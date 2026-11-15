@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 /** A test command that runs the whole suite (no change scoping). */
-const FULL_TEST = /\b(npm (run )?test(:ci|:full|:all)?|npm run -s test|npx vitest run|vitest run|npx playwright test|playwright test|node --test)\b/;
+const FULL_TEST = /(\bnpm (run (-s |--silent )?)?test(:ci|:full|:all)?|\bvitest run|\bplaywright test|\bnode --test)(?=\s|$|["'])/;
 const SCOPED = /--changed|--related|related\b|--only-changed|affected|test:changed|verify:changed|--grep|--since|--last-failed/;
 /** A runner given named test files (no glob) runs a focused set, not the whole suite. */
 const NAMED = /(vitest run|playwright test|node --test)\b(?!.*\*).*\s\S+\.(test|spec)\.[cm]?[jt]sx?\b/;
