@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 import { parseArgs } from 'node:util';
+import { spawnSync } from 'node:child_process';
 import { run } from './runner.js';
 import { toJson, toMarkdown, toText } from './report.js';
 import { init, initRunbook } from './init.js';
 import { secretsCheck, smoke } from './runbook-cmds.js';
 import { affectedTests } from './affected.js';
-import { runCommand } from './checks/run.js';
 import { RULES, ruleInfo } from './rules.js';
 import { loadConfig } from './config.js';
 import { readBaseline, ratchet, writeBaseline } from './baseline.js';
@@ -87,9 +87,9 @@ async function main(): Promise<number> {
       console.error(a.all ? `affected: all (${a.reason})` : `affected: ${a.changed.length} changed file(s) -> ${list.length} test file(s)`);
       if (!values.run) { for (const f of list) console.log(f); return 0; }
       if (!list.length) { console.error('affected: nothing to run'); return 0; }
-      const r = runCommand(`${values.run} ${list.map((f) => JSON.stringify(f)).join(' ')}`, cwd, {}, 60 * 60_000);
-      process.stdout.write(r.stdout); process.stderr.write(r.stderr);
-      return r.code;
+      // Stream the runner's output: suites can print more than a pipe flushes before exit.
+      const r = spawnSync(`${values.run} ${list.map((f) => JSON.stringify(f)).join(' ')}`, { cwd, shell: true, stdio: 'inherit' });
+      return r.status ?? 1;
     }
     case 'smoke': {
       const url = process.env.SMOKE_URL || values.url;
