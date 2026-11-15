@@ -1,0 +1,58 @@
+{
+  "$schema": "./node_modules/@ws42/guardrails/schema/guardrails.schema.json",
+  "version": 1,
+  "baseBranch": "cursor/stage1-ops-platform-c06f",
+  "sourceRoots": ["src", "functions"],
+  "tiers": {
+    "T1": ["functions/**", "src/lib/review.ts", "src/lib/storage/**", "src/lib/auth.ts", "src/shared/**"],
+    "T2": ["src/lib/**"],
+    "T3": ["src/pages/**", "src/components/**", "src/*.tsx"]
+  },
+  "specs": {
+    "items": {
+      "REVIEW-01": { "tier": "T1", "behaviour": "Malformed or unknown review token is rejected before any storage call" },
+      "REVIEW-02": { "tier": "T1", "behaviour": "Expired review token returns 410 and writes nothing" },
+      "REVIEW-03": { "tier": "T1", "behaviour": "Valid token returns only the public round view (no internal fields)" },
+      "REVIEW-04": { "tier": "T1", "behaviour": "Client submission writes clientPick and comments to design.json through storage" },
+      "REVIEW-05": { "tier": "T1", "behaviour": "Submissions are rejected once the round is locked; clients cannot approve or lock" },
+      "REVIEW-06": { "tier": "T1", "behaviour": "Stale write (SHA conflict) returns 409 and overwrites nothing" },
+      "REVIEW-07": { "tier": "T3", "behaviour": "Review page flow: load round, pick, comment, submit" },
+      "AUTH-01": { "tier": "T1", "behaviour": "/api/admin requires a Cloudflare Access JWT with valid signature, audience and expiry" },
+      "AUTH-02": { "tier": "T1", "behaviour": "Access user not in ALLOWED_EMAILS gets 403" },
+      "SUPPORT-01": { "tier": "T1", "behaviour": "Public support intake validates input with zod and Turnstile before writing" },
+      "SUPPORT-02": { "tier": "T2", "behaviour": "Triage assigns category and priority from the request text" },
+      "INTAKE-01": { "tier": "T1", "behaviour": "Intake submission is validated and stored as a new inbox item" },
+      "STORAGE-01": { "tier": "T1", "behaviour": "Local and GitHub storage behave the same for every interface method" },
+      "UI-01": { "tier": "T3", "behaviour": "Pipeline board shows each client in its stage column" }
+    }
+  },
+  "architecture": {
+    "tsConfig": "tsconfig.json",
+    "entries": ["src/main.tsx", "functions/**/*.ts"],
+    "forbidden": [
+      { "name": "shared-is-pure", "from": ["src/shared/**"], "to": ["src/lib/**", "src/pages/**", "src/components/**", "functions/**"], "message": "src/shared holds zod schemas and types only." },
+      { "name": "no-ui-in-backend", "from": ["src/lib/**", "functions/**"], "to": ["src/pages/**", "src/components/**"], "message": "Backend and domain code never import UI." },
+      { "name": "functions-only-from-functions", "from": ["src/**"], "to": ["functions/**"] },
+      { "name": "storage-through-interface", "from": ["src/**", "functions/**"], "except": ["src/lib/storage/index.ts"], "to": ["src/lib/storage/github.ts", "src/lib/storage/local.ts"], "message": "Use getStorage()/StorageInterface from src/lib/storage, not an implementation." }
+    ],
+    "singletons": ["getGitHubAppToken", "signJWT", "importPrivateKey", "base64UrlEncode", "verifyTurnstile", "createGitHubFile", "parseJwt"],
+    "restrictedStrings": [
+      { "pattern": "api\\.github\\.com", "allowIn": ["src/lib/storage/github.ts"], "message": "Only the GitHub storage implementation talks to GitHub. Go through StorageInterface." }
+    ]
+  },
+  "deps": { "allow": [] },
+  "fixtures": {
+    "globs": ["public/fixtures/**", "**/fixtures/**", "**/__fixtures__/**", "scripts/seed-fixtures.ts"],
+    "publicDir": "public",
+    "devOnly": ["src/lib/storage/local.ts"]
+  },
+  "tests": {
+    "command": "npx vitest run --pool=forks"
+  },
+  "mutation": { "tiers": ["T1"], "break": 70 },
+  "docs": {
+    "allow": ["README.md", "AGENTS.md", "docs/ARCHITECTURE.md", "docs/TESTING.md", "docs/proposal/**", "docs/design/**", ".github/**"],
+    "maxLines": { "default": 250, "AGENTS.md": 150, "docs/proposal/onboarding-backend-proposal.md": 450 }
+  },
+  "rules": { "TEST-8": "warn" }
+}
