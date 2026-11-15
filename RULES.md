@@ -42,6 +42,7 @@ Every finding names one of these IDs. `guardrails explain <ID>` (or the MCP tool
 | RUN-2 | block | Runbook commands exist | A runbook that names a missing script fails exactly when it is needed. | Add the script to package.json (deploy, deploy:preview, rollback, smoke, secrets:check) or mark it n/a with a reason in runbook.na. |
 | RUN-3 | block | Deploy workflows use the scripts and smoke | Inline deploy commands in CI drift from the runbook; a deploy nobody smoke-tests is not done. | Call `npm run deploy` (or deploy:preview) in the workflow instead of the raw command, and run `npm run smoke` after it. |
 | RUN-4 | block | One short runbook | Long or scattered runbooks go stale; one short file next to the scripts stays true. | Trim RUNBOOK.md under runbook.maxLines and fold other runbook/deploy docs into it, then delete them. |
+| CI-1 | warn | Change-scoped CI with full-suite safety nets | Running every test on every PR is slow and expensive; affected tests catch the change, and a nightly and pre-deploy full run catches the rest. | On PRs run `npm run test:changed` (vitest --changed, `guardrails affected`, or the repo selector). Run `npm run test:full` on a nightly cron and in `predeploy`/`predeploy:preview`. |
 | BASE-1 | block (diff) | Baseline only shrinks | Re-baselining new violations would switch the checks off. | Fix the violation instead. Growing the baseline needs the rebaseline label from a code owner. |
 
 ## Engines

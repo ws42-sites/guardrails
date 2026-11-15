@@ -93,14 +93,16 @@ export function initRunbook(opts: { cwd: string; force?: boolean }): InitResult 
   };
   edit('package.json', (pkg) => {
     const scripts = (pkg.scripts ??= {}) as Record<string, string>;
-    const missing = ['deploy', 'deploy:preview', 'rollback', 'smoke', 'secrets:check'].filter((s) => !(s in scripts));
+    const missing = ['deploy', 'deploy:preview', 'rollback', 'smoke', 'secrets:check', 'test:changed', 'test:full'].filter((s) => !(s in scripts));
     for (const s of missing) scripts[s] = STUB(s);
     return missing.length > 0;
   });
   edit('guardrails.config.json', (cfg) => {
     const rb = (cfg.runbook ??= {}) as Json;
-    if (rb.enabled === true) return false;
+    const ci = (cfg.ci ??= {}) as Json;
+    if (rb.enabled === true && ci.enabled === true) return false;
     rb.enabled = true;
+    ci.enabled = true;
     return true;
   });
   return { written, skipped };

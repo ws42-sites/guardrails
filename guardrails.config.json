@@ -210,6 +210,14 @@
       "RUN-04": {
         "tier": "T2",
         "behaviour": "guardrails smoke does read-only GETs and fails on >= 400; secrets-check verifies required names in a provider list command without printing it"
+      },
+      "CI-01": {
+        "tier": "T1",
+        "behaviour": "CI-1 warns when a PR workflow runs the full suite unconditionally, no scheduled full run exists, or deploy scripts lack a full-suite predeploy"
+      },
+      "CI-02": {
+        "tier": "T2",
+        "behaviour": "guardrails affected selects tests whose import graph reaches a changed file; global files select all"
       }
     }
   },
@@ -313,5 +321,8 @@
     "allowDocs": [
       "template/RUNBOOK.md"
     ]
+  },
+  "ci": {
+    "enabled": true
   }
 }

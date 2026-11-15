@@ -225,6 +225,18 @@ export const configSchema = z
       })
       .strict()
       .default({}),
+    ci: z
+      .object({
+        /** CI-1. Off until a repo adopts change-scoped CI. */
+        enabled: z.boolean().default(false),
+        workflows: globs.default(['.github/workflows/*.yml', '.github/workflows/*.yaml']),
+        /** Changes to these select every test (guardrails affected). */
+        globalFiles: globs.default(['package.json', 'package-lock.json', '**/tsconfig*.json', 'vitest.config.*', 'vitest.setup.*', 'playwright.config.*', '.nvmrc']),
+        /** Safety nets that genuinely do not apply, with the reason. */
+        na: z.object({ nightly: z.string().min(10).optional(), preDeploy: z.string().min(10).optional() }).strict().default({}),
+      })
+      .strict()
+      .default({}),
     rules: z
       .record(mode)
       .default({})

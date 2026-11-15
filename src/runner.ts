@@ -17,6 +17,7 @@ import { checkFailsOnBase } from './checks/failbase.js';
 import { checkFlags } from './flags.js';
 import { checkJourneys } from './checks/journeys.js';
 import { checkRunbook } from './checks/runbook.js';
+import { checkCi } from './checks/ci.js';
 
 export interface RunOptions {
   cwd: string;
@@ -63,6 +64,7 @@ export async function collect(opts: RunOptions): Promise<{ ctx: CheckContext; vi
   const outs = [];
   if (want('docs')) outs.push(checkDocs(ctx, files));
   if (want('runbook')) outs.push(checkRunbook(ctx, files));
+  if (want('ci')) outs.push(checkCi(ctx, files));
   if (want('setup')) outs.push(checkSetup(ctx, files));
   if (want('tests')) outs.push(checkTests(ctx, files));
   if (want('lint')) outs.push(await checkLint(ctx, files));

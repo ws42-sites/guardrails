@@ -42,6 +42,9 @@ Every repo ships one top-level `RUNBOOK.md` with the sections Deploy, Rollback, 
 
 DOC-1 (report-only) allows only top-level `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `README.md`, `ARCHITECTURE.md`, `TESTING.md`, `RUNBOOK.md` by default; markdown loaded at runtime (skills, prompts) goes in `docs.runtime` globs.
 
+## Change-scoped CI (CI-1, warn)
+PRs run only the tests the change can affect; the full suite is the safety net. Standard scripts: `test:changed` (PRs) and `test:full` (nightly cron and `predeploy`/`predeploy:preview`, which npm runs before `deploy`/`deploy:preview`). `guardrails affected [--base ref] [--e2e] [--run "<cmd>"]` picks test files whose import graph (dependency-cruiser) reaches a changed file, plus e2e files for journeys whose routes or spec paths changed; lockfile, package.json and test-config changes select everything. Use it where the runner has no selector of its own (node:test), or `vitest --changed`, or the repo's own selector. CI-1 warns when a PR workflow runs the full suite unguarded, when no scheduled workflow runs it, or when a deploy script has no full-suite `pre` script (`ci.na` records a reason). Mutation stays diff-only. The reusable workflow now runs the clock-shift rerun (a full-suite run) on main and nightly only.
+
 ## Critical User Journeys
 `journeys.items` in the config lists 5-10 plain-language user tasks (`CUJ-<AREA>`, priority P0-P2, steps, specs, routes). Only approved ones gate: approved P0 journeys need exactly one Playwright test under `e2e/` titled with the ID (JRN-1). The report shows a journey → specs → tests matrix with pass/fail when `journeys.resultsFile` points at Playwright's JSON reporter output. Model names: `journeys.draft.geminiModel` (default `gemini-2.5-flash`) and `openaiModel`. API keys are read from the environment only and never written anywhere. `journeys.visual` (JRN-5, per-step screenshot diff) is a stub for VIS-1 v2 and stays off.
 

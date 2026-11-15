@@ -818,6 +818,59 @@
           "additionalProperties": false,
           "default": {}
         },
+        "ci": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "workflows": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                ".github/workflows/*.yml",
+                ".github/workflows/*.yaml"
+              ]
+            },
+            "globalFiles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "package.json",
+                "package-lock.json",
+                "**/tsconfig*.json",
+                "vitest.config.*",
+                "vitest.setup.*",
+                "playwright.config.*",
+                ".nvmrc"
+              ]
+            },
+            "na": {
+              "type": "object",
+              "properties": {
+                "nightly": {
+                  "type": "string",
+                  "minLength": 10
+                },
+                "preDeploy": {
+                  "type": "string",
+                  "minLength": 10
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
         "rules": {
           "type": "object",
           "additionalProperties": {

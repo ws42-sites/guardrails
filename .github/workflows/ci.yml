@@ -1,9 +1,13 @@
 name: ci
+# PRs run only the tests affected by the change (guardrails affected, CI-1).
+# The full suite and the clock-shift rerun run on main and nightly.
 on:
   push:
     branches: [main]
   pull_request:
     types: [opened, synchronize, reopened, labeled, unlabeled]
+  schedule:
+    - cron: '0 7 * * *'
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -15,8 +19,13 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm run build
-      - run: npm test
+      - name: affected tests (PR)
+        if: github.event_name == 'pull_request'
+        run: npm run test:changed
+      - name: full suite (main, nightly)
+        if: github.event_name != 'pull_request'
+        run: npm run test:full
       - name: dogfood
         env:
           GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
-        run: node dist/cli.js check --clock-shift ${{ github.event_name == 'pull_request' && format('--base origin/{0} --fails-on-base', github.base_ref) || '' }}
+        run: node dist/cli.js check ${{ github.event_name == 'pull_request' && format('--base origin/{0} --fails-on-base', github.base_ref) || '--clock-shift' }}

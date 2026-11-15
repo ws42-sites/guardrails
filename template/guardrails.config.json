@@ -23,5 +23,6 @@
     "runtime": []
   },
   "runbook": { "enabled": true, "na": {} },
+  "ci": { "enabled": true },
   "rules": {}
 }
