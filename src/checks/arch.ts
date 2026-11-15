@@ -144,7 +144,8 @@ function knipUnused(ctx: CheckContext): { v: Violation[]; error?: string } {
   const tmp = mkdtempSync(join(tmpdir(), 'guardrails-knip-'));
   const conf = join(tmp, 'knip.json');
   const project = cfg.sourceRoots.map((r) => (r.includes('*') ? `${r}!` : `${r.replace(/\/$/, '')}/**/*.{ts,tsx,js,jsx,mjs}!`));
-  writeFileSync(conf, JSON.stringify({ entry: cfg.architecture.entries.map((e) => `${e}!`), project, ignore: [...cfg.tests.globs, ...cfg.tests.helperGlobs, ...cfg.fixtures.globs] }));
+  // CI workflows are not production entries, and knip's YAML loader rejects some files GitHub accepts.
+  writeFileSync(conf, JSON.stringify({ entry: cfg.architecture.entries.map((e) => `${e}!`), project, ignore: [...cfg.tests.globs, ...cfg.tests.helperGlobs, ...cfg.fixtures.globs], 'github-actions': false }));
   try {
     let dir = dirname(require.resolve('knip'));
     while (!existsSync(join(dir, 'bin', 'knip.js')) && dirname(dir) !== dir) dir = dirname(dir);

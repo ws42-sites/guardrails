@@ -49,3 +49,18 @@ describe('ARCH-02 singletons, restricted strings and shipped fixture assets', ()
     ]);
   });
 });
+
+describe('ARCH-03 production reachability (knip)', () => {
+  it('reports an unreachable module even when a workflow file is YAML that knip cannot load', async () => {
+    const r = repo({
+      'package.json': '{"name":"p","type":"module"}\n',
+      'src/main.ts': 'import { used } from "./used";\nconsole.log(used);\n',
+      'src/used.ts': 'export const used = 1;\n',
+      'src/orphan.ts': 'export const orphan = 2;\n',
+      '.github/workflows/odd.yml': 'name: odd on:\n  push:\n',
+    }, { ...BASE_CONFIG, architecture: { entries: ['src/main.ts'] } }).commit();
+    const out = await checkArch({ ...r.ctx(), options: { clockShift: false, mutation: false, knip: true } });
+    expect((out.metrics ?? []).find((m) => m.name === 'knip')).toBeUndefined();
+    expect(out.violations.filter((v) => v.rule === 'ARCH-3').map((v) => v.file)).toEqual(['src/orphan.ts']);
+  });
+});

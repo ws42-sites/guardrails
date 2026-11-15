@@ -6,7 +6,7 @@ import { init } from './init.js';
 import { RULES, ruleInfo } from './rules.js';
 import { loadConfig } from './config.js';
 import { readBaseline, ratchet, writeBaseline } from './baseline.js';
-import { collect, BASELINEABLE } from './runner.js';
+import { collect, baselineRules } from './runner.js';
 import { specMatrix } from './checks/tests.js';
 import { validateTest } from './validate.js';
 import type { CheckContext } from './types.js';
@@ -97,7 +97,7 @@ async function main(): Promise<number> {
       const { violations } = await collect({ ...opts, base: null, clockShift: false, mutation: false });
       const old = readBaseline(cwd, config.baselineFile);
       const first = old.entries.length === 0;
-      const r = ratchet(old, violations, first || !!values.force, BASELINEABLE);
+      const r = ratchet(old, violations, first || !!values.force, baselineRules(config.rules));
       writeBaseline(cwd, config.baselineFile, r.baseline);
       console.log(`${config.baselineFile}: ${r.baseline.entries.length} entries (${r.removed} removed, ${r.added} added)${first ? ' [initial]' : ''}`);
       if (r.added && !first) console.log('Baseline grew: CI will block this (BASE-1) unless a code owner adds the rebaseline label.');

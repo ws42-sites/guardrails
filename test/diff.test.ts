@@ -42,6 +42,13 @@ describe('DIFF-02 removing expects or loosening matchers is weakening', () => {
     expect(v.map((x) => [x.rule, x.message.split('.')[0]])).toEqual([['TEST-7', 'threshold lines lowered 80 -> 50'], ['BASE-1', 'baseline grew by 1 entry']]);
     expect(checkTests(r.ctx('main', ['guardrails:rebaseline'])).violations.filter((x) => x.rule === 'BASE-1')).toEqual([]);
   });
+
+  it('lets the adoption PR (no guardrails config on base) record the initial baseline', () => {
+    const r = repo();
+    r.remove('guardrails.config.json').commit();
+    r.write({ 'guardrails.config.json': JSON.stringify(BASE_CONFIG), '.guardrails/baseline.json': '{"entries":[{"rule":"DOC-1","fingerprint":"abc"}]}' });
+    expect(checkTests(r.ctx('main')).violations.filter((x) => x.rule === 'BASE-1')).toEqual([]);
+  });
 });
 
 describe('BUDGET-01 test budget is per tier and warn-only', () => {
