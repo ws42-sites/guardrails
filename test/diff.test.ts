@@ -70,4 +70,12 @@ describe('DEPS-01 new dependencies block unless allowlisted', () => {
     expect(out.violations.map((v) => [v.rule, v.fingerprint.length, v.message.split(' (')[0]])).toEqual([['ARCH-4', 12, 'adds dependency "left-pad"']]);
     expect(out.metrics).toEqual([{ name: 'deps.added', value: 2, detail: 'ok-lib, left-pad' }, { name: 'deps.registry', value: 'skipped', detail: 'offline: ok-lib, left-pad not checked against npm' }]);
   });
+
+  it('still gates local and git deps on deps.allow but skips the npm registry for them', async () => {
+    const r = repo({ 'package.json': JSON.stringify({ dependencies: {} }) }, { ...BASE_CONFIG, deps: { allow: ['@me/local'] } }).commit();
+    r.write({ 'package.json': JSON.stringify({ devDependencies: { '@me/local': 'file:vendor/me-local-1.0.0.tgz', 'gh-lib': 'github:me/gh-lib#abc', 'left-pad': '1' } }) });
+    const out = await checkArch(r.ctx('main'));
+    expect(out.violations.map((v) => v.message.split(' (')[0])).toEqual(['adds dependency "gh-lib"', 'adds dependency "left-pad"']);
+    expect(out.metrics).toEqual([{ name: 'deps.added', value: 3, detail: '@me/local, gh-lib, left-pad' }, { name: 'deps.registry', value: 'skipped', detail: 'offline: left-pad not checked against npm' }]);
+  });
 });

@@ -12,7 +12,7 @@ const cfg = {
 };
 
 describe('ARCH-01 import boundaries come from config (dependency-cruiser)', () => {
-  it('flags forbidden imports (incl. tsconfig path aliases), honours except, ignores tests and non-source fixtures, and flags prod fixture imports', async () => {
+  it('flags forbidden imports (incl. tsconfig path aliases), honours except, ignores tests, and flags prod fixture imports', async () => {
     const r = repo({
       'src/store/impl.ts': 'export const impl = () => fetch("https://api.github.com");\n',
       'src/store/index.ts': 'export { impl } from "./impl";\n',
