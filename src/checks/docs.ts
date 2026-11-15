@@ -24,7 +24,7 @@ export function checkDocs(ctx: CheckContext, files = listFiles(ctx.cwd)): CheckO
     v.push(
       violation('DOC-1', f, disguised && !isDoc
         ? 'looks like a doc in disguise (notes/todo/plan file). Put it in an allowlisted doc or delete it.'
-        : `not in docs.allow. Put the content in ${docs.agentFile} or docs/ARCHITECTURE.md (or a check), then delete it.`, 'file'),
+        : `not in docs.allow. Move the content into ${docs.agentFile}, another allowlisted doc or a check, then delete it.`, 'file'),
     );
   }
 

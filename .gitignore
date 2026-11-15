@@ -1,6 +1,5 @@
 node_modules
 dist
-reports/*.tmp
+reports/
 .stryker-tmp
-reports/mutation
 *.log

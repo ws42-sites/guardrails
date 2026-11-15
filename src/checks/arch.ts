@@ -118,7 +118,7 @@ function newDeps(ctx: CheckContext): { v: Violation[]; added: string[] } {
   const added = [...names(readText(ctx.cwd, 'package.json'))].filter((d) => !before.has(d));
   const v = added
     .filter((d) => !ctx.config.deps.allow.includes(d))
-    .map((d) => violation('ARCH-4', 'package.json', `adds dependency "${d}" (not in deps.allow). Say why in the PR; a code owner adds it to deps.allow.`, `dep:${d}`));
+    .map((d) => violation('ARCH-4', 'package.json', `adds dependency "${d}" (not in deps.allow). A code owner must add it to deps.allow (CODEOWNER-protected config).`, `dep:${d}`));
   return { v, added };
 }
 

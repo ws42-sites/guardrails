@@ -49,7 +49,7 @@ describe('REPORT-01 reports are readable for people, agents and PRs', () => {
     const rep = await run({ cwd: r.dir, knip: false });
     expect(toText(rep).split('\n')).toEqual([
       '✖ DOC-1 Doc allowlist (1)',
-      '    notes.txt  not in docs.allow. Put the content in AGENTS.md or docs/ARCHITECTURE.md (or a check), then delete it.',
+      '    notes.txt  not in docs.allow. Move the content into AGENTS.md, another allowlisted doc or a check, then delete it.',
       '    fix: Put the content in an allowlisted doc (or a check), then delete the file.',
       '• tests: 2',
       '• specs: 2 (2 with tests)',
