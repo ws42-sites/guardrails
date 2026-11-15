@@ -1,0 +1,66 @@
+# Reusable workflow. Call it from a project:
+#   jobs:
+#     guardrails:
+#       uses: ws42-sites/guardrails/.github/workflows/guardrails.yml@v0
+name: guardrails
+on:
+  workflow_call:
+    inputs:
+      node-version: { type: string, default: '20' }
+      working-directory: { type: string, default: '.' }
+      clock-shift: { type: boolean, default: true }
+      mutation: { type: boolean, default: true }
+      install-command: { type: string, default: 'npm ci' }
+permissions:
+  contents: read
+  pull-requests: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ inputs.node-version }}', cache: npm }
+      - run: ${{ inputs.install-command }}
+      - name: guardrails check
+        env:
+          GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || '' }}
+          CLOCK: ${{ inputs.clock-shift && '--clock-shift' || '' }}
+        run: |
+          set -o pipefail
+          ARGS="$CLOCK"; [ -n "$BASE" ] && ARGS="$ARGS --base $BASE"
+          npx guardrails report --format json $ARGS > guardrails-report.json || true
+          npx guardrails report --format markdown $ARGS >> "$GITHUB_STEP_SUMMARY" || true
+          npx guardrails check $ARGS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: guardrails-report, path: '${{ inputs.working-directory }}/guardrails-report.json', retention-days: 14 }
+  mutation:
+    if: ${{ inputs.mutation && github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ inputs.node-version }}', cache: npm }
+      - run: ${{ inputs.install-command }}
+      - uses: actions/cache@v4
+        with:
+          path: ${{ inputs.working-directory }}/node_modules/.cache/guardrails/stryker-incremental.json
+          key: stryker-${{ github.base_ref }}-${{ github.sha }}
+          restore-keys: stryker-${{ github.base_ref }}-
+      - name: mutation (changed files in mutation tiers)
+        env:
+          GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+        run: |
+          npx guardrails report --only mutation --mutation --base origin/${{ github.base_ref }} --format markdown >> "$GITHUB_STEP_SUMMARY" || true
+          npx guardrails check --only mutation --mutation --base origin/${{ github.base_ref }}

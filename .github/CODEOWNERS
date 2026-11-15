@@ -1,0 +1,5 @@
+/guardrails.config.json   @JoshBoyer
+/.guardrails/             @JoshBoyer
+/.github/                 @JoshBoyer
+/src/rules.ts             @JoshBoyer
+/template/                @JoshBoyer

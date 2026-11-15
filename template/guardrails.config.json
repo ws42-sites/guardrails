@@ -1,0 +1,25 @@
+{
+  "$schema": "./node_modules/@ws42/guardrails/schema/guardrails.schema.json",
+  "version": 1,
+  "baseBranch": "main",
+  "sourceRoots": ["src"],
+  "tiers": {
+    "T1": [],
+    "T2": ["src/lib/**"],
+    "T3": ["src/**"]
+  },
+  "specs": {
+    "items": {}
+  },
+  "architecture": {
+    "entries": ["src/main.{ts,tsx}"],
+    "forbidden": [],
+    "singletons": [],
+    "restrictedStrings": []
+  },
+  "deps": { "allow": [] },
+  "docs": {
+    "allow": ["README.md", "AGENTS.md", "docs/ARCHITECTURE.md"]
+  },
+  "rules": {}
+}

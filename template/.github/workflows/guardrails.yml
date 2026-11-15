@@ -1,0 +1,15 @@
+name: Guardrails
+on:
+  pull_request:
+  push:
+    branches: [{{BASE}}]
+permissions:
+  contents: read
+  pull-requests: read
+jobs:
+  guardrails:
+    uses: ws42-sites/guardrails/.github/workflows/guardrails.yml@v0
+    with:
+      node-version: '20'
+      clock-shift: true
+      mutation: true
