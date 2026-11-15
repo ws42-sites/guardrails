@@ -18,14 +18,20 @@ Shared by every project that uses `@ws42/guardrails`. Projects don't copy this f
 The budget [TEST-3] only warns. It points reviewers at padding; it never fails a PR on its own.
 
 ## 3. Banned patterns [TEST-5]
+Block (they make tests lie):
 - `.only`, `.skip`, `xit`/`xdescribe`, `test.todo`, `each([])`.
 - The real clock (`new Date()`, `Date.now()`, `performance.now()`, `process.hrtime`) unless the file uses `vi.useFakeTimers()`/`vi.setSystemTime()`.
 - Randomness (`Math.random`, `crypto.randomUUID`, `getRandomValues`) unless seeded or mocked.
-- Generated-input loops over 20 iterations, and fast-check without `numRuns ≤ 20`.
+- fast-check without a fixed `seed` (and over `numRuns ≤ 20`).
+- `// Stryker disable` comments anywhere, and `expect.extend` custom matchers [ARCH-7].
+
+Warn (weak, preference-style; moved from block in v0.2):
+- Generated-input loops over 20 iterations.
 - Hand-rolled fake servers (`createServer`). Test through the storage interface or its fixture implementation.
 - Spying on `Date`, `Response`, `crypto.subtle` or prototypes.
 - `toHaveClass`/`toHaveStyle`. Snapshots in T1 tests.
-- `// Stryker disable` comments anywhere.
+
+Property tests: a spec with `"properties": true` may use fast-check with a fixed `seed` and `interruptAfterTimeLimit` (≤ `tests.propertyTimeLimitMs`, default 5000) instead of the 20-run cap. Elsewhere seeded property runs warn.
 
 Heuristics that only warn [TEST-5W]: tests with no `expect`, tests that only assert a mock was called, and tests whose only assertions are `toBeDefined`/`toBeTruthy`/`not.toThrow`/`expect(true)`. Every project must add `@ws42/guardrails/vitest-setup` (or its own `expect.hasAssertions()` setup) to `setupFiles` [TEST-9].
 
@@ -40,8 +46,17 @@ In a PR, these block:
 
 Tests added in the same PR can be changed or deleted freely. Moving a test to another file is not a deletion. Any drop in the total test count versus base warns with the count [TEST-10].
 
-## 6. Size
+## 6. Tests must fail without the change [TEST-11]
+In a PR, every new or changed test runs twice: on the base branch's product code (a git worktree with only the PR's test files copied in) and on head. It must fail on base and pass on head; if you revert the implementation, the test should fail. A test that passes on base blocks unless its spec has `"regressionGuard": true` or a human adds the `allow-characterization` label. Only the changed test files run, so it's fast.
+
+## 7. Conflicts: stop and flag [FLAG-1]
+If a test contradicts the spec or can't pass honestly, the agent calls `guardrails_flag` / `guardrails flag` and stops. Flags live in `.guardrails/flags.json` and block merge until a human empties it or adds `flags-resolved`. Agent hooks lock spec-tagged tests and guardrails files, so editing the test is not an option. In ImpossibleBench, letting agents flag cut cheating from 54% to 9%.
+
+## 8. Hidden holdout tests [HOLD-1]
+Optional: tests the building agent never sees, in a separate private repo. The PR gate checks them out and runs them; only titles and pass/fail are reported. Their specs are exempt from TEST-2.
+
+## 9. Size
 Test files over 300 lines warn [TEST-4]. Split them by behaviour.
 
-## 7. Mutation testing [TEST-8]
-Stryker runs on changed files in `mutation.tiers` (T1 by default), incrementally, with pinned mutators. A surviving mutant means no test notices that bug. Add an assertion that would.
+## 10. Mutation testing [TEST-8]
+Stryker runs on changed files in `mutation.tiers` (T1 by default), incrementally, with pinned mutators. A surviving mutant means no test notices that bug. Add an assertion that would. `guardrails_mutants` lists survivors for the agent; the gate always recomputes the score itself (agents have misreported their own scores). Stryker runs with `GUARDRAILS_MUTATION=1`: exclude slow integration suites in your Vitest config when it's set, as this repo does.
