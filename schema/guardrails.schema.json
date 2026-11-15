@@ -1,0 +1,481 @@
+{
+  "$ref": "#/definitions/GuardrailsConfig",
+  "definitions": {
+    "GuardrailsConfig": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "version": {
+          "type": "number",
+          "const": 1
+        },
+        "baseBranch": {
+          "type": "string",
+          "default": "main"
+        },
+        "sourceRoots": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": [
+            "src"
+          ]
+        },
+        "tiers": {
+          "type": "object",
+          "properties": {
+            "T1": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": []
+            },
+            "T2": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": []
+            },
+            "T3": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": []
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "specs": {
+          "type": "object",
+          "properties": {
+            "idPattern": {
+              "type": "string",
+              "default": "^[A-Z][A-Z0-9]{1,11}-[0-9]{2,4}$"
+            },
+            "maxTestsPerId": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "default": 8
+            },
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "tier": {
+                    "type": "string",
+                    "enum": [
+                      "T1",
+                      "T2",
+                      "T3"
+                    ]
+                  },
+                  "behaviour": {
+                    "type": "string",
+                    "minLength": 3
+                  }
+                },
+                "required": [
+                  "tier",
+                  "behaviour"
+                ],
+                "additionalProperties": false
+              },
+              "default": {}
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "architecture": {
+          "type": "object",
+          "properties": {
+            "tsConfig": {
+              "type": "string"
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": []
+            },
+            "forbidden": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "from": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "to": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "except": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "description": "Importers exempt from this rule"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "additionalProperties": false
+              },
+              "default": []
+            },
+            "singletons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "restrictedStrings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pattern": {
+                    "type": "string"
+                  },
+                  "allowIn": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "default": []
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "pattern",
+                  "message"
+                ],
+                "additionalProperties": false
+              },
+              "default": []
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "deps": {
+          "type": "object",
+          "properties": {
+            "allow": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "fixtures": {
+          "type": "object",
+          "properties": {
+            "globs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "**/fixtures/**",
+                "**/__fixtures__/**"
+              ]
+            },
+            "publicDir": {
+              "type": "string",
+              "default": "public"
+            },
+            "devOnly": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": []
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "tests": {
+          "type": "object",
+          "properties": {
+            "globs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "**/*.test.ts",
+                "**/*.test.tsx",
+                "**/*.spec.ts",
+                "**/*.spec.tsx"
+              ]
+            },
+            "helperGlobs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "**/test/**",
+                "**/__tests__/helpers/**"
+              ]
+            },
+            "budget": {
+              "type": "object",
+              "properties": {
+                "T1": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "default": 1
+                },
+                "T2": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "default": 0.6
+                },
+                "T3": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "default": 0.4
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "maxFileLines": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "default": 300
+            },
+            "command": {
+              "type": "string",
+              "default": "npx vitest run --pool=forks"
+            },
+            "clockShiftYears": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "default": 2
+            },
+            "testsRemovedLabel": {
+              "type": "string",
+              "default": "tests-removed-approved"
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "mutation": {
+          "type": "object",
+          "properties": {
+            "tiers": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "T1",
+                  "T2",
+                  "T3"
+                ]
+              },
+              "default": [
+                "T1"
+              ]
+            },
+            "break": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "default": 70
+            },
+            "timeoutMinutes": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "default": 15
+            },
+            "excludedMutations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "docs": {
+          "type": "object",
+          "properties": {
+            "allow": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "README.md",
+                "AGENTS.md",
+                "docs/ARCHITECTURE.md"
+              ]
+            },
+            "extensions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                ".md",
+                ".mdx",
+                ".txt",
+                ".rst"
+              ]
+            },
+            "disguise": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "**/NOTES*",
+                "**/TODO*",
+                "**/*-plan.*",
+                "**/*_plan.*"
+              ]
+            },
+            "ignore": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "public/**",
+                "node_modules/**",
+                "dist/**",
+                "**/LICENSE*",
+                "**/CHANGELOG.md"
+              ]
+            },
+            "maxLines": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer",
+                "exclusiveMinimum": 0
+              },
+              "default": {
+                "default": 250,
+                "AGENTS.md": 150
+              }
+            },
+            "agentFile": {
+              "type": "string",
+              "default": "AGENTS.md"
+            },
+            "pointerFiles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "GEMINI.md",
+                "CLAUDE.md",
+                ".cursorrules",
+                ".windsurfrules",
+                ".github/copilot-instructions.md"
+              ]
+            },
+            "requiredLinks": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "default": {}
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "rules": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "enum": [
+              "block",
+              "warn",
+              "off"
+            ]
+          },
+          "default": {}
+        },
+        "baselineFile": {
+          "type": "string",
+          "default": ".guardrails/baseline.json"
+        },
+        "labels": {
+          "type": "object",
+          "properties": {
+            "rebaseline": {
+              "type": "string",
+              "default": "guardrails:rebaseline"
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        }
+      },
+      "required": [
+        "version"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
