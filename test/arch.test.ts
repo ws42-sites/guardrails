@@ -12,13 +12,14 @@ const cfg = {
 };
 
 describe('ARCH-01 import boundaries come from config (dependency-cruiser)', () => {
-  it('flags forbidden imports (incl. tsconfig path aliases), honours except, ignores tests, and flags prod fixture imports', async () => {
+  it('flags forbidden imports (incl. tsconfig path aliases), honours except, ignores tests and non-source fixtures, and flags prod fixture imports', async () => {
     const r = repo({
       'src/store/impl.ts': 'export const impl = () => fetch("https://api.github.com");\n',
       'src/store/index.ts': 'export { impl } from "./impl";\n',
       'src/pages/a.ts': 'import { impl } from "../store/impl";\nimport { data } from "../fixtures/data";\nexport const a = [impl, data];\n',
       'src/pages/a.test.ts': 'import { impl } from "../store/impl";\nit("CORE-01", () => { expect(impl).toBeTypeOf("function") });\n',
       'src/fixtures/data.ts': 'export const data = 1;\n',
+      'src/fixtures/hero.jpg': 'x = "\\8" // binary, not JS',
       'src/pages/b.ts': 'import { impl } from "@/store/impl";\nexport const b = impl;\n',
       'tsconfig.json': JSON.stringify({ compilerOptions: { baseUrl: '.', paths: { '@/*': ['src/*'] } } }),
     }, cfg);

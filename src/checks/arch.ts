@@ -32,7 +32,7 @@ async function cruiseBoundaries(ctx: CheckContext, files: string[]): Promise<Vio
     from: { path: rx(cfg.sourceRoots.map((r) => (r.includes('*') ? r : `${r.replace(/\/$/, '')}/**`))), pathNot: rx(notProd) },
     to: { path: rx(cfg.fixtures.globs) },
   });
-  const roots = files.filter((f) => isProductFile(cfg, f) || isHelperFile(cfg, f));
+  const roots = files.filter((f) => SOURCE_EXT.test(f) && (isProductFile(cfg, f) || isHelperFile(cfg, f)));
   if (!roots.length) return [];
 
   const { cruise } = await import('dependency-cruiser');
