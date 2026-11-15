@@ -1,0 +1,3 @@
+import { copyFileSync, chmodSync } from 'node:fs';
+copyFileSync('src/clock-shift.mjs', 'dist/clock-shift.mjs');
+for (const f of ['dist/cli.js', 'dist/mcp.js']) chmodSync(f, 0o755);

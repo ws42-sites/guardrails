@@ -1,0 +1,75 @@
+{
+  "name": "@ws42/guardrails",
+  "version": "0.1.0",
+  "description": "Config-driven guardrails that stop coding agents from padding, weakening or bypassing tests, docs and architecture.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "private": true,
+  "bin": {
+    "guardrails": "dist/cli.js",
+    "guardrails-mcp": "dist/mcp.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "template",
+    "skill",
+    "TESTING.md",
+    "RULES.md",
+    "schema"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node scripts/copy-assets.mjs && node scripts/gen-schema.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "node dist/cli.js check",
+    "guardrails": "node dist/cli.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "@typescript-eslint/parser": "7.18.0",
+    "@typescript-eslint/typescript-estree": "7.18.0",
+    "dependency-cruiser": "16.10.4",
+    "eslint": "8.57.1",
+    "eslint-plugin-vitest": "0.4.1",
+    "knip": "5.88.1",
+    "typescript": "5.6.3",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@stryker-mutator/core": "8.7.1",
+    "@stryker-mutator/vitest-runner": "8.7.1",
+    "@types/eslint": "8.56.12",
+    "@types/node": "20.17.6",
+    "vitest": "1.6.1",
+    "zod-to-json-schema": "3.24.6"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./vitest-setup": "./dist/vitest-setup.js",
+    "./package.json": "./package.json"
+  },
+  "peerDependencies": {
+    "vitest": ">=1",
+    "@stryker-mutator/core": ">=8",
+    "@stryker-mutator/vitest-runner": ">=8"
+  },
+  "peerDependenciesMeta": {
+    "vitest": {
+      "optional": true
+    },
+    "@stryker-mutator/core": {
+      "optional": true
+    },
+    "@stryker-mutator/vitest-runner": {
+      "optional": true
+    }
+  }
+}
