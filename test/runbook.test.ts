@@ -53,3 +53,20 @@ describe('RUN-03 init runbook scaffolds without clobbering', () => {
     expect(initRunbook({ cwd: r.dir }).written).toEqual([]);
   });
 });
+
+describe('RUN-04 smoke and secrets-check helpers', () => {
+  it('smoke passes only when every path answers below 400; secrets-check never needs the values', async () => {
+    const { createServer } = await import('node:http');
+    const srv = createServer((req, res) => { res.statusCode = req.url === '/missing' ? 404 : 200; res.end('ok'); });
+    await new Promise<void>((r) => srv.listen(0, '127.0.0.1', r));
+    const url = `http://127.0.0.1:${(srv.address() as { port: number }).port}`;
+    const { smoke, secretsCheck } = await import('../src/runbook-cmds.js');
+    const good = await smoke(url, ['/', '/about']);
+    const bad = await smoke(url, ['/', '/missing']);
+    srv.close();
+    expect([good.ok, bad.ok, bad.lines[1].slice(0, 8)]).toEqual([true, false, 'FAIL 404']);
+    const list = `node -e "console.log('API_KEY: Value Encrypted\\nAPI_KEY_OLD: x')"`;
+    expect(secretsCheck(['API_KEY', 'TOKEN'], list, process.cwd())).toEqual({ ok: false, missing: ['TOKEN'] });
+    expect(secretsCheck(['API_KEY'], 'exit 1', process.cwd()).ok).toBe(false);
+  });
+});

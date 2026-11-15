@@ -3,6 +3,7 @@ import { parseArgs } from 'node:util';
 import { run } from './runner.js';
 import { toJson, toMarkdown, toText } from './report.js';
 import { init, initRunbook } from './init.js';
+import { secretsCheck, smoke } from './runbook-cmds.js';
 import { RULES, ruleInfo } from './rules.js';
 import { loadConfig } from './config.js';
 import { readBaseline, ratchet, writeBaseline } from './baseline.js';
@@ -22,6 +23,8 @@ const HELP = `guardrails <command> [options]
 
 Commands
   init                 Scaffold guardrails.config.json, AGENTS.md (+ pointers), CODEOWNERS, CI workflow
+  smoke --url <u> [paths]   Read-only GET of each path (default /); fails on a status >= 400. SMOKE_URL overrides --url
+  secrets-check --require A,B -- <list cmd>   Fails unless every name appears in the provider's list output (never printed)
   init runbook         Scaffold RUNBOOK.md, stub deploy/deploy:preview/rollback/smoke/secrets:check scripts, enable RUN-1..4
   check                Run all checks. Exit 1 on blocking findings.
   report               Run checks and print a report (--format text|json|markdown)
@@ -63,7 +66,7 @@ async function main(): Promise<number> {
       owner: { type: 'string' }, force: { type: 'boolean' }, verbose: { type: 'boolean' }, help: { type: 'boolean', short: 'h' },
       lines: { type: 'string' }, file: { type: 'string' }, mutate: { type: 'string' },
       'fails-on-base': { type: 'boolean' }, specs: { type: 'string' }, agent: { type: 'string' }, dir: { type: 'string' },
-      preset: { type: 'string' }, by: { type: 'string' }, 'dry-run': { type: 'boolean' },
+      preset: { type: 'string' }, by: { type: 'string' }, 'dry-run': { type: 'boolean' }, url: { type: 'string' }, require: { type: 'string' },
     },
   });
   const [cmd, arg, ...rest] = positionals;
@@ -74,6 +77,22 @@ async function main(): Promise<number> {
     failsOnBase: values['fails-on-base'], specs: (values.specs ?? process.env.GUARDRAILS_SPECS)?.split(',').map((x) => x.trim()).filter(Boolean) };
 
   switch (cmd) {
+    case 'smoke': {
+      const url = process.env.SMOKE_URL || values.url;
+      if (!url) { console.error('smoke: pass --url or set SMOKE_URL'); return 2; }
+      const r = await smoke(url, positionals.slice(1));
+      for (const l of r.lines) console.log(l);
+      return r.ok ? 0 : 1;
+    }
+    case 'secrets-check': {
+      const names = (values.require ?? '').split(',').map((x) => x.trim()).filter(Boolean);
+      const sep = process.argv.indexOf('--');
+      const cmdLine = sep >= 0 ? process.argv.slice(sep + 1).join(' ') : '';
+      if (!names.length || !cmdLine) { console.error('secrets-check: --require A,B -- <provider list command>'); return 2; }
+      const r = secretsCheck(names, cmdLine, cwd);
+      console.log(r.ok ? `ok: ${names.length} required secret names present` : `missing: ${r.missing.join(', ')}`);
+      return r.ok ? 0 : 1;
+    }
     case 'init': {
       if (arg === 'runbook') {
         const rb = initRunbook({ cwd, force: values.force });

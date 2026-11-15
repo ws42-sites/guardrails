@@ -202,6 +202,10 @@
       "RUN-03": {
         "tier": "T2",
         "behaviour": "init runbook writes the template, stubs only missing standard scripts and enables runbook without overwriting"
+      },
+      "RUN-04": {
+        "tier": "T2",
+        "behaviour": "guardrails smoke does read-only GETs and fails on >= 400; secrets-check verifies required names in a provider list command without printing it"
       }
     }
   },
