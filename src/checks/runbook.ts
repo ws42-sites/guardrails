@@ -13,7 +13,8 @@ const CLICK_PATH = /\b(click|tap)\b|\bnavigate to\b|\b(go to|open|log ?in to|sig
 const INLINE_DEPLOY = /\b(wrangler(\.js)?(\s+pages)?\s+deploy|cdk\s+deploy|vercel\s+(deploy|--prod)|netlify\s+deploy|fly(ctl)?\s+deploy|serverless\s+deploy|sls\s+deploy|sam\s+deploy|firebase\s+deploy|aws\s+s3\s+sync|render\s+deploy)\b|uses:\s*cloudflare\/(wrangler|pages)-action|api\.render\.com\/deploy/;
 const SCRIPT_DEPLOY = /\bnpm run (deploy|deploy:preview)(?![\w:-])/;
 const SCRIPT_SMOKE = /\bnpm run smoke(?![\w:-])/;
-const RUNBOOKISH = /(^|\/)[^/]*(runbook|deploy|rollback|playbook)[^/]*\.mdx?$/i;
+/** Docs that compete with RUNBOOK.md: names containing runbook, playbook or rollback, or starting with deploy or deployment. Tickets that merely mention deploy do not count. */
+const RUNBOOKISH = /(^|\/)([^/]*(runbook|playbook|rollback)[^/]*|deploy(ment)?([-_. ][^/]*)?)\.mdx?$/i;
 
 /** Split markdown into "## " sections, ignoring headings inside code fences. Code lines are marked. */
 function sections(md: string): { title: string; line: number; prose: string[]; all: string }[] {

@@ -33,12 +33,12 @@ describe('RUN-01 RUNBOOK.md has the standard sections, commands and scripts', ()
 describe('RUN-02 deploy workflows call npm run deploy then smoke; one runbook', () => {
   it('flags inline deploys, missing smoke and stray runbook docs', () => {
     const r = repo({
-      'RUNBOOK.md': GOOD, 'package.json': pkg(SCRIPTS), 'docs/deploy-guide.md': 'x', 'legacy/ROLLBACK.md': 'x',
+      'RUNBOOK.md': GOOD, 'package.json': pkg(SCRIPTS), 'docs/deploy-guide.md': 'x', 'legacy/ROLLBACK.md': 'x', 'features/FEAT-1-managed-deployer.md': 'x', 'ops/chat-runbook.md': 'x',
       '.github/workflows/ok.yml': 'jobs:\n  d:\n    steps:\n      - run: npm run deploy\n      - run: npm run smoke\n',
       '.github/workflows/bad.yml': 'jobs:\n  d:\n    steps:\n      - uses: cloudflare/wrangler-action@v3\n      - run: npx wrangler pages deploy dist # ship\n      - run: npm run smoke\n      - run: npm run deploy:preview\n      - run: node node_modules/wrangler/bin/wrangler.js deploy --dry-run --outdir build\n',
     }, { ...ON, runbook: { ...ON.runbook, allowDocs: ['legacy/**'] } });
     expect(checkRunbook(r.ctx()).violations.map((v) => `${v.rule}:${v.file}:${v.line ?? ''}`).sort()).toEqual([
-      'RUN-3:.github/workflows/bad.yml:4', 'RUN-3:.github/workflows/bad.yml:5', 'RUN-3:.github/workflows/bad.yml:7', 'RUN-4:docs/deploy-guide.md:',
+      'RUN-3:.github/workflows/bad.yml:4', 'RUN-3:.github/workflows/bad.yml:5', 'RUN-3:.github/workflows/bad.yml:7', 'RUN-4:docs/deploy-guide.md:', 'RUN-4:ops/chat-runbook.md:',
     ]);
   });
 });
