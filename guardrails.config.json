@@ -1,0 +1,59 @@
+{
+  "$schema": "./schema/guardrails.schema.json",
+  "version": 1,
+  "baseBranch": "main",
+  "sourceRoots": ["src"],
+  "tiers": {
+    "T1": ["src/checks/**", "src/baseline.ts", "src/config.ts", "src/runner.ts"],
+    "T2": ["src/**"],
+    "T3": []
+  },
+  "specs": {
+    "items": {
+      "CFG-01": { "tier": "T1", "behaviour": "Config schema rejects unknown keys, bad values and malformed spec IDs" },
+      "SPEC-01": { "tier": "T1", "behaviour": "Test titles must start with a known, well-formed spec ID" },
+      "SPEC-02": { "tier": "T1", "behaviour": "T1 specs without a test block; T2 gaps only warn" },
+      "SIZE-01": { "tier": "T2", "behaviour": "Test files over the line cap and IDs over the per-ID test cap warn" },
+      "WEAK-01": { "tier": "T2", "behaviour": "Tests whose only assertions are mock calls or tautologies warn" },
+      "BAN-01": { "tier": "T1", "behaviour": "Focused, skipped, todo, empty-each, class, fake-server, loop, snapshot (T1) and Stryker-disable patterns block" },
+      "BAN-02": { "tier": "T1", "behaviour": "Real clock and randomness in tests block unless fake timers or a seed are used" },
+      "CLOCK-01": { "tier": "T1", "behaviour": "Suite rerun with the clock shifted reports tests that only fail in the future" },
+      "DIFF-01": { "tier": "T1", "behaviour": "Deleting base-branch tests needs the tests-removed-approved label; same-PR tests and moves are free" },
+      "DIFF-02": { "tier": "T1", "behaviour": "Removed expects, loosened matchers, lowered tool thresholds and baseline growth block" },
+      "DIFF-03": { "tier": "T1", "behaviour": "Loosening guardrails.config.json counts as weakening; tightening does not" },
+      "BUDGET-01": { "tier": "T2", "behaviour": "Test budget is per tier, excludes fixtures, handles test-only diffs and only warns" },
+      "DEPS-01": { "tier": "T1", "behaviour": "New dependencies block unless listed in deps.allow" },
+      "ARCH-01": { "tier": "T1", "behaviour": "Config-declared import boundaries and prod fixture imports are enforced via dependency-cruiser" },
+      "ARCH-02": { "tier": "T1", "behaviour": "Duplicate singletons, restricted strings and shipped fixture assets are flagged" },
+      "DOC-01": { "tier": "T1", "behaviour": "Docs (md/mdx/txt/rst and disguised notes) outside the allowlist block; required links checked" },
+      "DOC-02": { "tier": "T1", "behaviour": "GEMINI.md/CLAUDE.md etc. must be one-line pointers or symlinks to AGENTS.md" },
+      "DOC-03": { "tier": "T2", "behaviour": "Allowlisted docs over their line cap warn" },
+      "MODE-01": { "tier": "T1", "behaviour": "Rule modes, overrides and config errors decide pass/fail" },
+      "BASE-01": { "tier": "T1", "behaviour": "Baselined violations don't block; the ratchet only removes entries" },
+      "REPORT-01": { "tier": "T2", "behaviour": "Text and markdown reports show rule, location, message and fix" },
+      "RULES-01": { "tier": "T2", "behaviour": "RULES.md documents exactly the rules in the catalogue" },
+      "INIT-01": { "tier": "T2", "behaviour": "init scaffolds config, agent pointers, CODEOWNERS and CI without overwriting" },
+      "MCP-01": { "tier": "T2", "behaviour": "MCP server exposes the five tools and validate_test checks ID, cap and path" }
+    }
+  },
+  "architecture": {
+    "entries": ["src/cli.ts", "src/mcp.ts", "src/index.ts", "src/vitest-setup.ts", "src/clock-shift.mjs"],
+    "forbidden": [
+      { "name": "engine-not-entry", "from": ["src/checks/**", "src/eslint/**"], "to": ["src/cli.ts", "src/mcp.ts"], "message": "Checks are a library; entries import them, not the other way round." },
+      { "name": "no-test-code", "from": ["src/**"], "to": ["test/**"] }
+    ],
+    "singletons": ["globToRegex", "listFiles", "runCommand", "mergeBase"],
+    "restrictedStrings": [
+      { "pattern": "process\\.exit\\(", "allowIn": ["src/cli.ts"], "message": "Only the CLI may exit; library code returns results." }
+    ]
+  },
+  "tests": {
+    "globs": ["test/**/*.test.ts"],
+    "helperGlobs": ["test/helpers/**"]
+  },
+  "mutation": { "tiers": ["T1"], "break": 70 },
+  "docs": {
+    "allow": ["README.md", "AGENTS.md", "TESTING.md", "RULES.md", "skill/SKILL.md", "template/**"],
+    "requiredLinks": { "AGENTS.md": ["TESTING.md", "RULES.md"] }
+  }
+}
