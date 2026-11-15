@@ -37,6 +37,11 @@ export interface RunOptions {
 /** Rules a baseline may contain. Diff-only rules and runtime rules are never baselined. */
 export const BASELINEABLE = new Set(RULES.filter((r) => !r.diffOnly && !['TEST-6', 'TEST-8', 'TEST-9', 'CFG-1', 'CFG-2', 'FLAG-1', 'HOLD-1', 'SEC-1', 'JRN-5'].includes(r.id)).map((r) => r.id));
 
+/** Rules `guardrails baseline` records: baselineable and not switched off in this config. */
+export function baselineRules(overrides: Record<string, Mode>): Set<string> {
+  return new Set([...BASELINEABLE].filter((id) => effectiveMode(id, overrides) !== 'off'));
+}
+
 const RANK: Record<Mode, number> = { off: 0, warn: 1, block: 2 };
 
 export function effectiveMode(rule: string, overrides: Record<string, Mode>, cap?: Mode): Mode {

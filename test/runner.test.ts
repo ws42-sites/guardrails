@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { run } from '../src/runner.js';
+import { baselineRules, run } from '../src/runner.js';
 import { ratchet, readBaseline, writeBaseline } from '../src/baseline.js';
 import { toMarkdown, toText } from '../src/report.js';
 import { RULES } from '../src/rules.js';
@@ -65,5 +65,12 @@ describe('RULES-01 the rules catalogue and RULES.md agree', () => {
     const md = readFileSync(join(process.cwd(), 'RULES.md'), 'utf8');
     const documented = [...md.matchAll(/^\| (\w+-\d+W?) \|/gm)].map((m) => m[1]);
     expect(documented).toEqual(RULES.map((r) => r.id));
+  });
+});
+
+describe('BASE-01 rules switched off are never baselined', () => {
+  it('drops rules set to off and keeps the rest of the baselineable rules', () => {
+    const rules = baselineRules({ 'TEST-5W': 'off', 'TEST-1': 'warn' });
+    expect([rules.has('TEST-5W'), rules.has('TEST-1'), rules.has('TEST-2')]).toEqual([false, true, true]);
   });
 });

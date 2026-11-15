@@ -79,6 +79,10 @@
         "tier": "T1",
         "behaviour": "Duplicate singletons, restricted strings and shipped fixture assets are flagged"
       },
+      "ARCH-03": {
+        "tier": "T1",
+        "behaviour": "Modules unreachable from production entries are reported via knip; CI workflow files never break the run"
+      },
       "DOC-01": {
         "tier": "T1",
         "behaviour": "Docs (md/mdx/txt/rst and disguised notes) outside the top-level allowlist or docs.runtime globs warn; required links checked"

@@ -32,7 +32,7 @@ async function cruiseBoundaries(ctx: CheckContext, files: string[]): Promise<Vio
     from: { path: rx(cfg.sourceRoots.map((r) => (r.includes('*') ? r : `${r.replace(/\/$/, '')}/**`))), pathNot: rx(notProd) },
     to: { path: rx(cfg.fixtures.globs) },
   });
-  const roots = files.filter((f) => isProductFile(cfg, f) || isHelperFile(cfg, f));
+  const roots = files.filter((f) => SOURCE_EXT.test(f) && (isProductFile(cfg, f) || isHelperFile(cfg, f)));
   if (!roots.length) return [];
 
   const { cruise } = await import('dependency-cruiser');
@@ -106,6 +106,8 @@ function scanSources(ctx: CheckContext, files: string[]): Violation[] {
   return v;
 }
 
+const NON_REGISTRY_SPEC = /^(file:|link:|workspace:|portal:|git\+|git:|github:|https?:\/\/|[\w.-]+\/[\w.-]+(#.*)?$)/;
+
 /** ARCH-4: dependencies added vs base that are not in deps.allow. */
 function newDeps(ctx: CheckContext): { v: Violation[]; added: string[]; check: string[] } {
   if (!ctx.base || !existsSync(join(ctx.cwd, 'package.json'))) return { v: [], added: [], check: [] };
@@ -128,7 +130,11 @@ function newDeps(ctx: CheckContext): { v: Violation[]; added: string[]; check: s
   const v = added
     .filter((d) => !ctx.config.deps.allow.includes(d))
     .map((d) => violation('ARCH-4', 'package.json', `adds dependency "${d}" (not in deps.allow). A code owner must add it to deps.allow (CODEOWNER-protected config).`, `dep:${d}`));
-  return { v, added, check: [...new Set([...added, ...allowAdded])] };
+  // Local and git specs (file:, link:, workspace:, git URLs) never resolve from npm, so the registry check doesn't apply.
+  const cur = JSON.parse(readText(ctx.cwd, 'package.json'));
+  const spec = (d: string): string => String(cur.dependencies?.[d] ?? cur.devDependencies?.[d] ?? cur.optionalDependencies?.[d] ?? '');
+  const fromNpm = (d: string) => !NON_REGISTRY_SPEC.test(spec(d));
+  return { v, added, check: [...new Set([...added, ...allowAdded])].filter(fromNpm) };
 }
 
 /** ARCH-3: modules unreachable from production entries, via knip --production. */
@@ -138,7 +144,8 @@ function knipUnused(ctx: CheckContext): { v: Violation[]; error?: string } {
   const tmp = mkdtempSync(join(tmpdir(), 'guardrails-knip-'));
   const conf = join(tmp, 'knip.json');
   const project = cfg.sourceRoots.map((r) => (r.includes('*') ? `${r}!` : `${r.replace(/\/$/, '')}/**/*.{ts,tsx,js,jsx,mjs}!`));
-  writeFileSync(conf, JSON.stringify({ entry: cfg.architecture.entries.map((e) => `${e}!`), project, ignore: [...cfg.tests.globs, ...cfg.tests.helperGlobs, ...cfg.fixtures.globs] }));
+  // CI workflows are not production entries, and knip's YAML loader rejects some files GitHub accepts.
+  writeFileSync(conf, JSON.stringify({ entry: cfg.architecture.entries.map((e) => `${e}!`), project, ignore: [...cfg.tests.globs, ...cfg.tests.helperGlobs, ...cfg.fixtures.globs], 'github-actions': false }));
   try {
     let dir = dirname(require.resolve('knip'));
     while (!existsSync(join(dir, 'bin', 'knip.js')) && dirname(dir) !== dir) dir = dirname(dir);

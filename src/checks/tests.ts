@@ -266,7 +266,8 @@ function configWeakening(ctx: CheckContext, mb: string, v: Violation[]): void {
   const bl = ctx.config.baselineFile;
   const oldBl = showAt(ctx.cwd, mb, bl);
   const newBl = (() => { try { return readText(ctx.cwd, bl); } catch { return null; } })();
-  if (newBl) {
+  // The adoption PR (no guardrails config on base yet) records the initial baseline; growth after that needs the label.
+  if (newBl && showAt(ctx.cwd, mb, 'guardrails.config.json') !== null) {
     const keys = (s: string | null) => new Set<string>(s ? (JSON.parse(s).entries ?? []).map((e: { rule: string; fingerprint: string }) => `${e.rule}:${e.fingerprint}`) : []);
     const o = keys(oldBl);
     const added = [...keys(newBl)].filter((k) => !o.has(k));
