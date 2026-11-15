@@ -10,7 +10,7 @@ const SECTION_SCRIPT: Record<string, string | undefined> = { Deploy: 'deploy', R
 const NPM_RUN = /\bnpm run ([\w:.-]+)/g;
 const CLICK_PATH = /\b(click|tap)\b|\bnavigate to\b|\b(go to|open|log ?in to|sign in to)\b[^.`]*\b(dashboard|console|portal|web ui)\b/i;
 /** Raw deploy commands that belong behind `npm run deploy` (RUN-3). */
-const INLINE_DEPLOY = /\b(wrangler(\s+pages)?\s+deploy|cdk\s+deploy|vercel\s+(deploy|--prod)|netlify\s+deploy|fly(ctl)?\s+deploy|serverless\s+deploy|sls\s+deploy|sam\s+deploy|firebase\s+deploy|aws\s+s3\s+sync|render\s+deploy)\b|uses:\s*cloudflare\/(wrangler|pages)-action|api\.render\.com\/deploy/;
+const INLINE_DEPLOY = /\b(wrangler(\.js)?(\s+pages)?\s+deploy|cdk\s+deploy|vercel\s+(deploy|--prod)|netlify\s+deploy|fly(ctl)?\s+deploy|serverless\s+deploy|sls\s+deploy|sam\s+deploy|firebase\s+deploy|aws\s+s3\s+sync|render\s+deploy)\b|uses:\s*cloudflare\/(wrangler|pages)-action|api\.render\.com\/deploy/;
 const SCRIPT_DEPLOY = /\bnpm run (deploy|deploy:preview)(?![\w:-])/;
 const SCRIPT_SMOKE = /\bnpm run smoke(?![\w:-])/;
 const RUNBOOKISH = /(^|\/)[^/]*(runbook|deploy|rollback|playbook)[^/]*\.mdx?$/i;
@@ -61,6 +61,7 @@ export function checkRunbook(ctx: CheckContext, files = listFiles(ctx.cwd)): Che
     let smokeAfter = false;
     lines.forEach((l, i) => {
       const code = l.replace(/(^|\s)#.*$/, '');
+      if (/--dry-run\b/.test(code)) return; // builds and validates, deploys nothing
       if (INLINE_DEPLOY.test(code)) v.push(violation('RUN-3', f, `inline deploy command "${code.trim().slice(0, 80)}". Call \`npm run deploy\` (or deploy:preview) instead.`, `inline:${code.trim()}`, i + 1));
       if (SCRIPT_DEPLOY.test(code) || INLINE_DEPLOY.test(code)) { deployAt = i; smokeAfter = false; }
       else if (deployAt >= 0 && SCRIPT_SMOKE.test(code)) smokeAfter = true;
