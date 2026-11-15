@@ -13,7 +13,7 @@ npx guardrails init --owner @JoshBoyer --base main   # config, AGENTS.md + point
 npx guardrails baseline                               # record existing violations (only shrinks from here)
 npx guardrails check                                  # add --base origin/main for diff rules, --clock-shift for TEST-6
 ```
-Add `"@ws42/guardrails/vitest-setup"` to Vitest `setupFiles` so every test must assert. Turn on branch protection with "Require review from Code Owners" so CODEOWNERS actually guards the config, the baseline and CI.
+Add `"@ws42/guardrails/vitest-setup"` to Vitest `setupFiles` so every test must assert (TEST-9), and add `.stryker-tmp/` to `.gitignore`. Turn on branch protection with "Require review from Code Owners" so CODEOWNERS actually guards the config, the baseline and CI.
 
 ## CLI
 | Command | What it does |

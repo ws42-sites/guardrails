@@ -16,7 +16,9 @@ export function mutationTargets(ctx: CheckContext): string[] {
 /** The Stryker config guardrails generates. Mutators are pinned by the exact Stryker version plus excludedMutations. */
 export function strykerConfig(ctx: CheckContext, mutate: string[], cacheDir: string): Record<string, unknown> {
   const m = ctx.config.mutation;
+  const vitestConfig = ['vitest.config.ts', 'vitest.config.mts', 'vitest.config.js', 'vitest.config.mjs'].find((f) => existsSync(join(ctx.cwd, f)));
   return {
+    ...(vitestConfig ? { vitest: { configFile: vitestConfig } } : {}),
     $schema: './node_modules/@stryker-mutator/core/schema/stryker-schema.json',
     testRunner: 'vitest',
     plugins: ['@stryker-mutator/vitest-runner'],
@@ -29,7 +31,8 @@ export function strykerConfig(ctx: CheckContext, mutate: string[], cacheDir: str
     thresholds: { high: 90, low: m.break, break: null },
     timeoutMS: 60_000,
     concurrency: 2,
-    tempDirName: join(cacheDir, '.stryker-tmp'),
+    // Not under node_modules: Vite/esbuild ignore tsconfig for files there (breaks JSX).
+    tempDirName: '.stryker-tmp',
     cleanTempDir: true,
   };
 }
