@@ -10,6 +10,13 @@ import { collect, BASELINEABLE } from './runner.js';
 import { specMatrix } from './checks/tests.js';
 import { validateTest } from './validate.js';
 import type { CheckContext } from './types.js';
+import { addFlag } from './flags.js';
+import { survivingMutants } from './checks/mutation.js';
+import { guard, hookResponse, type Agent } from './hook.js';
+import { runHoldout } from './holdout.js';
+import { addDrafts, approveJourney, assertHuman, draftJourneys, presetDrafts } from './journeys.js';
+import { journeyMatrix } from './checks/journeys.js';
+import { listFiles } from './util.js';
 
 const HELP = `guardrails <command> [options]
 
@@ -21,6 +28,13 @@ Commands
   specs                Print the spec matrix (ID, tier, tests)
   explain <RULE>       Explain a rule
   validate-test <ID>   Check a spec ID before writing a test
+  flag <ID> <reason>   Stop and flag a spec/test conflict for a human (--file f). Blocks merge (FLAG-1)
+  mutants              Recompute surviving mutants for changed files (--base, --mutate)
+  hook-guard           Agent hook: deny edits to locked files (--agent claude|gemini|antigravity; JSON on stdin)
+  holdout --dir <d>    Run hidden holdout tests from a private checkout (HOLD-1)
+  journeys list        Journey coverage matrix (journey -> specs -> tests, e2e)
+  journeys draft       Draft 5-10 unapproved journeys from docs, routes and mocks (LLM if GEMINI_API_KEY/OPENAI_API_KEY; --dry-run)
+  journeys approve <ID> Approve a journey (humans only; --by <name>)
 
 Options
   --base <ref>         Diff mode against <ref> (default: origin/$GITHUB_BASE_REF on PRs)
@@ -28,11 +42,14 @@ Options
   --clock-shift        Also run TEST-6 (suite with clock at +N years)
   --mutation           Also run TEST-8 (Stryker on mutation-tier files)
   --mutate <globs>     Restrict --mutation to matching files (comma list)
+  --fails-on-base      Also run TEST-11 (new/changed tests must fail on base); needs --base
+  --specs <IDs>        Spec IDs this task implements (SCOPE-1; default $GUARDRAILS_SPECS)
   --no-knip            Skip ARCH-3 reachability
-  --only <groups>      Comma list: docs,setup,tests,lint,arch,clock,mutation
+  --only <groups>      Comma list: docs,setup,tests,lint,arch,gaming,flags,scope,journeys,failbase,clock,mutation
   --format <f>         text (default) | json | markdown
   --cwd <dir>          Project root (default: current directory)
   --owner <@handle>    init: CODEOWNERS owner
+  --preset <name>      init: add starter journeys as drafts (small-business)
   --force              init: overwrite files; baseline: record all current violations
   --verbose            Show every finding`;
 
@@ -44,18 +61,26 @@ async function main(): Promise<number> {
       'no-knip': { type: 'boolean' }, only: { type: 'string' }, format: { type: 'string' }, cwd: { type: 'string' },
       owner: { type: 'string' }, force: { type: 'boolean' }, verbose: { type: 'boolean' }, help: { type: 'boolean', short: 'h' },
       lines: { type: 'string' }, file: { type: 'string' }, mutate: { type: 'string' },
+      'fails-on-base': { type: 'boolean' }, specs: { type: 'string' }, agent: { type: 'string' }, dir: { type: 'string' },
+      preset: { type: 'string' }, by: { type: 'string' }, 'dry-run': { type: 'boolean' },
     },
   });
-  const [cmd, arg] = positionals;
+  const [cmd, arg, ...rest] = positionals;
   const cwd = values.cwd ?? process.cwd();
   const base = values.base ?? (process.env.GITHUB_BASE_REF ? `origin/${process.env.GITHUB_BASE_REF}` : null);
   const labels = (values.labels ?? process.env.GUARDRAILS_LABELS ?? '').split(',').map((s) => s.trim()).filter(Boolean);
-  const opts = { cwd, base, labels, clockShift: values['clock-shift'], mutation: values.mutation, knip: !values['no-knip'], only: values.only?.split(','), mutate: values.mutate?.split(',') };
+  const opts = { cwd, base, labels, clockShift: values['clock-shift'], mutation: values.mutation, knip: !values['no-knip'], only: values.only?.split(','), mutate: values.mutate?.split(','),
+    failsOnBase: values['fails-on-base'], specs: (values.specs ?? process.env.GUARDRAILS_SPECS)?.split(',').map((x) => x.trim()).filter(Boolean) };
 
   switch (cmd) {
     case 'init': {
       const r = init({ cwd, owner: values.owner, base: values.base, force: values.force });
       for (const f of r.written) console.log(`wrote   ${f}`);
+      if (values.preset) {
+        assertHuman(process.env, 'guardrails init --preset');
+        const added = addDrafts(cwd, presetDrafts(values.preset, listFiles(cwd)));
+        console.log(`journeys: added ${added.length} unapproved drafts from ${values.preset} (${added.join(', ')}). Edit, link specs, then "guardrails journeys approve <ID>".`);
+      }
       for (const f of r.skipped) console.log(`skipped ${f} (exists; --force to overwrite)`);
       console.log('Next: add specs to guardrails.config.json, run "guardrails baseline", then "guardrails check".');
       return 0;
@@ -100,6 +125,65 @@ async function main(): Promise<number> {
       const r = validateTest({ cwd, specId: arg, testFile: values.file, plannedLines: values.lines ? Number(values.lines) : undefined, base });
       console.log(JSON.stringify(r, null, 2));
       return r.ok ? 0 : 1;
+    }
+    case 'flag': {
+      const reason = rest.join(' ');
+      if (!arg || !reason) { console.error('usage: guardrails flag <SPEC-ID> <reason> [--file path]'); return 2; }
+      const config = loadConfig(cwd);
+      const f = addFlag(cwd, config.flagsFile, { specId: arg, file: values.file ?? '', reason, by: process.env.GUARDRAILS_AGENT });
+      console.log(`Flagged ${f.id} on ${f.specId} in ${config.flagsFile}. STOP work on this spec; a human must resolve it (merge is blocked by FLAG-1).`);
+      return 0;
+    }
+    case 'mutants': {
+      const config = loadConfig(cwd);
+      const ctx: CheckContext = { cwd, config, base, labels, options: { clockShift: false, mutation: true, knip: false, mutate: opts.mutate } };
+      console.log(JSON.stringify(survivingMutants(ctx), null, 2));
+      return 0;
+    }
+    case 'hook-guard': {
+      const agent = (values.agent ?? 'claude') as Agent;
+      let input = '';
+      for await (const chunk of process.stdin) input += chunk;
+      let payload = {};
+      try { payload = JSON.parse(input || '{}'); } catch { /* not JSON: allow */ }
+      const r = hookResponse(agent, guard(payload));
+      if (r.stdout) process.stdout.write(r.stdout);
+      if (r.stderr) process.stderr.write(`${r.stderr}\n`);
+      return r.code;
+    }
+    case 'journeys': {
+      const config = loadConfig(cwd);
+      if (arg === 'list' || !arg) {
+        const ctx: CheckContext = { cwd, config, base: null, labels: [], options: { clockShift: false, mutation: false, knip: false } };
+        const rows = journeyMatrix(ctx);
+        if (values.format === 'json') console.log(JSON.stringify(rows, null, 2));
+        else for (const j of rows) console.log(`${j.id.padEnd(16)} ${j.priority} ${j.status.padEnd(8)} ${j.title}\n${''.padEnd(26)}specs: ${j.specs.map((x) => `${x.id}(${x.tests})`).join(' ') || '-'}  e2e: ${j.e2e.join(', ') || '-'}`);
+        return 0;
+      }
+      if (arg === 'draft') {
+        const r = await draftJourneys(cwd);
+        if (values['dry-run']) { console.log(JSON.stringify({ via: r.via, drafts: r.drafts }, null, 2)); return 0; }
+        assertHuman(process.env, 'guardrails journeys draft (writing)');
+        const added = addDrafts(cwd, r.drafts);
+        console.log(`Drafted ${added.length} journeys via ${r.via} (approved: false): ${added.join(', ') || 'none new'}. Review them in guardrails.config.json, then "guardrails journeys approve <ID>".`);
+        return 0;
+      }
+      if (arg === 'approve') {
+        const id = rest[0];
+        if (!id) { console.error('usage: guardrails journeys approve <CUJ-ID> [--by name]'); return 2; }
+        const by = approveJourney(cwd, id, { by: values.by });
+        console.log(`Approved ${id} (approvedBy: ${by}). It now gates merges (JRN-1).`);
+        return 0;
+      }
+      console.error('usage: guardrails journeys list|draft|approve <ID>');
+      return 2;
+    }
+    case 'holdout': {
+      if (!values.dir) { console.error('usage: guardrails holdout --dir <holdout checkout>'); return 2; }
+      const r = runHoldout(cwd, loadConfig(cwd), values.dir);
+      for (const x of r.violations) console.log(`BLOCK ${x.rule} ${x.message}`);
+      console.log(`holdout: ${r.ran} hidden tests ran, ${r.violations.length} problems`);
+      return r.violations.length ? 1 : 0;
     }
     default:
       console.log(HELP);

@@ -2,57 +2,302 @@
   "$schema": "./node_modules/@ws42/guardrails/schema/guardrails.schema.json",
   "version": 1,
   "baseBranch": "cursor/stage1-ops-platform-c06f",
-  "sourceRoots": ["src", "functions"],
+  "sourceRoots": [
+    "src",
+    "functions"
+  ],
   "tiers": {
-    "T1": ["functions/**", "src/lib/review.ts", "src/lib/storage/**", "src/lib/auth.ts", "src/shared/**"],
-    "T2": ["src/lib/**"],
-    "T3": ["src/pages/**", "src/components/**", "src/*.tsx"]
+    "T1": [
+      "functions/**",
+      "src/lib/review.ts",
+      "src/lib/storage/**",
+      "src/lib/auth.ts",
+      "src/shared/**"
+    ],
+    "T2": [
+      "src/lib/**"
+    ],
+    "T3": [
+      "src/pages/**",
+      "src/components/**",
+      "src/*.tsx"
+    ]
   },
   "specs": {
     "items": {
-      "REVIEW-01": { "tier": "T1", "behaviour": "Malformed or unknown review token is rejected before any storage call" },
-      "REVIEW-02": { "tier": "T1", "behaviour": "Expired review token returns 410 and writes nothing" },
-      "REVIEW-03": { "tier": "T1", "behaviour": "Valid token returns only the public round view (no internal fields)" },
-      "REVIEW-04": { "tier": "T1", "behaviour": "Client submission writes clientPick and comments to design.json through storage" },
-      "REVIEW-05": { "tier": "T1", "behaviour": "Submissions are rejected once the round is locked; clients cannot approve or lock" },
-      "REVIEW-06": { "tier": "T1", "behaviour": "Stale write (SHA conflict) returns 409 and overwrites nothing" },
-      "REVIEW-07": { "tier": "T3", "behaviour": "Review page flow: load round, pick, comment, submit" },
-      "AUTH-01": { "tier": "T1", "behaviour": "/api/admin requires a Cloudflare Access JWT with valid signature, audience and expiry" },
-      "AUTH-02": { "tier": "T1", "behaviour": "Access user not in ALLOWED_EMAILS gets 403" },
-      "SUPPORT-01": { "tier": "T1", "behaviour": "Public support intake validates input with zod and Turnstile before writing" },
-      "SUPPORT-02": { "tier": "T2", "behaviour": "Triage assigns category and priority from the request text" },
-      "INTAKE-01": { "tier": "T1", "behaviour": "Intake submission is validated and stored as a new inbox item" },
-      "STORAGE-01": { "tier": "T1", "behaviour": "Local and GitHub storage behave the same for every interface method" },
-      "UI-01": { "tier": "T3", "behaviour": "Pipeline board shows each client in its stage column" }
+      "REVIEW-01": {
+        "tier": "T1",
+        "behaviour": "Malformed or unknown review token is rejected before any storage call"
+      },
+      "REVIEW-02": {
+        "tier": "T1",
+        "behaviour": "Expired review token returns 410 and writes nothing"
+      },
+      "REVIEW-03": {
+        "tier": "T1",
+        "behaviour": "Valid token returns only the public round view (no internal fields)"
+      },
+      "REVIEW-04": {
+        "tier": "T1",
+        "behaviour": "Client submission writes clientPick and comments to design.json through storage"
+      },
+      "REVIEW-05": {
+        "tier": "T1",
+        "behaviour": "Submissions are rejected once the round is locked; clients cannot approve or lock"
+      },
+      "REVIEW-06": {
+        "tier": "T1",
+        "behaviour": "Stale write (SHA conflict) returns 409 and overwrites nothing"
+      },
+      "REVIEW-07": {
+        "tier": "T3",
+        "behaviour": "Review page flow: load round, pick, comment, submit"
+      },
+      "AUTH-01": {
+        "tier": "T1",
+        "behaviour": "/api/admin requires a Cloudflare Access JWT with valid signature, audience and expiry"
+      },
+      "AUTH-02": {
+        "tier": "T1",
+        "behaviour": "Access user not in ALLOWED_EMAILS gets 403"
+      },
+      "SUPPORT-01": {
+        "tier": "T1",
+        "behaviour": "Public support intake validates input with zod and Turnstile before writing"
+      },
+      "SUPPORT-02": {
+        "tier": "T2",
+        "behaviour": "Triage assigns category and priority from the request text"
+      },
+      "INTAKE-01": {
+        "tier": "T1",
+        "behaviour": "Intake submission is validated and stored as a new inbox item"
+      },
+      "STORAGE-01": {
+        "tier": "T1",
+        "behaviour": "Local and GitHub storage behave the same for every interface method"
+      },
+      "UI-01": {
+        "tier": "T3",
+        "behaviour": "Pipeline board shows each client in its stage column"
+      }
     }
   },
   "architecture": {
     "tsConfig": "tsconfig.json",
-    "entries": ["src/main.tsx", "functions/**/*.ts"],
-    "forbidden": [
-      { "name": "shared-is-pure", "from": ["src/shared/**"], "to": ["src/lib/**", "src/pages/**", "src/components/**", "functions/**"], "message": "src/shared holds zod schemas and types only." },
-      { "name": "no-ui-in-backend", "from": ["src/lib/**", "functions/**"], "to": ["src/pages/**", "src/components/**"], "message": "Backend and domain code never import UI." },
-      { "name": "functions-only-from-functions", "from": ["src/**"], "to": ["functions/**"] },
-      { "name": "storage-through-interface", "from": ["src/**", "functions/**"], "except": ["src/lib/storage/index.ts"], "to": ["src/lib/storage/github.ts", "src/lib/storage/local.ts"], "message": "Use getStorage()/StorageInterface from src/lib/storage, not an implementation." }
+    "entries": [
+      "src/main.tsx",
+      "functions/**/*.ts"
     ],
-    "singletons": ["getGitHubAppToken", "signJWT", "importPrivateKey", "base64UrlEncode", "verifyTurnstile", "createGitHubFile", "parseJwt"],
+    "forbidden": [
+      {
+        "name": "shared-is-pure",
+        "from": [
+          "src/shared/**"
+        ],
+        "to": [
+          "src/lib/**",
+          "src/pages/**",
+          "src/components/**",
+          "functions/**"
+        ],
+        "message": "src/shared holds zod schemas and types only."
+      },
+      {
+        "name": "no-ui-in-backend",
+        "from": [
+          "src/lib/**",
+          "functions/**"
+        ],
+        "to": [
+          "src/pages/**",
+          "src/components/**"
+        ],
+        "message": "Backend and domain code never import UI."
+      },
+      {
+        "name": "functions-only-from-functions",
+        "from": [
+          "src/**"
+        ],
+        "to": [
+          "functions/**"
+        ]
+      },
+      {
+        "name": "storage-through-interface",
+        "from": [
+          "src/**",
+          "functions/**"
+        ],
+        "except": [
+          "src/lib/storage/index.ts"
+        ],
+        "to": [
+          "src/lib/storage/github.ts",
+          "src/lib/storage/local.ts"
+        ],
+        "message": "Use getStorage()/StorageInterface from src/lib/storage, not an implementation."
+      }
+    ],
+    "singletons": [
+      "getGitHubAppToken",
+      "signJWT",
+      "importPrivateKey",
+      "base64UrlEncode",
+      "verifyTurnstile",
+      "createGitHubFile",
+      "parseJwt"
+    ],
     "restrictedStrings": [
-      { "pattern": "api\\.github\\.com", "allowIn": ["src/lib/storage/github.ts"], "message": "Only the GitHub storage implementation talks to GitHub. Go through StorageInterface." }
+      {
+        "pattern": "api\\.github\\.com",
+        "allowIn": [
+          "src/lib/storage/github.ts"
+        ],
+        "message": "Only the GitHub storage implementation talks to GitHub. Go through StorageInterface."
+      }
     ]
   },
-  "deps": { "allow": [] },
+  "deps": {
+    "allow": []
+  },
+  "journeys": {
+    "e2eGlobs": [
+      "e2e/**/*.spec.ts"
+    ],
+    "resultsFile": "playwright-report/results.json",
+    "items": {
+      "CUJ-PIPELINE": {
+        "title": "Josh signs in through Cloudflare Access and sees every client in its pipeline stage",
+        "priority": "P0",
+        "steps": [
+          "Open /admin and pass Cloudflare Access",
+          "Land on the pipeline board",
+          "See each client card in its stage column",
+          "Open a client and see its detail"
+        ],
+        "specs": [
+          "AUTH-01",
+          "AUTH-02",
+          "UI-01",
+          "STORAGE-01"
+        ],
+        "routes": [
+          "/admin/*",
+          "/admin/board",
+          "/admin/clients",
+          "/admin/clients/:slug/*",
+          "/api/admin/*"
+        ],
+        "approved": false
+      },
+      "CUJ-REVIEW": {
+        "title": "A client opens the review link, picks a design option, comments and submits their choice",
+        "priority": "P0",
+        "steps": [
+          "Open the emailed /review/:token link",
+          "See the round's options (and nothing internal)",
+          "Pick an option and add a comment",
+          "Submit and see a confirmation",
+          "Josh sees the pick on the client's round"
+        ],
+        "specs": [
+          "REVIEW-01",
+          "REVIEW-02",
+          "REVIEW-03",
+          "REVIEW-04",
+          "REVIEW-05",
+          "REVIEW-06",
+          "REVIEW-07"
+        ],
+        "routes": [
+          "/review/:token",
+          "/api/review/:token"
+        ],
+        "approved": false
+      },
+      "CUJ-SUPPORT": {
+        "title": "A client submits a support request and it arrives triaged in Josh's support inbox",
+        "priority": "P0",
+        "steps": [
+          "Open /support",
+          "Fill in the request and pass Turnstile",
+          "Submit and see a confirmation",
+          "Josh opens the support inbox and sees it with a category and priority"
+        ],
+        "specs": [
+          "SUPPORT-01",
+          "SUPPORT-02"
+        ],
+        "routes": [
+          "/support",
+          "/api/support",
+          "/admin/support",
+          "/admin/support/:id",
+          "/api/admin/support"
+        ],
+        "approved": false
+      },
+      "CUJ-INTAKE": {
+        "title": "A new client's intake submission shows up as a new item in Josh's inbox",
+        "priority": "P1",
+        "steps": [
+          "Submit the intake form",
+          "See a confirmation",
+          "Josh opens the inbox and sees the new item",
+          "Open the item and read the details"
+        ],
+        "specs": [
+          "INTAKE-01"
+        ],
+        "routes": [
+          "/api/submissions",
+          "/admin/inbox",
+          "/admin/inbox/:id"
+        ],
+        "approved": false
+      }
+    }
+  },
   "fixtures": {
-    "globs": ["public/fixtures/**", "**/fixtures/**", "**/__fixtures__/**", "scripts/seed-fixtures.ts"],
+    "globs": [
+      "public/fixtures/**",
+      "**/fixtures/**",
+      "**/__fixtures__/**",
+      "scripts/seed-fixtures.ts"
+    ],
     "publicDir": "public",
-    "devOnly": ["src/lib/storage/local.ts"]
+    "devOnly": [
+      "src/lib/storage/local.ts"
+    ]
   },
   "tests": {
     "command": "npx vitest run --pool=forks"
   },
-  "mutation": { "tiers": ["T1"], "break": 70 },
-  "docs": {
-    "allow": ["README.md", "AGENTS.md", "docs/ARCHITECTURE.md", "docs/TESTING.md", "docs/proposal/**", "docs/design/**", ".github/**"],
-    "maxLines": { "default": 250, "AGENTS.md": 150, "docs/proposal/onboarding-backend-proposal.md": 450 }
+  "mutation": {
+    "tiers": [
+      "T1"
+    ],
+    "break": 70
   },
-  "rules": { "TEST-8": "warn" }
+  "docs": {
+    "allow": [
+      "README.md",
+      "AGENTS.md",
+      "docs/ARCHITECTURE.md",
+      "docs/TESTING.md",
+      "docs/proposal/**",
+      "docs/design/**",
+      ".github/**"
+    ],
+    "maxLines": {
+      "default": 250,
+      "AGENTS.md": 150,
+      "docs/proposal/onboarding-backend-proposal.md": 450
+    }
+  },
+  "rules": {
+    "TEST-8": "warn"
+  }
 }

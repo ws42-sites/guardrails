@@ -1,6 +1,7 @@
 name: Guardrails
 on:
   pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
   push:
     branches: [{{BASE}}]
 permissions:
@@ -13,3 +14,9 @@ jobs:
       node-version: '20'
       clock-shift: true
       mutation: true
+      fails-on-base: true
+      secret-scan: true
+      codeql: false          # needs GitHub Advanced Security on private repos
+      # holdout-repo: ws42-sites/<project>-holdout
+    # secrets:
+    #   holdout-token: ${{ secrets.GUARDRAILS_HOLDOUT_TOKEN }}

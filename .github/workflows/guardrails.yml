@@ -11,6 +11,15 @@ on:
       clock-shift: { type: boolean, default: true }
       mutation: { type: boolean, default: true }
       install-command: { type: string, default: 'npm ci' }
+      fails-on-base: { type: boolean, default: true }
+      secret-scan: { type: boolean, default: true }
+      codeql: { type: boolean, default: false }
+      codeql-languages: { type: string, default: 'javascript-typescript' }
+      holdout-repo: { type: string, default: '' }
+    secrets:
+      holdout-token:
+        required: false
+        description: Read-only token for the private holdout repo (fine-grained, contents:read).
 permissions:
   contents: read
   pull-requests: read
@@ -31,9 +40,10 @@ jobs:
           GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
           BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || '' }}
           CLOCK: ${{ inputs.clock-shift && '--clock-shift' || '' }}
+          FAILBASE: ${{ inputs.fails-on-base && '--fails-on-base' || '' }}
         run: |
           set -o pipefail
-          ARGS="$CLOCK"; [ -n "$BASE" ] && ARGS="$ARGS --base $BASE"
+          ARGS="$CLOCK"; [ -n "$BASE" ] && ARGS="$ARGS --base $BASE $FAILBASE"
           npx guardrails report --format json $ARGS > guardrails-report.json || true
           npx guardrails report --format markdown $ARGS >> "$GITHUB_STEP_SUMMARY" || true
           npx guardrails check $ARGS
@@ -64,3 +74,48 @@ jobs:
         run: |
           npx guardrails report --only mutation --mutation --base origin/${{ github.base_ref }} --format markdown >> "$GITHUB_STEP_SUMMARY" || true
           npx guardrails check --only mutation --mutation --base origin/${{ github.base_ref }}
+  secrets:
+    # SEC-1: secrets in the repo or the PR history block. Gitleaks CLI image (the action needs a licence for orgs).
+    if: ${{ inputs.secret-scan }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: gitleaks
+        env:
+          RANGE: ${{ github.event_name == 'pull_request' && format('{0}..{1}', github.event.pull_request.base.sha, github.event.pull_request.head.sha) || '' }}
+        run: |
+          OPTS="--redact --exit-code 1 --no-banner"
+          if [ -n "$RANGE" ]; then OPTS="$OPTS --log-opts=$RANGE"; fi
+          docker run --rm -v "$PWD:/repo" -w /repo ghcr.io/gitleaks/gitleaks:v8.30.1 git $OPTS .
+  holdout:
+    # HOLD-1: hidden tests from a private repo the building agent cannot read. PR gate only.
+    if: ${{ inputs.holdout-repo != '' && github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.holdout-repo }}
+          token: ${{ secrets.holdout-token }}
+          path: .holdout-src
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ inputs.node-version }}', cache: npm }
+      - run: ${{ inputs.install-command }}
+      - name: guardrails holdout
+        run: npx guardrails holdout --dir "$GITHUB_WORKSPACE/.holdout-src"
+  codeql:
+    if: ${{ inputs.codeql }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with: { languages: '${{ inputs.codeql-languages }}', queries: security-extended }
+      - uses: github/codeql-action/analyze@v3

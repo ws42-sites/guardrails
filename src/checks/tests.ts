@@ -71,7 +71,9 @@ export function checkTests(ctx: CheckContext, files = listFiles(ctx.cwd)): Check
       if (t.malformedId) {
         v.push(violation('TEST-1', file, `"${t.title}": "${t.malformedId}" does not match ${cfg.specs.idPattern}.`, `malformed:${t.title}`, t.line));
       } else if (!t.specId) {
-        v.push(violation('TEST-1', file, `"${t.title}" has no spec ID. Start the title (or its describe) with an ID from guardrails.config.json specs.items, e.g. "REVIEW-03 ...".`, `missing:${t.title}`, t.line));
+        const x = violation('TEST-1', file, `"${t.title}" has no spec ID. Start the title (or its describe) with an ID from guardrails.config.json specs.items, e.g. "REVIEW-03 ...".`, `missing:${t.title}`, t.line);
+        x.maxMode = 'warn';
+        v.push(x);
       } else if (!specs[t.specId]) {
         v.push(violation('TEST-1', file, `"${t.title}" uses ${t.specId}, which is not in specs.items. Add the behaviour to the spec block first (a code owner reviews it).`, `unknown:${t.specId}:${t.title}`, t.line));
       }
@@ -88,7 +90,7 @@ export function checkTests(ctx: CheckContext, files = listFiles(ctx.cwd)): Check
 
   const matrix = specMatrix(ctx, index);
   for (const row of matrix) {
-    if (row.tests.length === 0 && row.tier !== 'T3') {
+    if (row.tests.length === 0 && row.tier !== 'T3' && !cfg.holdout?.specs.includes(row.id)) {
       const x = violation('TEST-2', 'guardrails.config.json', `${row.id} (${row.tier}) "${row.behaviour}" has no test.`, row.id);
       if (row.tier === 'T2') x.maxMode = 'warn';
       v.push(x);
@@ -180,12 +182,17 @@ function diffChecks(ctx: CheckContext, index: TestIndex, v: Violation[], metrics
 type Json = null | boolean | number | string | Json[] | { [k: string]: Json };
 const MODE_RANK: Record<string, number> = { off: 0, warn: 1, block: 2 };
 /** Keys where a bigger number is looser. Everything else numeric: smaller is looser. */
-const LOOSER_WHEN_BIGGER = /(^|\.)(budget\.T\d|maxFileLines|maxTestsPerId|maxLines\.[^.]+|timeoutMinutes)$/;
-const LOOSER_WHEN_LIST_GROWS = /(^|\.)(deps\.allow|docs\.allow|docs\.ignore|allowIn|except|fixtures\.devOnly|excludedMutations)$/;
-const LOOSER_WHEN_LIST_SHRINKS = /(^|\.)(tiers\.T1|tiers\.T2|forbidden|restrictedStrings|singletons|sourceRoots|tests\.globs|docs\.extensions|docs\.disguise|docs\.pointerFiles)$/;
+const LOOSER_WHEN_BIGGER = /(^|\.)(budget\.T\d|maxFileLines|maxTestsPerId|maxLines\.[^.]+|timeoutMinutes|maxPercent|minLines|minTokens|maxProductLines|propertyTimeLimitMs|cacheHours)$/;
+const LOOSER_WHEN_LIST_GROWS = /(^|\.)(deps\.allow|docs\.allow|docs\.ignore|allowIn|except|fixtures\.devOnly|excludedMutations|mutation\.exclude|cliEntries|testEnvAllow|holdout\.specs)$/;
+const LOOSER_WHEN_LIST_SHRINKS = /(^|\.)(tiers\.T1|tiers\.T2|forbidden|restrictedStrings|singletons|sourceRoots|tests\.globs|docs\.extensions|docs\.disguise|docs\.pointerFiles|lock\.paths)$/;
 
 export function compareConfigs(before: Json, after: Json, path = ''): string[] {
   const out: string[] = [];
+  if (typeof after === 'boolean' && (before === undefined || typeof before === 'boolean')) {
+    if (/(^|\.)(enabled|specTests)$/.test(path) && before !== false && after === false) out.push(`${path}: disabled`);
+    if (/\.regressionGuard$/.test(path) && after && !before) out.push(`${path}: set (tests may pass on base)`);
+    return out;
+  }
   if (typeof before === 'number' && typeof after === 'number') {
     if (LOOSER_WHEN_BIGGER.test(path) ? after > before : after < before) out.push(`${path}: ${before} -> ${after}`);
     return out;
@@ -208,14 +215,15 @@ export function compareConfigs(before: Json, after: Json, path = ''): string[] {
   if (before && after && typeof before === 'object' && typeof after === 'object' && !Array.isArray(before) && !Array.isArray(after)) {
     for (const k of Object.keys(before)) {
       const p = path ? `${path}.${k}` : k;
-      if (k in after) out.push(...compareConfigs(before[k], after[k], p));
-      else if (path !== 'specs.items' && path !== 'rules' && k !== '$schema') out.push(`${p}: removed`);
+      if (k in after) { if (path !== 'journeys.items') out.push(...compareConfigs(before[k], after[k], p)); }
+      else if (path !== 'specs.items' && path !== 'journeys.items' && path !== 'rules' && k !== '$schema') out.push(`${p}: removed`);
     }
     for (const k of Object.keys(after)) {
-      if (k in before || path === 'rules') continue;
+      if (k in before || path === 'rules' || path.startsWith('journeys.items')) continue;
       const p = path ? `${path}.${k}` : k;
       const x = after[k];
-      if (Array.isArray(x)) out.push(...compareConfigs([], x, p));
+      if (typeof x === 'boolean') out.push(...compareConfigs(undefined as unknown as Json, x, p));
+      else if (Array.isArray(x)) out.push(...compareConfigs([], x, p));
       else if (x && typeof x === 'object') out.push(...compareConfigs({}, x, p));
     }
     if (path === 'rules')
@@ -239,7 +247,9 @@ function configWeakening(ctx: CheckContext, mb: string, v: Violation[]): void {
   if (before) {
     try {
       const changes = compareConfigs(JSON.parse(before), JSON.parse(readText(ctx.cwd, cfgFile)));
-      for (const c of changes) v.push(violation('TEST-7', cfgFile, `config loosened: ${c}. Lowering a threshold counts as weakening; a code owner must make this change.`, `cfg:${c}`));
+      const approved = ctx.labels.includes(ctx.config.labels.configApproved);
+      for (const c of changes)
+        if (!approved) v.push(violation('TEST-7', cfgFile, `config loosened: ${c}. Lowering a threshold counts as weakening; a code owner must approve it with the "${ctx.config.labels.configApproved}" label.`, `cfg:${c}`));
     } catch {
       /* invalid JSON is CFG-1's job */
     }

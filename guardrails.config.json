@@ -41,7 +41,7 @@
       },
       "BAN-01": {
         "tier": "T1",
-        "behaviour": "Focused, skipped, todo, empty-each, class, fake-server, loop, snapshot (T1) and Stryker-disable patterns block"
+        "behaviour": "Focused, skipped, todo, empty-each and Stryker-disable block; class, fake-server, loop and T1 snapshot patterns warn"
       },
       "BAN-02": {
         "tier": "T1",
@@ -81,7 +81,7 @@
       },
       "DOC-01": {
         "tier": "T1",
-        "behaviour": "Docs (md/mdx/txt/rst and disguised notes) outside the allowlist block; required links checked"
+        "behaviour": "Docs (md/mdx/txt/rst and disguised notes) outside the allowlist warn; required links checked"
       },
       "DOC-02": {
         "tier": "T1",
@@ -113,7 +113,7 @@
       },
       "MCP-01": {
         "tier": "T2",
-        "behaviour": "MCP server exposes the five tools and validate_test checks ID, cap and path"
+        "behaviour": "MCP server exposes check, report, explain, specs, validate_test, flag and mutants; validate_test checks ID, cap and path"
       },
       "SETUP-01": {
         "tier": "T1",
@@ -122,6 +122,74 @@
       "SETUP-02": {
         "tier": "T1",
         "behaviour": "CODEOWNERS must give the config, workflows and baseline an owner"
+      },
+      "GAME-01": {
+        "tier": "T1",
+        "behaviour": "Product code that detects the test runner or exits outside CLI entries blocks; expect.extend blocks; self-mocks warn"
+      },
+      "GAME-02": {
+        "tier": "T1",
+        "behaviour": "Diff mode: added valueOf/equals/toPrimitive block; counters, cheat comments and literals shared with new expectations warn"
+      },
+      "FAILBASE-01": {
+        "tier": "T1",
+        "behaviour": "New or changed tests must fail on the base branch and pass on head, unless regressionGuard or allow-characterization"
+      },
+      "PROP-01": {
+        "tier": "T1",
+        "behaviour": "Seeded fast-check with a time limit is allowed for properties specs; unseeded runs block"
+      },
+      "TRIM-01": {
+        "tier": "T1",
+        "behaviour": "Preference-style TEST-5 bans and missing spec IDs warn; cheating bans block"
+      },
+      "FLAG-01": {
+        "tier": "T2",
+        "behaviour": "guardrails flag / guardrails_flag record conflicts; open flags block until resolved; clearing warns"
+      },
+      "LOCK-01": {
+        "tier": "T2",
+        "behaviour": "Agent hooks deny edits to spec-tagged tests and guardrails files for Claude Code, Gemini CLI and Antigravity"
+      },
+      "HOLD-01": {
+        "tier": "T2",
+        "behaviour": "Holdout tests from a private checkout run at the gate, report titles only, and exempt their specs from TEST-2"
+      },
+      "DUP-01": {
+        "tier": "T1",
+        "behaviour": "Duplicated lines in new product code above duplication.maxPercent block"
+      },
+      "REG-01": {
+        "tier": "T1",
+        "behaviour": "New packages must exist on npm; young, unpopular or vulnerable packages warn or block; offline skips"
+      },
+      "SCOPE-01": {
+        "tier": "T1",
+        "behaviour": "PRs over the product line cap or outside their specs paths warn"
+      },
+      "WEAK-02": {
+        "tier": "T1",
+        "behaviour": "Loosening duplication, registry, scope, lock or regressionGuard settings counts as weakening"
+      },
+      "JOURNEY-01": {
+        "tier": "T1",
+        "behaviour": "Approved P0/P1 journeys need exactly one e2e test; matrix shows specs, tests and pass/fail"
+      },
+      "JOURNEY-02": {
+        "tier": "T2",
+        "behaviour": "Journey config is validated: IDs, spec links, approvedBy and spec back-references; orphan specs warn"
+      },
+      "JOURNEY-03": {
+        "tier": "T1",
+        "behaviour": "Journey changes in a PR need a code owner; approve is human-only and hooks deny agent commands"
+      },
+      "JOURNEY-04": {
+        "tier": "T2",
+        "behaviour": "New pages, endpoints, router paths and forms not covered by a journey warn"
+      },
+      "JOURNEY-05": {
+        "tier": "T2",
+        "behaviour": "journeys draft uses Gemini/OpenAI or a route heuristic; the small-business preset adds drafts"
       }
     }
   },
@@ -184,7 +252,14 @@
     "tiers": [
       "T1"
     ],
-    "break": 70
+    "break": 70,
+    "exclude": [
+      "src/checks/clock.ts",
+      "src/checks/lint.ts",
+      "src/checks/arch.ts",
+      "src/checks/failbase.ts",
+      "src/checks/dup.ts"
+    ]
   },
   "docs": {
     "allow": [
@@ -201,5 +276,10 @@
         "RULES.md"
       ]
     }
+  },
+  "deps": {
+    "allow": [
+      "jscpd"
+    ]
   }
 }

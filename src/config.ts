@@ -22,7 +22,22 @@ export const configSchema = z
         idPattern: z.string().default('^[A-Z][A-Z0-9]{1,11}-[0-9]{2,4}$'),
         maxTestsPerId: z.number().int().positive().default(8),
         items: z
-          .record(z.object({ tier, behaviour: z.string().min(3) }).strict())
+          .record(
+            z
+              .object({
+                tier,
+                behaviour: z.string().min(3),
+                /** Tests for this spec may pass on base (they guard existing behaviour). TEST-11. */
+                regressionGuard: z.boolean().optional(),
+                /** Property-based tests (seeded fast-check with a time limit) allowed. TEST-5. */
+                properties: z.boolean().optional(),
+                /** Product paths this behaviour lives in. SCOPE-1. */
+                paths: globs.optional(),
+                /** Journeys this spec serves (back-reference; must match journeys.items.*.specs). JRN-2. */
+                journeys: z.array(z.string()).optional(),
+              })
+              .strict(),
+          )
           .default({}),
       })
       .strict()
@@ -45,6 +60,10 @@ export const configSchema = z
           )
           .default([]),
         singletons: z.array(z.string()).default([]),
+        /** Files allowed to call process.exit (ARCH-7). */
+        cliEntries: globs.default(['**/cli.{ts,js,mjs,cjs}', 'bin/**', 'scripts/**']),
+        /** Product files allowed to read the test environment (ARCH-7), e.g. a test-only bootstrap. */
+        testEnvAllow: globs.default([]),
         restrictedStrings: z
           .array(
             z
@@ -55,7 +74,86 @@ export const configSchema = z
       })
       .strict()
       .default({}),
-    deps: z.object({ allow: z.array(z.string()).default([]) }).strict().default({}),
+    deps: z
+      .object({
+        allow: z.array(z.string()).default([]),
+        registry: z
+          .object({
+            enabled: z.boolean().default(true),
+            minAgeDays: z.number().nonnegative().default(30),
+            minWeeklyDownloads: z.number().nonnegative().default(1000),
+            cacheHours: z.number().positive().default(24),
+          })
+          .strict()
+          .default({}),
+      })
+      .strict()
+      .default({}),
+    duplication: z
+      .object({
+        enabled: z.boolean().default(true),
+        minLines: z.number().int().positive().default(5),
+        minTokens: z.number().int().positive().default(50),
+        maxPercent: z.number().min(0).max(100).default(3),
+      })
+      .strict()
+      .default({}),
+    scope: z
+      .object({ maxProductLines: z.number().int().positive().default(600) })
+      .strict()
+      .default({}),
+    holdout: z
+      .object({
+        repo: z.string().optional(),
+        path: z.string().optional(),
+        specs: z.array(z.string()).default([]),
+        target: z.string().default('test/holdout'),
+      })
+      .strict()
+      .optional(),
+    lock: z
+      .object({
+        specTests: z.boolean().default(true),
+        paths: globs.default(['guardrails.config.json', '.guardrails/**', '.github/CODEOWNERS', '.github/workflows/**', '.claude/settings.json', '.gemini/settings.json', '.agents/hooks.json']),
+      })
+      .strict()
+      .default({}),
+    journeys: z
+      .object({
+        idPattern: z.string().default('^CUJ-[A-Z0-9]{2,16}$'),
+        /** Playwright (or other e2e) test files; excluded from unit-test rules. JRN-1. */
+        e2eGlobs: globs.default(['e2e/**/*.spec.ts', 'e2e/**/*.test.ts']),
+        /** Optional Playwright JSON reporter output, for pass/fail in the coverage matrix. */
+        resultsFile: z.string().optional(),
+        /** Files whose routes count as new routes/endpoints (JRN-4). */
+        routeGlobs: globs.default(['src/pages/**', 'app/**/page.{ts,tsx,js,jsx}', 'pages/**', 'functions/**']),
+        draft: z
+          .object({ geminiModel: z.string().default('gemini-2.5-flash'), openaiModel: z.string().default('gpt-4.1-mini'), max: z.number().int().min(1).max(20).default(8) })
+          .strict()
+          .default({}),
+        /** JRN-5 visual diff of per-step screenshots against mocks (VIS-1 v2). Stub; off by default. */
+        visual: z
+          .object({ enabled: z.boolean().default(false), mocksDir: z.string().default('design/mocks'), maxDiffRatio: z.number().min(0).max(1).default(0.01) })
+          .strict()
+          .default({}),
+        items: z
+          .record(
+            z
+              .object({
+                title: z.string().min(10),
+                priority: z.enum(['P0', 'P1', 'P2']),
+                steps: z.array(z.string().min(3)).min(1),
+                specs: z.array(z.string()).default([]),
+                routes: z.array(z.string()).default([]),
+                approved: z.boolean().default(false),
+                approvedBy: z.string().optional(),
+              })
+              .strict(),
+          )
+          .default({}),
+      })
+      .strict()
+      .default({}),
     fixtures: z
       .object({
         globs: globs.default(['**/fixtures/**', '**/__fixtures__/**']),
@@ -80,6 +178,7 @@ export const configSchema = z
         command: z.string().default('npx vitest run --pool=forks'),
         clockShiftYears: z.number().positive().default(2),
         testsRemovedLabel: z.string().default('tests-removed-approved'),
+        propertyTimeLimitMs: z.number().int().positive().default(5000),
       })
       .strict()
       .default({}),
@@ -89,6 +188,8 @@ export const configSchema = z
         break: z.number().min(0).max(100).default(70),
         timeoutMinutes: z.number().positive().default(15),
         excludedMutations: z.array(z.string()).default([]),
+        /** Files covered by slow integration suites that the Stryker run excludes (GUARDRAILS_MUTATION=1). */
+        exclude: globs.default([]),
       })
       .strict()
       .default({}),
@@ -115,12 +216,34 @@ export const configSchema = z
           if (!RULE_IDS.includes(id)) ctx.addIssue({ code: 'custom', message: `unknown rule id ${id}` });
       }),
     baselineFile: z.string().default('.guardrails/baseline.json'),
+    flagsFile: z.string().default('.guardrails/flags.json'),
     labels: z
-      .object({ rebaseline: z.string().default('guardrails:rebaseline') })
+      .object({
+        rebaseline: z.string().default('guardrails:rebaseline'),
+        characterization: z.string().default('allow-characterization'),
+        flagsResolved: z.string().default('flags-resolved'),
+        /** A code owner approved loosening guardrails.config.json in this PR (TEST-7 config part). */
+        configApproved: z.string().default('guardrails:config-approved'),
+      })
       .strict()
       .default({}),
   })
-  .strict();
+  .strict()
+  .superRefine((cfg, ctx) => {
+    const idRe = new RegExp(cfg.journeys.idPattern);
+    for (const [id, j] of Object.entries(cfg.journeys.items)) {
+      if (!idRe.test(id)) ctx.addIssue({ code: 'custom', path: ['journeys', 'items', id], message: `journey ID must match ${cfg.journeys.idPattern}` });
+      for (const s of j.specs)
+        if (!cfg.specs.items[s]) ctx.addIssue({ code: 'custom', path: ['journeys', 'items', id, 'specs'], message: `unknown spec ${s}` });
+      if (j.approved && !j.approvedBy) ctx.addIssue({ code: 'custom', path: ['journeys', 'items', id, 'approvedBy'], message: 'approved journeys need approvedBy (use guardrails journeys approve)' });
+    }
+    for (const [sid, s] of Object.entries(cfg.specs.items))
+      for (const jid of s.journeys ?? []) {
+        const j = cfg.journeys.items[jid];
+        if (!j) ctx.addIssue({ code: 'custom', path: ['specs', 'items', sid, 'journeys'], message: `unknown journey ${jid}` });
+        else if (!j.specs.includes(sid)) ctx.addIssue({ code: 'custom', path: ['specs', 'items', sid, 'journeys'], message: `${jid} does not list ${sid} in its specs` });
+      }
+  });
 
 export type GuardrailsConfig = z.output<typeof configSchema>;
 export const CONFIG_FILE = 'guardrails.config.json';

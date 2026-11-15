@@ -12,12 +12,13 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "template",
-    "skill",
-    "TESTING.md",
     "RULES.md",
-    "schema"
+    "TESTING.md",
+    "dist",
+    "journeys",
+    "schema",
+    "skill",
+    "template"
   ],
   "engines": {
     "node": ">=20"
@@ -36,6 +37,7 @@
     "dependency-cruiser": "16.10.4",
     "eslint": "8.57.1",
     "eslint-plugin-vitest": "0.4.1",
+    "jscpd": "4.0.5",
     "knip": "5.88.1",
     "typescript": "5.6.3",
     "zod": "3.25.76"
@@ -57,9 +59,9 @@
     "./package.json": "./package.json"
   },
   "peerDependencies": {
-    "vitest": ">=1",
     "@stryker-mutator/core": ">=8",
-    "@stryker-mutator/vitest-runner": ">=8"
+    "@stryker-mutator/vitest-runner": ">=8",
+    "vitest": ">=1"
   },
   "peerDependenciesMeta": {
     "vitest": {
