@@ -20,7 +20,7 @@ export function checkScope(ctx: CheckContext): CheckOutput {
   let ids = ctx.options.specs ?? [];
   if (!ids.length) {
     const re = new RegExp(cfg.specs.idPattern.replace(/^\^|\$$/g, ''), 'g');
-    ids = [...new Set(Object.entries(diff).filter(([f]) => isTestFile(cfg, f)).flatMap(([, d]) => d.added.join('\n').match(re) ?? []))];
+    ids = [...new Set(Object.entries(diff).filter(([f]) => isTestFile(cfg, f)).flatMap(([, d]) => d.added.join('\n').match(re) ?? []))].filter((id) => cfg.specs.items[id]);
   }
   const paths = ids.flatMap((id) => cfg.specs.items[id]?.paths ?? []);
   if (paths.length)

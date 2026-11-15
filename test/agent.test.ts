@@ -15,7 +15,7 @@ describe('INIT-01 init scaffolds a repo without clobbering it', () => {
     r.remove('guardrails.config.json', '.github/CODEOWNERS');
     const res = init({ cwd: r.dir, owner: '@josh', base: 'main' });
     expect([res.written, res.skipped]).toEqual([
-      ['guardrails.config.json', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml', '.claude/settings.json', '.mcp.json', '.gemini/settings.json', '.agents/hooks.json', '.agents/mcp_config.json'],
+      ['guardrails.config.json', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml', '.claude/settings.json', '.mcp.json', '.gemini/settings.json', '.agents/hooks.json', '.agents/mcp_config.json', '.gemini/.env'],
       ['AGENTS.md'],
     ]);
     const cfg = parseConfig(JSON.parse(readFileSync(join(r.dir, 'guardrails.config.json'), 'utf8')));
@@ -24,7 +24,7 @@ describe('INIT-01 init scaffolds a repo without clobbering it', () => {
     expect(readFileSync(join(r.dir, 'GEMINI.md'), 'utf8')).toBe('See AGENTS.md.\n');
     expect(existsSync(join(r.dir, '.github/workflows/guardrails.yml'))).toBe(true);
     const claude = JSON.parse(readFileSync(join(r.dir, '.claude/settings.json'), 'utf8'));
-    expect([claude.model, claude.hooks.PreToolUse[0].hooks[0].command]).toEqual(['x', 'npx --no-install guardrails hook-guard --agent claude']);
+    expect([claude.model, claude.env.GUARDRAILS_AGENT, claude.hooks.PreToolUse[0].hooks[0].command]).toEqual(['x', 'claude-code', 'npx --no-install guardrails hook-guard --agent claude']);
     expect(init({ cwd: r.dir }).written).toEqual([]);
   });
 });
@@ -47,7 +47,7 @@ describe('MCP-01 agents can validate a test before writing it', () => {
     const client = new Client({ name: 't', version: '0' });
     await Promise.all([createServer().connect(a), client.connect(b)]);
     const tools = (await client.listTools()).tools.map((t) => t.name).sort();
-    expect(tools).toEqual(['guardrails_check', 'guardrails_explain_rule', 'guardrails_flag', 'guardrails_list_specs', 'guardrails_mutants', 'guardrails_report', 'guardrails_validate_test']);
+    expect(tools).toEqual(['guardrails_check', 'guardrails_explain_rule', 'guardrails_flag', 'guardrails_journey_coverage', 'guardrails_list_journeys', 'guardrails_list_specs', 'guardrails_mutants', 'guardrails_report', 'guardrails_validate_test']);
     const res = await client.callTool({ name: 'guardrails_list_specs', arguments: { cwd: r.dir, tier: 'T1' } });
     expect(JSON.parse((res.content as { text: string }[])[0].text)).toEqual([{ id: 'CORE-01', tier: 'T1', behaviour: 'core adds numbers', tests: 1 }]);
     await client.callTool({ name: 'guardrails_flag', arguments: { cwd: r.dir, specId: 'CORE-01', file: 'src/core/a.test.ts', reason: 'expects 3 for add(1,1); spec says sum' } });

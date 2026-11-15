@@ -33,6 +33,8 @@ export const configSchema = z
                 properties: z.boolean().optional(),
                 /** Product paths this behaviour lives in. SCOPE-1. */
                 paths: globs.optional(),
+                /** Journeys this spec serves (back-reference; must match journeys.items.*.specs). JRN-2. */
+                journeys: z.array(z.string()).optional(),
               })
               .strict(),
           )
@@ -116,6 +118,42 @@ export const configSchema = z
       })
       .strict()
       .default({}),
+    journeys: z
+      .object({
+        idPattern: z.string().default('^CUJ-[A-Z0-9]{2,16}$'),
+        /** Playwright (or other e2e) test files; excluded from unit-test rules. JRN-1. */
+        e2eGlobs: globs.default(['e2e/**/*.spec.ts', 'e2e/**/*.test.ts']),
+        /** Optional Playwright JSON reporter output, for pass/fail in the coverage matrix. */
+        resultsFile: z.string().optional(),
+        /** Files whose routes count as new routes/endpoints (JRN-4). */
+        routeGlobs: globs.default(['src/pages/**', 'app/**/page.{ts,tsx,js,jsx}', 'pages/**', 'functions/**']),
+        draft: z
+          .object({ geminiModel: z.string().default('gemini-2.5-flash'), openaiModel: z.string().default('gpt-4.1-mini'), max: z.number().int().min(1).max(20).default(8) })
+          .strict()
+          .default({}),
+        /** JRN-5 visual diff of per-step screenshots against mocks (VIS-1 v2). Stub; off by default. */
+        visual: z
+          .object({ enabled: z.boolean().default(false), mocksDir: z.string().default('design/mocks'), maxDiffRatio: z.number().min(0).max(1).default(0.01) })
+          .strict()
+          .default({}),
+        items: z
+          .record(
+            z
+              .object({
+                title: z.string().min(10),
+                priority: z.enum(['P0', 'P1', 'P2']),
+                steps: z.array(z.string().min(3)).min(1),
+                specs: z.array(z.string()).default([]),
+                routes: z.array(z.string()).default([]),
+                approved: z.boolean().default(false),
+                approvedBy: z.string().optional(),
+              })
+              .strict(),
+          )
+          .default({}),
+      })
+      .strict()
+      .default({}),
     fixtures: z
       .object({
         globs: globs.default(['**/fixtures/**', '**/__fixtures__/**']),
@@ -150,6 +188,8 @@ export const configSchema = z
         break: z.number().min(0).max(100).default(70),
         timeoutMinutes: z.number().positive().default(15),
         excludedMutations: z.array(z.string()).default([]),
+        /** Files covered by slow integration suites that the Stryker run excludes (GUARDRAILS_MUTATION=1). */
+        exclude: globs.default([]),
       })
       .strict()
       .default({}),
@@ -188,7 +228,22 @@ export const configSchema = z
       .strict()
       .default({}),
   })
-  .strict();
+  .strict()
+  .superRefine((cfg, ctx) => {
+    const idRe = new RegExp(cfg.journeys.idPattern);
+    for (const [id, j] of Object.entries(cfg.journeys.items)) {
+      if (!idRe.test(id)) ctx.addIssue({ code: 'custom', path: ['journeys', 'items', id], message: `journey ID must match ${cfg.journeys.idPattern}` });
+      for (const s of j.specs)
+        if (!cfg.specs.items[s]) ctx.addIssue({ code: 'custom', path: ['journeys', 'items', id, 'specs'], message: `unknown spec ${s}` });
+      if (j.approved && !j.approvedBy) ctx.addIssue({ code: 'custom', path: ['journeys', 'items', id, 'approvedBy'], message: 'approved journeys need approvedBy (use guardrails journeys approve)' });
+    }
+    for (const [sid, s] of Object.entries(cfg.specs.items))
+      for (const jid of s.journeys ?? []) {
+        const j = cfg.journeys.items[jid];
+        if (!j) ctx.addIssue({ code: 'custom', path: ['specs', 'items', sid, 'journeys'], message: `unknown journey ${jid}` });
+        else if (!j.specs.includes(sid)) ctx.addIssue({ code: 'custom', path: ['specs', 'items', sid, 'journeys'], message: `${jid} does not list ${sid} in its specs` });
+      }
+  });
 
 export type GuardrailsConfig = z.output<typeof configSchema>;
 export const CONFIG_FILE = 'guardrails.config.json';

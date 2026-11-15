@@ -12,10 +12,10 @@ const TEST_ENV = [
   /\btypeof\s+(jest|vi|describe|it)\s*[!=]==?\s*['"`]/,
 ];
 const EXIT = /\bprocess\.(exit|reallyExit|abort)\s*\(|\bprocess\.kill\(\s*process\.pid\b/;
-const EQUALITY_OVERRIDE = /^\s*(?:(?:public|private|protected|static|override)\s+)*(?:valueOf|equals|\[\s*Symbol\.toPrimitive\s*\])\s*(?:\(|:|=)/;
+const EQUALITY_OVERRIDE = /^\s*(?:(?:public|private|protected|static|override)\s+)*(valueOf|equals|\[\s*Symbol\.toPrimitive\s*\])\s*(?:\(|:|=)/;
 const EXPECT_EXTEND = /\bexpect\.extend\s*\(/;
 const COUNTER = /^(?:export\s+)?(?:let|var)\s+(\w+)\s*(?::\s*number\s*)?=\s*0\s*;?\s*$/;
-const CHEAT_COMMENT = /(?:^|\s)(?:\/\/|\/\*|\*)\s?.*\b(for (the )?tests?\b|make (the )?tests? pass|so (the )?tests? pass|to satisfy (the )?tests?|workaround for (the )?tests?|hack\b|test[- ]only hack)/i;
+const CHEAT_COMMENT = /(?:^|\s)(?:\/\/|\/\*|\*)\s?.*\b(for (the )?tests?(?=\s*(?:$|[.,;:)!]|\*\/))|make (the )?tests? pass|so (the )?tests? pass|to satisfy (the )?tests?|workaround for (the )?tests?|hack\b|test[- ]only hack)/i;
 const EXPECTED_LITERAL = /\.(?:toBe|toEqual|toStrictEqual|toContain|toMatch|toHaveProperty)\(\s*(?:(['"`])((?:(?!\1).){6,}?)\1|(-?\d{6,}(?:\.\d+)?|-?\d+\.\d{4,}))\s*[,)]/g;
 
 const warn = (x: Violation): Violation => ({ ...x, maxMode: 'warn' });
@@ -65,8 +65,9 @@ function diffSignatures(ctx: CheckContext, diff: Record<string, FileDiff>, v: Vi
     if (isProduct) {
       productAdded.set(file, d.added);
       for (const line of d.added) {
-        if (EQUALITY_OVERRIDE.test(line))
-          v.push(violation('ARCH-7', file, `adds a custom ${line.trim().split(/[\s(:=]/)[0]} on a product type. Overloaded equality/primitive conversion can make any assertion pass.`, `eq:${line.trim()}`));
+        const eq = EQUALITY_OVERRIDE.exec(line);
+        if (eq)
+          v.push(violation('ARCH-7', file, `adds a custom ${eq[1].replace(/\s/g, '')} on a product type. Overloaded equality/primitive conversion can make any assertion pass.`, `eq:${line.trim()}`));
         const c = COUNTER.exec(line);
         if (c) v.push(warn(violation('ARCH-7', file, `adds module-level mutable state "${c[1]}". Call counters let code behave differently per call (a common test-gaming trick).`, `counter:${c[1]}`)));
       }

@@ -21,7 +21,7 @@ export function mergeSettings(existing: Json, add: Json): Json {
   return out;
 }
 
-export interface InitOptions { cwd: string; owner?: string; base?: string; force?: boolean }
+export interface InitOptions { cwd: string; owner?: string; base?: string; force?: boolean; preset?: string }
 export interface InitResult { written: string[]; skipped: string[] }
 
 /** Guess tiers, roots and entries from what exists, so a fresh repo starts close to right. */
@@ -64,5 +64,14 @@ export function init(opts: InitOptions): InitResult {
     writeFileSync(dest, body);
     written.push(f);
   }
+  // Gemini CLI loads .gemini/.env: mark its shell as an agent so human-only commands refuse.
+  const envFile = join(opts.cwd, '.gemini/.env');
+  const line = readFileSync(join(TEMPLATE, '.gemini/.env'), 'utf8');
+  const cur = existsSync(envFile) ? readFileSync(envFile, 'utf8') : null;
+  if (cur === null || !/^GUARDRAILS_AGENT=/m.test(cur)) {
+    mkdirSync(dirname(envFile), { recursive: true });
+    writeFileSync(envFile, cur === null ? line : `${cur.replace(/\n?$/, '\n')}${line}`);
+    written.push('.gemini/.env');
+  } else skipped.push('.gemini/.env');
   return { written, skipped };
 }

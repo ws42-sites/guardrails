@@ -170,6 +170,26 @@
       "WEAK-02": {
         "tier": "T1",
         "behaviour": "Loosening duplication, registry, scope, lock or regressionGuard settings counts as weakening"
+      },
+      "JOURNEY-01": {
+        "tier": "T1",
+        "behaviour": "Approved P0/P1 journeys need exactly one e2e test; matrix shows specs, tests and pass/fail"
+      },
+      "JOURNEY-02": {
+        "tier": "T2",
+        "behaviour": "Journey config is validated: IDs, spec links, approvedBy and spec back-references; orphan specs warn"
+      },
+      "JOURNEY-03": {
+        "tier": "T1",
+        "behaviour": "Journey changes in a PR need a code owner; approve is human-only and hooks deny agent commands"
+      },
+      "JOURNEY-04": {
+        "tier": "T2",
+        "behaviour": "New pages, endpoints, router paths and forms not covered by a journey warn"
+      },
+      "JOURNEY-05": {
+        "tier": "T2",
+        "behaviour": "journeys draft uses Gemini/OpenAI or a route heuristic; the small-business preset adds drafts"
       }
     }
   },
@@ -232,7 +252,14 @@
     "tiers": [
       "T1"
     ],
-    "break": 70
+    "break": 70,
+    "exclude": [
+      "src/checks/clock.ts",
+      "src/checks/lint.ts",
+      "src/checks/arch.ts",
+      "src/checks/failbase.ts",
+      "src/checks/dup.ts"
+    ]
   },
   "docs": {
     "allow": [

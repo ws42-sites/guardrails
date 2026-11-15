@@ -1,6 +1,7 @@
 import type { Finding, Report } from './types.js';
 import { ruleInfo } from './rules.js';
 
+const STATUS = { draft: '○', missing: '✖', covered: '◐', pass: '✔', fail: '✖' } as const;
 const loc = (f: Finding) => `${f.file}${f.line ? `:${f.line}` : ''}`;
 const group = (fs: Finding[]) => {
   const m = new Map<string, Finding[]>();
@@ -23,6 +24,10 @@ export function toText(r: Report, { verbose = false } = {}): string {
     for (const [rule, fs] of group(r.findings.filter((f) => f.known))) out.push(`    ${rule}: ${fs.length}`);
   }
   if (r.staleBaseline) out.push(`• ${r.staleBaseline} baseline entries are fixed. Run "guardrails baseline" to shrink it.`);
+  if (r.journeys?.length) {
+    out.push('• journeys (journey → specs → tests, e2e):');
+    for (const j of r.journeys) out.push(`    ${STATUS[j.status]} ${j.id} ${j.priority}${j.approved ? '' : ' draft'}  specs: ${j.specs.map((s) => `${s.id}(${s.tests})`).join(' ') || '-'}  e2e: ${j.e2e.join(', ') || '-'}`);
+  }
   for (const m of r.metrics) out.push(`• ${m.name}: ${m.value}${m.detail && !m.detail.includes('\n') ? ` (${m.detail})` : ''}`);
   out.push(`${r.ok ? 'PASS' : 'FAIL'}: ${r.counts.block} blocking, ${r.counts.warn} warnings, ${r.counts.known} known${r.base ? ` (diff vs ${r.base})` : ''}`);
   return out.join('\n');
@@ -42,6 +47,11 @@ export function toMarkdown(r: Report): string {
   if (r.metrics.length) {
     out.push('', '| Metric | Value | Detail |', '|---|---|---|');
     for (const m of r.metrics) out.push(`| ${m.name} | ${m.value} | ${(m.detail ?? '').replace(/\n/g, '<br>').replace(/\|/g, '\\|')} |`);
+  }
+  if (r.journeys?.length) {
+    out.push('', '| Journey | Priority | Status | Specs (tests) | E2E |', '|---|---|---|---|---|');
+    for (const j of r.journeys)
+      out.push(`| ${j.id} ${j.title.replace(/\|/g, '\\|')} | ${j.priority} | ${STATUS[j.status]} ${j.status} | ${j.specs.map((s) => `${s.id} (${s.tests})`).join(', ') || '-'} | ${j.e2e.map((e) => `\`${e}\``).join(', ') || '-'} |`);
   }
   if (r.staleBaseline) out.push('', `${r.staleBaseline} baseline entries are fixed; run \`guardrails baseline\` to shrink the baseline.`);
   return out.join('\n');

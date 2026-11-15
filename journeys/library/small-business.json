@@ -1,0 +1,15 @@
+{
+  "preset": "small-business",
+  "description": "Starter Critical User Journeys for small-business client sites. Pulled in as unapproved drafts by `guardrails init --preset small-business`; a human edits, links specs and approves them.",
+  "journeys": [
+    { "id": "CUJ-SERVICES", "title": "Visitor lands on the home page and finds the service they need", "priority": "P0", "routes": ["/", "/services", "/services/*"], "steps": ["Open the home page", "See what the business does within the first screen", "Open the services list", "Open one service and read price or next step"] },
+    { "id": "CUJ-CONTACT", "title": "Visitor sends an enquiry through the contact form and sees a confirmation", "priority": "P0", "routes": ["/contact", "/api/contact"], "steps": ["Open the contact page from the main navigation", "Fill in name, email and message", "Submit the form", "See a clear confirmation; the business receives the enquiry"] },
+    { "id": "CUJ-BOOK", "title": "Visitor books an appointment or taps to call from any page", "priority": "P0", "routes": ["/book", "/booking"], "steps": ["Find the book or call button in the header", "Tap call (tel: link) or open booking", "Pick a time and confirm", "See the booking confirmation"] },
+    { "id": "CUJ-TRUST", "title": "Visitor reads about the business, reviews and credentials before deciding", "priority": "P1", "routes": ["/about", "/reviews", "/testimonials"], "steps": ["Open About from the navigation", "Read who runs the business and how long it has operated", "See reviews or testimonials", "Find a way to get in touch from the page"] },
+    { "id": "CUJ-MOBILE", "title": "Visitor completes the main journey on a phone without zooming or broken layout", "priority": "P0", "routes": ["/"], "steps": ["Open the site at a 390px wide viewport", "Open the menu and navigate to services", "Use the call or contact button", "Nothing overflows horizontally and tap targets are usable"] },
+    { "id": "CUJ-LOCATION", "title": "Visitor finds the address, map and opening hours", "priority": "P1", "routes": ["/contact", "/location", "/hours"], "steps": ["Find the address and hours from the footer or contact page", "Open the map link", "See today's hours"] },
+    { "id": "CUJ-MENU", "title": "Visitor browses the menu with prices", "priority": "P1", "optional": true, "when": ["menu"], "routes": ["/menu"], "steps": ["Open the menu page", "Browse sections", "See item names, descriptions and prices"] },
+    { "id": "CUJ-ORDER", "title": "Visitor orders online and gets an order confirmation", "priority": "P0", "optional": true, "when": ["order", "cart", "checkout", "shop"], "routes": ["/order", "/cart", "/checkout"], "steps": ["Add an item to the order", "Open the cart and adjust quantity", "Check out with contact and pickup or delivery details", "See the order confirmation"] },
+    { "id": "CUJ-GALLERY", "title": "Visitor browses the gallery of past work", "priority": "P2", "optional": true, "when": ["gallery", "portfolio", "work"], "routes": ["/gallery", "/portfolio"], "steps": ["Open the gallery", "Open an image full size", "Move to the next image and close"] }
+  ]
+}

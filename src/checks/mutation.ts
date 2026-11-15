@@ -12,7 +12,7 @@ export function mutationTargets(ctx: CheckContext): string[] {
   const cfg = ctx.config;
   const pool = ctx.base ? Object.entries(diffAgainst(ctx.cwd, ctx.base)).filter(([, d]) => d.status !== 'deleted').map(([f]) => f) : listFiles(ctx.cwd);
   const only = ctx.options.mutate;
-  return pool.filter((f) => isProductFile(cfg, f) && cfg.mutation.tiers.includes(tierOf(cfg, f)) && existsSync(join(ctx.cwd, f)) && (!only || matchesAny(f, only)));
+  return pool.filter((f) => isProductFile(cfg, f) && cfg.mutation.tiers.includes(tierOf(cfg, f)) && existsSync(join(ctx.cwd, f)) && !matchesAny(f, cfg.mutation.exclude) && (!only || matchesAny(f, only)));
 }
 
 /** The Stryker config guardrails generates. Mutators are pinned by the exact Stryker version plus excludedMutations. */
@@ -58,11 +58,12 @@ function runStryker(ctx: CheckContext, targets: string[]): StrykerRun {
 
 /** Surviving / uncovered mutants for changed (or given) files, for guardrails_mutants. Always recomputed. */
 export function survivingMutants(ctx: CheckContext): { mutants: SurvivingMutant[]; note?: string } {
-  const r = runStryker(ctx, mutationTargets(ctx));
+  const targets = mutationTargets(ctx);
+  const r = runStryker(ctx, targets);
   if ('skipped' in r) return { mutants: [], note: `${r.skipped}${r.detail ? `: ${r.detail}` : ''}` };
   if ('error' in r) return { mutants: [], note: `Stryker failed (exit ${r.code}): ${r.error}` };
   const out: SurvivingMutant[] = [];
-  for (const [file, f] of Object.entries(r.json.files))
+  for (const [file, f] of Object.entries(r.json.files).filter(([file]) => targets.includes(file.replace(`${ctx.cwd}/`, ''))))
     for (const m of f.mutants)
       if (m.status === 'Survived' || m.status === 'NoCoverage')
         out.push({ file: file.replace(`${ctx.cwd}/`, ''), line: m.location?.start.line ?? 0, mutator: m.mutatorName ?? '?', replacement: m.replacement ?? '', status: m.status });
@@ -71,7 +72,8 @@ export function survivingMutants(ctx: CheckContext): { mutants: SurvivingMutant[
 
 /** TEST-8: Stryker on mutation-tier files (changed ones in diff mode). */
 export function checkMutation(ctx: CheckContext): CheckOutput {
-  const r = runStryker(ctx, mutationTargets(ctx));
+  const targets = mutationTargets(ctx);
+  const r = runStryker(ctx, targets);
   if ('skipped' in r) return { violations: [], metrics: [{ name: 'mutation', value: r.skipped, detail: r.detail }] };
   if ('error' in r) return { violations: [violation('TEST-8', '(mutation)', `Stryker did not produce a report (exit ${r.code}): ${r.error}`, 'noreport')] };
   const json = r.json;
@@ -79,7 +81,8 @@ export function checkMutation(ctx: CheckContext): CheckOutput {
   let detected = 0;
   let valid = 0;
   const perFile: string[] = [];
-  for (const [file, f] of Object.entries(json.files)) {
+  // The incremental JSON report can carry files from earlier runs; score only this run's targets.
+  for (const [file, f] of Object.entries(json.files).filter(([file]) => targets.includes(file.replace(`${ctx.cwd}/`, '')))) {
     const k = f.mutants.filter((x) => x.status === 'Killed' || x.status === 'Timeout').length;
     const n = f.mutants.filter((x) => ['Killed', 'Timeout', 'Survived', 'NoCoverage'].includes(x.status)).length;
     detected += k;

@@ -54,6 +54,8 @@ export function guard(payload: Payload, env: NodeJS.ProcessEnv = process.env): G
     const why = isProtected(cwd, cfg, r);
     if (why) return { allow: false, path: r, reason: `guardrails: ${r} is protected (${why}). ${tip}` };
   }
+  if (command && (/\bguardrails\s+journeys\s+(approve|draft)\b|\binit\b.*--preset/.test(command) || new RegExp(`${UNLOCK_ENV}|unset\\s+GUARDRAILS_AGENT|GUARDRAILS_AGENT=\\s*(\\s|$)`).test(command)))
+    return { allow: false, reason: `guardrails: agents may not add, approve or unlock journeys, tests or guardrails. ${tip}` };
   if (command && WRITE_SHELL.test(command) && !/\bguardrails\s+flag\b/.test(command)) {
     for (const token of command.split(/[\s'"`;|&()<>]+/).filter((t) => /[./]/.test(t))) {
       const r = rel(token);

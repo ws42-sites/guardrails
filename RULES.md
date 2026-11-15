@@ -25,6 +25,11 @@ Every finding names one of these IDs. `guardrails explain <ID>` (or the MCP tool
 | TEST-9 | block | Every test must assert | A test with no assertion always passes. | Add "@ws42/guardrails/vitest-setup" (or a setup file that calls expect.hasAssertions() in beforeEach) to Vitest setupFiles. |
 | TEST-10 | warn (diff) | Test count dropped | Fewer tests than the base branch deserves a reviewer look, even when each deletion is approved. | Check the deleted tests were redundant; the job summary lists them. |
 | TEST-11 | block (diff) | New tests fail on base | A test should fail if you revert the implementation. A new test that already passes on the base branch proves nothing about this change. | Make the test assert the new behaviour. If it intentionally guards existing behaviour, mark the spec regressionGuard: true or get the allow-characterization label. |
+| JRN-1 | block | Approved journeys have one e2e test | Critical User Journeys (Google eval practice) are what users actually do; unit tests can all pass while sign-in is broken. P0 journeys block, P1 warn. | Write exactly one e2e test (Playwright, journeys.e2eGlobs) whose title starts with the journey ID and walks its steps. |
+| JRN-2 | warn | Every spec serves an approved journey | A spec no journey needs signals padding or a feature nobody asked for. | Add the spec ID to an approved journey's specs (a human change), or drop the spec and its tests. |
+| JRN-3 | block (diff) | Journeys are human-owned | Only approved journeys gate merges, so adding, changing or approving one is a product decision, not an agent edit. | A code owner reviews the journeys change and adds the guardrails:config-approved label; approve with "guardrails journeys approve <id>". |
+| JRN-4 | warn (diff) | New routes and forms belong to a journey | New pages, forms and public endpoints nobody mapped to a journey are untested surface or scope creep. | Ask the owner to add the route to a journey's routes, or confirm it is internal. |
+| JRN-5 | warn | Journey visual diff (stub) | Per-step screenshots compared to the mocks catch layout drift (VIS-1 v2). Off by default; not implemented yet. | Leave journeys.visual.enabled false until VIS-1 v2 ships. |
 | SCOPE-1 | warn (diff) | PR scope | Big or off-task diffs hide cheating and are hard to review. | Split the PR, or keep changes inside the paths of the task's spec IDs. |
 | FLAG-1 | block | Open agent flags | Letting agents stop and flag an impossible or conflicting test cut cheating from 54% to 9% (ImpossibleBench); a human must answer before merge. | A human resolves the flag (fix the spec/test, then empty .guardrails/flags.json or add the flags-resolved label). |
 | HOLD-1 | block | Hidden holdout tests | Tests the agent never sees cannot be gamed. | Implement the behaviour the spec describes; the holdout tests are not visible by design. |
@@ -50,20 +55,24 @@ Every finding names one of these IDs. `guardrails explain <ID>` (or the MCP tool
 - **FLAG-1:** `.guardrails/flags.json` (written by `guardrails flag` / MCP `guardrails_flag`).
 - **HOLD-1:** `guardrails holdout --dir <checkout>` in the reusable workflow's `holdout` job.
 - **SEC-1:** gitleaks (pinned CLI image) in the reusable workflow's `secrets` job, over the PR's commits. CodeQL is an optional job (`codeql: true`).
+- **JRN-1..5:** the `journeys` block in `guardrails.config.json`. JRN-1 scans `journeys.e2eGlobs` (Playwright) for `test()`/`test.describe()` titles starting with a journey ID and reads pass/fail from `journeys.resultsFile` (Playwright JSON reporter) when set. JRN-3 diffs the journeys block against the merge-base. JRN-4 derives routes from new files under `journeys.routeGlobs` (pages, app router, Pages Functions) and from added `<Route path>`, `path:` and `app.get('/x')` lines, plus added `<form>`s. JRN-5 is a stub (VIS-1 v2).
 - **SCOPE-1:** diff line counts plus `specs.items.<ID>.paths` for the task's spec IDs (`--specs`, `$GUARDRAILS_SPECS`, or the IDs in changed tests).
 
 ## Block vs warn
 BLOCK is kept for correctness, security and cheating. Preference-style rules warn.
-- Block: CFG-1, CFG-2, ARCH-1, ARCH-4 (missing package, unapproved, high advisory), ARCH-5, ARCH-6, ARCH-7 (block signatures), ARCH-8, TEST-1 (unknown/malformed ID), TEST-2 (T1), TEST-5 (`.only`/`.skip`/todo/empty each, real clock, unseeded randomness, Stryker-disable), TEST-6, TEST-7, TEST-8, TEST-9, TEST-11, FLAG-1, HOLD-1, SEC-1, BASE-1.
-- Warn: ARCH-2, ARCH-3, ARCH-4 (young/low-download package, moderate advisory), ARCH-7 (heuristics), TEST-1 (missing ID), TEST-2 (T2), TEST-3, TEST-4, TEST-5 (T1 snapshots, class/style assertions, fake servers, big loops, Date/Response/prototype spies, seeded property runs outside `properties` specs), TEST-5W, TEST-10, SCOPE-1, DOC-1, DOC-2, DOC-3.
+- Block: CFG-1, CFG-2, ARCH-1, ARCH-4 (missing package, unapproved, high advisory), ARCH-5, ARCH-6, ARCH-7 (block signatures), ARCH-8, TEST-1 (unknown/malformed ID), TEST-2 (T1), TEST-5 (`.only`/`.skip`/todo/empty each, real clock, unseeded randomness, Stryker-disable), TEST-6, TEST-7, TEST-8, TEST-9, TEST-11, FLAG-1, HOLD-1, SEC-1, JRN-1 (P0), JRN-3, BASE-1.
+- Warn: ARCH-2, ARCH-3, ARCH-4 (young/low-download package, moderate advisory), ARCH-7 (heuristics), TEST-1 (missing ID), TEST-2 (T2), TEST-3, TEST-4, TEST-5 (T1 snapshots, class/style assertions, fake servers, big loops, Date/Response/prototype spies, seeded property runs outside `properties` specs), TEST-5W, TEST-10, SCOPE-1, JRN-1 (P1), JRN-2, JRN-4, JRN-5, DOC-1, DOC-2, DOC-3.
 - Moved from block to warn in v0.2: DOC-1, DOC-2, TEST-1 missing ID, and the TEST-5 preference bans listed above.
+
+## Critical User Journeys
+A journey (CUJ, from Google's eval practice) is a complete task a user does, in plain language: `"CUJ-REVIEW": { "title": "Client opens the review link and submits a choice", "priority": "P0", "steps": [...], "specs": ["REVIEW-03", "REVIEW-04"], "routes": ["/review/:token"], "approved": false }`. Layers: journeys → specs → tests. Only approved journeys gate merges. Drafts come from `guardrails journeys draft` (LLM or route heuristic) or `init --preset small-business`; a human approves with `guardrails journeys approve <ID>` (refuses when `GUARDRAILS_AGENT` is set). Specs may list `journeys` as a back-reference; the schema checks both sides agree.
 
 ## Labels (set by a human on the PR)
 - `tests-removed-approved`: base tests may be deleted (TEST-7).
 - `guardrails:rebaseline`: the baseline may grow (BASE-1).
 - `allow-characterization`: new tests may pass on base (TEST-11). Per spec, `regressionGuard: true` does the same.
 - `flags-resolved`: open flags no longer block (FLAG-1). Emptying `.guardrails/flags.json` also clears them.
-- `guardrails:config-approved`: a code owner approved loosening `guardrails.config.json` (TEST-7 config part), for example a new `deps.allow` entry.
+- `guardrails:config-approved`: a code owner approved loosening `guardrails.config.json` (TEST-7 config part), for example a new `deps.allow` entry, or a journeys change (JRN-3).
 
 ## Baseline
-`guardrails baseline` records current violations in `.guardrails/baseline.json` as `{rule, file, fingerprint}`. The fingerprint never includes a line number. Known violations are reported but don't block. Re-running only removes fixed entries. `--force` re-records everything; CI blocks any growth (BASE-1) unless a code owner adds `guardrails:rebaseline`. Diff-only and runtime rules (TEST-3, TEST-6, TEST-7, TEST-8, TEST-9, TEST-10, TEST-11, ARCH-4, ARCH-8, SCOPE-1, FLAG-1, HOLD-1, SEC-1, BASE-1, CFG-1, CFG-2) are never baselined.
+`guardrails baseline` records current violations in `.guardrails/baseline.json` as `{rule, file, fingerprint}`. The fingerprint never includes a line number. Known violations are reported but don't block. Re-running only removes fixed entries. `--force` re-records everything; CI blocks any growth (BASE-1) unless a code owner adds `guardrails:rebaseline`. Diff-only and runtime rules (TEST-3, TEST-6, TEST-7, TEST-8, TEST-9, TEST-10, TEST-11, ARCH-4, ARCH-8, SCOPE-1, FLAG-1, HOLD-1, SEC-1, JRN-3, JRN-4, JRN-5, BASE-1, CFG-1, CFG-2) are never baselined.

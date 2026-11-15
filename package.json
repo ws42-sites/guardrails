@@ -12,12 +12,13 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "template",
-    "skill",
-    "TESTING.md",
     "RULES.md",
-    "schema"
+    "TESTING.md",
+    "dist",
+    "journeys",
+    "schema",
+    "skill",
+    "template"
   ],
   "engines": {
     "node": ">=20"

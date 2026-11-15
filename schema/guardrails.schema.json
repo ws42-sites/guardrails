@@ -97,6 +97,12 @@
                       "type": "string",
                       "minLength": 1
                     }
+                  },
+                  "journeys": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 },
                 "required": [
@@ -355,6 +361,142 @@
           "additionalProperties": false,
           "default": {}
         },
+        "journeys": {
+          "type": "object",
+          "properties": {
+            "idPattern": {
+              "type": "string",
+              "default": "^CUJ-[A-Z0-9]{2,16}$"
+            },
+            "e2eGlobs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "e2e/**/*.spec.ts",
+                "e2e/**/*.test.ts"
+              ]
+            },
+            "resultsFile": {
+              "type": "string"
+            },
+            "routeGlobs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "src/pages/**",
+                "app/**/page.{ts,tsx,js,jsx}",
+                "pages/**",
+                "functions/**"
+              ]
+            },
+            "draft": {
+              "type": "object",
+              "properties": {
+                "geminiModel": {
+                  "type": "string",
+                  "default": "gemini-2.5-flash"
+                },
+                "openaiModel": {
+                  "type": "string",
+                  "default": "gpt-4.1-mini"
+                },
+                "max": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20,
+                  "default": 8
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "visual": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "mocksDir": {
+                  "type": "string",
+                  "default": "design/mocks"
+                },
+                "maxDiffRatio": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1,
+                  "default": 0.01
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 10
+                  },
+                  "priority": {
+                    "type": "string",
+                    "enum": [
+                      "P0",
+                      "P1",
+                      "P2"
+                    ]
+                  },
+                  "steps": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 3
+                    },
+                    "minItems": 1
+                  },
+                  "specs": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "default": []
+                  },
+                  "routes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "default": []
+                  },
+                  "approved": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "approvedBy": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "title",
+                  "priority",
+                  "steps"
+                ],
+                "additionalProperties": false
+              },
+              "default": {}
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
         "fixtures": {
           "type": "object",
           "properties": {
@@ -493,6 +635,14 @@
               "type": "array",
               "items": {
                 "type": "string"
+              },
+              "default": []
+            },
+            "exclude": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
               },
               "default": []
             }

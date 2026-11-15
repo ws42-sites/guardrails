@@ -11,6 +11,7 @@ import { validateTest } from './validate.js';
 import type { CheckContext } from './types.js';
 import { addFlag } from './flags.js';
 import { survivingMutants } from './checks/mutation.js';
+import { journeyMatrix } from './checks/journeys.js';
 
 const VERSION = '0.1.0';
 const text = (t: string) => ({ content: [{ type: 'text' as const, text: t }] });
@@ -26,7 +27,7 @@ export function createServer(): McpServer {
     inputSchema: {
       cwd: cwdArg,
       base: z.string().optional().describe('Git ref for diff mode (e.g. origin/main). Enables budget, weakening and new-dependency checks.'),
-      only: z.array(z.enum(['docs', 'setup', 'tests', 'lint', 'arch', 'gaming', 'flags', 'scope', 'failbase', 'clock', 'mutation'])).optional(),
+      only: z.array(z.enum(['docs', 'setup', 'tests', 'lint', 'arch', 'gaming', 'flags', 'scope', 'journeys', 'failbase', 'clock', 'mutation'])).optional(),
       clockShift: z.boolean().optional().describe('Also rerun the test suite with the clock shifted (slow).'),
     },
   }, async ({ cwd, base, only, clockShift }) => {
@@ -106,6 +107,27 @@ export function createServer(): McpServer {
       const root = rootOf(cwd);
       const ctx: CheckContext = { cwd: root, config: loadConfig(root), base: base ?? null, labels: [], options: { clockShift: false, mutation: true, knip: false, mutate: files } };
       return text(JSON.stringify(survivingMutants(ctx), null, 2));
+    } catch (e) { return fail(e); }
+  });
+
+  server.registerTool('guardrails_list_journeys', {
+    description: 'List Critical User Journeys (CUJs): ID, title, priority, steps, routes, specs and whether a human approved them. Read-only. Only approved journeys gate merges; agents cannot add or approve journeys (ask the owner).',
+    inputSchema: { cwd: cwdArg, approvedOnly: z.boolean().optional() },
+  }, async ({ cwd, approvedOnly }) => {
+    try {
+      const items = Object.entries(loadConfig(rootOf(cwd)).journeys.items).filter(([, j]) => !approvedOnly || j.approved);
+      return text(JSON.stringify(items.map(([id, j]) => ({ id, ...j })), null, 2));
+    } catch (e) { return fail(e); }
+  });
+
+  server.registerTool('guardrails_journey_coverage', {
+    description: 'Journey coverage matrix: each journey with its specs (unit test counts), its e2e test(s) and status (draft, missing, covered, pass, fail). Read-only. An approved P0/P1 journey needs exactly one e2e test titled with its ID (JRN-1).',
+    inputSchema: { cwd: cwdArg },
+  }, async ({ cwd }) => {
+    try {
+      const root = rootOf(cwd);
+      const ctx: CheckContext = { cwd: root, config: loadConfig(root), base: null, labels: [], options: { clockShift: false, mutation: false, knip: false } };
+      return text(JSON.stringify(journeyMatrix(ctx), null, 2));
     } catch (e) { return fail(e); }
   });
 

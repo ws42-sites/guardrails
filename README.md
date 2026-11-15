@@ -29,16 +29,21 @@ Add `"@ws42/guardrails/vitest-setup"` to Vitest `setupFiles` so every test must 
 | `guardrails mutants [--base ref]` | Recompute surviving mutants for changed files (JSON) |
 | `guardrails hook-guard --agent claude\|gemini\|antigravity` | Agent hook: reads the tool call on stdin, denies edits to locked files |
 | `guardrails holdout --dir <checkout>` | Run hidden holdout tests (HOLD-1) |
+| `guardrails journeys list\|draft\|approve <ID>` | Journey coverage matrix; draft 5-10 unapproved journeys from docs, routes and mocks (Gemini if `GEMINI_API_KEY`, else OpenAI if `OPENAI_API_KEY`, else a route heuristic; `--dry-run`); approve (humans only) |
+| `guardrails init --preset small-business` | Add starter journeys (services, contact form, book/call, trust, mobile, location/hours; menu/order/gallery when present) as drafts |
 
 PR labels come from `$GUARDRAILS_LABELS` (the workflow sets it): `tests-removed-approved` (delete base tests), `guardrails:rebaseline` (baseline may grow), `guardrails:config-approved` (config loosening), `allow-characterization` (new tests may pass on base), `flags-resolved` (open flags stop blocking). Only code owners should add them.
 
 `GUARDRAILS_OFFLINE=1` skips the npm registry lookups (ARCH-4 then reports a metric instead). Results are cached for `deps.registry.cacheHours` in `node_modules/.cache/guardrails/`.
 
+## Critical User Journeys
+`journeys.items` in the config lists 5-10 plain-language user tasks (`CUJ-<AREA>`, priority P0-P2, steps, specs, routes). Only approved ones gate: approved P0 journeys need exactly one Playwright test under `e2e/` titled with the ID (JRN-1). The report shows a journey → specs → tests matrix with pass/fail when `journeys.resultsFile` points at Playwright's JSON reporter output. Model names: `journeys.draft.geminiModel` (default `gemini-2.5-flash`) and `openaiModel`. API keys are read from the environment only and never written anywhere. `journeys.visual` (JRN-5, per-step screenshot diff) is a stub for VIS-1 v2 and stays off.
+
 ## Agent hooks (test-file lock)
-`init` writes (or merges into) `.claude/settings.json` (PreToolUse), `.gemini/settings.json` (BeforeTool) and `.agents/hooks.json` (Antigravity PreToolUse). Each calls `guardrails hook-guard`, which denies edits to `lock.paths` (config, `.guardrails/`, CODEOWNERS, workflows, the hook files) and to existing test files that contain a spec ID. New test files are fine. Shell commands that name a locked file together with a write (`sed -i`, `>`, `mv`, `rm`, `git checkout`…) are denied too; `guardrails flag` is always allowed. Shell routes can't be closed completely, so TEST-7 in CI is the backstop. A human unlocks with `GUARDRAILS_ALLOW_TEST_EDITS=1` in the agent's environment.
+`init` writes (or merges into) `.claude/settings.json` (PreToolUse), `.gemini/settings.json` (BeforeTool) and `.agents/hooks.json` (Antigravity PreToolUse). Each calls `guardrails hook-guard`, which denies edits to `lock.paths` (config, `.guardrails/`, CODEOWNERS, workflows, the hook files) and to existing test files that contain a spec ID. New test files are fine. Shell commands that name a locked file together with a write (`sed -i`, `>`, `mv`, `rm`, `git checkout`…) are denied too; `guardrails flag` is always allowed. The hooks also deny `guardrails journeys approve|draft`, `init --preset` and attempts to unset `GUARDRAILS_AGENT` (Claude Code's settings set it via `env`, Gemini CLI via `.gemini/.env`). Shell routes can't be closed completely, so TEST-7 in CI is the backstop. A human unlocks with `GUARDRAILS_ALLOW_TEST_EDITS=1` in the agent's environment.
 
 ## MCP server (stdio)
-Tools: `guardrails_check`, `guardrails_report`, `guardrails_explain_rule`, `guardrails_list_specs`, `guardrails_validate_test`, `guardrails_flag` (stop and flag a conflict), `guardrails_mutants` (surviving mutants; the gate recomputes the score). The server checks the directory it is started in, or `GUARDRAILS_CWD`; every tool also takes `cwd`.
+Tools: `guardrails_list_journeys`, `guardrails_journey_coverage` (read-only; there is no approve tool), `guardrails_check`, `guardrails_report`, `guardrails_explain_rule`, `guardrails_list_specs`, `guardrails_validate_test`, `guardrails_flag` (stop and flag a conflict), `guardrails_mutants` (surviving mutants; the gate recomputes the score). The server checks the directory it is started in, or `GUARDRAILS_CWD`; every tool also takes `cwd`.
 
 Until it's published, replace `npx -y -p @ws42/guardrails guardrails-mcp` with `node /path/to/guardrails/dist/mcp.js`.
 

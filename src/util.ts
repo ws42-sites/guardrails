@@ -66,12 +66,14 @@ export function violation(rule: string, file: string, message: string, key: stri
 }
 
 export const SOURCE_EXT = /\.(ts|tsx|js|jsx|mjs|cjs|mts|cts)$/;
-export const isTestFile = (cfg: GuardrailsConfig, f: string): boolean => matchesAny(f, cfg.tests.globs);
+export const isE2eFile = (cfg: GuardrailsConfig, f: string): boolean => matchesAny(f, cfg.journeys.e2eGlobs);
+/** Unit/integration test files. Journey e2e files have their own rules (JRN-1). */
+export const isTestFile = (cfg: GuardrailsConfig, f: string): boolean => matchesAny(f, cfg.tests.globs) && !isE2eFile(cfg, f);
 export const isHelperFile = (cfg: GuardrailsConfig, f: string): boolean =>
-  !isTestFile(cfg, f) && (matchesAny(f, cfg.tests.helperGlobs) || matchesAny(f, cfg.fixtures.globs));
+  !isTestFile(cfg, f) && !isE2eFile(cfg, f) && (matchesAny(f, cfg.tests.helperGlobs) || matchesAny(f, cfg.fixtures.globs));
 
 export function isProductFile(cfg: GuardrailsConfig, f: string): boolean {
-  return SOURCE_EXT.test(f) && matchesAny(f, cfg.sourceRoots.map((r) => (/[*]/.test(r) ? r : `${r.replace(/\/$/, '')}/**`))) && !isTestFile(cfg, f) && !isHelperFile(cfg, f);
+  return SOURCE_EXT.test(f) && !isE2eFile(cfg, f) && matchesAny(f, cfg.sourceRoots.map((r) => (/[*]/.test(r) ? r : `${r.replace(/\/$/, '')}/**`))) && !isTestFile(cfg, f) && !isHelperFile(cfg, f);
 }
 
 export function tierOf(cfg: GuardrailsConfig, f: string): Tier {

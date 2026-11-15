@@ -32,9 +32,21 @@ export interface Metric {
   detail?: string;
 }
 
+export interface JourneyRow {
+  id: string;
+  title: string;
+  priority: 'P0' | 'P1' | 'P2';
+  approved: boolean;
+  specs: { id: string; tests: number }[];
+  e2e: string[];
+  /** draft = not approved (never gates); missing = no e2e test; covered = test exists, no results; pass/fail from resultsFile. */
+  status: 'draft' | 'missing' | 'covered' | 'pass' | 'fail';
+}
+
 export interface CheckOutput {
   violations: Violation[];
   metrics?: Metric[];
+  journeys?: JourneyRow[];
 }
 
 export interface Report {
@@ -44,4 +56,5 @@ export interface Report {
   metrics: Metric[];
   counts: { block: number; warn: number; known: number };
   staleBaseline: number;
+  journeys?: JourneyRow[];
 }

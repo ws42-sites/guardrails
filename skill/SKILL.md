@@ -7,6 +7,9 @@ description: Use in any repo with a guardrails.config.json, before writing or ch
 
 The repo enforces its testing, docs and architecture rules with `guardrails`. CI blocks on the same checks, so run them yourself first.
 
+## Journeys
+The product is described as Critical User Journeys (MCP `guardrails_list_journeys`, `npx guardrails journeys list`). Check `guardrails_journey_coverage` to see which approved journeys lack an e2e test. Write the one e2e test for a journey under `e2e/`, titled with its ID (`test("CUJ-REVIEW client submits a choice", …)`), walking its steps. Never add, edit or approve journeys; if one seems missing or wrong, call `guardrails_flag`.
+
 ## Before you write a test
 1. Find the behaviour's spec ID: MCP `guardrails_list_specs`, or `npx guardrails specs`.
 2. Validate it: MCP `guardrails_validate_test { specId, testFile, plannedLines }`, or `npx guardrails validate-test <ID> --file <path> --lines <n>`.
