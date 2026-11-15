@@ -165,6 +165,8 @@ function diffChecks(ctx: CheckContext, index: TestIndex, v: Violation[], metrics
   }
   const headCount = Object.values(index.byFile).reduce((n, t) => n + t.length, 0);
   metrics.push({ name: 'tests.vsBase', value: headCount - baseCount, detail: `${baseCount} on base, ${headCount} now` });
+  if (headCount < baseCount)
+    v.push(violation('TEST-10', '(diff)', `test count dropped by ${baseCount - headCount} (${baseCount} on base, ${headCount} now).`, 'drop'));
   if (deleted.length) {
     metrics.push({ name: 'tests.deletedFromBase', value: deleted.length, detail: deleted.slice(0, 50).join('\n') });
     if (!reduceOk)

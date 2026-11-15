@@ -26,6 +26,13 @@ export const BASE_CONFIG = {
   specs: { items: { 'CORE-01': { tier: 'T1', behaviour: 'core adds numbers' }, 'LIB-01': { tier: 'T2', behaviour: 'lib formats text' } } },
 } as const;
 
+/** Files every well-set-up project has (TEST-9, CFG-2), so tests only see the rule under test. */
+export const PROJECT_FILES = {
+  '.github/CODEOWNERS': '/guardrails.config.json @o\n/.github/ @o\n/.guardrails/ @o\n',
+  'vitest.config.ts': "export default { test: { setupFiles: ['./vitest.setup.ts'] } };\n",
+  'vitest.setup.ts': "import { beforeEach, expect } from 'vitest';\nbeforeEach(() => { expect.hasAssertions(); });\n",
+};
+
 /** A throwaway git repo with a guardrails config. Removed after each test. */
 export function repo(files: Record<string, string> = {}, config: object = BASE_CONFIG): Repo {
   const dir = mkdtempSync(join(tmpdir(), 'guardrails-test-'));
@@ -55,7 +62,7 @@ export function repo(files: Record<string, string> = {}, config: object = BASE_C
       return { cwd: dir, config: cfg, base, labels, options: { clockShift: false, mutation: false, knip: false } };
     },
   };
-  r.write({ 'guardrails.config.json': JSON.stringify(config), 'AGENTS.md': '# Agents\n', ...files });
+  r.write({ 'guardrails.config.json': JSON.stringify(config), 'AGENTS.md': '# Agents\n', ...PROJECT_FILES, ...files });
   return r;
 }
 

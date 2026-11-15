@@ -27,7 +27,7 @@ The budget [TEST-3] only warns. It points reviewers at padding; it never fails a
 - `toHaveClass`/`toHaveStyle`. Snapshots in T1 tests.
 - `// Stryker disable` comments anywhere.
 
-Heuristics that only warn [TEST-5W]: tests with no `expect`, tests that only assert a mock was called, and tests whose only assertions are `toBeDefined`/`toBeTruthy`/`not.toThrow`/`expect(true)`. Add `@ws42/guardrails/vitest-setup` to `setupFiles` so every test must assert (`expect.hasAssertions()`).
+Heuristics that only warn [TEST-5W]: tests with no `expect`, tests that only assert a mock was called, and tests whose only assertions are `toBeDefined`/`toBeTruthy`/`not.toThrow`/`expect(true)`. Every project must add `@ws42/guardrails/vitest-setup` (or its own `expect.hasAssertions()` setup) to `setupFiles` [TEST-9].
 
 ## 4. Time [TEST-6]
 CI reruns the suite with the clock moved forward 2 years. A test that passes today and fails then is a time bomb, and it blocks. Freeze time in the test.
@@ -38,7 +38,7 @@ In a PR, these block:
 - removing an `expect`, or loosening a matcher (`toEqual` → `toMatchObject`/`toContain`, `toBe` → `toBeTruthy`)
 - lowering any threshold, mode, tier or allowlist in `guardrails.config.json`, or a coverage/mutation threshold in Vitest or Stryker config
 
-Tests added in the same PR can be changed or deleted freely. Moving a test to another file is not a deletion.
+Tests added in the same PR can be changed or deleted freely. Moving a test to another file is not a deletion. Any drop in the total test count versus base warns with the count [TEST-10].
 
 ## 6. Size
 Test files over 300 lines warn [TEST-4]. Split them by behaviour.

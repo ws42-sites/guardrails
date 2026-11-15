@@ -12,7 +12,9 @@ describe('DIFF-01 deleting base tests needs the label', () => {
     const r = repo({ 'src/core/a.test.ts': test2 }).commit();
     r.write({ 'src/core/a.test.ts': test2.split('\n')[0] + '\n' });
     expect(weakening(r)).toEqual(['deleted base test "CORE-01 b"']);
-    expect(weakening(r, ['tests-removed-approved'])).toEqual([]);
+    const approved = checkTests(r.ctx('main', ['tests-removed-approved'])).violations;
+    expect(approved.filter((v) => v.rule === 'TEST-7')).toEqual([]);
+    expect(approved.filter((v) => v.rule === 'TEST-10').map((v) => v.message)).toEqual(['test count dropped by 1 (2 on base, 1 now).']);
   });
 
   it('lets a PR delete tests it added itself, and moves between files are not deletions', () => {

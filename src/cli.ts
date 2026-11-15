@@ -29,7 +29,7 @@ Options
   --mutation           Also run TEST-8 (Stryker on mutation-tier files)
   --mutate <globs>     Restrict --mutation to matching files (comma list)
   --no-knip            Skip ARCH-3 reachability
-  --only <groups>      Comma list: docs,tests,lint,arch,clock,mutation
+  --only <groups>      Comma list: docs,setup,tests,lint,arch,clock,mutation
   --format <f>         text (default) | json | markdown
   --cwd <dir>          Project root (default: current directory)
   --owner <@handle>    init: CODEOWNERS owner

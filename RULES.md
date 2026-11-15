@@ -5,6 +5,7 @@ Every finding names one of these IDs. `guardrails explain <ID>` (or the MCP tool
 | ID | Default | Rule | Why | Fix |
 |---|---|---|---|---|
 | CFG-1 | block | Config is valid | Unknown or misspelt keys would silently disable a rule. | Fix guardrails.config.json so it matches schema/guardrails.schema.json. |
+| CFG-2 | block | CODEOWNERS guards the guardrails | Without a human owner on the config, workflow and baseline, every rule is one edit away from off. | Add CODEOWNERS lines with an owner for guardrails.config.json, .github/workflows/ and the baseline file (see template/.github/CODEOWNERS). |
 | ARCH-1 | block | Declared import boundaries | Agents copy whatever import path works; boundaries make the wrong one impossible. | Import through the allowed layer (for example the storage interface), not across the forbidden edge. |
 | ARCH-2 | warn | Single implementation per capability | Copies of the same helper drift; one copy ends up untested or unused. | Delete the duplicate and import the one shared implementation. |
 | ARCH-3 | warn | Production reachability | Code only tests exercise looks covered but never runs in production. | Wire the module into a production entry, or delete it (and its tests). |
@@ -19,6 +20,8 @@ Every finding names one of these IDs. `guardrails explain <ID>` (or the MCP tool
 | TEST-5W | warn | Weak assertions (heuristic) | Tests that only assert a mock was called, or only toBeDefined/toBeTruthy, rarely catch bugs. | Assert on the observable result (returned value, written data, response status). |
 | TEST-6 | block | Clock independence | Tests that depend on today's date break later (the Nov 30 time bomb). | Freeze time with vi.useFakeTimers() and vi.setSystemTime(new Date("2026-01-01")) in the failing test. |
 | TEST-7 | block (diff) | No test weakening | Deleting tests, removing expects, loosening matchers or lowering thresholds is the cheapest way to go green. | Restore the test/assertion/threshold. Deleting base-branch tests needs the tests-removed-approved label from a code owner; tests added in the same PR can be deleted freely. |
+| TEST-9 | block | Every test must assert | A test with no assertion always passes. | Add "@ws42/guardrails/vitest-setup" (or a setup file that calls expect.hasAssertions() in beforeEach) to Vitest setupFiles. |
+| TEST-10 | warn (diff) | Test count dropped | Fewer tests than the base branch deserves a reviewer look, even when each deletion is approved. | Check the deleted tests were redundant; the job summary lists them. |
 | TEST-8 | block | Mutation score | The real answer to "do these tests test anything". | Add assertions that would fail if the surviving mutants were real bugs. |
 | DOC-1 | block | Doc allowlist | Agents create a new doc per task; they go stale and compete with the real instructions. | Put the content in an allowlisted doc (or a check), then delete the file. |
 | DOC-2 | block | One agent instruction file | AGENTS.md is the single source of truth for every coding tool. | Make GEMINI.md/CLAUDE.md/etc. a one-line pointer to AGENTS.md. |
@@ -31,12 +34,13 @@ Every finding names one of these IDs. `guardrails explain <ID>` (or the MCP tool
 - **TEST-5:** ESLint (`eslint-plugin-vitest` plus `no-restricted-syntax` and two small custom rules). The project's own ESLint config is not used, so it can't be loosened from there.
 - **TEST-1/2/4/5W/7:** a TypeScript AST inventory of every `it`/`test` (title, spec ID, expect count, matchers).
 - **TEST-6:** reruns `tests.command` with `NODE_OPTIONS=--import clock-shift.mjs` and the clock at +`tests.clockShiftYears`. Fake timers still win.
+- **TEST-9, CFG-2:** read Vitest `setupFiles` and CODEOWNERS (last matching line wins, like GitHub).
 - **TEST-8:** Stryker, using a generated config (pinned Stryker version, `mutation.excludedMutations`, incremental), run on changed files in `mutation.tiers`.
 
 ## Block vs warn
-- Blocking from day one: CFG-1, ARCH-1, ARCH-4, ARCH-5, ARCH-6, TEST-1, TEST-2 (T1), TEST-5, TEST-6, TEST-7, DOC-1, DOC-2, BASE-1.
-- Warn: ARCH-2, ARCH-3, TEST-2 (T2), TEST-4, TEST-5W, DOC-3. Promote them once the signal is clean.
+- Blocking from day one: CFG-1, CFG-2, ARCH-1, ARCH-4, ARCH-5, ARCH-6, TEST-1, TEST-2 (T1), TEST-5, TEST-6, TEST-7, TEST-9, DOC-1, DOC-2, BASE-1.
+- Warn: ARCH-2, ARCH-3, TEST-2 (T2), TEST-4, TEST-5W, TEST-10, DOC-3. Promote them once the signal is clean.
 - Always warn: TEST-3 (budget). It flags review attention and is never the reason a PR fails.
 
 ## Baseline
-`guardrails baseline` records current violations in `.guardrails/baseline.json` as `{rule, file, fingerprint}`. The fingerprint never includes a line number. Known violations are reported but don't block. Re-running only removes fixed entries. `--force` re-records everything; CI blocks any growth (BASE-1) unless a code owner adds `guardrails:rebaseline`. Diff-only and runtime rules (TEST-3, TEST-6, TEST-7, TEST-8, ARCH-4, BASE-1, CFG-1) are never baselined.
+`guardrails baseline` records current violations in `.guardrails/baseline.json` as `{rule, file, fingerprint}`. The fingerprint never includes a line number. Known violations are reported but don't block. Re-running only removes fixed entries. `--force` re-records everything; CI blocks any growth (BASE-1) unless a code owner adds `guardrails:rebaseline`. Diff-only and runtime rules (TEST-3, TEST-6, TEST-7, TEST-8, TEST-9, TEST-10, ARCH-4, BASE-1, CFG-1, CFG-2) are never baselined.

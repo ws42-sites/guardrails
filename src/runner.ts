@@ -4,6 +4,7 @@ import { RULES, ruleInfo } from './rules.js';
 import type { CheckContext, Finding, Metric, Mode, Report, Violation } from './types.js';
 import { listFiles, violation } from './util.js';
 import { checkDocs } from './checks/docs.js';
+import { checkSetup } from './checks/setup.js';
 import { checkTests } from './checks/tests.js';
 import { checkLint } from './checks/lint.js';
 import { checkArch } from './checks/arch.js';
@@ -23,7 +24,7 @@ export interface RunOptions {
 }
 
 /** Rules a baseline may contain. Diff-only rules and runtime rules are never baselined. */
-export const BASELINEABLE = new Set(RULES.filter((r) => !r.diffOnly && !['TEST-6', 'TEST-8', 'CFG-1'].includes(r.id)).map((r) => r.id));
+export const BASELINEABLE = new Set(RULES.filter((r) => !r.diffOnly && !['TEST-6', 'TEST-8', 'TEST-9', 'CFG-1', 'CFG-2'].includes(r.id)).map((r) => r.id));
 
 const RANK: Record<Mode, number> = { off: 0, warn: 1, block: 2 };
 
@@ -45,6 +46,7 @@ export async function collect(opts: RunOptions): Promise<{ ctx: CheckContext; vi
   const want = (g: string) => !opts.only || opts.only.includes(g);
   const outs = [];
   if (want('docs')) outs.push(checkDocs(ctx, files));
+  if (want('setup')) outs.push(checkSetup(ctx, files));
   if (want('tests')) outs.push(checkTests(ctx, files));
   if (want('lint')) outs.push(await checkLint(ctx, files));
   if (want('arch')) outs.push(await checkArch(ctx, files));

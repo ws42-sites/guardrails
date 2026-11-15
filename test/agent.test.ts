@@ -12,7 +12,7 @@ import { BASE_CONFIG, repo } from './helpers/repo.js';
 describe('INIT-01 init scaffolds a repo without clobbering it', () => {
   it('writes config, AGENTS.md pointers, CODEOWNERS and CI, guessing tiers, and skips existing files', () => {
     const r = repo({ 'src/lib/storage/x.ts': '', 'functions/api/a.ts': '', 'src/main.tsx': '' });
-    r.remove('guardrails.config.json');
+    r.remove('guardrails.config.json', '.github/CODEOWNERS');
     const res = init({ cwd: r.dir, owner: '@josh', base: 'main' });
     expect([res.written, res.skipped]).toEqual([
       ['guardrails.config.json', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml'],
