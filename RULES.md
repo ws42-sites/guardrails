@@ -38,6 +38,10 @@ Every finding names one of these IDs. `guardrails explain <ID>` (or the MCP tool
 | DOC-1 | warn | Doc allowlist | Agents create a new doc per task; they go stale and compete with the real instructions. | Put the content in an allowlisted doc (or a check), then delete the file. |
 | DOC-2 | warn | One agent instruction file | AGENTS.md is the single source of truth for every coding tool. | Make GEMINI.md/CLAUDE.md/etc. a one-line pointer to AGENTS.md. |
 | DOC-3 | warn | Doc length cap | Long docs mean rules that should be checks. | Move rules into checks and trim the doc. |
+| RUN-1 | block | RUNBOOK.md has the standard sections | Deploys drift when every repo documents them differently, and click-paths cannot be repeated by an agent or checked. | Run "guardrails init runbook". Keep the sections Deploy, Rollback, Smoke, Secrets rotation, Incident first steps in that order, each pointing at an `npm run <script>` (or saying n/a when runbook.na lists the script). |
+| RUN-2 | block | Runbook commands exist | A runbook that names a missing script fails exactly when it is needed. | Add the script to package.json (deploy, deploy:preview, rollback, smoke, secrets:check) or mark it n/a with a reason in runbook.na. |
+| RUN-3 | block | Deploy workflows use the scripts and smoke | Inline deploy commands in CI drift from the runbook; a deploy nobody smoke-tests is not done. | Call `npm run deploy` (or deploy:preview) in the workflow instead of the raw command, and run `npm run smoke` after it. |
+| RUN-4 | block | One short runbook | Long or scattered runbooks go stale; one short file next to the scripts stays true. | Trim RUNBOOK.md under runbook.maxLines and fold other runbook/deploy docs into it, then delete them. |
 | BASE-1 | block (diff) | Baseline only shrinks | Re-baselining new violations would switch the checks off. | Fix the violation instead. Growing the baseline needs the rebaseline label from a code owner. |
 
 ## Engines

@@ -13,6 +13,13 @@ describe('DOC-01 only allowlisted docs may exist', () => {
     expect(v.filter((x) => x.rule === 'DOC-1').map((x) => x.file).sort()).toEqual(['NOTES', 'docs/plan.md', 'guide.rst', 'notes.txt', 'src/feature-plan.ts']);
   });
 
+  it('defaults to the top-level allowlist and allows runtime-loaded md via docs.runtime', () => {
+    const files = { 'README.md': 'x', 'ARCHITECTURE.md': 'x', 'TESTING.md': 'x', 'RUNBOOK.md': 'x', 'docs/ARCHITECTURE.md': 'x', 'skills/a/SKILL.md': 'x' };
+    const flagged = (cfg: object) => checkDocs(repo(files, cfg).ctx()).violations.filter((x) => x.rule === 'DOC-1').map((x) => x.file).sort();
+    expect(flagged(BASE_CONFIG)).toEqual(['docs/ARCHITECTURE.md', 'skills/a/SKILL.md']);
+    expect(flagged({ ...BASE_CONFIG, docs: { runtime: ['skills/**/SKILL.md'] } })).toEqual(['docs/ARCHITECTURE.md']);
+  });
+
   it('requires configured links', () => {
     const r = repo({ 'AGENTS.md': 'see docs/ARCHITECTURE.md' }, { ...BASE_CONFIG, docs: { requiredLinks: { 'AGENTS.md': ['docs/ARCHITECTURE.md', 'docs/TESTING.md'] } } });
     expect(checkDocs(r.ctx()).violations.map((x) => x.message)).toEqual(['must link to docs/TESTING.md.']);
@@ -40,7 +47,7 @@ describe('DOC-02 agent files point at AGENTS.md', () => {
 
 describe('DOC-03 allowlisted docs have a line cap', () => {
   it('uses per-file caps, then the default', () => {
-    const r = repo({ 'AGENTS.md': long(151), 'README.md': long(250), 'docs/ARCHITECTURE.md': long(251) });
-    expect(checkDocs(r.ctx()).violations.map((x) => [x.rule, x.file])).toEqual([['DOC-3', 'AGENTS.md'], ['DOC-3', 'docs/ARCHITECTURE.md']]);
+    const r = repo({ 'AGENTS.md': long(151), 'README.md': long(250), 'ARCHITECTURE.md': long(251) });
+    expect(checkDocs(r.ctx()).violations.map((x) => [x.rule, x.file])).toEqual([['DOC-3', 'AGENTS.md'], ['DOC-3', 'ARCHITECTURE.md']]);
   });
 });

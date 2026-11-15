@@ -2,7 +2,7 @@
 import { parseArgs } from 'node:util';
 import { run } from './runner.js';
 import { toJson, toMarkdown, toText } from './report.js';
-import { init } from './init.js';
+import { init, initRunbook } from './init.js';
 import { RULES, ruleInfo } from './rules.js';
 import { loadConfig } from './config.js';
 import { readBaseline, ratchet, writeBaseline } from './baseline.js';
@@ -22,6 +22,7 @@ const HELP = `guardrails <command> [options]
 
 Commands
   init                 Scaffold guardrails.config.json, AGENTS.md (+ pointers), CODEOWNERS, CI workflow
+  init runbook         Scaffold RUNBOOK.md, stub deploy/deploy:preview/rollback/smoke/secrets:check scripts, enable RUN-1..4
   check                Run all checks. Exit 1 on blocking findings.
   report               Run checks and print a report (--format text|json|markdown)
   baseline             Write/ratchet the baseline (only shrinks; --force records everything current)
@@ -45,7 +46,7 @@ Options
   --fails-on-base      Also run TEST-11 (new/changed tests must fail on base); needs --base
   --specs <IDs>        Spec IDs this task implements (SCOPE-1; default $GUARDRAILS_SPECS)
   --no-knip            Skip ARCH-3 reachability
-  --only <groups>      Comma list: docs,setup,tests,lint,arch,gaming,flags,scope,journeys,failbase,clock,mutation
+  --only <groups>      Comma list: docs,runbook,setup,tests,lint,arch,gaming,flags,scope,journeys,failbase,clock,mutation
   --format <f>         text (default) | json | markdown
   --cwd <dir>          Project root (default: current directory)
   --owner <@handle>    init: CODEOWNERS owner
@@ -74,6 +75,13 @@ async function main(): Promise<number> {
 
   switch (cmd) {
     case 'init': {
+      if (arg === 'runbook') {
+        const rb = initRunbook({ cwd, force: values.force });
+        for (const f of rb.written) console.log(`wrote   ${f}`);
+        for (const f of rb.skipped) console.log(`skipped ${f}`);
+        console.log('Next: wire each stub script to the real command (or add runbook.na with a reason), then "guardrails check --only runbook".');
+        return 0;
+      }
       const r = init({ cwd, owner: values.owner, base: values.base, force: values.force });
       for (const f of r.written) console.log(`wrote   ${f}`);
       if (values.preset) {

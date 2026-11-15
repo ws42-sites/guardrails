@@ -81,7 +81,7 @@
       },
       "DOC-01": {
         "tier": "T1",
-        "behaviour": "Docs (md/mdx/txt/rst and disguised notes) outside the allowlist warn; required links checked"
+        "behaviour": "Docs (md/mdx/txt/rst and disguised notes) outside the top-level allowlist or docs.runtime globs warn; required links checked"
       },
       "DOC-02": {
         "tier": "T1",
@@ -190,6 +190,18 @@
       "JOURNEY-05": {
         "tier": "T2",
         "behaviour": "journeys draft uses Gemini/OpenAI or a route heuristic; the small-business preset adds drafts"
+      },
+      "RUN-01": {
+        "tier": "T1",
+        "behaviour": "RUNBOOK.md has Deploy, Rollback, Smoke, Secrets rotation, Incident first steps in order, each pointing at an npm script (or n/a), no click-paths; standard and referenced scripts exist; length cap"
+      },
+      "RUN-02": {
+        "tier": "T1",
+        "behaviour": "Deploy workflows call npm run deploy (no inline deploy commands) and run npm run smoke after; stray runbook/deploy docs outside allowDocs block"
+      },
+      "RUN-03": {
+        "tier": "T2",
+        "behaviour": "init runbook writes the template, stubs only missing standard scripts and enables runbook without overwriting"
       }
     }
   },
@@ -280,6 +292,18 @@
   "deps": {
     "allow": [
       "jscpd"
+    ]
+  },
+  "runbook": {
+    "enabled": true,
+    "na": {
+      "deploy": "Library, not a hosted service: consumers vendor an npm pack tarball under tools/guardrails.",
+      "deploy:preview": "No hosted environment; a PR branch build is the preview.",
+      "rollback": "Consumers pin the vendored tarball; roll back by re-vendoring the previous tarball in that repo.",
+      "secrets:check": "No runtime secrets; the optional journeys draft reads GEMINI/OPENAI keys from the caller environment."
+    },
+    "allowDocs": [
+      "template/RUNBOOK.md"
     ]
   }
 }

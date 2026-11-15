@@ -19,7 +19,9 @@
   },
   "deps": { "allow": [] },
   "docs": {
-    "allow": ["README.md", "AGENTS.md", "docs/ARCHITECTURE.md"]
+    "allow": ["AGENTS.md", "CLAUDE.md", "GEMINI.md", "README.md", "ARCHITECTURE.md", "TESTING.md", "RUNBOOK.md"],
+    "runtime": []
   },
+  "runbook": { "enabled": true, "na": {} },
   "rules": {}
 }

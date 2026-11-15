@@ -15,7 +15,8 @@ export function checkDocs(ctx: CheckContext, files = listFiles(ctx.cwd)): CheckO
     const isDoc = exts.includes(extname(f).toLowerCase());
     const disguised = matchesAny(f, docs.disguise);
     if (!isDoc && !disguised) continue;
-    if (matchesAny(f, docs.allow) || f === docs.agentFile) {
+    if (matchesAny(f, docs.runtime)) continue;
+    if (matchesAny(f, docs.allow) || f === docs.agentFile || (ctx.config.runbook.enabled && f === ctx.config.runbook.file)) {
       const cap = docs.maxLines[f] ?? docs.maxLines[basename(f)] ?? docs.maxLines.default;
       const n = lineCount(readText(ctx.cwd, f));
       if (cap && n > cap) v.push(violation('DOC-3', f, `${n} lines (cap ${cap}). Move rules into checks and trim it.`, 'cap'));
