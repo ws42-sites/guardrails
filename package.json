@@ -1,6 +1,6 @@
 {
   "name": "@ws42/guardrails",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Config-driven guardrails that stop coding agents from padding, weakening or bypassing tests, docs and architecture.",
   "type": "module",
   "license": "UNLICENSED",

@@ -6,6 +6,8 @@ import { join } from 'node:path';
 /** A test command that runs the whole suite (no change scoping). */
 const FULL_TEST = /\b(npm (run )?test(:ci|:full|:all)?|npm run -s test|npx vitest run|vitest run|npx playwright test|playwright test|node --test)\b/;
 const SCOPED = /--changed|--related|related\b|--only-changed|affected|test:changed|verify:changed|--grep|--since|--last-failed/;
+/** A runner given named test files (no glob) runs a focused set, not the whole suite. */
+const NAMED = /(vitest run|playwright test|node --test)\b(?!.*\*).*\s\S+\.(test|spec)\.[cm]?[jt]sx?\b/;
 const GUARDED = /if:.*(schedule|workflow_dispatch|event_name\s*!=\s*'pull_request'|github\.event_name\s*==\s*'push'|refs\/heads\/main)/;
 
 /** CI-1: PRs run only affected tests; the full suite runs nightly and before deploy. */
@@ -21,7 +23,7 @@ export function checkCi(ctx: CheckContext, files = listFiles(ctx.cwd)): CheckOut
     const scheduled = /^\s*schedule\s*:/m.test(text);
     lines.forEach((l, i) => {
       const code = l.replace(/(^|\s)#.*$/, '');
-      if (!FULL_TEST.test(code) || SCOPED.test(code)) return;
+      if (!FULL_TEST.test(code) || SCOPED.test(code) || NAMED.test(code)) return;
       if (scheduled) nightly = true;
       const guarded = lines.slice(Math.max(0, i - 6), i).some((p) => GUARDED.test(p));
       if (onPr && !guarded) v.push(violation('CI-1', f, `runs the full suite on every PR ("${code.trim().slice(0, 60)}"). Run affected tests (npm run test:changed) on PRs and the full suite nightly.`, `full:${code.trim()}`, i + 1));

@@ -7,13 +7,14 @@ const ON = { ...BASE_CONFIG, ci: { enabled: true } };
 const msgs = (r: ReturnType<typeof repo>) => checkCi(r.ctx()).violations.map((v) => `${v.file}:${v.line ?? ''}:${v.message.split(/[.(]/)[0]}`);
 
 describe('CI-01 PRs run affected tests; full suite nightly and before deploy', () => {
-  it('warns on unconditional full PR runs and missing safety nets, and passes the standard shape', () => {
+  it('warns on unconditional full PR runs (named test files are focused) and missing safety nets, and passes the standard shape', () => {
     const bad = repo({
       'package.json': JSON.stringify({ scripts: { deploy: 'wrangler deploy', 'deploy:preview': 'x', 'predeploy:preview': 'npm run test:changed' } }),
-      '.github/workflows/ci.yml': 'on:\n  pull_request:\njobs:\n  t:\n    steps:\n      - run: npm test\n      - if: github.event_name == \'schedule\'\n        run: npx vitest run\n',
+      '.github/workflows/ci.yml': 'on:\n  pull_request:\njobs:\n  t:\n    steps:\n      - run: npm test\n      - run: node --test tests/*.test.cjs\n      - if: github.event_name == \'schedule\'\n        run: npx vitest run\n',
     }, ON);
     expect(msgs(bad)).toEqual([
       '.github/workflows/ci.yml:6:runs the full suite on every PR ',
+      '.github/workflows/ci.yml:7:runs the full suite on every PR ',
       '.github/workflows::no scheduled ',
       'package.json::"deploy" has no full-suite safety net',
       'package.json::"deploy:preview" has no full-suite safety net',
