@@ -108,6 +108,8 @@ export function filesAt(cwd: string, ref: string): string[] {
 
 export interface FileDiff {
   added: string[];
+  /** 1-based head line numbers of `added`, same order. */
+  addedLines: number[];
   removed: string[];
   status: 'added' | 'deleted' | 'modified';
 }
@@ -119,6 +121,7 @@ export function diffAgainst(cwd: string, base: string): Record<string, FileDiff>
   let cur: FileDiff | null = null;
   let oldPath: string | null = null;
   let header = false;
+  let next = 0;
   for (const line of out.split('\n')) {
     if (line.startsWith('diff --git ')) {
       header = true;
@@ -135,23 +138,30 @@ export function diffAgainst(cwd: string, base: string): Record<string, FileDiff>
       const p = line.slice(4);
       const path = p === '/dev/null' ? oldPath : p.replace(/^b\//, '');
       if (path) {
-        cur = { added: [], removed: [], status: p === '/dev/null' ? 'deleted' : oldPath === null ? 'added' : 'modified' };
+        cur = { added: [], addedLines: [], removed: [], status: p === '/dev/null' ? 'deleted' : oldPath === null ? 'added' : 'modified' };
         files[path] = cur;
       }
       continue;
     }
     if (line.startsWith('@@')) {
       header = false;
+      next = Number(/\+(\d+)/.exec(line)?.[1] ?? 0);
       continue;
     }
     if (header || !cur) continue;
-    if (line.startsWith('+')) cur.added.push(line.slice(1));
+    if (line.startsWith('+')) {
+      cur.added.push(line.slice(1));
+      cur.addedLines.push(next++);
+    }
     else if (line.startsWith('-')) cur.removed.push(line.slice(1));
   }
   // Untracked files are not in `git diff`; count them as added.
   try {
     for (const f of git(cwd, ['ls-files', '--others', '--exclude-standard']).split('\n').filter(Boolean)) {
-      if (!files[f] && existsSync(join(cwd, f))) files[f] = { added: readText(cwd, f).split('\n'), removed: [], status: 'added' };
+      if (!files[f] && existsSync(join(cwd, f))) {
+        const added = readText(cwd, f).replace(/\n$/, '').split('\n');
+        files[f] = { added, addedLines: added.map((_, i) => i + 1), removed: [], status: 'added' };
+      }
     }
   } catch {
     /* not a git repo */

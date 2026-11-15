@@ -1,3 +1,4 @@
+import { checkRegistry } from './registry.js';
 import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { existsSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
@@ -106,8 +107,8 @@ function scanSources(ctx: CheckContext, files: string[]): Violation[] {
 }
 
 /** ARCH-4: dependencies added vs base that are not in deps.allow. */
-function newDeps(ctx: CheckContext): { v: Violation[]; added: string[] } {
-  if (!ctx.base || !existsSync(join(ctx.cwd, 'package.json'))) return { v: [], added: [] };
+function newDeps(ctx: CheckContext): { v: Violation[]; added: string[]; check: string[] } {
+  if (!ctx.base || !existsSync(join(ctx.cwd, 'package.json'))) return { v: [], added: [], check: [] };
   const old = showAt(ctx.cwd, mergeBase(ctx.cwd, ctx.base), 'package.json');
   const names = (s: string | null): Set<string> => {
     if (!s) return new Set();
@@ -116,10 +117,18 @@ function newDeps(ctx: CheckContext): { v: Violation[]; added: string[] } {
   };
   const before = names(old);
   const added = [...names(readText(ctx.cwd, 'package.json'))].filter((d) => !before.has(d));
+  const allowBefore = (() => {
+    try {
+      return (JSON.parse(showAt(ctx.cwd, mergeBase(ctx.cwd, ctx.base), 'guardrails.config.json') ?? '{}').deps?.allow ?? []) as string[];
+    } catch {
+      return [];
+    }
+  })();
+  const allowAdded = ctx.config.deps.allow.filter((d) => !allowBefore.includes(d));
   const v = added
     .filter((d) => !ctx.config.deps.allow.includes(d))
     .map((d) => violation('ARCH-4', 'package.json', `adds dependency "${d}" (not in deps.allow). A code owner must add it to deps.allow (CODEOWNER-protected config).`, `dep:${d}`));
-  return { v, added };
+  return { v, added, check: [...new Set([...added, ...allowAdded])] };
 }
 
 /** ARCH-3: modules unreachable from production entries, via knip --production. */
@@ -156,6 +165,9 @@ export async function checkArch(ctx: CheckContext, files = listFiles(ctx.cwd)): 
   const deps = newDeps(ctx);
   violations.push(...deps.v);
   if (deps.added.length) metrics.push({ name: 'deps.added', value: deps.added.length, detail: deps.added.join(', ') });
+  const reg = await checkRegistry(ctx, deps.check.filter((d) => !d.startsWith('node:')));
+  violations.push(...reg.v);
+  metrics.push(...reg.metrics);
   if (ctx.options.knip) {
     const k = knipUnused(ctx);
     violations.push(...k.v);

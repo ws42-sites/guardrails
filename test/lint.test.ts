@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { checkLint } from '../src/checks/lint.js';
-import { repo } from './helpers/repo.js';
+import { BASE_CONFIG, repo } from './helpers/repo.js';
 
 const lint = async (files: Record<string, string>) =>
   (await checkLint(repo(files).ctx())).violations.map((v) => `${v.file}:${v.line} ${v.message.split(/[.;:]/)[0]}`);
@@ -49,5 +49,31 @@ describe('BAN-02 real clocks and randomness are banned unless faked or seeded', 
   ])('%s', async (body, expected) => {
     const out = await lint({ 'src/lib/a.test.ts': `it('LIB-01 x', () => { ${body} expect(1).toBe(1) });` });
     expect(out.map((l) => l.replace(/^\S+ /, ''))).toEqual(expected);
+  });
+});
+
+describe('PROP-01 seeded property tests are allowed for properties specs', () => {
+  const prop = (id: string, opts: string) => `it('${id} p', () => { fc.assert(fc.property(fc.integer(), (n) => n === n), ${opts}); expect(1).toBe(1) });`;
+  it.each([
+    ['CORE-01', '{ seed: 42, interruptAfterTimeLimit: 2000 }', true, []],
+    ['CORE-01', '{ seed: 42, interruptAfterTimeLimit: 2000 }', false, ['warn fast-check:Seeded fast-check property run']],
+    ['CORE-01', '{ numRuns: 1000 }', true, ['block fast-check:fast-check run without a fixed seed and numRuns <= 20']],
+    ['CORE-01', '{ numRuns: 10 }', false, []],
+  ])('%s %s (properties: %s)', async (id, opts, properties, expected) => {
+    const cfg = { ...BASE_CONFIG, specs: { items: { ...BASE_CONFIG.specs.items, 'CORE-01': { tier: 'T1', behaviour: 'core adds numbers', properties } } } };
+    const out = (await checkLint(repo({ 'src/core/a.test.ts': prop(id, opts) }, cfg).ctx())).violations;
+    expect(out.map((v) => `${v.maxMode ?? 'block'} fast-check:${v.message.split('.')[0]}`)).toEqual(expected);
+  });
+});
+
+describe('TRIM-01 preference-style bans warn, cheating bans block', () => {
+  it('caps snapshots, class assertions, fake servers and loops at warn; keeps .only and the real clock blocking', async () => {
+    const src = [
+      "it.only('CORE-01 a', () => { expect(Date.now()).toBe(1) });",
+      "it('CORE-01 b', () => { expect(el).toHaveClass('x'); http.createServer(); expect(r()).toMatchSnapshot() });",
+      'for (let i = 0; i < 100; i++) { it(`CORE-01 g${i}`, () => { expect(i).toBe(i) }) }',
+    ].join('\n');
+    const out = (await checkLint(repo({ 'src/core/a.test.ts': src }).ctx())).violations;
+    expect(out.map((v) => `${v.line} ${v.maxMode ?? 'block'}`)).toEqual(['1 block', '1 block', '2 warn', '2 warn', '2 warn', '3 warn']);
   });
 });

@@ -23,7 +23,7 @@ export interface CheckContext {
   /** Git ref to diff against (merge-base is taken against HEAD). Null = full-repo mode. */
   base: string | null;
   labels: string[];
-  options: { clockShift: boolean; mutation: boolean; knip: boolean; mutate?: string[] };
+  options: { clockShift: boolean; mutation: boolean; knip: boolean; mutate?: string[]; failsOnBase?: boolean; specs?: string[] };
 }
 
 export interface Metric {

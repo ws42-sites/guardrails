@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "guardrails": { "command": "npx", "args": ["--no-install", "guardrails-mcp"], "cwd": "." }
+  },
+  "hooks": {
+    "BeforeTool": [
+      {
+        "matcher": "write_file|replace|run_shell_command",
+        "hooks": [{ "name": "guardrails-lock", "type": "command", "command": "npx --no-install guardrails hook-guard --agent gemini", "timeout": 10000 }]
+      }
+    ]
+  }
+}

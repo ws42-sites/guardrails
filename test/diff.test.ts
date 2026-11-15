@@ -68,6 +68,6 @@ describe('DEPS-01 new dependencies block unless allowlisted', () => {
     r.write({ 'package.json': JSON.stringify({ dependencies: { zod: '1', 'ok-lib': '1' }, devDependencies: { 'left-pad': '1' } }) });
     const out = await checkArch(r.ctx('main'));
     expect(out.violations.map((v) => [v.rule, v.fingerprint.length, v.message.split(' (')[0]])).toEqual([['ARCH-4', 12, 'adds dependency "left-pad"']]);
-    expect(out.metrics).toEqual([{ name: 'deps.added', value: 2, detail: 'ok-lib, left-pad' }]);
+    expect(out.metrics).toEqual([{ name: 'deps.added', value: 2, detail: 'ok-lib, left-pad' }, { name: 'deps.registry', value: 'skipped', detail: 'offline: ok-lib, left-pad not checked against npm' }]);
   });
 });

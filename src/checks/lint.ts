@@ -9,6 +9,8 @@ const require = createRequire(import.meta.url);
 
 const restricted = (items: { selector: string; message: string }[]): Linter.RuleEntry => ['error', ...items.map(({ selector, message }) => ({ selector, message }))];
 
+/** Preference-style findings: reported, never blocking (rule 12 trim). */
+const WARN_MESSAGES = ['Snapshots are banned in T1 tests', 'Loop over ', 'Seeded fast-check'];
 const CLOCK_EXEMPT = /\bvi\.(useFakeTimers|setSystemTime)\s*\(/;
 const RANDOM_EXEMPT = /\bseed\b|vi\.spyOn\(\s*(Math|crypto)\b|mockReturnValue/i;
 
@@ -30,6 +32,7 @@ export async function checkLint(ctx: CheckContext, files = listFiles(ctx.cwd)): 
   if (!tests.length && !product.length) return { violations: [] };
 
   const index = indexTests(ctx, tests);
+  const propertyFiles = new Set(tests.filter((f) => (index.byFile[f] ?? []).some((t) => t.specId && cfg.specs.items[t.specId]?.properties)));
   const t1Tests = tests.filter((f) => (index.byFile[f] ?? []).some((t) => t.specId && cfg.specs.items[t.specId]?.tier === 'T1'));
 
   const eslint = new ESLint({
@@ -70,12 +73,16 @@ export async function checkLint(ctx: CheckContext, files = listFiles(ctx.cwd)): 
         v.push(violation('TEST-5', file, `could not lint: ${m.message}`, 'fatal'));
         continue;
       }
-      const tag = TEST_SYNTAX.find((s) => m.message.startsWith(s.message))?.tag;
+      const syntax = TEST_SYNTAX.find((s) => m.message.startsWith(s.message));
+      const tag = syntax?.tag;
+      if (m.message.startsWith('Seeded fast-check') && propertyFiles.has(file)) continue;
       if (tag === 'clock' && CLOCK_EXEMPT.test(src)) continue;
       if (tag === 'random' && RANDOM_EXEMPT.test(src)) continue;
       const msg = m.message;
       const text = (lines[m.line - 1] ?? '').trim();
-      v.push(violation('TEST-5', file, `${msg} (${m.ruleId})`, `${m.ruleId}:${msg}:${text}`, m.line));
+      const x = violation('TEST-5', file, `${msg} (${m.ruleId})`, `${m.ruleId}:${msg}:${text}`, m.line);
+      if (syntax?.warn || WARN_MESSAGES.some((w) => msg.startsWith(w))) x.maxMode = 'warn';
+      v.push(x);
     }
   }
   return { violations: v };

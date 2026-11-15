@@ -4,7 +4,9 @@ import type { CheckContext, CheckOutput, Violation } from '../types.js';
 import { diffAgainst, isProductFile, listFiles, matchesAny, tierOf, violation } from '../util.js';
 import { runCommand } from './run.js';
 
-interface StrykerFile { mutants: { status: string }[] }
+interface StrykerMutant { status: string; mutatorName?: string; replacement?: string; location?: { start: { line: number } } }
+interface StrykerFile { mutants: StrykerMutant[] }
+export interface SurvivingMutant { file: string; line: number; mutator: string; replacement: string; status: string }
 
 export function mutationTargets(ctx: CheckContext): string[] {
   const cfg = ctx.config;
@@ -37,22 +39,42 @@ export function strykerConfig(ctx: CheckContext, mutate: string[], cacheDir: str
   };
 }
 
-/** TEST-8: Stryker on mutation-tier files (changed ones in diff mode). */
-export function checkMutation(ctx: CheckContext): CheckOutput {
-  const targets = mutationTargets(ctx);
-  if (!targets.length) return { violations: [], metrics: [{ name: 'mutation', value: 'skipped', detail: 'no mutation-tier files changed' }] };
-  if (!existsSync(join(ctx.cwd, 'node_modules/@stryker-mutator/core'))) {
-    return { violations: [], metrics: [{ name: 'mutation', value: 'not installed', detail: 'npm i -D -E @stryker-mutator/core @stryker-mutator/vitest-runner' }] };
-  }
+type StrykerRun = { json: { files: Record<string, StrykerFile> } } | { error: string; code: number } | { skipped: string; detail?: string };
+
+/** Run Stryker on targets. GUARDRAILS_MUTATION=1 lets a project's vitest config drop slow suites. */
+function runStryker(ctx: CheckContext, targets: string[]): StrykerRun {
+  if (!targets.length) return { skipped: 'skipped', detail: 'no mutation-tier files changed' };
+  if (!existsSync(join(ctx.cwd, 'node_modules/@stryker-mutator/core')))
+    return { skipped: 'not installed', detail: 'npm i -D -E @stryker-mutator/core @stryker-mutator/vitest-runner' };
   const cacheDir = join('node_modules', '.cache', 'guardrails');
   mkdirSync(join(ctx.cwd, cacheDir), { recursive: true });
   const confPath = join(cacheDir, 'stryker.config.json');
   writeFileSync(join(ctx.cwd, confPath), JSON.stringify(strykerConfig(ctx, targets, cacheDir), null, 2));
-  const r = runCommand(`npx stryker run ${JSON.stringify(confPath)}`, ctx.cwd, {}, ctx.config.mutation.timeoutMinutes * 60_000);
+  const r = runCommand(`npx stryker run ${JSON.stringify(confPath)}`, ctx.cwd, { GUARDRAILS_MUTATION: '1' }, ctx.config.mutation.timeoutMinutes * 60_000);
   const report = join(ctx.cwd, cacheDir, 'mutation.json');
-  if (!existsSync(report))
-    return { violations: [violation('TEST-8', '(mutation)', `Stryker did not produce a report (exit ${r.code}): ${(r.stderr || r.stdout).split('\n').slice(-3).join(' ')}`, 'noreport')] };
-  const json = JSON.parse(readFileSync(report, 'utf8')) as { files: Record<string, StrykerFile> };
+  if (!existsSync(report)) return { error: (r.stderr || r.stdout).split('\n').slice(-3).join(' '), code: r.code };
+  return { json: JSON.parse(readFileSync(report, 'utf8')) };
+}
+
+/** Surviving / uncovered mutants for changed (or given) files, for guardrails_mutants. Always recomputed. */
+export function survivingMutants(ctx: CheckContext): { mutants: SurvivingMutant[]; note?: string } {
+  const r = runStryker(ctx, mutationTargets(ctx));
+  if ('skipped' in r) return { mutants: [], note: `${r.skipped}${r.detail ? `: ${r.detail}` : ''}` };
+  if ('error' in r) return { mutants: [], note: `Stryker failed (exit ${r.code}): ${r.error}` };
+  const out: SurvivingMutant[] = [];
+  for (const [file, f] of Object.entries(r.json.files))
+    for (const m of f.mutants)
+      if (m.status === 'Survived' || m.status === 'NoCoverage')
+        out.push({ file: file.replace(`${ctx.cwd}/`, ''), line: m.location?.start.line ?? 0, mutator: m.mutatorName ?? '?', replacement: m.replacement ?? '', status: m.status });
+  return { mutants: out };
+}
+
+/** TEST-8: Stryker on mutation-tier files (changed ones in diff mode). */
+export function checkMutation(ctx: CheckContext): CheckOutput {
+  const r = runStryker(ctx, mutationTargets(ctx));
+  if ('skipped' in r) return { violations: [], metrics: [{ name: 'mutation', value: r.skipped, detail: r.detail }] };
+  if ('error' in r) return { violations: [violation('TEST-8', '(mutation)', `Stryker did not produce a report (exit ${r.code}): ${r.error}`, 'noreport')] };
+  const json = r.json;
   const v: Violation[] = [];
   let detected = 0;
   let valid = 0;

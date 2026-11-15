@@ -20,7 +20,8 @@ const noGeneratedInputs: Rule.RuleModule = {
     schema: [],
     messages: {
       loop: 'Loop over {{n}} iterations in a test. Generated input loops are padding; use a small it.each table of meaningful cases.',
-      fc: 'fast-check run without numRuns <= ' + LIMIT + '. Property loops are padding here; use fixed cases or cap numRuns.',
+      fc: 'fast-check run without a fixed seed and numRuns <= ' + LIMIT + '. Unseeded property runs are random; seed them (and mark the spec properties: true) or use fixed cases.',
+      fcSeeded: 'Seeded fast-check property run. Allowed only for specs marked properties: true, with interruptAfterTimeLimit instead of a run cap.',
     },
   },
   create(context) {
@@ -45,9 +46,11 @@ const noGeneratedInputs: Rule.RuleModule = {
       'CallExpression[callee.object.name="fc"][callee.property.name="assert"]'(node: Rule.Node) {
         const args = (node as unknown as { arguments: { type: string; properties?: { key?: { name?: string }; value?: unknown }[] }[] }).arguments;
         const opts = args[1];
-        const runs = opts?.type === 'ObjectExpression' ? opts.properties?.find((p) => p.key?.name === 'numRuns') : undefined;
-        const n = runs ? literal(runs.value) : null;
-        if (n === null || n > LIMIT) context.report({ node, messageId: 'fc' });
+        const prop = (k: string) => (opts?.type === 'ObjectExpression' ? opts.properties?.find((p) => p.key?.name === k) : undefined);
+        const n = prop('numRuns') ? literal(prop('numRuns')?.value) : null;
+        if (n !== null && n <= LIMIT) return;
+        const seeded = prop('seed') && literal(prop('seed')?.value) !== null && prop('interruptAfterTimeLimit');
+        context.report({ node, messageId: seeded ? 'fcSeeded' : 'fc' });
       },
     };
   },
@@ -56,13 +59,13 @@ const noGeneratedInputs: Rule.RuleModule = {
 export const plugin = { rules: { 'no-stryker-disable': noStrykerDisable, 'no-generated-inputs': noGeneratedInputs } };
 
 /** Restricted syntax for every test file. `tag` lets the checker apply file-level exemptions. */
-export const TEST_SYNTAX: { selector: string; message: string; tag?: 'clock' | 'random' }[] = [
+export const TEST_SYNTAX: { selector: string; message: string; tag?: 'clock' | 'random'; warn?: true }[] = [
   { selector: "CallExpression[callee.property.name='todo']", message: 'test.todo is banned; write the test or track it in an issue.' },
   { selector: "CallExpression[callee.property.name='each'][arguments.0.type='ArrayExpression'][arguments.0.elements.length=0]", message: 'each([]) with an empty table runs nothing.' },
-  { selector: "CallExpression[callee.property.name=/^(toHaveClass|toHaveStyle)$/]", message: 'Class-name/style assertions are banned; visuals are checked by screenshot diff.' },
-  { selector: "CallExpression[callee.property.name='createServer']", message: 'Hand-rolled fake servers are banned; test through the storage interface or a fixture implementation.' },
-  { selector: "CallExpression[callee.object.name='vi'][callee.property.name='spyOn'][arguments.0.name=/^(Date|Response)$/]", message: 'Spying on Date/Response is banned; use vi.useFakeTimers()/setSystemTime or a real Response.' },
-  { selector: "CallExpression[callee.object.name='vi'][callee.property.name='spyOn'][arguments.0.type='MemberExpression'][arguments.0.property.name=/^(subtle|prototype)$/]", message: 'Spying on crypto.subtle or a prototype is banned; test the real behaviour.' },
+  { selector: "CallExpression[callee.property.name=/^(toHaveClass|toHaveStyle)$/]", message: 'Class-name/style assertions are banned; visuals are checked by screenshot diff.', warn: true },
+  { selector: "CallExpression[callee.property.name='createServer']", message: 'Hand-rolled fake servers are banned; test through the storage interface or a fixture implementation.', warn: true },
+  { selector: "CallExpression[callee.object.name='vi'][callee.property.name='spyOn'][arguments.0.name=/^(Date|Response)$/]", message: 'Spying on Date/Response is banned; use vi.useFakeTimers()/setSystemTime or a real Response.', warn: true },
+  { selector: "CallExpression[callee.object.name='vi'][callee.property.name='spyOn'][arguments.0.type='MemberExpression'][arguments.0.property.name=/^(subtle|prototype)$/]", message: 'Spying on crypto.subtle or a prototype is banned; test the real behaviour.', warn: true },
   { selector: "NewExpression[callee.name='Date'][arguments.length=0]", message: 'Real clock in a test: use vi.useFakeTimers() and vi.setSystemTime(new Date("2026-01-01")).', tag: 'clock' },
   { selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']", message: 'Real clock in a test: use vi.useFakeTimers() and vi.setSystemTime().', tag: 'clock' },
   { selector: "CallExpression[callee.object.name='performance'][callee.property.name='now']", message: 'Real clock in a test: use fake timers.', tag: 'clock' },

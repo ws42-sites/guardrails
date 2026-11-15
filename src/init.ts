@@ -3,7 +3,23 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const TEMPLATE = join(dirname(fileURLToPath(import.meta.url)), '..', 'template');
-const FILES = ['guardrails.config.json', 'AGENTS.md', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml'];
+const FILES = ['guardrails.config.json', 'AGENTS.md', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml', ...HOOK_FILES()];
+/** Agent settings: hooks that lock spec-tagged tests and guardrails config, plus the MCP server. Merged into existing files. */
+function HOOK_FILES(): string[] {
+  return ['.claude/settings.json', '.mcp.json', '.gemini/settings.json', '.agents/hooks.json', '.agents/mcp_config.json'];
+}
+type Json = Record<string, unknown>;
+/** Deep-merge template JSON into existing settings: objects merge, arrays append entries not already present. */
+export function mergeSettings(existing: Json, add: Json): Json {
+  const out: Json = { ...existing };
+  for (const [k, v] of Object.entries(add)) {
+    const cur = out[k];
+    if (Array.isArray(cur) && Array.isArray(v)) out[k] = [...cur, ...v.filter((x) => !cur.some((c) => JSON.stringify(c) === JSON.stringify(x)))];
+    else if (cur && v && typeof cur === 'object' && typeof v === 'object' && !Array.isArray(cur)) out[k] = mergeSettings(cur as Json, v as Json);
+    else if (cur === undefined) out[k] = v;
+  }
+  return out;
+}
 
 export interface InitOptions { cwd: string; owner?: string; base?: string; force?: boolean }
 export interface InitResult { written: string[]; skipped: string[] }
@@ -27,11 +43,22 @@ export function init(opts: InitOptions): InitResult {
   const skipped: string[] = [];
   for (const f of FILES) {
     const dest = join(opts.cwd, f);
-    if (existsSync(dest) && !opts.force) {
-      skipped.push(f);
-      continue;
-    }
     let body = readFileSync(join(TEMPLATE, f), 'utf8').replaceAll('{{OWNER}}', owner).replaceAll('{{BASE}}', base);
+    if (existsSync(dest) && !opts.force) {
+      if (!HOOK_FILES().includes(f)) {
+        skipped.push(f);
+        continue;
+      }
+      try {
+        const current = JSON.parse(readFileSync(dest, 'utf8'));
+        const merged = `${JSON.stringify(mergeSettings(current, JSON.parse(body)), null, 2)}\n`;
+        if (merged === `${JSON.stringify(current, null, 2)}\n`) { skipped.push(f); continue; }
+        body = merged;
+      } catch {
+        skipped.push(f);
+        continue;
+      }
+    }
     if (f === 'guardrails.config.json') body = `${JSON.stringify(guessConfig(opts.cwd, JSON.parse(body), base), null, 2)}\n`;
     mkdirSync(dirname(dest), { recursive: true });
     writeFileSync(dest, body);

@@ -22,7 +22,20 @@ export const configSchema = z
         idPattern: z.string().default('^[A-Z][A-Z0-9]{1,11}-[0-9]{2,4}$'),
         maxTestsPerId: z.number().int().positive().default(8),
         items: z
-          .record(z.object({ tier, behaviour: z.string().min(3) }).strict())
+          .record(
+            z
+              .object({
+                tier,
+                behaviour: z.string().min(3),
+                /** Tests for this spec may pass on base (they guard existing behaviour). TEST-11. */
+                regressionGuard: z.boolean().optional(),
+                /** Property-based tests (seeded fast-check with a time limit) allowed. TEST-5. */
+                properties: z.boolean().optional(),
+                /** Product paths this behaviour lives in. SCOPE-1. */
+                paths: globs.optional(),
+              })
+              .strict(),
+          )
           .default({}),
       })
       .strict()
@@ -45,6 +58,10 @@ export const configSchema = z
           )
           .default([]),
         singletons: z.array(z.string()).default([]),
+        /** Files allowed to call process.exit (ARCH-7). */
+        cliEntries: globs.default(['**/cli.{ts,js,mjs,cjs}', 'bin/**', 'scripts/**']),
+        /** Product files allowed to read the test environment (ARCH-7), e.g. a test-only bootstrap. */
+        testEnvAllow: globs.default([]),
         restrictedStrings: z
           .array(
             z
@@ -55,7 +72,50 @@ export const configSchema = z
       })
       .strict()
       .default({}),
-    deps: z.object({ allow: z.array(z.string()).default([]) }).strict().default({}),
+    deps: z
+      .object({
+        allow: z.array(z.string()).default([]),
+        registry: z
+          .object({
+            enabled: z.boolean().default(true),
+            minAgeDays: z.number().nonnegative().default(30),
+            minWeeklyDownloads: z.number().nonnegative().default(1000),
+            cacheHours: z.number().positive().default(24),
+          })
+          .strict()
+          .default({}),
+      })
+      .strict()
+      .default({}),
+    duplication: z
+      .object({
+        enabled: z.boolean().default(true),
+        minLines: z.number().int().positive().default(5),
+        minTokens: z.number().int().positive().default(50),
+        maxPercent: z.number().min(0).max(100).default(3),
+      })
+      .strict()
+      .default({}),
+    scope: z
+      .object({ maxProductLines: z.number().int().positive().default(600) })
+      .strict()
+      .default({}),
+    holdout: z
+      .object({
+        repo: z.string().optional(),
+        path: z.string().optional(),
+        specs: z.array(z.string()).default([]),
+        target: z.string().default('test/holdout'),
+      })
+      .strict()
+      .optional(),
+    lock: z
+      .object({
+        specTests: z.boolean().default(true),
+        paths: globs.default(['guardrails.config.json', '.guardrails/**', '.github/CODEOWNERS', '.github/workflows/**', '.claude/settings.json', '.gemini/settings.json', '.agents/hooks.json']),
+      })
+      .strict()
+      .default({}),
     fixtures: z
       .object({
         globs: globs.default(['**/fixtures/**', '**/__fixtures__/**']),
@@ -80,6 +140,7 @@ export const configSchema = z
         command: z.string().default('npx vitest run --pool=forks'),
         clockShiftYears: z.number().positive().default(2),
         testsRemovedLabel: z.string().default('tests-removed-approved'),
+        propertyTimeLimitMs: z.number().int().positive().default(5000),
       })
       .strict()
       .default({}),
@@ -115,8 +176,15 @@ export const configSchema = z
           if (!RULE_IDS.includes(id)) ctx.addIssue({ code: 'custom', message: `unknown rule id ${id}` });
       }),
     baselineFile: z.string().default('.guardrails/baseline.json'),
+    flagsFile: z.string().default('.guardrails/flags.json'),
     labels: z
-      .object({ rebaseline: z.string().default('guardrails:rebaseline') })
+      .object({
+        rebaseline: z.string().default('guardrails:rebaseline'),
+        characterization: z.string().default('allow-characterization'),
+        flagsResolved: z.string().default('flags-resolved'),
+        /** A code owner approved loosening guardrails.config.json in this PR (TEST-7 config part). */
+        configApproved: z.string().default('guardrails:config-approved'),
+      })
       .strict()
       .default({}),
   })

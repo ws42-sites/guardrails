@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "guardrails": { "command": "npx", "args": ["--no-install", "guardrails-mcp"] }
+  }
+}

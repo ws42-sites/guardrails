@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { parse, type TSESTree } from '@typescript-eslint/typescript-estree';
 
 export interface TestCase {
@@ -10,6 +11,8 @@ export interface TestCase {
   expects: number;
   matchers: string[];
   each: boolean;
+  /** Hash of the test's source text: a changed test keeps its title but changes hash. */
+  hash: string;
 }
 
 export interface Inventory {
@@ -88,7 +91,7 @@ export function inventory(source: string, idPattern: string, file = 'test.ts'): 
   const pattern = new RegExp(idPattern);
   let ast: TSESTree.Program;
   try {
-    ast = parse(source, { loc: true, jsx: /\.(tsx|jsx)$/.test(file), comment: false });
+    ast = parse(source, { loc: true, range: true, jsx: /\.(tsx|jsx)$/.test(file), comment: false });
   } catch (e) {
     return { tests: [], parseError: (e as Error).message };
   }
@@ -116,6 +119,7 @@ export function inventory(source: string, idPattern: string, file = 'test.ts'): 
           expects: acc.expects,
           matchers: acc.matchers,
           each: b.each,
+          hash: createHash('sha1').update(source.slice(node.range[0], node.range[1])).digest('hex').slice(0, 12),
         });
         return;
       }

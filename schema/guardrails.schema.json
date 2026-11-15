@@ -84,6 +84,19 @@
                   "behaviour": {
                     "type": "string",
                     "minLength": 3
+                  },
+                  "regressionGuard": {
+                    "type": "boolean"
+                  },
+                  "properties": {
+                    "type": "boolean"
+                  },
+                  "paths": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
                   }
                 },
                 "required": [
@@ -161,6 +174,26 @@
               },
               "default": []
             },
+            "cliEntries": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "**/cli.{ts,js,mjs,cjs}",
+                "bin/**",
+                "scripts/**"
+              ]
+            },
+            "testEnvAllow": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": []
+            },
             "restrictedStrings": {
               "type": "array",
               "items": {
@@ -202,6 +235,121 @@
                 "type": "string"
               },
               "default": []
+            },
+            "registry": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "minAgeDays": {
+                  "type": "number",
+                  "minimum": 0,
+                  "default": 30
+                },
+                "minWeeklyDownloads": {
+                  "type": "number",
+                  "minimum": 0,
+                  "default": 1000
+                },
+                "cacheHours": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "default": 24
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "duplication": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "minLines": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "default": 5
+            },
+            "minTokens": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "default": 50
+            },
+            "maxPercent": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "default": 3
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "scope": {
+          "type": "object",
+          "properties": {
+            "maxProductLines": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "default": 600
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "holdout": {
+          "type": "object",
+          "properties": {
+            "repo": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "specs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "target": {
+              "type": "string",
+              "default": "test/holdout"
+            }
+          },
+          "additionalProperties": false
+        },
+        "lock": {
+          "type": "object",
+          "properties": {
+            "specTests": {
+              "type": "boolean",
+              "default": true
+            },
+            "paths": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "guardrails.config.json",
+                ".guardrails/**",
+                ".github/CODEOWNERS",
+                ".github/workflows/**",
+                ".claude/settings.json",
+                ".gemini/settings.json",
+                ".agents/hooks.json"
+              ]
             }
           },
           "additionalProperties": false,
@@ -303,6 +451,11 @@
             "testsRemovedLabel": {
               "type": "string",
               "default": "tests-removed-approved"
+            },
+            "propertyTimeLimitMs": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "default": 5000
             }
           },
           "additionalProperties": false,
@@ -459,12 +612,28 @@
           "type": "string",
           "default": ".guardrails/baseline.json"
         },
+        "flagsFile": {
+          "type": "string",
+          "default": ".guardrails/flags.json"
+        },
         "labels": {
           "type": "object",
           "properties": {
             "rebaseline": {
               "type": "string",
               "default": "guardrails:rebaseline"
+            },
+            "characterization": {
+              "type": "string",
+              "default": "allow-characterization"
+            },
+            "flagsResolved": {
+              "type": "string",
+              "default": "flags-resolved"
+            },
+            "configApproved": {
+              "type": "string",
+              "default": "guardrails:config-approved"
             }
           },
           "additionalProperties": false,
