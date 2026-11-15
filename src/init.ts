@@ -1,6 +1,9 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadConfig } from './config.js';
+import { auditSuite, readSuiteBaseline, toBaseline, writeSuiteBaseline } from './test-suite.js';
+import { listFiles } from './util.js';
 
 const TEMPLATE = join(dirname(fileURLToPath(import.meta.url)), '..', 'template');
 const FILES = ['guardrails.config.json', 'AGENTS.md', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml', ...HOOK_FILES()];
@@ -78,7 +81,7 @@ export function init(opts: InitOptions): InitResult {
 
 const STUB = (name: string) => `echo "${name}: not wired yet. Point it at the real command or mark it n/a in guardrails.config.json runbook.na." && exit 1`;
 
-/** guardrails init runbook: RUNBOOK.md template, stub standard scripts, runbook.enabled. Never overwrites. */
+/** guardrails init runbook: RUNBOOK.md template, stub standard scripts, TESTING.md section, suite baseline; enables runbook, ci, testSuite. Never overwrites. */
 export function initRunbook(opts: { cwd: string; force?: boolean }): InitResult {
   const written: string[] = [];
   const skipped: string[] = [];
@@ -95,15 +98,33 @@ export function initRunbook(opts: { cwd: string; force?: boolean }): InitResult 
     const scripts = (pkg.scripts ??= {}) as Record<string, string>;
     const missing = ['deploy', 'deploy:preview', 'rollback', 'smoke', 'secrets:check', 'test:changed', 'test:full'].filter((s) => !(s in scripts));
     for (const s of missing) scripts[s] = STUB(s);
+    if (!('check:tests' in scripts)) { scripts['check:tests'] = 'guardrails check-tests'; missing.push('check:tests'); }
     return missing.length > 0;
   });
   edit('guardrails.config.json', (cfg) => {
     const rb = (cfg.runbook ??= {}) as Json;
     const ci = (cfg.ci ??= {}) as Json;
-    if (rb.enabled === true && ci.enabled === true) return false;
+    const ts = (cfg.testSuite ??= {}) as Json;
+    if (rb.enabled === true && ci.enabled === true && ts.enabled === true) return false;
     rb.enabled = true;
     ci.enabled = true;
+    ts.enabled = true;
     return true;
   });
+  // TESTING.md gets the short test-suite section; existing findings go into the suite baseline.
+  const testing = join(opts.cwd, 'TESTING.md');
+  const section = readFileSync(join(TEMPLATE, 'TESTING.md'), 'utf8');
+  if (!existsSync(testing)) { writeFileSync(testing, section); written.push('TESTING.md'); }
+  else if (!readFileSync(testing, 'utf8').includes('## Test suite standard')) {
+    writeFileSync(testing, `${readFileSync(testing, 'utf8').trimEnd()}\n\n${section.slice(section.indexOf('## Test suite standard'))}`);
+    written.push('TESTING.md');
+  } else skipped.push('TESTING.md');
+  if (existsSync(join(opts.cwd, 'guardrails.config.json'))) {
+    const cfg = loadConfig(opts.cwd);
+    if (!readSuiteBaseline(opts.cwd, cfg.testSuite.baselineFile)) {
+      writeSuiteBaseline(opts.cwd, cfg.testSuite.baselineFile, toBaseline(auditSuite(opts.cwd, cfg, listFiles(opts.cwd)), cfg.testSuite.maxLines));
+      written.push(cfg.testSuite.baselineFile);
+    }
+  }
   return { written, skipped };
 }

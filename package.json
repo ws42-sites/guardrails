@@ -1,6 +1,6 @@
 {
   "name": "@ws42/guardrails",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "Config-driven guardrails that stop coding agents from padding, weakening or bypassing tests, docs and architecture.",
   "type": "module",
   "license": "UNLICENSED",
@@ -31,7 +31,8 @@
     "guardrails": "node dist/cli.js",
     "smoke": "node dist/cli.js explain RUN-1 > /dev/null && node dist/cli.js check --only docs,runbook",
     "test:changed": "node dist/cli.js affected --run \"npx vitest run\"",
-    "test:full": "vitest run"
+    "test:full": "vitest run",
+    "check:tests": "node dist/cli.js check-tests"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.32.2",

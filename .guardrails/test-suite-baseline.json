@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "maxLines": 300,
+  "totals": {
+    "testFiles": 20,
+    "testLines": 1259,
+    "productFiles": 41,
+    "productLines": 3931,
+    "ratio": 0.32
+  },
+  "byKind": {
+    "clock": 2,
+    "focused": 4,
+    "oversize": 0,
+    "skip": 4,
+    "sleep": 1,
+    "source-text": 2
+  },
+  "counts": {
+    "clock|test/clock.test.ts": 1,
+    "clock|test/suite.test.ts": 1,
+    "focused|test/lint.test.ts": 2,
+    "focused|test/suite.test.ts": 2,
+    "skip|test/lint.test.ts": 3,
+    "skip|test/suite.test.ts": 1,
+    "sleep|test/suite.test.ts": 1,
+    "source-text|test/ci.test.ts": 1,
+    "source-text|test/suite.test.ts": 1
+  },
+  "oversize": {}
+}
