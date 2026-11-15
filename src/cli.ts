@@ -84,7 +84,7 @@ async function main(): Promise<number> {
       const cfg = loadConfig(cwd);
       const a = await affectedTests(cwd, cfg, base ?? `origin/${cfg.baseBranch}`);
       const list = values.e2e ? a.e2e : a.tests;
-      console.error(a.all ? `affected: all (${a.reason})` : `affected: ${list.length} of ${a.changed.length} changed file(s) -> ${list.length} test file(s)`);
+      console.error(a.all ? `affected: all (${a.reason})` : `affected: ${a.changed.length} changed file(s) -> ${list.length} test file(s)`);
       if (!values.run) { for (const f of list) console.log(f); return 0; }
       if (!list.length) { console.error('affected: nothing to run'); return 0; }
       const r = runCommand(`${values.run} ${list.map((f) => JSON.stringify(f)).join(' ')}`, cwd, {}, 60 * 60_000);

@@ -217,7 +217,7 @@
       },
       "CI-02": {
         "tier": "T2",
-        "behaviour": "guardrails affected selects tests whose import graph reaches a changed file; global files select all"
+        "behaviour": "guardrails affected selects tests whose import graph reaches, or whose source names, a changed file; global files select all"
       }
     }
   },

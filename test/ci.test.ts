@@ -28,12 +28,12 @@ describe('CI-01 PRs run affected tests; full suite nightly and before deploy', (
 });
 
 describe('CI-02 guardrails affected selects tests through the import graph', () => {
-  it('selects only tests that reach a changed file; global files select all', async () => {
-    const r = repo({ 'src/core/a.ts': 'export const a = 1;\n', 'src/lib/b.ts': 'export const b = 2;\n', 'src/core/a.test.ts': "import { a } from './a';\n", 'src/lib/b.test.ts': "import { b } from './b';\n", 'package.json': '{}' }).commit();
-    r.write({ 'src/core/a.ts': 'export const a = 3;\n' });
+  it('selects only tests that import or name a changed file; global files select all', async () => {
+    const r = repo({ 'src/core/a.ts': 'export const a = 1;\n', 'src/lib/b.ts': 'export const b = 2;\n', 'src/core/a.test.ts': "import { a } from './a';\n", 'src/lib/b.test.ts': "import { b } from './b';\n", 'src/lib/page.test.ts': "readFileSync('public/about.html');\n", 'public/about.html': '<p>a</p>\n', 'package.json': '{}' }).commit();
+    r.write({ 'src/core/a.ts': 'export const a = 3;\n', 'public/about.html': '<p>b</p>\n' });
     const one = await affectedTests(r.dir, r.ctx().config, 'HEAD');
     r.write({ 'package.json': '{"x":1}' });
     const all = await affectedTests(r.dir, r.ctx().config, 'HEAD');
-    expect([one.all, one.tests, all.all, all.reason]).toEqual([false, ['src/core/a.test.ts'], true, 'package.json changed']);
+    expect([one.all, one.tests, all.all, all.reason]).toEqual([false, ['src/core/a.test.ts', 'src/lib/page.test.ts'], true, 'package.json changed']);
   });
 });

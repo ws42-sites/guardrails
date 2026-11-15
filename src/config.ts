@@ -231,6 +231,8 @@ export const configSchema = z
         enabled: z.boolean().default(false),
         workflows: globs.default(['.github/workflows/*.yml', '.github/workflows/*.yaml']),
         /** Changes to these select every test (guardrails affected). */
+        /** Limit which test files `affected` can select (e.g. the root node:test suite); empty = all test files. */
+        tests: globs.default([]),
         globalFiles: globs.default(['package.json', 'package-lock.json', '**/tsconfig*.json', 'vitest.config.*', 'vitest.setup.*', 'playwright.config.*', '.nvmrc']),
         /** Safety nets that genuinely do not apply, with the reason. */
         na: z.object({ nightly: z.string().min(10).optional(), preDeploy: z.string().min(10).optional() }).strict().default({}),

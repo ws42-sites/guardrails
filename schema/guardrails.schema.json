@@ -836,6 +836,14 @@
                 ".github/workflows/*.yaml"
               ]
             },
+            "tests": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": []
+            },
             "globalFiles": {
               "type": "array",
               "items": {
