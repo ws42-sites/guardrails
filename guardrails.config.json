@@ -250,6 +250,26 @@
       "CUJ-05": {
         "tier": "T1",
         "behaviour": "Journey import validates atomically, rejects protected overwrites and approvals, and is idempotent"
+      },
+      "CUJ-06": {
+        "tier": "T1",
+        "behaviour": "Generate stable standalone journey specs with resolved hashes, literal titles, unmanaged-file protection and read-only checks"
+      },
+      "CUJ-07": {
+        "tier": "T1",
+        "behaviour": "Execute all closed journey steps with bounded timeouts and contextual failures"
+      },
+      "CUJ-08": {
+        "tier": "T1",
+        "behaviour": "Abort unmocked writes while allowing mocked writes and reads"
+      },
+      "CUJ-09": {
+        "tier": "T1",
+        "behaviour": "JRN-6 detects stale or edited generated journeys according to enforcement policy"
+      },
+      "CUJ-10": {
+        "tier": "T1",
+        "behaviour": "Run journeys with enforcement-aware summaries and scaffold without overwriting"
       }
     }
   },
@@ -259,7 +279,8 @@
       "src/mcp.ts",
       "src/index.ts",
       "src/vitest-setup.ts",
-      "src/clock-shift.mjs"
+      "src/clock-shift.mjs",
+      "src/cuj-runtime.ts"
     ],
     "forbidden": [
       {

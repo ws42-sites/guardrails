@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { journeySchema, type GuardrailsConfig } from '../config.js';
 import type { CheckContext, CheckOutput, JourneyRow, Metric, Violation } from '../types.js';
 import { diffAgainst, isE2eFile, isProductFile, listFiles, matchesAny, mergeBase, readText, showAt, violation } from '../util.js';
+import { generatedRuntime, generatedSpec, journeyData } from '../cuj-generate.js';
 import { indexTests } from './tests.js';
 
 export const isJourneyEnforced = (journey: { approved?: boolean; provenance?: string }): boolean => journey.approved === true || journey.provenance === 'client-provided';
@@ -30,7 +31,7 @@ interface PwSuite { title: string; specs?: PwSpec[]; suites?: PwSuite[] }
 /** Pass/fail per journey ID from a Playwright JSON report. */
 export function e2eResults(cfg: GuardrailsConfig, cwd: string): Map<string, boolean> {
   const out = new Map<string, boolean>();
-  const file = cfg.journeys.resultsFile;
+  const file = cfg.journeys.resultsFile ?? '.guardrails/journeys-results.json';
   if (!file || !existsSync(join(cwd, file))) return out;
   const re = new RegExp(idSource(cfg));
   const walk = (s: PwSuite, path: string) => {
@@ -94,6 +95,22 @@ export function checkJourneys(ctx: CheckContext, files = listFiles(ctx.cwd)): Ch
     if (row.priority === 'P1' || warning) x.maxMode = 'warn';
     if (warning) x.message += ' It will only warn until a human approves it.';
     v.push(x);
+  }
+  // JRN-6 checks bytes as well as hashes; never executes browser code.
+  for (const [id, j] of Object.entries(items)) {
+    if (j.run === undefined) continue;
+    const file = 'e2e/cuj/' + id + '.spec.ts';
+    let reason = '';
+    try {
+      const expected = generatedSpec(id, j, journeyData(ctx.cwd, cfg));
+      if (existsSync(join(ctx.cwd, file)) && (readText(ctx.cwd, file) !== expected || !existsSync(join(ctx.cwd, 'e2e/cuj/_runtime.ts')) || readText(ctx.cwd, 'e2e/cuj/_runtime.ts') !== generatedRuntime()))
+        reason = 'hand-edited or stale generated CUJ test; regenerate with guardrails journeys generate-tests';
+    } catch (error) { reason = error instanceof Error ? error.message : String(error); }
+    if (reason) {
+      const finding = violation('JRN-6', file, id + ': ' + reason, id);
+      if (!isJourneyEnforced(j)) finding.maxMode = 'warn';
+      v.push(finding);
+    }
   }
   const results = e2eResults(cfg, ctx.cwd);
   for (const row of matrix) {

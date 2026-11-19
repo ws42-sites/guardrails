@@ -8,11 +8,13 @@ Shared by every project that uses `@ws42/guardrails`. Projects don't copy this f
 - New behaviour means a new spec entry first. The config is CODEOWNER-protected, so a human approves what gets tested.
 - More than 8 tests on one ID is padding. Use `it.each` [TEST-4].
 
-## 2. Journeys come first [JRN-1..5]
+## 2. Journeys come first [JRN-1..6]
 Above the specs sit Critical User Journeys: 5-10 complete tasks users actually do, written in plain language ("Client opens the review link and submits a choice"). Each has a priority, steps, the spec IDs it depends on and its routes. Only journeys a human approved gate merges.
 - Every approved P0 journey has exactly one e2e test (Playwright, `e2e/`) whose title starts with its ID and walks the steps [JRN-1]. P1 gaps warn; P2 is optional.
 - Every spec should serve an approved journey. Orphans warn: they signal padding or a feature nobody asked for [JRN-2].
 - Agents never add, edit or approve journeys [JRN-3]. New routes, forms and endpoints should map to a journey [JRN-4].
+
+Executable journeys use `journeys scaffold`, `journeys generate-tests`, and `journeys run --base-url <url>`. Check generated files with `journeys generate-tests --check`; JRN-6 compares the specs and shared runtime byte-for-byte. Declare mocks for writes: the runtime aborts unmocked non-GET/HEAD requests. Approved/client-provided failures gate execution; unapproved inferred/template failures warn.
 
 ## 3. Risk tiers decide how much testing
 | Tier | What | Expectation |

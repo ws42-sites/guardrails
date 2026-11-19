@@ -61,6 +61,21 @@ Findings are counted per file. A committed baseline (`.guardrails/test-suite-bas
 ## Critical User Journeys
 `journeys.items` in the config lists 5-10 plain-language user tasks (`CUJ-<AREA>`, priority P0-P2, steps, specs, routes). Only approved ones gate: approved P0 journeys need exactly one Playwright test under `e2e/` titled with the ID (JRN-1). The report shows a journey → specs → tests matrix with pass/fail when `journeys.resultsFile` points at Playwright's JSON reporter output. Model names: `journeys.draft.geminiModel` (default `gemini-2.5-flash`) and `openaiModel`. API keys are read from the environment only and never written anywhere. `journeys.visual` (JRN-5, per-step screenshot diff) is a stub for VIS-1 v2 and stays off.
 
+## Executable journeys
+
+Journeys with a non-empty declarative `run` can run against local Astro preview, Cloudflare preview or production:
+
+```sh
+guardrails journeys scaffold
+guardrails journeys generate-tests
+guardrails journeys generate-tests --check
+guardrails journeys run --base-url http://localhost:4321
+```
+
+The site needs only `@playwright/test`; generated tests import a generated shared runtime, never guardrails. Tokens resolve from `journeys.dataFile` (default `.guardrails/client-data.json`). Missing or empty tokens fail generation. Files without the generated header are never overwritten. JRN-6 detects hand edits and stale files. Custom `--out` is supported for generation; JRN-6 and the runner use `e2e/cuj`.
+
+Run filters: `--ids CUJ-A,CUJ-B`, `--only-enforced`. Approved or client-provided journeys are **enforced**: their failures exit 1; unapproved inferred/template failures warn and exit 0. Setup/report errors exit 2; other runner exit codes pass through. Results go to `journeys.resultsFile` or `.guardrails/journeys-results.json` and feed the journey matrix. Every step defaults to a 10-second timeout. Unmocked non-GET/HEAD requests are aborted; `mockRoute` fulfils matching requests with its status and JSON `{}`. Scaffold blocks service workers so they cannot bypass routing. Real browser qualification remains an owner-run check.
+
 ## Agent hooks (test-file lock)
 `init` writes (or merges into) `.claude/settings.json` (PreToolUse), `.gemini/settings.json` (BeforeTool) and `.agents/hooks.json` (Antigravity PreToolUse). Each calls `guardrails hook-guard`, which denies edits to `lock.paths` (config, `.guardrails/`, CODEOWNERS, workflows, the hook files) and to existing test files that contain a spec ID. New test files are fine. Shell commands that name a locked file together with a write (`sed -i`, `>`, `mv`, `rm`, `git checkout`…) are denied too; `guardrails flag` is always allowed. The hooks also deny `guardrails journeys approve|draft`, `init --preset` and attempts to unset `GUARDRAILS_AGENT` (Claude Code's settings set it via `env`, Gemini CLI via `.gemini/.env`). Shell routes can't be closed completely, so TEST-7 in CI is the backstop. A human unlocks with `GUARDRAILS_ALLOW_TEST_EDITS=1` in the agent's environment.
 

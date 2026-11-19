@@ -60,7 +60,11 @@
       "default": "./dist/index.js"
     },
     "./vitest-setup": "./dist/vitest-setup.js",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./cuj-runtime": {
+      "types": "./dist/cuj-runtime.d.ts",
+      "default": "./dist/cuj-runtime.js"
+    }
   },
   "peerDependencies": {
     "@stryker-mutator/core": ">=8",

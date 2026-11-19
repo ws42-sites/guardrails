@@ -21,6 +21,8 @@ import { survivingMutants } from './checks/mutation.js';
 import { guard, hookResponse, type Agent } from './hook.js';
 import { runHoldout } from './holdout.js';
 import { addDrafts, approveJourney, assertHuman, draftJourneys, presetDrafts } from './journeys.js';
+import { generateTests } from './cuj-generate.js';
+import { runJourneys, scaffoldJourneys } from './cuj-commands.js';
 import { importJourneys } from './journeys-import.js';
 import { journeyMatrix } from './checks/journeys.js';
 import { listFiles } from './util.js';
@@ -45,6 +47,9 @@ Commands
   mutants              Recompute surviving mutants for changed files (--base, --mutate)
   hook-guard           Agent hook: deny edits to locked files (--agent claude|gemini|antigravity; JSON on stdin)
   holdout --dir <d>    Run hidden holdout tests from a private checkout (HOLD-1)
+  journeys generate-tests [--out e2e/cuj] [--check] Generate or verify portable Playwright tests
+  journeys scaffold    Create missing Playwright journey config
+  journeys run --base-url <url> [--ids CUJ-A,CUJ-B] [--only-enforced]
   journeys list        Journey coverage matrix (journey -> specs -> tests, e2e)
   journeys draft       Draft 5-10 unapproved journeys from docs, routes and mocks (LLM if GEMINI_API_KEY/OPENAI_API_KEY; --dry-run)
   journeys import <file.json> Import journeys from a trusted producer (never approves)
@@ -71,6 +76,7 @@ async function main(): Promise<number> {
   const { values, positionals } = parseArgs({
     allowPositionals: true,
     options: {
+      out: { type: 'string' }, check: { type: 'boolean' }, 'base-url': { type: 'string' }, ids: { type: 'string' }, 'only-enforced': { type: 'boolean' },
       base: { type: 'string' }, labels: { type: 'string' }, 'clock-shift': { type: 'boolean' }, mutation: { type: 'boolean' },
       'no-knip': { type: 'boolean' }, only: { type: 'string' }, format: { type: 'string' }, cwd: { type: 'string' },
       owner: { type: 'string' }, force: { type: 'boolean' }, verbose: { type: 'boolean' }, help: { type: 'boolean', short: 'h' },
@@ -227,6 +233,17 @@ async function main(): Promise<number> {
     }
     case 'journeys': {
       const config = loadConfig(cwd);
+      if (arg === 'generate-tests') {
+        try { const changed = generateTests(cwd, config, values.out, values.check); console.log(changed.length + ' generated CUJ files updated'); return 0; }
+        catch (error) { console.error(error instanceof Error ? error.message : error); return 1; }
+      }
+      if (arg === 'scaffold') { for (const file of scaffoldJourneys(cwd)) console.log('wrote ' + file); return 0; }
+      if (arg === 'run') {
+        if (!values['base-url']) { console.error('journeys run: --base-url is required'); return 2; }
+        const result = runJourneys(cwd, config, { baseUrl: values['base-url'], ids: values.ids?.split(',').map((s) => s.trim()), onlyEnforced: values['only-enforced'] });
+        for (const line of result.lines) console.log(line);
+        return result.code;
+      }
       if (arg === 'list' || !arg) {
         const ctx: CheckContext = { cwd, config, base: null, labels: [], options: { clockShift: false, mutation: false, knip: false } };
         const rows = journeyMatrix(ctx);
