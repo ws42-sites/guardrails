@@ -70,7 +70,7 @@ Test files over 300 lines warn [TEST-4]. Split them by behaviour.
 Stryker runs on changed files in `mutation.tiers` (T1 by default), incrementally, with pinned mutators. A surviving mutant means no test notices that bug. Add an assertion that would. `guardrails_mutants` lists survivors for the agent; the gate always recomputes the score itself (agents have misreported their own scores). Stryker runs with `GUARDRAILS_MUTATION=1`: exclude slow integration suites in your Vitest config when it's set, as this repo does.
 
 ## 12. Suite health [SUITE-1..6]
-`guardrails check-tests` audits the whole suite (ported from nexus-core's scanner):
+`guardrails check-tests` audits the whole suite (a generic, config-driven scanner):
 - No `.only`, no unexplained skips (a reason, issue or `TEST-SKIP:` marker beside it), and no reading product source as text to assert on it [SUITE-1].
 - Test files stay at or under 300 lines (`testSuite.maxLines`) [SUITE-2]. No fixed sleeps [SUITE-3]. No real clock inside an assertion without fake timers [SUITE-4]. No copy-paste test bodies or files that repeat each other's titles [SUITE-5].
 - It reports the test/product line ratio per package.

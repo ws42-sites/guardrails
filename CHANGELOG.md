@@ -8,9 +8,7 @@ Version: 0.6.0 · Date: 2026-11-19
 ### Changed
 - Package renamed to `@ws42ca/guardrails` (first public npm name).
 - TEST-9 accepts both `@ws42ca/guardrails/vitest-setup` and the legacy `@ws42/guardrails/vitest-setup`.
-
-### Added
-- Release workflow publishes with npm provenance when the repository is public.
+- The init template workflow (`template/.github/workflows/guardrails.yml`) now runs the installed package instead of a reusable workflow in a private repository.
 
 ## [0.5.0] - 2026-11-15
 

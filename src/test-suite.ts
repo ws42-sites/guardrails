@@ -1,4 +1,4 @@
-// Test-suite audit (SUITE-1..6), ported from nexus-core tools/scripts/check-tests.mjs and made generic.
+// Test-suite audit (SUITE-1..6), a generic, config-driven audit.
 // Findings are counted per file and compared with a committed baseline, so only regressions block.
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
