@@ -8,3 +8,4 @@ export { inventory } from './inventory.js';
 export { specMatrix, indexTests } from './checks/tests.js';
 export { validateTest } from './validate.js';
 export type * from './types.js';
+export { resolveTokens, resolveJourney, UnresolvedTokensError } from './cuj-tokens.js';

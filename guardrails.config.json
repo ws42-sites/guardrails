@@ -230,6 +230,26 @@
       "SUITE-03": {
         "tier": "T2",
         "behaviour": "guardrails shard splits test files into complete, size-balanced shards"
+      },
+      "CUJ-01": {
+        "tier": "T1",
+        "behaviour": "Journey schema accepts provenance and bounded closed run steps; rejects unsafe values"
+      },
+      "CUJ-02": {
+        "tier": "T1",
+        "behaviour": "Journey tokens resolve dotted paths and report every unresolved or empty token"
+      },
+      "CUJ-03": {
+        "tier": "T1",
+        "behaviour": "Approved and client-provided journeys enforce coverage; inferred and template journeys only warn"
+      },
+      "CUJ-04": {
+        "tier": "T1",
+        "behaviour": "Journey ownership permits only trusted producer additions and unapproved regeneration using base trust"
+      },
+      "CUJ-05": {
+        "tier": "T1",
+        "behaviour": "Journey import validates atomically, rejects protected overwrites and approvals, and is idempotent"
       }
     }
   },

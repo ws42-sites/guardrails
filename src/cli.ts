@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { spawnSync } from 'node:child_process';
 import { run } from './runner.js';
@@ -20,6 +21,7 @@ import { survivingMutants } from './checks/mutation.js';
 import { guard, hookResponse, type Agent } from './hook.js';
 import { runHoldout } from './holdout.js';
 import { addDrafts, approveJourney, assertHuman, draftJourneys, presetDrafts } from './journeys.js';
+import { importJourneys } from './journeys-import.js';
 import { journeyMatrix } from './checks/journeys.js';
 import { listFiles } from './util.js';
 
@@ -45,6 +47,7 @@ Commands
   holdout --dir <d>    Run hidden holdout tests from a private checkout (HOLD-1)
   journeys list        Journey coverage matrix (journey -> specs -> tests, e2e)
   journeys draft       Draft 5-10 unapproved journeys from docs, routes and mocks (LLM if GEMINI_API_KEY/OPENAI_API_KEY; --dry-run)
+  journeys import <file.json> Import journeys from a trusted producer (never approves)
   journeys approve <ID> Approve a journey (humans only; --by <name>)
 
 Options
@@ -239,6 +242,14 @@ async function main(): Promise<number> {
         console.log(`Drafted ${added.length} journeys via ${r.via} (approved: false): ${added.join(', ') || 'none new'}. Review them in guardrails.config.json, then "guardrails journeys approve <ID>".`);
         return 0;
       }
+      if (arg === 'import') {
+        if (!rest[0]) { console.error('usage: guardrails journeys import <file.json>'); return 1; }
+        try {
+          const changed = importJourneys(cwd, resolve(cwd, rest[0]));
+          console.log(`Imported ${changed.length} journeys: ${changed.join(', ') || 'unchanged'}`);
+          return 0;
+        } catch (e) { console.error(e instanceof Error ? e.message : e); return 1; }
+      }
       if (arg === 'approve') {
         const id = rest[0];
         if (!id) { console.error('usage: guardrails journeys approve <CUJ-ID> [--by name]'); return 2; }
@@ -246,7 +257,7 @@ async function main(): Promise<number> {
         console.log(`Approved ${id} (approvedBy: ${by}). It now gates merges (JRN-1).`);
         return 0;
       }
-      console.error('usage: guardrails journeys list|draft|approve <ID>');
+      console.error('usage: guardrails journeys list|draft|import <file.json>|approve <ID>');
       return 2;
     }
     case 'holdout': {
