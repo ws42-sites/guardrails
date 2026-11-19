@@ -39,8 +39,8 @@ export interface JourneyRow {
   approved: boolean;
   specs: { id: string; tests: number }[];
   e2e: string[];
-  /** draft = not approved (never gates); missing = no e2e test; covered = test exists, no results; pass/fail from resultsFile. */
-  status: 'draft' | 'missing' | 'covered' | 'pass' | 'fail';
+  /** draft = legacy unapproved; inferred = unapproved producer journey (warn only); missing = no e2e test; covered = test exists, no results; pass/fail from resultsFile. */
+  status: 'inferred' | 'draft' | 'missing' | 'covered' | 'pass' | 'fail';
 }
 
 export interface CheckOutput {

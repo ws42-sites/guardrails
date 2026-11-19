@@ -6,6 +6,18 @@ Config-driven checks that stop coding agents from padding tests, weakening them,
 - **Engines:** dependency-cruiser (import boundaries), knip (production reachability), ESLint with eslint-plugin-vitest (test bans), a TypeScript AST inventory (spec IDs, weakening), jscpd (duplication on new code), the npm registry (hallucinated or risky packages), Stryker (mutation), a clock-shift preload (time bombs), a base-branch worktree (tests must fail without the change), and gitleaks in CI (secrets).
 - **Anti-cheating:** product code that detects tests, exits early, overloads equality or hard-codes expected values blocks [ARCH-7]; agents stop and flag conflicts instead of bending tests [FLAG-1]; hooks lock spec-tagged tests for Claude Code, Gemini CLI and Antigravity; optional hidden holdout tests run only at the gate [HOLD-1].
 
+## Install
+
+```bash
+npm i -D @ws42/guardrails
+```
+
+First npm publish pending; until then use the [GitHub Release tarball](https://github.com/ws42-sites/guardrails/releases).
+
+## Releasing
+
+Bump the version and CHANGELOG, merge, then push tag `vX.Y.Z`. The release workflow verifies the release, attaches the tarball to the GitHub Release, and publishes publicly when `NPM_TOKEN` exists. The npm account, `@ws42` organisation and repository secret must be set up before the first npm publication.
+
 ## Install in a project
 ```bash
 npm i -D -E @ws42/guardrails @stryker-mutator/core@8.7.1 @stryker-mutator/vitest-runner@8.7.1

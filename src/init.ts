@@ -7,6 +7,9 @@ import { listFiles } from './util.js';
 
 const TEMPLATE = join(dirname(fileURLToPath(import.meta.url)), '..', 'template');
 const FILES = ['guardrails.config.json', 'AGENTS.md', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml', ...HOOK_FILES()];
+export function initTemplateFiles(): string[] {
+  return [...FILES, '.gemini/.env', 'RUNBOOK.md', 'TESTING.md'];
+}
 /** Agent settings: hooks that lock spec-tagged tests and guardrails config, plus the MCP server. Merged into existing files. */
 function HOOK_FILES(): string[] {
   return ['.claude/settings.json', '.mcp.json', '.gemini/settings.json', '.agents/hooks.json', '.agents/mcp_config.json'];

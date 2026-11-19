@@ -250,6 +250,38 @@
       "SITE-05": {
         "tier": "T2",
         "behaviour": "Site workflow uses one guardrails version pin without a guardrails dependency or CUJ steps"
+      },
+      "CUJ-01": {
+        "tier": "T1",
+        "behaviour": "Journey schema accepts provenance and bounded closed run steps; rejects unsafe values"
+      },
+      "CUJ-02": {
+        "tier": "T1",
+        "behaviour": "Journey tokens resolve dotted paths and report every unresolved or empty token"
+      },
+      "CUJ-03": {
+        "tier": "T1",
+        "behaviour": "Approved and client-provided journeys enforce coverage; inferred and template journeys only warn"
+      },
+      "CUJ-04": {
+        "tier": "T1",
+        "behaviour": "Journey ownership permits only trusted producer additions and unapproved regeneration using base trust"
+      },
+      "CUJ-05": {
+        "tier": "T1",
+        "behaviour": "Journey import validates atomically, rejects protected overwrites and approvals, and is idempotent"
+      },
+      "REL-01": {
+        "tier": "T1",
+        "behaviour": "Release version equals the supplied v-prefixed tag and CHANGELOG has the version heading"
+      },
+      "REL-02": {
+        "tier": "T1",
+        "behaviour": "Packed files stay inside the allowlist; no reports, tests, src or env files"
+      },
+      "REL-03": {
+        "tier": "T1",
+        "behaviour": "Release workflow only publishes behind an NPM_TOKEN guard and only on v* tags"
       }
     }
   },
@@ -328,7 +360,8 @@
       "TESTING.md",
       "RULES.md",
       "skill/SKILL.md",
-      "template/**"
+      "template/**",
+      "CHANGELOG.md"
     ],
     "requiredLinks": {
       "AGENTS.md": [
@@ -345,9 +378,9 @@
   "runbook": {
     "enabled": true,
     "na": {
-      "deploy": "Library, not a hosted service: consumers vendor an npm pack tarball under tools/guardrails.",
+      "deploy": "Library released by .github/workflows/release.yml on a v* tag; npm publication requires NPM_TOKEN.",
       "deploy:preview": "No hosted environment; a PR branch build is the preview.",
-      "rollback": "Consumers pin the vendored tarball; roll back by re-vendoring the previous tarball in that repo.",
+      "rollback": "Pin the previous version released by .github/workflows/release.yml on a v* tag; npm unpublish only inside 72 hours.",
       "secrets:check": "No runtime secrets; the optional journeys draft reads GEMINI/OPENAI keys from the caller environment."
     },
     "allowDocs": [

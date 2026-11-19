@@ -7,6 +7,47 @@ const globs = z.array(z.string().min(1));
 const tier = z.enum(['T1', 'T2', 'T3']);
 const mode = z.enum(['block', 'warn', 'off']);
 
+const cujString = z.string().min(1).max(300).refine((s) => s.trim().length > 0, 'must not be blank');
+const token = /\{\{[^{}]*\}\}/g;
+const pathValue = cujString.refine((s) => s.startsWith('/') || /^\{\{[^{}]+\}\}/.test(s), 'path must start with /');
+const selector = cujString.refine((s) => /^[A-Za-z0-9_\-\[\]=^$*"'.#:() >]+$/.test(s.replace(token, 'token')), 'unsafe selector');
+const locator = z.object({ role: cujString.optional(), name: cujString.optional(), text: cujString.optional() }).strict()
+  .refine((s) => !!s.text || !!(s.role && s.name), 'provide role and name, or text');
+
+/** Each strict branch is discriminated by its sole operation key; no executable code. */
+export const journeyStepSchema = z.union([
+  z.object({ goto: pathValue }).strict(),
+  z.object({ click: locator }).strict(),
+  z.object({ fill: z.object({ label: cujString, value: cujString }).strict() }).strict(),
+  z.object({ submit: selector }).strict(),
+  z.object({ expectText: cujString }).strict(),
+  z.object({ expectUrl: pathValue }).strict(),
+  z.object({ expectVisible: locator }).strict(),
+  z.object({ expectHref: z.object({ selector, value: cujString }).strict() }).strict(),
+  z.object({ expectNoHorizontalScroll: z.literal(true) }).strict(),
+  z.object({ viewport: z.object({ width: z.number().int().min(200).max(4000), height: z.number().int().min(200).max(4000) }).strict() }).strict(),
+  z.object({ mockRoute: z.object({ match: cujString, status: z.number().int().min(100).max(599) }).strict() }).strict(),
+]);
+
+export const journeySchema = z.object({
+  title: z.string().min(10).max(300),
+  priority: z.enum(['P0', 'P1', 'P2']),
+  steps: z.array(z.string().min(3).max(300)).min(1),
+  specs: z.array(z.string()).default([]),
+  routes: z.array(z.string()).default([]),
+  approved: z.boolean().default(false),
+  approvedBy: z.string().optional(),
+  persona: cujString.optional(),
+  goal: cujString.optional(),
+  success: cujString.optional(),
+  provenance: z.enum(['client-provided', 'inferred', 'template']).optional(),
+  source: z.object({ by: cujString, runId: cujString.optional(), inputs: z.array(cujString).optional() }).strict().optional(),
+  run: z.array(journeyStepSchema).max(40).optional(),
+}).strict().superRefine((j, ctx) => {
+  const metadata = [j.approvedBy, ...j.specs, ...j.routes, j.source?.by, j.source?.runId, ...(j.source?.inputs ?? [])];
+  if (metadata.some((s) => s?.includes('{{'))) ctx.addIssue({ code: 'custom', message: 'tokens are only legal in run values and prose' });
+}).transform((j) => j.source && !j.provenance ? { ...j, provenance: 'inferred' as const } : j);
+
 export const configSchema = z
   .object({
     $schema: z.string().optional(),
@@ -136,21 +177,8 @@ export const configSchema = z
           .object({ enabled: z.boolean().default(false), mocksDir: z.string().default('design/mocks'), maxDiffRatio: z.number().min(0).max(1).default(0.01) })
           .strict()
           .default({}),
-        items: z
-          .record(
-            z
-              .object({
-                title: z.string().min(10),
-                priority: z.enum(['P0', 'P1', 'P2']),
-                steps: z.array(z.string().min(3)).min(1),
-                specs: z.array(z.string()).default([]),
-                routes: z.array(z.string()).default([]),
-                approved: z.boolean().default(false),
-                approvedBy: z.string().optional(),
-              })
-              .strict(),
-          )
-          .default({}),
+        trustedProducers: z.array(cujString).default([]),
+        items: z.record(journeySchema).default({}),
       })
       .strict()
       .default({}),
