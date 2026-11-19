@@ -95,11 +95,13 @@ export function heuristicDrafts(routes: string[], max: number): Record<string, J
   return out;
 }
 
-export async function draftJourneys(cwd: string, opts: { env?: NodeJS.ProcessEnv; fetch?: Fetch } = {}): Promise<{ drafts: Record<string, JourneyDraft>; via: string; context: ReturnType<typeof draftContext> }> {
+export async function draftJourneys(cwd: string, opts: { env?: NodeJS.ProcessEnv; fetch?: Fetch; dryRun?: boolean } = {}): Promise<{ drafts: Record<string, JourneyDraft>; via: string; context: ReturnType<typeof draftContext> }> {
   const cfg = loadConfig(cwd);
   const env = opts.env ?? process.env;
   const ctx = draftContext(cwd, cfg);
   const max = cfg.journeys.draft.max;
+  // A dry run is a free preview: it never calls a model, even when an API key is set.
+  if (opts.dryRun) return { drafts: heuristicDrafts(ctx.routes, max), via: 'heuristic preview (--dry-run makes no model call)', context: ctx };
   const res = await llm(prompt(ctx, max), cfg, env, opts.fetch ?? (globalThis.fetch as unknown as Fetch));
   if (!res) return { drafts: heuristicDrafts(ctx.routes, max), via: 'heuristic (no GEMINI_API_KEY or OPENAI_API_KEY)', context: ctx };
   const idRe = new RegExp(cfg.journeys.idPattern);

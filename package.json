@@ -1,6 +1,6 @@
 {
-  "name": "@ws42/guardrails",
-  "version": "0.5.0",
+  "name": "@ws42ca/guardrails",
+  "version": "0.6.0",
   "description": "Guardrails that stop AI coding agents from padding, weakening or bypassing your tests, docs and architecture. CLI, MCP server, agent hooks and CI checks.",
   "type": "module",
   "license": "MIT",
@@ -104,6 +104,7 @@
     "playwright"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

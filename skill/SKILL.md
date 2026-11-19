@@ -3,7 +3,7 @@ name: guardrails
 description: Use in any repo with a guardrails.config.json, before writing or changing tests, docs, dependencies or architecture, and before every commit. It explains how to pass the guardrails checks without padding or weakening tests.
 ---
 
-# Working under @ws42/guardrails
+# Working under @ws42ca/guardrails
 
 The repo enforces its testing, docs and architecture rules with `guardrails`. CI blocks on the same checks, so run them yourself first.
 

@@ -2,6 +2,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
+import { readFileSync } from 'node:fs';
 import { run } from './runner.js';
 import { toJson, toMarkdown, toText } from './report.js';
 import { RULES, ruleInfo } from './rules.js';
@@ -13,7 +14,7 @@ import { addFlag } from './flags.js';
 import { survivingMutants } from './checks/mutation.js';
 import { journeyMatrix } from './checks/journeys.js';
 
-const VERSION = '0.1.0';
+const VERSION = (JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')) as { version: string }).version;
 const text = (t: string) => ({ content: [{ type: 'text' as const, text: t }] });
 const fail = (e: unknown) => ({ ...text(`error: ${e instanceof Error ? e.message : String(e)}`), isError: true });
 const cwdArg = z.string().optional().describe('Project root. Defaults to the server working directory (or GUARDRAILS_CWD).');

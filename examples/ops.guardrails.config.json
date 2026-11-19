@@ -1,5 +1,5 @@
 {
-  "$schema": "./node_modules/@ws42/guardrails/schema/guardrails.schema.json",
+  "$schema": "./node_modules/@ws42ca/guardrails/schema/guardrails.schema.json",
   "version": 1,
   "baseBranch": "cursor/stage1-ops-platform-c06f",
   "sourceRoots": [

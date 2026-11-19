@@ -1,5 +1,5 @@
 {
-  "$schema": "./node_modules/@ws42/guardrails/schema/guardrails.schema.json",
+  "$schema": "./node_modules/@ws42ca/guardrails/schema/guardrails.schema.json",
   "version": 1,
   "baseBranch": "main",
   "sourceRoots": ["src"],
@@ -22,7 +22,5 @@
     "allow": ["AGENTS.md", "CLAUDE.md", "GEMINI.md", "README.md", "ARCHITECTURE.md", "TESTING.md", "RUNBOOK.md"],
     "runtime": []
   },
-  "runbook": { "enabled": true, "na": {} },
-  "ci": { "enabled": true },
   "rules": {}
 }
