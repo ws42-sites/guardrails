@@ -5,6 +5,20 @@ Version: 0.6.0 · Date: 2026-11-19
 
 ## [0.6.0] - 2026-11-19
 
+### Added
+- Codex CLI support: `init` writes `.codex/config.toml` (MCP server and `GUARDRAILS_AGENT=codex` for Codex's shell) and `.codex/hooks.json`; `guardrails hook-guard --agent codex` guards shell commands and `apply_patch`. Existing `config.toml` files are only appended to.
+- The hook locks `.codex/hooks.json` and `.codex/config.toml` by default and finds the project root from a subfolder.
+
+### Fixed
+- A fresh `init` followed by `check` now passes: the template no longer enables the runbook and CI standards that `init` does not scaffold. `init runbook` still opts in.
+- `journeys draft --dry-run` never calls Gemini or OpenAI; it previews the route heuristic.
+- The MCP server reports the package version instead of a hardcoded `0.1.0`.
+- RULES.md lists every never-baselined rule (SUITE-1 to 6 were missing) and JRN-5 comes before JRN-6.
+- README and CLI help state the real journeys draft count (up to `journeys.draft.max`, default 8, at most 20).
+
+### Removed
+- `holdout.repo` (it was never read; `holdout.path` and `guardrails holdout --dir` are how a checkout is supplied).
+
 ### Changed
 - Package renamed to `@ws42ca/guardrails` (first public npm name).
 - TEST-9 accepts both `@ws42ca/guardrails/vitest-setup` and the legacy `@ws42/guardrails/vitest-setup`.

@@ -47,13 +47,13 @@ Commands
   validate-test <ID>   Check a spec ID before writing a test
   flag <ID> <reason>   Stop and flag a spec/test conflict for a human (--file f). Blocks merge (FLAG-1)
   mutants              Recompute surviving mutants for changed files (--base, --mutate)
-  hook-guard           Agent hook: deny edits to locked files (--agent claude|gemini|antigravity; JSON on stdin)
+  hook-guard           Agent hook: deny edits to locked files (--agent claude|gemini|antigravity|codex; JSON on stdin)
   holdout --dir <d>    Run hidden holdout tests from a private checkout (HOLD-1)
   journeys generate-tests [--out e2e/cuj] [--check] Generate or verify portable Playwright tests
   journeys scaffold    Create missing Playwright journey config
   journeys run --base-url <url> [--ids CUJ-A,CUJ-B] [--only-enforced]
   journeys list        Journey coverage matrix (journey -> specs -> tests, e2e)
-  journeys draft       Draft 5-10 unapproved journeys from docs, routes and mocks (LLM if GEMINI_API_KEY/OPENAI_API_KEY; --dry-run)
+  journeys draft       Draft up to journeys.draft.max (default 8) unapproved journeys from docs, routes and mocks (LLM if GEMINI_API_KEY/OPENAI_API_KEY; --dry-run previews without any model call)
   journeys import <file.json> Import journeys from a trusted producer (never approves)
   journeys approve <ID> Approve a journey (humans only; --by <name>)
 
@@ -262,7 +262,7 @@ async function main(): Promise<number> {
         return 0;
       }
       if (arg === 'draft') {
-        const r = await draftJourneys(cwd);
+        const r = await draftJourneys(cwd, { dryRun: Boolean(values['dry-run']) });
         if (values['dry-run']) { console.log(JSON.stringify({ via: r.via, drafts: r.drafts }, null, 2)); return 0; }
         assertHuman(process.env, 'guardrails journeys draft (writing)');
         const added = addDrafts(cwd, r.drafts);

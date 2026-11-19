@@ -22,7 +22,5 @@
     "allow": ["AGENTS.md", "CLAUDE.md", "GEMINI.md", "README.md", "ARCHITECTURE.md", "TESTING.md", "RUNBOOK.md"],
     "runtime": []
   },
-  "runbook": { "enabled": true, "na": {} },
-  "ci": { "enabled": true },
   "rules": {}
 }
