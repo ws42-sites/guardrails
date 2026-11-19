@@ -4,7 +4,8 @@ import type { CheckContext, CheckOutput, Violation } from '../types.js';
 import { globToRegex, isTestFile, listFiles, readText, violation } from '../util.js';
 
 const VITEST_CONFIGS = /^(vitest|vite)\.config\.(ts|mts|cts|js|mjs|cjs)$|^vitest\.workspace\.(ts|js|mjs)$/;
-const SETUP_PACKAGE = '@ws42/guardrails/vitest-setup';
+const SETUP_PACKAGE = '@ws42ca/guardrails/vitest-setup';
+const LEGACY_SETUP_PACKAGE = '@ws42/guardrails/vitest-setup';
 
 /** TEST-9: Vitest setupFiles must enforce expect.hasAssertions(). */
 function checkAssertionSetup(ctx: CheckContext, files: string[]): Violation[] {
@@ -16,7 +17,7 @@ function checkAssertionSetup(ctx: CheckContext, files: string[]): Violation[] {
     for (const m of src.matchAll(/setupFiles\s*:\s*(\[[^\]]*\]|['"`][^'"`]+['"`])/g))
       for (const s of m[1].matchAll(/['"`]([^'"`]+)['"`]/g)) setupFiles.push(s[1]);
   }
-  if (setupFiles.some((s) => s.includes(SETUP_PACKAGE))) return [];
+  if (setupFiles.some((s) => s.includes(SETUP_PACKAGE) || s.includes(LEGACY_SETUP_PACKAGE))) return [];
   for (const s of setupFiles) {
     const candidates = [s, `${s}.ts`, `${s}.js`].map((p) => posix.normalize(p.replace(/^\.\//, '')));
     const hit = candidates.find((p) => existsSync(join(ctx.cwd, p)));

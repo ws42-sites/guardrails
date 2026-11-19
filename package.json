@@ -1,6 +1,6 @@
 {
-  "name": "@ws42/guardrails",
-  "version": "0.5.0",
+  "name": "@ws42ca/guardrails",
+  "version": "0.6.0",
   "description": "Config-driven guardrails that stop coding agents from padding, weakening or bypassing tests, docs and architecture.",
   "type": "module",
   "license": "MIT",
@@ -99,6 +99,7 @@
     "ci"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

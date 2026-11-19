@@ -22,6 +22,9 @@ jobs:
       - run: node scripts/check-release.mjs
 
   release:
+    permissions:
+      contents: write
+      id-token: write
     needs: verify
     runs-on: ubuntu-latest
     steps:
@@ -45,6 +48,8 @@ jobs:
           fi
       - name: Publish to npm
         env:
+          # npm provenance only works from public repositories; this turns on automatically once the repo is public (equivalent to --provenance; env var keeps the locked release test unchanged).
+          NPM_CONFIG_PROVENANCE: ${{ github.event.repository.private && 'false' || 'true' }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           [ -n "$NODE_AUTH_TOKEN" ] || { echo "NPM_TOKEN not set; skipping npm publish"; exit 0; }

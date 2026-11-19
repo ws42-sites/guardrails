@@ -1,7 +1,16 @@
 # Changelog
 
 All notable changes are documented here, following Keep a Changelog.
-Version: 0.5.0 · Date: 2026-11-15
+Version: 0.6.0 · Date: 2026-11-19
+
+## [0.6.0] - 2026-11-19
+
+### Changed
+- Package renamed to `@ws42ca/guardrails` (first public npm name).
+- TEST-9 accepts both `@ws42ca/guardrails/vitest-setup` and the legacy `@ws42/guardrails/vitest-setup`.
+
+### Added
+- Release workflow publishes with npm provenance when the repository is public.
 
 ## [0.5.0] - 2026-11-15
 

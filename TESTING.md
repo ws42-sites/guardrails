@@ -1,6 +1,6 @@
 # Testing policy
 
-Shared by every project that uses `@ws42/guardrails`. Projects don't copy this file; `AGENTS.md` links to it. Rule IDs in brackets are enforced (see RULES.md).
+Shared by every project that uses `@ws42ca/guardrails`. Projects don't copy this file; `AGENTS.md` links to it. Rule IDs in brackets are enforced (see RULES.md).
 
 ## 1. Tests come from specs, not from the code
 - Behaviours live in `guardrails.config.json` → `specs.items`: an ID, a tier and one line saying what must hold. Example: `"REVIEW-02": { "tier": "T1", "behaviour": "Expired token returns 410 and writes nothing" }`.
@@ -41,7 +41,7 @@ Warn (weak, preference-style; moved from block in v0.2):
 
 Property tests: a spec with `"properties": true` may use fast-check with a fixed `seed` and `interruptAfterTimeLimit` (≤ `tests.propertyTimeLimitMs`, default 5000) instead of the 20-run cap. Elsewhere seeded property runs warn.
 
-Heuristics that only warn [TEST-5W]: tests with no `expect`, tests that only assert a mock was called, and tests whose only assertions are `toBeDefined`/`toBeTruthy`/`not.toThrow`/`expect(true)`. Every project must add `@ws42/guardrails/vitest-setup` (or its own `expect.hasAssertions()` setup) to `setupFiles` [TEST-9].
+Heuristics that only warn [TEST-5W]: tests with no `expect`, tests that only assert a mock was called, and tests whose only assertions are `toBeDefined`/`toBeTruthy`/`not.toThrow`/`expect(true)`. Every project must add `@ws42ca/guardrails/vitest-setup` (or its own `expect.hasAssertions()` setup) to `setupFiles` [TEST-9].
 
 ## 5. Time [TEST-6]
 CI reruns the suite with the clock moved forward 2 years. A test that passes today and fails then is a time bomb, and it blocks. Freeze time in the test.
