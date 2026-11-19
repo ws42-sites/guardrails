@@ -1,6 +1,6 @@
 # Testing policy
 
-Shared by every project that uses `@ws42/guardrails`. Projects don't copy this file; `AGENTS.md` links to it. Rule IDs in brackets are enforced (see RULES.md).
+Shared by every project that uses `@ws42ca/guardrails`. Projects don't copy this file; `AGENTS.md` links to it. Rule IDs in brackets are enforced (see RULES.md).
 
 ## 1. Tests come from specs, not from the code
 - Behaviours live in `guardrails.config.json` → `specs.items`: an ID, a tier and one line saying what must hold. Example: `"REVIEW-02": { "tier": "T1", "behaviour": "Expired token returns 410 and writes nothing" }`.
@@ -41,7 +41,7 @@ Warn (weak, preference-style; moved from block in v0.2):
 
 Property tests: a spec with `"properties": true` may use fast-check with a fixed `seed` and `interruptAfterTimeLimit` (≤ `tests.propertyTimeLimitMs`, default 5000) instead of the 20-run cap. Elsewhere seeded property runs warn.
 
-Heuristics that only warn [TEST-5W]: tests with no `expect`, tests that only assert a mock was called, and tests whose only assertions are `toBeDefined`/`toBeTruthy`/`not.toThrow`/`expect(true)`. Every project must add `@ws42/guardrails/vitest-setup` (or its own `expect.hasAssertions()` setup) to `setupFiles` [TEST-9].
+Heuristics that only warn [TEST-5W]: tests with no `expect`, tests that only assert a mock was called, and tests whose only assertions are `toBeDefined`/`toBeTruthy`/`not.toThrow`/`expect(true)`. Every project must add `@ws42ca/guardrails/vitest-setup` (or its own `expect.hasAssertions()` setup) to `setupFiles` [TEST-9].
 
 ## 5. Time [TEST-6]
 CI reruns the suite with the clock moved forward 2 years. A test that passes today and fails then is a time bomb, and it blocks. Freeze time in the test.
@@ -70,7 +70,7 @@ Test files over 300 lines warn [TEST-4]. Split them by behaviour.
 Stryker runs on changed files in `mutation.tiers` (T1 by default), incrementally, with pinned mutators. A surviving mutant means no test notices that bug. Add an assertion that would. `guardrails_mutants` lists survivors for the agent; the gate always recomputes the score itself (agents have misreported their own scores). Stryker runs with `GUARDRAILS_MUTATION=1`: exclude slow integration suites in your Vitest config when it's set, as this repo does.
 
 ## 12. Suite health [SUITE-1..6]
-`guardrails check-tests` audits the whole suite (ported from nexus-core's scanner):
+`guardrails check-tests` audits the whole suite (a generic, config-driven scanner):
 - No `.only`, no unexplained skips (a reason, issue or `TEST-SKIP:` marker beside it), and no reading product source as text to assert on it [SUITE-1].
 - Test files stay at or under 300 lines (`testSuite.maxLines`) [SUITE-2]. No fixed sleeps [SUITE-3]. No real clock inside an assertion without fake timers [SUITE-4]. No copy-paste test bodies or files that repeat each other's titles [SUITE-5].
 - It reports the test/product line ratio per package.

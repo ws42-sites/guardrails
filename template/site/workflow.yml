@@ -6,7 +6,7 @@ on:
     branches: [{{BASE}}]
   workflow_dispatch:
 env:
-  GUARDRAILS_VERSION: '0.5.0'
+  GUARDRAILS_VERSION: '0.6.0'
 permissions:
   contents: read
   pull-requests: read
@@ -28,9 +28,9 @@ jobs:
           GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
         run: |
           ARGS=""; [ -n "$BASE" ] && ARGS="--base $BASE"
-          npx -y @ws42/guardrails@${GUARDRAILS_VERSION} check --only docs,lint,arch,gaming,journeys $ARGS
+          npx -y @ws42ca/guardrails@${GUARDRAILS_VERSION} check --only docs,lint,arch,gaming,journeys $ARGS
       - name: Built links
-        run: npx -y @ws42/guardrails@${GUARDRAILS_VERSION} check-links dist
+        run: npx -y @ws42ca/guardrails@${GUARDRAILS_VERSION} check-links dist
       - name: Preview smoke
         run: |
           npx astro preview --port 4321 &
@@ -42,7 +42,7 @@ jobs:
             sleep 1
           done
           if [ "$READY" != true ]; then echo 'Preview did not start'; exit 1; fi
-          npx -y @ws42/guardrails@${GUARDRAILS_VERSION} smoke --url http://localhost:4321 --sitemap
+          npx -y @ws42ca/guardrails@${GUARDRAILS_VERSION} smoke --url http://localhost:4321 --sitemap
   secrets:
     runs-on: ubuntu-latest
     steps:

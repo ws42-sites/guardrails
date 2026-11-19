@@ -6,15 +6,26 @@ import { auditSuite, readSuiteBaseline, toBaseline, writeSuiteBaseline } from '.
 import { listFiles } from './util.js';
 
 const TEMPLATE = join(dirname(fileURLToPath(import.meta.url)), '..', 'template');
-const FILES = ['guardrails.config.json', 'AGENTS.md', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml', ...HOOK_FILES()];
+const FILES = ['guardrails.config.json', 'AGENTS.md', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml', ...HOOK_FILES(), '.codex/config.toml'];
 export function initTemplateFiles(): string[] {
   return [...FILES, '.gemini/.env', 'RUNBOOK.md', 'TESTING.md'];
 }
 /** Agent settings: hooks that lock spec-tagged tests and guardrails config, plus the MCP server. Merged into existing files. */
 function HOOK_FILES(): string[] {
-  return ['.claude/settings.json', '.mcp.json', '.gemini/settings.json', '.agents/hooks.json', '.agents/mcp_config.json'];
+  return ['.claude/settings.json', '.mcp.json', '.gemini/settings.json', '.agents/hooks.json', '.agents/mcp_config.json', '.codex/hooks.json'];
 }
 type Json = Record<string, unknown>;
+/** Append the template's TOML tables that an existing Codex config lacks. Never edits or duplicates a table; null when nothing is missing. */
+export function mergeCodexToml(existing: string, template: string): string | null {
+  const has = (re: RegExp) => re.test(existing);
+  const add = template.split(/\n\n+/).map((b) => b.trim()).filter((block) => {
+    const table = /^\[([^\]]+)\]/m.exec(block)?.[1];
+    if (!table) return false;
+    if (table.startsWith('shell_environment_policy')) return !has(/^\s*(\[shell_environment_policy|shell_environment_policy\b)/m);
+    return !has(new RegExp(`^\\s*\\[${table.replace(/\./g, '\\.')}\\]`, 'm'));
+  });
+  return add.length ? `${existing.replace(/\s*$/, '')}\n\n${add.join('\n\n')}\n` : null;
+}
 /** Deep-merge template JSON into existing settings: objects merge, arrays append entries not already present. */
 export function mergeSettings(existing: Json, add: Json): Json {
   const out: Json = { ...existing };
@@ -54,11 +65,14 @@ export function init(opts: InitOptions): InitResult {
     const source = site ? `site/${f === '.github/workflows/guardrails.yml' ? 'workflow.yml' : f}` : f;
     let body = readFileSync(join(TEMPLATE, source), 'utf8').replaceAll('{{OWNER}}', owner).replaceAll('{{BASE}}', base);
     if (existsSync(dest) && !opts.force) {
-      if (!HOOK_FILES().includes(f)) {
+      if (f === '.codex/config.toml') {
+        const merged = mergeCodexToml(readFileSync(dest, 'utf8'), body);
+        if (merged === null) { skipped.push(f); continue; }
+        body = merged;
+      } else if (!HOOK_FILES().includes(f)) {
         skipped.push(f);
         continue;
-      }
-      try {
+      } else try {
         const current = JSON.parse(readFileSync(dest, 'utf8'));
         const merged = `${JSON.stringify(mergeSettings(current, JSON.parse(body)), null, 2)}\n`;
         if (merged === `${JSON.stringify(current, null, 2)}\n`) { skipped.push(f); continue; }

@@ -1,4 +1,4 @@
-# Agent instructions: @ws42/guardrails
+# Agent instructions: @ws42ca/guardrails
 
 This repo builds the guardrails framework. It follows its own rules (dogfood).
 

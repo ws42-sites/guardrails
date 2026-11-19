@@ -47,8 +47,8 @@ it('SITE-05 workflow pins standalone tooling once and builds and checks the site
   const dir = siteTree();
   init({ cwd: dir, preset: 'site' });
   const workflow = readFileSync(join(dir, '.github/workflows/guardrails.yml'), 'utf8');
-  expect(workflow.match(/0\.5\.0/g)).toHaveLength(1);
-  expect(workflow.match(/npx -y @ws42\/guardrails@\$\{GUARDRAILS_VERSION\}/g)).toHaveLength(3);
+  expect(workflow.match(/0\.6\.0/g)).toHaveLength(1);
+  expect(workflow.match(/npx -y @ws42ca\/guardrails@\$\{GUARDRAILS_VERSION\}/g)).toHaveLength(3);
   expect(workflow.match(/npm ci/g)).toHaveLength(1);
   expect(workflow).not.toMatch(/npm (?:ci|install).*guardrails|playwright|cuj/i);
   for (const text of ['pull_request:', 'branches: [main]', 'workflow_dispatch:', 'node-version-file: .nvmrc', 'cache: npm', 'fetch-depth: 0', 'npm run build', 'check --only docs,lint,arch,gaming,journeys', 'check-links dist', 'astro preview --port 4321', 'smoke --url http://localhost:4321 --sitemap', 'GUARDRAILS_LABELS:', 'ghcr.io/gitleaks/gitleaks:v8.30.1']) expect(workflow).toContain(text);

@@ -16,7 +16,7 @@ Project page: [ws42.ca/guardrails](https://ws42.ca/guardrails)
 - **Protects the architecture.** Import boundaries (dependency-cruiser), production reachability (knip), duplication on new code (jscpd), restricted strings and no fixtures in production code.
 - **Checks new dependencies.** New packages must exist on the npm registry, be old enough and have enough downloads, and have no high or critical advisories. This catches hallucinated package names.
 - **Describes the product as journeys.** Critical user journeys (CUJs) are plain-language tasks that humans approve. Approved journeys must have an end-to-end test, and the CLI can generate and run those tests.
-- **Locks the rules.** Agent hooks for Claude Code, Gemini CLI and Antigravity deny edits to the config, baseline, CI files and spec-tagged tests. Agents can stop and flag a conflict instead of bending a test, and the flag blocks merge until a human answers.
+- **Locks the rules.** Agent hooks for Claude Code, Gemini CLI, Antigravity and Codex CLI deny edits to the config, baseline, CI files and spec-tagged tests. Agents can stop and flag a conflict instead of bending a test, and the flag blocks merge until a human answers.
 - **Keeps docs short.** One agent instruction file, an allowlist of top-level docs and a length cap.
 - **Standardises runbooks and CI.** A required `RUNBOOK.md` that points at scripts, change-scoped test runs, and a test-suite audit with a baseline that only shrinks.
 
@@ -40,7 +40,9 @@ npm i -D -E vitest @stryker-mutator/core@8.7.1 @stryker-mutator/vitest-runner@8.
 npx guardrails init --owner @your-github-handle --base main
 ```
 
-`init` writes `guardrails.config.json`, `AGENTS.md` (the single source of truth for agent instructions), one-line `CLAUDE.md` and `GEMINI.md` pointers, `.github/CODEOWNERS`, a starter GitHub Actions workflow, and the agent hook and MCP files for Claude Code, Gemini CLI and Antigravity. It never overwrites an existing file unless you pass `--force`.
+`init` writes `guardrails.config.json`, `AGENTS.md` (the single source of truth for agent instructions), one-line `CLAUDE.md` and `GEMINI.md` pointers, `.github/CODEOWNERS`, a starter GitHub Actions workflow, and the agent hook and MCP files for Claude Code, Gemini CLI, Antigravity and Codex CLI. It never overwrites an existing file unless you pass `--force`.
+
+A fresh `init` followed by `npx guardrails check` passes. The runbook, CI and test-suite standards start off; opt in with `npx guardrails init runbook` once you want them (it writes `RUNBOOK.md` and stub scripts that fail until you wire them up).
 
 Then:
 
@@ -132,10 +134,10 @@ Set `GUARDRAILS_OFFLINE=1` to skip the npm registry lookups.
 | `guardrails validate-test <ID> [--file f] [--lines n]` | Pre-flight check before writing a test |
 | `guardrails flag <ID> "<reason>" [--file f]` | Stop and flag a spec/test conflict for a human (blocks merge, FLAG-1) |
 | `guardrails mutants [--base ref]` | List surviving mutants for changed files (JSON) |
-| `guardrails hook-guard --agent claude\|gemini\|antigravity` | Agent hook: reads a tool call on stdin, denies edits to locked files |
+| `guardrails hook-guard --agent claude\|gemini\|antigravity\|codex` | Agent hook: reads a tool call on stdin, denies edits to locked files |
 | `guardrails holdout --dir <checkout>` | Run hidden holdout tests (HOLD-1) |
 | `guardrails journeys list` | Journey coverage matrix: journey, specs, tests |
-| `guardrails journeys draft [--dry-run]` | Draft 5 to 10 unapproved journeys from your docs, routes and mocks |
+| `guardrails journeys draft [--dry-run]` | Draft up to `journeys.draft.max` (default 8, at most 20) unapproved journeys from your docs, routes and mocks. `--dry-run` previews a route heuristic and never calls a model |
 | `guardrails journeys approve <ID> [--by name]` | Approve a journey (humans only) |
 | `guardrails journeys import <file.json>` | Import journeys from a trusted producer (never approves them) |
 | `guardrails journeys generate-tests [--out dir] [--check]` | Generate or verify Playwright tests from journeys |
@@ -189,11 +191,11 @@ A critical user journey is a short, plain-language task a real visitor does: "Vi
   The step vocabulary is `goto`, `click`, `fill`, `submit`, `expectText`, `expectUrl`, `expectVisible`, `expectHref`, `expectNoHorizontalScroll`, `viewport` and `mockRoute`. There is no free-form code in a journey. The site only needs `@playwright/test`, and generated tests never import guardrails. Hand edits to generated files and stale files are detected (JRN-6).
 - **Enforced versus advisory.** Failures of approved or client-provided journeys exit 1. Unapproved inferred or template journeys only warn.
 - **Safe by default.** Every step has a 10-second timeout. Requests other than GET and HEAD that are not mocked are aborted, and service workers are blocked so they cannot bypass routing. Values written as `{{token}}` resolve from `.guardrails/client-data.json`.
-- **Drafting.** `journeys draft` uses Gemini if `GEMINI_API_KEY` is set, otherwise OpenAI if `OPENAI_API_KEY` is set, otherwise a route-based heuristic. Keys are read from the environment and never written anywhere.
+- **Drafting.** `journeys draft` uses Gemini if `GEMINI_API_KEY` is set, otherwise OpenAI if `OPENAI_API_KEY` is set, otherwise a route-based heuristic. `--dry-run` always uses the heuristic, so it makes no network or model call even when a key is set. Keys are read from the environment and never written anywhere.
 
 ## Agents: hooks, skill and MCP
 
-`init` writes hook settings for Claude Code (`.claude/settings.json`), Gemini CLI (`.gemini/settings.json`) and Antigravity (`.agents/hooks.json`). Each calls `guardrails hook-guard`, which denies edits to the config, `.guardrails/`, CODEOWNERS, workflows, the hook files and existing test files that carry a spec ID. New test files are fine. Shell commands that name a locked file together with a write are denied too, and `guardrails flag` is always allowed. Shell routes cannot be closed completely, so the CI checks are the backstop. A human unlocks edits with `GUARDRAILS_ALLOW_TEST_EDITS=1`.
+`init` writes hook settings for Claude Code (`.claude/settings.json`), Gemini CLI (`.gemini/settings.json`), Antigravity (`.agents/hooks.json`) and Codex CLI (`.codex/hooks.json`). Each calls `guardrails hook-guard`, which denies edits to the config, `.guardrails/`, CODEOWNERS, workflows, the hook files and existing test files that carry a spec ID. New test files are fine. Shell commands that name a locked file together with a write are denied too, and `guardrails flag` is always allowed. Shell routes cannot be closed completely, so the CI checks are the backstop. A human unlocks edits with `GUARDRAILS_ALLOW_TEST_EDITS=1`.
 
 The MCP server (`guardrails-mcp`, stdio) exposes `guardrails_list_journeys`, `guardrails_journey_coverage`, `guardrails_check`, `guardrails_report`, `guardrails_explain_rule`, `guardrails_list_specs`, `guardrails_validate_test`, `guardrails_flag` and `guardrails_mutants`. It is read-only for journeys, and there is no approve tool. It checks the directory it starts in, or `GUARDRAILS_CWD`.
 
@@ -207,6 +209,14 @@ claude mcp add guardrails --scope project -- npx -y -p @ws42ca/guardrails guardr
 ```
 
 The second block works for Gemini CLI (`.gemini/settings.json`) and Antigravity (`.agents/mcp_config.json`). The agent skill that tells an agent how to work under these rules is in the package at `skill/SKILL.md`. Copy it to `.claude/skills/guardrails/SKILL.md`, `.gemini/skills/guardrails/SKILL.md` or `.agents/skills/guardrails/SKILL.md`.
+
+### Codex CLI
+
+`init` writes `.codex/config.toml` (the MCP server, and `GUARDRAILS_AGENT=codex` for Codex's shell so human-only commands refuse) and `.codex/hooks.json` (a `PreToolUse` hook for shell commands and `apply_patch`). Codex reads `AGENTS.md` itself, so it needs no pointer file. An existing `config.toml` is only appended to, never rewritten.
+
+- Codex loads project `.codex/` files only for trusted projects, and skips hooks you have not reviewed. Trust the project, then open `/hooks` and trust the guardrails hook.
+- The hook denies a patch or shell write to a locked file with exit code 2, as Claude Code's does. Codex documents hooks as a guardrail, not a complete boundary, so the CI checks are still the backstop.
+- Antigravity has no hook-config way to set an environment variable, so `GUARDRAILS_AGENT` is not set for it. Its hook still denies the same edits; the human-only journey commands are only blocked in Antigravity by that hook.
 
 ## CI
 

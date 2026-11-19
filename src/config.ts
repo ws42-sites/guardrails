@@ -145,7 +145,6 @@ export const configSchema = z
       .default({}),
     holdout: z
       .object({
-        repo: z.string().optional(),
         path: z.string().optional(),
         specs: z.array(z.string()).default([]),
         target: z.string().default('test/holdout'),
@@ -155,7 +154,7 @@ export const configSchema = z
     lock: z
       .object({
         specTests: z.boolean().default(true),
-        paths: globs.default(['guardrails.config.json', '.guardrails/**', '.github/CODEOWNERS', '.github/workflows/**', '.claude/settings.json', '.gemini/settings.json', '.agents/hooks.json']),
+        paths: globs.default(['guardrails.config.json', '.guardrails/**', '.github/CODEOWNERS', '.github/workflows/**', '.claude/settings.json', '.gemini/settings.json', '.agents/hooks.json', '.codex/hooks.json', '.codex/config.toml']),
       })
       .strict()
       .default({}),

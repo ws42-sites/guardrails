@@ -1,0 +1,10 @@
+# Guardrails for Codex CLI. Codex loads this file only for trusted projects.
+# Review and trust the hook in /hooks (Codex skips untrusted hooks).
+
+[mcp_servers.guardrails]
+command = "npx"
+args = ["--no-install", "guardrails-mcp"]
+
+# Mark Codex's shell as an agent so human-only commands (journeys approve/draft) refuse.
+[shell_environment_policy.set]
+GUARDRAILS_AGENT = "codex"

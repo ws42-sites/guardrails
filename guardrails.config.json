@@ -115,9 +115,21 @@
         "tier": "T2",
         "behaviour": "init scaffolds config, agent pointers, CODEOWNERS and CI without overwriting"
       },
+      "INIT-02": {
+        "tier": "T2",
+        "behaviour": "A fresh init followed by check passes; the runbook and CI standards stay off until init runbook"
+      },
+      "INIT-03": {
+        "tier": "T2",
+        "behaviour": "init sets up Codex CLI with an MCP server, an agent marker and a guard hook, appending to an existing config.toml safely"
+      },
       "MCP-01": {
         "tier": "T2",
         "behaviour": "MCP server exposes check, report, explain, specs, validate_test, flag and mutants; validate_test checks ID, cap and path"
+      },
+      "MCP-02": {
+        "tier": "T2",
+        "behaviour": "The MCP server reports the package.json version"
       },
       "SETUP-01": {
         "tier": "T1",
@@ -154,6 +166,10 @@
       "LOCK-01": {
         "tier": "T2",
         "behaviour": "Agent hooks deny edits to spec-tagged tests and guardrails files for Claude Code, Gemini CLI and Antigravity"
+      },
+      "LOCK-02": {
+        "tier": "T2",
+        "behaviour": "The Codex hook denies apply_patch and shell writes to locked files, resolving paths from the project root"
       },
       "HOLD-01": {
         "tier": "T2",
@@ -194,6 +210,10 @@
       "JOURNEY-05": {
         "tier": "T2",
         "behaviour": "journeys draft uses Gemini/OpenAI or a route heuristic; the small-business preset adds drafts"
+      },
+      "JOURNEY-06": {
+        "tier": "T2",
+        "behaviour": "journeys draft --dry-run makes no model call and writes nothing"
       },
       "RUN-01": {
         "tier": "T1",
