@@ -48,7 +48,8 @@ export function init(opts: InitOptions): InitResult {
   const files = site ? ['guardrails.config.json', '.github/workflows/guardrails.yml'] : FILES;
   for (const f of files) {
     const dest = join(opts.cwd, f);
-    let body = readFileSync(join(TEMPLATE, site ? `site/${f.split('/').pop()}` : f), 'utf8').replaceAll('{{OWNER}}', owner).replaceAll('{{BASE}}', base);
+    const source = site ? `site/${f === '.github/workflows/guardrails.yml' ? 'workflow.yml' : f}` : f;
+    let body = readFileSync(join(TEMPLATE, source), 'utf8').replaceAll('{{OWNER}}', owner).replaceAll('{{BASE}}', base);
     if (existsSync(dest) && !opts.force) {
       if (!HOOK_FILES().includes(f)) {
         skipped.push(f);

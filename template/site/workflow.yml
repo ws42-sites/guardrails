@@ -24,8 +24,11 @@ jobs:
       - run: npm run build
       - name: Guardrails
         env:
+          BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || '' }}
           GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
-        run: npx -y @ws42/guardrails@${GUARDRAILS_VERSION} check --only docs,lint,arch,gaming,journeys
+        run: |
+          ARGS=""; [ -n "$BASE" ] && ARGS="--base $BASE"
+          npx -y @ws42/guardrails@${GUARDRAILS_VERSION} check --only docs,lint,arch,gaming,journeys $ARGS
       - name: Built links
         run: npx -y @ws42/guardrails@${GUARDRAILS_VERSION} check-links dist
       - name: Preview smoke
