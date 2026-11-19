@@ -314,9 +314,6 @@
         "holdout": {
           "type": "object",
           "properties": {
-            "repo": {
-              "type": "string"
-            },
             "path": {
               "type": "string"
             },
@@ -354,7 +351,9 @@
                 ".github/workflows/**",
                 ".claude/settings.json",
                 ".gemini/settings.json",
-                ".agents/hooks.json"
+                ".agents/hooks.json",
+                ".codex/hooks.json",
+                ".codex/config.toml"
               ]
             }
           },

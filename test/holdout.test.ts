@@ -7,7 +7,7 @@ import { checkTests } from '../src/checks/tests.js';
 import { BASE_CONFIG, repo } from './helpers/repo.js';
 
 const VITEST = `node ${JSON.stringify(join(process.cwd(), 'node_modules/vitest/vitest.mjs'))} run`;
-const config = { ...BASE_CONFIG, tests: { command: VITEST }, holdout: { repo: 'ws42-sites/x-holdout', specs: ['CORE-01'] } };
+const config = { ...BASE_CONFIG, tests: { command: VITEST }, holdout: { specs: ['CORE-01'] } };
 
 function hidden(body: string): string {
   const dir = mkdtempSync(join(tmpdir(), 'guardrails-hidden-'));
