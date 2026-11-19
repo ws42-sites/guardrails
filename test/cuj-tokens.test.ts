@@ -1,9 +1,8 @@
 import { expect, it } from 'vitest';
 import { resolveJourney, resolveTokens, UnresolvedTokensError } from '../src/cuj-tokens.js';
 
-it('CUJ-02 resolves repeated dotted paths and preserves false and zero', () => {
-  expect(resolveTokens('{{client.phone}} / {{client.phone}} / {{zero}} / {{flag}}', { client: { phone: '555-0100' }, zero: 0, flag: false })).toBe('555-0100 / 555-0100 / 0 / false');
-});
+it('CUJ-02 resolves repeated dotted paths and preserves false and zero', () =>
+  expect(resolveTokens('{{client.phone}} / {{client.phone}} / {{zero}} / {{flag}}', { client: { phone: '555-0100' }, zero: 0, flag: false })).toBe('555-0100 / 555-0100 / 0 / false'));
 it.each([undefined, null, '', '  ', {}, [], '{{other}}'])('CUJ-02 reports every unresolved or empty token for %j', (empty) => {
   try { resolveTokens('{{client.phone}} {{missing}} {{client.phone}}', { client: { phone: empty } }); }
   catch (e) {
