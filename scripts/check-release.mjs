@@ -15,15 +15,20 @@ export function packFiles(list) {
   const files = new Set(['package.json', 'README.md', 'LICENSE', 'CHANGELOG.md', 'RULES.md', 'TESTING.md']);
   const roots = new Set(['dist', 'journeys', 'schema', 'skill', 'template']);
   const forbidden = new Set(['reports', 'test', 'src', '.github', '.guardrails']);
-  return list.flatMap(file => {
+  const required = 'template/.gemini/.env';
+  const problems = list.flatMap(file => {
     const path = typeof file === 'string' ? file : file.path;
     if (typeof path !== 'string') return ['Invalid packed path'];
     const parts = path.split('/');
     const unsafe = forbidden.has(parts[0]) || path.includes('\\') || parts.some(part =>
-      !part || part === '.' || part === '..' || part.startsWith('.env'));
+      !part || part === '.' || part === '..' || (part.startsWith('.env') && path !== required));
     return !unsafe && (files.has(path) || (parts.length > 1 && roots.has(parts[0])))
       ? [] : [`Forbidden packed path: ${path}`];
   });
+  if (!list.some(file => (typeof file === 'string' ? file : file.path) === required)) {
+    problems.push(`missing required template file: ${required}`);
+  }
+  return problems;
 }
 
 export function checkRelease({ version, tag, changelog, files }) {

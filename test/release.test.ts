@@ -1,9 +1,20 @@
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { initTemplateFiles } from '../src/init.js';
 
 const script = new URL('../scripts/check-release.mjs', import.meta.url).href;
 const { versionMatchesTag, changelogHas, packFiles, checkRelease } = await import(script);
+const requiredTemplate = 'template/.gemini/.env';
+
+function realPackFiles(): { path: string }[] {
+  const args = ['pack', '--dry-run', '--json'];
+  const output = process.env.npm_execpath
+    ? execFileSync(process.execPath, [process.env.npm_execpath, ...args], { encoding: 'utf8' })
+    : execFileSync(process.platform === 'win32' ? 'npm.cmd' : 'npm', args,
+      { encoding: 'utf8', shell: process.platform === 'win32' });
+  return JSON.parse(output).flatMap((pack: { files: { path: string }[] }) => pack.files);
+}
 
 describe('REL-01 release identity', () => {
   it.each([
@@ -23,7 +34,7 @@ describe('REL-01 release identity', () => {
   });
 
   it('REL-01 reports all identity problems together', () => {
-    expect(checkRelease({ version: '0.5.0', tag: 'v0.4.0', changelog: '', files: [] })).toEqual([
+    expect(checkRelease({ version: '0.5.0', tag: 'v0.4.0', changelog: '', files: [requiredTemplate] })).toEqual([
       'Tag v0.4.0 does not match version v0.5.0', 'CHANGELOG.md missing ## [0.5.0]',
     ]);
   });
@@ -32,26 +43,36 @@ describe('REL-01 release identity', () => {
 it.each([
   'package.json', 'README.md', 'LICENSE', 'CHANGELOG.md', 'RULES.md', 'TESTING.md',
   'dist/cli.js', 'journeys/example.json', 'schema/guardrails.schema.json',
-  'skill/SKILL.md', 'template/AGENTS.md',
+  'skill/SKILL.md', 'template/AGENTS.md', requiredTemplate,
 ])('REL-02 allows packed file %s', path => {
-  expect(packFiles([{ path }])).toEqual([]);
+  expect(packFiles([{ path }, { path: requiredTemplate }])).toEqual([]);
 });
 
 it.each([
   'src/cli.ts', 'reports/ops-report.md', '.env', '.env.local', 'test/release.test.ts',
   '.github/workflows/release.yml', '.guardrails/baseline.json', 'other.txt',
   'dist/.env.production', 'dist/../src/cli.ts', '/dist/cli.js', 'dist\\cli.js',
+  'src/.env.local', 'template/.env', 'template/.gemini/.env.local',
 ])('REL-02 rejects packed file %s', path => {
-  expect(packFiles([{ path }])).toEqual([`Forbidden packed path: ${path}`]);
+  expect(packFiles([{ path }, { path: requiredTemplate }])).toEqual([`Forbidden packed path: ${path}`]);
+});
+
+it.each([{ files: [] }, { files: ['package.json', 'template/AGENTS.md'] },
+  { files: [{ path: 'template/.gemini/settings.json' }] }])(
+  'REL-02 rejects a pack list missing the required Gemini template $files', ({ files }) => {
+    expect(packFiles(files)).toEqual([`missing required template file: ${requiredTemplate}`]);
+  });
+
+it('REL-02 packs every template required by init', () => {
+  const paths = realPackFiles().map(file => file.path);
+  expect(paths).toEqual(expect.arrayContaining(initTemplateFiles().map(file => `template/${file}`)));
 });
 
 it('REL-02 checks the real package and dry-run tarball', () => {
   const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
-  const output = execFileSync(process.execPath,
-    [process.env.npm_execpath!, 'pack', '--dry-run', '--json'], { encoding: 'utf8' });
-  const files = JSON.parse(output).flatMap((pack: { files: { path: string }[] }) => pack.files);
+  const files = realPackFiles();
   expect(files.map((file: { path: string }) => file.path)).toEqual(expect.arrayContaining([
-    'package.json', 'LICENSE', 'CHANGELOG.md', 'dist/cli.js',
+    'package.json', 'LICENSE', 'CHANGELOG.md', 'dist/cli.js', requiredTemplate,
   ]));
   expect(checkRelease({ version: pkg.version, tag: `v${pkg.version}`,
     changelog: readFileSync('CHANGELOG.md', 'utf8'), files })).toEqual([]);

@@ -19,8 +19,7 @@
     "skill",
     "template",
     "CHANGELOG.md",
-    "LICENSE",
-    "!**/.env*"
+    "LICENSE"
   ],
   "engines": {
     "node": ">=20"
