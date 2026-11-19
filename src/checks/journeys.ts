@@ -96,7 +96,6 @@ export function checkJourneys(ctx: CheckContext, files = listFiles(ctx.cwd)): Ch
     if (warning) x.message += ' It will only warn until a human approves it.';
     v.push(x);
   }
-  // JRN-6 checks bytes as well as hashes; never executes browser code.
   for (const [id, j] of Object.entries(items)) {
     if (j.run === undefined) continue;
     const file = 'e2e/cuj/' + id + '.spec.ts';

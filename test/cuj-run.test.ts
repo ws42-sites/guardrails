@@ -46,7 +46,7 @@ it.each([[true, true, 0, 0], [true, false, 1, 0], [false, true, 1, 1], [false, f
 it('CUJ-10 filters selected IDs and enforced journeys without accidentally running everything', () => {
   const r = site(); scaffoldJourneys(r.dir);
   vi.mocked(runCommand).mockImplementation((command) => {
-    expect(command).toContain('--grep "^(CUJ-CLIENT )"');
+    expect(command).toContain('--grep "(?:^|\\.spec\\.[jt]s(?: \\u203A)? )(CUJ-CLIENT )"');
     r.write({ 'results.json': '{"suites":[{"specs":[{"title":"CUJ-CLIENT contact","ok":true}]}]}' });
     return { code: 0, stdout: '', stderr: '' };
   });

@@ -38,7 +38,6 @@ export async function runJourney(page: PageLike, journey: { id: string; title: s
   let writeError: Error | undefined;
   let failWrite: (error: Error) => void = () => {};
   const blocked = new Promise<never>((_resolve, reject) => { failWrite = reject; });
-  // Observe writes between awaited steps without an unhandled rejection.
   void blocked.catch(() => {});
   const locate = (s: LocatorSpec) => s.text ? page.getByText(s.text) : page.getByRole(s.role as never, { name: s.name! });
   let index = 0;
@@ -51,7 +50,6 @@ export async function runJourney(page: PageLike, journey: { id: string; title: s
         failWrite(writeError);
         await route.abort();
       } else {
-        // Declared mocks are safe even before their DSL step is reached.
         const mock = mocks.find((m) => request.url().includes(m.match));
         if (mock) await route.fulfill({ status: mock.status, contentType: 'application/json', body: '{}' });
         else await route.continue();

@@ -35,9 +35,8 @@ export function runJourneys(cwd: string, cfg: GuardrailsConfig, opts: { baseUrl:
   const resultPath = resolve(cwd, resultsFile);
   mkdirSync(dirname(resultPath), { recursive: true });
   rmSync(resultPath, { force: true });
-  // IDs are validated above before being interpolated into a shell argument.
   const grep = selected.map(([id]) => `${id} `).join('|');
-  const result = runCommand(`npx --no-install playwright test e2e/cuj --config playwright.cuj.config.ts --reporter=list,json --grep "^(${grep})"`, cwd,
+  const result = runCommand(`npx --no-install playwright test e2e/cuj --config playwright.cuj.config.ts --reporter=list,json --grep "(?:^|\\.spec\\.[jt]s(?: \\u203A)? )(${grep})"`, cwd,
     { CUJ_BASE_URL: opts.baseUrl, PLAYWRIGHT_JSON_OUTPUT_NAME: resultPath });
   let results: Map<string, boolean>;
   try { results = e2eResults({ ...cfg, journeys: { ...cfg.journeys, resultsFile } }, cwd); }
