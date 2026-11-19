@@ -182,8 +182,8 @@ function diffChecks(ctx: CheckContext, index: TestIndex, v: Violation[], metrics
 type Json = null | boolean | number | string | Json[] | { [k: string]: Json };
 const MODE_RANK: Record<string, number> = { off: 0, warn: 1, block: 2 };
 /** Keys where a bigger number is looser. Everything else numeric: smaller is looser. */
-const LOOSER_WHEN_BIGGER = /(^|\.)(budget\.T\d|maxFileLines|maxTestsPerId|maxLines\.[^.]+|timeoutMinutes|maxPercent|minLines|minTokens|maxProductLines|propertyTimeLimitMs|cacheHours|runbook\.maxLines)$/;
-const LOOSER_WHEN_LIST_GROWS = /(^|\.)(deps\.allow|docs\.allow|docs\.ignore|runbook\.allowDocs|allowIn|except|fixtures\.devOnly|excludedMutations|mutation\.exclude|cliEntries|testEnvAllow|holdout\.specs)$/;
+const LOOSER_WHEN_BIGGER = /(^|\.)(budget\.T\d|maxFileLines|maxTestsPerId|maxLines\.[^.]+|timeoutMinutes|maxPercent|minLines|minTokens|maxProductLines|propertyTimeLimitMs|cacheHours|runbook\.maxLines|testSuite\.maxLines)$/;
+const LOOSER_WHEN_LIST_GROWS = /(^|\.)(deps\.allow|docs\.allow|docs\.ignore|runbook\.allowDocs|allowIn|except|fixtures\.devOnly|excludedMutations|mutation\.exclude|cliEntries|testEnvAllow|holdout\.specs|testSuite\.exclude)$/;
 const LOOSER_WHEN_LIST_SHRINKS = /(^|\.)(tiers\.T1|tiers\.T2|forbidden|restrictedStrings|singletons|sourceRoots|tests\.globs|docs\.extensions|docs\.disguise|docs\.pointerFiles|lock\.paths)$/;
 
 export function compareConfigs(before: Json, after: Json, path = ''): string[] {
@@ -220,7 +220,7 @@ export function compareConfigs(before: Json, after: Json, path = ''): string[] {
     }
     for (const k of Object.keys(after)) {
       // Adopting the runbook standard (absent = disabled) can only tighten.
-      if (k in before || path === 'rules' || path.startsWith('journeys.items') || (path === '' && k === 'runbook')) continue;
+      if (k in before || path === 'rules' || path.startsWith('journeys.items') || (path === '' && (k === 'runbook' || k === 'testSuite'))) continue;
       const p = path ? `${path}.${k}` : k;
       const x = after[k];
       if (typeof x === 'boolean') out.push(...compareConfigs(undefined as unknown as Json, x, p));

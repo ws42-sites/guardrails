@@ -6,6 +6,8 @@ import { toJson, toMarkdown, toText } from './report.js';
 import { init, initRunbook } from './init.js';
 import { secretsCheck, smoke } from './runbook-cmds.js';
 import { affectedTests } from './affected.js';
+import { auditSuite, byKind, ratchetSuite, readSuiteBaseline, regressions, suiteMarkdown, toBaseline, writeSuiteBaseline } from './test-suite.js';
+import { shardFiles } from './shard.js';
 import { RULES, ruleInfo } from './rules.js';
 import { loadConfig } from './config.js';
 import { readBaseline, ratchet, writeBaseline } from './baseline.js';
@@ -28,6 +30,8 @@ Commands
   smoke --url <u> [paths]   Read-only GET of each path (default /); fails on a status >= 400. SMOKE_URL overrides --url
   secrets-check --require A,B -- <list cmd>   Fails unless every name appears in the provider's list output (never printed)
   affected [--base ref] [--e2e] [--run "<cmd>"]   Tests affected by the change (dependency graph); --run appends them to <cmd>, all of them when a global file changed
+  check-tests [--update-baseline] [--format text|json|markdown]   Test-suite audit (SUITE-1..6): banned patterns, 300-line cap, fixed sleeps, real clock in asserts, duplicate families, test/product ratio. Exit 1 on regressions vs the baseline
+  shard --shard i/n [--e2e] [--glob g] [--run "<cmd>"]   Test files for shard i of n, balanced by size; --run appends them to <cmd>
   init runbook         Scaffold RUNBOOK.md, stub deploy/deploy:preview/rollback/smoke/secrets:check scripts, enable RUN-1..4
   check                Run all checks. Exit 1 on blocking findings.
   report               Run checks and print a report (--format text|json|markdown)
@@ -52,7 +56,7 @@ Options
   --fails-on-base      Also run TEST-11 (new/changed tests must fail on base); needs --base
   --specs <IDs>        Spec IDs this task implements (SCOPE-1; default $GUARDRAILS_SPECS)
   --no-knip            Skip ARCH-3 reachability
-  --only <groups>      Comma list: docs,runbook,ci,setup,tests,lint,arch,gaming,flags,scope,journeys,failbase,clock,mutation
+  --only <groups>      Comma list: docs,runbook,ci,suite,setup,tests,lint,arch,gaming,flags,scope,journeys,failbase,clock,mutation
   --format <f>         text (default) | json | markdown
   --cwd <dir>          Project root (default: current directory)
   --owner <@handle>    init: CODEOWNERS owner
@@ -69,7 +73,7 @@ async function main(): Promise<number> {
       owner: { type: 'string' }, force: { type: 'boolean' }, verbose: { type: 'boolean' }, help: { type: 'boolean', short: 'h' },
       lines: { type: 'string' }, file: { type: 'string' }, mutate: { type: 'string' },
       'fails-on-base': { type: 'boolean' }, specs: { type: 'string' }, agent: { type: 'string' }, dir: { type: 'string' },
-      preset: { type: 'string' }, by: { type: 'string' }, 'dry-run': { type: 'boolean' }, url: { type: 'string' }, require: { type: 'string' }, e2e: { type: 'boolean' }, run: { type: 'string' },
+      preset: { type: 'string' }, by: { type: 'string' }, 'dry-run': { type: 'boolean' }, url: { type: 'string' }, require: { type: 'string' }, e2e: { type: 'boolean' }, run: { type: 'string' }, 'update-baseline': { type: 'boolean' }, shard: { type: 'string' }, glob: { type: 'string' },
     },
   });
   const [cmd, arg, ...rest] = positionals;
@@ -90,6 +94,32 @@ async function main(): Promise<number> {
       // Stream the runner's output: suites can print more than a pipe flushes before exit.
       const r = spawnSync(`${values.run} ${list.map((f) => JSON.stringify(f)).join(' ')}`, { cwd, shell: true, stdio: 'inherit' });
       return r.status ?? 1;
+    }
+    case 'check-tests': {
+      const cfg = loadConfig(cwd);
+      const ts = cfg.testSuite;
+      const audit = auditSuite(cwd, cfg, listFiles(cwd));
+      const old = readSuiteBaseline(cwd, ts.baselineFile);
+      if (values['update-baseline']) {
+        const cur = toBaseline(audit, ts.maxLines);
+        const next = old && !values.force ? ratchetSuite(old, cur) : cur;
+        writeSuiteBaseline(cwd, ts.baselineFile, next);
+        console.log(`${ts.baselineFile}: ${Object.entries(next.byKind).map(([k, n]) => `${k} ${n}`).join(', ')}; ratio ${next.totals.ratio}${old && !values.force ? ' (ratcheted)' : ' [recorded]'}`);
+        return 0;
+      }
+      const regs = regressions(audit, old);
+      if (values.format === 'json') console.log(JSON.stringify({ totals: audit.totals, byKind: byKind(audit), regressions: regs, packages: audit.packages, biggest: audit.biggest, families: audit.families, findings: audit.findings }, null, 2));
+      else process.stdout.write(suiteMarkdown(audit, regs, !!old));
+      return regs.length ? 1 : 0;
+    }
+    case 'shard': {
+      const cfg = loadConfig(cwd);
+      const [i, n] = (values.shard ?? process.env.GUARDRAILS_SHARD ?? '1/1').split('/').map(Number);
+      const list = shardFiles(cwd, cfg, listFiles(cwd), i, n, { e2e: values.e2e, globs: values.glob?.split(',') });
+      console.error(`shard ${i}/${n}: ${list.length} test file(s)`);
+      if (!values.run) { for (const f of list) console.log(f); return 0; }
+      if (!list.length) return 0;
+      return spawnSync(`${values.run} ${list.map((f) => JSON.stringify(f)).join(' ')}`, { cwd, shell: true, stdio: 'inherit' }).status ?? 1;
     }
     case 'smoke': {
       const url = process.env.SMOKE_URL || values.url;

@@ -29,3 +29,6 @@ jobs:
         env:
           GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
         run: node dist/cli.js check ${{ github.event_name == 'pull_request' && format('--base origin/{0} --fails-on-base', github.base_ref) || '--clock-shift' }}
+      - name: test-suite report
+        if: always()
+        run: node dist/cli.js check-tests >> "$GITHUB_STEP_SUMMARY" || true

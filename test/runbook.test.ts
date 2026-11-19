@@ -46,7 +46,7 @@ describe('RUN-02 deploy workflows call npm run deploy then smoke; one runbook', 
 describe('RUN-03 init runbook scaffolds without clobbering', () => {
   it('writes the template, stubs only missing scripts, enables the rules, and the result needs wiring', () => {
     const r = repo({ 'package.json': pkg({ deploy: 'wrangler deploy' }) }, BASE_CONFIG);
-    expect(initRunbook({ cwd: r.dir }).written).toEqual(['RUNBOOK.md', 'package.json', 'guardrails.config.json']);
+    expect(initRunbook({ cwd: r.dir }).written).toEqual(['RUNBOOK.md', 'package.json', 'guardrails.config.json', 'TESTING.md', '.guardrails/test-suite-baseline.json']);
     const scripts = JSON.parse(readFileSync(join(r.dir, 'package.json'), 'utf8')).scripts;
     expect([scripts.deploy, scripts.smoke]).toEqual(['wrangler deploy', expect.stringMatching(/not wired yet.*exit 1$/)]);
     expect(checkRunbook(r.ctx()).violations).toEqual([]);

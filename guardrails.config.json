@@ -205,7 +205,7 @@
       },
       "RUN-03": {
         "tier": "T2",
-        "behaviour": "init runbook writes the template, stubs only missing standard scripts and enables runbook without overwriting"
+        "behaviour": "init runbook writes the template, stubs only missing standard scripts, adds the TESTING.md section and suite baseline, and enables runbook, ci and testSuite without overwriting"
       },
       "RUN-04": {
         "tier": "T2",
@@ -218,6 +218,18 @@
       "CI-02": {
         "tier": "T2",
         "behaviour": "guardrails affected selects tests whose import graph reaches, or whose source names, a changed file; global files select all"
+      },
+      "SUITE-01": {
+        "tier": "T2",
+        "behaviour": "check-tests finds banned patterns, oversize files, fixed sleeps, real clock in assertions and copy-paste bodies, and blocks only counts above the baseline (ratchets down)"
+      },
+      "SUITE-02": {
+        "tier": "T2",
+        "behaviour": "guardrails check blocks suite regressions, a missing baseline, and a baseline that grew vs the base branch"
+      },
+      "SUITE-03": {
+        "tier": "T2",
+        "behaviour": "guardrails shard splits test files into complete, size-balanced shards"
       }
     }
   },
@@ -323,6 +335,9 @@
     ]
   },
   "ci": {
+    "enabled": true
+  },
+  "testSuite": {
     "enabled": true
   }
 }

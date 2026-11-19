@@ -48,6 +48,10 @@ jobs:
           npx guardrails report --format json $ARGS > guardrails-report.json || true
           npx guardrails report --format markdown $ARGS >> "$GITHUB_STEP_SUMMARY" || true
           npx guardrails check $ARGS
+      # Test-suite audit for the job summary (the check above already gates SUITE-1..6 when testSuite is enabled).
+      - name: test-suite report
+        if: always()
+        run: npx guardrails check-tests >> "$GITHUB_STEP_SUMMARY" || true
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: guardrails-report, path: '${{ inputs.working-directory }}/guardrails-report.json', retention-days: 14 }

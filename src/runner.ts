@@ -18,6 +18,7 @@ import { checkFlags } from './flags.js';
 import { checkJourneys } from './checks/journeys.js';
 import { checkRunbook } from './checks/runbook.js';
 import { checkCi } from './checks/ci.js';
+import { checkSuite } from './checks/suite.js';
 
 export interface RunOptions {
   cwd: string;
@@ -36,7 +37,7 @@ export interface RunOptions {
 }
 
 /** Rules a baseline may contain. Diff-only rules and runtime rules are never baselined. */
-export const BASELINEABLE = new Set(RULES.filter((r) => !r.diffOnly && !['TEST-6', 'TEST-8', 'TEST-9', 'CFG-1', 'CFG-2', 'FLAG-1', 'HOLD-1', 'SEC-1', 'JRN-5'].includes(r.id)).map((r) => r.id));
+export const BASELINEABLE = new Set(RULES.filter((r) => !r.diffOnly && !['TEST-6', 'TEST-8', 'TEST-9', 'CFG-1', 'CFG-2', 'FLAG-1', 'HOLD-1', 'SEC-1', 'JRN-5', 'SUITE-1', 'SUITE-2', 'SUITE-3', 'SUITE-4', 'SUITE-5', 'SUITE-6'].includes(r.id)).map((r) => r.id));
 
 /** Rules `guardrails baseline` records: baselineable and not switched off in this config. */
 export function baselineRules(overrides: Record<string, Mode>): Set<string> {
@@ -65,6 +66,7 @@ export async function collect(opts: RunOptions): Promise<{ ctx: CheckContext; vi
   if (want('docs')) outs.push(checkDocs(ctx, files));
   if (want('runbook')) outs.push(checkRunbook(ctx, files));
   if (want('ci')) outs.push(checkCi(ctx, files));
+  if (want('suite')) outs.push(checkSuite(ctx, files));
   if (want('setup')) outs.push(checkSetup(ctx, files));
   if (want('tests')) outs.push(checkTests(ctx, files));
   if (want('lint')) outs.push(await checkLint(ctx, files));

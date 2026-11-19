@@ -230,12 +230,23 @@ export const configSchema = z
         /** CI-1. Off until a repo adopts change-scoped CI. */
         enabled: z.boolean().default(false),
         workflows: globs.default(['.github/workflows/*.yml', '.github/workflows/*.yaml']),
-        /** Changes to these select every test (guardrails affected). */
         /** Limit which test files `affected` can select (e.g. the root node:test suite); empty = all test files. */
         tests: globs.default([]),
+        /** Changes to these select every test (guardrails affected). */
         globalFiles: globs.default(['package.json', 'package-lock.json', '**/tsconfig*.json', 'vitest.config.*', 'vitest.setup.*', 'playwright.config.*', '.nvmrc']),
         /** Safety nets that genuinely do not apply, with the reason. */
         na: z.object({ nightly: z.string().min(10).optional(), preDeploy: z.string().min(10).optional() }).strict().default({}),
+      })
+      .strict()
+      .default({}),
+    testSuite: z
+      .object({
+        /** SUITE-1..6 (guardrails check-tests). Off until a repo commits a baseline. */
+        enabled: z.boolean().default(false),
+        maxLines: z.number().int().positive().default(300),
+        baselineFile: z.string().default('.guardrails/test-suite-baseline.json'),
+        /** Paths that are neither tests nor product for the audit (generated code, fixtures). */
+        exclude: globs.default([]),
       })
       .strict()
       .default({}),
