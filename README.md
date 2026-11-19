@@ -28,6 +28,13 @@ npx guardrails check                                  # add --base origin/main f
 ```
 Add `"@ws42/guardrails/vitest-setup"` to Vitest `setupFiles` so every test must assert (TEST-9), and add `.stryker-tmp/` to `.gitignore`. Turn on branch protection with "Require review from Code Owners" so CODEOWNERS actually guards the config, the baseline and CI.
 
+## Generated marketing sites
+Run `npx -y @ws42/guardrails@0.5.0 init --preset site` to scaffold the site config and workflow without agent files. Keep guardrails out of the site's dependencies: Cloudflare Pages uses a plain `npm ci`; the workflow runs the pinned package through `npx`. Set its single `GUARDRAILS_VERSION` pin to the released version containing these commands.
+
+`guardrails check-links dist` checks internal HTML `href`/`src` references against built files, including directory indexes and extensionless pages. Broken links print `file:line -> target` and exit 1; bad usage exits 2. Add `--require-contact` to require a `tel:` or `mailto:` link on `index.html`.
+
+`guardrails smoke --url http://localhost:4321 --sitemap` adds sitemap pages to explicit paths (or `/`). It tries `/sitemap-index.xml`, then `/sitemap.xml`, follows nested indexes, and fails on unavailable or empty sitemaps. The first HTTP(S) location establishes the canonical site origin; other origins are ignored. Canonical paths are fetched on the requested preview origin. `SMOKE_URL` overrides `--url`.
+
 ## CLI
 | Command | What it does |
 |---|---|

@@ -21,7 +21,7 @@ npm run rollback
 
 ## Smoke
 
-Read-only checks against the deployed URL. Set `SMOKE_URL` to test a preview.
+Read-only checks against the deployed URL. Set `SMOKE_URL` to test a preview. For static sites, use `guardrails smoke --url <url> --sitemap` to include sitemap pages, and `guardrails check-links dist` to check built internal links before deployment (`--require-contact` also requires a home-page phone or email link).
 
 ```sh
 npm run smoke

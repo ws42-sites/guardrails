@@ -231,6 +231,26 @@
         "tier": "T2",
         "behaviour": "guardrails shard splits test files into complete, size-balanced shards"
       },
+      "SITE-01": {
+        "tier": "T2",
+        "behaviour": "Site preset validates and scaffolds site files without agent files, preserving existing config unless forced"
+      },
+      "SITE-02": {
+        "tier": "T2",
+        "behaviour": "Built-site link checks report broken internal references and resolve valid file trees"
+      },
+      "SITE-03": {
+        "tier": "T2",
+        "behaviour": "Link checks ignore external and non-file references and optionally require a home-page contact link"
+      },
+      "SITE-04": {
+        "tier": "T2",
+        "behaviour": "Sitemap smoke follows same-origin sitemap paths on the requested preview origin"
+      },
+      "SITE-05": {
+        "tier": "T2",
+        "behaviour": "Site workflow uses one guardrails version pin without a guardrails dependency or CUJ steps"
+      },
       "CUJ-01": {
         "tier": "T1",
         "behaviour": "Journey schema accepts provenance and bounded closed run steps; rejects unsafe values"

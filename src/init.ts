@@ -47,9 +47,12 @@ export function init(opts: InitOptions): InitResult {
   const base = opts.base ?? 'main';
   const written: string[] = [];
   const skipped: string[] = [];
-  for (const f of FILES) {
+  const site = opts.preset === 'site';
+  const files = site ? ['guardrails.config.json', '.github/workflows/guardrails.yml'] : FILES;
+  for (const f of files) {
     const dest = join(opts.cwd, f);
-    let body = readFileSync(join(TEMPLATE, f), 'utf8').replaceAll('{{OWNER}}', owner).replaceAll('{{BASE}}', base);
+    const source = site ? `site/${f === '.github/workflows/guardrails.yml' ? 'workflow.yml' : f}` : f;
+    let body = readFileSync(join(TEMPLATE, source), 'utf8').replaceAll('{{OWNER}}', owner).replaceAll('{{BASE}}', base);
     if (existsSync(dest) && !opts.force) {
       if (!HOOK_FILES().includes(f)) {
         skipped.push(f);
@@ -65,11 +68,12 @@ export function init(opts: InitOptions): InitResult {
         continue;
       }
     }
-    if (f === 'guardrails.config.json') body = `${JSON.stringify(guessConfig(opts.cwd, JSON.parse(body), base), null, 2)}\n`;
+    if (!site && f === 'guardrails.config.json') body = `${JSON.stringify(guessConfig(opts.cwd, JSON.parse(body), base), null, 2)}\n`;
     mkdirSync(dirname(dest), { recursive: true });
     writeFileSync(dest, body);
     written.push(f);
   }
+  if (site) return { written, skipped };
   // Gemini CLI loads .gemini/.env: mark its shell as an agent so human-only commands refuse.
   const envFile = join(opts.cwd, '.gemini/.env');
   const line = readFileSync(join(TEMPLATE, '.gemini/.env'), 'utf8');

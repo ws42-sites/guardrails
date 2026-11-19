@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { resolve } from 'node:path';
+import { checkLinks } from './links.js';
 import { parseArgs } from 'node:util';
 import { spawnSync } from 'node:child_process';
 import { run } from './runner.js';
@@ -29,7 +30,8 @@ const HELP = `guardrails <command> [options]
 
 Commands
   init                 Scaffold guardrails.config.json, AGENTS.md (+ pointers), CODEOWNERS, CI workflow
-  smoke --url <u> [paths]   Read-only GET of each path (default /); fails on a status >= 400. SMOKE_URL overrides --url
+  check-links <dir> [--require-contact]   Check built HTML references; exit 1 for broken links, 2 for bad usage
+  smoke --url <u> [--sitemap] [paths]   Read-only GET of each path (default /); fails on a status >= 400. SMOKE_URL overrides --url
   secrets-check --require A,B -- <list cmd>   Fails unless every name appears in the provider's list output (never printed)
   affected [--base ref] [--e2e] [--run "<cmd>"]   Tests affected by the change (dependency graph); --run appends them to <cmd>, all of them when a global file changed
   check-tests [--update-baseline] [--format text|json|markdown]   Test-suite audit (SUITE-1..6): banned patterns, 300-line cap, fixed sleeps, real clock in asserts, duplicate families, test/product ratio. Exit 1 on regressions vs the baseline
@@ -63,7 +65,7 @@ Options
   --format <f>         text (default) | json | markdown
   --cwd <dir>          Project root (default: current directory)
   --owner <@handle>    init: CODEOWNERS owner
-  --preset <name>      init: add starter journeys as drafts (small-business)
+  --preset <name>      init: site scaffold or starter journey drafts (small-business)
   --force              init: overwrite files; baseline: record all current violations
   --verbose            Show every finding`;
 
@@ -71,6 +73,7 @@ async function main(): Promise<number> {
   const { values, positionals } = parseArgs({
     allowPositionals: true,
     options: {
+      sitemap: { type: 'boolean' }, 'require-contact': { type: 'boolean' },
       base: { type: 'string' }, labels: { type: 'string' }, 'clock-shift': { type: 'boolean' }, mutation: { type: 'boolean' },
       'no-knip': { type: 'boolean' }, only: { type: 'string' }, format: { type: 'string' }, cwd: { type: 'string' },
       owner: { type: 'string' }, force: { type: 'boolean' }, verbose: { type: 'boolean' }, help: { type: 'boolean', short: 'h' },
@@ -124,10 +127,17 @@ async function main(): Promise<number> {
       if (!list.length) return 0;
       return spawnSync(`${values.run} ${list.map((f) => JSON.stringify(f)).join(' ')}`, { cwd, shell: true, stdio: 'inherit' }).status ?? 1;
     }
+    case 'check-links': {
+      if (!arg || rest.length) { console.error('check-links: pass one built directory'); return 2; }
+      const r = checkLinks(resolve(cwd, arg), { requireContact: values['require-contact'] });
+      for (const problem of r.broken) console.log(`${problem.file}:${problem.line} -> ${problem.target}`);
+      if (r.contactMissing) console.log('index.html:1 -> missing tel: or mailto: contact link');
+      return r.ok ? 0 : 1;
+    }
     case 'smoke': {
       const url = process.env.SMOKE_URL || values.url;
       if (!url) { console.error('smoke: pass --url or set SMOKE_URL'); return 2; }
-      const r = await smoke(url, positionals.slice(1));
+      const r = await smoke(url, positionals.slice(1), 15_000, { sitemap: values.sitemap });
       for (const l of r.lines) console.log(l);
       return r.ok ? 0 : 1;
     }
@@ -148,9 +158,9 @@ async function main(): Promise<number> {
         console.log('Next: wire each stub script to the real command (or add runbook.na with a reason), then "guardrails check --only runbook".');
         return 0;
       }
-      const r = init({ cwd, owner: values.owner, base: values.base, force: values.force });
+      const r = init({ cwd, owner: values.owner, base: values.base, force: values.force, preset: values.preset });
       for (const f of r.written) console.log(`wrote   ${f}`);
-      if (values.preset) {
+      if (values.preset && values.preset !== 'site') {
         assertHuman(process.env, 'guardrails init --preset');
         const added = addDrafts(cwd, presetDrafts(values.preset, listFiles(cwd)));
         console.log(`journeys: added ${added.length} unapproved drafts from ${values.preset} (${added.join(', ')}). Edit, link specs, then "guardrails journeys approve <ID>".`);
