@@ -146,7 +146,9 @@ Set `GUARDRAILS_OFFLINE=1` to skip the npm registry lookups.
 | `guardrails affected [--base ref] [--e2e] [--run "<cmd>"]` | Test files affected by the change (dependency graph) |
 | `guardrails check-tests [--update-baseline]` | Audit the test suite (SUITE-1 to 6) |
 | `guardrails shard --shard i/n [--e2e] [--run "<cmd>"]` | Size-balanced test shards for full-suite workflows |
-| `guardrails smoke --url <url> [paths]` | Read-only GET of each path. Fails on a status of 400 or more |
+| `guardrails smoke --url <url> [--sitemap] [paths]` | Read-only GET of each path, plus every page in the sitemap with `--sitemap`. Fails on a status of 400 or more |
+| `guardrails check-links <dir> [--require-contact]` | Check internal `href` and `src` references in built HTML. Exit 1 on broken links |
+| `guardrails init --preset site` | Scaffold a site config and GitHub Actions workflow for a built static site, without agent files |
 | `guardrails secrets-check --require A,B -- <list cmd>` | Fails unless every named secret appears in the provider's list output (names only, never printed) |
 
 ## Journeys (CUJs)
@@ -251,6 +253,14 @@ Notes:
 - Secret scanning (SEC-1) is a gitleaks step in CI, not part of the CLI.
 - Optional hidden holdout tests (HOLD-1) run with `guardrails holdout --dir <checkout>` against tests in a private repository that the building agent cannot read.
 - Change-scoped CI: `guardrails affected --base origin/main --run "npx vitest run"` runs only the tests the change can reach, with the full suite on a nightly schedule.
+
+## Static sites
+
+For a built static site, `npx -y @ws42ca/guardrails init --preset site` writes a site-sized config and a GitHub Actions workflow, and keeps guardrails out of the site's own dependencies. The workflow runs a pinned version through `npx`: set `GUARDRAILS_VERSION` in it to the release you want.
+
+`guardrails check-links dist` checks internal `href` and `src` references against the built files, including directory indexes and extensionless pages. Broken links print `file:line -> target`. Add `--require-contact` to require a `tel:` or `mailto:` link on `index.html`.
+
+`guardrails smoke --url http://localhost:4321 --sitemap` fetches the pages listed in `/sitemap-index.xml` or `/sitemap.xml` (following nested indexes) from a preview server, and fails if the sitemap is missing or empty.
 
 ## Also included
 
