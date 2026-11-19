@@ -1,138 +1,273 @@
-# @ws42/guardrails
+# @ws42ca/guardrails
 
-Config-driven checks that stop coding agents from padding tests, weakening them, sprawling docs or bypassing the architecture. One CLI, one MCP server, one reusable GitHub workflow, one config file per project.
+**Guardrails that stop AI coding agents from padding, weakening or bypassing your tests, docs and architecture.**
 
-- **Rules:** [RULES.md](RULES.md). **Testing policy:** [TESTING.md](TESTING.md). **Agent skill:** [skill/SKILL.md](skill/SKILL.md).
-- **Engines:** dependency-cruiser (import boundaries), knip (production reachability), ESLint with eslint-plugin-vitest (test bans), a TypeScript AST inventory (spec IDs, weakening), jscpd (duplication on new code), the npm registry (hallucinated or risky packages), Stryker (mutation), a clock-shift preload (time bombs), a base-branch worktree (tests must fail without the change), and gitleaks in CI (secrets).
-- **Anti-cheating:** product code that detects tests, exits early, overloads equality or hard-codes expected values blocks [ARCH-7]; agents stop and flag conflicts instead of bending tests [FLAG-1]; hooks lock spec-tagged tests for Claude Code, Gemini CLI and Antigravity; optional hidden holdout tests run only at the gate [HOLD-1].
+[![npm](https://img.shields.io/npm/v/@ws42ca/guardrails)](https://www.npmjs.com/package/@ws42ca/guardrails)
+![license](https://img.shields.io/npm/l/@ws42ca/guardrails)
+
+Coding agents optimise for a green build. Left alone, they delete the failing test, loosen an assertion, special-case the expected value, add a package that does not exist, or write a new doc for every task. `guardrails` is a config-driven checker that blocks those shortcuts in CI and inside the agent's own editor. It ships as one CLI, one MCP server, an agent skill and one config file per project.
+
+Project page: [ws42.ca/guardrails](https://ws42.ca/guardrails)
+
+## What it does
+
+- **Keeps tests honest.** Every test maps to a spec ID, risky specs must have a test, and every test must assert something. Deleting tests, removing `expect`s, loosening matchers or lowering thresholds is blocked on pull requests. New tests must fail on the base branch (so they prove the change). Optional mutation testing with Stryker checks that tests catch real bugs.
+- **Catches test-gaming.** Product code that detects the test runner, exits early, overloads equality or hard-codes expected values is blocked (ARCH-7).
+- **Protects the architecture.** Import boundaries (dependency-cruiser), production reachability (knip), duplication on new code (jscpd), restricted strings and no fixtures in production code.
+- **Checks new dependencies.** New packages must exist on the npm registry, be old enough and have enough downloads, and have no high or critical advisories. This catches hallucinated package names.
+- **Describes the product as journeys.** Critical user journeys (CUJs) are plain-language tasks that humans approve. Approved journeys must have an end-to-end test, and the CLI can generate and run those tests.
+- **Locks the rules.** Agent hooks for Claude Code, Gemini CLI and Antigravity deny edits to the config, baseline, CI files and spec-tagged tests. Agents can stop and flag a conflict instead of bending a test, and the flag blocks merge until a human answers.
+- **Keeps docs short.** One agent instruction file, an allowlist of top-level docs and a length cap.
+- **Standardises runbooks and CI.** A required `RUNBOOK.md` that points at scripts, change-scoped test runs, and a test-suite audit with a baseline that only shrinks.
+
+There are 47 rules. `npx guardrails explain` lists them, and `npx guardrails explain <ID>` says why a rule exists and how to fix a finding. The same catalogue ships in the package as `RULES.md`.
 
 ## Install
 
 ```bash
-npm i -D @ws42/guardrails
+npm i -D @ws42ca/guardrails
 ```
 
-First npm publish pending; until then use the [GitHub Release tarball](https://github.com/ws42-sites/guardrails/releases).
+Requires Node 20 or newer. Vitest, `@stryker-mutator/core` and `@stryker-mutator/vitest-runner` are optional peer dependencies. Install them to use the Vitest assertion setup and mutation testing:
 
-## Releasing
-
-Bump the version and CHANGELOG, merge, then push tag `vX.Y.Z`. The release workflow verifies the release, attaches the tarball to the GitHub Release, and publishes publicly when `NPM_TOKEN` exists. The npm account, `@ws42` organisation and repository secret must be set up before the first npm publication.
-
-## Install in a project
 ```bash
-npm i -D -E @ws42/guardrails @stryker-mutator/core@8.7.1 @stryker-mutator/vitest-runner@8.7.1
-npx guardrails init --owner @JoshBoyer --base main   # config, AGENTS.md + pointers, CODEOWNERS, CI caller, agent hooks + MCP
-# edit guardrails.config.json: tiers, specs.items, architecture rules
-npx guardrails baseline                               # record existing violations (only shrinks from here)
-npx guardrails check                                  # add --base origin/main for diff rules, --clock-shift for TEST-6
+npm i -D -E vitest @stryker-mutator/core@8.7.1 @stryker-mutator/vitest-runner@8.7.1
 ```
-Add `"@ws42/guardrails/vitest-setup"` to Vitest `setupFiles` so every test must assert (TEST-9), and add `.stryker-tmp/` to `.gitignore`. Turn on branch protection with "Require review from Code Owners" so CODEOWNERS actually guards the config, the baseline and CI.
 
-## Generated marketing sites
-Run `npx -y @ws42/guardrails@0.5.0 init --preset site` to scaffold the site config and workflow without agent files. Keep guardrails out of the site's dependencies: Cloudflare Pages uses a plain `npm ci`; the workflow runs the pinned package through `npx`. Set its single `GUARDRAILS_VERSION` pin to the released version containing these commands.
+## Quick start
 
-`guardrails check-links dist` checks internal HTML `href`/`src` references against built files, including directory indexes and extensionless pages. Broken links print `file:line -> target` and exit 1; bad usage exits 2. Add `--require-contact` to require a `tel:` or `mailto:` link on `index.html`.
+```bash
+npx guardrails init --owner @your-github-handle --base main
+```
 
-`guardrails smoke --url http://localhost:4321 --sitemap` adds sitemap pages to explicit paths (or `/`). It tries `/sitemap-index.xml`, then `/sitemap.xml`, follows nested indexes, and fails on unavailable or empty sitemaps. The first HTTP(S) location establishes the canonical site origin; other origins are ignored. Canonical paths are fetched on the requested preview origin. `SMOKE_URL` overrides `--url`.
+`init` writes `guardrails.config.json`, `AGENTS.md` (the single source of truth for agent instructions), one-line `CLAUDE.md` and `GEMINI.md` pointers, `.github/CODEOWNERS`, a starter GitHub Actions workflow, and the agent hook and MCP files for Claude Code, Gemini CLI and Antigravity. It never overwrites an existing file unless you pass `--force`.
+
+Then:
+
+```bash
+# 1. Describe your behaviours and layers in guardrails.config.json (specs, tiers, architecture).
+# 2. Record today's violations. The baseline can only shrink from here.
+npx guardrails baseline
+
+# 3. Run the checks. Exit code 1 means a blocking finding.
+npx guardrails check
+
+# On a branch, also run the diff rules (no test weakening, new tests fail on base, new dependencies):
+npx guardrails check --base origin/main --fails-on-base
+```
+
+To make every test assert something (TEST-9), add the setup file to Vitest:
+
+```ts
+// vitest.config.ts
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  test: { setupFiles: ['@ws42ca/guardrails/vitest-setup'] },
+});
+```
+
+Add `.stryker-tmp/` to `.gitignore` if you use mutation testing. Turn on branch protection with "Require review from Code Owners" so CODEOWNERS actually protects the config, the baseline and CI.
+
+## Configuration
+
+Everything lives in one `guardrails.config.json`. Unknown keys are an error (CFG-1), so a typo cannot silently turn a rule off. Add the schema for editor completion:
+
+```json
+{
+  "$schema": "./node_modules/@ws42ca/guardrails/schema/guardrails.schema.json",
+  "version": 1,
+  "baseBranch": "main",
+  "sourceRoots": ["src"],
+  "tiers": {
+    "T1": ["src/payments/**"],
+    "T2": ["src/lib/**"],
+    "T3": ["src/**"]
+  },
+  "specs": {
+    "items": {
+      "ORDER-01": { "tier": "T1", "behaviour": "A paid order sends a receipt email" },
+      "ORDER-02": { "tier": "T2", "behaviour": "An expired cart is emptied" }
+    }
+  },
+  "architecture": {
+    "entries": ["src/main.ts"],
+    "forbidden": [
+      { "name": "ui-not-db", "from": ["src/ui/**"], "to": ["src/db/**"], "message": "Go through the service layer" }
+    ]
+  },
+  "deps": { "allow": [] },
+  "rules": {}
+}
+```
+
+- **`specs.items`** are the promised behaviours. Test titles start with the ID, for example `it('ORDER-01 sends a receipt', ...)`. Tiers decide how strict the checks are: T1 specs without a test block, T2 gaps warn.
+- **`tiers`** map paths to T1, T2 or T3. They also drive the test budget and which files are mutation-tested.
+- **`architecture`** declares entry points, forbidden imports, singletons and restricted strings.
+- **`rules`** overrides the default mode of a rule. Lowering a mode counts as weakening, so it needs approval on a pull request.
+- **`journeys`, `runbook`, `ci`, `testSuite`, `docs`, `duplication`, `mutation`, `scope`, `lock`, `holdout`** configure the other checks. The schema file documents every option.
+
+Pull request labels come from the `GUARDRAILS_LABELS` environment variable (comma separated) or `--labels`. Only code owners should be able to add them:
+
+| Label | Effect |
+|---|---|
+| `tests-removed-approved` | Allows deleting tests that exist on the base branch |
+| `guardrails:rebaseline` | Allows the baseline to grow |
+| `guardrails:config-approved` | Allows loosening the config |
+| `allow-characterization` | Allows new tests that already pass on base |
+| `flags-resolved` | Open flags stop blocking |
+
+Set `GUARDRAILS_OFFLINE=1` to skip the npm registry lookups.
 
 ## CLI
+
 | Command | What it does |
 |---|---|
-| `guardrails init` | Scaffold `guardrails.config.json` (tiers guessed), `AGENTS.md`, one-line `GEMINI.md`/`CLAUDE.md`, `.github/CODEOWNERS`, and a workflow that calls the reusable one |
-| `guardrails check [--base ref] [--clock-shift] [--mutation]` | Run the checks. Exit 1 on blocking findings |
-| `guardrails report --format text\|json\|markdown` | Same checks, printed to stdout. Markdown is for PR comments and job summaries |
-| `guardrails baseline [--force]` | Write or ratchet `.guardrails/baseline.json` |
-| `guardrails specs`, `explain <ID>`, `validate-test <ID>` | Spec matrix, rule help, and a pre-flight check for a new test |
-| `guardrails check --base ref --fails-on-base` | Also run TEST-11: new/changed tests must fail on base and pass on head |
-| `guardrails flag <ID> "<reason>" [--file f]` | Stop-and-flag: record a spec/test conflict in `.guardrails/flags.json` (blocks merge, FLAG-1) |
-| `guardrails mutants [--base ref]` | Recompute surviving mutants for changed files (JSON) |
-| `guardrails hook-guard --agent claude\|gemini\|antigravity` | Agent hook: reads the tool call on stdin, denies edits to locked files |
+| `guardrails init [--owner @handle] [--base main] [--force]` | Scaffold config, agent files, CODEOWNERS, CI workflow and hooks |
+| `guardrails check [--base ref] [--fails-on-base] [--clock-shift] [--mutation] [--only groups]` | Run the checks. Exit 1 on blocking findings |
+| `guardrails report --format text\|json\|markdown` | The same checks, printed. Markdown suits PR comments and job summaries |
+| `guardrails baseline [--force]` | Write or ratchet `.guardrails/baseline.json` (it only shrinks) |
+| `guardrails specs` | Print the spec matrix: ID, tier and test count |
+| `guardrails explain [ID]` | List the rules, or explain one |
+| `guardrails validate-test <ID> [--file f] [--lines n]` | Pre-flight check before writing a test |
+| `guardrails flag <ID> "<reason>" [--file f]` | Stop and flag a spec/test conflict for a human (blocks merge, FLAG-1) |
+| `guardrails mutants [--base ref]` | List surviving mutants for changed files (JSON) |
+| `guardrails hook-guard --agent claude\|gemini\|antigravity` | Agent hook: reads a tool call on stdin, denies edits to locked files |
 | `guardrails holdout --dir <checkout>` | Run hidden holdout tests (HOLD-1) |
-| `guardrails journeys list\|draft\|approve <ID>` | Journey coverage matrix; draft 5-10 unapproved journeys from docs, routes and mocks (Gemini if `GEMINI_API_KEY`, else OpenAI if `OPENAI_API_KEY`, else a route heuristic; `--dry-run`); approve (humans only) |
-| `guardrails init --preset small-business` | Add starter journeys (services, contact form, book/call, trust, mobile, location/hours; menu/order/gallery when present) as drafts |
-| `guardrails init runbook` | Write the standard `RUNBOOK.md` and stub `deploy`, `deploy:preview`, `rollback`, `smoke`, `secrets:check` scripts (never overwrites), and turn on RUN-1..4 |
+| `guardrails journeys list` | Journey coverage matrix: journey, specs, tests |
+| `guardrails journeys draft [--dry-run]` | Draft 5 to 10 unapproved journeys from your docs, routes and mocks |
+| `guardrails journeys approve <ID> [--by name]` | Approve a journey (humans only) |
+| `guardrails journeys import <file.json>` | Import journeys from a trusted producer (never approves them) |
+| `guardrails journeys generate-tests [--out dir] [--check]` | Generate or verify Playwright tests from journeys |
+| `guardrails journeys scaffold` | Create the missing Playwright journey config |
+| `guardrails journeys run --base-url <url> [--ids A,B] [--only-enforced]` | Run the journeys against a running site |
+| `guardrails init --preset small-business` | Add starter journeys as unapproved drafts |
+| `guardrails init runbook` | Write `RUNBOOK.md` and stub `deploy`, `deploy:preview`, `rollback`, `smoke` and `secrets:check` scripts |
+| `guardrails affected [--base ref] [--e2e] [--run "<cmd>"]` | Test files affected by the change (dependency graph) |
+| `guardrails check-tests [--update-baseline]` | Audit the test suite (SUITE-1 to 6) |
+| `guardrails shard --shard i/n [--e2e] [--run "<cmd>"]` | Size-balanced test shards for full-suite workflows |
+| `guardrails smoke --url <url> [--sitemap] [paths]` | Read-only GET of each path, plus every page in the sitemap with `--sitemap`. Fails on a status of 400 or more |
+| `guardrails check-links <dir> [--require-contact]` | Check internal `href` and `src` references in built HTML. Exit 1 on broken links |
+| `guardrails init --preset site` | Scaffold a site config and GitHub Actions workflow for a built static site, without agent files |
+| `guardrails secrets-check --require A,B -- <list cmd>` | Fails unless every named secret appears in the provider's list output (names only, never printed) |
 
-PR labels come from `$GUARDRAILS_LABELS` (the workflow sets it): `tests-removed-approved` (delete base tests), `guardrails:rebaseline` (baseline may grow), `guardrails:config-approved` (config loosening), `allow-characterization` (new tests may pass on base), `flags-resolved` (open flags stop blocking). Only code owners should add them.
+## Journeys (CUJs)
 
-`GUARDRAILS_OFFLINE=1` skips the npm registry lookups (ARCH-4 then reports a metric instead). Results are cached for `deps.registry.cacheHours` in `node_modules/.cache/guardrails/`.
+A critical user journey is a short, plain-language task a real visitor does: "Visitor sends an enquiry through the contact form and sees a confirmation". Journeys give the checks something other than the code to hold agents to. Unit tests can all pass while the form is broken.
 
-## Runbook standard (RUN-1..4)
-Every repo ships one top-level `RUNBOOK.md` with the sections Deploy, Rollback, Smoke, Secrets rotation, Incident first steps (in that order), each pointing at an `npm run` script, never a click-path. The five script names are the same everywhere; one that genuinely does not apply goes in `runbook.na` with a reason. Deploy workflows call `npm run deploy` (no raw `wrangler`/`cdk`/... commands) and then `npm run smoke`. Other runbook/deploy docs are flagged unless listed in `runbook.allowDocs`. Off until `runbook.enabled` (set by `init runbook`). Shared helpers keep the scripts the same shape everywhere: `guardrails smoke --url <prod> / /path` (read-only GETs, `SMOKE_URL` points it at a preview) and `guardrails secrets-check --require A,B -- <provider list command>` (checks names only, never prints the listing).
-
-DOC-1 (report-only) allows only top-level `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `README.md`, `ARCHITECTURE.md`, `TESTING.md`, `RUNBOOK.md` by default; markdown loaded at runtime (skills, prompts) goes in `docs.runtime` globs.
-
-## Change-scoped CI (CI-1, warn)
-PRs run only the tests the change can affect; the full suite is the safety net. Standard scripts: `test:changed` (PRs) and `test:full` (nightly cron and `predeploy`/`predeploy:preview`, which npm runs before `deploy`/`deploy:preview`). `guardrails affected [--base ref] [--e2e] [--run "<cmd>"]` picks test files whose import graph (dependency-cruiser) reaches a changed file or whose source names one (files read by path), limited to `ci.tests` globs when set, plus e2e files for journeys whose routes or spec paths changed; lockfile, package.json and test-config changes select everything. Use it where the runner has no selector of its own (node:test), or `vitest --changed`, or the repo's own selector. CI-1 warns when a PR workflow runs the full suite unguarded, when no scheduled workflow runs it, or when a deploy script has no full-suite `pre` script (`ci.na` records a reason). Mutation stays diff-only. The reusable workflow now runs the clock-shift rerun (a full-suite run) on main and nightly only.
-
-## Test-suite health (SUITE-1..6)
-`guardrails check-tests` audits the suite. It is ported from nexus-core's `check-tests.mjs` and made generic:
-- **SUITE-1:** banned patterns: `.only`, unexplained skips, source-text asserts.
-- **SUITE-2:** test files over `testSuite.maxLines` (300).
-- **SUITE-3:** fixed sleeps.
-- **SUITE-4:** the real clock inside assertions.
-- **SUITE-5:** copy-paste test bodies, and files that share 3+ titles (duplicate families).
-- **Report:** test/product line ratio per package.
-
-Findings are counted per file. A committed baseline (`.guardrails/test-suite-baseline.json`, written with `--update-baseline`, which only ratchets down) means only regressions block. `guardrails check` gates them once `testSuite.enabled` is set, and SUITE-6 blocks a baseline that grew on a PR. `guardrails init runbook` enables it, writes the baseline and adds the TESTING.md section.
-
-**Sharding (optional):** `guardrails shard --shard i/n [--e2e] [--run "<cmd>"]` splits test files into size-balanced shards for full-suite workflows. Vitest can use `--shard=i/n` instead. `template/.github/workflows/full-suite-sharded.yml` is a cached-install, N-shard workflow.
-
-## Critical User Journeys
-`journeys.items` in the config lists 5-10 plain-language user tasks (`CUJ-<AREA>`, priority P0-P2, steps, specs, routes). Only approved ones gate: approved P0 journeys need exactly one Playwright test under `e2e/` titled with the ID (JRN-1). The report shows a journey → specs → tests matrix with pass/fail when `journeys.resultsFile` points at Playwright's JSON reporter output. Model names: `journeys.draft.geminiModel` (default `gemini-2.5-flash`) and `openaiModel`. API keys are read from the environment only and never written anywhere. `journeys.visual` (JRN-5, per-step screenshot diff) is a stub for VIS-1 v2 and stays off.
-
-## Executable journeys
-
-Journeys with a non-empty declarative `run` can run against local Astro preview, Cloudflare preview or production:
-
-```sh
-guardrails journeys scaffold
-guardrails journeys generate-tests
-guardrails journeys generate-tests --check
-guardrails journeys run --base-url http://localhost:4321
-```
-
-The site needs only `@playwright/test`; generated tests import a generated shared runtime, never guardrails. Tokens resolve from `journeys.dataFile` (default `.guardrails/client-data.json`). Missing or empty tokens fail generation. Files without the generated header are never overwritten. JRN-6 detects hand edits and stale files. Custom `--out` is supported for generation; JRN-6 and the runner use `e2e/cuj`.
-
-Run filters: `--ids CUJ-A,CUJ-B`, `--only-enforced`. Approved or client-provided journeys are **enforced**: their failures exit 1; unapproved inferred/template failures warn and exit 0. Setup/report errors exit 2; other runner exit codes pass through. Results go to `journeys.resultsFile` or `.guardrails/journeys-results.json` and feed the journey matrix. Every step defaults to a 10-second timeout. Unmocked non-GET/HEAD requests are aborted; `mockRoute` fulfils matching requests with its status and JSON `{}`. Scaffold blocks service workers so they cannot bypass routing. Real browser qualification remains an owner-run check.
-
-## Agent hooks (test-file lock)
-`init` writes (or merges into) `.claude/settings.json` (PreToolUse), `.gemini/settings.json` (BeforeTool) and `.agents/hooks.json` (Antigravity PreToolUse). Each calls `guardrails hook-guard`, which denies edits to `lock.paths` (config, `.guardrails/`, CODEOWNERS, workflows, the hook files) and to existing test files that contain a spec ID. New test files are fine. Shell commands that name a locked file together with a write (`sed -i`, `>`, `mv`, `rm`, `git checkout`…) are denied too; `guardrails flag` is always allowed. The hooks also deny `guardrails journeys approve|draft`, `init --preset` and attempts to unset `GUARDRAILS_AGENT` (Claude Code's settings set it via `env`, Gemini CLI via `.gemini/.env`). Shell routes can't be closed completely, so TEST-7 in CI is the backstop. A human unlocks with `GUARDRAILS_ALLOW_TEST_EDITS=1` in the agent's environment.
-
-## MCP server (stdio)
-Tools: `guardrails_list_journeys`, `guardrails_journey_coverage` (read-only; there is no approve tool), `guardrails_check`, `guardrails_report`, `guardrails_explain_rule`, `guardrails_list_specs`, `guardrails_validate_test`, `guardrails_flag` (stop and flag a conflict), `guardrails_mutants` (surviving mutants; the gate recomputes the score). The server checks the directory it is started in, or `GUARDRAILS_CWD`; every tool also takes `cwd`.
-
-Until it's published, replace `npx -y -p @ws42/guardrails guardrails-mcp` with `node /path/to/guardrails/dist/mcp.js`.
-
-**Gemini CLI** (`.gemini/settings.json` in the repo, or `~/.gemini/settings.json`):
 ```json
-{ "mcpServers": { "guardrails": { "command": "npx", "args": ["-y", "-p", "@ws42/guardrails", "guardrails-mcp"], "cwd": "." } } }
+{
+  "journeys": {
+    "items": {
+      "CUJ-CHECKOUT": {
+        "title": "Visitor buys a product and sees a confirmation",
+        "priority": "P0",
+        "steps": ["Open the shop", "Add an item", "Pay", "See the confirmation"],
+        "specs": ["ORDER-01"],
+        "routes": ["/shop"],
+        "run": [
+          { "goto": "/shop" },
+          { "click": { "role": "button", "name": "Add to cart" } },
+          { "expectText": "Order confirmed" }
+        ]
+      }
+    }
+  }
+}
 ```
-**Antigravity** (app, IDE and `agy` CLI: `.agents/mcp_config.json` in the repo, or `~/.gemini/config/mcp_config.json`):
-```json
-{ "mcpServers": { "guardrails": { "command": "npx", "args": ["-y", "-p", "@ws42/guardrails", "guardrails-mcp"], "cwd": "." } } }
-```
-**Claude Code:** run `claude mcp add guardrails --scope project -- npx -y -p @ws42/guardrails guardrails-mcp`, or put the same `mcpServers` block in `.mcp.json`.
 
-Skill: copy `skill/SKILL.md` to `.agents/skills/guardrails/SKILL.md` (Antigravity), `.claude/skills/guardrails/SKILL.md` (Claude Code) or `.gemini/skills/guardrails/SKILL.md` (Gemini CLI).
+- **Humans own them.** Agents can draft journeys, but only a person runs `guardrails journeys approve CUJ-CHECKOUT`. Approved and client-provided journeys are protected from edits (JRN-3).
+- **Approved journeys gate.** An approved P0 journey needs exactly one end-to-end test titled with its ID (JRN-1). Specs that serve no approved journey warn (JRN-2), and new routes and forms that no journey covers are flagged (JRN-4).
+- **Executable.** A journey with a declarative `run` list can be turned into Playwright tests and run against a local preview, a staging site or production:
+
+  ```bash
+  npx guardrails journeys scaffold
+  npx guardrails journeys generate-tests
+  npx guardrails journeys run --base-url http://localhost:4321
+  ```
+
+  The step vocabulary is `goto`, `click`, `fill`, `submit`, `expectText`, `expectUrl`, `expectVisible`, `expectHref`, `expectNoHorizontalScroll`, `viewport` and `mockRoute`. There is no free-form code in a journey. The site only needs `@playwright/test`, and generated tests never import guardrails. Hand edits to generated files and stale files are detected (JRN-6).
+- **Enforced versus advisory.** Failures of approved or client-provided journeys exit 1. Unapproved inferred or template journeys only warn.
+- **Safe by default.** Every step has a 10-second timeout. Requests other than GET and HEAD that are not mocked are aborted, and service workers are blocked so they cannot bypass routing. Values written as `{{token}}` resolve from `.guardrails/client-data.json`.
+- **Drafting.** `journeys draft` uses Gemini if `GEMINI_API_KEY` is set, otherwise OpenAI if `OPENAI_API_KEY` is set, otherwise a route-based heuristic. Keys are read from the environment and never written anywhere.
+
+## Agents: hooks, skill and MCP
+
+`init` writes hook settings for Claude Code (`.claude/settings.json`), Gemini CLI (`.gemini/settings.json`) and Antigravity (`.agents/hooks.json`). Each calls `guardrails hook-guard`, which denies edits to the config, `.guardrails/`, CODEOWNERS, workflows, the hook files and existing test files that carry a spec ID. New test files are fine. Shell commands that name a locked file together with a write are denied too, and `guardrails flag` is always allowed. Shell routes cannot be closed completely, so the CI checks are the backstop. A human unlocks edits with `GUARDRAILS_ALLOW_TEST_EDITS=1`.
+
+The MCP server (`guardrails-mcp`, stdio) exposes `guardrails_list_journeys`, `guardrails_journey_coverage`, `guardrails_check`, `guardrails_report`, `guardrails_explain_rule`, `guardrails_list_specs`, `guardrails_validate_test`, `guardrails_flag` and `guardrails_mutants`. It is read-only for journeys, and there is no approve tool. It checks the directory it starts in, or `GUARDRAILS_CWD`.
+
+```bash
+# Claude Code
+claude mcp add guardrails --scope project -- npx -y -p @ws42ca/guardrails guardrails-mcp
+```
+
+```json
+{ "mcpServers": { "guardrails": { "command": "npx", "args": ["-y", "-p", "@ws42ca/guardrails", "guardrails-mcp"], "cwd": "." } } }
+```
+
+The second block works for Gemini CLI (`.gemini/settings.json`) and Antigravity (`.agents/mcp_config.json`). The agent skill that tells an agent how to work under these rules is in the package at `skill/SKILL.md`. Copy it to `.claude/skills/guardrails/SKILL.md`, `.gemini/skills/guardrails/SKILL.md` or `.agents/skills/guardrails/SKILL.md`.
 
 ## CI
+
+Run the same command CI-side with the base branch, so the diff rules apply. This GitHub Actions job also writes the report to the job summary:
+
 ```yaml
+name: Guardrails
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   guardrails:
-    uses: ws42-sites/guardrails/.github/workflows/guardrails.yml@v0
-    with: { clock-shift: true, mutation: true, fails-on-base: true, secret-scan: true, codeql: false }
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - name: guardrails
+        env:
+          GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+        run: |
+          ARGS=""
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            ARGS="--base origin/${{ github.base_ref }} --fails-on-base"
+          fi
+          npx guardrails report --format markdown $ARGS >> "$GITHUB_STEP_SUMMARY" || true
+          npx guardrails check $ARGS
 ```
-- `check`: every rule in diff mode on PRs (including TEST-11), markdown report in the job summary, JSON uploaded.
-- `mutation`: Stryker on changed files in the mutation tiers, with an incremental cache.
-- `secrets` [SEC-1]: gitleaks (pinned `ghcr.io/gitleaks/gitleaks` image, redacted output) over the PR's commits. Blocks on any finding.
-- `codeql` (optional, `codeql: true`): CodeQL `security-extended`. Needs GitHub Advanced Security on private repos.
-- `holdout` (optional) [HOLD-1]: see below.
 
-### Hidden holdout tests
-1. Create a private repo the building agent can't read, e.g. `ws42-sites/<project>-holdout`, with Vitest test files (`*.test.ts`) that import the project by relative path from `holdout.target` (default `test/holdout/`).
-2. Add `"holdout": { "repo": "ws42-sites/<project>-holdout", "specs": ["REVIEW-02"] }` to the config. Listed specs don't need visible tests (TEST-2), and adding specs to the list counts as loosening.
-3. Create a fine-grained token with read access to that repo only, save it as the secret `GUARDRAILS_HOLDOUT_TOKEN`, and pass `holdout-repo` plus `secrets: { holdout-token: ${{ secrets.GUARDRAILS_HOLDOUT_TOKEN }} }` to the workflow.
-4. Make sure `holdout.target` is inside your Vitest `include` and in `.gitignore`. The job copies the tests in, runs them, reports titles only, and deletes them.
+Notes:
 
-## Develop
-`npm run build && npm test && npm run lint`. `lint` dogfoods `guardrails check` on this repo. After changing `src/rules.ts`, run `node scripts/gen-rules.mjs` to regenerate the RULES.md table.
+- `guardrails check` exits 1 on blocking findings. The checks need full git history (`fetch-depth: 0`) to compare against the base branch.
+- Mutation testing is opt in: add `npx guardrails check --only mutation --mutation --base origin/<base>` as a separate job. It runs Stryker on changed files in the mutation tiers.
+- The clock-shift rerun (`--clock-shift`, TEST-6) runs the whole suite with the clock moved forward. Run it on the main branch and nightly, not on every pull request.
+- Secret scanning (SEC-1) is a gitleaks step in CI, not part of the CLI.
+- Optional hidden holdout tests (HOLD-1) run with `guardrails holdout --dir <checkout>` against tests in a private repository that the building agent cannot read.
+- Change-scoped CI: `guardrails affected --base origin/main --run "npx vitest run"` runs only the tests the change can reach, with the full suite on a nightly schedule.
+
+## Static sites
+
+For a built static site, `npx -y @ws42ca/guardrails init --preset site` writes a site-sized config and a GitHub Actions workflow, and keeps guardrails out of the site's own dependencies. The workflow runs a pinned version through `npx`: set `GUARDRAILS_VERSION` in it to the release you want.
+
+`guardrails check-links dist` checks internal `href` and `src` references against the built files, including directory indexes and extensionless pages. Broken links print `file:line -> target`. Add `--require-contact` to require a `tel:` or `mailto:` link on `index.html`.
+
+`guardrails smoke --url http://localhost:4321 --sitemap` fetches the pages listed in `/sitemap-index.xml` or `/sitemap.xml` (following nested indexes) from a preview server, and fails if the sitemap is missing or empty.
+
+## Also included
+
+- **Runbook standard (RUN-1 to 4).** One top-level `RUNBOOK.md` with Deploy, Rollback, Smoke, Secrets rotation and Incident first steps, each pointing at an `npm run` script. Deploy workflows call the script and then `npm run smoke`.
+- **Test-suite health (SUITE-1 to 6).** `guardrails check-tests` flags `.only`, unexplained skips, tests over 300 lines, fixed sleeps, the real clock in assertions and duplicate test families. A committed baseline means only regressions block.
+- **Change-scoped CI (CI-1).** Warns when a PR workflow runs the full suite unguarded or no scheduled workflow runs it.
+
+## Licence
+
+MIT. Copyright (c) 2026 Josh Boyer / WS42. The full text is in the `LICENSE` file in the package.
