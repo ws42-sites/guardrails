@@ -231,6 +231,26 @@
         "tier": "T2",
         "behaviour": "guardrails shard splits test files into complete, size-balanced shards"
       },
+      "SITE-01": {
+        "tier": "T2",
+        "behaviour": "Site preset validates and scaffolds site files without agent files, preserving existing config unless forced"
+      },
+      "SITE-02": {
+        "tier": "T2",
+        "behaviour": "Built-site link checks report broken internal references and resolve valid file trees"
+      },
+      "SITE-03": {
+        "tier": "T2",
+        "behaviour": "Link checks ignore external and non-file references and optionally require a home-page contact link"
+      },
+      "SITE-04": {
+        "tier": "T2",
+        "behaviour": "Sitemap smoke follows same-origin sitemap paths on the requested preview origin"
+      },
+      "SITE-05": {
+        "tier": "T2",
+        "behaviour": "Site workflow uses one guardrails version pin without a guardrails dependency or CUJ steps"
+      },
       "CUJ-01": {
         "tier": "T1",
         "behaviour": "Journey schema accepts provenance and bounded closed run steps; rejects unsafe values"
@@ -270,6 +290,18 @@
       "CUJ-10": {
         "tier": "T1",
         "behaviour": "Run journeys with enforcement-aware summaries and scaffold without overwriting"
+      },
+      "REL-01": {
+        "tier": "T1",
+        "behaviour": "Release version equals the supplied v-prefixed tag and CHANGELOG has the version heading"
+      },
+      "REL-02": {
+        "tier": "T1",
+        "behaviour": "Packed files stay inside the allowlist; no reports, tests, src or env files"
+      },
+      "REL-03": {
+        "tier": "T1",
+        "behaviour": "Release workflow only publishes behind an NPM_TOKEN guard and only on v* tags"
       }
     }
   },
@@ -349,7 +381,8 @@
       "TESTING.md",
       "RULES.md",
       "skill/SKILL.md",
-      "template/**"
+      "template/**",
+      "CHANGELOG.md"
     ],
     "requiredLinks": {
       "AGENTS.md": [
@@ -366,9 +399,9 @@
   "runbook": {
     "enabled": true,
     "na": {
-      "deploy": "Library, not a hosted service: consumers vendor an npm pack tarball under tools/guardrails.",
+      "deploy": "Library released by .github/workflows/release.yml on a v* tag; npm publication requires NPM_TOKEN.",
       "deploy:preview": "No hosted environment; a PR branch build is the preview.",
-      "rollback": "Consumers pin the vendored tarball; roll back by re-vendoring the previous tarball in that repo.",
+      "rollback": "Pin the previous version released by .github/workflows/release.yml on a v* tag; npm unpublish only inside 72 hours.",
       "secrets:check": "No runtime secrets; the optional journeys draft reads GEMINI/OPENAI keys from the caller environment."
     },
     "allowDocs": [

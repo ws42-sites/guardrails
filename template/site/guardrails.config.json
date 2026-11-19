@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "baseBranch": "{{BASE}}",
+  "sourceRoots": [
+    "src",
+    "functions"
+  ],
+  "tiers": {
+    "T1": [
+      "functions/api/**"
+    ],
+    "T2": [
+      "src/lib/**"
+    ],
+    "T3": [
+      "src/**"
+    ]
+  },
+  "specs": {
+    "items": {}
+  },
+  "architecture": {
+    "entries": [
+      "src/pages/**/*.astro",
+      "functions/**/*.ts"
+    ],
+    "forbidden": [],
+    "singletons": [],
+    "restrictedStrings": [
+      {
+        "pattern": "fonts\\.googleapis\\.com|fonts\\.gstatic\\.com",
+        "allowIn": [],
+        "message": "Self-host fonts; no Google Fonts calls."
+      }
+    ]
+  },
+  "deps": {
+    "allow": []
+  },
+  "docs": {
+    "allow": [
+      "README.md",
+      "SITE-CHECKLIST.txt"
+    ]
+  },
+  "rules": {},
+  "journeys": {
+    "e2eGlobs": [
+      "e2e/cuj/**/*.spec.ts"
+    ],
+    "resultsFile": "playwright-report/results.json",
+    "routeGlobs": [
+      "src/pages/**",
+      "functions/**"
+    ],
+    "items": {}
+  },
+  "runbook": {
+    "enabled": false
+  },
+  "testSuite": {
+    "enabled": false
+  },
+  "ci": {
+    "enabled": false
+  }
+}

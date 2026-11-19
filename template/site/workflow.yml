@@ -1,0 +1,57 @@
+name: Site guardrails
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  push:
+    branches: [{{BASE}}]
+  workflow_dispatch:
+env:
+  GUARDRAILS_VERSION: '0.5.0'
+permissions:
+  contents: read
+  pull-requests: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Guardrails
+        env:
+          BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || '' }}
+          GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+        run: |
+          ARGS=""; [ -n "$BASE" ] && ARGS="--base $BASE"
+          npx -y @ws42/guardrails@${GUARDRAILS_VERSION} check --only docs,lint,arch,gaming,journeys $ARGS
+      - name: Built links
+        run: npx -y @ws42/guardrails@${GUARDRAILS_VERSION} check-links dist
+      - name: Preview smoke
+        run: |
+          npx astro preview --port 4321 &
+          PREVIEW_PID=$!
+          trap 'kill "$PREVIEW_PID" 2>/dev/null || true' EXIT
+          READY=false
+          for attempt in {1..30}; do
+            if curl --fail --silent http://localhost:4321/ > /dev/null; then READY=true; break; fi
+            sleep 1
+          done
+          if [ "$READY" != true ]; then echo 'Preview did not start'; exit 1; fi
+          npx -y @ws42/guardrails@${GUARDRAILS_VERSION} smoke --url http://localhost:4321 --sitemap
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: gitleaks
+        env:
+          RANGE: ${{ github.event_name == 'pull_request' && format('{0}..{1}', github.event.pull_request.base.sha, github.event.pull_request.head.sha) || '' }}
+        run: |
+          OPTS="--redact --exit-code 1 --no-banner"
+          if [ -n "$RANGE" ]; then OPTS="$OPTS --log-opts=$RANGE"; fi
+          docker run --rm -v "$PWD:/repo" -w /repo ghcr.io/gitleaks/gitleaks:v8.30.1 git $OPTS .
