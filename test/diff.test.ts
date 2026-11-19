@@ -42,6 +42,13 @@ describe('DIFF-02 removing expects or loosening matchers is weakening', () => {
     expect(v.map((x) => [x.rule, x.message.split('.')[0]])).toEqual([['TEST-7', 'threshold lines lowered 80 -> 50'], ['BASE-1', 'baseline grew by 1 entry']]);
     expect(checkTests(r.ctx('main', ['guardrails:rebaseline'])).violations.filter((x) => x.rule === 'BASE-1')).toEqual([]);
   });
+
+  it('lets the adoption PR (no guardrails config on base) record the initial baseline', () => {
+    const r = repo();
+    r.remove('guardrails.config.json').commit();
+    r.write({ 'guardrails.config.json': JSON.stringify(BASE_CONFIG), '.guardrails/baseline.json': '{"entries":[{"rule":"DOC-1","fingerprint":"abc"}]}' });
+    expect(checkTests(r.ctx('main')).violations.filter((x) => x.rule === 'BASE-1')).toEqual([]);
+  });
 });
 
 describe('BUDGET-01 test budget is per tier and warn-only', () => {
@@ -69,5 +76,13 @@ describe('DEPS-01 new dependencies block unless allowlisted', () => {
     const out = await checkArch(r.ctx('main'));
     expect(out.violations.map((v) => [v.rule, v.fingerprint.length, v.message.split(' (')[0]])).toEqual([['ARCH-4', 12, 'adds dependency "left-pad"']]);
     expect(out.metrics).toEqual([{ name: 'deps.added', value: 2, detail: 'ok-lib, left-pad' }, { name: 'deps.registry', value: 'skipped', detail: 'offline: ok-lib, left-pad not checked against npm' }]);
+  });
+
+  it('still gates local and git deps on deps.allow but skips the npm registry for them', async () => {
+    const r = repo({ 'package.json': JSON.stringify({ dependencies: {} }) }, { ...BASE_CONFIG, deps: { allow: ['@me/local'] } }).commit();
+    r.write({ 'package.json': JSON.stringify({ devDependencies: { '@me/local': 'file:vendor/me-local-1.0.0.tgz', 'gh-lib': 'github:me/gh-lib#abc', 'left-pad': '1' } }) });
+    const out = await checkArch(r.ctx('main'));
+    expect(out.violations.map((v) => v.message.split(' (')[0])).toEqual(['adds dependency "gh-lib"', 'adds dependency "left-pad"']);
+    expect(out.metrics).toEqual([{ name: 'deps.added', value: 3, detail: '@me/local, gh-lib, left-pad' }, { name: 'deps.registry', value: 'skipped', detail: 'offline: left-pad not checked against npm' }]);
   });
 });

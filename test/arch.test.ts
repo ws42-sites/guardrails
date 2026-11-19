@@ -19,6 +19,7 @@ describe('ARCH-01 import boundaries come from config (dependency-cruiser)', () =
       'src/pages/a.ts': 'import { impl } from "../store/impl";\nimport { data } from "../fixtures/data";\nexport const a = [impl, data];\n',
       'src/pages/a.test.ts': 'import { impl } from "../store/impl";\nit("CORE-01", () => { expect(impl).toBeTypeOf("function") });\n',
       'src/fixtures/data.ts': 'export const data = 1;\n',
+      'src/fixtures/hero.jpg': 'x = "\\8" // binary, not JS',
       'src/pages/b.ts': 'import { impl } from "@/store/impl";\nexport const b = impl;\n',
       'tsconfig.json': JSON.stringify({ compilerOptions: { baseUrl: '.', paths: { '@/*': ['src/*'] } } }),
     }, cfg);
@@ -46,5 +47,20 @@ describe('ARCH-02 singletons, restricted strings and shipped fixture assets', ()
       ['ARCH-5', 'src/a.ts', 1],
       ['ARCH-6', 'src/c.ts', null],
     ]);
+  });
+});
+
+describe('ARCH-03 production reachability (knip)', () => {
+  it('reports an unreachable module even when a workflow file is YAML that knip cannot load', async () => {
+    const r = repo({
+      'package.json': '{"name":"p","type":"module"}\n',
+      'src/main.ts': 'import { used } from "./used";\nconsole.log(used);\n',
+      'src/used.ts': 'export const used = 1;\n',
+      'src/orphan.ts': 'export const orphan = 2;\n',
+      '.github/workflows/odd.yml': 'name: odd on:\n  push:\n',
+    }, { ...BASE_CONFIG, architecture: { entries: ['src/main.ts'] } }).commit();
+    const out = await checkArch({ ...r.ctx(), options: { clockShift: false, mutation: false, knip: true } });
+    expect((out.metrics ?? []).find((m) => m.name === 'knip')).toBeUndefined();
+    expect(out.violations.filter((v) => v.rule === 'ARCH-3').map((v) => v.file)).toEqual(['src/orphan.ts']);
   });
 });
