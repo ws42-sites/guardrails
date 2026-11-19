@@ -660,10 +660,22 @@
                 "minLength": 1
               },
               "default": [
-                "README.md",
                 "AGENTS.md",
-                "docs/ARCHITECTURE.md"
+                "CLAUDE.md",
+                "GEMINI.md",
+                "README.md",
+                "ARCHITECTURE.md",
+                "TESTING.md",
+                "RUNBOOK.md"
               ]
+            },
+            "runtime": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": []
             },
             "extensions": {
               "type": "array",
@@ -740,6 +752,127 @@
                   "type": "string"
                 }
               },
+              "default": {}
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "runbook": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "file": {
+              "type": "string",
+              "default": "RUNBOOK.md"
+            },
+            "maxLines": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "default": 150
+            },
+            "packageJson": {
+              "type": "string",
+              "default": "package.json"
+            },
+            "na": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "minLength": 10
+              },
+              "propertyNames": {
+                "enum": [
+                  "deploy",
+                  "deploy:preview",
+                  "rollback",
+                  "smoke",
+                  "secrets:check"
+                ]
+              },
+              "default": {}
+            },
+            "workflows": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                ".github/workflows/*.yml",
+                ".github/workflows/*.yaml"
+              ]
+            },
+            "allowDocs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": []
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "ci": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "workflows": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                ".github/workflows/*.yml",
+                ".github/workflows/*.yaml"
+              ]
+            },
+            "tests": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": []
+            },
+            "globalFiles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "package.json",
+                "package-lock.json",
+                "**/tsconfig*.json",
+                "vitest.config.*",
+                "vitest.setup.*",
+                "playwright.config.*",
+                ".nvmrc"
+              ]
+            },
+            "na": {
+              "type": "object",
+              "properties": {
+                "nightly": {
+                  "type": "string",
+                  "minLength": 10
+                },
+                "preDeploy": {
+                  "type": "string",
+                  "minLength": 10
+                }
+              },
+              "additionalProperties": false,
               "default": {}
             }
           },

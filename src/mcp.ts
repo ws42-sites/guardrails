@@ -27,7 +27,7 @@ export function createServer(): McpServer {
     inputSchema: {
       cwd: cwdArg,
       base: z.string().optional().describe('Git ref for diff mode (e.g. origin/main). Enables budget, weakening and new-dependency checks.'),
-      only: z.array(z.enum(['docs', 'setup', 'tests', 'lint', 'arch', 'gaming', 'flags', 'scope', 'journeys', 'failbase', 'clock', 'mutation'])).optional(),
+      only: z.array(z.enum(['docs', 'runbook', 'ci', 'setup', 'tests', 'lint', 'arch', 'gaming', 'flags', 'scope', 'journeys', 'failbase', 'clock', 'mutation'])).optional(),
       clockShift: z.boolean().optional().describe('Also rerun the test suite with the clock shifted (slow).'),
     },
   }, async ({ cwd, base, only, clockShift }) => {

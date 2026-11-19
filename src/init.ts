@@ -75,3 +75,35 @@ export function init(opts: InitOptions): InitResult {
   } else skipped.push('.gemini/.env');
   return { written, skipped };
 }
+
+const STUB = (name: string) => `echo "${name}: not wired yet. Point it at the real command or mark it n/a in guardrails.config.json runbook.na." && exit 1`;
+
+/** guardrails init runbook: RUNBOOK.md template, stub standard scripts, runbook.enabled. Never overwrites. */
+export function initRunbook(opts: { cwd: string; force?: boolean }): InitResult {
+  const written: string[] = [];
+  const skipped: string[] = [];
+  const dest = join(opts.cwd, 'RUNBOOK.md');
+  if (existsSync(dest) && !opts.force) skipped.push('RUNBOOK.md');
+  else { writeFileSync(dest, readFileSync(join(TEMPLATE, 'RUNBOOK.md'), 'utf8')); written.push('RUNBOOK.md'); }
+  const edit = (file: string, fn: (j: Json) => boolean) => {
+    const p = join(opts.cwd, file);
+    if (!existsSync(p)) { skipped.push(file); return; }
+    const j = JSON.parse(readFileSync(p, 'utf8')) as Json;
+    if (fn(j)) { writeFileSync(p, `${JSON.stringify(j, null, 2)}\n`); written.push(file); } else skipped.push(file);
+  };
+  edit('package.json', (pkg) => {
+    const scripts = (pkg.scripts ??= {}) as Record<string, string>;
+    const missing = ['deploy', 'deploy:preview', 'rollback', 'smoke', 'secrets:check', 'test:changed', 'test:full'].filter((s) => !(s in scripts));
+    for (const s of missing) scripts[s] = STUB(s);
+    return missing.length > 0;
+  });
+  edit('guardrails.config.json', (cfg) => {
+    const rb = (cfg.runbook ??= {}) as Json;
+    const ci = (cfg.ci ??= {}) as Json;
+    if (rb.enabled === true && ci.enabled === true) return false;
+    rb.enabled = true;
+    ci.enabled = true;
+    return true;
+  });
+  return { written, skipped };
+}

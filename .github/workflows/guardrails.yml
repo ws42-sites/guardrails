@@ -39,7 +39,8 @@ jobs:
         env:
           GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
           BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || '' }}
-          CLOCK: ${{ inputs.clock-shift && '--clock-shift' || '' }}
+          # The clock-shift rerun is a full-suite run: main and nightly only (CI-1).
+          CLOCK: ${{ inputs.clock-shift && github.event_name != 'pull_request' && '--clock-shift' || '' }}
           FAILBASE: ${{ inputs.fails-on-base && '--fails-on-base' || '' }}
         run: |
           set -o pipefail

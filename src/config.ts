@@ -195,7 +195,9 @@ export const configSchema = z
       .default({}),
     docs: z
       .object({
-        allow: globs.default(['README.md', 'AGENTS.md', 'docs/ARCHITECTURE.md']),
+        allow: globs.default(['AGENTS.md', 'CLAUDE.md', 'GEMINI.md', 'README.md', 'ARCHITECTURE.md', 'TESTING.md', 'RUNBOOK.md']),
+        /** Markdown the app loads at runtime (skills, prompt files). Allowed by DOC-1, exempt from DOC-3. */
+        runtime: globs.default([]),
         extensions: z.array(z.string()).default(['.md', '.mdx', '.txt', '.rst']),
         disguise: globs.default(['**/NOTES*', '**/TODO*', '**/*-plan.*', '**/*_plan.*']),
         ignore: globs.default(['public/**', 'node_modules/**', 'dist/**', '**/LICENSE*', '**/CHANGELOG.md']),
@@ -205,6 +207,35 @@ export const configSchema = z
           .array(z.string())
           .default(['GEMINI.md', 'CLAUDE.md', '.cursorrules', '.windsurfrules', '.github/copilot-instructions.md']),
         requiredLinks: z.record(z.array(z.string())).default({}),
+      })
+      .strict()
+      .default({}),
+    runbook: z
+      .object({
+        /** RUN-1..4. Off until a repo adopts the standard ("guardrails init runbook" turns it on). */
+        enabled: z.boolean().default(false),
+        file: z.string().default('RUNBOOK.md'),
+        maxLines: z.number().int().positive().default(150),
+        packageJson: z.string().default('package.json'),
+        /** Standard scripts that genuinely do not apply, with the reason (RUN-2). */
+        na: z.record(z.enum(['deploy', 'deploy:preview', 'rollback', 'smoke', 'secrets:check']), z.string().min(10)).default({}),
+        workflows: globs.default(['.github/workflows/*.yml', '.github/workflows/*.yaml']),
+        /** Other runbook/deploy docs tolerated by RUN-4 (e.g. legacy docs pending a cleanup). */
+        allowDocs: globs.default([]),
+      })
+      .strict()
+      .default({}),
+    ci: z
+      .object({
+        /** CI-1. Off until a repo adopts change-scoped CI. */
+        enabled: z.boolean().default(false),
+        workflows: globs.default(['.github/workflows/*.yml', '.github/workflows/*.yaml']),
+        /** Changes to these select every test (guardrails affected). */
+        /** Limit which test files `affected` can select (e.g. the root node:test suite); empty = all test files. */
+        tests: globs.default([]),
+        globalFiles: globs.default(['package.json', 'package-lock.json', '**/tsconfig*.json', 'vitest.config.*', 'vitest.setup.*', 'playwright.config.*', '.nvmrc']),
+        /** Safety nets that genuinely do not apply, with the reason. */
+        na: z.object({ nightly: z.string().min(10).optional(), preDeploy: z.string().min(10).optional() }).strict().default({}),
       })
       .strict()
       .default({}),
