@@ -1,7 +1,8 @@
 # Reusable workflow. Call it from a project:
 #   jobs:
 #     guardrails:
-#       uses: ws42-sites/guardrails/.github/workflows/guardrails.yml@v0
+#       uses: ws42-sites/guardrails/.github/workflows/guardrails.yml@v0.5.0
+# The repo is private; cross-repo use needs the repo made accessible or a copy of the workflow.
 name: guardrails
 on:
   workflow_call:
