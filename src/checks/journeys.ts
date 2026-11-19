@@ -1,9 +1,11 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import type { GuardrailsConfig } from '../config.js';
+import { journeySchema, type GuardrailsConfig } from '../config.js';
 import type { CheckContext, CheckOutput, JourneyRow, Metric, Violation } from '../types.js';
 import { diffAgainst, isE2eFile, isProductFile, listFiles, matchesAny, mergeBase, readText, showAt, violation } from '../util.js';
 import { indexTests } from './tests.js';
+
+export const isJourneyEnforced = (journey: { approved?: boolean; provenance?: string }): boolean => journey.approved === true || journey.provenance === 'client-provided';
 
 type Journey = GuardrailsConfig['journeys']['items'][string];
 
@@ -52,7 +54,7 @@ export function journeyMatrix(ctx: CheckContext, files = listFiles(ctx.cwd)): Jo
   return Object.entries(cfg.journeys.items).map(([id, j]) => {
     const tests = e2e.get(id) ?? [];
     const result = results.get(id);
-    const status: JourneyRow['status'] = !j.approved ? 'draft' : !tests.length ? 'missing' : result === undefined ? 'covered' : result ? 'pass' : 'fail';
+    const status: JourneyRow['status'] = !isJourneyEnforced(j) ? (j.provenance ? 'inferred' : 'draft') : !tests.length ? 'missing' : result === undefined ? 'covered' : result ? 'pass' : 'fail';
     return { id, title: j.title, priority: j.priority, approved: j.approved, specs: j.specs.map((s) => ({ id: s, tests: testsFor(s) })), e2e: tests.map((t) => `${t.file}:${t.line}`), status };
   });
 }
@@ -77,21 +79,32 @@ export function checkJourneys(ctx: CheckContext, files = listFiles(ctx.cwd)): Ch
   const items = cfg.journeys.items;
   const v: Violation[] = [];
   const metrics: Metric[] = [];
-  if (!Object.keys(items).length) return { violations: [] };
+  if (!Object.keys(items).length && !ctx.base) return { violations: [] };
   const matrix = journeyMatrix(ctx, files);
   const approved = Object.entries(items).filter(([, j]) => j.approved);
 
   // JRN-1: exactly one e2e test per approved P0/P1 journey.
   for (const row of matrix) {
-    if (!row.approved || row.priority === 'P2' || row.e2e.length === 1) continue;
+    const j = items[row.id];
+    const warning = !isJourneyEnforced(j) && !!j.provenance;
+    if ((!isJourneyEnforced(j) && !warning) || (!warning && row.priority === 'P2') || row.e2e.length === 1) continue;
     const x = violation('JRN-1', row.e2e[0]?.split(':')[0] ?? 'guardrails.config.json',
       row.e2e.length ? `${row.id} has ${row.e2e.length} e2e tests (${row.e2e.join(', ')}); keep exactly one journey test and put variations in steps.` : `${row.id} (${row.priority}) "${row.title}" has no e2e test titled with its ID in ${cfg.journeys.e2eGlobs.join(', ')}.`,
       `${row.id}:${row.e2e.length ? 'many' : 'none'}`);
-    if (row.priority === 'P1') x.maxMode = 'warn';
+    if (row.priority === 'P1' || warning) x.maxMode = 'warn';
+    if (warning) x.message += ' It will only warn until a human approves it.';
     v.push(x);
   }
-  for (const row of matrix.filter((r) => r.status === 'fail'))
-    v.push(violation('JRN-1', row.e2e[0].split(':')[0], `${row.id} e2e test failed in ${cfg.journeys.resultsFile}.`, `${row.id}:fail`));
+  const results = e2eResults(cfg, ctx.cwd);
+  for (const row of matrix) {
+    const j = items[row.id];
+    const warning = !isJourneyEnforced(j) && !!j.provenance;
+    if ((!isJourneyEnforced(j) && !warning) || results.get(row.id) !== false) continue;
+    const x = violation('JRN-1', row.e2e[0]?.split(':')[0] ?? 'guardrails.config.json', `${row.id} e2e test failed in ${cfg.journeys.resultsFile}.`, `${row.id}:fail`);
+    if (warning || row.priority === 'P1') x.maxMode = 'warn';
+    if (warning) x.message += ' It will only warn until a human approves it.';
+    v.push(x);
+  }
 
   // JRN-2: orphan specs (only once at least one journey is approved).
   if (approved.length) {
@@ -104,15 +117,11 @@ export function checkJourneys(ctx: CheckContext, files = listFiles(ctx.cwd)): Ch
     // JRN-3: journeys are human-owned; any change in a PR needs a code owner.
     const before = showAt(ctx.cwd, mergeBase(ctx.cwd, ctx.base), 'guardrails.config.json');
     if (before && !ctx.labels.includes(cfg.labels.configApproved)) {
-      let old: Record<string, Journey> = {};
-      try { old = (JSON.parse(before).journeys?.items ?? {}) as Record<string, Journey>; } catch { /* CFG-1 */ }
-      const head = (JSON.parse(readText(ctx.cwd, 'guardrails.config.json')).journeys?.items ?? {}) as Record<string, Journey>;
-      for (const id of new Set([...Object.keys(old), ...Object.keys(head)])) {
-        const a = old[id];
-        const b = head[id];
-        const what = !a ? 'added' : !b ? 'removed' : !a.approved && b.approved ? 'approved' : JSON.stringify(a) !== JSON.stringify(b) ? 'changed' : null;
-        if (what) v.push(violation('JRN-3', 'guardrails.config.json', `journey ${id} ${what} in this PR. Journeys are human-owned: a code owner adds the "${cfg.labels.configApproved}" label.`, `${id}:${what}`));
-      }
+      let old = {};
+      try { old = JSON.parse(before).journeys ?? {}; } catch { /* CFG-1 */ }
+      const head = JSON.parse(readText(ctx.cwd, 'guardrails.config.json')).journeys ?? {};
+      for (const change of journeyOwnershipChanges(old, head))
+        v.push(violation('JRN-3', 'guardrails.config.json', `${change.message} in this PR. Journeys are human-owned: ${change.reason}; a code owner adds the "${cfg.labels.configApproved}" label.`, change.key));
     }
     // JRN-4: new routes, forms and endpoints need a journey.
     const all = Object.values(items);
@@ -135,7 +144,37 @@ export function checkJourneys(ctx: CheckContext, files = listFiles(ctx.cwd)): Ch
 
   // JRN-5: visual diff per step (VIS-1 v2). Stub.
   if (cfg.journeys.visual.enabled) metrics.push({ name: 'journeys.visual', value: 'not implemented', detail: 'JRN-5 per-step screenshot diff arrives with VIS-1 v2; screenshots are not compared yet' });
-  const gated = matrix.filter((r) => r.approved);
-  metrics.push({ name: 'journeys', value: `${gated.filter((r) => r.e2e.length).length}/${gated.length}`, detail: `approved journeys with an e2e test (${matrix.length - gated.length} drafts)` });
+  const gated = matrix.filter((r) => isJourneyEnforced(items[r.id]));
+  const policy = gated.some((r) => !r.approved) ? 'enforced' : 'approved';
+  metrics.push({ name: 'journeys', value: `${gated.filter((r) => r.e2e.length).length}/${gated.length}`, detail: `${policy} journeys with an e2e test (${matrix.length - gated.length} drafts)` });
   return { violations: v, metrics, journeys: matrix };
+}
+
+type JourneyBlock = { items?: Record<string, unknown>; trustedProducers?: string[]; idPattern?: string; e2eGlobs?: string[] };
+/** Trust comes exclusively from the base; regeneration cannot promote authority. */
+export function journeyOwnershipChanges(base: JourneyBlock, head: JourneyBlock): { key: string; message: string; reason: string }[] {
+  const changes: { key: string; message: string; reason: string }[] = [];
+  for (const key of ['trustedProducers', 'idPattern', 'e2eGlobs'] as const)
+    if (JSON.stringify(base[key]) !== JSON.stringify(head[key])) changes.push({ key, message: `journeys.${key} changed`, reason: 'policy settings always require human approval' });
+  const trusted = (j: Journey) => !!j.source?.by && (base.trustedProducers ?? []).includes(j.source.by);
+  for (const id of new Set([...Object.keys(base.items ?? {}), ...Object.keys(head.items ?? {})])) {
+    const a = base.items?.[id];
+    const b = head.items?.[id];
+    if (JSON.stringify(a) === JSON.stringify(b)) continue;
+    const old = a === undefined ? undefined : journeySchema.safeParse(a);
+    const next = b === undefined ? undefined : journeySchema.safeParse(b);
+    const previous = old?.success ? old.data : undefined;
+    const current = next?.success ? next.data : undefined;
+    const what = a === undefined ? 'added' : b === undefined ? 'removed' : !previous?.approved && current?.approved ? 'approved' : 'changed';
+    const safeNext = current && !current.approved && !current.approvedBy && trusted(current);
+    const addition = a === undefined && safeNext && (b as { provenance?: unknown }).provenance && current.run !== undefined;
+    const regeneration = previous && !isJourneyEnforced(previous) && trusted(previous)
+      && (b === undefined || (safeNext && current.provenance !== 'client-provided'));
+    if (addition || regeneration) continue;
+    const reason = previous && isJourneyEnforced(previous) ? 'approved and client-provided journeys are protected'
+      : current?.approved || current?.approvedBy ? 'producer changes cannot approve journeys'
+      : 'only base-trusted producers may add valid run journeys or regenerate unapproved non-client journeys';
+    changes.push({ key: `${id}:${what}`, message: `journey ${id} ${what}`, reason });
+  }
+  return changes;
 }
