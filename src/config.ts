@@ -166,6 +166,7 @@ export const configSchema = z
         e2eGlobs: globs.default(['e2e/**/*.spec.ts', 'e2e/**/*.test.ts']),
         /** Optional Playwright JSON reporter output, for pass/fail in the coverage matrix. */
         resultsFile: z.string().optional(),
+          dataFile: z.string().default('.guardrails/client-data.json'),
         /** Files whose routes count as new routes/endpoints (JRN-4). */
         routeGlobs: globs.default(['src/pages/**', 'app/**/page.{ts,tsx,js,jsx}', 'pages/**', 'functions/**']),
         draft: z
