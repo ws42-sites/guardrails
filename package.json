@@ -1,7 +1,7 @@
 {
   "name": "@ws42/guardrails",
   "version": "0.5.0",
-  "description": "Config-driven guardrails that stop coding agents from padding, weakening or bypassing tests, docs and architecture.",
+  "description": "Guardrails that stop AI coding agents from padding, weakening or bypassing your tests, docs and architecture. CLI, MCP server, agent hooks and CI checks.",
   "type": "module",
   "license": "MIT",
   "bin": {
@@ -84,19 +84,24 @@
       "optional": true
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ws42-sites/guardrails.git"
-  },
-  "homepage": "https://github.com/ws42-sites/guardrails#readme",
-  "bugs": {
-    "url": "https://github.com/ws42-sites/guardrails/issues"
-  },
+  "homepage": "https://ws42.ca/guardrails",
   "keywords": [
     "guardrails",
     "ai-agents",
+    "coding-agents",
+    "ai-coding",
     "testing",
-    "ci"
+    "test-quality",
+    "mutation-testing",
+    "mcp",
+    "model-context-protocol",
+    "claude-code",
+    "gemini-cli",
+    "cli",
+    "ci",
+    "architecture",
+    "vitest",
+    "playwright"
   ],
   "publishConfig": {
     "access": "public"
