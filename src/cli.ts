@@ -47,6 +47,9 @@ Commands
   baseline             Write/ratchet the baseline (only shrinks; --force records everything current)
   specs                Print the spec matrix (ID, tier, tests)
   explain <RULE>       Explain a rule
+  ledger add|import    Record evaluation evidence (--events file for import)
+  evaluate             Propose rule improvements (--since 7d|ISO, --cache dir)
+  feedback draft       Draft candidate rules (--failures file)
   validate-test <ID>   Check a spec ID before writing a test
   flag <ID> <reason>   Stop and flag a spec/test conflict for a human (--file f). Blocks merge (FLAG-1)
   mutants              Recompute surviving mutants for changed files (--base, --mutate)
@@ -223,6 +226,42 @@ async function main(): Promise<number> {
       const rows = specMatrix(ctx);
       if (values.format === 'json') console.log(JSON.stringify(rows, null, 2));
       else for (const r of rows) console.log(`${r.id.padEnd(14)} ${r.tier}  ${String(r.tests.length).padStart(2)} tests  ${r.behaviour}`);
+      return 0;
+    }
+    case 'ledger': {
+      const { ledgerAdd, ledgerImport } = await import('./evaluate.js');
+      const { readFileSync } = await import('node:fs');
+      const config = loadConfig(cwd);
+      const file = resolve(cwd, config.evaluation.ledgerFile);
+      if (arg === 'import' && values.events) {
+        const entries = ledgerImport(JSON.parse(readFileSync(resolve(cwd, values.events), 'utf8')), config);
+        console.log(JSON.stringify({ added: entries.filter((entry) => ledgerAdd(file, entry)).length }));
+      } else if (arg === 'add') {
+        const entry = { kind: rest[0], pr: Number(values.pr), at: new Date().toISOString(), by: values.by,
+          ...(rest[0] === 'escaped-bug' ? { issue: Number(values.issue), rules: values.rule ? values.rule.split(',') : [] }
+            : { rule: values.rule, label: values.label, reason: values.reason }) };
+        console.log(JSON.stringify({ added: ledgerAdd(file, entry) }));
+      } else throw new Error('Usage: ledger add <kind> --pr N | ledger import --events file');
+      return 0;
+    }
+    case 'evaluate': {
+      const { evaluateCached } = await import('./evaluate.js');
+      const { writeFileSync } = await import('node:fs');
+      const result = evaluateCached(cwd, RULES.map(({ id, mode }) => ({ id, mode })), loadConfig(cwd), { since: values.since, now: new Date(), cache: values.cache });
+      const output = values.format === 'json' ? JSON.stringify(result, null, 2) : result.markdown;
+      if (values.out) writeFileSync(resolve(cwd, values.out), output);
+      else console.log(output);
+      return 0;
+    }
+    case 'feedback': {
+      if (arg !== 'draft') throw new Error('Usage: feedback draft');
+      const { feedbackDraft } = await import('./feedback.js');
+      const { writeFileSync } = await import('node:fs');
+      const config = loadConfig(cwd);
+      const result = feedbackDraft(resolve(cwd, values.failures ?? config.feedback.logFile), config.feedback.minRepeats);
+      const output = values.format === 'json' ? JSON.stringify(result, null, 2) : result.markdown;
+      if (values.out) writeFileSync(resolve(cwd, values.out), output);
+      else console.log(output);
       return 0;
     }
     case 'explain': {
