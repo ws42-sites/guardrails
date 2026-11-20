@@ -96,7 +96,7 @@ describe('GAME-03 checkGaming ARCH-7 boundary, diff and adversarial verification
         'test/helpers/ext-tsx.tsx': `${EXTEND}({});\n`,
         'test/helpers/ext-jsx.jsx': `${EXTEND}({});\n`,
         'src/core/foo.test.bar.test.ts': `${VIMOCK}('./other.helper.js');\n${VIMOCK}('./foo.test.bar.js');\n`,
-        'src/core/widget.spec.ts': `${VIMOCK}(\`./widget\`);\n${VIMOCK}("./different.mjs");\n`,
+        'src/core/widget.spec.ts': `${VIMOCK}(  \`./widget\` );\n${VIMOCK}("./different.mjs");\n`,
         'src/core/alpha.test.tsx': `${VIMOCK}("../core/alpha.cjs");\n`,
       },
       expected: [
@@ -125,7 +125,8 @@ describe('GAME-03 checkGaming ARCH-7 boundary, diff and adversarial verification
   ])('GAME-03 $label', ({ files, expected }) => {
     const out = checkGaming(repo(files).ctx());
     const sortKey = (v: Violation) => `${v.file}:${v.line ?? 0}:${v.fingerprint}`;
-    expect([...out.violations].sort((a, b) => sortKey(a).localeCompare(sortKey(b)))).toEqual(expected);
+    const sorted = [...out.violations].sort((a, b) => (sortKey(a) < sortKey(b) ? -1 : sortKey(a) > sortKey(b) ? 1 : 0));
+    expect({ ...out, violations: sorted }).toEqual({ violations: expected });
   });
 
   it.each<{
@@ -144,7 +145,7 @@ describe('GAME-03 checkGaming ARCH-7 boundary, diff and adversarial verification
           '  public  valueOf() { return 1; }',
           '  private  override  equals: (x: unknown) => boolean = () => true;',
           '  protected  static  valueOf = () => 2;',
-          '  [ Symbol.toPrimitive ] = () => 3;  ',
+          '  [  Symbol.toPrimitive  ] = () => 3;  ',
           '}',
           'export  let  spacedHits :  number  =  0 ;  ',
           'let tightHits:number=0',
@@ -155,7 +156,7 @@ describe('GAME-03 checkGaming ARCH-7 boundary, diff and adversarial verification
         eqV('src/core/eq-cnt.ts', 'valueOf', '  public  valueOf() { return 1; }'),
         eqV('src/core/eq-cnt.ts', 'equals', '  private  override  equals: (x: unknown) => boolean = () => true;'),
         eqV('src/core/eq-cnt.ts', 'valueOf', '  protected  static  valueOf = () => 2;'),
-        eqV('src/core/eq-cnt.ts', '[Symbol.toPrimitive]', '  [ Symbol.toPrimitive ] = () => 3;  '),
+        eqV('src/core/eq-cnt.ts', '[Symbol.toPrimitive]', '  [  Symbol.toPrimitive  ] = () => 3;  '),
         counterV('src/core/eq-cnt.ts', 'spacedHits'),
         counterV('src/core/eq-cnt.ts', 'tightHits'),
         counterV('src/core/eq-cnt.ts', 'spacedVar'),
@@ -252,12 +253,15 @@ describe('GAME-03 checkGaming ARCH-7 boundary, diff and adversarial verification
       `<script>${canary}</script>`,
       `{"__proto__":{"k":"${canary}"}}`,
       `https://u:${canary}@evil.example/hack`,
-      `\\u0000${canary}${'z'.repeat(4096)}`,
+      `\u0000${canary}${'z'.repeat(4096)}`,
     ];
     const benignLines = Array.from({ length: 12 }, (_, idx) => `export const h${idx} = ${JSON.stringify(hostileTokens[nextInt() % hostileTokens.length])};`);
     const r = repo({ 'src/core/adv.ts': `export const init = 1;${eol}` }).commit();
-    const hitLine = '  if (process.env.VITEST) return 0;  ';
-    r.write({ 'src/core/adv.ts': `${[...benignLines, hitLine].join(eol)}${eol}` });
+    const hitLine = `  const secret = '${canary}'; if (process.env.VITEST) return 0;  `;
+    r.write({
+      'src/core/adv.ts': `${[...benignLines, hitLine].join(eol)}${eol}`,
+      'src/core/nul.ts': `export const rawNul = "a\u0000${canary}";${eol}`,
+    });
     const first = checkGaming(r.ctx('main'));
     const second = checkGaming(r.ctx('main'));
     expect(second).toEqual(first);
