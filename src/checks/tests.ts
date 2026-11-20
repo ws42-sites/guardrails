@@ -152,8 +152,11 @@ function diffChecks(ctx: CheckContext, index: TestIndex, v: Violation[], metrics
   for (const [file, tests] of Object.entries(baseTests)) {
     baseCount += tests.length;
     const head = index.byFile[file] ?? [];
+    const nth = new Map<string, number>();
     for (const bt of tests) {
-      const ht = head.find((x) => x.title === bt.title);
+      const n = nth.get(bt.title) ?? 0;
+      nth.set(bt.title, n + 1);
+      const ht = head.filter((x) => x.title === bt.title)[n];
       if (!ht) {
         if (!headTitles.has(bt.title)) deleted.push(`${file}: ${bt.title}`);
         continue;
