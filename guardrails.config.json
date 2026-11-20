@@ -405,14 +405,7 @@
     "tiers": [
       "T1"
     ],
-    "break": 70,
-    "exclude": [
-      "src/checks/clock.ts",
-      "src/checks/lint.ts",
-      "src/checks/arch.ts",
-      "src/checks/failbase.ts",
-      "src/checks/dup.ts"
-    ]
+    "break": 70
   },
   "docs": {
     "allow": [
