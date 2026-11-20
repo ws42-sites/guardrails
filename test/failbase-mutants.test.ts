@@ -29,7 +29,7 @@ describe('FAILBASE-02 checkFailsOnBase, changedTests and titleMatcher', () => {
     ['CORE-01 $1', 'CORE-01 $1', true],
     ['CORE-01 $1', 'CORE-01 x', false],
     ['CORE-01 %s and %d and $x', 'CORE-01 a and 2 and z', true],
-    ['CORE-01 a.b*c+d?e^f$g{1}(h)|[i]\\j', 'CORE-01 a.b*c+d?e^f$g{1}(h)|[i]\\j', true],
+    ['CORE-01 a.b*c+d?e^f$2{1}(h)|[i]\\j', 'CORE-01 a.b*c+d?e^f$2{1}(h)|[i]\\j', true],
     ['CORE-01 a.b', 'CORE-01 axb', false],
     ['CORE-01 a+b', 'CORE-01 aab', false],
     ['CORE-01 a?b', 'CORE-01 b', false],
@@ -47,7 +47,7 @@ describe('FAILBASE-02 checkFailsOnBase, changedTests and titleMatcher', () => {
 
   it('FAILBASE-02 changedTests finds new, body-changed and renamed tests across ts and tsx files', () => {
     const r = initRepo({
-      'src/core/a.test.ts': testFile(['CORE-01 keep', 'expect(1).toBe(1);'], ['CORE-01 edit', 'expect(1).toBe(1);'], ['CORE-01 old', 'expect(2).toBe(2);'], ['CORE-01 drop', 'expect(3).toBe(3);']),
+      'src/core/a.test.ts': testFile(['CORE-01 drop', 'expect(3).toBe(3);'], ['CORE-01 keep', 'expect(1).toBe(1);'], ['CORE-01 edit', 'expect(1).toBe(1);'], ['CORE-01 old', 'expect(2).toBe(2);']),
       'src/core/view.test.tsx': "import { expect, it } from 'vitest';\nit('CORE-01 jsx', () => { const x = <div />; expect(x).toBeDefined(); });\n",
     }, failbaseConfig('node -e ""'));
     r.write({
@@ -87,7 +87,7 @@ describe('FAILBASE-02 checkFailsOnBase, changedTests and titleMatcher', () => {
       'src/core/add.ts': '// BASE\n',
       'src/core/unchanged.test.ts': testFile(['CORE-01 untouched']),
       'src/core/deleted.test.ts': testFile(['CORE-01 deleted']),
-      'test/helpers/deleted.ts': 'export const old = 1;\n',
+      'test/helpers/swap': 'export const old = 1;\n',
     }, failbaseConfig(runner.command));
     gitRun(r.dir, 'checkout', '-b', 'feat');
     gitRun(r.dir, 'checkout', 'main');
@@ -95,7 +95,8 @@ describe('FAILBASE-02 checkFailsOnBase, changedTests and titleMatcher', () => {
     gitRun(r.dir, 'checkout', 'feat');
 
     const headConfig = failbaseConfig(runner.command, { 'CORE-01': { tier: 'T1', behaviour: 'head updated behaviour' } });
-    r.remove('src/core/deleted.test.ts', 'test/helpers/deleted.ts');
+    r.remove('src/core/deleted.test.ts', 'test/helpers/swap');
+    mkdirSync(join(r.dir, 'test/helpers/swap'));
     r.write({
       'guardrails.config.json': JSON.stringify(headConfig),
       'src/core/add.ts': '// HEAD\n',
@@ -133,14 +134,14 @@ describe('FAILBASE-02 checkFailsOnBase, changedTests and titleMatcher', () => {
     expect(out).toEqual({ violations: [], metrics: [{ name: 'failsOnBase', value: '3/3', detail: '3 new/changed tests fail on base as required' }] });
     const [baseRun, headRun] = runner.invocations();
     const tmpDir = dirname(baseRun.cwd);
-    expect([basename(baseRun.cwd), basename(tmpDir).startsWith('guardrails-base-'), realpathSync(dirname(tmpDir))]).toEqual(['base', true, realpathSync(tmpdir())]);
+    expect([basename(baseRun.cwd), basename(tmpDir).startsWith('guardrails-base-'), realpathSync(dirname(tmpDir)), realpathSync(headRun.cwd)]).toEqual(['base', true, realpathSync(tmpdir()), realpathSync(r.dir)]);
     expect([existsSync(tmpDir), worktreeCount(r.dir)]).toEqual([false, 1]);
     expect(baseRun.args[0]).toBe('--reporter=json');
     expect(baseRun.args[1].startsWith('--outputFile=')).toBe(true);
     expect(resolve(baseRun.args[1].slice('--outputFile='.length))).toBe(resolve(join(tmpDir, 'base.json')));
     expect(resolve(headRun.args[1].slice('--outputFile='.length))).toBe(resolve(join(tmpDir, 'head.json')));
     expect(baseRun.args.slice(2)).toEqual(['src/core/add.test.ts', 'src/newdir/sub/extra.test.ts']);
-    expect([baseRun.clockEnv, headRun.clockEnv, baseRun.hasNodeModules, baseRun.configText]).toEqual(['', '', false, JSON.stringify(headConfig)]);
+    expect([baseRun.clockEnv, headRun.clockEnv, baseRun.hasNodeModules, baseRun.hasNodeModulesEntry, baseRun.configText]).toEqual(['', '', false, false, JSON.stringify(headConfig)]);
 
     runner.clearLog();
     mkdirSync(join(r.dir, 'node_modules', 'pkg'), { recursive: true });
@@ -254,10 +255,11 @@ describe('FAILBASE-02 checkFailsOnBase, changedTests and titleMatcher', () => {
 
     runner.clearLog();
     runner.setPlan({ mode: 'invalidJson' });
+    let expectedErr = '';
+    try { JSON.parse('{corrupt-json'); } catch (e) { expectedErr = (e as Error).message.split('\n')[0]; }
     const errOut = checkFailsOnBase(ctx);
     const errRuns = runner.invocations();
-    expect([errOut.violations, errOut.metrics?.length, errOut.metrics?.[0].name, errOut.metrics?.[0].value]).toEqual([[], 1, 'failsOnBase', 'error']);
-    expect([errOut.metrics?.[0].detail?.includes('\n'), (errOut.metrics?.[0].detail?.length ?? 0) > 0]).toEqual([false, true]);
+    expect(errOut).toEqual({ violations: [], metrics: [{ name: 'failsOnBase', value: 'error', detail: expectedErr }] });
     expect([existsSync(dirname(errRuns[0].cwd)), worktreeCount(r.dir)]).toEqual([false, 1]);
   });
 });

@@ -33,6 +33,7 @@ export interface RunnerInvocation {
   args: string[];
   clockEnv: string | undefined;
   hasNodeModules: boolean;
+  hasNodeModulesEntry: boolean;
   nodeModulesMarker: string | null;
   configText: string | null;
 }
@@ -49,7 +50,7 @@ afterEach(() => {
   while (runnerDirs.length) rmSync(runnerDirs.pop() as string, { recursive: true, force: true });
 });
 
-const RUNNER_SOURCE = `import { appendFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
+const RUNNER_SOURCE = `import { appendFileSync, existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const [stateDir, ...args] = process.argv.slice(2);
@@ -66,6 +67,7 @@ appendFileSync(join(stateDir, 'log.jsonl'), JSON.stringify({
   args,
   clockEnv: process.env.GUARDRAILS_CLOCK_SHIFT_YEARS,
   hasNodeModules: existsSync(join(cwd, 'node_modules')),
+  hasNodeModulesEntry: readdirSync(cwd).includes('node_modules'),
   nodeModulesMarker: existsSync(nmMarker) ? readFileSync(nmMarker, 'utf8') : null,
   configText: existsSync(cfgPath) ? readFileSync(cfgPath, 'utf8') : null,
 }) + '\\n');
