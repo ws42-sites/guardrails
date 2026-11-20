@@ -4,7 +4,7 @@ import { parseConfig } from '../src/config.js';
 
 const NEW = 'guardrails:existing-behaviour-tests-approved';
 
-describe('LABEL-01 approval labels follow guardrails:<function>-approved and keep deprecated aliases', () => {
+describe('DIFF-01 approval labels follow guardrails:<function>-approved and keep deprecated aliases', () => {
   let write: { mockRestore(): void; mock: { calls: unknown[][] } };
   beforeEach(() => { write = vi.spyOn(process.stderr, 'write').mockImplementation(() => true) as unknown as typeof write; });
   afterEach(() => { write.mockRestore(); });
@@ -16,19 +16,12 @@ describe('LABEL-01 approval labels follow guardrails:<function>-approved and kee
     ]);
   });
 
-  it('accepts the new label without a warning', () => {
+  it('accepts the new label silently, the old name once with a warning naming the new label, and rejects others', () => {
     expect(hasLabel([NEW], NEW, LEGACY_LABELS.characterization)).toBe(true);
     expect(write).not.toHaveBeenCalled();
-  });
-
-  it('accepts the old name once, warning with the new label', () => {
-    expect(hasLabel(['allow-characterization'], NEW, LEGACY_LABELS.characterization)).toBe(true);
-    expect(hasLabel(['allow-characterization'], NEW, LEGACY_LABELS.characterization)).toBe(true);
+    expect([hasLabel(['allow-characterization'], NEW, LEGACY_LABELS.characterization), hasLabel(['allow-characterization'], NEW, LEGACY_LABELS.characterization)]).toEqual([true, true]);
     expect(write).toHaveBeenCalledTimes(1);
     expect(String(write.mock.calls[0][0])).toContain(`Rename it to "${NEW}"`);
-  });
-
-  it('rejects an unrelated label', () => {
     expect(hasLabel(['other'], NEW, LEGACY_LABELS.characterization)).toBe(false);
   });
 });
