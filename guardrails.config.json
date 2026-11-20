@@ -453,5 +453,113 @@
   },
   "testSuite": {
     "enabled": true
+  },
+  "journeys": {
+    "e2eGlobs": [
+      "test/e2e/**/*.test.ts"
+    ],
+    "items": {
+      "CUJ-INITCHK": {
+        "title": "Developer runs guardrails init in a fresh git repo and the first guardrails check passes",
+        "priority": "P0",
+        "steps": [
+          "Create a fresh git repository on main with package.json and an entry module",
+          "Run guardrails init with a code owner handle and verify scaffolded files without overwriting existing files",
+          "Run guardrails check and verify it exits 0 with zero blocking findings and runbook/CI checks kept off"
+        ],
+        "specs": [
+          "INIT-01",
+          "INIT-02"
+        ],
+        "provenance": "inferred",
+        "source": {
+          "by": "ws42-admin"
+        }
+      },
+      "CUJ-NOWEAKEN": {
+        "title": "Branch that deletes a base test or removes an expect is blocked by check --base main unless labelled",
+        "priority": "P0",
+        "steps": [
+          "Commit spec-tagged base tests on main",
+          "Remove an expect call on a feature branch and verify check --base main blocks with TEST-7",
+          "Delete a base test on the branch and verify check --base main blocks with TEST-7",
+          "Re-run check --base main with GUARDRAILS_LABELS=guardrails:tests-removed-approved and verify the deletion rule passes"
+        ],
+        "specs": [
+          "DIFF-01",
+          "DIFF-02"
+        ],
+        "provenance": "inferred",
+        "source": {
+          "by": "ws42-admin"
+        }
+      },
+      "CUJ-FAILBASE": {
+        "title": "New test that passes on base is blocked by fails-on-base while a test failing on base and passing on head passes",
+        "priority": "P0",
+        "steps": [
+          "Commit buggy product code on main in a repository wired to Vitest",
+          "Add a new test on a branch that already passes on main and verify check --base main --fails-on-base blocks with TEST-11",
+          "Fix the bug and replace the test with one that fails on main and passes on head",
+          "Run check --base main --fails-on-base and verify it exits 0"
+        ],
+        "specs": [
+          "FAILBASE-01"
+        ],
+        "provenance": "inferred",
+        "source": {
+          "by": "ws42-admin"
+        }
+      },
+      "CUJ-FLAG": {
+        "title": "Agent flags a spec conflict with guardrails flag and check blocks until a human empties the flags file",
+        "priority": "P1",
+        "steps": [
+          "Run guardrails flag with a spec ID and conflict reason in a clean repository",
+          "Run guardrails check and verify it exits 1 with FLAG-1",
+          "Empty .guardrails/flags.json as a human resolution and verify guardrails check passes"
+        ],
+        "specs": [
+          "FLAG-01"
+        ],
+        "provenance": "inferred",
+        "source": {
+          "by": "ws42-admin"
+        }
+      },
+      "CUJ-BASELINE": {
+        "title": "guardrails baseline records known violations, shrinks when fixed, and blocks baseline growth against base",
+        "priority": "P1",
+        "steps": [
+          "Run guardrails baseline on a repository with known violations so guardrails check passes",
+          "Fix one violation, re-run guardrails baseline, and verify .guardrails/baseline.json shrinks",
+          "Commit the baselines on main, grow the baselines on a branch, and verify check --base main blocks with BASE-1 and SUITE-6"
+        ],
+        "specs": [
+          "BASE-01",
+          "SUITE-02"
+        ],
+        "provenance": "inferred",
+        "source": {
+          "by": "ws42-admin"
+        }
+      },
+      "CUJ-HOOK": {
+        "title": "guardrails hook-guard --agent claude denies edits to guardrails.config.json and allows them when unlocked",
+        "priority": "P1",
+        "steps": [
+          "Send a Claude tool call editing guardrails.config.json to guardrails hook-guard --agent claude on stdin",
+          "Verify hook-guard exits with code 2 and writes the protection message to stderr",
+          "Re-run with GUARDRAILS_ALLOW_TEST_EDITS=1 and verify hook-guard exits with code 0"
+        ],
+        "specs": [
+          "LOCK-01"
+        ],
+        "provenance": "inferred",
+        "source": {
+          "by": "ws42-admin"
+        }
+      }
+    }
   }
 }
