@@ -19,7 +19,7 @@ it.each([
   ['+++ b/a.ts\n@@ -0 +123,2 @@\n+bad\n+bad', [{ file: 'a.ts', line: 123, message: 'Added line matches reviewer failOn: bad' }, { file: 'a.ts', line: 124, message: 'Added line matches reviewer failOn: bad' }]],
   ['+++ b/a.ts\n@@ -0 +1 @@\n+++ "b/bad.ts"', [{ file: 'a.ts', line: 1, message: 'Added line matches reviewer failOn: ++ "b/bad.ts"' }]],
   ['diff --git a/a b/a\n+++ b/a.ts\n@@ -1 +1 @@\n+++ b/bad.ts\n@@ -8 +9 @@\n+bad', [{ file: 'a.ts', line: 1, message: 'Added line matches reviewer failOn: ++ b/bad.ts' }, { file: 'a.ts', line: 9, message: 'Added line matches reviewer failOn: bad' }]],
-])('REVIEW-01 stub checks only added lines with new-side locations: %s', async (text, findings) => {
+])('REVIEW-01 stub checks only added lines with new-side locations: case %#', async (text, findings) => {
   const provider = createReviewer(config({ stub: { failOn: ['^bad$', 'worse', 'b/bad'] } }).review);
   expect(provider.name).toBe('stub');
   expect(await provider.review({ ...input, diff: { text, truncated: false } })).toEqual({ verdict: findings.length ? 'fail' : 'pass', findings });
