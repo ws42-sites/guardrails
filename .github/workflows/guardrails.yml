@@ -19,11 +19,64 @@ on:
       codeql: { type: boolean, default: false }
       codeql-languages: { type: string, default: 'javascript-typescript' }
       holdout-repo: { type: string, default: '' }
+      label-plan: { type: boolean, default: true }
+      review: { type: boolean, default: false }
+      review-shards: { type: string, default: '["1/2","2/2"]' }
+      provenance: { type: boolean, default: false }
     secrets:
       holdout-token:
         required: false
         description: Read-only token for the private holdout repo (fine-grained, contents:read).
 jobs:
+  labels:
+    if: ${{ inputs.label-plan && github.event_name == 'pull_request' }}
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ inputs.node-version }}', cache: npm }
+      - run: ${{ inputs.install-command }}
+      - name: guardrails labels plan (advisory)
+        env:
+          CLI: ${{ inputs.cli }}
+          GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          BASE_REF: ${{ github.base_ref }}
+        run: $CLI labels plan --base "origin/$BASE_REF" --format markdown >> "$GITHUB_STEP_SUMMARY" || true
+  review:
+    if: ${{ inputs.review && github.event_name == 'pull_request' }}
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(inputs.review-shards) }}
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0, persist-credentials: false }
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ inputs.node-version }}', cache: npm }
+      - run: ${{ inputs.install-command }}
+      - name: guardrails review
+        env:
+          CLI: ${{ inputs.cli }}
+          BASE_REF: ${{ github.base_ref }}
+          SHARD: ${{ matrix.shard }}
+        run: |
+          $CLI report --only tests,gaming --base "origin/$BASE_REF" --format json > guardrails-review-input.json || true
+          $CLI review --base "origin/$BASE_REF" --report guardrails-review-input.json --shard "$SHARD"
   check:
     permissions:
       contents: read
@@ -53,6 +106,21 @@ jobs:
           $CLI report --format json $ARGS > guardrails-report.json || true
           $CLI report --format markdown $ARGS >> "$GITHUB_STEP_SUMMARY" || true
           $CLI check $ARGS
+      - name: guardrails provenance
+        if: ${{ always() && inputs.provenance }}
+        env:
+          CLI: ${{ inputs.cli }}
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          echo '[]' > guardrails-events.json; echo '[]' > guardrails-comments.json
+          if [ -n "$PR" ]; then
+            gh api "repos/$GITHUB_REPOSITORY/issues/$PR/events?per_page=100" > guardrails-events.json 2>/dev/null || echo '[]' > guardrails-events.json
+            gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments?per_page=100" > guardrails-comments.json 2>/dev/null || echo '[]' > guardrails-comments.json
+          fi
+          $CLI provenance record --report guardrails-report.json --head "$HEAD_SHA" --events guardrails-events.json --comments guardrails-comments.json --format markdown >> "$GITHUB_STEP_SUMMARY"
+          $CLI provenance verify --head "$HEAD_SHA" --report guardrails-report.json
       - name: stamp guardrails report
         if: always()
         env:
@@ -132,11 +200,13 @@ jobs:
         if: always()
         with:
           name: guardrails-report-${{ github.sha }}
-          path: '${{ inputs.working-directory }}/guardrails-report-${{ github.sha }}.json'
+          path: |
+            ${{ inputs.working-directory }}/guardrails-report-${{ github.sha }}.json
+            ${{ inputs.working-directory }}/guardrails-provenance.json
           retention-days: 90
           if-no-files-found: warn
   mutation:
-    if: ${{ inputs.mutation && github.event_name == 'pull_request' }}
+    if: ${{ inputs.mutation && (github.event_name == 'pull_request' || (github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000')) }}
     permissions:
       contents: read
       pull-requests: read
@@ -160,9 +230,10 @@ jobs:
         env:
           CLI: ${{ inputs.cli }}
           GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event.before }}
         run: |
-          $CLI report --only mutation --mutation --base origin/${{ github.base_ref }} --format markdown >> "$GITHUB_STEP_SUMMARY" || true
-          $CLI check --only mutation --mutation --base origin/${{ github.base_ref }}
+          $CLI report --only mutation --mutation --base "$BASE" --format markdown >> "$GITHUB_STEP_SUMMARY" || true
+          $CLI check --only mutation --mutation --base "$BASE"
   mutation-full:
     if: ${{ inputs.mutation-full && github.event_name != 'pull_request' }}
     permissions:

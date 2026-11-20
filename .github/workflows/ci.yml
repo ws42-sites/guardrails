@@ -1,6 +1,6 @@
 name: ci
 # PRs run only the tests affected by the change (guardrails affected, CI-1).
-# The full suite, clock-shift rerun and full mutation run on main, nightly and manual dispatch.
+# The full suite and clock-shift rerun run on main, nightly and manual dispatch. Pushes to main mutate only the changed files; the full mutation run is nightly and manual.
 on:
   push:
     branches: [main]
@@ -38,6 +38,8 @@ jobs:
       cli: node dist/cli.js
       clock-shift: true
       mutation: true
-      mutation-full: true
+      mutation-full: ${{ github.event_name != 'push' }}
+      review: true
+      provenance: true
       secret-scan: true
       fails-on-base: true
