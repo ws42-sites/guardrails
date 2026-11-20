@@ -51,7 +51,7 @@ it.each(GROUPS)('FEED-01 runner logs blocking failures for the selected check gr
   expect(off.findings.map((f) => f.rule)).toEqual(RUNTIME.includes(group) ? [] : [...rules]);
 });
 
-it('FEED-01 runner logs every group, passes options through and reports stale baseline entries', async () => {
+it('FEED-01 runner logs every group, passes options through, reports stale baseline entries and a bad config as CFG-1', async () => {
   const r = repo({}, { ...config, baselineFile: 'b.json' });
   writeFileSync(join(r.dir, 'b.json'), JSON.stringify({ version: 1, entries: [{ rule: 'DOC-2', file: 'DOC-2.ts', fingerprint: 'DOC-2' }, { rule: 'DOC-2', file: 'x', fingerprint: 'gone' }] }));
   seen.ctx.length = 0;
@@ -65,10 +65,6 @@ it('FEED-01 runner logs every group, passes options through and reports stale ba
   const plain = seen.ctx[1] as { base: unknown; labels: unknown; options: unknown };
   expect([plain.base, plain.labels, plain.options]).toEqual([null, [], { clockShift: false, mutation: false, knip: true, mutate: undefined, failsOnBase: false, specs: undefined }]);
   expect((await run({ cwd: r.dir, only: ['docs'] })).staleBaseline).toBe(0);
-});
-
-it('FEED-01 runner reports a bad config as CFG-1 without logging failures', async () => {
-  const r = repo({}, config);
   r.write({ 'guardrails.config.json': '{"version":1,"oops":true}' });
   for (const base of [undefined, 'b']) {
     const rep = await run({ cwd: r.dir, base });
@@ -78,7 +74,8 @@ it('FEED-01 runner reports a bad config as CFG-1 without logging failures', asyn
   const off = repo({}, { ...config, feedback: { enabled: false, logFile: 'out/failures.jsonl' } });
   await run({ cwd: off.dir });
   expect(() => logged(off.dir)).toThrow();
-  r.write({ 'guardrails.config.json': JSON.stringify(config) });
+  r.write({ 'guardrails.config.json': JSON.stringify({ ...config, baselineFile: 'b.json' }), 'out/failures.jsonl': '' });
   await run({ cwd: r.dir });
-  expect(logged(r.dir)).toEqual(ALL.filter((rule) => !RUNTIME_RULES.includes(rule)));
+  const fresh = ALL.filter((rule) => !RUNTIME_RULES.includes(rule) && rule !== 'DOC-2');
+  expect(logged(r.dir)).toEqual(fresh);
 });
