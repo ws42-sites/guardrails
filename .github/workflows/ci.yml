@@ -39,6 +39,7 @@ jobs:
       clock-shift: true
       mutation: true
       mutation-full: ${{ github.event_name != 'push' }}
+      mutation-shards: '["1/4","2/4","3/4","4/4"]'
       review: true
       provenance: true
       secret-scan: true

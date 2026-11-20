@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { resolve } from 'node:path';
+import { readFileSync } from 'node:fs';
 import { checkLinks } from './links.js';
 import { parseArgs } from 'node:util';
 import { spawnSync } from 'node:child_process';
@@ -16,7 +17,7 @@ import { readBaseline, ratchet, writeBaseline } from './baseline.js';
 import { collect, baselineRules } from './runner.js';
 import { specMatrix } from './checks/tests.js';
 import { validateTest } from './validate.js';
-import type { CheckContext } from './types.js';
+import type { CheckContext, Report } from './types.js';
 import { addFlag } from './flags.js';
 import { survivingMutants } from './checks/mutation.js';
 import { guard, hookResponse, type Agent } from './hook.js';
@@ -40,7 +41,7 @@ Commands
   shard --shard i/n [--e2e] [--glob g] [--run "<cmd>"]   Test files for shard i of n, balanced by size; --run appends them to <cmd>
   init runbook         Scaffold RUNBOOK.md, stub deploy/deploy:preview/rollback/smoke/secrets:check scripts, enable RUN-1..4
   check                Run all checks. Exit 1 on blocking findings.
-  report               Run checks and print a report (--format text|json|markdown)
+  report               Run checks and print a report (--format text|json|markdown); --report <file> re-renders a saved JSON report without re-running
   baseline             Write/ratchet the baseline (only shrinks; --force records everything current)
   specs                Print the spec matrix (ID, tier, tests)
   explain <RULE>       Explain a rule
@@ -179,7 +180,7 @@ async function main(): Promise<number> {
     }
     case 'check':
     case 'report': {
-      const r = await run(opts);
+      const r: Report = cmd === 'report' && values.report ? JSON.parse(readFileSync(resolve(cwd, values.report), 'utf8')) as Report : await run(opts);
       const fmt = values.format ?? (cmd === 'report' ? 'text' : 'text');
       console.log(fmt === 'json' ? toJson(r) : fmt === 'markdown' ? toMarkdown(r) : toText(r, { verbose: values.verbose }));
       return cmd === 'check' && !r.ok ? 1 : 0;
