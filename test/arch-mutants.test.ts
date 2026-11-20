@@ -1,5 +1,4 @@
-import { readdirSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { mkdirSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { checkArch } from '../src/checks/arch.js';
@@ -14,6 +13,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  vi.unstubAllEnvs();
   vi.useRealTimers();
 });
 
@@ -46,7 +46,7 @@ describe('ARCH-04 checkArch boundary, fixture, singleton, restricted-string, dep
     {
       label: 'custom architecture.tsConfig without tsconfig.json',
       files: {
-        'tsconfig.app.json': JSON.stringify({ compilerOptions: { baseUrl: '.', paths: { '#sec/*': ['src/secret/*'] } } }),
+        'tsconfig.app.json': JSON.stringify({ compilerOptions: { baseUrl: 'src', paths: { '#sec/*': ['secret/*'] } } }),
         'src/secret/x.ts': 'export const x = 1;\n',
         'src/app.ts': 'import { x } from "#sec/x";\nexport const app = x;\n',
       },
@@ -62,7 +62,7 @@ describe('ARCH-04 checkArch boundary, fixture, singleton, restricted-string, dep
     {
       label: 'no product or helper source files',
       files: { 'src/only.test.ts': 'it("CORE-01 ok", () => { expect(1).toBe(1); });\n' },
-      config: BASE_CONFIG,
+      config: { ...BASE_CONFIG, architecture: { tsConfig: 'tsconfig.missing.json' } },
       expected: [],
     },
   ])('ARCH-04 resolves tsconfig options and empty roots: $label', async ({ files, config, expected }) => {
@@ -90,7 +90,7 @@ describe('ARCH-04 checkArch boundary, fixture, singleton, restricted-string, dep
             'kept-allow': '1.0.0',
             'newly-allow': '1.0.0',
             'unapproved-pkg': '^2.0.0',
-            'aliased-npm': 'npm:@scope/pkg@1.0.0',
+            'aliased-npm': 'npm:@scope/pkg',
             'tar-http': 'http://example.com/p.tgz',
             'at-ver': 'user/repo@1.0.0',
             'gh-frag': 'my-org/my-repo#v1.0',
@@ -118,14 +118,14 @@ describe('ARCH-04 checkArch boundary, fixture, singleton, restricted-string, dep
       baseFiles: { 'guardrails.config.json': '{corrupt-base-json' },
       headFiles: {
         'package.json': JSON.stringify({ devDependencies: { 'brand-new': '1.0.0' } }),
-        'guardrails.config.json': JSON.stringify(BASE_CONFIG),
+        'guardrails.config.json': JSON.stringify({ ...BASE_CONFIG, deps: { allow: ['head-allowed'] } }),
       },
       expectedViolations: [
         { rule: 'ARCH-4', file: 'package.json', line: null, message: 'adds dependency "brand-new" (not in deps.allow). A code owner must add it to deps.allow (CODEOWNER-protected config).', fingerprint: '0541475254e7' },
       ],
       expectedMetrics: [
         { name: 'deps.added', value: 1, detail: 'brand-new' },
-        { name: 'deps.registry', value: 'skipped', detail: 'offline: brand-new not checked against npm' },
+        { name: 'deps.registry', value: 'skipped', detail: 'offline: brand-new, head-allowed not checked against npm' },
       ],
     },
     {
@@ -146,7 +146,7 @@ describe('ARCH-04 checkArch boundary, fixture, singleton, restricted-string, dep
     const unreachableMsg = 'is not reachable from any production entry (architecture.entries). Wire it in or delete it and its tests.';
     const r = repo(
       {
-        'package.json': JSON.stringify({ name: 'p', type: 'module', devDependencies: { vitest: '1.6.1' } }),
+        'package.json': JSON.stringify({ name: 'p', type: 'module', dependencies: { svelte: '5.0.0' }, devDependencies: { vitest: '1.6.1' } }),
         'vitest.setup.ts': "import { beforeEach, expect } from 'vitest';\nimport './src/setup-only.js';\nbeforeEach(() => { expect.hasAssertions(); });\n",
         'src/main.ts': 'import { used } from "./used.js";\nexport const app = used;\n',
         'src/used.ts': 'export const used = 1;\n',
@@ -155,7 +155,7 @@ describe('ARCH-04 checkArch boundary, fixture, singleton, restricted-string, dep
         'packages/web/orphan.ts': 'export const webOrphan = 4;\n',
         'sub/orphan.ts': 'export const subOrphan = 5;\n',
         'mods/orphan.ts': 'export const modOrphan = 6;\n',
-        'mods/notes.txt': 'not a source file\n',
+        'mods/unused.svelte': '<script>export const s = 1;</script>\n',
         'src/main.test.ts': 'it("CORE-01 ok", () => { expect(1).toBe(1); });\n',
         'src/helpers/h.ts': 'export const h = 1;\n',
         'src/fixtures/f.ts': 'export const f = 1;\n',
@@ -169,8 +169,8 @@ describe('ARCH-04 checkArch boundary, fixture, singleton, restricted-string, dep
       },
     ).commit();
 
-    const skipped = await run({ cwd: r.dir, only: ['arch'], knip: false });
-    expect([skipped.ok, skipped.findings, skipped.metrics]).toEqual([true, [], []]);
+    const skipped = await checkArch(r.ctx(), []);
+    expect(skipped).toEqual({ violations: [], metrics: [] });
 
     const active = await run({ cwd: r.dir, only: ['arch'], knip: true });
     expect([active.ok, active.counts, active.metrics]).toEqual([true, { block: 0, warn: 5, known: 0 }, []]);
@@ -188,9 +188,12 @@ describe('ARCH-04 checkArch boundary, fixture, singleton, restricted-string, dep
     const emptyOut = await checkArch({ ...noEntries.ctx(), options: { clockShift: false, mutation: false, knip: true } }, []);
     expect(emptyOut).toEqual({ violations: [], metrics: [] });
 
+    const isoTmp = join(noEntries.dir, 'isolated-tmp');
+    mkdirSync(isoTmp);
+    vi.stubEnv('TMPDIR', isoTmp);
+    vi.stubEnv('TMP', isoTmp);
+    vi.stubEnv('TEMP', isoTmp);
     const brokenCtx = { ...noEntries.ctx(), cwd: join(noEntries.dir, 'missing-cwd'), config: { ...noEntries.ctx().config, architecture: { ...noEntries.ctx().config.architecture, entries: ['src/main.ts'] } }, options: { clockShift: false, mutation: false, knip: true } };
-    const countKnipTmp = () => readdirSync(tmpdir()).filter((n) => n.startsWith('guardrails-knip-')).length;
-    const before = countKnipTmp();
     const errOut = await checkArch(brokenCtx, []);
     expect(errOut.violations).toEqual([]);
     expect(errOut.metrics).toHaveLength(1);
@@ -202,6 +205,40 @@ describe('ARCH-04 checkArch boundary, fixture, singleton, restricted-string, dep
       true,
       true,
     ]);
-    expect(countKnipTmp()).toBe(before);
+    expect(readdirSync(isoTmp)).toEqual([]);
+  });
+
+  it.each([
+    {
+      label: 'CRLF, U+2028, oversize line, HTML/SQL/JSON strings and URL credential canary',
+      source: `export const pad = "${'x'.repeat(5000)}\u2028<script>SELECT 1</script>";\r\nexport const j = '{"nested":"CANARY-9f3a7c2e1b4d"}';\r\nexport const hit = "raw://ban CANARY-9f3a7c2e1b4d";\r\n`,
+      pkg: '{"__proto__":{"k":"CANARY-9f3a7c2e1b4d"},"dependencies":{"hostile-dep":"https://u:CANARY-9f3a7c2e1b4d@evil.example/a.tgz"}}',
+      expectedLine: 3,
+    },
+    {
+      label: 'first-line match with NUL escape and lookalike URL canary',
+      source: 'export const hit = "raw://ban \\u0000 CANARY-9f3a7c2e1b4d";\n',
+      pkg: '{"dependencies":{"hostile-dep":"git+https://token:CANARY-9f3a7c2e1b4d@github.com.evil.example/o/r.git"}}',
+      expectedLine: 1,
+    },
+  ])('ARCH-04 handles hostile inputs deterministically without leaking canaries: $label', async ({ source, pkg, expectedLine }) => {
+    const canary = 'CANARY-9f3a7c2e1b4d';
+    const cfg = {
+      ...BASE_CONFIG,
+      architecture: { restrictedStrings: [{ pattern: 'raw://ban', allowIn: [], message: 'Use client.' }] },
+    };
+    const r = repo({ 'package.json': '{"dependencies":{}}' }, cfg).commit();
+    r.write({ 'package.json': pkg, 'src/hostile.ts': source });
+    const first = await checkArch(r.ctx('main'), ['src/hostile.ts', 'package.json']);
+    const second = await checkArch(r.ctx('main'), ['src/hostile.ts', 'package.json']);
+    expect(second).toEqual(first);
+    expect(JSON.stringify(first)).not.toContain(canary);
+    expect([sortViolations(first.violations), first.metrics]).toEqual([
+      [
+        { rule: 'ARCH-4', file: 'package.json', line: null, message: 'adds dependency "hostile-dep" (not in deps.allow). A code owner must add it to deps.allow (CODEOWNER-protected config).', fingerprint: '8fea8637779c' },
+        { rule: 'ARCH-5', file: 'src/hostile.ts', line: expectedLine, message: 'matches /raw://ban/. Use client.', fingerprint: 'cf6b211a152b' },
+      ],
+      [{ name: 'deps.added', value: 1, detail: 'hostile-dep' }],
+    ]);
   });
 });
