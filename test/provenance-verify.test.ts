@@ -1,7 +1,7 @@
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { expect, it } from 'vitest';
-import { marker, parseMarker, verify } from '../src/provenance.js';
+import { marker, parseMarker, verify, type Provenance } from '../src/provenance.js';
 import { first, fixture, head, tested } from './helpers/provenance.js';
 
 const failed = { ok: false, violations: [{ rule: 'PROV-1', message: 'Missing, invalid or mismatched provenance or report' }] };
@@ -79,5 +79,30 @@ it.each([
   { generatedAt: 'yesterday' }, { extra: true },
 ])('PROV-02 rejects malformed binding fields %j', (patch) => {
   const f = fixture();
-  expect(verify({ ...f.value, ...patch }, tested)).toEqual(failed);
+  const input = { ...f.value, ...patch };
+  if ('testedSha' in patch) input.parents = [String(patch.testedSha)];
+  expect(verify(input, input.testedSha)).toEqual(failed);
+  let rejected = false;
+  try { marker(input as Provenance); } catch { rejected = true; }
+  expect(rejected).toBe(true);
+});
+
+it('PROV-02 accepts SHA-256 Git identifiers and disabled checks in markers', () => {
+  const f = fixture();
+  const sha = 'd'.repeat(64);
+  const value: Provenance = { ...f.value, testedSha: sha, parents: [sha], prHeadSha: sha,
+    checks: [{ rule: 'TEST-1', mode: 'off', count: 0 }] };
+  expect(parseMarker(marker(value))).toEqual(value);
+  expect(verify(value, sha)).toEqual({ ok: true, violations: [] });
+});
+
+it('PROV-02 rejects noncanonical base64 even when decoded JSON and checksum are valid', () => {
+  const f = fixture();
+  const value = { ...f.value };
+  if (marker(value).split(' ')[3].length % 4 === 0) value.guardrailsVersion += 'x';
+  const encoded = marker(value).split(' ')[3];
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+  const altered = encoded.slice(0, -1) + alphabet[alphabet.indexOf(encoded.at(-1) as string) + 1];
+  expect(Buffer.from(altered, 'base64url').toString()).toBe(Buffer.from(encoded, 'base64url').toString());
+  expect(parseMarker(`<!-- guardrails:provenance v1 ${altered} -->`)).toBe(null);
 });

@@ -16,6 +16,7 @@ it('PROV-01 binds one atomic record to report bytes, Git and tool version', () =
     checks: [{ rule: 'TEST-1', mode: 'block', count: 2 }, { rule: 'TEST-1', mode: 'warn', count: 1 }, { rule: 'ARCH-1', mode: 'warn', count: 1 }],
     ok: false, overrides: [], generatedAt: instant });
   expect(f.saved()).toEqual(f.value);
+  expect(readFileSync(join(f.cwd, config.out), 'utf8')).toBe(JSON.stringify(f.value, null, 2) + '\n');
   expect(readdirSync(f.cwd).sort()).toEqual(['proof.json', 'report.json']);
 });
 
@@ -42,19 +43,22 @@ it.each([
 it('PROV-01 extracts current override labels with latest label event and reason', () => {
   const label = 'guardrails:approved';
   const events = [
+    { event: 'labeled', label: { name: label } },
     { event: 'labeled', label: { name: label }, actor: { login: 'latest' }, created_at: '2026-02-01' },
     { event: 'labeled', label: { name: label }, actor: { login: 'earlier' }, created_at: '2026-01-01' },
     { event: 'unlabeled', label: { name: label }, actor: { login: 'ignored' }, created_at: '2026-03-01' },
     { event: 'labeled', label: { name: 'foreign' }, actor: { login: 'other' }, created_at: '2026-04-01' },
-    { event: 'labeled' }, { event: 'labeled', label: { name: label } },
+    { event: 'labeled', label: { name: label } }, { event: 'labeled' },
+    { event: 'labeled', label: { name: 'guardrails:anonymous' }, created_at: instant },
   ];
   expect(overridesFrom(events, [
     { body: `guardrails-reason: ${label} old\r\nnoise`, user: { login: 'earlier' } },
-    { body: `guardrails-reason: ${label} final reason\r\nguardrails-reason: guardrails:missing pending`, user: { login: 'latest' } },
-  ], [label, label, 'guardrails:missing', 'guardrails:empty', 'foreign', 'xguardrails:no'], 'guardrails:')).toEqual([
+    { body: `guardrails-reason: ${label} final reason\r\nguardrails-reason: guardrails:missing pending\nguardrails-reason: ${label} final reason\nxguardrails-reason: ${label} ignored\nguardrails-reason: ${label} ignored\rbad`, user: { login: 'latest' } },
+  ], [label, label, 'guardrails:missing', 'guardrails:empty', 'guardrails:anonymous', 'foreign', 'xguardrails:no'], 'guardrails:')).toEqual([
     { label, by: 'latest', at: '2026-02-01', reason: 'final reason' },
     { label: 'guardrails:missing', by: '', at: '', reason: 'pending' },
     { label: 'guardrails:empty', by: '', at: '', reason: '' },
+    { label: 'guardrails:anonymous', by: '', at: instant, reason: '' },
   ]);
 });
 
@@ -63,9 +67,12 @@ it.each(['invalid-report', 'same-path', 'rename-failure'])('PROV-01 preserves ex
   if (failure === 'invalid-report') writeFileSync(join(f.cwd, 'report.json'), '{}');
   const out = failure === 'same-path' ? 'report.json' : failure === 'rename-failure' ? '.' : undefined;
   let threw = false;
-  try { record({ ...f.opts, out }); } catch { threw = true; }
+  let message = '';
+  try { record({ ...f.opts, out }); } catch (error) { threw = true; message = String(error); }
   expect(threw).toBe(true);
+  if (failure === 'same-path') expect(message).toBe('Error: Provenance output must differ from the report');
   expect(f.saved()).toEqual(f.value);
+  expect(readFileSync(join(f.cwd, config.out), 'utf8')).toBe(JSON.stringify(f.value, null, 2) + '\n');
   expect(readdirSync(f.cwd).sort()).toEqual(['proof.json', 'report.json']);
 });
 
@@ -88,4 +95,16 @@ it.each([undefined, new Error('offline'), 'denied'])('PROV-01 defers upload with
   expect(await pending).toBe(error ? `Provenance upload failed: ${String(error)}` : undefined);
   expect(completed).toBe(true);
   expect(f.saved()).toEqual(f.value);
+});
+
+it('PROV-01 parses repeated Git whitespace without changing the binding', () => {
+  const f = fixture();
+  const value = record({ ...f.opts, git: (args) => args[0] === 'rev-parse' ? tested : `${tested}  ${head}\t ${tested}` });
+  expect(value.parents).toEqual([tested, head, tested]);
+});
+
+it('PROV-01 does not invent override labels when using a custom prefix', () => {
+  const f = fixture();
+  const value = record({ ...f.opts, provenance: { ...config, overrideLabelPrefix: 'S' } });
+  expect(value.overrides).toEqual([]);
 });
