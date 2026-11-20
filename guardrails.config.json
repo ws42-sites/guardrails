@@ -363,17 +363,33 @@
         "tier": "T1",
         "behaviour": "An optional independent reviewer runs after the checks, sees only the diff and test output through a swappable provider (deterministic stub, external command), never the author reasoning, PR text or commit messages, and turns a fail verdict into REVIEW-1 findings; off by default"
       },
+      "REVIEW-02": {
+        "tier": "T1",
+        "behaviour": "Reviewer input holds only the merge-base diff and test output, is truncated at review.maxDiffBytes, and the command provider runs in an empty temp dir with a scrubbed env, fails closed on timeout, non-zero exit or malformed verdicts"
+      },
       "PROV-01": {
         "tier": "T1",
         "behaviour": "Provenance pins the tested commit SHA, report path and hash, guardrails version, checks with results and override labels with who and why into a JSON record and a PR comment marker; a tested SHA that does not match the PR head fails PROV-1; off by default"
+      },
+      "PROV-02": {
+        "tier": "T1",
+        "behaviour": "provenance verify accepts the tested SHA or a merge commit whose second parent is the PR head, rejects any other head, a missing record or a changed report hash, and the comment marker round-trips"
       },
       "EVAL-01": {
         "tier": "T1",
         "behaviour": "The checker ledger records escaped bugs and false escalations, and guardrails evaluate diffs it against the rule set to propose prunes and sharpening as a report, never applying them; off by default"
       },
+      "EVAL-02": {
+        "tier": "T1",
+        "behaviour": "guardrails ledger add and import validate entries, dedupe them and append to evaluation.ledgerFile from GitHub event exports without network calls"
+      },
       "CFGMD-01": {
         "tier": "T1",
         "behaviour": "guardrails.md front matter and fenced guardrails blocks parse into the same typed config as guardrails.config.json with documented precedence, are locked like the JSON config, and count toward weakening checks"
+      },
+      "CFGMD-02": {
+        "tier": "T1",
+        "behaviour": "guardrails.md rejects journeys and deps keys and malformed front matter or blocks with line numbers, and agent hooks lock it"
       }
     }
   },
