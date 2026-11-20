@@ -342,6 +342,18 @@
       "FAILBASE-02": {
         "tier": "T1",
         "behaviour": "checkFailsOnBase handles renamed and changed tests, helper files, deleted tests, labels, regressionGuard, missing node_modules and always removes its worktree and temp dir"
+      },
+      "GAME-03": {
+        "tier": "T1",
+        "behaviour": "checkGaming reports each ARCH-7 signature (test-runner detection, early exit, equality override, expect.extend, self-mock, counters, copied literals, cheat comments) with exact file, line, message, severity and fingerprint, and ignores comments, allowed paths and benign look-alikes"
+      },
+      "CI-03": {
+        "tier": "T1",
+        "behaviour": "checkCi reports unconditional full-suite PR runs, missing nightly workflow and missing deploy safety nets with exact file, line, message and fingerprint, and respects scoped, named and guarded commands, na settings and disabled config"
+      },
+      "MUT-01": {
+        "tier": "T1",
+        "behaviour": "checkMutation and survivingMutants select mutation-tier targets, run Stryker with the exact config, env and timeout, score only this run's files, block below mutation.break with exact message, and report skipped, not-installed and no-report states"
       }
     }
   },
