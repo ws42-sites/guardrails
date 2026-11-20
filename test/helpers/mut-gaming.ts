@@ -68,9 +68,9 @@ export const litV = (file: string, lit: string, testFile: string): Violation =>
 
 export const ENV_EXIT_POS_LINES = [
   '  if (process.env.NODE_ENV == "test") return 1;  ',
-  'if (process.env.NODE_ENV != `test`) return 2;',
+  'if (process.env.NODE_ENV!=`test`) return 2;',
   'if (`test` == process.env.NODE_ENV) return 3;',
-  "if ('test' !== process.env.NODE_ENV) return 4;",
+  "if ('test'!==process.env.NODE_ENV) return 4;",
   'const w1 = process.env.VITEST_WORKER_ID;',
   'const w2 = process.env["VITEST_POOL_ID"];',
   'const w3 = process.env[`VITEST`];',
@@ -106,7 +106,7 @@ export const ENV_EXIT_NEG_LINES = [
   "const g = import.meta.env.MODE === 'testing';",
   'if (typeof it === expectedType) {}',
   "if (typeof item === 'string') {}",
-  "if (mytypeof === 'undefined') {}",
+  'const tw = "mytypeof vi === \'undefined\'";',
   `my${P_EXIT}(1);`,
   'process.kill(otherPid);',
   'process.kill(process.pids);',
@@ -156,7 +156,7 @@ export const ALLOW_CONFIG = {
 
 export const LITS_HEAD_FILES: Record<string, string> = {
   'src/core/lits.test.ts': [
-    'expect(a).toBe( \'single-six\' ); expect(b).toEqual("double-six");',
+    'expect(a).toBe( \'six666\' ); expect(b).toEqual("seven77");',
     'expect(c).toStrictEqual(`backtick6`);',
     "expect(d).toContain('a$123456');",
     "expect(e).toMatch('123456$b');",
@@ -172,8 +172,8 @@ export const LITS_HEAD_FILES: Record<string, string> = {
   ].join('\n'),
   'test/helpers/non-test.ts': "expect(x).toBe('helper-lit');\n",
   'src/core/lits-pos.ts': [
-    "export const s1 = 'single-six';",
-    'export const s2 = "double-six";',
+    "export const s1 = 'six666';",
+    'export const s2 = "seven77";',
     'export const s3 = `backtick6`;',
     "export const s4 = 'a$123456';",
     "export const s5 = '123456$b';",
@@ -200,8 +200,8 @@ export const LITS_HEAD_FILES: Record<string, string> = {
 };
 
 export const LITS_EXPECTED: Violation[] = [
-  'single-six',
-  'double-six',
+  'six666',
+  'seven77',
   'backtick6',
   'a$123456',
   '123456$b',
