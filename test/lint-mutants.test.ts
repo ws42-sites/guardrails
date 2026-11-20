@@ -19,6 +19,8 @@ describe('LINT-02 checkLint enforces TEST-5 patterns, modes, exemptions and conf
     const bLines = files[b].split('\n');
     const w = 'src/core/t1-warns.test.tsx';
     const wLines = files[w].split('\n');
+    const jsBad = 'src/lib/t2-bad.test.js';
+    const jsxBad = 'src/lib/t2-jsx.test.jsx';
     const mixed = 'src/lib/mixed-tier.test.ts';
     const untagged = 'src/lib/untagged.test.ts';
     const clockFake = 'src/core/clock-fake-timers.test.ts';
@@ -43,6 +45,8 @@ describe('LINT-02 checkLint enforces TEST-5 patterns, modes, exemptions and conf
       b,
       w,
       mixed,
+      jsBad,
+      jsxBad,
       untagged,
     ]);
 
@@ -81,6 +85,12 @@ describe('LINT-02 checkLint enforces TEST-5 patterns, modes, exemptions and conf
 
     expect(byFile(mixed)).toEqual([
       expectedViolation(mixed, 2, 'no-restricted-syntax', 'Snapshots are banned in T1 tests; assert the exact values that matter.', files[mixed].split('\n')[1].trim(), 'warn'),
+    ]);
+    expect(byFile(jsBad)).toEqual([
+      expectedViolation(jsBad, 1, 'vitest/no-focused-tests', 'Focused tests are not allowed.', files[jsBad].split('\n')[0].trim()),
+    ]);
+    expect(byFile(jsxBad)).toEqual([
+      expectedViolation(jsxBad, 1, 'no-restricted-syntax', 'Class-name/style assertions are banned; visuals are checked by screenshot diff.', files[jsxBad].split('\n')[0].trim(), 'warn'),
     ]);
     expect(byFile(untagged)).toEqual([
       expectedViolation(untagged, 2, 'guardrails/no-generated-inputs', 'Seeded fast-check property run. Allowed only for specs marked properties: true, with interruptAfterTimeLimit instead of a run cap.', files[untagged].split('\n')[1].trim(), 'warn'),
@@ -126,8 +136,8 @@ describe('LINT-02 checkLint enforces TEST-5 patterns, modes, exemptions and conf
       expected: [] as ReturnType<typeof normalizeViolations>,
     },
     {
-      name: 'product-only repo still checks Stryker-disable without tests',
-      files: { 'src/core/only-prod.ts': '// ' + 'Stryker disable next-line\nexport const x = 1;\n' },
+      name: 'product-only repo still checks Stryker-disable without applying test rules',
+      files: { 'src/core/only-prod.ts': '// ' + 'Stryker disable next-line\nexport const x = Date.now() + Math.random();\n' },
       explicit: undefined,
       expected: [
         expectedViolation(
