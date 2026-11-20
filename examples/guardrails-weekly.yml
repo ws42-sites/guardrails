@@ -19,7 +19,6 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run build
       - name: Export evidence
         env:
           GH_TOKEN: ${{ github.token }}
@@ -71,9 +70,9 @@ jobs:
           done < artifact-ids.txt
       - name: Produce proposals
         run: |
-          node dist/cli.js ledger import --events guardrails-events.json
-          node dist/cli.js evaluate --since 7d --out guardrails-weekly.md
-          node dist/cli.js feedback draft --failures guardrails-failures.jsonl --out guardrails-feedback.md
+          npx guardrails ledger import --events guardrails-events.json
+          npx guardrails evaluate --since 7d --out guardrails-weekly.md
+          npx guardrails feedback draft --failures guardrails-failures.jsonl --out guardrails-feedback.md
           cat guardrails-feedback.md >> guardrails-weekly.md
           cat guardrails-weekly.md >> "$GITHUB_STEP_SUMMARY"
       - name: Open report-only draft

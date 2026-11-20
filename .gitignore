@@ -3,3 +3,9 @@ dist
 reports/
 .stryker-tmp
 *.log
+guardrails-failures.jsonl
+guardrails-provenance.json
+guardrails-report*.json
+guardrails-review-input.json
+guardrails-events.json
+guardrails-comments.json

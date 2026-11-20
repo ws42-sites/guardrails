@@ -191,6 +191,13 @@ jobs:
             rm -f "$TMP_STAMP"
             echo "::warning::Failed to stamp guardrails-report.json"
           fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: guardrails-failures
+          path: ${{ inputs.working-directory }}/guardrails-failures.jsonl
+          retention-days: 90
+          if-no-files-found: ignore
       # Test-suite audit for the job summary (the check above already gates SUITE-1..6 when testSuite is enabled).
       - name: test-suite report
         if: always()
