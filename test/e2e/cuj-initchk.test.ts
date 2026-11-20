@@ -16,6 +16,17 @@ test('CUJ-INITCHK developer scaffolds a fresh git repo with guardrails init and 
     /Built guardrails CLI not found.*Run "npm run build"/,
   );
 
+  const beforeInit = checkJson(r.dir);
+  expect([
+    beforeInit.status,
+    beforeInit.report.ok,
+    beforeInit.report.findings.map((f) => [f.rule, f.mode, f.file, f.message]),
+  ]).toEqual([
+    1,
+    false,
+    [['CFG-1', 'block', 'guardrails.config.json', `No guardrails.config.json in ${r.dir}. Run "guardrails init" first.`]],
+  ]);
+
   const firstInit = runCli(r.dir, ['init', '--owner', '@ws42-admin', '--base', 'main']);
   expect(firstInit.status).toBe(0);
   expect(firstInit.stdout).toContain('wrote   guardrails.config.json');

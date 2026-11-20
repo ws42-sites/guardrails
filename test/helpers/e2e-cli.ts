@@ -1,5 +1,5 @@
 import { execFileSync, spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,7 +9,39 @@ import type { Report } from '../../src/types.js';
 export const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 export const CLI_PATH = join(REPO_ROOT, 'dist', 'cli.js');
 export const NODE_MODULES_PATH = join(REPO_ROOT, 'node_modules');
-export const VITEST_CMD = `node ${JSON.stringify(join(NODE_MODULES_PATH, 'vitest/vitest.mjs'))} run`;
+export const VITEST_ENTRY_PATH = join(NODE_MODULES_PATH, 'vitest', 'vitest.mjs');
+export const VITEST_INDEX_PATH = join(NODE_MODULES_PATH, 'vitest', 'dist', 'index.js');
+export const VITEST_RUNNER_FILE = 'vitest-runner.mjs';
+export const VITEST_CMD = `${JSON.stringify(process.execPath)} ./${VITEST_RUNNER_FILE}`;
+
+export function vitestRunnerSource(): string {
+  return [
+    "import { spawnSync } from 'node:child_process';",
+    "import { existsSync, readFileSync, writeFileSync } from 'node:fs';",
+    "import { resolve } from 'node:path';",
+    'const args = process.argv.slice(2);',
+    `const res = spawnSync(process.execPath, [${JSON.stringify(VITEST_ENTRY_PATH)}, 'run', '--pool=forks', '--no-file-parallelism', ...args], { stdio: 'inherit' });`,
+    "const outFile = args.find((a) => a.startsWith('--outputFile='))?.slice('--outputFile='.length);",
+    'if (outFile && existsSync(outFile)) {',
+    "  const data = JSON.parse(readFileSync(outFile, 'utf8'));",
+    '  for (const tr of data.testResults ?? []) tr.name = resolve(tr.name);',
+    '  writeFileSync(outFile, JSON.stringify(data));',
+    '}',
+    'process.exit(res.status ?? 1);',
+    '',
+  ].join('\n');
+}
+
+export function e2eVitestConfigSource(): string {
+  return [
+    'export default {',
+    "  cacheDir: './.vite',",
+    `  resolve: { alias: { vitest: ${JSON.stringify(VITEST_INDEX_PATH)} } },`,
+    "  test: { setupFiles: ['./vitest.setup.ts'], server: { deps: { external: [/node_modules/] } } },",
+    '};',
+    '',
+  ].join('\n');
+}
 
 const STRIP_ENV = [
   'GITHUB_BASE_REF',
@@ -113,11 +145,10 @@ export interface E2eRepo {
   exists(file: string): boolean;
   commit(msg?: string): E2eRepo;
   branch(name: string): E2eRepo;
-  linkNodeModules(): E2eRepo;
 }
 
 export function e2eRepo(files: Record<string, string> = {}, config: object | null = E2E_BASE_CONFIG): E2eRepo {
-  const dir = mkdtempSync(join(tmpdir(), 'guardrails-e2e-'));
+  const dir = realpathSync(mkdtempSync(join(tmpdir(), 'guardrails-e2e-')));
   createdDirs.push(dir);
   const gitEnv = { ...GIT_ENV };
   delete gitEnv.GIT_DIR;
@@ -158,10 +189,6 @@ export function e2eRepo(files: Record<string, string> = {}, config: object | nul
     },
     branch(name) {
       git('checkout', '-q', '-b', name);
-      return r;
-    },
-    linkNodeModules() {
-      symlinkSync(NODE_MODULES_PATH, join(dir, 'node_modules'), 'junction');
       return r;
     },
   };
