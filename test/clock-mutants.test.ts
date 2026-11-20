@@ -7,7 +7,7 @@ import type { Metric, Violation } from '../src/types.js';
 import { fingerprint } from '../src/util.js';
 import { BASE_CONFIG, repo } from './helpers/repo.js';
 
-interface StepSpec { code: number; json?: unknown; rawJson?: string; stderr?: string; stdout?: string }
+interface StepSpec { code: number; json?: unknown; rawJson?: string; removeDir?: boolean; stderr?: string; stdout?: string }
 interface RunLog { argv: string[]; shiftEnv: string | null; nodeOptions: string | null; activeShiftMs: number; tempDirExists: boolean | null; outputFile: string | null }
 
 const RUNNER_SOURCE = [
@@ -25,6 +25,7 @@ const RUNNER_SOURCE = [
   'fs.writeFileSync(logPath, JSON.stringify(runs));',
   'if (outputFile && step.rawJson !== undefined) fs.writeFileSync(outputFile, step.rawJson);',
   "else if (outputFile && step.json !== undefined && step.json !== null) fs.writeFileSync(outputFile, JSON.stringify(JSON.parse(JSON.stringify(step.json).replaceAll('$CWD', JSON.stringify(cwd).slice(1, -1)))));",
+  'if (outputFile && step.removeDir) fs.rmSync(path.dirname(outputFile), { recursive: true, force: true });',
   'if (step.stdout) process.stdout.write(step.stdout);',
   'if (step.stderr) process.stderr.write(step.stderr);',
   'process.exit(step.code);',
@@ -74,7 +75,7 @@ describe('CLOCK-02 checkClock detects future-only failures and cleans up', () =>
               { fullName: 'CORE-01 safe', status: 'passed' },
               { fullName: 'CORE-01 skipped', status: 'skipped' },
             ] },
-            { name: '$CWD/src/second.test.ts', assertionResults: [{ fullName: 'LIB-01 second bomb', status: 'failed' }] },
+            { name: '$CWD/src/second.test.ts', assertionResults: [{ fullName: 'LIB-01 $hostile [bomb]', status: 'failed' }] },
           ],
         },
       },
@@ -88,7 +89,7 @@ describe('CLOCK-02 checkClock detects future-only failures and cleans up', () =>
       },
       violations: [
         shiftViol('src/bomb.test.ts', 'SUITE > CORE-01 bomb', 2, 'src/bomb.test.ts >   SUITE > CORE-01 bomb  '),
-        shiftViol('src/second.test.ts', 'LIB-01 second bomb', 2),
+        shiftViol('src/second.test.ts', 'LIB-01 $hostile [bomb]', 2),
       ],
       metrics: [{ name: 'clockShift', value: 'fail', detail: undefined }],
     },
@@ -111,14 +112,16 @@ describe('CLOCK-02 checkClock detects future-only failures and cleans up', () =>
     {
       label: 'vitest failure without output json falls back to suite violation with last 5 stderr lines',
       years: 4, count: 2,
-      shifted: { code: 1, json: null, stderr: 'e1\ne2\ne3\ne4\ne5\ne6\ne7', stdout: 'ignored-stdout' },
+      shifted: { code: 1, json: null, stderr: 'CANARY-9f3a7c1e\ne2\ne3\ne4\ne5\ne6\ne7', stdout: 'CANARY-9f3a7c1e-out' },
       normal: { code: 0, json: {} },
       violations: [suiteViol(4, 'e3 e4 e5 e6 e7')],
       metrics: [{ name: 'clockShift', value: 'fail', detail: undefined }],
     },
   ])('CLOCK-02 evaluates vitest runs: $label', ({ years, shifted, normal, violations, metrics, count }) => {
     const { r, readRuns } = setupClockRepo('fake-vitest.mjs', years, shifted, normal);
-    expect(checkClock(r.ctx())).toEqual({ violations, metrics });
+    const out = checkClock(r.ctx());
+    expect(out).toEqual({ violations, metrics });
+    expect(JSON.stringify(out)).not.toContain('CANARY-9f3a7c1e');
     const runs = readRuns();
     expect(runs).toHaveLength(count);
     const firstOut = runs[0].outputFile ?? '';
@@ -166,6 +169,9 @@ describe('CLOCK-02 checkClock detects future-only failures and cleans up', () =>
       ]);
 
       delete process.env.NODE_OPTIONS;
+      const removedDirCase = setupClockRepo('fake-vitest.mjs', 2, { code: 0, json: null, removeDir: true });
+      expect(checkClock(removedDirCase.r.ctx())).toEqual({ violations: [], metrics: [{ name: 'clockShift', value: 'pass', detail: '+2y' }] });
+
       const throwCase = setupClockRepo('fake-vitest.mjs', 2, { code: 1, rawJson: '{broken' }, { code: 0, json: {} });
       expect(() => checkClock(throwCase.r.ctx())).toThrow(SyntaxError);
       const crashedOut = throwCase.readRuns()[0].outputFile ?? '';
