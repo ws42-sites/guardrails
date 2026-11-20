@@ -254,7 +254,7 @@ function configWeakening(ctx: CheckContext, mb: string, v: Violation[]): void {
       const approved = ctx.labels.includes(ctx.config.labels.configApproved);
       for (const file of configFiles.filter((_, i) => before[i] !== after[i]))
         for (const c of changes)
-          if (!approved) v.push(violation('TEST-7', file, `config loosened: ${c}. Lowering a threshold counts as weakening; a code owner must add the "${ctx.config.labels.configApproved}" label, which approves loosening guardrails configuration.`, `cfg:${c}`));
+          if (!approved) v.push(violation('TEST-7', file, `config loosened: ${c}. Lowering a threshold counts as weakening; a code owner must add the "${ctx.config.labels.configApproved}" label, which approves loosening ${file}.`, `cfg:${c}`));
     } catch {}
   }
   for (const f of listFiles(ctx.cwd).filter((x) => THRESHOLD_FILES.test(x))) {
