@@ -54,6 +54,7 @@ Commands
   validate-test <ID>   Check a spec ID before writing a test
   telemetry status    Show opt-in status, reason and exact anonymous payload
   flag <ID> <reason>   Stop and flag a spec/test conflict for a human (--file f). Blocks merge (FLAG-1)
+  labels plan [--base ref] [--labels a,b] [--format markdown|json]   Advisory approval-label summary
   mutants              Recompute surviving mutants for changed files (--base, --mutate)
   hook-guard           Agent hook: deny edits to locked files (--agent claude|gemini|antigravity|codex; JSON on stdin)
   holdout --dir <d>    Run hidden holdout tests from a private checkout (HOLD-1)
@@ -291,6 +292,19 @@ async function main(): Promise<number> {
       const r = validateTest({ cwd, specId: arg, testFile: values.file, plannedLines: values.lines ? Number(values.lines) : undefined, base });
       console.log(JSON.stringify(r, null, 2));
       return r.ok ? 0 : 1;
+    }
+    case 'labels': {
+      try {
+        if (arg !== 'plan' || rest.length) throw new Error('usage: guardrails labels plan [--base ref] [--labels a,b] [--format markdown|json]');
+        if (values.format && !['markdown', 'json'].includes(values.format)) throw new Error('labels plan: format must be markdown or json');
+        const { planLabels, toMarkdown: labelMarkdown } = await import('./label-plan.js');
+        const config = loadConfig(cwd);
+        const plan = await planLabels({ cwd, config, base: base ?? `origin/${config.baseBranch}`, labels, options: { clockShift: false, mutation: false, knip: false } });
+        console.log(values.format === 'json' ? JSON.stringify(plan, null, 2) : labelMarkdown(plan));
+      } catch (error) {
+        console.error(`labels plan advisory: ${error instanceof Error ? error.message : String(error)}`);
+      }
+      return 0;
     }
     case 'flag': {
       const reason = rest.join(' ');
