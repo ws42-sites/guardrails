@@ -22,6 +22,7 @@ export function tree(files: Record<string, string>, diff = '', previous: Record<
     writeFileSync(join(dir, file), body);
   }
   const calls: string[][] = [];
+  vi.spyOn(util, 'listFiles').mockReturnValue(Object.keys(files));
   vi.spyOn(util, 'git').mockImplementation((cwd, args) => {
     if (cwd !== dir) throw new Error('unexpected cwd');
     calls.push(args);

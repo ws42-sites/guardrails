@@ -24,7 +24,7 @@ export function buildInput(cwd: string, config: GuardrailsConfig, opts: ReviewOp
     const [index, total] = opts.shard.split('/').map(Number);
     files = shardFiles(cwd, config, files, index, total, { globs: ['**/*'] });
   }
-  const text = files.length ? git(cwd, ['diff', '--no-color', '--no-ext-diff', '--no-renames', change.range, '--', ...files]) : '';
+  const text = files.length ? git(cwd, ['--literal-pathspecs', '-c', 'core.quotePath=false', 'diff', '--no-color', '--no-ext-diff', '--no-renames', change.range, '--', ...files]) : '';
   const bytes = Buffer.from(text);
   let end = Math.min(bytes.length, config.review.maxDiffBytes);
   while (end > 0 && end < bytes.length && (bytes[end] & 0xc0) === 0x80) end--;
@@ -37,7 +37,7 @@ export async function review(cwd: string, config: GuardrailsConfig, opts: Review
     if (config.review.onlyWhenRisky) {
       const change = changes(cwd, config, opts);
       const risky = change.files.some((file) => {
-        if (matchesAny(file, ['guardrails.config.json', 'guardrails.md', '.guardrails/**', ...config.review.paths]) || isProtected(cwd, config, file)) return true;
+        if (matchesAny(file, ['guardrails.config.json', 'guardrails.md', '.guardrails/**', ...config.review.paths]) || (isTestFile(config, file) && isProtected(cwd, config, file))) return true;
         if (!config.lock.specTests || !isTestFile(config, file)) return false;
         try { return new RegExp(config.specs.idPattern.replace(/^\^|\$$/g, '')).test(git(cwd, ['show', `${change.base}:${file}`])); } catch { return false; }
       });
