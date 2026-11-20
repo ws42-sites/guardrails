@@ -117,10 +117,12 @@ describe('FAILBASE-01 base worktree node_modules link cleanup', () => {
       'src/core/add.test.ts': "import { expect, it } from 'vitest';\nimport { add } from './add';\nit('CORE-01 adds', () => { expect(add(2, 2)).toBe(4); });\n",
     });
 
+    unlinkDirLink(nm);
     const out = checkFailsOnBase(r.ctx('main'));
     expect(out.metrics?.[0]?.name).toBe('failsOnBase');
     expect(out.metrics?.[0]?.value).toBe('0/1');
     expect(existsSync(nm)).toBe(true);
+    expect(lstatSync(nm).isDirectory()).toBe(true);
     expect(existsSync(canary)).toBe(true);
     expect(readFileSync(canary, 'utf8')).toBe('preserve-me');
   });
