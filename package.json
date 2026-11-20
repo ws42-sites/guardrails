@@ -53,7 +53,7 @@
     "@stryker-mutator/vitest-runner": "8.7.1",
     "@types/eslint": "8.56.12",
     "@types/node": "20.17.6",
-    "vitest": "1.6.1",
+    "vitest": "5.1.1",
     "zod-to-json-schema": "3.24.6"
   },
   "exports": {
