@@ -40,6 +40,7 @@ Commands
   shard --shard i/n [--e2e] [--glob g] [--run "<cmd>"]   Test files for shard i of n, balanced by size; --run appends them to <cmd>
   init runbook         Scaffold RUNBOOK.md, stub deploy/deploy:preview/rollback/smoke/secrets:check scripts, enable RUN-1..4
   check                Run all checks. Exit 1 on blocking findings.
+  review [--base ref] [--report file] [--shard i/n] [--format text|json]   Independent review; check --review enables it in checks.
   report               Run checks and print a report (--format text|json|markdown)
   baseline             Write/ratchet the baseline (only shrinks; --force records everything current)
   specs                Print the spec matrix (ID, tier, tests)
@@ -94,7 +95,7 @@ async function main(): Promise<number> {
   const cwd = values.cwd ?? process.cwd();
   const base = values.base ?? (process.env.GITHUB_BASE_REF ? `origin/${process.env.GITHUB_BASE_REF}` : null);
   const labels = (values.labels ?? process.env.GUARDRAILS_LABELS ?? '').split(',').map((s) => s.trim()).filter(Boolean);
-  const opts = { cwd, base, labels, clockShift: values['clock-shift'], mutation: values.mutation, knip: !values['no-knip'], only: values.only?.split(','), mutate: values.mutate?.split(','),
+  const opts = { review: values.review, cwd, base, labels, clockShift: values['clock-shift'], mutation: values.mutation, knip: !values['no-knip'], only: values.only?.split(','), mutate: values.mutate?.split(','),
     failsOnBase: values['fails-on-base'], specs: (values.specs ?? process.env.GUARDRAILS_SPECS)?.split(',').map((x) => x.trim()).filter(Boolean) };
 
   switch (cmd) {
@@ -183,6 +184,14 @@ async function main(): Promise<number> {
       const fmt = values.format ?? (cmd === 'report' ? 'text' : 'text');
       console.log(fmt === 'json' ? toJson(r) : fmt === 'markdown' ? toMarkdown(r) : toText(r, { verbose: values.verbose }));
       return cmd === 'check' && !r.ok ? 1 : 0;
+    }
+    case 'review': {
+      const { review } = await import('./review/index.js');
+      const config = loadConfig(cwd);
+      const testOutput = values.report || !config.review.enabled ? [] : (await collect(opts)).violations;
+      const result = await review(cwd, config, { base, report: values.report, shard: values.shard, testOutput });
+      console.log(values.format === 'json' ? JSON.stringify(result, null, 2) : [result.verdict, ...result.findings.map((f) => `${f.file}:${f.line ?? ''} ${f.message}`), ...('reason' in result ? [result.reason] : [])].join('\n'));
+      return result.verdict === 'fail' ? 1 : 0;
     }
     case 'baseline': {
       const config = loadConfig(cwd);
