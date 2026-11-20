@@ -108,5 +108,6 @@ export async function run(opts: RunOptions): Promise<Report> {
     warn: findings.filter((f) => f.mode === 'warn' && !f.known).length,
     known: findings.filter((f) => f.known).length,
   };
+  if (ctx.config.feedback.enabled) (await import('./feedback.js')).appendFailures(ctx.cwd, ctx.config, { findings });
   return { ok: counts.block === 0, base: ctx.base, findings, metrics, counts, staleBaseline, ...(journeys?.length ? { journeys } : {}) };
 }
