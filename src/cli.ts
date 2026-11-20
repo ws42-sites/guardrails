@@ -42,6 +42,8 @@ Commands
   init runbook         Scaffold RUNBOOK.md, stub deploy/deploy:preview/rollback/smoke/secrets:check scripts, enable RUN-1..4
   check                Run all checks. Exit 1 on blocking findings.
   report               Run checks and print a report (--format text|json|markdown); --report <file> re-renders a saved JSON report without re-running
+  provenance record --report f [--head sha] [--events f] [--comments f] [--out f] [--format json|markdown]
+  provenance verify --head sha [--file f] [--report f]
   baseline             Write/ratchet the baseline (only shrinks; --force records everything current)
   specs                Print the spec matrix (ID, tier, tests)
   explain <RULE>       Explain a rule
@@ -195,6 +197,25 @@ async function main(): Promise<number> {
       console.log(`${config.baselineFile}: ${r.baseline.entries.length} entries (${r.removed} removed, ${r.added} added)${first ? ' [initial]' : ''}`);
       if (r.added && !first) console.log('Baseline grew: CI will block this (BASE-1) unless a code owner adds the guardrails:baseline-approved label.');
       return 0;
+    }
+    case 'provenance': {
+      const { record, marker, verify } = await import('./provenance.js');
+      const { readFileSync } = await import('node:fs');
+      const config = loadConfig(cwd).provenance;
+      if (arg === 'record' && values.report) {
+        const read = (file: string) => JSON.parse(readFileSync(resolve(cwd, file), 'utf8'));
+        const result = record({ cwd, provenance: config, report: values.report, head: values.head, env: process.env,
+          out: values.out, labels, events: values.events ? read(values.events) : [], comments: values.comments ? read(values.comments) : [] });
+        console.log(values.format === 'markdown' ? `Provenance: ${result.ok ? 'pass' : 'fail'} at ${result.testedSha}\n${marker(result)}` : JSON.stringify(result, null, 2));
+        return 0;
+      }
+      if (arg === 'verify' && values.head) {
+        const result = verify(resolve(cwd, values.file ?? config.out), values.head, values.report ? resolve(cwd, values.report) : undefined);
+        console.log(JSON.stringify(result, null, 2));
+        return result.ok ? 0 : 1;
+      }
+      console.error('usage: provenance record --report f | verify --head sha');
+      return 2;
     }
     case 'specs': {
       const config = loadConfig(cwd);
