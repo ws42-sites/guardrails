@@ -1,6 +1,6 @@
-import { config, fixture, flagFile, labelRepo, labels, testSource, title } from './helpers/label-plan.js';
+import { config, fixture, flagFile, labelRepo, labels, testSource, title } from './helpers/label-planner.js';
 import { expect, it } from 'vitest';
-import { planLabels } from '../src/label-plan.js';
+import { planLabels } from '../src/label-planner.js';
 
 it.each([
   { name: 'new', old: '', next: testSource(), product: false, guard: false, expected: true },

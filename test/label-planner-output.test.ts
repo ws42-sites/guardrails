@@ -1,6 +1,6 @@
-import { config, fixture, flagFile, labelRepo, labels, testSource } from './helpers/label-plan.js';
+import { config, fixture, flagFile, labelRepo, labels, testSource } from './helpers/label-planner.js';
 import { expect, it, vi } from 'vitest';
-import { planLabels, toMarkdown } from '../src/label-plan.js';
+import { planLabels, toMarkdown } from '../src/label-planner.js';
 import { inventory } from '../src/inventory.js';
 
 async function cli(args: string[]) {

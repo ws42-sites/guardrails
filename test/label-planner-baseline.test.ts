@@ -1,8 +1,8 @@
-import { config, fixture, flagFile, labelRepo, labels, testSource } from './helpers/label-plan.js';
+import { config, fixture, flagFile, labelRepo, labels, testSource } from './helpers/label-planner.js';
 import { expect, it, vi } from 'vitest';
 import { join } from 'node:path';
 import { cruise } from 'dependency-cruiser';
-import { planLabels } from '../src/label-plan.js';
+import { planLabels } from '../src/label-planner.js';
 
 it.each([-1, 0, 1, 2])('LPLAN-01 reports suite baseline growth to %s', async (count) => {
   const baseline = (n: number) => JSON.stringify({ version: 1, byKind: { focus: n }, totals: {}, counts: {}, oversize: {} });

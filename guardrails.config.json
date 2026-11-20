@@ -15,7 +15,7 @@
       "src/provenance.ts",
       "src/evaluate.ts",
       "src/config-md.ts",
-      "src/label-plan.ts",
+      "src/label-planner.ts",
       "src/feedback.ts",
       "src/telemetry.ts"
     ],

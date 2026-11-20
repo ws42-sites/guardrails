@@ -297,7 +297,7 @@ async function main(): Promise<number> {
       try {
         if (arg !== 'plan' || rest.length) throw new Error('usage: guardrails labels plan [--base ref] [--labels a,b] [--format markdown|json]');
         if (values.format && !['markdown', 'json'].includes(values.format)) throw new Error('labels plan: format must be markdown or json');
-        const { planLabels, toMarkdown: labelMarkdown } = await import('./label-plan.js');
+        const { planLabels, toMarkdown: labelMarkdown } = await import('./label-planner.js');
         const config = loadConfig(cwd);
         const plan = await planLabels({ cwd, config, base: base ?? `origin/${config.baseBranch}`, labels, options: { clockShift: false, mutation: false, knip: false } });
         console.log(values.format === 'json' ? JSON.stringify(plan, null, 2) : labelMarkdown(plan));
