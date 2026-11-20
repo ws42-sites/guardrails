@@ -13,8 +13,8 @@ interface RunLog { argv: string[]; shiftEnv: string | null; nodeOptions: string 
 const RUNNER_SOURCE = [
   "import fs from 'node:fs';",
   "import path from 'node:path';",
-  'const cwd = process.cwd();',
-  "const spec = JSON.parse(fs.readFileSync(path.join(cwd, 'scenario.json'), 'utf8'));",
+  "const spec = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'scenario.json'), 'utf8'));",
+  'const cwd = spec.cwd;',
   "const logPath = path.join(cwd, 'runs.json');",
   "const runs = fs.existsSync(logPath) ? JSON.parse(fs.readFileSync(logPath, 'utf8')) : [];",
   'const step = runs.length === 0 ? spec.shifted : spec.normal;',
@@ -45,9 +45,10 @@ const suiteViol = (years: number, tail: string): Violation => ({
 
 function setupClockRepo(scriptName: string, years: number, shifted: StepSpec, normal?: StepSpec) {
   const r = repo(
-    { [scriptName]: RUNNER_SOURCE, 'scenario.json': JSON.stringify({ shifted, normal: normal ?? { code: 0, json: {} } }) },
+    { [scriptName]: RUNNER_SOURCE },
     { ...BASE_CONFIG, tests: { command: `node ${scriptName}`, clockShiftYears: years } },
   );
+  r.write({ 'scenario.json': JSON.stringify({ cwd: r.dir, shifted, normal: normal ?? { code: 0, json: {} } }) });
   return { r, readRuns: (): RunLog[] => JSON.parse(readFileSync(join(r.dir, 'runs.json'), 'utf8')) as RunLog[] };
 }
 

@@ -1,8 +1,9 @@
-import { readdirSync } from 'node:fs';
+import { mkdtempSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { checkDuplication } from '../src/checks/dup.js';
-import type { Metric, Violation } from '../src/types.js';
+import type { CheckContext, CheckOutput, Metric, Violation } from '../src/types.js';
 import { fingerprint, listFiles } from '../src/util.js';
 import { BASE_CONFIG, repo } from './helpers/repo.js';
 
@@ -58,7 +59,23 @@ const dupViol = (file: string, count: number, source: string, pct: number, max: 
   fingerprint: fingerprint('ARCH-8', file, `dup:${file}`),
 });
 
-const jscpdTempDirs = (): string[] => readdirSync(tmpdir()).filter((d) => d.startsWith('guardrails-jscpd-'));
+function checkWithIsolatedTmp(ctx: CheckContext, files: string[]): { out: CheckOutput; leaked: string[] } {
+  const scopeDir = mkdtempSync(join(tmpdir(), 'mut-dup-scope-'));
+  const prev = { TMPDIR: process.env.TMPDIR, TMP: process.env.TMP, TEMP: process.env.TEMP };
+  process.env.TMPDIR = scopeDir;
+  process.env.TMP = scopeDir;
+  process.env.TEMP = scopeDir;
+  try {
+    const out = checkDuplication(ctx, files);
+    return { out, leaked: readdirSync(scopeDir) };
+  } finally {
+    for (const [k, v] of Object.entries(prev)) {
+      if (v === undefined) delete process.env[k];
+      else process.env[k] = v;
+    }
+    rmSync(scopeDir, { recursive: true, force: true });
+  }
+}
 
 describe('DUP-02 checkDuplication gates new duplicated product code', () => {
   beforeEach(() => { vi.useFakeTimers(); vi.setSystemTime(new Date('2026-01-01T00:00:00.000Z')); });
@@ -114,11 +131,8 @@ describe('DUP-02 checkDuplication gates new duplicated product code', () => {
       'src/core/unit.test.ts': `${blockUnique('gammaTest').join('\n')}\n`,
     });
 
-    const beforeDirs = new Set(jscpdTempDirs());
-    const out = checkDuplication(r.ctx('main'), listFiles(r.dir));
-    const leakedDirs = jscpdTempDirs().filter((d) => !beforeDirs.has(d));
-
-    expect(leakedDirs).toEqual([]);
+    const { out, leaked } = checkWithIsolatedTmp(r.ctx('main'), listFiles(r.dir));
+    expect(leaked).toEqual([]);
     expect(JSON.stringify(out)).not.toContain('CANARY-9f3a7c1e');
     expect({ ...out, violations: [...out.violations].sort((a, b) => a.file.localeCompare(b.file)) }).toEqual({
       violations: [
@@ -159,10 +173,8 @@ describe('DUP-02 checkDuplication gates new duplicated product code', () => {
   it('DUP-02 returns error metric with first stderr line when jscpd writes no report and cleans up', () => {
     const r = repo({}, { ...BASE_CONFIG, sourceRoots: ['src', '--bad'] }).commit();
     r.write({ 'src/core/one.ts': 'export const one = 1;\n' });
-    const beforeDirs = new Set(jscpdTempDirs());
-    const out = checkDuplication(r.ctx('main'), ['src/core/one.ts', '--bad/x.ts']);
-    const leakedDirs = jscpdTempDirs().filter((d) => !beforeDirs.has(d));
-    expect(leakedDirs).toEqual([]);
+    const { out, leaked } = checkWithIsolatedTmp(r.ctx('main'), ['src/core/one.ts', '--bad/x.ts']);
+    expect(leaked).toEqual([]);
     expect(out).toEqual({
       violations: [],
       metrics: [{ name: 'duplication', value: 'error', detail: "error: unknown option '--bad/x.ts'" }],
