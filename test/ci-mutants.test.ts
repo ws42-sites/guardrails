@@ -130,49 +130,46 @@ describe('CI-03 checkCi enforces PR scoping, nightly schedules and predeploy saf
   });
 
   it('CI-03 respects all GUARDED expressions and enforces the exact 6-line lookback window', () => {
-    const topGuard = "on:\n  pull_request\nif: github.event_name == 'schedule'\nrun: npm test\n# 1\n# 2\n# 3\n# 4\n# 5\n# 6\n";
-    const guards = [
+    const win6 = [
       'on:',
       '  pull_request',
-      'jobs:',
-      '  t:',
-      '    steps:',
-      "      - if: github.event_name == 'schedule'",
-      '        run: npm test',
-      "      - if: github.event_name == 'workflow_dispatch'",
-      '        run: npm test',
-      "      - if: github.event_name != 'pull_request'",
-      '        run: npm test',
-      "      - if: github.event_name!='pull_request'",
-      '        run: npm test',
-      "      - if: github.event_name == 'push'",
-      '        run: npm test',
-      "      - if: github.event_name=='push'",
-      '        run: npm test',
-      "      - if: github.ref == 'refs/heads/main'",
-      '        run: npm test',
-      "      - if: github.event_name == 'schedule'",
-      '        name: line 1',
-      '        shell: bash',
-      '        working-directory: .',
-      '        env:',
-      '          A: 1',
-      '        run: npm test',
-      "      - if: github.event_name == 'schedule'",
-      '        name: line 1',
-      '        shell: bash',
-      '        working-directory: .',
-      '        env:',
-      '          A: 1',
-      '          B: 2',
-      '        run: npm test',
+      "if: github.event_name == 'schedule'",
+      'name: line 1',
+      'shell: bash',
+      'working-directory: .',
+      'env:',
+      '  A: 1',
+      'run: npm test',
+    ].join('\n');
+    const win7 = [
+      'on:',
+      '  pull_request',
+      "if: github.event_name == 'schedule'",
+      'name: line 1',
+      'shell: bash',
+      'working-directory: .',
+      'env:',
+      '  A: 1',
+      '  B: 2',
+      'run: npm test',
     ].join('\n');
     const r = repo(
-      { '.github/workflows/top.yml': topGuard, '.github/workflows/guards.yml': `${guards}\n`, '.github/workflows/nightly.yml': NIGHTLY_YML },
+      {
+        '.github/workflows/g1.yml': "on:\n  pull_request\nif: github.event_name == 'schedule'\nrun: npm test\n# 1\n# 2\n# 3\n# 4\n# 5\n# 6\n",
+        '.github/workflows/g2.yml': "on:\n  pull_request\nif: github.event_name == 'workflow_dispatch'\nrun: npm test\n",
+        '.github/workflows/g3.yml': "on:\n  pull_request\nif: github.event_name != 'pull_request'\nrun: npm test\n",
+        '.github/workflows/g4.yml': "on:\n  pull_request\nif: github.event_name!='pull_request'\nrun: npm test\n",
+        '.github/workflows/g5.yml': "on:\n  pull_request\nif: github.event_name == 'push'\nrun: npm test\n",
+        '.github/workflows/g6.yml': "on:\n  pull_request\nif: github.event_name=='push'\nrun: npm test\n",
+        '.github/workflows/g7.yml': "on:\n  pull_request\nif: github.ref == 'refs/heads/main'\nrun: npm test\n",
+        '.github/workflows/g-win6.yml': `${win6}\n`,
+        '.github/workflows/g-win7.yml': `${win7}\n`,
+        '.github/workflows/nightly.yml': NIGHTLY_YML,
+      },
       ON,
     );
     expect(checkCi(r.ctx())).toEqual({
-      violations: [prViol('.github/workflows/guards.yml', 34, 'run: npm test')],
+      violations: [prViol('.github/workflows/g-win7.yml', 10, 'run: npm test')],
     });
   });
 
