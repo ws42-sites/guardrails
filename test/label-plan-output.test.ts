@@ -1,6 +1,7 @@
 import { config, fixture, flagFile, labelRepo, labels, testSource } from './helpers/label-plan.js';
 import { expect, it, vi } from 'vitest';
 import { planLabels, toMarkdown } from '../src/label-plan.js';
+import { inventory } from '../src/inventory.js';
 
 async function cli(args: string[]) {
   vi.resetModules();
@@ -62,6 +63,7 @@ it.each(['config', 'flags', 'test'])('LPLAN-02 malformed %s produces an advisory
   expect(out.status).toBe(0);
   expect(out.stderr.startsWith('labels plan advisory:')).toBe(true);
   expect(out.stdout).toBe('');
+  if (kind === 'test') expect(out.stderr).toBe(`labels plan advisory: ${file}: ${inventory('{', '^[A-Z]+-\\d+$').parseError}`);
 });
 
 it('LPLAN-02 defaults to the configured remote base and environment labels', async () => {

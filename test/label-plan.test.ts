@@ -11,10 +11,14 @@ it.each([
   { name: 'regression guard', old: '', next: testSource(), product: false, guard: true, expected: false },
   { name: 'unknown spec', old: '', next: testSource().replace('CORE-01', 'OTHER-01'), product: false, guard: false, expected: false },
   { name: 'untagged', old: '', next: testSource().replace('CORE-01 ', ''), product: false, guard: false, expected: false },
-])('LPLAN-01 classifies $name tests using spec paths', async ({ old, next, product, guard, expected }) => {
+])('LPLAN-01 classifies $name tests using spec paths', async ({ name, old, next, product, guard, expected }) => {
   const cfg = { ...config, specs: { items: { 'CORE-01': { ...config.specs.items['CORE-01'], regressionGuard: guard } } } };
   const r = labelRepo({ 'test/add.test.ts': old }, cfg);
   r.write({ 'test/add.test.ts': next });
+  if (name === 'new') {
+    r.write({ 'src/other.ts': 'export const other = 2;' });
+    fixture.modules = [{ source: 'Stryker was here', dependencies: [{ resolved: 'src/other.ts' }] }];
+  }
   if (product) r.write({ 'src/core/add.ts': 'export const add = () => 2;\n' });
   expect(await planLabels(r.ctx('HEAD'))).toEqual(expected ? [{
     label: labels.characterization, reason: `Existing behaviour: ${title}; matching product files did not change.`,
@@ -58,12 +62,13 @@ it.each(['deleted', 'moved', 'weakened', 'strengthened'] as const)('LPLAN-01 reu
   }] : []);
 });
 
-it.each([60, 70, 80])('LPLAN-01 reuses config weakening at threshold %s', async (threshold) => {
-  const r = labelRepo({}, { ...config, mutation: { break: 70 } });
-  r.write({ 'guardrails.config.json': JSON.stringify({ ...config, mutation: { break: threshold } }) });
-  expect(await planLabels(r.ctx('HEAD', [labels.configApproved]))).toEqual(threshold < 70 ? [{
-    label: labels.configApproved, file: 'guardrails.config.json', status: 'already present',
-    reason: 'config loosened: mutation.break: 70 -> 60. Lowering a threshold counts as weakening; a code owner must add the "owner:config" label, which approves loosening guardrails.config.json.',
+it.each([[60, 'owner:config'], [70, 'owner:config'], [80, 'owner:config'], [60, 'Stryker was here']] as const)('LPLAN-01 reuses config weakening at threshold %s with label %s', async (threshold, label) => {
+  const cfg = { ...config, labels: { ...labels, configApproved: label } };
+  const r = labelRepo({}, { ...cfg, mutation: { break: 70 } });
+  r.write({ 'guardrails.config.json': JSON.stringify({ ...cfg, mutation: { break: threshold } }) });
+  expect(await planLabels(r.ctx('HEAD', [label]))).toEqual(threshold < 70 ? [{
+    label, file: 'guardrails.config.json', status: 'already present',
+    reason: `config loosened: mutation.break: 70 -> 60. Lowering a threshold counts as weakening; a code owner must add the "${label}" label, which approves loosening guardrails.config.json.`,
   }] : []);
 });
 
@@ -76,14 +81,14 @@ it.each([true, false])('LPLAN-01 reports baseline entry growth %s', async (grow)
   }] : []);
 });
 
-it('LPLAN-01 reports journey ownership changes with their approval label', async () => {
+it.each([false, true])('LPLAN-01 reports journey ownership changes with approval %s', async (approved) => {
   const r = labelRepo();
   r.write({ 'guardrails.config.json': JSON.stringify({ ...config, journeys: { items: {
-    'CUJ-ADD': { title: 'Add two numbers', priority: 'P2', steps: ['Add numbers'], specs: ['CORE-01'], routes: [] },
+    'CUJ-ADD': { title: 'Add two numbers', priority: 'P0', steps: ['Add numbers'], specs: ['CORE-01'], routes: [], approved, ...(approved ? { approvedBy: 'Owner' } : {}) },
   } } }) });
   expect(await planLabels(r.ctx('HEAD'))).toEqual([{
     label: labels.journeysApproved, file: 'guardrails.config.json', status: 'needed',
-    reason: 'journey CUJ-ADD added in this PR. Journeys are human-owned: only base-trusted producers may add valid run journeys or regenerate unapproved non-client journeys; a code owner adds the "owner:journeys" label, which approves these journey changes.',
+    reason: `journey CUJ-ADD added in this PR. Journeys are human-owned: ${approved ? 'producer changes cannot approve journeys' : 'only base-trusted producers may add valid run journeys or regenerate unapproved non-client journeys'}; a code owner adds the "owner:journeys" label, which approves these journey changes.`,
   }]);
 });
 

@@ -25,7 +25,10 @@ vi.mock('../../src/util.js', async (original) => {
   const util = await original<typeof import('../../src/util.js')>();
   return { ...util,
     listFiles: () => Object.keys(fixture.files),
-    readText: (_cwd: string, file: string) => fixture.files[file],
+    readText: (_cwd: string, file: string) => {
+      if (!(file in fixture.files)) throw new Error(`Missing fixture: ${file}`);
+      return fixture.files[file];
+    },
     filesAt: () => Object.keys(fixture.base),
     mergeBase: (_cwd: string, ref: string) => {
       if (ref === 'missing') throw new Error('Unknown base');
