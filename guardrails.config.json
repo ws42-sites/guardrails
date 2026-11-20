@@ -405,7 +405,8 @@
     "tiers": [
       "T1"
     ],
-    "break": 70
+    "break": 70,
+    "timeoutMinutes": 110
   },
   "docs": {
     "allow": [
