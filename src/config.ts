@@ -278,6 +278,38 @@ export const configSchema = z
       })
       .strict()
       .default({}),
+    review: z
+      .object({
+        enabled: z.boolean().default(false),
+        provider: z.enum(['stub', 'command']).default('stub'),
+        command: z.string().min(1).optional(),
+        timeoutSeconds: z.number().int().positive().default(300),
+        maxDiffBytes: z.number().int().positive().default(200000),
+        stub: z.object({ failOn: z.array(z.string().min(1)).default([]) }).strict().default({}),
+      })
+      .strict()
+      .default({})
+      .superRefine((r, ctx) => {
+        if (r.enabled && r.provider === 'command' && !r.command) ctx.addIssue({ code: 'custom', path: ['command'], message: 'review.provider "command" needs review.command' });
+      }),
+    provenance: z
+      .object({
+        enabled: z.boolean().default(false),
+        out: z.string().min(1).default('guardrails-provenance.json'),
+        overrideLabelPrefix: z.string().min(1).default('guardrails:'),
+      })
+      .strict()
+      .default({}),
+    evaluation: z
+      .object({
+        enabled: z.boolean().default(false),
+        ledgerFile: z.string().min(1).default('.guardrails/ledger.jsonl'),
+        escapedLabel: z.string().min(1).default('guardrails:escaped-bug'),
+        windowDays: z.number().int().positive().default(7),
+        minFalseEscalations: z.number().int().positive().default(3),
+      })
+      .strict()
+      .default({}),
     rules: z
       .record(mode)
       .default({})

@@ -10,7 +10,11 @@
       "src/checks/**",
       "src/baseline.ts",
       "src/config.ts",
-      "src/runner.ts"
+      "src/runner.ts",
+      "src/review/**",
+      "src/provenance.ts",
+      "src/evaluate.ts",
+      "src/config-md.ts"
     ],
     "T2": [
       "src/**"
@@ -354,6 +358,22 @@
       "MUT-01": {
         "tier": "T1",
         "behaviour": "checkMutation and survivingMutants select mutation-tier targets, run Stryker with the exact config, env and timeout, score only this run's files, block below mutation.break with exact message, and report skipped, not-installed and no-report states"
+      },
+      "REVIEW-01": {
+        "tier": "T1",
+        "behaviour": "An optional independent reviewer runs after the checks, sees only the diff and test output through a swappable provider (deterministic stub, external command), never the author reasoning, PR text or commit messages, and turns a fail verdict into REVIEW-1 findings; off by default"
+      },
+      "PROV-01": {
+        "tier": "T1",
+        "behaviour": "Provenance pins the tested commit SHA, report path and hash, guardrails version, checks with results and override labels with who and why into a JSON record and a PR comment marker; a tested SHA that does not match the PR head fails PROV-1; off by default"
+      },
+      "EVAL-01": {
+        "tier": "T1",
+        "behaviour": "The checker ledger records escaped bugs and false escalations, and guardrails evaluate diffs it against the rule set to propose prunes and sharpening as a report, never applying them; off by default"
+      },
+      "CFGMD-01": {
+        "tier": "T1",
+        "behaviour": "guardrails.md front matter and fenced guardrails blocks parse into the same typed config as guardrails.config.json with documented precedence, are locked like the JSON config, and count toward weakening checks"
       }
     }
   },
