@@ -219,7 +219,11 @@ jobs:
       contents: read
       pull-requests: read
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(inputs.mutation-shards) }}
     defaults:
       run:
         working-directory: ${{ inputs.working-directory }}
@@ -229,18 +233,30 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: '${{ inputs.node-version }}', cache: npm }
       - run: ${{ inputs.install-command }}
+      - id: shardkey
+        env:
+          SHARD: ${{ matrix.shard }}
+        run: echo "key=$(printf '%s' "$SHARD" | tr '/' '-')" >> "$GITHUB_OUTPUT"
       - uses: actions/cache@v4
         with:
           path: ${{ inputs.working-directory }}/node_modules/.cache/guardrails/stryker-incremental.json
-          key: stryker-${{ github.base_ref }}-${{ github.sha }}
-          restore-keys: stryker-${{ github.base_ref }}-
+          key: stryker-${{ github.base_ref }}-${{ steps.shardkey.outputs.key }}-${{ github.sha }}
+          restore-keys: stryker-${{ github.base_ref }}-${{ steps.shardkey.outputs.key }}-
       - name: mutation (changed files in mutation tiers)
         env:
           CLI: ${{ inputs.cli }}
           GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
           BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event.before }}
+          SHARD: ${{ matrix.shard }}
         run: |
-          rc=0; $CLI check --only mutation --mutation --base "$BASE" --format json > guardrails-mutation-report.json || rc=$?
+          MUTATE=""
+          if [ "$SHARD" != "1/1" ]; then
+            CHANGED="$(git diff --name-only --diff-filter=AMR "$BASE"...HEAD | grep -E '\.(ts|tsx|js|mjs|cjs)$' | grep -vE '(^|/)(test|tests|__tests__)/|\.(test|spec)\.' | paste -sd, -)"
+            [ -n "$CHANGED" ] && MUTATE="$($CLI shard --shard "$SHARD" --glob "$CHANGED" 2>/dev/null | paste -sd, -)"
+            if [ -z "$MUTATE" ]; then echo "shard $SHARD has no changed files"; exit 0; fi
+            MUTATE="--mutate $MUTATE"
+          fi
+          rc=0; $CLI check --only mutation --mutation --base "$BASE" $MUTATE --format json > guardrails-mutation-report.json || rc=$?
           $CLI report --report guardrails-mutation-report.json --format markdown >> "$GITHUB_STEP_SUMMARY" || true
           $CLI report --report guardrails-mutation-report.json --format text || true
           exit $rc
