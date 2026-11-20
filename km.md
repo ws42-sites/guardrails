@@ -978,20 +978,25 @@ The `files` list in `package.json` is the allowlist for the published package: `
 
 ### 9.4 Release workflow
 
-Pushing a tag `v*` runs `.github/workflows/release.yml`:
+Pushing a tag `v*` runs `.github/workflows/release.yml` (top-level `permissions: contents: read`; the `release` job requests `contents: write` and `id-token: write` for npm provenance):
 
-1. `verify`: `npm ci`, typecheck, build, full test suite, release checks.
-2. `release`: build, `npm pack`, create (or update) the GitHub release with the tarball attached and `CHANGELOG.md` as notes, then `npm publish --access public`. The publish step uses the `NPM_TOKEN` repository secret and skips publishing (without failing) if it is unset.
+1. `verify`: `npm ci`, typecheck, build, dogfood check (`node dist/cli.js check`), full test suite, release checks.
+2. `release`: build, `npm pack`, create (or update) the GitHub release with the tarball attached and `CHANGELOG.md` as notes, run a provenance preflight check (fails if `NPM_TOKEN` is set on a private repository), then `npm publish --access public --provenance`. Both the preflight and publish steps skip quietly when `NPM_TOKEN` is unset.
 
 Publishing to npm makes a version public and effectively permanent, so the repository's agent instructions say never to publish, push or create repositories without the owner's go-ahead. Rolling back means pinning consumers to the previous version; `npm unpublish` is only possible inside 72 hours.
 
 ### 9.5 CI for this repository
 
-`ci.yml` runs on pushes to the main branch, on pull requests and nightly. PRs run typecheck, build, the affected tests and the dogfood check (`guardrails check --base origin/<base> --fails-on-base`, with the PR labels); main and nightly run the full suite and the dogfood check with `--clock-shift`. A test-suite report goes to the job summary. `guardrails.yml` in the same folder is a reusable workflow with jobs for the check, mutation, secret scan, optional holdout and optional CodeQL.
+`ci.yml` runs on pushes to `main`, on pull requests (including `labeled` and `unlabeled`), on a nightly cron, and on `workflow_dispatch`:
+
+- `test`: `npm ci`, typecheck, build, affected tests (`npm run test:changed`) on PRs, and the full suite (`npm run test:full`) on non-PR runs.
+- `guardrails`: calls the reusable `./.github/workflows/guardrails.yml` workflow (`permissions: contents: read, pull-requests: read`) with `install-command: npm ci && npm run build`, `cli: node dist/cli.js`, `clock-shift: true`, `mutation: true`, `mutation-full: true`, `secret-scan: true`, and `fails-on-base: true`.
+
+`guardrails.yml` is the reusable workflow (`cli` defaults to `npx guardrails`; `mutation-full` defaults to `false`). Its `check` job prints the short commit SHA in the job summary heading, stamps the JSON report with commit/run/config metadata into `guardrails-report-<sha>.json`, uploads it with 90-day retention, and appends `check-tests` to the summary. Its `mutation` job scores changed mutation-tier files on PRs; `mutation-full` scores all mutation-tier files on non-PR runs (120 min timeout, Stryker incremental cache, `mutation.json` artifact). It also provides `secrets` (gitleaks) plus optional `holdout` and `codeql` jobs.
 
 ### 9.6 This repository's own configuration
 
-The repository follows its own rules. Its `guardrails.config.json` defines the specs for each rule, marks `src/checks/**`, `src/baseline.ts`, `src/config.ts` and `src/runner.ts` as T1, enables the runbook, CI and test-suite standards, and records n/a reasons for deploy and rollback (a library is released by tag). `km.md` is not in its `docs.allow`, so the repository's own check reports it as a DOC-1 warning until a code owner adds it.
+The repository follows its own rules. Its `guardrails.config.json` defines the specs for each rule, marks `src/checks/**`, `src/baseline.ts`, `src/config.ts` and `src/runner.ts` as T1 (with no `mutation.exclude`: every T1 module, including the five check modules that were once excluded, is mutation-tested), enables the runbook, CI and test-suite standards, and records n/a reasons for deploy, rollback and `secrets:check` (a library is released by tag). `km.md` is not in its `docs.allow`, so the repository's own check reports it as a DOC-1 warning until a code owner adds it.
 
 ---
 

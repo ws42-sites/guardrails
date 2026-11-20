@@ -85,6 +85,10 @@
     }
   },
   "homepage": "https://ws42.ca/guardrails",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ws42-sites/guardrails.git"
+  },
   "keywords": [
     "guardrails",
     "ai-agents",

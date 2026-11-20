@@ -1,6 +1,6 @@
 name: ci
 # PRs run only the tests affected by the change (guardrails affected, CI-1).
-# The full suite and the clock-shift rerun run on main and nightly.
+# The full suite, clock-shift rerun and full mutation run on main, nightly and manual dispatch.
 on:
   push:
     branches: [main]
@@ -8,8 +8,11 @@ on:
     types: [opened, synchronize, reopened, labeled, unlabeled]
   schedule:
     - cron: '0 7 * * *'
+  workflow_dispatch:
 jobs:
   test:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,13 +25,19 @@ jobs:
       - name: affected tests (PR)
         if: github.event_name == 'pull_request'
         run: npm run test:changed
-      - name: full suite (main, nightly)
+      - name: full suite (main, nightly, manual)
         if: github.event_name != 'pull_request'
         run: npm run test:full
-      - name: dogfood
-        env:
-          GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
-        run: node dist/cli.js check ${{ github.event_name == 'pull_request' && format('--base origin/{0} --fails-on-base', github.base_ref) || '--clock-shift' }}
-      - name: test-suite report
-        if: always()
-        run: node dist/cli.js check-tests >> "$GITHUB_STEP_SUMMARY" || true
+  guardrails:
+    permissions:
+      contents: read
+      pull-requests: read
+    uses: ./.github/workflows/guardrails.yml
+    with:
+      install-command: npm ci && npm run build
+      cli: node dist/cli.js
+      clock-shift: true
+      mutation: true
+      mutation-full: true
+      secret-scan: true
+      fails-on-base: true

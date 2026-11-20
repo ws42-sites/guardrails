@@ -4,7 +4,7 @@ on:
     tags: ['v*']
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   verify:
@@ -18,12 +18,16 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm run build
+      - run: node dist/cli.js check
       - run: npm run test:full
       - run: node scripts/check-release.mjs
 
   release:
     needs: verify
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -43,9 +47,19 @@ jobs:
           else
             gh release create "$RELEASE_TAG" ./*.tgz --title "$RELEASE_TAG" --notes-file CHANGELOG.md --verify-tag
           fi
+      - name: Check npm provenance preflight
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          REPO_PRIVATE: ${{ github.event.repository.private }}
+        run: |
+          [ -n "$NODE_AUTH_TOKEN" ] || exit 0
+          if [ "$REPO_PRIVATE" = "true" ]; then
+            echo "npm provenance requires a public source repository; make the repo public or remove --provenance" >&2
+            exit 1
+          fi
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           [ -n "$NODE_AUTH_TOKEN" ] || { echo "NPM_TOKEN not set; skipping npm publish"; exit 0; }
-          npm publish --access public
+          npm publish --access public --provenance
