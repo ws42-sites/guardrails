@@ -1,3 +1,4 @@
+import { review, reviewViolations } from './review/index.js';
 import { loadConfig, ConfigError } from './config.js';
 import { readBaseline, key } from './baseline.js';
 import { RULES, ruleInfo } from './rules.js';
@@ -22,6 +23,7 @@ import { checkSuite } from './checks/suite.js';
 
 export interface RunOptions {
   cwd: string;
+  review?: boolean;
   base?: string | null;
   labels?: string[];
   clockShift?: boolean;
@@ -91,6 +93,9 @@ export async function run(opts: RunOptions): Promise<Report> {
     return { ok: false, base: opts.base ?? null, findings: [f], metrics: [], counts: { block: 1, warn: 0, known: 0 }, staleBaseline: 0 };
   }
   const { ctx, violations, metrics, journeys } = collected;
+  if (ctx.config.review.enabled && opts.review && (!opts.only || opts.only.includes('review'))) {
+    violations.push(...reviewViolations(await review(ctx.cwd, ctx.config, { base: ctx.base, testOutput: violations })));
+  }
   const baseline = readBaseline(ctx.cwd, ctx.config.baselineFile);
   const known = new Set(baseline.entries.map(key));
   const seen = new Set<string>();
