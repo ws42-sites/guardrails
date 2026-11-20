@@ -8,6 +8,22 @@ Version: 0.6.3 · Date: 2026-11-20
 ### Fixed
 - `guardrails check --fails-on-base` now unlinks the base worktree's `node_modules` link before removing the worktree, so cleanup no longer deletes the checkout's real `node_modules` directory (Windows junctions and POSIX symlinks).
 
+## [0.6.2] - 2026-11-19
+
+### Added
+- `guardrails init` now works in a repository that already has agent instruction files, so guardrails can be brought in partway through a project. Nothing outside the guardrails markers is ever changed, and a second run adds nothing.
+  - An existing `AGENTS.md` gets the guardrails rules appended between `<!-- guardrails:start -->` and `<!-- guardrails:end -->`. A later run replaces only what sits between those markers.
+  - An existing `CLAUDE.md` or `GEMINI.md` gets a one-line pointer to `AGENTS.md`, inside the same markers, unless it already mentions `AGENTS.md` or is a symlink to it.
+  - An existing `.github/CODEOWNERS` gets the guardrails owner lines (config, `.guardrails/`, workflows, CODEOWNERS, `AGENTS.md`) appended only where that path has no line yet.
+  - A file whose markers are broken (a start without an end) is left alone and reported as skipped.
+  - Line endings of the existing file (LF or CRLF) are kept.
+- `init` output says whether each file was `created`, `merged` or `skipped`. The library `init()` result has a new `merged` list: the files in `written` that were added into an existing file.
+
+### Changed
+- The `AGENTS.md` template wraps its Guardrails section in the same markers, so a file created by `init` can be updated by a later run.
+- `--force` is unchanged: it overwrites the whole file.
+- `CLAUDE.md` and `GEMINI.md` must stay a one-line pointer (DOC-2). If yours holds other content, `check` still asks you to move it into `AGENTS.md`.
+
 ## [0.6.1] - 2026-11-19
 
 ### Changed
