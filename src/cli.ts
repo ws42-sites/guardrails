@@ -165,13 +165,13 @@ async function main(): Promise<number> {
         return 0;
       }
       const r = init({ cwd, owner: values.owner, base: values.base, force: values.force, preset: values.preset });
-      for (const f of r.written) console.log(`wrote   ${f}`);
+      for (const f of r.written) console.log(`${r.merged?.includes(f) ? 'merged ' : 'created'} ${f}`);
       if (values.preset && values.preset !== 'site') {
         assertHuman(process.env, 'guardrails init --preset');
         const added = addDrafts(cwd, presetDrafts(values.preset, listFiles(cwd)));
         console.log(`journeys: added ${added.length} unapproved drafts from ${values.preset} (${added.join(', ')}). Edit, link specs, then "guardrails journeys approve <ID>".`);
       }
-      for (const f of r.skipped) console.log(`skipped ${f} (exists; --force to overwrite)`);
+      for (const f of r.skipped) console.log(`skipped ${f} (exists, nothing to add; --force to overwrite)`);
       console.log('Next: add specs to guardrails.config.json, run "guardrails baseline", then "guardrails check".');
       return 0;
     }
