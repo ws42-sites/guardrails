@@ -3,6 +3,25 @@
 All notable changes are documented here, following Keep a Changelog.
 Version: 0.6.3 · Date: 2026-11-20
 
+## [Unreleased] - planned 0.7.0
+
+Plan: [docs/plan/0.7.0.md](docs/plan/0.7.0.md). It's 0.7.0 rather than 0.6.x because 0.6.3 is already on npm and this release adds features and config keys. Everything new is off by default, so a basic install behaves like 0.6.3.
+
+### Added
+- Independent reviewer (`guardrails review`, `check --review`, rule REVIEW-1). It sees only the merge-base diff and the test output, never the author's reasoning, PR description or commit messages. It uses a typed provider interface (`stub`, `command`), fails closed, runs only on PRs that touch locked tests, config or auth paths, and shards with `--shard i/n`. Turn it on with `review.enabled`.
+- Commit-pinned provenance (`guardrails provenance record|verify`, rule PROV-1). It records the tested SHA, report hash, guardrails version, checks and results, and override labels with who and why, as JSON plus a PR marker. A head that wasn't tested fails. Turn it on with `provenance.enabled`.
+- Checker evaluation (`guardrails ledger add|import`, `guardrails evaluate`): a ledger of escaped bugs and false escalations, and weekly prune and sharpen proposals that are never applied. Results are cached. Turn it on with `evaluation.enabled`.
+- Feedback loop (`guardrails feedback draft`): failures tagged by rule, file and agent, with repeats clustered into candidate lint rules. Turn it on with `feedback.enabled`.
+- Label planner (`guardrails labels plan`): lists every approval label a PR will need, with the reason and file:line. Advisory only.
+- `guardrails.md` config format (front matter plus fenced `guardrails` blocks), merged under `guardrails.config.json`.
+- Opt-in anonymous telemetry (`telemetry.enabled` plus `telemetry.endpoint`, `GUARDRAILS_TELEMETRY=0` to force it off) and `guardrails telemetry status`.
+- Reusable workflow inputs `label-plan` (default true, advisory), `review`, `review-shards` and `provenance` (default false).
+- `scripts/ci-weight.mjs` measures the CI weight defined in the plan.
+
+### Changed
+- In this repo's CI, pushes to main mutation-test only the changed files. The full mutation run moves to the nightly and manual runs.
+- `guardrails.md` is in the default `lock.paths`.
+
 ## [0.6.3] - 2026-11-20
 
 ### Fixed

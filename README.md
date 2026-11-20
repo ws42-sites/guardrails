@@ -4,6 +4,9 @@
 
 [![npm](https://img.shields.io/npm/v/@ws42ca/guardrails)](https://www.npmjs.com/package/@ws42ca/guardrails)
 ![license](https://img.shields.io/npm/l/@ws42ca/guardrails)
+[![dogfood: guardrails on itself](https://github.com/ws42-sites/guardrails/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/ws42-sites/guardrails/actions/workflows/ci.yml)
+
+The badge is Guardrails' own CI: this repo runs every Guardrails check on itself (tests, diff rules, fails-on-base, mutation, secret scan) on each pull request.
 
 Coding agents optimise for a green build. Left alone, they delete the failing test, loosen an assertion, special-case the expected value, add a package that does not exist, or write a new doc for every task. `guardrails` is a config-driven checker that blocks those shortcuts in CI and inside the agent's own editor. It ships as one CLI, one MCP server, an agent skill and one config file per project.
 
@@ -33,6 +36,18 @@ Requires Node 20 or newer. Vitest, `@stryker-mutator/core` and `@stryker-mutator
 ```bash
 npm i -D -E vitest @stryker-mutator/core@8.7.1 @stryker-mutator/vitest-runner@8.7.1
 ```
+
+## Five-minute quickstart
+
+```bash
+npm i -D @ws42ca/guardrails          # 1. install (Node 20+)
+npx guardrails init --owner @you     # 2. scaffold config, AGENTS.md, CODEOWNERS, CI, agent hooks
+npx guardrails baseline              # 3. record today's findings; the baseline only shrinks
+npx guardrails check                 # 4. run every check; exit 1 means a blocking finding
+git checkout -b my-change && npx guardrails check --base origin/main --fails-on-base   # 5. diff rules on a branch
+```
+
+That's the whole setup. Everything below is optional.
 
 ## Quick start
 
@@ -123,6 +138,50 @@ Pull request labels come from the `GUARDRAILS_LABELS` environment variable (comm
 The old names (`tests-removed-approved`, `guardrails:rebaseline`, `allow-characterization`, `flags-resolved`, and `guardrails:config-approved` for journeys) still work in 0.6.1 as deprecated aliases and print a warning naming the new label.
 
 Set `GUARDRAILS_OFFLINE=1` to skip the npm registry lookups.
+
+## Advanced verification (0.7.0, all off by default)
+
+A basic install needs none of this. Each piece is switched on in `guardrails.config.json` or `guardrails.md`.
+
+| Feature | Switch | Command |
+|---|---|---|
+| Independent reviewer (REVIEW-1): sees only the diff and test output, never the author's reasoning, PR text or commit messages. `stub` or `command` provider. Runs only on PRs touching locked tests, config or auth paths. Sharded. | `review.enabled` | `guardrails review [--shard i/n]`, `guardrails check --review` |
+| Commit-pinned provenance (PROV-1): tested SHA, report hash, version, checks and override labels (who, why), stored as JSON plus a `<!-- guardrails:provenance v1 ... -->` marker. A head that was not tested fails. | `provenance.enabled` | `guardrails provenance record`, `guardrails provenance verify --head <sha>` |
+| Weekly checker evaluation: a ledger of escaped bugs and false escalations, with prune and sharpen proposals. It only proposes. | `evaluation.enabled` | `guardrails ledger add/import`, `guardrails evaluate --since 7d` |
+| Feedback loop: blocking findings tagged by rule, file and agent; repeats clustered into candidate lint rules for a human. | `feedback.enabled` | `guardrails feedback draft` |
+| Label planner: every approval label the PR will need, with the reason and file:line, in one summary. Advisory; never adds labels. | always available | `guardrails labels plan --base origin/main` |
+| Telemetry: opt in, anonymous. | `telemetry.enabled` + `telemetry.endpoint` | `guardrails telemetry status` |
+
+Weekly evaluation workflow: [`examples/guardrails-weekly.yml`](examples/guardrails-weekly.yml).
+
+### guardrails.md
+
+`guardrails.md` lives next to `AGENTS.md` and `CLAUDE.md`. Optional front matter holds flat `dotted.key: value` lines, and fenced blocks tagged `guardrails` (or `json guardrails`) hold JSON objects. Both parse into the same typed config as `guardrails.config.json`.
+
+````markdown
+---
+review.enabled: true
+provenance.enabled: true
+---
+# Guardrails
+Agents: never edit spec-tagged tests; flag conflicts instead.
+
+```json guardrails
+{ "mutation": { "break": 75 } }
+```
+````
+
+Precedence, lowest first: defaults, then fenced blocks (in order, objects deep-merged), then front matter, then `guardrails.config.json`. The JSON file wins, so adding a `guardrails.md` never changes an existing setup. Either file alone works. `journeys` and `deps` stay in the JSON file. The hooks lock `guardrails.md`, and loosening it counts as weakening (TEST-7).
+
+### Telemetry payload
+
+Off unless `telemetry.enabled` is true and an `endpoint` is set. `GUARDRAILS_TELEMETRY=0` or `telemetry.enabled: false` in `guardrails.md` turns it off. It's sent on `init` and on each `check`/`report`, fire-and-forget with a short timeout, and never changes a result. There's no npm postinstall hook. The payload is exactly:
+
+```json
+{ "v": 1, "event": "check", "version": "0.7.0", "node": 20, "os": "linux", "command": "check", "counts": { "block": 0, "warn": 2 }, "durationMs": 5123, "installId": "<random uuid>" }
+```
+
+No hostnames, paths, usernames, repo names, emails or git data. `guardrails telemetry status` prints exactly what would be sent.
 
 ## CLI
 
