@@ -1,7 +1,12 @@
 # Changelog
 
 All notable changes are documented here, following Keep a Changelog.
-Version: 0.6.2 · Date: 2026-11-19
+Version: 0.6.3 · Date: 2026-11-20
+
+## [0.6.3] - 2026-11-20
+
+### Fixed
+- `guardrails check --fails-on-base` now unlinks the base worktree's `node_modules` link before removing the worktree, so cleanup no longer deletes the checkout's real `node_modules` directory (Windows junctions and POSIX symlinks).
 
 ## [0.6.2] - 2026-11-19
 

@@ -260,7 +260,7 @@ jobs:
 
 Notes:
 
-- `guardrails check` exits 1 on blocking findings. The checks need full git history (`fetch-depth: 0`) to compare against the base branch.
+- `guardrails check` exits 1 on blocking findings. The checks need full git history (`fetch-depth: 0`) to compare against the base branch. `--fails-on-base` unlinks the worktree `node_modules` link first during cleanup so the real `node_modules` directory is never deleted.
 - Mutation testing is opt in: add `npx guardrails check --only mutation --mutation --base origin/<base>` as a separate job. It runs Stryker on changed files in the mutation tiers.
 - The clock-shift rerun (`--clock-shift`, TEST-6) runs the whole suite with the clock moved forward. Run it on the main branch and nightly, not on every pull request.
 - Secret scanning (SEC-1) is a gitleaks step in CI, not part of the CLI.
