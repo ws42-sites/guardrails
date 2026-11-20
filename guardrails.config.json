@@ -53,7 +53,7 @@
       },
       "DIFF-01": {
         "tier": "T1",
-        "behaviour": "Deleting base-branch tests needs the tests-removed-approved label; same-PR tests and moves are free; a count drop warns"
+        "behaviour": "Deleting base-branch tests needs the guardrails:tests-removed-approved label; same-PR tests and moves are free; a count drop warns"
       },
       "DIFF-02": {
         "tier": "T1",
@@ -149,7 +149,7 @@
       },
       "FAILBASE-01": {
         "tier": "T1",
-        "behaviour": "New or changed tests must fail on the base branch and pass on head, unless regressionGuard or allow-characterization"
+        "behaviour": "New or changed tests must fail on the base branch and pass on head, unless regressionGuard or the guardrails:existing-behaviour-tests-approved label"
       },
       "PROP-01": {
         "tier": "T1",

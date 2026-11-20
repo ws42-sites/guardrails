@@ -5,6 +5,7 @@ import type { CheckContext, CheckOutput, JourneyRow, Metric, Violation } from '.
 import { diffAgainst, isE2eFile, isProductFile, listFiles, matchesAny, mergeBase, readText, showAt, violation } from '../util.js';
 import { generatedRuntime, generatedSpec, journeyData } from '../cuj-generate.js';
 import { indexTests } from './tests.js';
+import { LEGACY_LABELS, hasLabel } from '../labels.js';
 
 export const isJourneyEnforced = (journey: { approved?: boolean; provenance?: string }): boolean => journey.approved === true || journey.provenance === 'client-provided';
 
@@ -132,12 +133,12 @@ export function checkJourneys(ctx: CheckContext, files = listFiles(ctx.cwd)): Ch
   if (ctx.base) {
     // JRN-3: journeys are human-owned; any change in a PR needs a code owner.
     const before = showAt(ctx.cwd, mergeBase(ctx.cwd, ctx.base), 'guardrails.config.json');
-    if (before && !ctx.labels.includes(cfg.labels.configApproved)) {
+    if (before && !hasLabel(ctx.labels, cfg.labels.journeysApproved, LEGACY_LABELS.journeys)) {
       let old = {};
       try { old = JSON.parse(before).journeys ?? {}; } catch { /* CFG-1 */ }
       const head = JSON.parse(readText(ctx.cwd, 'guardrails.config.json')).journeys ?? {};
       for (const change of journeyOwnershipChanges(old, head))
-        v.push(violation('JRN-3', 'guardrails.config.json', `${change.message} in this PR. Journeys are human-owned: ${change.reason}; a code owner adds the "${cfg.labels.configApproved}" label.`, change.key));
+        v.push(violation('JRN-3', 'guardrails.config.json', `${change.message} in this PR. Journeys are human-owned: ${change.reason}; a code owner adds the "${cfg.labels.journeysApproved}" label, which approves these journey changes.`, change.key));
     }
     // JRN-4: new routes, forms and endpoints need a journey.
     const all = Object.values(items);

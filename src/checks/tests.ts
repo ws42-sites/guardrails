@@ -5,6 +5,7 @@ import {
   mergeBase, readText, showAt, tierOf, violation,
 } from '../util.js';
 import { ruleInfo } from '../rules.js';
+import { LEGACY_LABELS, hasLabel } from '../labels.js';
 
 export interface SpecRow {
   id: string;
@@ -138,7 +139,7 @@ function diffChecks(ctx: CheckContext, index: TestIndex, v: Violation[], metrics
   }
 
   // ---- TEST-7 weakening ----
-  const reduceOk = ctx.labels.includes(cfg.tests.testsRemovedLabel);
+  const reduceOk = hasLabel(ctx.labels, cfg.tests.testsRemovedLabel, LEGACY_LABELS.testsRemoved);
   const baseTests: Record<string, TestCase[]> = {};
   for (const f of filesAt(ctx.cwd, mb).filter((x) => isTestFile(cfg, x))) {
     const src = showAt(ctx.cwd, mb, f);
@@ -173,7 +174,7 @@ function diffChecks(ctx: CheckContext, index: TestIndex, v: Violation[], metrics
     metrics.push({ name: 'tests.deletedFromBase', value: deleted.length, detail: deleted.slice(0, 50).join('\n') });
     if (!reduceOk)
       for (const d of deleted)
-        v.push(violation('TEST-7', d.split(': ')[0], `deleted base test "${d.slice(d.indexOf(': ') + 2)}". Deleting base tests needs the "${cfg.tests.testsRemovedLabel}" label from a code owner.`, `deleted:${d}`));
+        v.push(violation('TEST-7', d.split(': ')[0], `deleted base test "${d.slice(d.indexOf(': ') + 2)}". Deleting base tests needs a code owner to add the "${cfg.tests.testsRemovedLabel}" label, which approves removing tests.`, `deleted:${d}`));
   }
 
   configWeakening(ctx, mb, v);
@@ -250,7 +251,7 @@ function configWeakening(ctx: CheckContext, mb: string, v: Violation[]): void {
       const changes = compareConfigs(JSON.parse(before), JSON.parse(readText(ctx.cwd, cfgFile)));
       const approved = ctx.labels.includes(ctx.config.labels.configApproved);
       for (const c of changes)
-        if (!approved) v.push(violation('TEST-7', cfgFile, `config loosened: ${c}. Lowering a threshold counts as weakening; a code owner must approve it with the "${ctx.config.labels.configApproved}" label.`, `cfg:${c}`));
+        if (!approved) v.push(violation('TEST-7', cfgFile, `config loosened: ${c}. Lowering a threshold counts as weakening; a code owner must add the "${ctx.config.labels.configApproved}" label, which approves loosening guardrails.config.json.`, `cfg:${c}`));
     } catch {
       /* invalid JSON is CFG-1's job */
     }
@@ -271,7 +272,7 @@ function configWeakening(ctx: CheckContext, mb: string, v: Violation[]): void {
     const keys = (s: string | null) => new Set<string>(s ? (JSON.parse(s).entries ?? []).map((e: { rule: string; fingerprint: string }) => `${e.rule}:${e.fingerprint}`) : []);
     const o = keys(oldBl);
     const added = [...keys(newBl)].filter((k) => !o.has(k));
-    if (added.length && !ctx.labels.includes(ctx.config.labels.rebaseline))
-      v.push(violation('BASE-1', bl, `baseline grew by ${added.length} entr${added.length === 1 ? 'y' : 'ies'}. Fix the new violations instead, or get the "${ctx.config.labels.rebaseline}" label from a code owner.`, `grew:${added.sort().join(',')}`));
+    if (added.length && !hasLabel(ctx.labels, ctx.config.labels.rebaseline, LEGACY_LABELS.baseline))
+      v.push(violation('BASE-1', bl, `baseline grew by ${added.length} entr${added.length === 1 ? 'y' : 'ies'}. Fix the new violations instead, or have a code owner add the "${ctx.config.labels.rebaseline}" label, which approves letting the baseline grow.`, `grew:${added.sort().join(',')}`));
   }
 }

@@ -22,5 +22,5 @@ it.each([
   vi.mocked(showAt).mockReturnValue(JSON.stringify({ version: 1, journeys: base }));
   const findings = checkJourneys(r.ctx('main')).violations.filter((v) => v.rule === 'JRN-3');
   expect(findings.map((v) => v.message.split(' in this')[0])).toEqual(expected);
-  expect(checkJourneys(r.ctx('main', ['guardrails:config-approved'])).violations.filter((v) => v.rule === 'JRN-3')).toEqual([]);
+  expect(checkJourneys(r.ctx('main', ['guardrails:journeys-approved'])).violations.filter((v) => v.rule === 'JRN-3')).toEqual([]);
 });

@@ -5,6 +5,7 @@ import type { CheckContext, CheckOutput, Metric, Violation } from '../types.js';
 import { inventory, type TestCase } from '../inventory.js';
 import { diffAgainst, git, isHelperFile, isTestFile, mergeBase, readText, showAt, violation } from '../util.js';
 import { runCommand } from './run.js';
+import { LEGACY_LABELS, hasLabel } from '../labels.js';
 
 interface Assertion { title: string; status: string }
 interface VitestJson { testResults?: { name: string; assertionResults?: Assertion[] }[] }
@@ -75,7 +76,7 @@ export function checkFailsOnBase(ctx: CheckContext): CheckOutput {
     };
     const onBase = run(wt, 'base');
     const onHead = run(ctx.cwd, 'head');
-    const characterization = ctx.labels.includes(cfg.labels.characterization);
+    const characterization = hasLabel(ctx.labels, cfg.labels.characterization, LEGACY_LABELS.characterization);
     let failedOnBase = 0;
     let guards = 0;
     for (const { file, test } of targets) {
@@ -97,7 +98,7 @@ export function checkFailsOnBase(ctx: CheckContext): CheckOutput {
         guards++;
         continue;
       }
-      v.push(violation('TEST-11', file, `"${test.title}" already passes on ${ctx.base} without this change, so it does not test the change. Assert the new behaviour, or mark ${test.specId ?? 'the spec'} regressionGuard / use the "${cfg.labels.characterization}" label for characterization tests.`, `base:${test.title}`, test.line));
+      v.push(violation('TEST-11', file, `"${test.title}" already passes on ${ctx.base} without this change, so it does not test the change. Assert the new behaviour, or mark ${test.specId ?? 'the spec'} regressionGuard / have a code owner add the "${cfg.labels.characterization}" label, which approves new tests that lock in existing behaviour.`, `base:${test.title}`, test.line));
     }
     metrics.push({ name: 'failsOnBase', value: `${failedOnBase}/${targets.length}`, detail: `${failedOnBase} new/changed tests fail on base as required${guards ? `, ${guards} allowed as regression guards/characterization` : ''}` });
   } catch (e) {

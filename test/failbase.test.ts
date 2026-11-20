@@ -29,7 +29,7 @@ describe('FAILBASE-01 new and changed tests must fail on base and pass on head',
     const r = project();
     r.write({ 'src/core/add.ts': 'export const add = (a: number, b: number) => a + b;\n', 'src/core/add.test.ts': test('CORE-01 zero', 'expect(add(0, 0)).toBe(0)') });
     expect(outcome(r)).toEqual([['"CORE-01 zero"'], '0/1']);
-    expect(outcome(r, ['allow-characterization'])).toEqual([[], '0/1']);
+    expect(outcome(r, ['guardrails:existing-behaviour-tests-approved'])).toEqual([[], '0/1']);
     const guard = project(cfg({ 'CORE-01': { tier: 'T1', behaviour: 'core adds numbers', regressionGuard: true } }));
     guard.write({ 'src/core/add.test.ts': test('CORE-01 zero', 'expect(add(0, 0)).toBe(0)') });
     expect(outcome(guard)).toEqual([[], '0/1']);

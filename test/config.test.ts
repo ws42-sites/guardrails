@@ -20,7 +20,7 @@ describe('CFG-01 config schema rejects unknown keys and bad values', () => {
     expect(c.tests.budget).toEqual({ T1: 1, T2: 0.6, T3: 0.4 });
     expect(c.tests.maxFileLines).toBe(300);
     expect(c.specs.maxTestsPerId).toBe(8);
-    expect(c.tests.testsRemovedLabel).toBe('tests-removed-approved');
+    expect(c.tests.testsRemovedLabel).toBe('guardrails:tests-removed-approved');
     expect(c.docs.maxLines).toEqual({ default: 250, 'AGENTS.md': 150 });
   });
 });

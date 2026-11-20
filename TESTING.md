@@ -48,17 +48,17 @@ CI reruns the suite with the clock moved forward 2 years. A test that passes tod
 
 ## 6. Never weaken a test [TEST-7]
 In a PR, these block:
-- deleting a test that exists on the base branch (needs the `tests-removed-approved` label from a code owner)
+- deleting a test that exists on the base branch (needs the `guardrails:tests-removed-approved` label from a code owner)
 - removing an `expect`, or loosening a matcher (`toEqual` → `toMatchObject`/`toContain`, `toBe` → `toBeTruthy`)
 - lowering any threshold, mode, tier or allowlist in `guardrails.config.json`, or a coverage/mutation threshold in Vitest or Stryker config
 
 Tests added in the same PR can be changed or deleted freely. Moving a test to another file is not a deletion. Any drop in the total test count versus base warns with the count [TEST-10].
 
 ## 7. Tests must fail without the change [TEST-11]
-In a PR, every new or changed test runs twice: on the base branch's product code (a git worktree with only the PR's test files copied in) and on head. It must fail on base and pass on head; if you revert the implementation, the test should fail. A test that passes on base blocks unless its spec has `"regressionGuard": true` or a human adds the `allow-characterization` label. Only the changed test files run, so it's fast.
+In a PR, every new or changed test runs twice: on the base branch's product code (a git worktree with only the PR's test files copied in) and on head. It must fail on base and pass on head; if you revert the implementation, the test should fail. A test that passes on base blocks unless its spec has `"regressionGuard": true` or a human adds the `guardrails:existing-behaviour-tests-approved` label (for new tests that lock in existing behaviour). Only the changed test files run, so it's fast.
 
 ## 8. Conflicts: stop and flag [FLAG-1]
-If a test contradicts the spec or can't pass honestly, the agent calls `guardrails_flag` / `guardrails flag` and stops. Flags live in `.guardrails/flags.json` and block merge until a human empties it or adds `flags-resolved`. Agent hooks lock spec-tagged tests and guardrails files, so editing the test is not an option. In ImpossibleBench, letting agents flag cut cheating from 54% to 9%.
+If a test contradicts the spec or can't pass honestly, the agent calls `guardrails_flag` / `guardrails flag` and stops. Flags live in `.guardrails/flags.json` and block merge until a human empties it or adds `guardrails:flags-approved`. Agent hooks lock spec-tagged tests and guardrails files, so editing the test is not an option. In ImpossibleBench, letting agents flag cut cheating from 54% to 9%.
 
 ## 9. Hidden holdout tests [HOLD-1]
 Optional: tests the building agent never sees, in a separate private repo. The PR gate checks them out and runs them; only titles and pass/fail are reported. Their specs are exempt from TEST-2.
@@ -75,4 +75,4 @@ Stryker runs on changed files in `mutation.tiers` (T1 by default), incrementally
 - Test files stay at or under 300 lines (`testSuite.maxLines`) [SUITE-2]. No fixed sleeps [SUITE-3]. No real clock inside an assertion without fake timers [SUITE-4]. No copy-paste test bodies or files that repeat each other's titles [SUITE-5].
 - It reports the test/product line ratio per package.
 
-Existing findings live in `.guardrails/test-suite-baseline.json`, so only regressions block. `--update-baseline` only ratchets down. Growing the baseline needs the rebaseline label [SUITE-6]. Large full suites can shard with `guardrails shard --shard i/n --run "<runner>"`, or `vitest run --shard=i/n` (see template/.github/workflows/full-suite-sharded.yml).
+Existing findings live in `.guardrails/test-suite-baseline.json`, so only regressions block. `--update-baseline` only ratchets down. Growing the baseline needs the `guardrails:baseline-approved` label [SUITE-6]. Large full suites can shard with `guardrails shard --shard i/n --run "<runner>"`, or `vitest run --shard=i/n` (see template/.github/workflows/full-suite-sharded.yml).

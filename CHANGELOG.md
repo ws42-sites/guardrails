@@ -1,7 +1,32 @@
 # Changelog
 
 All notable changes are documented here, following Keep a Changelog.
-Version: 0.6.0 · Date: 2026-11-19
+Version: 0.6.1 · Date: 2026-11-19
+
+## [0.6.1] - 2026-11-19
+
+### Changed
+- Every approval label now follows `guardrails:<what it approves>-approved`, so a code owner can see what they are signing off:
+
+  | Old label | New label | Approves |
+  |---|---|---|
+  | `guardrails:config-approved` (for journeys) | `guardrails:journeys-approved` | The journey changes in the PR (JRN-3) |
+  | `guardrails:config-approved` (for config) | `guardrails:config-approved` (unchanged) | Loosening `guardrails.config.json` (TEST-7 config part) |
+  | `tests-removed-approved` | `guardrails:tests-removed-approved` | Deleting base-branch tests (TEST-7) |
+  | `allow-characterization` | `guardrails:existing-behaviour-tests-approved` | New tests that lock in existing behaviour and already pass on base (TEST-11) |
+  | `guardrails:rebaseline` | `guardrails:baseline-approved` | The baseline may grow (BASE-1, SUITE-6) |
+  | `flags-resolved` | `guardrails:flags-approved` | Open flags stop blocking (FLAG-1) |
+
+- Error and fix messages now say plainly what the code owner is approving.
+- New config key `labels.journeysApproved` (default `guardrails:journeys-approved`).
+
+### Deprecated
+- The old label names still work in this release as aliases and print a warning on stderr naming the new label. `guardrails:config-approved` still approves journeys (JRN-3) with a warning. The aliases will be removed in a later release.
+
+### Migration
+1. Create the new labels in each repository that uses guardrails (labels are never created for you).
+2. Replace the old labels on open pull requests, then delete the old labels.
+3. If you set custom names under `labels` or `tests.testsRemovedLabel`, nothing changes for those keys, except that `labels.journeysApproved` is new: a journeys change now needs it, or the deprecated `guardrails:config-approved` alias.
 
 ## [0.6.0] - 2026-11-19
 
