@@ -1,6 +1,6 @@
 # @ws42ca/guardrails: knowledge base
 
-A single reference for what `@ws42ca/guardrails` does, how its parts fit together, and how to use it day to day. It describes version 0.6.1. For a short introduction see `README.md`; for the full list of rules see `RULES.md`; for the testing policy the rules enforce see `TESTING.md`. Every statement here comes from the package source, so when this file and the code disagree, the code wins.
+A single reference for what `@ws42ca/guardrails` does, how its parts fit together, and how to use it day to day. It describes version 0.6.2. For a short introduction see `README.md`; for the full list of rules see `RULES.md`; for the testing policy the rules enforce see `TESTING.md`. Every statement here comes from the package source, so when this file and the code disagree, the code wins.
 
 ## Contents
 
@@ -152,7 +152,7 @@ There are 47 rules (`guardrails explain` lists them). Features below group them 
 |---|---|---|---|---|
 | F-57 | **Library API** | Exports `run`, `collect`, `loadConfig`, `parseConfig`, `configSchema`, `RULES`, `ruleInfo`, `toText`, `toMarkdown`, `toJson`, baseline helpers, `init`, `inventory`, `specMatrix`, `validateTest`, token helpers and the types. A separate `./cuj-runtime` export holds the journey runtime. | `import ... from '@ws42ca/guardrails'` | n/a |
 | F-58 | **Reports** | The same findings as text (default), JSON or Markdown. Markdown suits PR comments and job summaries. | `guardrails report --format text\|json\|markdown` | text |
-| F-59 | **Project scaffolding** | Writes the config, agent files, CODEOWNERS, a CI workflow and agent hook and MCP files for Claude Code, Gemini CLI, Antigravity and Codex CLI. Never overwrites a file without `--force`, except that hook and MCP JSON files are merged and an existing `.codex/config.toml` gets only the missing tables appended. The runbook, CI and test-suite standards stay off until `init runbook`. | `guardrails init [--owner @handle] [--base main] [--force]` | owner `@OWNER` |
+| F-59 | **Project scaffolding** | Writes the config, agent files, CODEOWNERS, a CI workflow and agent hook and MCP files for Claude Code, Gemini CLI, Antigravity and Codex CLI. Never overwrites a file without `--force`. Hook and MCP JSON files are merged, an existing `.codex/config.toml` gets only the missing tables appended, an existing `AGENTS.md` gets a marked guardrails section, `CLAUDE.md` and `GEMINI.md` get a marked one-line pointer, and `CODEOWNERS` gets any missing owner lines. Re-running is idempotent; the output says created, merged or skipped. The runbook, CI and test-suite standards stay off until `init runbook`. | `guardrails init [--owner @handle] [--base main] [--force]` | owner `@OWNER` |
 | F-60 | **Static site preset** | A site-sized config and workflow, without agent files, keeping guardrails out of the site's dependencies (it runs a pinned version through `npx`). | `guardrails init --preset site` | n/a |
 | F-61 | **MCP server** | Nine tools for agents; see [MCP tools](#mcp-tools). | `guardrails-mcp` | stdio |
 | F-62 | **Agent skill** | A skill file that tells an agent how to work under the rules. | `skill/SKILL.md` | not installed automatically |
@@ -310,7 +310,7 @@ Install it as a project dependency (not only through `npx`) so the files `init` 
 npx guardrails init --owner @your-github-handle --base main
 ```
 
-`init` writes these files and never overwrites an existing one unless you pass `--force`:
+`init` writes these files. It never overwrites an existing one unless you pass `--force`; agent files, CODEOWNERS and settings files that already exist are merged instead (see below):
 
 | File | Purpose |
 |---|---|
@@ -325,6 +325,18 @@ npx guardrails init --owner @your-github-handle --base main
 | `.codex/hooks.json`, `.codex/config.toml` | Codex CLI hook, MCP server, and `GUARDRAILS_AGENT=codex` for Codex's shell |
 
 The six hook and MCP JSON files are merged into any existing settings rather than skipped, and an existing `.codex/config.toml` only has the missing tables appended (never rewritten or duplicated). If you omit `--owner`, CODEOWNERS contains the placeholder `@OWNER`, so replace it before enabling branch protection.
+
+**Bringing guardrails into an existing project (0.6.2 and later).** Agent files that already exist are merged, not skipped. Everything guardrails adds sits between `<!-- guardrails:start -->` and `<!-- guardrails:end -->`, and nothing outside those markers is read or changed.
+
+| Existing file | What `init` does |
+|---|---|
+| `AGENTS.md` | Appends the guardrails section (the same rules the template uses) after your content. |
+| `CLAUDE.md`, `GEMINI.md` | Appends one marked line, `<!-- guardrails:start --> See AGENTS.md for the guardrails rules. <!-- guardrails:end -->`. Skipped when the file already mentions `AGENTS.md` or is a symlink to it. |
+| `.github/CODEOWNERS` | Appends the owner lines for the config, `.guardrails/`, workflows, CODEOWNERS and `AGENTS.md`, only for paths that have no line yet. They go last, because the last matching line wins. |
+
+Running `init` again is safe: if the markers exist, only the text between them is replaced (with the current rules), and when it is already current the file is reported as skipped. A start marker with no end marker is treated as broken: the file is left alone and reported as skipped. The file's line endings are kept. `--force` keeps its meaning and overwrites the whole file. The output lists each file as `created`, `merged` or `skipped`.
+
+`CLAUDE.md` and `GEMINI.md` must be only a pointer (DOC-2), so if yours holds real content, `check` will still ask you to move it into `AGENTS.md` after `init` has added the pointer.
 
 The starter workflow (0.6.0 and later) runs the installed package, so it works in any repository that has `@ws42ca/guardrails` as a dependency. It has three jobs: `check` (report to the job summary, then `guardrails check`), `mutation` (pull requests only), and `secrets` (gitleaks). Earlier versions of this template called a reusable workflow instead.
 

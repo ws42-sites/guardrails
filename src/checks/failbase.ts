@@ -1,4 +1,4 @@
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync } from 'node:fs';
+import { cpSync, existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmdirSync, rmSync, symlinkSync, unlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import type { CheckContext, CheckOutput, Metric, Violation } from '../types.js';
@@ -40,6 +40,32 @@ export function changedTests(ctx: CheckContext, mb: string, files: string[]): { 
     }
   }
   return out;
+}
+
+export function unlinkDirLink(target: string): void {
+  let st;
+  try {
+    st = lstatSync(target);
+  } catch (e) {
+    const code = (e as NodeJS.ErrnoException)?.code;
+    if (code === 'ENOENT' || code === 'ENOTDIR') return;
+    throw e;
+  }
+  let isLink = st.isSymbolicLink();
+  if (!isLink && process.platform === 'win32' && st.isDirectory()) {
+    try {
+      isLink = Boolean(readlinkSync(target));
+    } catch {
+      return;
+    }
+  }
+  if (!isLink) return;
+  try {
+    unlinkSync(target);
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException)?.code === 'ENOENT') return;
+    rmdirSync(target);
+  }
 }
 
 /**
@@ -104,6 +130,7 @@ export function checkFailsOnBase(ctx: CheckContext): CheckOutput {
   } catch (e) {
     metrics.push({ name: 'failsOnBase', value: 'error', detail: (e as Error).message.split('\n')[0] });
   } finally {
+    unlinkDirLink(join(wt, 'node_modules'));
     try { git(ctx.cwd, ['worktree', 'remove', '--force', wt]); } catch { /* already gone */ }
     rmSync(tmp, { recursive: true, force: true });
   }

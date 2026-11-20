@@ -10,13 +10,13 @@ import { validateTest } from '../src/validate.js';
 import { BASE_CONFIG, repo } from './helpers/repo.js';
 
 describe('INIT-01 init scaffolds a repo without clobbering it', () => {
-  it('writes config, AGENTS.md pointers, CODEOWNERS and CI, guessing tiers, and skips existing files', () => {
+  it('writes config, AGENTS.md pointers, CODEOWNERS and CI, guessing tiers, and merges into existing agent docs', () => {
     const r = repo({ 'src/lib/storage/x.ts': '', 'functions/api/a.ts': '', 'src/main.tsx': '', '.claude/settings.json': '{"model":"x","hooks":{"PreToolUse":[]}}' });
     r.remove('guardrails.config.json', '.github/CODEOWNERS');
     const res = init({ cwd: r.dir, owner: '@josh', base: 'main' });
     expect([res.written, res.skipped]).toEqual([
-      ['guardrails.config.json', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml', '.claude/settings.json', '.mcp.json', '.gemini/settings.json', '.agents/hooks.json', '.agents/mcp_config.json', '.codex/hooks.json', '.codex/config.toml', '.gemini/.env'],
-      ['AGENTS.md'],
+      ['guardrails.config.json', 'AGENTS.md', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml', '.claude/settings.json', '.mcp.json', '.gemini/settings.json', '.agents/hooks.json', '.agents/mcp_config.json', '.codex/hooks.json', '.codex/config.toml', '.gemini/.env'],
+      [],
     ]);
     const cfg = parseConfig(JSON.parse(readFileSync(join(r.dir, 'guardrails.config.json'), 'utf8')));
     expect([cfg.sourceRoots, cfg.tiers.T1, cfg.architecture.entries]).toEqual([['src', 'functions'], ['functions/api/**', 'src/lib/storage/**'], ['src/main.tsx', 'functions/**/*.ts']]);

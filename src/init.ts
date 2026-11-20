@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, lstatSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadConfig } from './config.js';
@@ -39,7 +39,50 @@ export function mergeSettings(existing: Json, add: Json): Json {
 }
 
 export interface InitOptions { cwd: string; owner?: string; base?: string; force?: boolean; preset?: string }
-export interface InitResult { written: string[]; skipped: string[] }
+/** `written` is every file init changed; `merged` is the part of it that was added into a file that already existed. */
+export interface InitResult { written: string[]; skipped: string[]; merged?: string[] }
+
+export const MARK_START = '<!-- guardrails:start -->';
+export const MARK_END = '<!-- guardrails:end -->';
+const POINTER = `${MARK_START} See AGENTS.md for the guardrails rules. ${MARK_END}`;
+const eolOf = (text: string) => (text.includes('\r\n') ? '\r\n' : '\n');
+
+/** Insert `block` (markers included) at the end of `existing`, or replace only what sits between its markers. null when nothing would change or the markers are broken. */
+export function upsertMarked(existing: string, block: string): string | null {
+  const eol = eolOf(existing);
+  const start = existing.indexOf(MARK_START);
+  const end = existing.indexOf(MARK_END, start + 1);
+  if (start === -1 && existing.includes(MARK_END)) return null;
+  if (start !== -1) {
+    if (end === -1) return null;
+    const next = existing.slice(0, start) + block.replace(/\r?\n/g, eol) + existing.slice(end + MARK_END.length);
+    return next === existing ? null : next;
+  }
+  return `${existing.replace(/\s*$/, '')}${eol}${eol}${block.replace(/\r?\n/g, eol)}${eol}`;
+}
+
+/** Template owner lines (comment lines excluded) whose path the existing CODEOWNERS never mentions, appended after it so they win. null when none are missing. */
+export function mergeCodeowners(existing: string, template: string): string | null {
+  const paths = new Set(existing.split(/\r?\n/).map((l) => l.trim()).filter((l) => l && !l.startsWith('#')).map((l) => l.split(/\s+/)[0]));
+  const lines = template.split(/\r?\n/).filter((l) => l.trim());
+  const missing = lines.filter((l) => !l.startsWith('#') && !paths.has(l.trim().split(/\s+/)[0]));
+  if (!missing.length) return null;
+  const eol = eolOf(existing);
+  const head = lines.filter((l) => l.startsWith('#'));
+  return `${existing.replace(/\s*$/, '')}${eol}${eol}${[...head, ...missing].join(eol)}${eol}`;
+}
+
+/** The existing agent file (AGENTS.md, CLAUDE.md, GEMINI.md) with guardrails added; null to skip it. */
+function mergeAgentFile(file: string, current: string, body: string, dest: string): string | null {
+  if (file === 'AGENTS.md') {
+    const from = body.indexOf(MARK_START);
+    const to = body.indexOf(MARK_END);
+    return upsertMarked(current, body.slice(from, to + MARK_END.length));
+  }
+  if (lstatSync(dest).isSymbolicLink()) return null;
+  if (current.includes(MARK_START) || current.includes(MARK_END)) return upsertMarked(current, POINTER);
+  return current.includes('AGENTS.md') ? null : upsertMarked(current, POINTER);
+}
 
 /** Guess tiers, roots and entries from what exists, so a fresh repo starts close to right. */
 export function guessConfig(cwd: string, template: Record<string, unknown>, base: string): Record<string, unknown> {
@@ -58,6 +101,7 @@ export function init(opts: InitOptions): InitResult {
   const base = opts.base ?? 'main';
   const written: string[] = [];
   const skipped: string[] = [];
+  const merged: string[] = [];
   const site = opts.preset === 'site';
   const files = site ? ['guardrails.config.json', '.github/workflows/guardrails.yml'] : FILES;
   for (const f of files) {
@@ -66,23 +110,32 @@ export function init(opts: InitOptions): InitResult {
     let body = readFileSync(join(TEMPLATE, source), 'utf8').replaceAll('{{OWNER}}', owner).replaceAll('{{BASE}}', base);
     if (existsSync(dest) && !opts.force) {
       if (f === '.codex/config.toml') {
-        const merged = mergeCodexToml(readFileSync(dest, 'utf8'), body);
-        if (merged === null) { skipped.push(f); continue; }
-        body = merged;
+        const next = mergeCodexToml(readFileSync(dest, 'utf8'), body);
+        if (next === null) { skipped.push(f); continue; }
+        body = next;
+      } else if (['AGENTS.md', 'CLAUDE.md', 'GEMINI.md'].includes(f)) {
+        const next = mergeAgentFile(f, readFileSync(dest, 'utf8'), body, dest);
+        if (next === null) { skipped.push(f); continue; }
+        body = next;
+      } else if (f.endsWith('CODEOWNERS')) {
+        const next = mergeCodeowners(readFileSync(dest, 'utf8'), body);
+        if (next === null) { skipped.push(f); continue; }
+        body = next;
       } else if (!HOOK_FILES().includes(f)) {
         skipped.push(f);
         continue;
       } else try {
         const current = JSON.parse(readFileSync(dest, 'utf8'));
-        const merged = `${JSON.stringify(mergeSettings(current, JSON.parse(body)), null, 2)}\n`;
-        if (merged === `${JSON.stringify(current, null, 2)}\n`) { skipped.push(f); continue; }
-        body = merged;
+        const next = `${JSON.stringify(mergeSettings(current, JSON.parse(body)), null, 2)}\n`;
+        if (next === `${JSON.stringify(current, null, 2)}\n`) { skipped.push(f); continue; }
+        body = next;
       } catch {
         skipped.push(f);
         continue;
       }
     }
     if (!site && f === 'guardrails.config.json') body = `${JSON.stringify(guessConfig(opts.cwd, JSON.parse(body), base), null, 2)}\n`;
+    if (existsSync(dest) && !opts.force) merged.push(f);
     mkdirSync(dirname(dest), { recursive: true });
     writeFileSync(dest, body);
     written.push(f);
@@ -95,9 +148,10 @@ export function init(opts: InitOptions): InitResult {
   if (cur === null || !/^GUARDRAILS_AGENT=/m.test(cur)) {
     mkdirSync(dirname(envFile), { recursive: true });
     writeFileSync(envFile, cur === null ? line : `${cur.replace(/\n?$/, '\n')}${line}`);
+    if (cur !== null) merged.push('.gemini/.env');
     written.push('.gemini/.env');
   } else skipped.push('.gemini/.env');
-  return { written, skipped };
+  return { written, skipped, merged };
 }
 
 const STUB = (name: string) => `echo "${name}: not wired yet. Point it at the real command or mark it n/a in guardrails.config.json runbook.na." && exit 1`;

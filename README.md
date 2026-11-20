@@ -40,7 +40,7 @@ npm i -D -E vitest @stryker-mutator/core@8.7.1 @stryker-mutator/vitest-runner@8.
 npx guardrails init --owner @your-github-handle --base main
 ```
 
-`init` writes `guardrails.config.json`, `AGENTS.md` (the single source of truth for agent instructions), one-line `CLAUDE.md` and `GEMINI.md` pointers, `.github/CODEOWNERS`, a starter GitHub Actions workflow, and the agent hook and MCP files for Claude Code, Gemini CLI, Antigravity and Codex CLI. It never overwrites an existing file unless you pass `--force`.
+`init` writes `guardrails.config.json`, `AGENTS.md` (the single source of truth for agent instructions), one-line `CLAUDE.md` and `GEMINI.md` pointers, `.github/CODEOWNERS`, a starter GitHub Actions workflow, and the agent hook and MCP files for Claude Code, Gemini CLI, Antigravity and Codex CLI. It never overwrites an existing file unless you pass `--force`. In a repository that already has these files, `init` merges instead: it appends the rules to `AGENTS.md` between `<!-- guardrails:start -->` and `<!-- guardrails:end -->` markers, adds a marked one-line pointer to an existing `CLAUDE.md` or `GEMINI.md` (unless it already mentions `AGENTS.md`), and appends missing owner lines to `.github/CODEOWNERS`. Running it again only replaces what is between the markers and never touches the rest. It prints `created`, `merged` or `skipped` for every file.
 
 A fresh `init` followed by `npx guardrails check` passes. The runbook, CI and test-suite standards start off; opt in with `npx guardrails init runbook` once you want them (it writes `RUNBOOK.md` and stub scripts that fail until you wire them up).
 
@@ -128,7 +128,7 @@ Set `GUARDRAILS_OFFLINE=1` to skip the npm registry lookups.
 
 | Command | What it does |
 |---|---|
-| `guardrails init [--owner @handle] [--base main] [--force]` | Scaffold config, agent files, CODEOWNERS, CI workflow and hooks |
+| `guardrails init [--owner @handle] [--base main] [--force]` | Scaffold config, agent files, CODEOWNERS, CI workflow and hooks; merges into agent files and CODEOWNERS that already exist |
 | `guardrails check [--base ref] [--fails-on-base] [--clock-shift] [--mutation] [--only groups]` | Run the checks. Exit 1 on blocking findings |
 | `guardrails report --format text\|json\|markdown` | The same checks, printed. Markdown suits PR comments and job summaries |
 | `guardrails baseline [--force]` | Write or ratchet `.guardrails/baseline.json` (it only shrinks) |
@@ -260,7 +260,7 @@ jobs:
 
 Notes:
 
-- `guardrails check` exits 1 on blocking findings. The checks need full git history (`fetch-depth: 0`) to compare against the base branch.
+- `guardrails check` exits 1 on blocking findings. The checks need full git history (`fetch-depth: 0`) to compare against the base branch. `--fails-on-base` unlinks the worktree `node_modules` link first during cleanup so the real `node_modules` directory is never deleted.
 - Mutation testing is opt in: add `npx guardrails check --only mutation --mutation --base origin/<base>` as a separate job. It runs Stryker on changed files in the mutation tiers.
 - The clock-shift rerun (`--clock-shift`, TEST-6) runs the whole suite with the clock moved forward. Run it on the main branch and nightly, not on every pull request.
 - Secret scanning (SEC-1) is a gitleaks step in CI, not part of the CLI.
