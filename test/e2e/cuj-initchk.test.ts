@@ -29,9 +29,10 @@ test('CUJ-INITCHK developer scaffolds a fresh git repo with guardrails init and 
 
   const firstInit = runCli(r.dir, ['init', '--owner', '@ws42-admin', '--base', 'main']);
   expect(firstInit.status).toBe(0);
-  expect(firstInit.stdout).toContain('wrote   guardrails.config.json');
-  expect(firstInit.stdout).toContain('skipped AGENTS.md (exists; --force to overwrite)');
-  expect(r.read('AGENTS.md')).toBe('# Custom project instructions\n');
+  expect(firstInit.stdout).toContain('created guardrails.config.json');
+  expect(firstInit.stdout).toContain('merged  AGENTS.md');
+  expect(r.read('AGENTS.md').startsWith('# Custom project instructions\n')).toBe(true);
+  expect(r.read('AGENTS.md')).toContain('<!-- guardrails:start -->');
   expect(r.read('GEMINI.md')).toBe('See AGENTS.md.\n');
   expect(r.read('CLAUDE.md')).toBe('See AGENTS.md.\n');
   expect(r.read('.github/CODEOWNERS')).toContain('/guardrails.config.json        @ws42-admin');
@@ -41,7 +42,8 @@ test('CUJ-INITCHK developer scaffolds a fresh git repo with guardrails init and 
 
   const secondInit = runCli(r.dir, ['init', '--owner', '@other']);
   expect(secondInit.status).toBe(0);
-  expect(secondInit.stdout).not.toContain('wrote   ');
+  expect(secondInit.stdout).not.toMatch(/^(created|merged) /m);
+  expect(secondInit.stdout).toContain('skipped guardrails.config.json (exists, nothing to add; --force to overwrite)');
   expect(r.read('.github/CODEOWNERS')).toContain('@ws42-admin');
 
   const { status, report } = checkJson(r.dir);

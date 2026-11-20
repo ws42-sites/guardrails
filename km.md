@@ -996,7 +996,7 @@ Publishing to npm makes a version public and effectively permanent, so the repos
 
 ### 9.6 This repository's own configuration
 
-The repository follows its own rules. Its `guardrails.config.json` defines the specs for each rule, marks `src/checks/**`, `src/baseline.ts`, `src/config.ts` and `src/runner.ts` as T1 (with `mutation.exclude` listing the five excluded check modules), enables the runbook, CI and test-suite standards, and records n/a reasons for deploy, rollback and `secrets:check` (a library is released by tag). `km.md` is not in its `docs.allow`, so the repository's own check reports it as a DOC-1 warning until a code owner adds it.
+The repository follows its own rules. Its `guardrails.config.json` defines the specs for each rule, marks `src/checks/**`, `src/baseline.ts`, `src/config.ts` and `src/runner.ts` as T1 (with no `mutation.exclude`: every T1 module, including the five check modules that were once excluded, is mutation-tested), enables the runbook, CI and test-suite standards, and records n/a reasons for deploy, rollback and `secrets:check` (a library is released by tag). `km.md` is not in its `docs.allow`, so the repository's own check reports it as a DOC-1 warning until a code owner adds it.
 
 ---
 
