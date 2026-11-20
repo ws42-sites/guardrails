@@ -9,8 +9,10 @@ on:
     inputs:
       node-version: { type: string, default: '20' }
       working-directory: { type: string, default: '.' }
+      cli: { type: string, default: 'npx guardrails' }
       clock-shift: { type: boolean, default: true }
       mutation: { type: boolean, default: true }
+      mutation-full: { type: boolean, default: false }
       install-command: { type: string, default: 'npm ci' }
       fails-on-base: { type: boolean, default: true }
       secret-scan: { type: boolean, default: true }
@@ -21,11 +23,11 @@ on:
       holdout-token:
         required: false
         description: Read-only token for the private holdout repo (fine-grained, contents:read).
-permissions:
-  contents: read
-  pull-requests: read
 jobs:
   check:
+    permissions:
+      contents: read
+      pull-requests: read
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -38,6 +40,7 @@ jobs:
       - run: ${{ inputs.install-command }}
       - name: guardrails check
         env:
+          CLI: ${{ inputs.cli }}
           GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
           BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || '' }}
           # The clock-shift rerun is a full-suite run: main and nightly only (CI-1).
@@ -46,18 +49,97 @@ jobs:
         run: |
           set -o pipefail
           ARGS="$CLOCK"; [ -n "$BASE" ] && ARGS="$ARGS --base $BASE $FAILBASE"
-          npx guardrails report --format json $ARGS > guardrails-report.json || true
-          npx guardrails report --format markdown $ARGS >> "$GITHUB_STEP_SUMMARY" || true
-          npx guardrails check $ARGS
+          echo "## Guardrails (\`${GITHUB_SHA:0:7}\`)" >> "$GITHUB_STEP_SUMMARY"
+          $CLI report --format json $ARGS > guardrails-report.json || true
+          $CLI report --format markdown $ARGS >> "$GITHUB_STEP_SUMMARY" || true
+          $CLI check $ARGS
+      - name: stamp guardrails report
+        if: always()
+        env:
+          CLI: ${{ inputs.cli }}
+          STAMP_SHA: ${{ github.sha }}
+          STAMP_PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          STAMP_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+          STAMP_REF: ${{ github.ref }}
+          STAMP_EVENT: ${{ github.event_name }}
+          STAMP_RUN_ID: ${{ github.run_id }}
+          STAMP_RUN_ATTEMPT: ${{ github.run_attempt }}
+          STAMP_WORKFLOW: ${{ github.workflow }}
+          STAMP_REPOSITORY: ${{ github.repository }}
+          STAMP_LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+        run: |
+          if [ ! -s guardrails-report.json ] || ! jq -se 'length == 1 and (.[0] | type == "object")' guardrails-report.json >/dev/null 2>&1; then
+            echo "guardrails-report.json missing or invalid; skipping stamp"
+            exit 0
+          fi
+          GENERATED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          GUARDRAILS_VERSION="$(node -e "try{const p=require('./package.json');if(p.name==='@ws42ca/guardrails'&&p.version){console.log(p.version);process.exit(0)}}catch{}try{const p=require('@ws42ca/guardrails/package.json');if(p.version){console.log(p.version);process.exit(0)}}catch{}process.exit(1)" 2>/dev/null || { $CLI --version 2>/dev/null | awk 'NR==1 && /^[0-9]+\.[0-9]+/ { print; ok=1 } END { exit !ok }'; } || echo 'unknown')"
+          CONFIG_SHA256=""
+          if [ -f guardrails.config.json ]; then
+            CONFIG_SHA256="$(sha256sum guardrails.config.json | awk '{print $1}')"
+          fi
+          LABELS_JSON="${STAMP_LABELS:-[]}"
+          if ! printf '%s' "$LABELS_JSON" | jq -e 'type == "array"' >/dev/null 2>&1; then
+            LABELS_JSON="[]"
+          fi
+          TMP_STAMP="guardrails-report-${STAMP_SHA}.json.tmp"
+          if jq -n \
+            --arg sha "$STAMP_SHA" \
+            --arg pr_head_sha "$STAMP_PR_HEAD_SHA" \
+            --arg base_sha "$STAMP_BASE_SHA" \
+            --arg ref "$STAMP_REF" \
+            --arg event "$STAMP_EVENT" \
+            --arg run_id "$STAMP_RUN_ID" \
+            --arg run_attempt "$STAMP_RUN_ATTEMPT" \
+            --arg workflow "$STAMP_WORKFLOW" \
+            --arg repository "$STAMP_REPOSITORY" \
+            --arg generated_at "$GENERATED_AT" \
+            --arg guardrails_version "$GUARDRAILS_VERSION" \
+            --arg config_sha256 "$CONFIG_SHA256" \
+            --argjson labels "$LABELS_JSON" \
+            --slurpfile report guardrails-report.json \
+            '{
+              stamp: {
+                sha: $sha,
+                pull_request_head_sha: (if $pr_head_sha == "" then null else $pr_head_sha end),
+                base_sha: (if $base_sha == "" then null else $base_sha end),
+                ref: $ref,
+                event: $event,
+                run_id: $run_id,
+                run_attempt: $run_attempt,
+                workflow: $workflow,
+                repository: $repository,
+                generated_at: $generated_at,
+                guardrails_version: $guardrails_version,
+                config_sha256: (if $config_sha256 == "" then null else $config_sha256 end),
+                labels: $labels
+              },
+              report: $report[0]
+            }' > "$TMP_STAMP"; then
+            mv "$TMP_STAMP" "guardrails-report-${STAMP_SHA}.json"
+            rm -f guardrails-report.json
+          else
+            rm -f "$TMP_STAMP"
+            echo "::warning::Failed to stamp guardrails-report.json"
+          fi
       # Test-suite audit for the job summary (the check above already gates SUITE-1..6 when testSuite is enabled).
       - name: test-suite report
         if: always()
-        run: npx guardrails check-tests >> "$GITHUB_STEP_SUMMARY" || true
+        env:
+          CLI: ${{ inputs.cli }}
+        run: $CLI check-tests >> "$GITHUB_STEP_SUMMARY" || true
       - uses: actions/upload-artifact@v4
         if: always()
-        with: { name: guardrails-report, path: '${{ inputs.working-directory }}/guardrails-report.json', retention-days: 14 }
+        with:
+          name: guardrails-report-${{ github.sha }}
+          path: '${{ inputs.working-directory }}/guardrails-report-${{ github.sha }}.json'
+          retention-days: 90
+          if-no-files-found: warn
   mutation:
     if: ${{ inputs.mutation && github.event_name == 'pull_request' }}
+    permissions:
+      contents: read
+      pull-requests: read
     runs-on: ubuntu-latest
     timeout-minutes: 30
     defaults:
@@ -76,13 +158,52 @@ jobs:
           restore-keys: stryker-${{ github.base_ref }}-
       - name: mutation (changed files in mutation tiers)
         env:
+          CLI: ${{ inputs.cli }}
           GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
         run: |
-          npx guardrails report --only mutation --mutation --base origin/${{ github.base_ref }} --format markdown >> "$GITHUB_STEP_SUMMARY" || true
-          npx guardrails check --only mutation --mutation --base origin/${{ github.base_ref }}
+          $CLI report --only mutation --mutation --base origin/${{ github.base_ref }} --format markdown >> "$GITHUB_STEP_SUMMARY" || true
+          $CLI check --only mutation --mutation --base origin/${{ github.base_ref }}
+  mutation-full:
+    if: ${{ inputs.mutation-full && github.event_name != 'pull_request' }}
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ inputs.node-version }}', cache: npm }
+      - run: ${{ inputs.install-command }}
+      - uses: actions/cache@v4
+        with:
+          path: ${{ inputs.working-directory }}/node_modules/.cache/guardrails/stryker-incremental.json
+          key: stryker-${{ github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            stryker-${{ github.ref_name }}-
+            stryker-
+      - name: mutation (all mutation-tier files)
+        env:
+          CLI: ${{ inputs.cli }}
+          GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+        run: |
+          $CLI report --only mutation --mutation --format markdown >> "$GITHUB_STEP_SUMMARY" || true
+          $CLI check --only mutation --mutation
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: guardrails-mutation-${{ github.sha }}
+          path: ${{ inputs.working-directory }}/node_modules/.cache/guardrails/mutation.json
+          retention-days: 90
+          if-no-files-found: warn
   secrets:
     # SEC-1: secrets in the repo or the PR history block. Gitleaks CLI image (the action needs a licence for orgs).
     if: ${{ inputs.secret-scan }}
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -97,6 +218,8 @@ jobs:
   holdout:
     # HOLD-1: hidden tests from a private repo the building agent cannot read. PR gate only.
     if: ${{ inputs.holdout-repo != '' && github.event_name == 'pull_request' }}
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -113,13 +236,13 @@ jobs:
         with: { node-version: '${{ inputs.node-version }}', cache: npm }
       - run: ${{ inputs.install-command }}
       - name: guardrails holdout
-        run: npx guardrails holdout --dir "$GITHUB_WORKSPACE/.holdout-src"
+        env:
+          CLI: ${{ inputs.cli }}
+        run: $CLI holdout --dir "$GITHUB_WORKSPACE/.holdout-src"
   codeql:
+    # Callers that enable codeql: true must grant security-events: write (and contents: read) on the calling job.
     if: ${{ inputs.codeql }}
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
     steps:
       - uses: actions/checkout@v4
       - uses: github/codeql-action/init@v3
