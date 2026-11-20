@@ -113,11 +113,14 @@ Pull request labels come from the `GUARDRAILS_LABELS` environment variable (comm
 
 | Label | Effect |
 |---|---|
-| `tests-removed-approved` | Allows deleting tests that exist on the base branch |
-| `guardrails:rebaseline` | Allows the baseline to grow |
+| `guardrails:journeys-approved` | Approves the journey changes in the PR |
 | `guardrails:config-approved` | Allows loosening the config |
-| `allow-characterization` | Allows new tests that already pass on base |
-| `flags-resolved` | Open flags stop blocking |
+| `guardrails:tests-removed-approved` | Allows deleting tests that exist on the base branch |
+| `guardrails:existing-behaviour-tests-approved` | Allows new tests that lock in existing behaviour, so they already pass on base |
+| `guardrails:baseline-approved` | Allows the baseline to grow |
+| `guardrails:flags-approved` | Open flags stop blocking |
+
+The old names (`tests-removed-approved`, `guardrails:rebaseline`, `allow-characterization`, `flags-resolved`, and `guardrails:config-approved` for journeys) still work in 0.6.1 as deprecated aliases and print a warning naming the new label.
 
 Set `GUARDRAILS_OFFLINE=1` to skip the npm registry lookups.
 

@@ -909,7 +909,7 @@
             },
             "testsRemovedLabel": {
               "type": "string",
-              "default": "tests-removed-approved"
+              "default": "guardrails:tests-removed-approved"
             },
             "propertyTimeLimitMs": {
               "type": "integer",
@@ -1249,19 +1249,23 @@
           "properties": {
             "rebaseline": {
               "type": "string",
-              "default": "guardrails:rebaseline"
+              "default": "guardrails:baseline-approved"
             },
             "characterization": {
               "type": "string",
-              "default": "allow-characterization"
+              "default": "guardrails:existing-behaviour-tests-approved"
             },
             "flagsResolved": {
               "type": "string",
-              "default": "flags-resolved"
+              "default": "guardrails:flags-approved"
             },
             "configApproved": {
               "type": "string",
               "default": "guardrails:config-approved"
+            },
+            "journeysApproved": {
+              "type": "string",
+              "default": "guardrails:journeys-approved"
             }
           },
           "additionalProperties": false,

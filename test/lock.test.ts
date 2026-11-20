@@ -13,11 +13,11 @@ describe('FLAG-01 agents stop and flag; open flags block until a human clears th
     expect(checkFlags(r.ctx()).violations.map((v) => v.message)).toEqual([
       'open flag F1 on CORE-01: test expects 5 but spec says 4. A human must resolve it before merge.',
     ]);
-    expect(checkFlags(r.ctx(null, ['flags-resolved'])).violations).toEqual([]);
+    expect(checkFlags(r.ctx(null, ['guardrails:flags-approved'])).violations).toEqual([]);
     r.commit();
     r.write({ '.guardrails/flags.json': '' });
     expect(checkFlags(r.ctx('HEAD')).violations.map((v) => `${v.maxMode} ${v.message.split(' in this')[0]}`)).toEqual(['warn flag F1 (CORE-01) was cleared']);
-    expect(checkFlags(r.ctx('HEAD', ['flags-resolved'])).violations).toEqual([]);
+    expect(checkFlags(r.ctx('HEAD', ['guardrails:flags-approved'])).violations).toEqual([]);
   });
 });
 

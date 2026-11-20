@@ -12,7 +12,7 @@ describe('DIFF-01 deleting base tests needs the label', () => {
     const r = repo({ 'src/core/a.test.ts': test2 }).commit();
     r.write({ 'src/core/a.test.ts': test2.split('\n')[0] + '\n' });
     expect(weakening(r)).toEqual(['deleted base test "CORE-01 b"']);
-    const approved = checkTests(r.ctx('main', ['tests-removed-approved'])).violations;
+    const approved = checkTests(r.ctx('main', ['guardrails:tests-removed-approved'])).violations;
     expect(approved.filter((v) => v.rule === 'TEST-7')).toEqual([]);
     expect(approved.filter((v) => v.rule === 'TEST-10').map((v) => v.message)).toEqual(['test count dropped by 1 (2 on base, 1 now).']);
   });
@@ -40,7 +40,7 @@ describe('DIFF-02 removing expects or loosening matchers is weakening', () => {
     r.write({ 'vitest.config.ts': 'export default { test: { coverage: { thresholds: { lines: 50 } } } }', '.guardrails/baseline.json': '{"entries":[{"rule":"DOC-1","fingerprint":"abc"}]}' });
     const v = checkTests(r.ctx('main')).violations.filter((x) => ['TEST-7', 'BASE-1'].includes(x.rule));
     expect(v.map((x) => [x.rule, x.message.split('.')[0]])).toEqual([['TEST-7', 'threshold lines lowered 80 -> 50'], ['BASE-1', 'baseline grew by 1 entry']]);
-    expect(checkTests(r.ctx('main', ['guardrails:rebaseline'])).violations.filter((x) => x.rule === 'BASE-1')).toEqual([]);
+    expect(checkTests(r.ctx('main', ['guardrails:baseline-approved'])).violations.filter((x) => x.rule === 'BASE-1')).toEqual([]);
   });
 
   it('lets the adoption PR (no guardrails config on base) record the initial baseline', () => {

@@ -61,7 +61,7 @@ describe('JOURNEY-03 journeys are human-owned', () => {
     const r = repo({}, cfg({ 'CUJ-A1': J({ approved: false, approvedBy: undefined }) })).commit();
     r.write({ 'guardrails.config.json': JSON.stringify(cfg({ 'CUJ-A1': J(), 'CUJ-B1': J({ approved: false, approvedBy: undefined }) })) });
     const jrn3 = (labels: string[]) => checkJourneys(r.ctx('main', labels)).violations.filter((v) => v.rule === 'JRN-3').map((v) => v.message.split(' in this')[0]);
-    expect([jrn3([]), jrn3(['guardrails:config-approved'])]).toEqual([['journey CUJ-A1 approved', 'journey CUJ-B1 added'], []]);
+    expect([jrn3([]), jrn3(['guardrails:journeys-approved'])]).toEqual([['journey CUJ-A1 approved', 'journey CUJ-B1 added'], []]);
   });
 
   it('refuses approval from agents, records approvedBy and back-references, and hooks deny agent commands', () => {

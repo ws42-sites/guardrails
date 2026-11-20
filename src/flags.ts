@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import type { CheckContext, CheckOutput, Violation } from './types.js';
 import { mergeBase, showAt, violation } from './util.js';
+import { LEGACY_LABELS, hasLabel } from './labels.js';
 
 export interface Flag { id: string; specId: string; file: string; reason: string; createdAt: string; by?: string }
 export interface FlagFile { version: 1; flags: Flag[] }
@@ -28,12 +29,12 @@ export function addFlag(cwd: string, file: string, input: { specId: string; file
 }
 
 /**
- * FLAG-1: open flags block merge until a human resolves them (empty the file, or the flags-resolved
+ * FLAG-1: open flags block merge until a human resolves them (empty the file, or the flags-approved
  * label). Clearing flags in a PR warns so the code owner reviewing .guardrails/ sees it.
  */
 export function checkFlags(ctx: CheckContext): CheckOutput {
   const { flagsFile, labels } = ctx.config;
-  const resolved = ctx.labels.includes(labels.flagsResolved);
+  const resolved = hasLabel(ctx.labels, labels.flagsResolved, LEGACY_LABELS.flags);
   const v: Violation[] = [];
   let flags: Flag[] = [];
   try {
@@ -51,7 +52,7 @@ export function checkFlags(ctx: CheckContext): CheckOutput {
       const now = new Set(flags.map((f) => `${f.specId}:${f.reason}`));
       for (const f of old)
         if (!now.has(`${f.specId}:${f.reason}`))
-          v.push({ ...violation('FLAG-1', flagsFile, `flag ${f.id} (${f.specId}) was cleared in this PR. Only a human clears flags; a code owner must review ${flagsFile} (or add "${labels.flagsResolved}").`, `cleared:${f.specId}:${f.reason}`), maxMode: 'warn' });
+          v.push({ ...violation('FLAG-1', flagsFile, `flag ${f.id} (${f.specId}) was cleared in this PR. Only a human clears flags; a code owner must review ${flagsFile} (or add the "${labels.flagsResolved}" label, which says a human has answered the open flags).`, `cleared:${f.specId}:${f.reason}`), maxMode: 'warn' });
     }
   }
   return { violations: v, metrics: flags.length ? [{ name: 'flags.open', value: flags.length, detail: flags.map((f) => `${f.id} ${f.specId} ${f.file}: ${f.reason}`).join('\n') }] : [] };

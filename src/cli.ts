@@ -190,7 +190,7 @@ async function main(): Promise<number> {
       const r = ratchet(old, violations, first || !!values.force, baselineRules(config.rules));
       writeBaseline(cwd, config.baselineFile, r.baseline);
       console.log(`${config.baselineFile}: ${r.baseline.entries.length} entries (${r.removed} removed, ${r.added} added)${first ? ' [initial]' : ''}`);
-      if (r.added && !first) console.log('Baseline grew: CI will block this (BASE-1) unless a code owner adds the rebaseline label.');
+      if (r.added && !first) console.log('Baseline grew: CI will block this (BASE-1) unless a code owner adds the guardrails:baseline-approved label.');
       return 0;
     }
     case 'specs': {

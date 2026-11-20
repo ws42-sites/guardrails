@@ -205,7 +205,7 @@ export const configSchema = z
         maxFileLines: z.number().int().positive().default(300),
         command: z.string().default('npx vitest run --pool=forks'),
         clockShiftYears: z.number().positive().default(2),
-        testsRemovedLabel: z.string().default('tests-removed-approved'),
+        testsRemovedLabel: z.string().default('guardrails:tests-removed-approved'),
         propertyTimeLimitMs: z.number().int().positive().default(5000),
       })
       .strict()
@@ -289,11 +289,16 @@ export const configSchema = z
     flagsFile: z.string().default('.guardrails/flags.json'),
     labels: z
       .object({
-        rebaseline: z.string().default('guardrails:rebaseline'),
-        characterization: z.string().default('allow-characterization'),
-        flagsResolved: z.string().default('flags-resolved'),
+        /** A code owner approved growing the baseline (BASE-1, SUITE-6). */
+        rebaseline: z.string().default('guardrails:baseline-approved'),
+        /** A code owner approved new tests that lock in existing behaviour and so already pass on base (TEST-11). */
+        characterization: z.string().default('guardrails:existing-behaviour-tests-approved'),
+        /** A code owner resolved the open flags (FLAG-1). */
+        flagsResolved: z.string().default('guardrails:flags-approved'),
         /** A code owner approved loosening guardrails.config.json in this PR (TEST-7 config part). */
         configApproved: z.string().default('guardrails:config-approved'),
+        /** A code owner approved the journey changes in this PR (JRN-3). */
+        journeysApproved: z.string().default('guardrails:journeys-approved'),
       })
       .strict()
       .default({}),

@@ -1,6 +1,6 @@
 # @ws42ca/guardrails: knowledge base
 
-A single reference for what `@ws42ca/guardrails` does, how its parts fit together, and how to use it day to day. It describes version 0.6.0. For a short introduction see `README.md`; for the full list of rules see `RULES.md`; for the testing policy the rules enforce see `TESTING.md`. Every statement here comes from the package source, so when this file and the code disagree, the code wins.
+A single reference for what `@ws42ca/guardrails` does, how its parts fit together, and how to use it day to day. It describes version 0.6.1. For a short introduction see `README.md`; for the full list of rules see `RULES.md`; for the testing policy the rules enforce see `TESTING.md`. Every statement here comes from the package source, so when this file and the code disagree, the code wins.
 
 ## Contents
 
@@ -71,9 +71,9 @@ There are 47 rules (`guardrails explain` lists them). Features below group them 
 | F-05 | **Banned test patterns** (TEST-5) | An ESLint run with its own fixed config (your ESLint config is not used and inline `eslint-disable` comments are ignored). Blocks `.only`, `.skip`, `test.todo`, `each([])`, the real clock (`new Date()`, `Date.now()`, `performance.now()`, `process.hrtime`) unless the file fakes timers, unseeded randomness, fast-check runs that are not a small fixed run (20 runs or fewer), and `// Stryker disable` comments (also in product files). Warns on T1 snapshots, `toHaveClass`/`toHaveStyle`, hand-rolled `createServer`, spies on `Date`/`Response`/`crypto.subtle`/prototypes, generated-input loops over 20 iterations, and seeded fast-check runs outside specs marked `properties: true`. | `rules.TEST-5`, `specs.items.<ID>.properties` | block, with the warn-only items above |
 | F-06 | **Weak assertion heuristics** (TEST-5W) | Warns when every assertion in a test is weak: no `expect` at all, only "a mock was called", or only `toBeDefined`/`toBeTruthy`/`not.toThrow`/`expect(true)`. | none | warn |
 | F-07 | **Every test must assert** (TEST-9) | Checks the Vitest config's `setupFiles` for `@ws42ca/guardrails/vitest-setup` (the legacy `@ws42/guardrails/vitest-setup` name is also accepted) or a setup file that calls `expect.hasAssertions()`. The setup file itself runs `expect.hasAssertions()` before each test. | Vitest `setupFiles` | block |
-| F-08 | **No test weakening** (TEST-7, diff) | On a PR, blocks deleting a test that exists on the base branch, removing `expect` calls from a test, loosening a matcher (for example `toEqual` to `toBeTruthy`), and lowering a coverage or mutation threshold in Vitest or Stryker config. A deleted test needs the `tests-removed-approved` label. Tests added in the same PR can change freely, and moving a test between files is not a deletion. | label `tests-removed-approved` (`tests.testsRemovedLabel`) | block |
+| F-08 | **No test weakening** (TEST-7, diff) | On a PR, blocks deleting a test that exists on the base branch, removing `expect` calls from a test, loosening a matcher (for example `toEqual` to `toBeTruthy`), and lowering a coverage or mutation threshold in Vitest or Stryker config. A deleted test needs the `guardrails:tests-removed-approved` label. Tests added in the same PR can change freely, and moving a test between files is not a deletion. | label `tests-removed-approved` (`tests.testsRemovedLabel`) | block |
 | F-09 | **Test count drop** (TEST-10, diff) | Warns when the total test count is below the base branch, listing the deleted tests in the report. | none | warn |
-| F-10 | **New tests must fail on base** (TEST-11, diff) | Creates a temporary git worktree of the merge base, copies in the PR's changed test and helper files (and the config), runs `tests.command` on just those files on base and on head. A new or changed test must fail on base and pass on head. Escape hatches: the `allow-characterization` label, or `regressionGuard: true` on the spec. | `check --base <ref> --fails-on-base`, `specs.items.<ID>.regressionGuard` | opt in by flag; block |
+| F-10 | **New tests must fail on base** (TEST-11, diff) | Creates a temporary git worktree of the merge base, copies in the PR's changed test and helper files (and the config), runs `tests.command` on just those files on base and on head. A new or changed test must fail on base and pass on head. Escape hatches: the `guardrails:existing-behaviour-tests-approved` label (for new tests that lock in existing behaviour), or `regressionGuard: true` on the spec. | `check --base <ref> --fails-on-base`, `specs.items.<ID>.regressionGuard` | opt in by flag; block |
 | F-11 | **Clock independence** (TEST-6) | Reruns the suite with the clock moved forward and blocks tests that pass today but fail then (the "time bomb" test). Fake timers still win. Per-test attribution needs a Vitest command; for other runners it only reports a failing shifted suite. | `check --clock-shift`, `tests.command`, `tests.clockShiftYears` | opt in by flag; +2 years; block |
 | F-12 | **Mutation testing** (TEST-8) | Runs Stryker on changed product files in the chosen tiers (all files in those tiers when no base is given). Each file's mutation score must reach the break threshold. Stryker is generated config: pinned mutators, incremental, 2 workers, 60 s per mutant. If Stryker is not installed or no mutation-tier file changed, the check is skipped with a note, not failed. | `check --only mutation --mutation`, `mutation.*`, `guardrails mutants` | opt in by flag; T1 only; break at 70; block |
 
@@ -82,11 +82,11 @@ There are 47 rules (`guardrails explain` lists them). Features below group them 
 | # | Feature | What it does | Command or config | Default |
 |---|---|---|---|---|
 | F-13 | **Test-gaming signatures** (ARCH-7) | Blocks product code that detects the test runner (`NODE_ENV === 'test'`, `VITEST`, `JEST_WORKER_ID`, `import.meta.vitest` and similar) or exits the process outside a CLI entry; blocks `expect.extend` in test files. In diff mode also blocks an added `valueOf`/`equals`/`Symbol.toPrimitive`, and warns on added module-level counters, comments such as "make the test pass", literals that a new test expects, and `vi.mock` of the module under test. | `architecture.cliEntries`, `architecture.testEnvAllow` | block (heuristics warn) |
-| F-14 | **Stop and flag** (FLAG-1) | An agent that finds a test impossible or in conflict with the spec records a flag in `.guardrails/flags.json` and stops. Open flags block merge until a human empties the file or adds the `flags-resolved` label. Clearing flags inside a PR also raises a finding. | `guardrails flag <ID> "<reason>" [--file f]`, MCP `guardrails_flag`, `flagsFile` | block |
+| F-14 | **Stop and flag** (FLAG-1) | An agent that finds a test impossible or in conflict with the spec records a flag in `.guardrails/flags.json` and stops. Open flags block merge until a human empties the file or adds the `guardrails:flags-approved` label. Clearing flags inside a PR also raises a finding. | `guardrails flag <ID> "<reason>" [--file f]`, MCP `guardrails_flag`, `flagsFile` | block |
 | F-15 | **Hidden holdout tests** (HOLD-1) | Runs tests the building agent never saw, from a separate private checkout, copied into `holdout.target` for the run and then removed. Only titles and pass/fail are reported, never source. | `guardrails holdout --dir <checkout>`, `holdout.*` | not configured; block when run |
 | F-16 | **Agent edit locks** | `guardrails hook-guard` is called by each agent's pre-tool hook. It denies edits to `lock.paths`, and to existing test files that carry a spec ID. New test files are allowed. Shell commands that write to a locked file are denied too, as are agent attempts to approve or draft journeys, run `init --preset`, or set or unset the unlock variables. `guardrails flag` is always allowed. A human unlocks with `GUARDRAILS_ALLOW_TEST_EDITS=1`. The guard never throws: a broken guard must not wedge the agent. | `lock.specTests`, `lock.paths` | on |
 | F-17 | **Human-only commands** | `journeys approve`, writing `journeys draft` results, and `init --preset <journey preset>` refuse when `GUARDRAILS_AGENT` is set. The settings written by `init` set that variable for Claude Code (`.claude/settings.json`), Gemini CLI (`.gemini/.env`) and Codex CLI (`.codex/config.toml`). Antigravity has no hook-config way to set it, so there only the hook denies these commands. | `GUARDRAILS_AGENT` | on |
-| F-18 | **Approval labels** | A code owner sets a PR label to approve a deliberate exception. Labels come from `--labels` or `GUARDRAILS_LABELS` (comma separated). See [Labels](#labels). | `labels.*`, `tests.testsRemovedLabel` | five labels |
+| F-18 | **Approval labels** | A code owner sets a PR label to approve a deliberate exception. Labels come from `--labels` or `GUARDRAILS_LABELS` (comma separated). See [Labels](#labels). | `labels.*`, `tests.testsRemovedLabel` | six labels |
 
 ### C. Architecture and supply chain
 
@@ -112,7 +112,7 @@ There are 47 rules (`guardrails explain` lists them). Features below group them 
 | F-31 | **Strict config** (CFG-1) | The config is validated with a strict schema. An unknown or misspelt key is an error, so a typo cannot silently disable a rule. An invalid config reports as a single blocking CFG-1 finding. | `schema/guardrails.schema.json` | block |
 | F-32 | **CODEOWNERS guard** (CFG-2) | Requires a human owner (last matching line wins, like GitHub) for `guardrails.config.json`, `.github/workflows/guardrails.yml` and the baseline file. | `.github/CODEOWNERS` | block |
 | F-33 | **Config weakening guard** (TEST-7, config part) | On a PR, loosening the config blocks unless a code owner adds `guardrails:config-approved`. Loosening includes lowering a rule mode, disabling a feature, raising a cap, lowering a threshold, growing an allowlist, shrinking a protective list or demoting a spec tier. | label `guardrails:config-approved` | block |
-| F-34 | **Baseline ratchet** (BASE-1, diff) | `guardrails baseline` records current violations in `.guardrails/baseline.json`. Known entries are reported but do not block. Re-running only removes fixed entries. Growth blocks on a PR unless a code owner adds `guardrails:rebaseline`. The fingerprint never includes a line number. | `guardrails baseline [--force]`, `baselineFile` | on |
+| F-34 | **Baseline ratchet** (BASE-1, diff) | `guardrails baseline` records current violations in `.guardrails/baseline.json`. Known entries are reported but do not block. Re-running only removes fixed entries. Growth blocks on a PR unless a code owner adds `guardrails:baseline-approved`. The fingerprint never includes a line number. | `guardrails baseline [--force]`, `baselineFile` | on |
 
 ### E. Journeys
 
@@ -120,7 +120,7 @@ There are 47 rules (`guardrails explain` lists them). Features below group them 
 |---|---|---|---|---|
 | F-35 | **Journey definitions** | A Critical User Journey (CUJ) is a plain-language task a user does, with a priority (P0, P1, P2), prose steps, specs and routes. | `journeys.items` | none defined |
 | F-36 | **Journey coverage** (JRN-1, JRN-2) | An approved or client-provided journey needs exactly one e2e test whose title starts with its ID (P0 blocks, P1 warns, P2 optional). Specs that serve no approved journey warn once at least one journey is approved. A failing result in the Playwright JSON report also raises JRN-1. | `guardrails journeys list`, `journeys.e2eGlobs`, `journeys.resultsFile` | on |
-| F-37 | **Journey ownership** (JRN-3, diff) | Journey changes in a PR need a code owner's `guardrails:config-approved` label, except for the narrow cases that trusted producers may do. Trust is read from the base branch, so a PR cannot trust itself. | `journeys.trustedProducers` | block; no trusted producers |
+| F-37 | **Journey ownership** (JRN-3, diff) | Journey changes in a PR need a code owner's `guardrails:journeys-approved` label, except for the narrow cases that trusted producers may do. Trust is read from the base branch, so a PR cannot trust itself. | `journeys.trustedProducers` | block; no trusted producers |
 | F-38 | **Route and form coverage** (JRN-4, diff) | Warns when a PR adds a page, endpoint, router path or `<form>` that no journey's `routes` cover. | `journeys.routeGlobs` | warn |
 | F-39 | **Approve a journey** | A human records approval, which also writes the journey ID back into the specs it lists. | `guardrails journeys approve <ID> [--by name]` | human only |
 | F-40 | **Draft journeys** | Proposes unapproved journeys from your docs, routes and design mocks. Uses Gemini if `GEMINI_API_KEY` is set, otherwise OpenAI if `OPENAI_API_KEY` is set, otherwise a route-based heuristic with no network. Asks the model for 5 to `journeys.draft.max` drafts. `--dry-run` never calls a model: it previews the heuristic drafts and writes nothing. Keys are read from the environment and never written. Drafts only add new IDs. | `guardrails journeys draft [--dry-run]`, `journeys.draft.*` | up to 8 drafts (max 20) |
@@ -492,7 +492,7 @@ This is what `AGENTS.md` and the skill ask an agent to do:
 ### 5.4 What a human owner does
 
 - **Adds behaviours** to `specs.items` (the config is code-owner protected).
-- **Resolves flags**: fix the spec or the test, then empty `.guardrails/flags.json`, or add the `flags-resolved` label.
+- **Resolves flags**: fix the spec or the test, then empty `.guardrails/flags.json`, or add the `guardrails:flags-approved` label.
 - **Approves exceptions** with labels (see [Labels](#labels)).
 - **Approves journeys**: `guardrails journeys approve <ID>`.
 - **Adds dependencies** the agent needs by putting them in `deps.allow` (with the `guardrails:config-approved` label on the PR).
@@ -565,7 +565,7 @@ Only `version` (which must be `1`) is required. Every other key has a default. T
 | `rules` | Per-rule mode override: `"block"`, `"warn"` or `"off"` | `{}` |
 | `baselineFile` | Where the baseline lives | `.guardrails/baseline.json` |
 | `flagsFile` | Where agent flags live | `.guardrails/flags.json` |
-| `labels` | Label names for rebaseline, characterization, flags-resolved, config-approved | see [Labels](#labels) |
+| `labels` | Label names for baseline, existing-behaviour tests, flags, config and journeys approval | see [Labels](#labels) |
 
 A `rules` entry must name a real rule ID. Lowering a mode (for example `"TEST-5": "warn"`) counts as weakening, so a PR that does it needs the `guardrails:config-approved` label.
 
@@ -614,7 +614,7 @@ A `rules` entry must name a real rule ID. Lowering a mode (for example `"TEST-5"
 | `maxFileLines` | `300` | TEST-4 |
 | `command` | `npx vitest run --pool=forks` | Used by TEST-6, TEST-11 and HOLD-1. It must accept Vitest-style `--reporter=json --outputFile=<file>` and file arguments |
 | `clockShiftYears` | `2` | TEST-6 |
-| `testsRemovedLabel` | `tests-removed-approved` | Label that allows deleting base tests |
+| `testsRemovedLabel` | `guardrails:tests-removed-approved` | Label that allows deleting base tests |
 | `propertyTimeLimitMs` | `5000` | Documented limit for property tests |
 
 ### 6.6 `mutation`
@@ -678,11 +678,16 @@ A label on the pull request is the approval. Pass them with `--labels a,b` or th
 
 | Label | Effect | Rule |
 |---|---|---|
-| `tests-removed-approved` | Base-branch tests may be deleted | TEST-7 |
-| `guardrails:rebaseline` | The baseline (or the test-suite baseline) may grow | BASE-1, SUITE-6 |
-| `guardrails:config-approved` | A code owner approved loosening `guardrails.config.json`, such as a new `deps.allow` entry, or a journeys change | TEST-7 (config part), JRN-3 |
-| `allow-characterization` | New tests may already pass on base | TEST-11 |
-| `flags-resolved` | Open flags stop blocking | FLAG-1 |
+| `guardrails:journeys-approved` | A code owner approved the journey changes in the PR | JRN-3 |
+| `guardrails:config-approved` | A code owner approved loosening `guardrails.config.json`, such as a new `deps.allow` entry or a lower rule mode | TEST-7 (config part), ARCH-4 |
+| `guardrails:tests-removed-approved` | Base-branch tests may be deleted | TEST-7 |
+| `guardrails:existing-behaviour-tests-approved` | New tests that lock in existing behaviour may already pass on base | TEST-11 |
+| `guardrails:baseline-approved` | The baseline (or the test-suite baseline) may grow | BASE-1, SUITE-6 |
+| `guardrails:flags-approved` | Open flags stop blocking | FLAG-1 |
+
+Every label follows `guardrails:<what it approves>-approved`. The label names (`labels.journeysApproved`, `labels.configApproved`, `labels.rebaseline`, `labels.characterization`, `labels.flagsResolved`) and `tests.testsRemovedLabel` are the config keys that rename them.
+
+**Deprecated aliases (0.6.1).** The old names still work for one release and print a warning naming the new label: `tests-removed-approved`, `guardrails:rebaseline`, `allow-characterization`, `flags-resolved`, and `guardrails:config-approved` when it is used to approve journeys. Rename them in your repository's labels and workflows; the aliases will be removed in a later release.
 
 Label names are configurable under `labels` (and `tests.testsRemovedLabel`).
 
@@ -692,7 +697,7 @@ Label names are configurable under `labels` (and `tests.testsRemovedLabel`).
 
 - Known violations are reported but do not block.
 - The first run (or `--force`) records everything current. Later runs only remove entries that were fixed.
-- CI blocks any growth (BASE-1) unless a code owner adds `guardrails:rebaseline`. The pull request that adopts guardrails (no config on the base branch yet) may record the initial baseline.
+- CI blocks any growth (BASE-1) unless a code owner adds `guardrails:baseline-approved`. The pull request that adopts guardrails (no config on the base branch yet) may record the initial baseline.
 - Never baselined: diff-only rules (ARCH-4, ARCH-8, TEST-3, TEST-7, TEST-10, TEST-11, JRN-3, JRN-4, SCOPE-1, BASE-1), the runtime and CI rules (TEST-6, TEST-8, TEST-9, FLAG-1, HOLD-1, SEC-1), CFG-1, CFG-2, JRN-5 and SUITE-1 to SUITE-6. The suite rules use their own baseline.
 - The test-suite baseline works the same way: `guardrails check-tests --update-baseline` only ratchets down, and `--force` re-records it.
 
@@ -836,7 +841,7 @@ Safety defaults of the runtime: a 10 s timeout per step, requests other than GET
 - add an unapproved journey that has provenance and valid `run` steps, or
 - change or remove its own unapproved, non-client journeys.
 
-Everything else needs `guardrails:config-approved`: touching an approved or client-provided journey, promoting one to approved or client-provided, or editing `trustedProducers`, `idPattern` or `e2eGlobs`.
+Everything else needs `guardrails:journeys-approved`: touching an approved or client-provided journey, promoting one to approved or client-provided, or editing `trustedProducers`, `idPattern` or `e2eGlobs`.
 
 `guardrails journeys import <file.json>` takes an array of journeys, each with an `id`, `provenance` and `source.by`. The whole batch and the resulting config are validated before anything is written. Imports never approve, never accept `approvedBy`, and never overwrite protected journeys, though an exact replay of a client-provided journey is allowed. Importing works for agents; approving remains human-only.
 
@@ -857,7 +862,7 @@ Everything else needs `guardrails:config-approved`: touching an approved or clie
 | Diff rules never fire | They need a base: `--base origin/main`, or `GITHUB_BASE_REF` on a PR run. In CI use `fetch-depth: 0` and make sure the base ref exists locally |
 | TEST-1 on every test | Titles must start with a spec ID from `specs.items`. A missing ID warns; an unknown or malformed one blocks |
 | TEST-9 although I added the setup | Guardrails reads `setupFiles` from `vitest.config.*`, `vite.config.*` or `vitest.workspace.*` as text. List the package path as a string literal there, or point at a local setup file that calls `expect.hasAssertions()` |
-| TEST-11 "already passes on base" | The test does not exercise the change. Assert the new behaviour. If it guards existing behaviour on purpose, set `regressionGuard: true` on the spec or have a code owner add `allow-characterization` |
+| TEST-11 "already passes on base" | The test does not exercise the change. Assert the new behaviour. If it guards existing behaviour on purpose, set `regressionGuard: true` on the spec or have a code owner add `guardrails:existing-behaviour-tests-approved` |
 | `failsOnBase: error` metric | The base run could not execute. `tests.command` must accept Vitest-style `--reporter=json --outputFile` and file arguments. The worktree reuses your `node_modules` by link |
 | TEST-6 "inconclusive" | The suite also fails without the clock shift. Fix the red suite first |
 | `mutation: not installed` or `skipped` | Stryker is optional. Install `@stryker-mutator/core` and `@stryker-mutator/vitest-runner`, and make sure a mutation-tier file changed |
@@ -867,7 +872,7 @@ Everything else needs `guardrails:config-approved`: touching an approved or clie
 | The hook blocks an edit | Expected for locked paths and existing spec-tagged tests. If the test or spec is wrong, flag it. A human can set `GUARDRAILS_ALLOW_TEST_EDITS=1` |
 | `journeys approve` says humans only | `GUARDRAILS_AGENT` is set in this shell (agent hooks set it). Run it from a normal terminal |
 | JRN-6 on a generated test | The file was hand-edited or is stale. Run `guardrails journeys generate-tests` |
-| BASE-1 or SUITE-6 on a PR | The baseline grew. Fix the new findings, or have a code owner add `guardrails:rebaseline` |
+| BASE-1 or SUITE-6 on a PR | The baseline grew. Fix the new findings, or have a code owner add `guardrails:baseline-approved` |
 | CFG-2 | CODEOWNERS must give an owner to `guardrails.config.json`, `.github/workflows/guardrails.yml` and the baseline file. The last matching line wins |
 | RUN-1, RUN-2 or CI-1 after `init runbook` | The stub scripts exit 1 until you wire them to real commands or mark them n/a in `runbook.na`. See [first run notes](#45-record-todays-violations-then-run-the-first-check) |
 | `smoke --sitemap` fails | It needs `/sitemap-index.xml` or `/sitemap.xml` on the preview server. Same-origin pages from the sitemap are fetched from the preview origin, since a build may list production URLs |
@@ -987,7 +992,7 @@ The repository follows its own rules. Its `guardrails.config.json` defines the s
 | **Base ref, merge base** | The branch a PR is compared with. Diff rules compare the working tree against the merge base of the base ref and HEAD |
 | **Baseline** | A file of known violations. Known entries do not block, and the file can only shrink |
 | **Blocking and warning** | A blocking finding makes `check` exit 1. A warning is reported only. Each rule has a default mode that `rules` can override |
-| **Characterisation test** | A test that guards existing behaviour, so it passes on base. Allowed with `regressionGuard` or the `allow-characterization` label |
+| **Existing-behaviour test** | A test that locks in existing behaviour, so it passes on base. Allowed with `regressionGuard` or the `guardrails:existing-behaviour-tests-approved` label (formerly `allow-characterization`) |
 | **CODEOWNERS** | GitHub file naming who must review a path. Guardrails requires an owner for the config, workflow and baseline |
 | **CUJ** | Critical user journey: a complete task a user does, in plain language |
 | **Diff rule** | A rule that only runs when a base ref is available |
