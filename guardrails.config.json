@@ -322,6 +322,26 @@
       "REL-03": {
         "tier": "T1",
         "behaviour": "Release workflow only publishes behind an NPM_TOKEN guard and only on v* tags"
+      },
+      "CLOCK-02": {
+        "tier": "T1",
+        "behaviour": "checkClock reports exactly the tests that fail only with the clock shifted, passes when nothing fails, treats a suite that is red without the shift as inconclusive, and removes its temp files"
+      },
+      "DUP-02": {
+        "tier": "T1",
+        "behaviour": "checkDuplication counts only duplicated lines the PR adds, blocks above duplication.maxPercent, skips tests and fixtures, and reports the percentage metric"
+      },
+      "LINT-02": {
+        "tier": "T1",
+        "behaviour": "checkLint blocks and warns on the exact TEST-5 patterns with file, line and message, ignores inline eslint-disable and the project ESLint config, and skips non-test files"
+      },
+      "ARCH-04": {
+        "tier": "T1",
+        "behaviour": "checkArch enforces forbidden imports, fixture imports, restricted strings, singletons and reachability with exact files and messages, and respects test and entry exclusions"
+      },
+      "FAILBASE-02": {
+        "tier": "T1",
+        "behaviour": "checkFailsOnBase handles renamed and changed tests, helper files, deleted tests, labels, regressionGuard, missing node_modules and always removes its worktree and temp dir"
       }
     }
   },
