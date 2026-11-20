@@ -14,7 +14,10 @@
       "src/review/**",
       "src/provenance.ts",
       "src/evaluate.ts",
-      "src/config-md.ts"
+      "src/config-md.ts",
+      "src/label-plan.ts",
+      "src/feedback.ts",
+      "src/telemetry.ts"
     ],
     "T2": [
       "src/**"
@@ -390,6 +393,30 @@
       "CFGMD-02": {
         "tier": "T1",
         "behaviour": "guardrails.md rejects journeys and deps keys and malformed front matter or blocks with line numbers, and agent hooks lock it"
+      },
+      "LPLAN-01": {
+        "tier": "T1",
+        "behaviour": "guardrails labels plan statically scans the diff and lists every approval label the PR will need with reason and file:line, as one markdown summary"
+      },
+      "LPLAN-02": {
+        "tier": "T1",
+        "behaviour": "The label planner is advisory: it always exits 0, never adds labels, and omits labels already on the PR"
+      },
+      "FEED-01": {
+        "tier": "T1",
+        "behaviour": "Blocking findings are tagged with rule, file and agent and appended to feedback.logFile"
+      },
+      "FEED-02": {
+        "tier": "T1",
+        "behaviour": "The weekly feedback job clusters repeated failures and drafts candidate lint rules with a one-line rationale for human approval, never applying them"
+      },
+      "TELEM-01": {
+        "tier": "T1",
+        "behaviour": "Telemetry is off unless opted in with an endpoint, is disabled by GUARDRAILS_TELEMETRY=0 or guardrails.md, and sends only the documented anonymous payload"
+      },
+      "TELEM-02": {
+        "tier": "T1",
+        "behaviour": "Telemetry sends are fire-and-forget with a timeout and never change a command result or throw"
       }
     }
   },

@@ -286,6 +286,8 @@ export const configSchema = z
         timeoutSeconds: z.number().int().positive().default(300),
         maxDiffBytes: z.number().int().positive().default(200000),
         stub: z.object({ failOn: z.array(z.string().min(1)).default([]) }).strict().default({}),
+        paths: globs.default(['**/auth/**', '**/*auth*.*', '**/*session*.*', '**/*token*.*']),
+        onlyWhenRisky: z.boolean().default(true),
       })
       .strict()
       .default({})
@@ -307,6 +309,22 @@ export const configSchema = z
         escapedLabel: z.string().min(1).default('guardrails:escaped-bug'),
         windowDays: z.number().int().positive().default(7),
         minFalseEscalations: z.number().int().positive().default(3),
+      })
+      .strict()
+      .default({}),
+    feedback: z
+      .object({
+        enabled: z.boolean().default(false),
+        logFile: z.string().min(1).default('guardrails-failures.jsonl'),
+        minRepeats: z.number().int().positive().default(3),
+      })
+      .strict()
+      .default({}),
+    telemetry: z
+      .object({
+        enabled: z.boolean().default(false),
+        endpoint: z.string().url().optional(),
+        timeoutMs: z.number().int().positive().default(1500),
       })
       .strict()
       .default({}),

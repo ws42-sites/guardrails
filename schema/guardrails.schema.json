@@ -1267,6 +1267,23 @@
               },
               "additionalProperties": false,
               "default": {}
+            },
+            "paths": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "default": [
+                "**/auth/**",
+                "**/*auth*.*",
+                "**/*session*.*",
+                "**/*token*.*"
+              ]
+            },
+            "onlyWhenRisky": {
+              "type": "boolean",
+              "default": true
             }
           },
           "additionalProperties": false,
@@ -1319,6 +1336,47 @@
               "type": "integer",
               "exclusiveMinimum": 0,
               "default": 3
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "feedback": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "logFile": {
+              "type": "string",
+              "minLength": 1,
+              "default": "guardrails-failures.jsonl"
+            },
+            "minRepeats": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "default": 3
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "telemetry": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "endpoint": {
+              "type": "string",
+              "format": "uri"
+            },
+            "timeoutMs": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "default": 1500
             }
           },
           "additionalProperties": false,

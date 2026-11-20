@@ -87,6 +87,7 @@ async function main(): Promise<number> {
       'fails-on-base': { type: 'boolean' }, specs: { type: 'string' }, agent: { type: 'string' }, dir: { type: 'string' },
       preset: { type: 'string' }, by: { type: 'string' }, 'dry-run': { type: 'boolean' }, url: { type: 'string' }, require: { type: 'string' }, e2e: { type: 'boolean' }, run: { type: 'string' }, 'update-baseline': { type: 'boolean' }, shard: { type: 'string' }, glob: { type: 'string' },
       review: { type: 'boolean' }, report: { type: 'string' }, tested: { type: 'string' }, head: { type: 'string' }, overrides: { type: 'string' }, since: { type: 'string' }, pr: { type: 'string' }, issue: { type: 'string' }, rule: { type: 'string' }, label: { type: 'string' }, reason: { type: 'string' },
+      events: { type: 'string' }, comments: { type: 'string' }, cache: { type: 'string' }, failures: { type: 'string' }, 'agent-name': { type: 'string' },
     },
   });
   const [cmd, arg, ...rest] = positionals;
