@@ -15,6 +15,7 @@ import { loadConfig } from './config.js';
 import { readBaseline, ratchet, writeBaseline } from './baseline.js';
 import { collect, baselineRules } from './runner.js';
 import { specMatrix } from './checks/tests.js';
+import { send, telemetryStatus } from './telemetry.js';
 import { validateTest } from './validate.js';
 import type { CheckContext } from './types.js';
 import { addFlag } from './flags.js';
@@ -45,6 +46,7 @@ Commands
   specs                Print the spec matrix (ID, tier, tests)
   explain <RULE>       Explain a rule
   validate-test <ID>   Check a spec ID before writing a test
+  telemetry status    Show opt-in status, reason and exact anonymous payload
   flag <ID> <reason>   Stop and flag a spec/test conflict for a human (--file f). Blocks merge (FLAG-1)
   mutants              Recompute surviving mutants for changed files (--base, --mutate)
   hook-guard           Agent hook: deny edits to locked files (--agent claude|gemini|antigravity|codex; JSON on stdin)
@@ -159,11 +161,13 @@ async function main(): Promise<number> {
       return r.ok ? 0 : 1;
     }
     case 'init': {
+      const started = Date.now();
       if (arg === 'runbook') {
         const rb = initRunbook({ cwd, force: values.force });
         for (const f of rb.written) console.log(`wrote   ${f}`);
         for (const f of rb.skipped) console.log(`skipped ${f}`);
         console.log('Next: wire each stub script to the real command (or add runbook.na with a reason), then "guardrails check --only runbook".');
+        void send('init', { command: 'init', counts: { block: 0, warn: 0 }, durationMs: Date.now() - started }, { cwd });
         return 0;
       }
       const r = init({ cwd, owner: values.owner, base: values.base, force: values.force, preset: values.preset });
@@ -174,12 +178,15 @@ async function main(): Promise<number> {
         console.log(`journeys: added ${added.length} unapproved drafts from ${values.preset} (${added.join(', ')}). Edit, link specs, then "guardrails journeys approve <ID>".`);
       }
       for (const f of r.skipped) console.log(`skipped ${f} (exists, nothing to add; --force to overwrite)`);
+      void send('init', { command: 'init', counts: { block: 0, warn: 0 }, durationMs: Date.now() - started }, { cwd });
       console.log('Next: add specs to guardrails.config.json, run "guardrails baseline", then "guardrails check".');
       return 0;
     }
     case 'check':
     case 'report': {
+      const started = Date.now();
       const r = await run(opts);
+      void send(cmd, { command: cmd, counts: r.counts, durationMs: Date.now() - started }, { cwd });
       const fmt = values.format ?? (cmd === 'report' ? 'text' : 'text');
       console.log(fmt === 'json' ? toJson(r) : fmt === 'markdown' ? toMarkdown(r) : toText(r, { verbose: values.verbose }));
       return cmd === 'check' && !r.ok ? 1 : 0;
@@ -210,6 +217,11 @@ async function main(): Promise<number> {
         return arg ? 1 : 0;
       }
       console.log(`${info.id}: ${info.title}\nDefault mode: ${info.mode}${info.diffOnly ? ' (diff mode only)' : ''}\nWhy: ${info.why}\nFix: ${info.fix}`);
+      return 0;
+    }
+    case 'telemetry': {
+      if (arg !== 'status' || rest.length) { console.error('usage: guardrails telemetry status'); return 2; }
+      console.log(JSON.stringify(telemetryStatus('check', { command: 'check', counts: { block: 0, warn: 0 }, durationMs: 0 }, { cwd }), null, 2));
       return 0;
     }
     case 'validate-test': {

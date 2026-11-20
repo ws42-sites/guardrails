@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { z } from 'zod';
+import { configFromSources } from './config-md.js';
 import { RULE_IDS } from './rules.js';
 
 const globs = z.array(z.string().min(1));
@@ -154,7 +155,7 @@ export const configSchema = z
     lock: z
       .object({
         specTests: z.boolean().default(true),
-        paths: globs.default(['guardrails.config.json', '.guardrails/**', '.github/CODEOWNERS', '.github/workflows/**', '.claude/settings.json', '.gemini/settings.json', '.agents/hooks.json', '.codex/hooks.json', '.codex/config.toml']),
+        paths: globs.default(['guardrails.config.json', 'guardrails.md', '.guardrails/**', '.github/CODEOWNERS', '.github/workflows/**', '.claude/settings.json', '.gemini/settings.json', '.agents/hooks.json', '.codex/hooks.json', '.codex/config.toml']),
       })
       .strict()
       .default({}),
@@ -372,6 +373,7 @@ export const configSchema = z
 
 export type GuardrailsConfig = z.output<typeof configSchema>;
 export const CONFIG_FILE = 'guardrails.config.json';
+export const CONFIG_MD = 'guardrails.md';
 
 export class ConfigError extends Error {}
 
@@ -391,12 +393,7 @@ export function parseConfig(raw: unknown): GuardrailsConfig {
 
 export function loadConfig(cwd: string, file = CONFIG_FILE): GuardrailsConfig {
   const path = join(cwd, file);
-  if (!existsSync(path)) throw new ConfigError(`No ${file} in ${cwd}. Run "guardrails init" first.`);
-  let raw: unknown;
-  try {
-    raw = JSON.parse(readFileSync(path, 'utf8'));
-  } catch (e) {
-    throw new ConfigError(`${file} is not valid JSON: ${(e as Error).message}`);
-  }
-  return parseConfig(raw);
+  const markdown = join(cwd, CONFIG_MD);
+  if (!existsSync(path) && !existsSync(markdown)) throw new ConfigError(`No ${file} or ${CONFIG_MD} in ${cwd}. Run "guardrails init" first.`);
+  return configFromSources(existsSync(markdown) ? readFileSync(markdown, 'utf8') : null, existsSync(path) ? readFileSync(path, 'utf8') : null);
 }

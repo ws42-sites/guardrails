@@ -89,7 +89,7 @@ export function checkFailsOnBase(ctx: CheckContext): CheckOutput {
   try {
     git(ctx.cwd, ['worktree', 'add', '--detach', '--force', wt, mb]);
     if (existsSync(join(ctx.cwd, 'node_modules'))) symlinkSync(join(ctx.cwd, 'node_modules'), join(wt, 'node_modules'), 'junction');
-    for (const f of [...new Set([...testFiles, ...helpers, 'guardrails.config.json'])]) {
+    for (const f of [...new Set([...testFiles, ...helpers, 'guardrails.config.json', 'guardrails.md'])]) {
       if (!existsSync(join(ctx.cwd, f))) continue;
       mkdirSync(dirname(join(wt, f)), { recursive: true });
       cpSync(join(ctx.cwd, f), join(wt, f));
