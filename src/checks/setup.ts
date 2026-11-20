@@ -47,7 +47,8 @@ function parseCodeowners(src: string): OwnerRule[] {
 /** CFG-2: CODEOWNERS must give the config, the workflows and the baseline a human owner. */
 function checkCodeowners(ctx: CheckContext, files: string[]): Violation[] {
   const file = ['.github/CODEOWNERS', 'CODEOWNERS', 'docs/CODEOWNERS'].find((f) => files.includes(f) || existsSync(join(ctx.cwd, f)));
-  const required = ['guardrails.config.json', '.github/workflows/guardrails.yml', ctx.config.baselineFile];
+  const configs = ['guardrails.config.json', 'guardrails.md'].filter((f) => existsSync(join(ctx.cwd, f)));
+  const required = [...(configs.length ? configs : ['guardrails.config.json']), '.github/workflows/guardrails.yml', ctx.config.baselineFile];
   if (!file) return [violation('CFG-2', '.github/CODEOWNERS', `missing. It must assign an owner to ${required.join(', ')}.`, 'missing')];
   const rules = parseCodeowners(readText(ctx.cwd, file));
   const v: Violation[] = [];

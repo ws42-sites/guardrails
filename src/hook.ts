@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
-import { parseConfig, CONFIG_FILE, type GuardrailsConfig } from './config.js';
+import { parseConfig, loadConfig as loadProjectConfig, CONFIG_FILE, CONFIG_MD, type GuardrailsConfig } from './config.js';
 import { isTestFile, matchesAny } from './util.js';
 
 export type Agent = 'claude' | 'gemini' | 'antigravity' | 'codex';
@@ -18,9 +18,8 @@ interface Payload {
 }
 
 function loadConfig(cwd: string): GuardrailsConfig {
-  const p = join(cwd, CONFIG_FILE);
   try {
-    return parseConfig(existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : { version: 1 });
+    return loadProjectConfig(cwd);
   } catch {
     return parseConfig({ version: 1 });
   }
@@ -29,7 +28,7 @@ function loadConfig(cwd: string): GuardrailsConfig {
 /** Nearest ancestor of `from` that holds the guardrails config, else `from` itself (agents can start in a subfolder). */
 function configRoot(from: string): string {
   for (let d = resolve(from); ; d = dirname(d)) {
-    if (existsSync(join(d, CONFIG_FILE))) return d;
+    if (existsSync(join(d, CONFIG_FILE)) || existsSync(join(d, CONFIG_MD))) return d;
     if (dirname(d) === d) return from;
   }
 }
