@@ -346,6 +346,7 @@
               },
               "default": [
                 "guardrails.config.json",
+                "guardrails.md",
                 ".guardrails/**",
                 ".github/CODEOWNERS",
                 ".github/workflows/**",

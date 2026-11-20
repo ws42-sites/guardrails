@@ -394,6 +394,6 @@ export function parseConfig(raw: unknown): GuardrailsConfig {
 export function loadConfig(cwd: string, file = CONFIG_FILE): GuardrailsConfig {
   const path = join(cwd, file);
   const markdown = join(cwd, CONFIG_MD);
-  if (!existsSync(path) && !existsSync(markdown)) throw new ConfigError(`No ${file} or ${CONFIG_MD} in ${cwd}. Run "guardrails init" first.`);
+  if (!existsSync(path) && !existsSync(markdown)) throw new ConfigError(`No ${file} in ${cwd}. Run "guardrails init" first.`);
   return configFromSources(existsSync(markdown) ? readFileSync(markdown, 'utf8') : null, existsSync(path) ? readFileSync(path, 'utf8') : null);
 }

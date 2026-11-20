@@ -107,7 +107,7 @@ it('CFGMD-02 reports absent files and validates merged schema', () => {
   const r = repo().remove('guardrails.config.json');
   let message = '';
   try { loadConfig(r.dir); } catch (error) { message = (error as Error).message; }
-  expect(message).toBe(`No guardrails.config.json or guardrails.md in ${r.dir}. Run "guardrails init" first.`);
+  expect(message).toBe(`No guardrails.config.json in ${r.dir}. Run "guardrails init" first.`);
   let invalid = false;
   try { configFromSources('---\nversion: 2\n---', null); } catch (error) { invalid = error instanceof ConfigError; }
   expect(invalid).toBe(true);
