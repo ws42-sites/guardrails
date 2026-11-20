@@ -73,10 +73,10 @@ describe('CI-03 checkCi enforces PR scoping, nightly schedules and predeploy saf
       '      - run: npx vitest runner',
       '      - run: npm run test -- --changed',
       '      - run: npx vitest run --related src/a.ts',
-      '      - run: npx vitest related src/a.ts',
+      '      - run: npx vitest run related src/a.ts',
       '      - run: npm test -- --only-changed',
       '      - run: npx guardrails affected && npm test',
-      '      - run: npm run test:changed',
+      '      - run: npm run test:changed && npm test',
       '      - run: npm run verify:changed && npm test',
       '      - run: npx playwright test --grep smoke',
       '      - run: npm test -- --since origin/main',
@@ -93,6 +93,7 @@ describe('CI-03 checkCi enforces PR scoping, nightly schedules and predeploy saf
       '      - run: npx vitest run foo.test.xts',
       '      - run: npx vitest run foo.test.ps',
       '      - run: npx vitest run foo.unit.ts',
+      '      - run: npx vitest run relatedx',
     ];
     const r = repo(
       {
@@ -125,6 +126,7 @@ describe('CI-03 checkCi enforces PR scoping, nightly schedules and predeploy saf
         prViol(wf, 46, '- run: npx vitest run foo.test.xts'),
         prViol(wf, 47, '- run: npx vitest run foo.test.ps'),
         prViol(wf, 48, '- run: npx vitest run foo.unit.ts'),
+        prViol(wf, 49, '- run: npx vitest run relatedx'),
       ],
     });
   });
@@ -202,7 +204,7 @@ describe('CI-03 checkCi enforces PR scoping, nightly schedules and predeploy saf
     },
     {
       label: 'scheduled workflow running only scoped or named tests still flags missing nightly',
-      files: { '.github/workflows/nightly.yml': 'on:\n  schedule:\nsteps:\n  - run: npm run test:changed\n  - run: npx vitest run foo.test.ts\n' },
+      files: { '.github/workflows/nightly.yml': 'on:\n  schedule:\nsteps:\n  - run: npm test -- --changed\n  - run: npx vitest run foo.test.ts\n' },
       expected: [nightlyViol()],
     },
     {
@@ -233,8 +235,8 @@ describe('CI-03 checkCi enforces PR scoping, nightly schedules and predeploy saf
     { label: 'missing package.json skips preDeploy', expected: [] },
     { label: 'package.json without scripts skips preDeploy', pkg: '{"name":"pkg","canary":"CANARY-ci-9e4f2a1b"}', expected: [] },
     { label: 'package.json without deploy scripts (including __proto__ key) skips preDeploy', pkg: '{"scripts":{"__proto__":"npm test","build":"tsc"}}', expected: [] },
-    { label: 'missing predeploy and scoped predeploy:preview both flag', pkg: JSON.stringify({ scripts: { deploy: 'x', 'deploy:preview': 'x', 'predeploy:preview': 'npm run test:changed' } }), expected: [preViol('deploy'), preViol('deploy:preview')] },
-    { label: 'non-full predeploy script flags deploy', pkg: JSON.stringify({ scripts: { deploy: 'x', predeploy: 'echo ok' } }), expected: [preViol('deploy')] },
+    { label: 'missing predeploy and scoped predeploy:preview both flag', pkg: JSON.stringify({ scripts: { deploy: 'x', 'deploy:preview': 'x', 'predeploy:preview': 'npx vitest run --changed' } }), expected: [preViol('deploy'), preViol('deploy:preview')] },
+    { label: 'non-full predeploy script flags deploy without leaking canary', pkg: JSON.stringify({ scripts: { deploy: 'x', predeploy: 'echo CANARY-ci-9e4f2a1b' } }), expected: [preViol('deploy')] },
     { label: 'full-suite predeploy and predeploy:preview pass', pkg: JSON.stringify({ scripts: { deploy: 'x', predeploy: 'npm run -s test:full', 'deploy:preview': 'x', 'predeploy:preview': 'npx vitest run' } }), expected: [] },
     { label: 'runbook.na.deploy skips only deploy', pkg: JSON.stringify({ scripts: { deploy: 'x', 'deploy:preview': 'x' } }), config: { ...ON, runbook: { na: { deploy: 'Library released via tag workflow.' } } }, expected: [preViol('deploy:preview')] },
     { label: 'runbook.na deploy:preview skips only deploy:preview', pkg: JSON.stringify({ scripts: { deploy: 'x', 'deploy:preview': 'x' } }), config: { ...ON, runbook: { na: { 'deploy:preview': 'No preview environment exists.' } } }, expected: [preViol('deploy')] },
