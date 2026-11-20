@@ -1,14 +1,17 @@
+import { execFileSync } from 'node:child_process';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { afterEach } from 'vitest';
-import { parseConfig } from '../../src/config.js';
 import type { SurvivingMutant } from '../../src/checks/mutation.js';
+import { parseConfig } from '../../src/config.js';
 import type { CheckContext, CheckOutput, Violation } from '../../src/types.js';
 import { fingerprint } from '../../src/util.js';
 import { BASE_CONFIG } from './repo.js';
 
 export const CANARY = 'CANARY-hmut-7b4e91a2';
+export const HOSTILE_TEXT = 'false\r\n\u0000\u2028<script>x</script>\'; DROP TABLE m;--{"nested":1}https://user:pass@xn--pple-43d.example/p';
+export const LONG_TEXT = 'L'.repeat(4096);
 
 const tempDirs: string[] = [];
 afterEach(() => {
@@ -20,6 +23,10 @@ export interface MutantInput {
   mutatorName?: string;
   replacement?: string;
   location?: { start: { line: number } };
+}
+
+export function checkoutBranch(dir: string, branch: string): void {
+  execFileSync('git', ['checkout', '-q', '-b', branch], { cwd: dir, stdio: 'pipe' });
 }
 
 export function installStryker(dir: string): void {
@@ -49,6 +56,50 @@ export function scoreViolation(file: string, scoreText: string, breakPct: number
     message: `mutation score ${scoreText}% is below ${breakPct}% (${survivingCount} surviving/uncovered of ${validCount}). Add assertions that kill them.`,
     fingerprint: fingerprint('TEST-8', file, 'score'),
   };
+}
+
+export function multiFileScoreReport(cwd: string): string {
+  return JSON.stringify({
+    files: {
+      [`${cwd}/src/core/a.ts`]: {
+        mutants: [
+          { status: 'Killed' }, { status: 'Killed' }, { status: 'Timeout' },
+          { status: 'Survived', replacement: CANARY }, { status: 'NoCoverage', replacement: CANARY },
+          { status: 'Ignored', replacement: CANARY }, { status: 'CompileError' }, { status: 'RuntimeError' },
+        ],
+      },
+      'src/core/b.ts': {
+        mutants: [
+          { status: 'Killed' }, { status: 'Killed' }, { status: 'Killed' },
+          { status: 'Killed' }, { status: 'Timeout' }, { status: 'Survived' },
+        ],
+      },
+      'src/core/zero.ts': { mutants: [{ status: 'Ignored' }, { status: 'CompileError' }, { status: 'RuntimeError' }] },
+      'src/core/stale.ts': { mutants: [{ status: 'Survived', replacement: CANARY }] },
+      [`${cwd}x/src/core/a.ts`]: { mutants: [{ status: 'Survived', replacement: CANARY }] },
+    },
+  });
+}
+
+export function mixedSurvivorsReport(cwd: string): string {
+  const base = JSON.stringify({
+    'src/core/a.ts': {
+      mutants: [
+        { status: 'Survived', mutatorName: 'ConditionalExpression', replacement: HOSTILE_TEXT, location: { start: { line: 17 } } },
+        { status: 'NoCoverage' },
+        { status: 'NoCoverage', mutatorName: 'StringLiteral', replacement: LONG_TEXT, location: { start: { line: 51 } } },
+        { status: 'Killed', mutatorName: 'K', replacement: CANARY, location: { start: { line: 3 } } },
+        { status: 'Timeout', mutatorName: 'T', replacement: CANARY, location: { start: { line: 4 } } },
+        { status: 'Ignored', mutatorName: 'I', replacement: CANARY, location: { start: { line: 5 } } },
+        { status: 'CompileError', mutatorName: 'C', replacement: CANARY, location: { start: { line: 6 } } },
+        { status: 'RuntimeError', mutatorName: 'R', replacement: CANARY, location: { start: { line: 7 } } },
+      ],
+    },
+    [`${cwd}/src/core/b.ts`]: { mutants: [{ status: 'Survived', mutatorName: '', replacement: 'x || y', location: { start: { line: 29 } } }] },
+    'src/core/stale.ts': { mutants: [{ status: 'Survived', mutatorName: 'S', replacement: CANARY, location: { start: { line: 99 } } }] },
+    [`${cwd}x/src/core/b.ts`]: { mutants: [{ status: 'NoCoverage', mutatorName: 'N', replacement: CANARY, location: { start: { line: 88 } } }] },
+  });
+  return `{"files":${base.slice(0, -1)},"__proto__":{"mutants":[{"status":"Survived","replacement":"${CANARY}"}]}}}`;
 }
 
 export interface SeedRow {

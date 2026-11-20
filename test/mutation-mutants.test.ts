@@ -23,7 +23,10 @@ import { checkMutation, mutationTargets, strykerConfig, survivingMutants, type S
 import { parseConfig } from '../src/config.js';
 import type { CheckOutput } from '../src/types.js';
 import { fingerprint } from '../src/util.js';
-import { buildSeededRows, CANARY, installStryker, mutConfig, plainCtx, scoreViolation } from './helpers/mut-mutation.js';
+import {
+  buildSeededRows, CANARY, checkoutBranch, HOSTILE_TEXT, installStryker, LONG_TEXT,
+  mixedSurvivorsReport, multiFileScoreReport, mutConfig, plainCtx, scoreViolation,
+} from './helpers/mut-mutation.js';
 import { repo } from './helpers/repo.js';
 
 const SEEDED_ROWS = buildSeededRows();
@@ -43,9 +46,10 @@ describe('MUT-01 checkMutation, survivingMutants, strykerConfig and mutationTarg
   it.each<{ label: string; base: string | null; tiers: ('T1' | 'T2' | 'T3')[]; mutateOpt?: string[]; expected: string[] }>([
     { label: 'full repo selects existing T1 product files and skips missing, excluded, T2, T3 and non-product', base: null, tiers: ['T1'], expected: ['src/core/dirswap.ts', 'src/core/kept.ts', 'src/core/mod.ts'] },
     { label: 'full repo includes T2 when configured in mutation.tiers', base: null, tiers: ['T1', 'T2'], expected: ['src/core/dirswap.ts', 'src/core/kept.ts', 'src/core/mod.ts', 'src/lib/util.ts'] },
-    { label: 'diff mode drops unchanged, deleted, directory-swapped, excluded, T2 and non-product files', base: 'main', tiers: ['T1'], expected: ['src/core/mod.ts', 'src/core/added.ts'] },
+    { label: 'diff mode includes branch commits vs base and drops unchanged, deleted, directory-swapped, excluded, T2 and non-product', base: 'main', tiers: ['T1'], expected: ['src/core/branch.ts', 'src/core/mod.ts', 'src/core/added.ts'] },
     { label: 'ctx.options.mutate filters candidate targets by glob', base: 'main', tiers: ['T1'], mutateOpt: ['**/added.ts'], expected: ['src/core/added.ts'] },
     { label: 'empty ctx.options.mutate list selects nothing', base: null, tiers: ['T1'], mutateOpt: [], expected: [] },
+    { label: 'empty mutation.tiers selects nothing', base: null, tiers: [], expected: [] },
   ])('MUT-01 mutationTargets filters by base diff, tier, exclude, mutate option and existence: $label', ({ base, tiers, mutateOpt, expected }) => {
     const r = repo(
       {
@@ -64,9 +68,10 @@ describe('MUT-01 checkMutation, survivingMutants, strykerConfig and mutationTarg
       },
       mutConfig({ tiers, exclude: ['src/core/excluded.ts', 'src/core/gen/**'] }),
     ).commit('init');
-    r.remove('src/core/del.ts');
     if (base) {
-      r.remove('src/core/dirswap.ts');
+      checkoutBranch(r.dir, 'feat');
+      r.write({ 'src/core/branch.ts': 'export const br = 1;\n' }).commit('branch-commit');
+      r.remove('src/core/del.ts', 'src/core/dirswap.ts');
       mkdirSync(join(r.dir, 'src', 'core', 'dirswap.ts'));
       r.write({
         'src/core/mod.ts': 'export const mod = 2;\n',
@@ -75,6 +80,8 @@ describe('MUT-01 checkMutation, survivingMutants, strykerConfig and mutationTarg
         'src/lib/util.ts': 'export const util = 2;\n',
         'src/core/data.json': '{"a":1}\n',
       });
+    } else {
+      r.remove('src/core/del.ts');
     }
     const ctx = r.ctx(base);
     if (mutateOpt !== undefined) ctx.options.mutate = mutateOpt;
@@ -111,12 +118,16 @@ describe('MUT-01 checkMutation, survivingMutants, strykerConfig and mutationTarg
     });
   });
 
-  it.each<{ label: string; mode: 'skipped' | 'not-installed' | 'stderr-tail' | 'stdout-fallback' }>([
+  it.each<{ label: string; mode: 'skipped' | 'not-installed' | 'stderr-tail' | 'short-stderr' | 'stdout-fallback' | 'empty-output' | 'corrupt-report' | 'null-files' }>([
     { label: 'skips when no mutation-tier files changed', mode: 'skipped' },
     { label: 'reports not installed when @stryker-mutator/core is absent', mode: 'not-installed' },
     { label: 'writes formatted config, passes env/timeout, and reports last 3 stderr lines when report missing', mode: 'stderr-tail' },
+    { label: 'preserves both lines when stderr has fewer than 3 lines', mode: 'short-stderr' },
     { label: 'falls back to last 3 stdout lines when stderr is empty', mode: 'stdout-fallback' },
-  ])('MUT-01 runStryker handles skipped, missing package, command wiring and missing report: $label', ({ mode }) => {
+    { label: 'handles missing report when both stderr and stdout are empty', mode: 'empty-output' },
+    { label: 'fails closed with SyntaxError when mutation.json is truncated mid-write', mode: 'corrupt-report' },
+    { label: 'fails closed with TypeError when mutation.json files field is null', mode: 'null-files' },
+  ])('MUT-01 runStryker handles skipped, missing package, command wiring, missing report and corrupt report: $label', ({ mode }) => {
     const r = repo({ 'src/core/a.ts': 'export const a = 1;\n' }, mutConfig({ timeoutMinutes: 23, excludedMutations: ['Regex'], break: 72 })).commit('base');
     if (mode === 'skipped') {
       installStryker(r.dir);
@@ -136,15 +147,21 @@ describe('MUT-01 checkMutation, survivingMutants, strykerConfig and mutationTarg
     }
     installStryker(r.dir);
     const ctx = r.ctx(null);
-    const isStderr = mode === 'stderr-tail';
-    strykerState.next = {
-      code: isStderr ? 3 : 9,
-      stderr: isStderr ? `${CANARY}\ne2\ne3\ne4\ne5` : '',
-      stdout: isStderr ? `${CANARY}-out\ns2` : `${CANARY}\no2\no3\no4\no5`,
-      rawReport: null,
-    };
-    const tail = isStderr ? 'e3 e4 e5' : 'o3 o4 o5';
-    const code = isStderr ? 3 : 9;
+    if (mode === 'corrupt-report' || mode === 'null-files') {
+      strykerState.next = { code: 0, stderr: '', stdout: '', rawReport: mode === 'corrupt-report' ? '{"files":' : '{"files":null}' };
+      const errType = mode === 'corrupt-report' ? SyntaxError : TypeError;
+      expect(() => checkMutation(ctx)).toThrow(errType);
+      expect(() => survivingMutants(ctx)).toThrow(errType);
+      return;
+    }
+    const spec = mode === 'stderr-tail'
+      ? { code: 3, stderr: `${CANARY}\ne2\ne3\ne4\ne5`, stdout: `${CANARY}-out\ns2`, tail: 'e3 e4 e5' }
+      : mode === 'short-stderr'
+        ? { code: 5, stderr: 'e1\ne2', stdout: `${CANARY}-out`, tail: 'e1 e2' }
+        : mode === 'stdout-fallback'
+          ? { code: 9, stderr: '', stdout: `${CANARY}\no2\no3\no4\no5`, tail: 'o3 o4 o5' }
+          : { code: 137, stderr: '', stdout: '', tail: '' };
+    strykerState.next = { code: spec.code, stderr: spec.stderr, stdout: spec.stdout, rawReport: null };
     const outCheck = checkMutation(ctx);
     const outSurv = survivingMutants(ctx);
     expect(outCheck).toEqual({
@@ -152,11 +169,11 @@ describe('MUT-01 checkMutation, survivingMutants, strykerConfig and mutationTarg
         rule: 'TEST-8',
         file: '(mutation)',
         line: undefined,
-        message: `Stryker did not produce a report (exit ${code}): ${tail}`,
+        message: `Stryker did not produce a report (exit ${spec.code}): ${spec.tail}`,
         fingerprint: fingerprint('TEST-8', '(mutation)', 'noreport'),
       }],
     });
-    expect(outSurv).toEqual({ mutants: [], note: `Stryker failed (exit ${code}): ${tail}` });
+    expect(outSurv).toEqual({ mutants: [], note: `Stryker failed (exit ${spec.code}): ${spec.tail}` });
     expect(JSON.stringify([outCheck, outSurv]).includes(CANARY)).toBe(false);
     const cacheDir = join('node_modules', '.cache', 'guardrails');
     const confPath = join(cacheDir, 'stryker.config.json');
@@ -175,21 +192,7 @@ describe('MUT-01 checkMutation, survivingMutants, strykerConfig and mutationTarg
       label: 'scores multiple files, strips cwd prefix, ignores non-targets and non-valid statuses, skips zero-valid file',
       breakPct: 70,
       targetFiles: ['src/core/a.ts', 'src/core/b.ts', 'src/core/zero.ts'],
-      buildReport: (cwd) => JSON.stringify({
-        files: {
-          [`${cwd}/src/core/a.ts`]: {
-            mutants: [
-              { status: 'Killed' }, { status: 'Killed' }, { status: 'Timeout' },
-              { status: 'Survived', replacement: CANARY }, { status: 'NoCoverage', replacement: CANARY },
-              { status: 'Ignored', replacement: CANARY }, { status: 'CompileError' }, { status: 'RuntimeError' },
-            ],
-          },
-          'src/core/b.ts': { mutants: [{ status: 'Killed' }, { status: 'Killed' }, { status: 'Killed' }, { status: 'Killed' }, { status: 'Timeout' }, { status: 'Survived' }] },
-          'src/core/zero.ts': { mutants: [{ status: 'Ignored' }, { status: 'CompileError' }, { status: 'RuntimeError' }] },
-          'src/core/stale.ts': { mutants: [{ status: 'Survived', replacement: CANARY }] },
-          [`${cwd}x/src/core/a.ts`]: { mutants: [{ status: 'Survived', replacement: CANARY }] },
-        },
-      }),
+      buildReport: multiFileScoreReport,
       expected: {
         violations: [scoreViolation('src/core/a.ts', '60.0', 70, 2, 5)],
         metrics: [{ name: 'mutation', value: 72.7, detail: 'src/core/a.ts: 60.0% (3/5)\nsrc/core/b.ts: 83.3% (5/6)' }],
@@ -235,26 +238,12 @@ describe('MUT-01 checkMutation, survivingMutants, strykerConfig and mutationTarg
   it.each<{ label: string; buildReport: (cwd: string) => string; expected: { mutants: SurvivingMutant[]; note?: string } }>([
     {
       label: 'filters Survived and NoCoverage, strips cwd prefix, applies defaults and ignores non-targets and proto keys',
-      buildReport: (cwd) => `{"files":${JSON.stringify({
-        'src/core/a.ts': {
-          mutants: [
-            { status: 'Survived', mutatorName: 'ConditionalExpression', replacement: 'false\r\n"hostile"\u2028', location: { start: { line: 17 } } },
-            { status: 'NoCoverage' },
-            { status: 'Killed', mutatorName: 'K', replacement: CANARY, location: { start: { line: 3 } } },
-            { status: 'Timeout', mutatorName: 'T', replacement: CANARY, location: { start: { line: 4 } } },
-            { status: 'Ignored', mutatorName: 'I', replacement: CANARY, location: { start: { line: 5 } } },
-            { status: 'CompileError', mutatorName: 'C', replacement: CANARY, location: { start: { line: 6 } } },
-            { status: 'RuntimeError', mutatorName: 'R', replacement: CANARY, location: { start: { line: 7 } } },
-          ],
-        },
-        [`${cwd}/src/core/b.ts`]: { mutants: [{ status: 'Survived', mutatorName: '', replacement: 'x || y', location: { start: { line: 29 } } }] },
-        'src/core/stale.ts': { mutants: [{ status: 'Survived', mutatorName: 'S', replacement: CANARY, location: { start: { line: 99 } } }] },
-        [`${cwd}x/src/core/b.ts`]: { mutants: [{ status: 'NoCoverage', mutatorName: 'N', replacement: CANARY, location: { start: { line: 88 } } }] },
-      }).slice(0, -1)},"__proto__":{"mutants":[{"status":"Survived","replacement":"${CANARY}"}]}}}`,
+      buildReport: mixedSurvivorsReport,
       expected: {
         mutants: [
-          { file: 'src/core/a.ts', line: 17, mutator: 'ConditionalExpression', replacement: 'false\r\n"hostile"\u2028', status: 'Survived' },
+          { file: 'src/core/a.ts', line: 17, mutator: 'ConditionalExpression', replacement: HOSTILE_TEXT, status: 'Survived' },
           { file: 'src/core/a.ts', line: 0, mutator: '?', replacement: '', status: 'NoCoverage' },
+          { file: 'src/core/a.ts', line: 51, mutator: 'StringLiteral', replacement: LONG_TEXT, status: 'NoCoverage' },
           { file: 'src/core/b.ts', line: 29, mutator: '', replacement: 'x || y', status: 'Survived' },
         ],
       },
