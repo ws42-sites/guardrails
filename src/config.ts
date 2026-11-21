@@ -4,7 +4,34 @@ import { z } from 'zod';
 import { configFromSources } from './config-md.js';
 import { RULE_IDS } from './rules.js';
 
-const globs = z.array(z.string().min(1));
+function lazySchema<T extends z.ZodTypeAny>(build: () => T): T {
+  let schema: T | undefined;
+  const get = (): T => (schema ??= build());
+  return new Proxy({} as T, {
+    get(_target, prop) {
+      const resolved = get();
+      const value = Reflect.get(resolved, prop, resolved);
+      return typeof value === 'function' ? value.bind(resolved) : value;
+    },
+    has(_target, prop) {
+      return Reflect.has(get(), prop);
+    },
+    ownKeys() {
+      return Reflect.ownKeys(get());
+    },
+    getOwnPropertyDescriptor(_target, prop) {
+      const desc = Object.getOwnPropertyDescriptor(get(), prop);
+      if (desc) desc.configurable = true;
+      return desc;
+    },
+    getPrototypeOf() {
+      return Object.getPrototypeOf(get());
+    },
+  });
+}
+
+function buildSchemas() {
+  const globs = z.array(z.string().min(1));
 const tier = z.enum(['T1', 'T2', 'T3']);
 const mode = z.enum(['block', 'warn', 'off']);
 
@@ -16,7 +43,7 @@ const locator = z.object({ role: cujString.optional(), name: cujString.optional(
   .refine((s) => !!s.text || !!(s.role && s.name), 'provide role and name, or text');
 
 /** Each strict branch is discriminated by its sole operation key; no executable code. */
-export const journeyStepSchema = z.union([
+const journeyStepSchema = z.union([
   z.object({ goto: pathValue }).strict(),
   z.object({ click: locator }).strict(),
   z.object({ fill: z.object({ label: cujString, value: cujString }).strict() }).strict(),
@@ -30,7 +57,7 @@ export const journeyStepSchema = z.union([
   z.object({ mockRoute: z.object({ match: cujString, status: z.number().int().min(100).max(599) }).strict() }).strict(),
 ]);
 
-export const journeySchema = z.object({
+const journeySchema = z.object({
   title: z.string().min(10).max(300),
   priority: z.enum(['P0', 'P1', 'P2']),
   steps: z.array(z.string().min(3).max(300)).min(1),
@@ -49,7 +76,7 @@ export const journeySchema = z.object({
   if (metadata.some((s) => s?.includes('{{'))) ctx.addIssue({ code: 'custom', message: 'tokens are only legal in run values and prose' });
 }).transform((j) => j.source && !j.provenance ? { ...j, provenance: 'inferred' as const } : j);
 
-export const configSchema = z
+const configSchema = z
   .object({
     $schema: z.string().optional(),
     version: z.literal(1),
@@ -370,6 +397,16 @@ export const configSchema = z
         else if (!j.specs.includes(sid)) ctx.addIssue({ code: 'custom', path: ['specs', 'items', sid, 'journeys'], message: `${jid} does not list ${sid} in its specs` });
       }
   });
+
+  return { journeyStepSchema, journeySchema, configSchema };
+}
+
+let cachedSchemas: ReturnType<typeof buildSchemas> | undefined;
+const schemas = () => (cachedSchemas ??= buildSchemas());
+
+export const journeyStepSchema = lazySchema(() => schemas().journeyStepSchema);
+export const journeySchema = lazySchema(() => schemas().journeySchema);
+export const configSchema = lazySchema(() => schemas().configSchema);
 
 export type GuardrailsConfig = z.output<typeof configSchema>;
 export const CONFIG_FILE = 'guardrails.config.json';
