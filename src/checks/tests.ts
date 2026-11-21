@@ -1,3 +1,4 @@
+import { configFromSources } from '../config-md.js';
 import type { CheckContext, CheckOutput, Metric, Tier, Violation } from '../types.js';
 import { inventory, MATCHER_STRENGTH, matcherName, type TestCase } from '../inventory.js';
 import {
@@ -151,8 +152,11 @@ function diffChecks(ctx: CheckContext, index: TestIndex, v: Violation[], metrics
   for (const [file, tests] of Object.entries(baseTests)) {
     baseCount += tests.length;
     const head = index.byFile[file] ?? [];
+    const nth = new Map<string, number>();
     for (const bt of tests) {
-      const ht = head.find((x) => x.title === bt.title);
+      const n = nth.get(bt.title) ?? 0;
+      nth.set(bt.title, n + 1);
+      const ht = head.filter((x) => x.title === bt.title)[n];
       if (!ht) {
         if (!headTitles.has(bt.title)) deleted.push(`${file}: ${bt.title}`);
         continue;
@@ -244,17 +248,17 @@ const thresholdNumbers = (src: string): Record<string, number> => {
 };
 
 function configWeakening(ctx: CheckContext, mb: string, v: Violation[]): void {
-  const cfgFile = 'guardrails.config.json';
-  const before = showAt(ctx.cwd, mb, cfgFile);
-  if (before) {
+  const configFiles = ['guardrails.md', 'guardrails.config.json'];
+  const before = configFiles.map((f) => showAt(ctx.cwd, mb, f));
+  const after = configFiles.map((f) => { try { return readText(ctx.cwd, f); } catch { return null; } });
+  if (before.some((s) => s !== null)) {
     try {
-      const changes = compareConfigs(JSON.parse(before), JSON.parse(readText(ctx.cwd, cfgFile)));
+      const changes = compareConfigs(configFromSources(before[0], before[1]) as unknown as Json, configFromSources(after[0], after[1]) as unknown as Json);
       const approved = ctx.labels.includes(ctx.config.labels.configApproved);
-      for (const c of changes)
-        if (!approved) v.push(violation('TEST-7', cfgFile, `config loosened: ${c}. Lowering a threshold counts as weakening; a code owner must add the "${ctx.config.labels.configApproved}" label, which approves loosening guardrails.config.json.`, `cfg:${c}`));
-    } catch {
-      /* invalid JSON is CFG-1's job */
-    }
+      for (const file of configFiles.filter((_, i) => before[i] !== after[i]))
+        for (const c of changes)
+          if (!approved) v.push(violation('TEST-7', file, `config loosened: ${c}. Lowering a threshold counts as weakening; a code owner must add the "${ctx.config.labels.configApproved}" label, which approves loosening ${file}.`, `cfg:${c}`));
+    } catch {}
   }
   for (const f of listFiles(ctx.cwd).filter((x) => THRESHOLD_FILES.test(x))) {
     const old = showAt(ctx.cwd, mb, f);
@@ -268,7 +272,7 @@ function configWeakening(ctx: CheckContext, mb: string, v: Violation[]): void {
   const oldBl = showAt(ctx.cwd, mb, bl);
   const newBl = (() => { try { return readText(ctx.cwd, bl); } catch { return null; } })();
   // The adoption PR (no guardrails config on base yet) records the initial baseline; growth after that needs the label.
-  if (newBl && showAt(ctx.cwd, mb, 'guardrails.config.json') !== null) {
+  if (newBl && before.some((s) => s !== null)) {
     const keys = (s: string | null) => new Set<string>(s ? (JSON.parse(s).entries ?? []).map((e: { rule: string; fingerprint: string }) => `${e.rule}:${e.fingerprint}`) : []);
     const o = keys(oldBl);
     const added = [...keys(newBl)].filter((k) => !o.has(k));

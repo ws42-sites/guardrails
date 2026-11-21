@@ -19,11 +19,65 @@ on:
       codeql: { type: boolean, default: false }
       codeql-languages: { type: string, default: 'javascript-typescript' }
       holdout-repo: { type: string, default: '' }
+      label-plan: { type: boolean, default: true }
+      review: { type: boolean, default: false }
+      review-shards: { type: string, default: '["1/2","2/2"]' }
+      provenance: { type: boolean, default: false }
+      mutation-shards: { type: string, default: '["1/1"]' }
     secrets:
       holdout-token:
         required: false
         description: Read-only token for the private holdout repo (fine-grained, contents:read).
 jobs:
+  labels:
+    if: ${{ inputs.label-plan && github.event_name == 'pull_request' }}
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ inputs.node-version }}', cache: npm }
+      - run: ${{ inputs.install-command }}
+      - name: guardrails labels plan (advisory)
+        env:
+          CLI: ${{ inputs.cli }}
+          GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          BASE_REF: ${{ github.base_ref }}
+        run: $CLI labels plan --base "origin/$BASE_REF" --format markdown >> "$GITHUB_STEP_SUMMARY" || true
+  review:
+    if: ${{ inputs.review && github.event_name == 'pull_request' }}
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(inputs.review-shards) }}
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0, persist-credentials: false }
+      - uses: actions/setup-node@v4
+        with: { node-version: '${{ inputs.node-version }}', cache: npm }
+      - run: ${{ inputs.install-command }}
+      - name: guardrails review
+        env:
+          CLI: ${{ inputs.cli }}
+          BASE_REF: ${{ github.base_ref }}
+          SHARD: ${{ matrix.shard }}
+        run: |
+          $CLI report --only tests,gaming --base "origin/$BASE_REF" --format json > guardrails-review-input.json || true
+          $CLI review --base "origin/$BASE_REF" --report guardrails-review-input.json --shard "$SHARD"
   check:
     permissions:
       contents: read
@@ -47,12 +101,27 @@ jobs:
           CLOCK: ${{ inputs.clock-shift && github.event_name != 'pull_request' && '--clock-shift' || '' }}
           FAILBASE: ${{ inputs.fails-on-base && '--fails-on-base' || '' }}
         run: |
-          set -o pipefail
           ARGS="$CLOCK"; [ -n "$BASE" ] && ARGS="$ARGS --base $BASE $FAILBASE"
           echo "## Guardrails (\`${GITHUB_SHA:0:7}\`)" >> "$GITHUB_STEP_SUMMARY"
-          $CLI report --format json $ARGS > guardrails-report.json || true
-          $CLI report --format markdown $ARGS >> "$GITHUB_STEP_SUMMARY" || true
-          $CLI check $ARGS
+          rc=0; $CLI check --format json $ARGS > guardrails-report.json || rc=$?
+          $CLI report --report guardrails-report.json --format markdown >> "$GITHUB_STEP_SUMMARY" || true
+          $CLI report --report guardrails-report.json --format text || true
+          exit $rc
+      - name: guardrails provenance
+        if: ${{ always() && inputs.provenance }}
+        env:
+          CLI: ${{ inputs.cli }}
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          echo '[]' > guardrails-events.json; echo '[]' > guardrails-comments.json
+          if [ -n "$PR" ]; then
+            gh api "repos/$GITHUB_REPOSITORY/issues/$PR/events?per_page=100" > guardrails-events.json 2>/dev/null || echo '[]' > guardrails-events.json
+            gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments?per_page=100" > guardrails-comments.json 2>/dev/null || echo '[]' > guardrails-comments.json
+          fi
+          $CLI provenance record --report guardrails-report.json --head "$HEAD_SHA" --events guardrails-events.json --comments guardrails-comments.json --format markdown >> "$GITHUB_STEP_SUMMARY"
+          $CLI provenance verify --head "$HEAD_SHA" --report guardrails-report.json
       - name: stamp guardrails report
         if: always()
         env:
@@ -122,6 +191,13 @@ jobs:
             rm -f "$TMP_STAMP"
             echo "::warning::Failed to stamp guardrails-report.json"
           fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: guardrails-failures
+          path: ${{ inputs.working-directory }}/guardrails-failures.jsonl
+          retention-days: 90
+          if-no-files-found: ignore
       # Test-suite audit for the job summary (the check above already gates SUITE-1..6 when testSuite is enabled).
       - name: test-suite report
         if: always()
@@ -132,16 +208,22 @@ jobs:
         if: always()
         with:
           name: guardrails-report-${{ github.sha }}
-          path: '${{ inputs.working-directory }}/guardrails-report-${{ github.sha }}.json'
+          path: |
+            ${{ inputs.working-directory }}/guardrails-report-${{ github.sha }}.json
+            ${{ inputs.working-directory }}/guardrails-provenance.json
           retention-days: 90
           if-no-files-found: warn
   mutation:
-    if: ${{ inputs.mutation && github.event_name == 'pull_request' }}
+    if: ${{ inputs.mutation && (github.event_name == 'pull_request' || (github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000')) }}
     permissions:
       contents: read
       pull-requests: read
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(inputs.mutation-shards) }}
     defaults:
       run:
         working-directory: ${{ inputs.working-directory }}
@@ -151,24 +233,43 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: '${{ inputs.node-version }}', cache: npm }
       - run: ${{ inputs.install-command }}
+      - id: shardkey
+        env:
+          SHARD: ${{ matrix.shard }}
+        run: echo "key=$(printf '%s' "$SHARD" | tr '/' '-')" >> "$GITHUB_OUTPUT"
       - uses: actions/cache@v4
         with:
           path: ${{ inputs.working-directory }}/node_modules/.cache/guardrails/stryker-incremental.json
-          key: stryker-${{ github.base_ref }}-${{ github.sha }}
-          restore-keys: stryker-${{ github.base_ref }}-
+          key: stryker-${{ github.base_ref }}-${{ steps.shardkey.outputs.key }}-${{ github.sha }}
+          restore-keys: stryker-${{ github.base_ref }}-${{ steps.shardkey.outputs.key }}-
       - name: mutation (changed files in mutation tiers)
         env:
           CLI: ${{ inputs.cli }}
           GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event.before }}
+          SHARD: ${{ matrix.shard }}
         run: |
-          $CLI report --only mutation --mutation --base origin/${{ github.base_ref }} --format markdown >> "$GITHUB_STEP_SUMMARY" || true
-          $CLI check --only mutation --mutation --base origin/${{ github.base_ref }}
+          MUTATE=""
+          if [ "$SHARD" != "1/1" ]; then
+            CHANGED="$(git diff --name-only --diff-filter=AMR "$BASE"...HEAD | grep -E '\.(ts|tsx|js|mjs|cjs)$' | grep -vE '(^|/)(test|tests|__tests__)/|\.(test|spec)\.' | paste -sd, -)"
+            [ -n "$CHANGED" ] && MUTATE="$($CLI shard --shard "$SHARD" --glob "$CHANGED" 2>/dev/null | paste -sd, -)"
+            if [ -z "$MUTATE" ]; then echo "shard $SHARD has no changed files"; exit 0; fi
+            MUTATE="--mutate $MUTATE"
+          fi
+          rc=0; $CLI check --only mutation --mutation --base "$BASE" $MUTATE --format json > guardrails-mutation-report.json || rc=$?
+          $CLI report --report guardrails-mutation-report.json --format markdown >> "$GITHUB_STEP_SUMMARY" || true
+          $CLI report --report guardrails-mutation-report.json --format text || true
+          exit $rc
   mutation-full:
     if: ${{ inputs.mutation-full && github.event_name != 'pull_request' }}
     permissions:
       contents: read
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(inputs.mutation-shards) }}
     defaults:
       run:
         working-directory: ${{ inputs.working-directory }}
@@ -178,24 +279,41 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: '${{ inputs.node-version }}', cache: npm }
       - run: ${{ inputs.install-command }}
-      - uses: actions/cache@v4
+      - id: shardkey
+        env:
+          SHARD: ${{ matrix.shard }}
+        run: echo "key=$(printf '%s' "$SHARD" | tr '/' '-')" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache/restore@v4
         with:
           path: ${{ inputs.working-directory }}/node_modules/.cache/guardrails/stryker-incremental.json
-          key: stryker-${{ github.ref_name }}-${{ github.sha }}
+          key: stryker-full-${{ steps.shardkey.outputs.key }}-${{ github.sha }}
           restore-keys: |
-            stryker-${{ github.ref_name }}-
-            stryker-
-      - name: mutation (all mutation-tier files)
+            stryker-full-${{ steps.shardkey.outputs.key }}-
+      - name: mutation (all mutation-tier files, this shard)
         env:
           CLI: ${{ inputs.cli }}
-          GUARDRAILS_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          SHARD: ${{ matrix.shard }}
         run: |
-          $CLI report --only mutation --mutation --format markdown >> "$GITHUB_STEP_SUMMARY" || true
-          $CLI check --only mutation --mutation
+          GLOBS="$(node -e "try{const c=require('./guardrails.config.json');const t=(c.mutation&&c.mutation.tiers)||['T1'];console.log(t.flatMap((x)=>(c.tiers&&c.tiers[x])||[]).join(','))}catch{console.log('')}")"
+          MUTATE=""
+          if [ "$SHARD" != "1/1" ] && [ -n "$GLOBS" ]; then
+            MUTATE="$($CLI shard --shard "$SHARD" --glob "$GLOBS" 2>/dev/null | paste -sd, -)"
+            if [ -z "$MUTATE" ]; then echo "shard $SHARD has no mutation-tier files"; exit 0; fi
+            MUTATE="--mutate $MUTATE"
+          fi
+          rc=0; $CLI check --only mutation --mutation $MUTATE --format json > guardrails-mutation-report.json || rc=$?
+          $CLI report --report guardrails-mutation-report.json --format markdown >> "$GITHUB_STEP_SUMMARY" || true
+          $CLI report --report guardrails-mutation-report.json --format text || true
+          exit $rc
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: ${{ inputs.working-directory }}/node_modules/.cache/guardrails/stryker-incremental.json
+          key: stryker-full-${{ steps.shardkey.outputs.key }}-${{ github.sha }}-${{ github.run_attempt }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: guardrails-mutation-${{ github.sha }}
+          name: guardrails-mutation-${{ github.sha }}-${{ steps.shardkey.outputs.key }}
           path: ${{ inputs.working-directory }}/node_modules/.cache/guardrails/mutation.json
           retention-days: 90
           if-no-files-found: warn

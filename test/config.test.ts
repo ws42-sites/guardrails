@@ -46,3 +46,19 @@ describe('DIFF-03 loosening the config counts as weakening', () => {
     )).toEqual([]);
   });
 });
+
+describe('CFG-01 exported schemas stay inspectable', () => {
+  it('defers schema construction behind a proxy until first use', async () => {
+    const { isProxy } = await import('node:util/types');
+    const { configSchema, journeySchema, parseConfig } = await import('../src/config.js');
+    expect(isProxy(configSchema)).toBe(true);
+    expect(isProxy(journeySchema)).toBe(true);
+    expect('safeParse' in configSchema).toBe(true);
+    expect('parse' in journeySchema).toBe(true);
+    expect(Object.keys(configSchema).length + Reflect.ownKeys(configSchema).length).toBeGreaterThan(0);
+    expect(Object.getPrototypeOf(configSchema)).not.toBeNull();
+    expect(Object.getOwnPropertyDescriptor(configSchema, 'safeParse') ?? Object.getOwnPropertyDescriptor(Object.getPrototypeOf(configSchema), 'safeParse')).toBeTruthy();
+    expect(configSchema.safeParse({ version: 1 }).success).toBe(true);
+    expect(parseConfig({ version: 1 }).version).toBe(1);
+  });
+});

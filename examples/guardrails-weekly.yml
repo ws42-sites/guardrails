@@ -1,0 +1,88 @@
+name: Weekly guardrails proposals
+on:
+  schedule:
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+  actions: read
+  issues: read
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Export evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          node --input-type=module <<'JS'
+          import { execFileSync } from 'node:child_process';
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const escapedLabel = JSON.parse(readFileSync('guardrails.config.json', 'utf8')).evaluation?.escapedLabel ?? 'guardrails:escaped-bug';
+          const [owner, name] = process.env.REPOSITORY.split('/');
+          const gh = (...args) => JSON.parse(execFileSync('gh', args, { encoding: 'utf8' }));
+          const pages = gh('api', '--paginate', '--slurp', `repos/${owner}/${name}/pulls?state=closed&per_page=100`);
+          const exports = [];
+          for (const pr of pages.flat().filter(p => p.merged_at)) {
+            const linked = gh('api', 'graphql', '-f', `query=query { repository(owner:${JSON.stringify(owner)},name:${JSON.stringify(name)}) { pullRequest(number:${pr.number}) { closingIssuesReferences(first:100) { nodes { number updatedAt labels(first:100) { nodes { name } } } pageInfo { hasNextPage } } } } }`).data.repository.pullRequest.closingIssuesReferences;
+            if (linked.pageInfo.hasNextPage) throw new Error('Linked issue export exceeds 100; paginate before importing');
+            const runs = gh('api', '--paginate', '--slurp', `repos/${owner}/${name}/commits/${pr.head.sha}/check-runs?per_page=100`).flatMap(p => p.check_runs);
+            const events = [];
+            for (const run of runs.filter(r => r.name.toLowerCase().includes('guardrails') && r.conclusion === 'failure')) {
+              const annotations = gh('api', '--paginate', '--slurp', `repos/${owner}/${name}/check-runs/${run.id}/annotations?per_page=100`).flat();
+              for (const annotation of annotations) {
+                const rule = /\b[A-Z]+-\d+\b/.exec(annotation.title + ' ' + annotation.message)?.[0];
+                if (rule) events.push({ event: 'blocked', at: run.completed_at, rule });
+              }
+            }
+            const labels = gh('api', '--paginate', '--slurp', `repos/${owner}/${name}/issues/${pr.number}/events?per_page=100`).flat().filter(e => e.event === 'labeled');
+            for (const event of labels) for (const rule of new Set(events.map(e => e.rule))) events.push({ event: 'labeled', at: event.created_at, rule, label: event.label.name, by: event.actor.login });
+            const linkedIssues = [];
+            for (const issue of linked.nodes) {
+              const issueEvents = gh('api', '--paginate', '--slurp', `repos/${owner}/${name}/issues/${issue.number}/events?per_page=100`).flat();
+              const escaped = issueEvents.filter(e => e.event === 'labeled' && e.label.name === escapedLabel).at(-1);
+              if (escaped) linkedIssues.push({ number: issue.number, at: escaped.created_at, labels: [escapedLabel], rules: [] });
+            }
+            exports.push({ number: pr.number, mergedAt: pr.merged_at, linkedIssues, events });
+          }
+          writeFileSync('guardrails-events.json', JSON.stringify(exports));
+          JS
+      - name: Collect failure log artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          gh api --paginate "repos/$REPOSITORY/actions/artifacts?name=guardrails-failures&per_page=100" --jq '.artifacts[] | select(.expired == false) | .id' > artifact-ids.txt
+          : > guardrails-failures.jsonl
+          while read -r artifact; do
+            gh api "repos/$REPOSITORY/actions/artifacts/$artifact/zip" > failures.zip
+            unzip -p failures.zip guardrails-failures.jsonl >> guardrails-failures.jsonl
+            printf '\n' >> guardrails-failures.jsonl
+          done < artifact-ids.txt
+      - name: Produce proposals
+        run: |
+          npx guardrails ledger import --events guardrails-events.json
+          npx guardrails evaluate --since 7d --out guardrails-weekly.md
+          npx guardrails feedback draft --failures guardrails-failures.jsonl --out guardrails-feedback.md
+          cat guardrails-feedback.md >> guardrails-weekly.md
+          cat guardrails-weekly.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Open report-only draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git switch -c "guardrails-weekly-${GITHUB_RUN_ID}"
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git add -- guardrails-weekly.md
+          git commit -m "Report weekly guardrails proposals"
+          git push origin HEAD
+          gh pr create --draft --title "Weekly guardrails proposals" --body "Report only. Review evidence before changing any rules."

@@ -10,7 +10,14 @@
       "src/checks/**",
       "src/baseline.ts",
       "src/config.ts",
-      "src/runner.ts"
+      "src/runner.ts",
+      "src/review/**",
+      "src/provenance.ts",
+      "src/evaluate.ts",
+      "src/config-md.ts",
+      "src/label-planner.ts",
+      "src/feedback.ts",
+      "src/telemetry.ts"
     ],
     "T2": [
       "src/**"
@@ -354,6 +361,62 @@
       "MUT-01": {
         "tier": "T1",
         "behaviour": "checkMutation and survivingMutants select mutation-tier targets, run Stryker with the exact config, env and timeout, score only this run's files, block below mutation.break with exact message, and report skipped, not-installed and no-report states"
+      },
+      "REVIEW-01": {
+        "tier": "T1",
+        "behaviour": "An optional independent reviewer runs after the checks, sees only the diff and test output through a swappable provider (deterministic stub, external command), never the author reasoning, PR text or commit messages, and turns a fail verdict into REVIEW-1 findings; off by default"
+      },
+      "REVIEW-02": {
+        "tier": "T1",
+        "behaviour": "Reviewer input holds only the merge-base diff and test output, is truncated at review.maxDiffBytes, and the command provider runs in an empty temp dir with a scrubbed env, fails closed on timeout, non-zero exit or malformed verdicts"
+      },
+      "PROV-01": {
+        "tier": "T1",
+        "behaviour": "Provenance pins the tested commit SHA, report path and hash, guardrails version, checks with results and override labels with who and why into a JSON record and a PR comment marker; a tested SHA that does not match the PR head fails PROV-1; off by default"
+      },
+      "PROV-02": {
+        "tier": "T1",
+        "behaviour": "provenance verify accepts the tested SHA or a merge commit whose second parent is the PR head, rejects any other head, a missing record or a changed report hash, and the comment marker round-trips"
+      },
+      "EVAL-01": {
+        "tier": "T1",
+        "behaviour": "The checker ledger records escaped bugs and false escalations, and guardrails evaluate diffs it against the rule set to propose prunes and sharpening as a report, never applying them; off by default"
+      },
+      "EVAL-02": {
+        "tier": "T1",
+        "behaviour": "guardrails ledger add and import validate entries, dedupe them and append to evaluation.ledgerFile from GitHub event exports without network calls"
+      },
+      "CFGMD-01": {
+        "tier": "T1",
+        "behaviour": "guardrails.md front matter and fenced guardrails blocks parse into the same typed config as guardrails.config.json with documented precedence, are locked like the JSON config, and count toward weakening checks"
+      },
+      "CFGMD-02": {
+        "tier": "T1",
+        "behaviour": "guardrails.md rejects journeys and deps keys and malformed front matter or blocks with line numbers, and agent hooks lock it"
+      },
+      "LPLAN-01": {
+        "tier": "T1",
+        "behaviour": "guardrails labels plan statically scans the diff and lists every approval label the PR will need with reason and file:line, as one markdown summary"
+      },
+      "LPLAN-02": {
+        "tier": "T1",
+        "behaviour": "The label planner is advisory: it always exits 0, never adds labels, and omits labels already on the PR"
+      },
+      "FEED-01": {
+        "tier": "T1",
+        "behaviour": "Blocking findings are tagged with rule, file and agent and appended to feedback.logFile"
+      },
+      "FEED-02": {
+        "tier": "T1",
+        "behaviour": "The weekly feedback job clusters repeated failures and drafts candidate lint rules with a one-line rationale for human approval, never applying them"
+      },
+      "TELEM-01": {
+        "tier": "T1",
+        "behaviour": "Telemetry is off unless opted in with an endpoint, is disabled by GUARDRAILS_TELEMETRY=0 or guardrails.md, and sends only the documented anonymous payload"
+      },
+      "TELEM-02": {
+        "tier": "T1",
+        "behaviour": "Telemetry sends are fire-and-forget with a timeout and never change a command result or throw"
       }
     }
   },

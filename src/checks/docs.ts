@@ -1,5 +1,6 @@
 import { existsSync, lstatSync, readlinkSync } from 'node:fs';
 import { basename, extname, join } from 'node:path';
+import { CONFIG_MD } from '../config.js';
 import type { CheckContext, CheckOutput, Violation } from '../types.js';
 import { lineCount, listFiles, matchesAny, readText, violation } from '../util.js';
 
@@ -11,7 +12,7 @@ export function checkDocs(ctx: CheckContext, files = listFiles(ctx.cwd)): CheckO
   const pointers = new Set(docs.pointerFiles);
 
   for (const f of files) {
-    if (matchesAny(f, docs.ignore) || pointers.has(f)) continue;
+    if (matchesAny(f, docs.ignore) || pointers.has(f) || f === CONFIG_MD) continue;
     const isDoc = exts.includes(extname(f).toLowerCase());
     const disguised = matchesAny(f, docs.disguise);
     if (!isDoc && !disguised) continue;

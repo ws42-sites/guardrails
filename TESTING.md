@@ -9,10 +9,10 @@ Shared by every project that uses `@ws42ca/guardrails`. Projects don't copy this
 - More than 8 tests on one ID is padding. Use `it.each` [TEST-4].
 
 ## 2. Journeys come first [JRN-1..6]
-Above the specs sit Critical User Journeys: 5-10 complete tasks users actually do, written in plain language ("Client opens the review link and submits a choice"). Each has a priority, steps, the spec IDs it depends on and its routes. Only journeys a human approved gate merges.
-- Every approved P0 journey has exactly one e2e test (Playwright, `e2e/`) whose title starts with its ID and walks the steps [JRN-1]. P1 gaps warn; P2 is optional.
+Above the specs sit Critical User Journeys: 5-10 complete tasks users actually do, written in plain language ("Client opens the review link and submits a choice"). Each has a priority, steps, the spec IDs it depends on and its routes. Only approved or client-provided journeys gate merges.
+- Every enforced P0 journey has exactly one e2e test (Playwright, `e2e/`) whose title starts with its ID and walks the steps [JRN-1]. P1 gaps warn; P2 is optional.
 - Every spec should serve an approved journey. Orphans warn: they signal padding or a feature nobody asked for [JRN-2].
-- Agents never add, edit or approve journeys [JRN-3]. New routes, forms and endpoints should map to a journey [JRN-4].
+- Agents never approve journeys (`guardrails journeys approve` is human-only) or edit approved/client-provided journeys; only configured base-branch `journeys.trustedProducers` may import unapproved journeys with `run` steps (`guardrails journeys import`), while other PR journey edits need `guardrails:journeys-approved` [JRN-3]. New routes, forms and endpoints should map to a journey [JRN-4].
 
 Executable journeys use `journeys scaffold`, `journeys generate-tests`, and `journeys run --base-url <url>`. Check generated files with `journeys generate-tests --check`; JRN-6 compares the specs and shared runtime byte-for-byte. Declare mocks for writes: the runtime aborts unmocked non-GET/HEAD requests. Approved/client-provided failures gate execution; unapproved inferred/template failures warn.
 
@@ -41,33 +41,33 @@ Warn (weak, preference-style; moved from block in v0.2):
 
 Property tests: a spec with `"properties": true` may use fast-check with a fixed `seed` and `interruptAfterTimeLimit` (≤ `tests.propertyTimeLimitMs`, default 5000) instead of the 20-run cap. Elsewhere seeded property runs warn.
 
-Heuristics that only warn [TEST-5W]: tests with no `expect`, tests that only assert a mock was called, and tests whose only assertions are `toBeDefined`/`toBeTruthy`/`not.toThrow`/`expect(true)`. Every project must add `@ws42ca/guardrails/vitest-setup` (or its own `expect.hasAssertions()` setup) to `setupFiles` [TEST-9].
+Heuristics that only warn [TEST-5W]: tests with no `expect`, tests that only assert a mock was called, and tests whose only assertions are `toBeDefined`/`toBeTruthy`/`not.toThrow`/`expect(true)`. Whenever test files exist, Vitest `setupFiles` must include `@ws42ca/guardrails/vitest-setup` (or a setup file calling `expect.hasAssertions()`); this check is never baselined [TEST-9].
 
 ## 5. Time [TEST-6]
-CI reruns the suite with the clock moved forward 2 years. A test that passes today and fails then is a time bomb, and it blocks. Freeze time in the test.
+CI reruns the suite with the clock moved forward 2 years (`--clock-shift`). A test that passes today and fails then is a time bomb, and it blocks. Freeze time in the test.
 
 ## 6. Never weaken a test [TEST-7]
 In a PR, these block:
 - deleting a test that exists on the base branch (needs the `guardrails:tests-removed-approved` label from a code owner)
 - removing an `expect`, or loosening a matcher (`toEqual` → `toMatchObject`/`toContain`, `toBe` → `toBeTruthy`)
-- lowering any threshold, mode, tier or allowlist in `guardrails.config.json`, or a coverage/mutation threshold in Vitest or Stryker config
+- lowering any threshold, mode, tier or allowlist in `guardrails.config.json` or `guardrails.md` (needs `guardrails:config-approved`), or a coverage/mutation threshold in Vitest or Stryker config
 
 Tests added in the same PR can be changed or deleted freely. Moving a test to another file is not a deletion. Any drop in the total test count versus base warns with the count [TEST-10].
 
 ## 7. Tests must fail without the change [TEST-11]
-In a PR, every new or changed test runs twice: on the base branch's product code (a git worktree with only the PR's test files copied in) and on head. It must fail on base and pass on head; if you revert the implementation, the test should fail. A test that passes on base blocks unless its spec has `"regressionGuard": true` or a human adds the `guardrails:existing-behaviour-tests-approved` label (for new tests that lock in existing behaviour). Only the changed test files run, so it's fast.
+In a PR (`--base <ref> --fails-on-base`), every new or changed test runs twice: on the base branch's product code (a git worktree with only the PR's test files, helpers and config copied in) and on head. It must fail on base and pass on head; if you revert the implementation, the test should fail. A test that passes on base blocks unless its spec has `"regressionGuard": true` or a human adds the `guardrails:existing-behaviour-tests-approved` label (for new tests that lock in existing behaviour). Only the changed test files run, so it's fast.
 
 ## 8. Conflicts: stop and flag [FLAG-1]
-If a test contradicts the spec or can't pass honestly, the agent calls `guardrails_flag` / `guardrails flag` and stops. Flags live in `.guardrails/flags.json` and block merge until a human empties it or adds `guardrails:flags-approved`. Agent hooks lock spec-tagged tests and guardrails files, so editing the test is not an option. In ImpossibleBench, letting agents flag cut cheating from 54% to 9%.
+If a test contradicts the spec or can't pass honestly, the agent calls `guardrails_flag` / `guardrails flag <ID> "<reason>" [--file <path>]` (`reason` ≥ 10 characters) and stops. Flags live in `.guardrails/flags.json` and block merge until a human empties it or adds `guardrails:flags-approved`. Agent hooks lock spec-tagged tests and guardrails files (`guardrails.config.json`, `guardrails.md`, `.guardrails/**`, CODEOWNERS, workflows, hook settings), so editing the test is not an option. In ImpossibleBench, letting agents flag cut cheating from 54% to 9%.
 
 ## 9. Hidden holdout tests [HOLD-1]
-Optional: tests the building agent never sees, in a separate private repo. The PR gate checks them out and runs them; only titles and pass/fail are reported. Their specs are exempt from TEST-2.
+Optional: tests the building agent never sees, in a separate private repo. The PR gate checks them out and runs `guardrails holdout --dir <checkout>`; only titles and pass/fail are reported. Their specs are exempt from TEST-2.
 
 ## 10. Size
 Test files over 300 lines warn [TEST-4]. Split them by behaviour.
 
 ## 11. Mutation testing [TEST-8]
-Stryker runs on changed files in `mutation.tiers` (T1 by default), incrementally, with pinned mutators. A surviving mutant means no test notices that bug. Add an assertion that would. `guardrails_mutants` lists survivors for the agent; the gate always recomputes the score itself (agents have misreported their own scores). Stryker runs with `GUARDRAILS_MUTATION=1`: exclude slow integration suites in your Vitest config when it's set, as this repo does.
+Stryker runs on changed files in `mutation.tiers` (T1 by default), incrementally, with pinned mutators. A surviving mutant means no test notices that bug. Add an assertion that would. `guardrails_mutants` / `guardrails mutants` lists survivors for the agent; the gate always recomputes the score itself (agents have misreported their own scores). Stryker runs with `GUARDRAILS_MUTATION=1`: exclude slow integration suites in your Vitest config when it's set, as this repo does.
 
 ## 12. Suite health [SUITE-1..6]
 `guardrails check-tests` audits the whole suite (a generic, config-driven scanner):
@@ -76,3 +76,8 @@ Stryker runs on changed files in `mutation.tiers` (T1 by default), incrementally
 - It reports the test/product line ratio per package.
 
 Existing findings live in `.guardrails/test-suite-baseline.json`, so only regressions block. `--update-baseline` only ratchets down. Growing the baseline needs the `guardrails:baseline-approved` label [SUITE-6]. Large full suites can shard with `guardrails shard --shard i/n --run "<runner>"`, or `vitest run --shard=i/n` (see template/.github/workflows/full-suite-sharded.yml).
+
+## 13. Independent review and provenance (opt-in) [REVIEW-1, PROV-1]
+Both checks are off by default (`0.6.3` behaviour unless enabled in `guardrails.config.json` or `guardrails.md`):
+- When `review.enabled` is true, `guardrails review` (or `guardrails check --review`) passes only the merge-base diff and check output—never PR descriptions, commit messages or author reasoning—to a configured `stub` or `command` reviewer and blocks on a `fail` verdict [REVIEW-1].
+- When `provenance.enabled` is true, `guardrails provenance record --report <file>` binds the tested commit SHA, report sha256 and override labels into a provenance record and marker, and `guardrails provenance verify --head <sha>` blocks if the PR head was not the tested commit [PROV-1].
