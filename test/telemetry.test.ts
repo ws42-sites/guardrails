@@ -1,4 +1,8 @@
-import { afterEach, expect, it, vi } from 'vitest';
+import { afterEach, expect, it, vi as realVi } from 'vitest';
+
+const vi = realVi as typeof realVi & {
+  fn<Args extends readonly unknown[], Result>(impl?: (...args: Args) => Result): ReturnType<typeof realVi.fn> & typeof globalThis.fetch;
+};
 import { existsSync, readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { send, telemetryStatus } from '../src/telemetry.js';
@@ -39,7 +43,7 @@ it.each([
   [true, 'https://example.invalid', { CI: '1', GUARDRAILS_TELEMETRY: 'yes' }, 'CI requires GUARDRAILS_TELEMETRY=1'],
 ])('TELEM-01 disables sending for %j %j %j', async (optIn, endpoint, env, reason) => {
   const r = repo();
-  const fetch = vi.fn<typeof globalThis.fetch>();
+  const fetch = vi.fn<Parameters<typeof globalThis.fetch>, ReturnType<typeof globalThis.fetch>>();
   const config = parseConfig({ version: 1, telemetry: { enabled: optIn, endpoint } });
   const deps = { ...identity, cwd: r.dir, config, env, fetch };
   expect(await send('check', input, deps)).toBe(undefined);
@@ -51,7 +55,7 @@ it.each([
 it.each([{}, { CI: 'false' }, { CI: '0' }, { CI: '' }, { CI: 'true', GUARDRAILS_TELEMETRY: '1' }])('TELEM-01 sends only anonymous fields for %j', async (env) => {
   vi.useFakeTimers();
   const r = repo();
-  const fetch = vi.fn<typeof globalThis.fetch>().mockResolvedValue(new Response('', { status: 200 }));
+  const fetch = vi.fn<Parameters<typeof globalThis.fetch>, ReturnType<typeof globalThis.fetch>>().mockResolvedValue(new Response('', { status: 200 }));
   const deps = { ...identity, cwd: r.dir, config: enabled, env, fetch };
   await send('check', { ...input, counts: { ...input.counts, known: 99 }, hostname: 'private', path: r.dir } as typeof input, deps);
   const [url, request] = fetch.mock.calls[0];
@@ -69,7 +73,7 @@ it('TELEM-01 persists the install identifier and honours Markdown opt-out', asyn
   expect(telemetryStatus('check', input, deps).payload).toEqual(expected);
   expect(readFileSync(join(r.dir, 'node_modules/.cache/guardrails/install-id'), 'utf8')).toBe(id);
   expect(telemetryStatus('check', input, { ...deps, uuid: () => { throw new Error('must reuse'); } }).payload).toEqual(expected);
-  const fetch = vi.fn<typeof globalThis.fetch>();
+  const fetch = vi.fn<Parameters<typeof globalThis.fetch>, ReturnType<typeof globalThis.fetch>>();
   await send('check', input, { ...identity, cwd: r.dir, fetch });
   expect(fetch.mock.calls).toEqual([]);
   expect(loadConfig(r.dir).telemetry.enabled).toBe(false);
@@ -85,7 +89,7 @@ it.each(['init', 'report'] as const)('TELEM-01 preserves the %s event and runtim
 it.each(['reject', 'throw', 'http'] as const)('TELEM-02 swallows %s failures and clears the timeout', async (mode) => {
   vi.useFakeTimers();
   const r = repo();
-  const fetch = vi.fn<typeof globalThis.fetch>(() => {
+  const fetch = vi.fn<Parameters<typeof globalThis.fetch>, ReturnType<typeof globalThis.fetch>>(() => {
     if (mode === 'throw') throw new Error('offline');
     return mode === 'reject' ? Promise.reject(new Error('offline')) : Promise.resolve(new Response('', { status: 500 }));
   });
@@ -98,7 +102,7 @@ it('TELEM-02 aborts at the configured deadline even when fetch ignores abort', a
   vi.useFakeTimers();
   vi.setSystemTime(new Date('2026-01-01T00:00:00Z'));
   const r = repo();
-  const fetch = vi.fn<typeof globalThis.fetch>(() => new Promise(() => {}));
+  const fetch = vi.fn<Parameters<typeof globalThis.fetch>, ReturnType<typeof globalThis.fetch>>(() => new Promise(() => {}));
   let finished = false;
   const sending = send('check', input, { ...identity, cwd: r.dir, config: enabled, fetch }).then(() => { finished = true; });
   expect(finished).toBe(false);
@@ -117,7 +121,7 @@ it.each(['config', 'uuid', 'storage', 'corrupt'] as const)('TELEM-02 ignores %s 
   if (failure === 'config') r.remove('guardrails.config.json');
   if (failure === 'storage') r.write({ node_modules: 'not a directory' });
   if (failure === 'corrupt') r.write({ 'node_modules/.cache/guardrails/install-id': 'private@example.invalid' });
-  const fetch = vi.fn<typeof globalThis.fetch>();
+  const fetch = vi.fn<Parameters<typeof globalThis.fetch>, ReturnType<typeof globalThis.fetch>>();
   const deps = { ...identity, cwd: r.dir, fetch, ...(failure === 'config' ? {} : { config: enabled }), ...(failure === 'uuid' ? { uuid: () => { throw new Error('unavailable'); } } : {}) };
   expect(await send('check', input, deps)).toBe(undefined);
   expect(fetch.mock.calls).toEqual([]);
@@ -125,7 +129,7 @@ it.each(['config', 'uuid', 'storage', 'corrupt'] as const)('TELEM-02 ignores %s 
 
 it('TELEM-02 supports the default fetch without making a network request', async () => {
   const r = repo({}, { version: 1, telemetry: enabled.telemetry });
-  const fetch = vi.fn<typeof globalThis.fetch>().mockResolvedValue(new Response('ok'));
+  const fetch = vi.fn<Parameters<typeof globalThis.fetch>, ReturnType<typeof globalThis.fetch>>().mockResolvedValue(new Response('ok'));
   vi.stubGlobal('fetch', fetch);
   vi.stubEnv('GUARDRAILS_TELEMETRY', '1');
   expect(await send('check', input, { cwd: r.dir, uuid: () => id })).toBe(undefined);
