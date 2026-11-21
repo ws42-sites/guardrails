@@ -22,6 +22,18 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm run build
+      - name: docs match the catalogue
+        run: node scripts/check-docs.mjs
+      - name: readme screenshot matches the CLI
+        run: node scripts/readme-shot.mjs --check
+      - name: DOC-1 is an error
+        run: node scripts/check-doc1.mjs
+      - name: changelog and pack allowlist
+        run: node scripts/check-release.mjs
+      - name: npm audit
+        run: node scripts/audit-exceptions.mjs
+      - name: fresh-repo quickstart
+        run: node scripts/quickstart-smoke.mjs
       - name: affected tests (PR)
         if: github.event_name == 'pull_request'
         run: npm run test:changed

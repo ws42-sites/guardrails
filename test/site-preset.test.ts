@@ -14,7 +14,7 @@ it('SITE-01 validates the site template and writes only site files with the chos
   ]);
   expect(cfg.journeys).toMatchObject({ e2eGlobs: ['e2e/cuj/**/*.spec.ts'], resultsFile: 'playwright-report/results.json', routeGlobs: ['src/pages/**', 'functions/**'] });
   const dir = siteTree();
-  expect(init({ cwd: dir, preset: 'site', base: 'release' })).toEqual({ written: ['guardrails.config.json', '.github/workflows/guardrails.yml'], skipped: [] });
+  expect(init({ cwd: dir, preset: 'site', base: 'release' })).toEqual({ written: ['guardrails.config.json', '.github/workflows/guardrails.yml', '.gitignore'], skipped: [] });
   expect(JSON.parse(readFileSync(join(dir, 'guardrails.config.json'), 'utf8'))).toEqual({ ...template, baseBranch: 'release' });
   expect(readFileSync(join(dir, '.github/workflows/guardrails.yml'), 'utf8')).toContain('branches: [release]');
   expect(['AGENTS.md', 'GEMINI.md', 'CLAUDE.md', '.claude', '.gemini', '.agents', '.mcp.json'].filter((f) => existsSync(join(dir, f)))).toEqual([]);
@@ -24,7 +24,7 @@ it('SITE-01 keeps existing site files unless forced', () => {
   const dir = siteTree();
   init({ cwd: dir, preset: 'site' });
   writeFileSync(join(dir, 'guardrails.config.json'), '{"custom":true}');
-  expect(init({ cwd: dir, preset: 'site' })).toEqual({ written: [], skipped: ['guardrails.config.json', '.github/workflows/guardrails.yml'] });
+  expect(init({ cwd: dir, preset: 'site' })).toEqual({ written: [], skipped: ['guardrails.config.json', '.github/workflows/guardrails.yml', '.gitignore'] });
   expect(readFileSync(join(dir, 'guardrails.config.json'), 'utf8')).toBe('{"custom":true}');
   expect(init({ cwd: dir, preset: 'site', force: true }).written).toEqual(['guardrails.config.json', '.github/workflows/guardrails.yml']);
   expect(parseConfig(JSON.parse(readFileSync(join(dir, 'guardrails.config.json'), 'utf8'))).baseBranch).toBe('main');
@@ -47,7 +47,8 @@ it('SITE-05 workflow pins standalone tooling once and builds and checks the site
   const dir = siteTree();
   init({ cwd: dir, preset: 'site' });
   const workflow = readFileSync(join(dir, '.github/workflows/guardrails.yml'), 'utf8');
-  expect(workflow.match(/0\.6\.0/g)).toHaveLength(1);
+  const version = JSON.parse(readFileSync('package.json', 'utf8')).version as string;
+  expect(workflow.match(new RegExp(version.replace(/\./g, '\\.'), 'g'))).toHaveLength(1);
   expect(workflow.match(/npx -y @ws42ca\/guardrails@\$\{GUARDRAILS_VERSION\}/g)).toHaveLength(3);
   expect(workflow.match(/npm ci/g)).toHaveLength(1);
   expect(workflow).not.toMatch(/npm (?:ci|install).*guardrails|playwright|cuj/i);

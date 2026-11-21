@@ -4,6 +4,8 @@
   "description": "Guardrails that stop AI coding agents from padding, weakening or bypassing your tests, docs and architecture. CLI, MCP server, agent hooks and CI checks.",
   "type": "module",
   "license": "MIT",
+  "author": "Josh Boyer <josh@ws42.ca>",
+  "bugs": "https://github.com/ws42-sites/guardrails/issues",
   "bin": {
     "guardrails": "dist/cli.js",
     "guardrails-mcp": "dist/mcp.js"
@@ -19,7 +21,8 @@
     "skill",
     "template",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "docs/cli-weakened.svg"
   ],
   "engines": {
     "node": ">=20"
@@ -34,7 +37,10 @@
     "test:changed": "node dist/cli.js affected --run \"npx vitest run\"",
     "test:full": "vitest run",
     "check:tests": "node dist/cli.js check-tests",
-    "prepublishOnly": "node scripts/check-release.mjs"
+    "prepublishOnly": "node scripts/check-release.mjs",
+    "check:docs": "node scripts/check-docs.mjs && node scripts/readme-shot.mjs --check && node scripts/check-doc1.mjs",
+    "check:audit": "node scripts/audit-exceptions.mjs",
+    "check:quickstart": "node scripts/quickstart-smoke.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.32.2",
@@ -49,12 +55,12 @@
     "zod": "3.25.76"
   },
   "devDependencies": {
-    "@stryker-mutator/core": "8.7.1",
-    "@stryker-mutator/vitest-runner": "8.7.1",
+    "@stryker-mutator/core": "9.6.1",
+    "@stryker-mutator/vitest-runner": "9.6.1",
     "@types/eslint": "8.56.12",
     "@types/node": "20.17.6",
-    "vitest": "1.6.1",
-    "zod-to-json-schema": "3.24.6"
+    "vitest": "^4.1.12",
+    "zod-to-json-schema": "3.25.2"
   },
   "exports": {
     ".": {

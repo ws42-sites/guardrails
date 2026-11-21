@@ -3,9 +3,19 @@
 All notable changes are documented here, following Keep a Changelog.
 Version: 0.7.0 · Date: 2026-11-21
 
+## [Unreleased]
+
+### Fixed
+- File listing skips generated directories (`node_modules`, `dist`, and the rest of the skip list) even when `git ls-files` would show them. `guardrails init` creates `.gitignore`, or appends the missing lines. A fresh install no longer baselines dependency files or fails TEST-9 because of them.
+
+### Changed
+- README states that 0.7.0 has shipped, shows a check that blocks a loosened matcher, and lists what Guardrails does not do.
+- Development dependencies: Vitest `^4.1.12` (Node 20) and Stryker 9.6.1. CI checks the README rule count and host list, rejects "planned" wording for released versions, treats DOC-1 as a failure, smoke-tests the quickstart from `npm pack`, and fails `npm audit` on high or critical advisories other than the documented Zod 3 exception.
+- Tag publishes fail when `NPM_TOKEN` is missing instead of skipping, and the GitHub release notes are the changelog section for that version.
+
 ## [0.7.0] - 2026-11-21
 
-Plan: `docs/plan/0.7.0.md`. Targeted as `0.7.0` rather than `0.6.x` because `0.6.3` is already on npm and this release adds opt-in rules, commands and config keys. Everything new is off by default, so a basic install behaves like `0.6.3`.
+Targeted as `0.7.0` rather than `0.6.x` because `0.6.3` is already on npm and this release adds opt-in rules, commands and config keys. Everything new is off by default, so a basic install behaves like `0.6.3`.
 
 ### Added
 - Independent reviewer (`guardrails review`, `guardrails check --review`, rule REVIEW-1). Sees only the merge-base diff and check output—never author reasoning, PR descriptions or commit messages—via a typed provider (`stub` or `command`), fails closed, runs on risky paths by default (`review.onlyWhenRisky`), and shards with `--shard i/n`. Off unless `review.enabled` is true.

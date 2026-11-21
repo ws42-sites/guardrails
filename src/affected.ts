@@ -1,15 +1,15 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import type { GuardrailsConfig } from './config.js';
-import { git, isE2eFile, isTestFile, listFiles, matchesAny, mergeBase, readText } from './util.js';
+import { git, isE2eFile, isSkippedPath, isTestFile, listFiles, matchesAny, mergeBase, readText } from './util.js';
 
 export interface Affected { all: boolean; reason?: string; changed: string[]; tests: string[]; e2e: string[] }
 
 /** Files changed vs merge-base(base, HEAD), including uncommitted and untracked ones. */
 export function changedFiles(cwd: string, base: string): string[] {
   const mb = mergeBase(cwd, base);
-  const out = new Set(git(cwd, ['diff', '--name-only', '--no-renames', mb]).split('\n').filter(Boolean));
-  for (const f of git(cwd, ['ls-files', '--others', '--exclude-standard']).split('\n').filter(Boolean)) out.add(f);
+  const out = new Set(git(cwd, ['diff', '--name-only', '--no-renames', mb]).split('\n').filter((f) => f && !isSkippedPath(f)));
+  for (const f of git(cwd, ['ls-files', '--others', '--exclude-standard']).split('\n').filter((f) => f && !isSkippedPath(f))) out.add(f);
   return [...out];
 }
 

@@ -72,7 +72,7 @@ it('REL-02 checks the real package and dry-run tarball', () => {
   const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
   const files = realPackFiles();
   expect(files.map((file: { path: string }) => file.path)).toEqual(expect.arrayContaining([
-    'package.json', 'LICENSE', 'CHANGELOG.md', 'dist/cli.js', requiredTemplate,
+    'package.json', 'LICENSE', 'CHANGELOG.md', 'dist/cli.js', requiredTemplate, 'docs/cli-weakened.svg',
   ]));
   expect(checkRelease({ version: pkg.version, tag: `v${pkg.version}`,
     changelog: readFileSync('CHANGELOG.md', 'utf8'), files })).toEqual([]);
@@ -87,6 +87,10 @@ it('REL-03 publishes only in the token-guarded tag workflow step', () => {
   expect(workflow.match(/^\s*npm publish\b/gm)).toHaveLength(1);
   expect(publishers).toHaveLength(1);
   expect(publishers[0]).toContain('NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}');
-  expect(publishers[0]).toContain('[ -n "$NODE_AUTH_TOKEN" ] || { echo "NPM_TOKEN not set; skipping npm publish"; exit 0; }\n          npm publish --access public');
+  expect(publishers[0]).toContain('NPM_TOKEN is not set');
+  expect(publishers[0]).toContain('exit 1');
+  expect(publishers[0]).toContain('npm publish --access public --provenance');
+  expect(publishers[0]).not.toContain('skipping npm publish');
   expect(workflow).toContain('needs: verify');
+  expect(workflow).toContain('--notes-file release-notes.md');
 });

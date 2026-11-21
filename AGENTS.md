@@ -10,3 +10,4 @@ This repo builds the guardrails framework. It follows its own rules (dogfood).
 - If a test conflicts with the spec or seems impossible, STOP and call `guardrails_flag` (or `npx guardrails flag <SPEC-ID> "<reason>" --file <path>`). Never change code or tests just to satisfy a test.
 - Rules regenerate into RULES.md with `node scripts/gen-rules.mjs` after `npm run build`.
 - Never publish to npm, push, or create repos without the owner's go-ahead.
+- CI fails when the README rule count or host list drifts, when a released version is still described as planned, when DOC-1 finds a file, or when the fresh-repo quickstart fails.

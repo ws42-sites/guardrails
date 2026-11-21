@@ -20,6 +20,10 @@ jobs:
       - run: npm run build
       - run: node dist/cli.js check
       - run: npm run test:full
+      - run: node scripts/check-docs.mjs
+      - run: node scripts/readme-shot.mjs --check
+      - run: node scripts/check-doc1.mjs
+      - run: node scripts/audit-exceptions.mjs
       - run: node scripts/check-release.mjs
 
   release:
@@ -37,6 +41,20 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm pack
+      - name: Changelog notes for this tag
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          ver="${RELEASE_TAG#v}"
+          awk -v ver="$ver" '
+            $0 ~ "^## \\[" ver "\\]" { show=1 }
+            show && /^## \[/ && $0 !~ "^## \\[" ver "\\]" { exit }
+            show { print }
+          ' CHANGELOG.md > release-notes.md
+          if ! grep -q '[^[:space:]]' release-notes.md; then
+            echo "CHANGELOG.md has no section ## [$ver]" >&2
+            exit 1
+          fi
       - name: Attach GitHub Release tarball
         env:
           GH_TOKEN: ${{ github.token }}
@@ -45,21 +63,27 @@ jobs:
           if gh release view "$RELEASE_TAG" > /dev/null 2>&1; then
             gh release upload "$RELEASE_TAG" ./*.tgz --clobber
           else
-            gh release create "$RELEASE_TAG" ./*.tgz --title "$RELEASE_TAG" --notes-file CHANGELOG.md --verify-tag
+            gh release create "$RELEASE_TAG" ./*.tgz --title "$RELEASE_TAG" --notes-file release-notes.md --verify-tag
           fi
       - name: Check npm provenance preflight
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           REPO_PRIVATE: ${{ github.event.repository.private }}
         run: |
-          [ -n "$NODE_AUTH_TOKEN" ] || exit 0
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "NPM_TOKEN is not set. Add the repository secret NPM_TOKEN (an npm Automation token) before this tag can publish." >&2
+            exit 1
+          fi
           if [ "$REPO_PRIVATE" = "true" ]; then
-            echo "npm provenance requires a public source repository; make the repo public or remove --provenance" >&2
+            echo "npm provenance requires a public source repository. Make the repository public before publishing with --provenance." >&2
             exit 1
           fi
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          [ -n "$NODE_AUTH_TOKEN" ] || { echo "NPM_TOKEN not set; skipping npm publish"; exit 0; }
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "NPM_TOKEN is not set. Add the repository secret NPM_TOKEN (an npm Automation token) before this tag can publish." >&2
+            exit 1
+          fi
           npm publish --access public --provenance
