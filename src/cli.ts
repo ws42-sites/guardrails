@@ -49,7 +49,8 @@ Commands
   baseline             Write/ratchet the baseline (only shrinks; --force records everything current)
   specs                Print the spec matrix (ID, tier, tests)
   explain <RULE>       Explain a rule
-  ledger add|import    Record evaluation evidence (--events file for import)
+  ledger add <kind> --pr <N> [--by <name>]   Record evidence; escaped-bug needs --issue; false-escalation needs --rule and --label
+  ledger import --events <file>   Import evaluation events
   evaluate             Propose rule improvements (--since 7d|ISO, --cache dir)
   feedback draft       Draft candidate rules (--failures file)
   validate-test <ID>   Check a spec ID before writing a test
@@ -82,10 +83,28 @@ Options
   --owner <@handle>    init: CODEOWNERS owner
   --preset <name>      init: site scaffold or starter journey drafts (small-business)
   --force              init: overwrite files; baseline: record all current violations
-  --verbose            Show every finding`;
+  --verbose            Show every finding
+  -h, --help           Show help without running the command`;
 
-async function main(): Promise<number> {
-  const { values, positionals } = parseArgs({
+const COMMANDS = [...new Set(HELP.split('Options')[0].split('\n').flatMap((line) => /^  ([a-z][a-z-]*)\s/.exec(line)?.[1] ?? []))];
+const SUBCOMMANDS: Record<string, string[]> = {
+  init: ['runbook'], provenance: ['record', 'verify'], ledger: ['add', 'import'], feedback: ['draft'],
+  telemetry: ['status'], labels: ['plan'], journeys: ['generate-tests', 'scaffold', 'run', 'list', 'draft', 'import', 'approve'],
+};
+
+function usageError(message: string, command = ''): number {
+  console.error(`${message}\nRun "guardrails ${command ? `${command} ` : ''}--help" for usage.`);
+  return 2;
+}
+
+function commandHelp(command: string, subcommand?: string): string {
+  const prefix = `${command}${subcommand ? ` ${subcommand}` : ''}`;
+  const lines = HELP.split('\n').filter((line) => line.startsWith(`  ${prefix} `));
+  return `Usage: guardrails ${prefix} [options]\n\n${lines.join('\n')}\n\nOptions${HELP.split('\nOptions')[1]}`;
+}
+
+function parseCliArgs() {
+  return parseArgs({
     allowPositionals: true,
     options: {
       out: { type: 'string' }, check: { type: 'boolean' }, 'base-url': { type: 'string' }, ids: { type: 'string' }, 'only-enforced': { type: 'boolean' },
@@ -100,7 +119,22 @@ async function main(): Promise<number> {
       events: { type: 'string' }, comments: { type: 'string' }, cache: { type: 'string' }, failures: { type: 'string' }, 'agent-name': { type: 'string' },
     },
   });
+}
+
+async function main(): Promise<number> {
+  let parsed: ReturnType<typeof parseCliArgs>;
+  try { parsed = parseCliArgs(); }
+  catch (error) { return usageError(error instanceof Error ? error.message : String(error)); }
+  const { values, positionals } = parsed;
   const [cmd, arg, ...rest] = positionals;
+  if (cmd && !COMMANDS.includes(cmd)) return usageError(`Unknown command: ${cmd}.`);
+  if (!cmd || values.help) { console.log(cmd ? commandHelp(cmd, SUBCOMMANDS[cmd]?.includes(arg) ? arg : undefined) : HELP); return 0; }
+  if (cmd !== 'labels' && SUBCOMMANDS[cmd] && arg && !SUBCOMMANDS[cmd].includes(arg)) return usageError(`Unknown ${cmd} subcommand: ${arg}.`, cmd);
+  const variadic = ['smoke', 'secrets-check', 'flag', 'ledger', 'journeys', 'labels'];
+  if (!variadic.includes(cmd) && rest.length) return usageError(`Unexpected argument: ${rest[0]}.`, cmd);
+  const noArguments = ['affected', 'check-tests', 'shard', 'check', 'report', 'review', 'baseline', 'specs', 'evaluate', 'mutants', 'hook-guard', 'holdout'];
+  if (noArguments.includes(cmd) && arg) return usageError(`Unexpected argument: ${arg}.`, cmd);
+  if (['provenance', 'ledger', 'feedback', 'telemetry'].includes(cmd) && !arg) return usageError(`${cmd}: a subcommand is required.`, cmd);
   const cwd = values.cwd ?? process.cwd();
   const base = values.base ?? (process.env.GITHUB_BASE_REF ? `origin/${process.env.GITHUB_BASE_REF}` : null);
   const labels = (values.labels ?? process.env.GUARDRAILS_LABELS ?? '').split(',').map((s) => s.trim()).filter(Boolean);
@@ -146,7 +180,7 @@ async function main(): Promise<number> {
       return spawnSync(`${values.run} ${list.map((f) => JSON.stringify(f)).join(' ')}`, { cwd, shell: true, stdio: 'inherit' }).status ?? 1;
     }
     case 'check-links': {
-      if (!arg || rest.length) { console.error('check-links: pass one built directory'); return 2; }
+      if (!arg || rest.length) return usageError('check-links: pass one built directory.', cmd);
       const r = checkLinks(resolve(cwd, arg), { requireContact: values['require-contact'] });
       for (const problem of r.broken) console.log(`${problem.file}:${problem.line} -> ${problem.target}`);
       if (r.contactMissing) console.log('index.html:1 -> missing tel: or mailto: contact link');
@@ -154,7 +188,7 @@ async function main(): Promise<number> {
     }
     case 'smoke': {
       const url = process.env.SMOKE_URL || values.url;
-      if (!url) { console.error('smoke: pass --url or set SMOKE_URL'); return 2; }
+      if (!url) return usageError('smoke: pass --url or set SMOKE_URL.', cmd);
       const r = await smoke(url, positionals.slice(1), 15_000, { sitemap: values.sitemap });
       for (const l of r.lines) console.log(l);
       return r.ok ? 0 : 1;
@@ -163,7 +197,7 @@ async function main(): Promise<number> {
       const names = (values.require ?? '').split(',').map((x) => x.trim()).filter(Boolean);
       const sep = process.argv.indexOf('--');
       const cmdLine = sep >= 0 ? process.argv.slice(sep + 1).join(' ') : '';
-      if (!names.length || !cmdLine) { console.error('secrets-check: --require A,B -- <provider list command>'); return 2; }
+      if (!names.length || !cmdLine) return usageError('secrets-check: --require A,B -- <provider list command>.', cmd);
       const r = secretsCheck(names, cmdLine, cwd);
       console.log(r.ok ? `ok: ${names.length} required secret names present` : `missing: ${r.missing.join(', ')}`);
       return r.ok ? 0 : 1;
@@ -235,8 +269,7 @@ async function main(): Promise<number> {
         console.log(JSON.stringify(result, null, 2));
         return result.ok ? 0 : 1;
       }
-      console.error('usage: provenance record --report f | verify --head sha');
-      return 2;
+      return usageError('provenance: record requires --report; verify requires --head.', cmd);
     }
     case 'specs': {
       const config = loadConfig(cwd);
@@ -247,6 +280,12 @@ async function main(): Promise<number> {
       return 0;
     }
     case 'ledger': {
+      if (arg === 'add') {
+        if (!rest[0] || !values.pr) return usageError('ledger add: <kind> and --pr are required.', cmd);
+        if (!['escaped-bug', 'false-escalation'].includes(rest[0])) return usageError('ledger add: kind must be escaped-bug or false-escalation.', cmd);
+        if (rest[0] === 'escaped-bug' && !values.issue) return usageError('ledger add escaped-bug: --issue is required.', cmd);
+        if (rest[0] === 'false-escalation' && (!values.rule || !values.label)) return usageError('ledger add false-escalation: --rule and --label are required.', cmd);
+      }
       const { ledgerAdd, ledgerImport } = await import('./evaluate.js');
       const { readFileSync } = await import('node:fs');
       const config = loadConfig(cwd);
@@ -259,7 +298,7 @@ async function main(): Promise<number> {
           ...(rest[0] === 'escaped-bug' ? { issue: Number(values.issue), rules: values.rule ? values.rule.split(',') : [] }
             : { rule: values.rule, label: values.label, reason: values.reason }) };
         console.log(JSON.stringify({ added: ledgerAdd(file, entry) }));
-      } else throw new Error('Usage: ledger add <kind> --pr N | ledger import --events file');
+      } else return usageError('ledger: add <kind> --pr N | import --events file.', cmd);
       return 0;
     }
     case 'evaluate': {
@@ -272,7 +311,6 @@ async function main(): Promise<number> {
       return 0;
     }
     case 'feedback': {
-      if (arg !== 'draft') throw new Error('Usage: feedback draft');
       const { feedbackDraft } = await import('./feedback.js');
       const { writeFileSync } = await import('node:fs');
       const config = loadConfig(cwd);
@@ -284,20 +322,21 @@ async function main(): Promise<number> {
     }
     case 'explain': {
       const info = arg ? ruleInfo(arg.toUpperCase()) : undefined;
+      if (arg && !info) return usageError(`Unknown rule: ${arg}.`, cmd);
       if (!info) {
         for (const r of RULES) console.log(`${r.id.padEnd(8)} ${r.mode.padEnd(5)} ${r.title}`);
-        return arg ? 1 : 0;
+        return 0;
       }
       console.log(`${info.id}: ${info.title}\nDefault mode: ${info.mode}${info.diffOnly ? ' (diff mode only)' : ''}\nWhy: ${info.why}\nFix: ${info.fix}`);
       return 0;
     }
     case 'telemetry': {
-      if (arg !== 'status' || rest.length) { console.error('usage: guardrails telemetry status'); return 2; }
+      if (arg !== 'status' || rest.length) return usageError('telemetry: expected status.', cmd);
       console.log(JSON.stringify(telemetryStatus('check', { command: 'check', counts: { block: 0, warn: 0 }, durationMs: 0 }, { cwd }), null, 2));
       return 0;
     }
     case 'validate-test': {
-      if (!arg) { console.error('usage: guardrails validate-test <SPEC-ID> [--file f] [--lines n]'); return 2; }
+      if (!arg) return usageError('validate-test: a spec ID is required.', cmd);
       const r = validateTest({ cwd, specId: arg, testFile: values.file, plannedLines: values.lines ? Number(values.lines) : undefined, base });
       console.log(JSON.stringify(r, null, 2));
       return r.ok ? 0 : 1;
@@ -317,7 +356,7 @@ async function main(): Promise<number> {
     }
     case 'flag': {
       const reason = rest.join(' ');
-      if (!arg || !reason) { console.error('usage: guardrails flag <SPEC-ID> <reason> [--file path]'); return 2; }
+      if (!arg || !reason) return usageError('flag: a spec ID and reason are required.', cmd);
       const config = loadConfig(cwd);
       const f = addFlag(cwd, config.flagsFile, { specId: arg, file: values.file ?? '', reason, by: process.env.GUARDRAILS_AGENT });
       console.log(`Flagged ${f.id} on ${f.specId} in ${config.flagsFile}. STOP work on this spec; a human must resolve it (merge is blocked by FLAG-1).`);
@@ -348,7 +387,7 @@ async function main(): Promise<number> {
       }
       if (arg === 'scaffold') { for (const file of scaffoldJourneys(cwd)) console.log('wrote ' + file); return 0; }
       if (arg === 'run') {
-        if (!values['base-url']) { console.error('journeys run: --base-url is required'); return 2; }
+        if (!values['base-url']) return usageError('journeys run: --base-url is required.', cmd);
         const result = runJourneys(cwd, config, { baseUrl: values['base-url'], ids: values.ids?.split(',').map((s) => s.trim()), onlyEnforced: values['only-enforced'] });
         for (const line of result.lines) console.log(line);
         return result.code;
@@ -369,7 +408,7 @@ async function main(): Promise<number> {
         return 0;
       }
       if (arg === 'import') {
-        if (!rest[0]) { console.error('usage: guardrails journeys import <file.json>'); return 1; }
+        if (!rest[0]) return usageError('journeys import: a JSON file is required.', cmd);
         try {
           const changed = importJourneys(cwd, resolve(cwd, rest[0]));
           console.log(`Imported ${changed.length} journeys: ${changed.join(', ') || 'unchanged'}`);
@@ -378,24 +417,22 @@ async function main(): Promise<number> {
       }
       if (arg === 'approve') {
         const id = rest[0];
-        if (!id) { console.error('usage: guardrails journeys approve <CUJ-ID> [--by name]'); return 2; }
+        if (!id) return usageError('journeys approve: a journey ID is required.', cmd);
         const by = approveJourney(cwd, id, { by: values.by });
         console.log(`Approved ${id} (approvedBy: ${by}). It now gates merges (JRN-1).`);
         return 0;
       }
-      console.error('usage: guardrails journeys list|draft|import <file.json>|approve <ID>');
-      return 2;
+      return usageError('journeys: expected a subcommand.', cmd);
     }
     case 'holdout': {
-      if (!values.dir) { console.error('usage: guardrails holdout --dir <holdout checkout>'); return 2; }
+      if (!values.dir) return usageError('holdout: --dir is required.', cmd);
       const r = runHoldout(cwd, loadConfig(cwd), values.dir);
       for (const x of r.violations) console.log(`BLOCK ${x.rule} ${x.message}`);
       console.log(`holdout: ${r.ran} hidden tests ran, ${r.violations.length} problems`);
       return r.violations.length ? 1 : 0;
     }
     default:
-      console.log(HELP);
-      return cmd && !values.help ? 2 : 0;
+      return usageError(`Unknown command: ${cmd}.`);
   }
 }
 
