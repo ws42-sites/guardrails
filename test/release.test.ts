@@ -93,4 +93,5 @@ it('REL-03 publishes only in the token-guarded tag workflow step', () => {
   expect(publishers[0]).not.toContain('skipping npm publish');
   expect(workflow).toContain('needs: verify');
   expect(workflow).toContain('--notes-file release-notes.md');
+  expect(workflow).toContain('has no notes');
 });

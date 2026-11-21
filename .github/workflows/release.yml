@@ -55,6 +55,10 @@ jobs:
             echo "CHANGELOG.md has no section ## [$ver]" >&2
             exit 1
           fi
+          if ! grep -v -e "^## \[" -e '^[[:space:]]*$' release-notes.md | grep -q .; then
+            echo "CHANGELOG.md section ## [$ver] has no notes" >&2
+            exit 1
+          fi
       - name: Attach GitHub Release tarball
         env:
           GH_TOKEN: ${{ github.token }}
