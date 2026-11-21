@@ -1,11 +1,11 @@
 # Changelog
 
 All notable changes are documented here, following Keep a Changelog.
-Version: 0.6.3 · Date: 2026-11-20
+Version: 0.7.0 · Date: 2026-11-21
 
-## [Unreleased] - planned 0.7.0
+## [0.7.0] - 2026-11-21
 
-Plan: `docs/plan/0.7.0.md` (not yet published). Targeted as `0.7.0` rather than `0.6.x` because `0.6.3` is already on npm and this branch adds opt-in rules, commands and config keys. Everything new is off by default, so a basic install behaves like `0.6.3`.
+Plan: `docs/plan/0.7.0.md`. Targeted as `0.7.0` rather than `0.6.x` because `0.6.3` is already on npm and this release adds opt-in rules, commands and config keys. Everything new is off by default, so a basic install behaves like `0.6.3`.
 
 ### Added
 - Independent reviewer (`guardrails review`, `guardrails check --review`, rule REVIEW-1). Sees only the merge-base diff and check output—never author reasoning, PR descriptions or commit messages—via a typed provider (`stub` or `command`), fails closed, runs on risky paths by default (`review.onlyWhenRisky`), and shards with `--shard i/n`. Off unless `review.enabled` is true.

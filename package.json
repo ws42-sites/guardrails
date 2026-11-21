@@ -1,6 +1,6 @@
 {
   "name": "@ws42ca/guardrails",
-  "version": "0.6.3",
+  "version": "0.7.0",
   "description": "Guardrails that stop AI coding agents from padding, weakening or bypassing your tests, docs and architecture. CLI, MCP server, agent hooks and CI checks.",
   "type": "module",
   "license": "MIT",
