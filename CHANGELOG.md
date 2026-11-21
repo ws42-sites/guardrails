@@ -5,22 +5,28 @@ Version: 0.6.3 · Date: 2026-11-20
 
 ## [Unreleased] - planned 0.7.0
 
-Plan: [docs/plan/0.7.0.md](docs/plan/0.7.0.md). It's 0.7.0 rather than 0.6.x because 0.6.3 is already on npm and this release adds features and config keys. Everything new is off by default, so a basic install behaves like 0.6.3.
+Plan: `docs/plan/0.7.0.md` (not yet published). Targeted as `0.7.0` rather than `0.6.x` because `0.6.3` is already on npm and this branch adds opt-in rules, commands and config keys. Everything new is off by default, so a basic install behaves like `0.6.3`.
 
 ### Added
-- Independent reviewer (`guardrails review`, `check --review`, rule REVIEW-1). It sees only the merge-base diff and the test output, never the author's reasoning, PR description or commit messages. It uses a typed provider interface (`stub`, `command`), fails closed, runs only on PRs that touch locked tests, config or auth paths, and shards with `--shard i/n`. Turn it on with `review.enabled`.
-- Commit-pinned provenance (`guardrails provenance record|verify`, rule PROV-1). It records the tested SHA, report hash, guardrails version, checks and results, and override labels with who and why, as JSON plus a PR marker. A head that wasn't tested fails. Turn it on with `provenance.enabled`.
-- Checker evaluation (`guardrails ledger add|import`, `guardrails evaluate`): a ledger of escaped bugs and false escalations, and weekly prune and sharpen proposals that are never applied. Results are cached. Turn it on with `evaluation.enabled`.
-- Feedback loop (`guardrails feedback draft`): failures tagged by rule, file and agent, with repeats clustered into candidate lint rules. Turn it on with `feedback.enabled`.
-- Label planner (`guardrails labels plan`): lists every approval label a PR will need, with the reason and file:line. Advisory only.
-- `guardrails.md` config format (front matter plus fenced `guardrails` blocks), merged under `guardrails.config.json`.
-- Opt-in anonymous telemetry (`telemetry.enabled` plus `telemetry.endpoint`, `GUARDRAILS_TELEMETRY=0` to force it off) and `guardrails telemetry status`.
-- Reusable workflow inputs `label-plan` (default true, advisory), `review`, `review-shards` and `provenance` (default false).
-- `scripts/ci-weight.mjs` measures the CI weight defined in the plan.
+- Independent reviewer (`guardrails review`, `guardrails check --review`, rule REVIEW-1). Sees only the merge-base diff and check output—never author reasoning, PR descriptions or commit messages—via a typed provider (`stub` or `command`), fails closed, runs on risky paths by default (`review.onlyWhenRisky`), and shards with `--shard i/n`. Off unless `review.enabled` is true.
+- Commit-pinned provenance (`guardrails provenance record --report <file>`, `guardrails provenance verify --head <sha>`, rule PROV-1). Records tested SHA, commit parents, report sha256, guardrails version, checks and override labels (who, when, why) as JSON plus a `<!-- guardrails:provenance v1 ... -->` marker, and fails verification on an untested head or altered report. Off unless `provenance.enabled` is true.
+- Checker evaluation (`guardrails ledger add|import`, `guardrails evaluate`): offline `.guardrails/ledger.jsonl` tracking `escaped-bug` and `false-escalation` evidence, with cached weekly soften/prune/sharpen/add proposals that are never auto-applied (`examples/guardrails-weekly.yml`). Off unless `evaluation.enabled` is true.
+- Feedback loop (`guardrails feedback draft`): tags blocking findings with `{rule, file, agent}` (`GUARDRAILS_AGENT_NAME` or `--agent-name`, default `unknown`) into `feedback.logFile` and clusters repeats into candidate lint rules for human review. Off unless `feedback.enabled` is true.
+- Label planner (`guardrails labels plan [--base ref] [--labels a,b] [--format markdown|json]`): statically scans the diff and open flags to summarise needed (and already present) approval labels with `file:line`. Advisory only (always exits `0`, never adds labels).
+- `guardrails.md` config format (`template/guardrails.md`): optional `dotted.key: value` front matter and fenced `guardrails` / `json guardrails` JSON blocks merged below `guardrails.config.json`. Locked by agent hooks, covered by CFG-2 and TEST-7 weakening checks, copied into `--fails-on-base` worktrees, and exempt from DOC-1 at the repo root.
+- Opt-in anonymous telemetry (`telemetry.enabled` + `telemetry.endpoint`; disabled by `GUARDRAILS_TELEMETRY=0`, and in `CI` also requires `GUARDRAILS_TELEMETRY=1`) plus `guardrails telemetry status`.
+- `guardrails report --report <file>` re-renders a saved JSON report as text, markdown or JSON without re-running the checks.
+- Reusable workflow inputs `label-plan` (default `true`, advisory), `review`, `review-shards`, `provenance` (default `false`) and `mutation-shards` (default `'["1/1"]'`, saving per-shard Stryker incremental caches even on failure), plus `scripts/ci-weight.mjs`.
 
 ### Changed
-- In this repo's CI, pushes to main mutation-test only the changed files. The full mutation run moves to the nightly and manual runs.
-- `guardrails.md` is in the default `lock.paths`.
+- In this repo's CI, pushes to `main` mutation-test only changed files, PR and full mutation runs shard 6 ways (`mutation-shards`), and full-repo mutation runs only on nightly and manual triggers.
+- `guardrails.md` is included in the default `lock.paths`, and `hook-guard` resolves project roots from either `guardrails.config.json` or `guardrails.md`.
+- `guardrails --help`, `-h` and `<command> --help` print usage to stdout and exit `0`. Usage errors, unknown commands and unknown `explain` rule IDs print to stderr and exit `2`. Blocking findings still exit `1`.
+- Journey and config Zod schemas in `src/config.ts` are built lazily on first use, so mutation testing of that file no longer reconstructs the schemas for every mutant.
+- README five-minute quickstart, exit-code table, TESTING.md and the agent skill now match current CLI behaviour and the 0.7.0 plan.
+
+### Fixed
+- `TEST-7` pairs base and head tests that share a title by position, so unchanged `it.each` or duplicate-title test families are no longer misreported as weakened.
 
 ## [0.6.3] - 2026-11-20
 
