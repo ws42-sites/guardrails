@@ -12,7 +12,7 @@ export function changelogHas(version, text) {
 }
 
 export function packFiles(list) {
-  const files = new Set(['package.json', 'README.md', 'LICENSE', 'CHANGELOG.md', 'RULES.md', 'TESTING.md']);
+  const files = new Set(['package.json', 'README.md', 'LICENSE', 'CHANGELOG.md', 'RULES.md', 'TESTING.md', 'docs/cli-weakened.svg']);
   const roots = new Set(['dist', 'journeys', 'schema', 'skill', 'template']);
   const forbidden = new Set(['reports', 'test', 'src', '.github', '.guardrails']);
   const required = 'template/.gemini/.env';
@@ -44,7 +44,7 @@ function main() {
     if (args.length && (args.length !== 2 || args[0] !== '--tag' || !args[1])) {
       throw new Error('Usage: node scripts/check-release.mjs [--tag vX.Y.Z]');
     }
-    const tag = args[1] ?? process.env.GITHUB_REF_NAME;
+    const tag = args[1] ?? (process.env.GITHUB_REF_TYPE === 'tag' ? process.env.GITHUB_REF_NAME : undefined);
     if (!tag) console.log('No tag supplied; version/tag check skipped');
     const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
     // npm_execpath avoids shell invocation on Windows as well as lifecycle recursion.

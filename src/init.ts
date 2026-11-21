@@ -3,7 +3,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadConfig } from './config.js';
 import { auditSuite, readSuiteBaseline, toBaseline, writeSuiteBaseline } from './test-suite.js';
-import { listFiles } from './util.js';
+import { listFiles, SKIP_DIRS } from './util.js';
 
 const TEMPLATE = join(dirname(fileURLToPath(import.meta.url)), '..', 'template');
 const FILES = ['guardrails.config.json', 'AGENTS.md', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml', ...HOOK_FILES(), '.codex/config.toml'];
@@ -140,18 +140,49 @@ export function init(opts: InitOptions): InitResult {
     writeFileSync(dest, body);
     written.push(f);
   }
-  if (site) return { written, skipped };
-  // Gemini CLI loads .gemini/.env: mark its shell as an agent so human-only commands refuse.
-  const envFile = join(opts.cwd, '.gemini/.env');
-  const line = readFileSync(join(TEMPLATE, '.gemini/.env'), 'utf8');
-  const cur = existsSync(envFile) ? readFileSync(envFile, 'utf8') : null;
-  if (cur === null || !/^GUARDRAILS_AGENT=/m.test(cur)) {
-    mkdirSync(dirname(envFile), { recursive: true });
-    writeFileSync(envFile, cur === null ? line : `${cur.replace(/\n?$/, '\n')}${line}`);
-    if (cur !== null) merged.push('.gemini/.env');
-    written.push('.gemini/.env');
-  } else skipped.push('.gemini/.env');
+  if (!site) {
+    const envFile = join(opts.cwd, '.gemini/.env');
+    const line = readFileSync(join(TEMPLATE, '.gemini/.env'), 'utf8');
+    const cur = existsSync(envFile) ? readFileSync(envFile, 'utf8') : null;
+    if (cur === null || !/^GUARDRAILS_AGENT=/m.test(cur)) {
+      mkdirSync(dirname(envFile), { recursive: true });
+      writeFileSync(envFile, cur === null ? line : `${cur.replace(/\n?$/, '\n')}${line}`);
+      if (cur !== null) merged.push('.gemini/.env');
+      written.push('.gemini/.env');
+    } else skipped.push('.gemini/.env');
+  }
+  const ignore = ensureGitignore(opts.cwd);
+  if (ignore === 'skipped') skipped.push('.gitignore');
+  else {
+    written.push('.gitignore');
+    if (ignore === 'merged') merged.push('.gitignore');
+  }
+  if (site) return merged.length ? { written, skipped, merged } : { written, skipped };
   return { written, skipped, merged };
+}
+
+const GITIGNORE_NAMES = [...SKIP_DIRS].filter((name) => name !== '.git');
+
+function ignoreKey(line: string): string {
+  const text = line.trim();
+  if (!text || text.startsWith('#') || text.startsWith('!')) return '';
+  return text.replace(/^\//, '').replace(/\/\*\*$/, '').replace(/\/$/, '');
+}
+
+function ensureGitignore(cwd: string): 'created' | 'merged' | 'skipped' {
+  const dest = join(cwd, '.gitignore');
+  const entries = GITIGNORE_NAMES.map((name) => `${name}/`);
+  if (!existsSync(dest)) {
+    writeFileSync(dest, `${entries.join('\n')}\n`);
+    return 'created';
+  }
+  const current = readFileSync(dest, 'utf8');
+  const have = new Set(current.split(/\r?\n/).map(ignoreKey));
+  const missing = entries.filter((entry) => !have.has(ignoreKey(entry)));
+  if (!missing.length) return 'skipped';
+  const eol = current.includes('\r\n') ? '\r\n' : '\n';
+  writeFileSync(dest, `${current.replace(/\s*$/, '')}${eol}${missing.join(eol)}${eol}`);
+  return 'merged';
 }
 
 const STUB = (name: string) => `echo "${name}: not wired yet. Point it at the real command or mark it n/a in guardrails.config.json runbook.na." && exit 1`;

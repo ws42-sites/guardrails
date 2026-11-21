@@ -15,7 +15,7 @@ describe('INIT-01 init scaffolds a repo without clobbering it', () => {
     r.remove('guardrails.config.json', '.github/CODEOWNERS');
     const res = init({ cwd: r.dir, owner: '@josh', base: 'main' });
     expect([res.written, res.skipped]).toEqual([
-      ['guardrails.config.json', 'AGENTS.md', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml', '.claude/settings.json', '.mcp.json', '.gemini/settings.json', '.agents/hooks.json', '.agents/mcp_config.json', '.codex/hooks.json', '.codex/config.toml', '.gemini/.env'],
+      ['guardrails.config.json', 'AGENTS.md', 'GEMINI.md', 'CLAUDE.md', '.github/CODEOWNERS', '.github/workflows/guardrails.yml', '.claude/settings.json', '.mcp.json', '.gemini/settings.json', '.agents/hooks.json', '.agents/mcp_config.json', '.codex/hooks.json', '.codex/config.toml', '.gemini/.env', '.gitignore'],
       [],
     ]);
     const cfg = parseConfig(JSON.parse(readFileSync(join(r.dir, 'guardrails.config.json'), 'utf8')));

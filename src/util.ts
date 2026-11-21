@@ -34,6 +34,10 @@ export const matchesAny = (file: string, globs: readonly string[]): boolean =>
 
 export const SKIP_DIRS = new Set(['.git', 'node_modules', 'dist', 'build', 'coverage', 'reports', '.wrangler', '.stryker-tmp', '.astro', '.next', '.turbo']);
 
+export function isSkippedPath(file: string): boolean {
+  return file.split(/[/\\]/).some((part) => SKIP_DIRS.has(part));
+}
+
 export function walk(cwd: string, dir = ''): string[] {
   const out: string[] = [];
   const abs = join(cwd, dir);
@@ -51,7 +55,7 @@ export function walk(cwd: string, dir = ''): string[] {
 export function listFiles(cwd: string): string[] {
   try {
     const out = execFileSync('git', ['ls-files', '-co', '--exclude-standard'], { cwd, encoding: 'utf8', maxBuffer: 64 << 20 });
-    return out.split('\n').filter((f) => f && existsSync(join(cwd, f)));
+    return out.split('\n').filter((f) => f && !isSkippedPath(f) && existsSync(join(cwd, f)));
   } catch {
     return walk(cwd);
   }
@@ -159,7 +163,7 @@ export function diffAgainst(cwd: string, base: string): Record<string, FileDiff>
   }
   // Untracked files are not in `git diff`; count them as added.
   try {
-    for (const f of git(cwd, ['ls-files', '--others', '--exclude-standard']).split('\n').filter(Boolean)) {
+    for (const f of git(cwd, ['ls-files', '--others', '--exclude-standard']).split('\n').filter((f) => f && !isSkippedPath(f))) {
       if (!files[f] && existsSync(join(cwd, f))) {
         const added = readText(cwd, f).replace(/\n$/, '').split('\n');
         files[f] = { added, addedLines: added.map((_, i) => i + 1), removed: [], status: 'added' };
@@ -168,5 +172,6 @@ export function diffAgainst(cwd: string, base: string): Record<string, FileDiff>
   } catch {
     /* not a git repo */
   }
+  for (const f of Object.keys(files)) if (isSkippedPath(f)) delete files[f];
   return files;
 }

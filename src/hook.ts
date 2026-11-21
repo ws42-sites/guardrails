@@ -4,6 +4,7 @@ import { parseConfig, loadConfig as loadProjectConfig, CONFIG_FILE, CONFIG_MD, t
 import { isTestFile, matchesAny } from './util.js';
 
 export type Agent = 'claude' | 'gemini' | 'antigravity' | 'codex';
+export const AGENT_HOSTS = ['Claude Code', 'Gemini CLI', 'Antigravity', 'Codex CLI'] as const;
 export interface GuardResult { allow: boolean; reason?: string; path?: string }
 
 const WRITE_SHELL = /(\bsed\s+-i|\bperl\s+-i|>{1,2}|\btee\b|\bmv\b|\brm\b|\bcp\b|\btruncate\b|\bgit\s+(checkout|restore|rm|mv)\b|\bdd\b|\bchmod\b|writeFile|open\([^)]*['"]w)/;

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="226" viewBox="0 0 760 226" role="img">
+<title>guardrails check blocks a loosened matcher</title>
+<rect width="100%" height="100%" fill="#fafafa" stroke="#d4d4d8"/>
+<style>text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace; font-size: 13px; }</style>
+<text x="16" y="26" fill="#9f1239">✖ TEST-7 No test weakening (1)</text>
+<text x="16" y="44" fill="#18181b">    src/add.test.ts:2  "CORE-01 adds" loosened a matcher (toEqual -&gt; toMatchObject). Keep</text>
+<text x="16" y="62" fill="#18181b">  the stricter matcher.</text>
+<text x="16" y="80" fill="#18181b">    fix: Restore the test/assertion/threshold. Deleting base-branch tests needs a code owner</text>
+<text x="16" y="98" fill="#18181b">  to add the guardrails:tests-removed-approved label; tests added in the same PR can be</text>
+<text x="16" y="116" fill="#18181b">  deleted freely.</text>
+<text x="16" y="134" fill="#18181b">• tests: 1</text>
+<text x="16" y="152" fill="#18181b">• specs: 1 (1 with tests)</text>
+<text x="16" y="170" fill="#18181b">• budget.T1: test-only (1 test lines, 0 product lines)</text>
+<text x="16" y="188" fill="#18181b">• tests.vsBase: 0 (1 on base, 1 now)</text>
+<text x="16" y="206" fill="#9f1239">FAIL: 1 blocking, 0 warnings, 0 known (diff vs main)</text>
+</svg>

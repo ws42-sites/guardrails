@@ -21,9 +21,15 @@ Coding agents optimise for a green build. Left alone, they delete the failing te
 
 There are 49 rules. `npx guardrails explain` lists them, and `npx guardrails explain <ID>` prints why a rule exists and how to fix a finding. The same catalogue ships in the package as `RULES.md`.
 
+## A weakened assertion
+
+`guardrails check --base main` after a branch changes `toEqual` to `toMatchObject`:
+
+<img alt="guardrails check blocks a loosened matcher" src="docs/cli-weakened.svg" width="720">
+
 ## Five-minute quickstart
 
-Requires **Node 20+** inside a **git repository** (for a brand-new folder, run `git init -b main` and ensure `package.json` and `src/` exist first). Optional peer dependencies for the Vitest setup and mutation testing: `npm i -D -E vitest @stryker-mutator/core@8.7.1 @stryker-mutator/vitest-runner@8.7.1`.
+Requires **Node 20+** inside a **git repository** (for a brand-new folder, run `git init -b main` and ensure `package.json` and `src/` exist first). Optional peers for the Vitest setup and mutation testing: `npm i -D vitest@^4.1.12 @stryker-mutator/core@9.6.1 @stryker-mutator/vitest-runner@9.6.1`.
 
 ```bash
 # 1. Install
@@ -46,7 +52,7 @@ git checkout -b my-change
 npx guardrails check --base main --fails-on-base          # use --base origin/main once pushed to a remote
 ```
 
-`init` never overwrites an existing file unless you pass `--force`. In an existing repo it merges between `<!-- guardrails:start -->` and `<!-- guardrails:end -->` markers in `AGENTS.md`, `CLAUDE.md` and `GEMINI.md`, merges hook/MCP settings, appends missing `.codex/config.toml` tables and missing `.github/CODEOWNERS` paths, and prints `created`, `merged` or `skipped` per file. A fresh `init` with no test files (or with `@ws42ca/guardrails/vitest-setup` configured) passes `npx guardrails check` out of the box; runbook, CI and suite standards stay off until `npx guardrails init runbook`.
+`init` never overwrites an existing file unless you pass `--force`. In an existing repo it merges between `<!-- guardrails:start -->` and `<!-- guardrails:end -->` markers in `AGENTS.md`, `CLAUDE.md` and `GEMINI.md`, merges hook/MCP settings, appends missing `.codex/config.toml` tables and missing `.github/CODEOWNERS` paths, and prints `created`, `merged` or `skipped` per file. It also creates `.gitignore`, or appends any missing lines, for `node_modules/`, `dist/`, `coverage/`, `.stryker-tmp/` and the other generated directories. Checks skip those directories even when they are not ignored, so a dependency's tests are not baselined and do not fail TEST-9. A fresh `init` with no test files (or with `@ws42ca/guardrails/vitest-setup` configured) passes `npx guardrails check` out of the box; runbook, CI and suite standards stay off until `npx guardrails init runbook`.
 
 ### Exit codes
 
@@ -85,7 +91,7 @@ Everything lives in `guardrails.config.json` (and optionally `guardrails.md`). U
 - **`specs.items`** define promised behaviours; test titles start with the ID (`it('ORDER-01 sends a receipt', ...)`). T1 gaps block, T2 gaps warn.
 - **`tiers`**, **`architecture`** and **`rules`** set risk paths, boundaries/entries/singletons/restricted strings, and mode overrides (`block` | `warn` | `off`). Lowering a mode or threshold counts as weakening (TEST-7).
 - **`journeys`, `runbook`, `ci`, `testSuite`, `docs`, `duplication`, `mutation`, `scope`, `lock`, `holdout`, `review`, `provenance`, `evaluation`, `feedback`, `telemetry`** configure the remaining features (see `schema/guardrails.schema.json`).
-- Add `.stryker-tmp/` to `.gitignore` when using mutation testing, and enable GitHub branch protection with **Require review from Code Owners** so `.github/CODEOWNERS` enforces human review. Set `GUARDRAILS_OFFLINE=1` to skip npm registry lookups.
+- `init` adds `.stryker-tmp/` to `.gitignore`. Enable GitHub branch protection with **Require review from Code Owners** so `.github/CODEOWNERS` enforces human review. Set `GUARDRAILS_OFFLINE=1` to skip npm registry lookups.
 
 Pull request approval labels come from `GUARDRAILS_LABELS` (comma-separated) or `--labels`:
 
@@ -100,7 +106,7 @@ Pull request approval labels come from `GUARDRAILS_LABELS` (comma-separated) or 
 
 Legacy 0.6.1 aliases (`tests-removed-approved`, `guardrails:rebaseline`, `allow-characterization`, `flags-resolved`, and `guardrails:config-approved` for journeys) still work with a deprecation warning on stderr.
 
-## Advanced verification (planned 0.7.0, all off by default)
+## Advanced verification (0.7.0, all off by default)
 
 A basic install behaves like `0.6.3`: every feature below is off by default until enabled in `guardrails.config.json` or `guardrails.md`.
 
@@ -173,6 +179,21 @@ claude mcp add guardrails --scope project -- npx -y -p @ws42ca/guardrails guardr
 `init` writes `.github/workflows/guardrails.yml` (checkout with `fetch-depth: 0`, `GUARDRAILS_LABELS` from PR labels, `--base origin/$GITHUB_BASE_REF --fails-on-base` on PRs, `--clock-shift` on `main`/nightly, a separate `--only mutation --mutation` job, and gitleaks for SEC-1). `--fails-on-base` safely unlinks the temporary worktree `node_modules` junction/symlink before cleanup so your real `node_modules` is never touched. To run checks once and render multiple formats in CI, save JSON with `guardrails check --format json > report.json` and render `guardrails report --report report.json --format markdown`.
 
 For static sites without adding a repo dependency, run `npx -y @ws42ca/guardrails init --preset site` to scaffold a site config and workflow using `check-links` and `smoke --sitemap`.
+
+## Limits and design choices
+
+- Guardrails is not a test runner. It reads the tests you already have and runs the commands you configure.
+- It does not scan the repo for secrets. The CI workflow runs gitleaks for SEC-1.
+- `guardrails check` does not call a model. `journeys draft` can call one when an API key is set; `--dry-run` does not.
+- The test rules target Vitest on JavaScript and TypeScript. Journey end-to-end tests target Playwright. Other runners are not parsed.
+- Mutation testing is optional. It needs `@stryker-mutator/core` and `@stryker-mutator/vitest-runner` installed, and it runs only when you pass `--mutation`.
+- JRN-5, the journey visual diff, is not implemented. Leave `journeys.visual.enabled` false.
+- ESLint stays on 8.57.1, which is end of life. Current `npm audit` results do not list a high or critical issue in ESLint. The checker calls the ESLint 8 library API (`useEslintrc: false`, an eslintrc `overrideConfig`, and constructor `plugins`). ESLint 9 removed that API. `@typescript-eslint/parser` 7 and `eslint-plugin-vitest` 0.4.1 match those calls, and TEST-5 checks their messages.
+- Zod stays on 3.25. Advisory GHSA-mrhx-c7xc-m3w5 (memory use while validating oversized collections) is fixed in Zod 4.6.6 and later. Zod 4 would change the config parser and the published JSON schema, so that upgrade is a separate release. CI fails on every other high or critical advisory.
+
+## Releasing
+
+Push a `v*` tag that matches `package.json`. The checklist, the `NPM_TOKEN` secret, and the changelog rule are in [RUNBOOK.md](RUNBOOK.md).
 
 ## Licence
 

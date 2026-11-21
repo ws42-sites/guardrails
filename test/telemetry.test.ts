@@ -1,4 +1,8 @@
-import { afterEach, expect, it, vi } from 'vitest';
+import { afterEach, expect, it, vi as realVi } from 'vitest';
+
+const vi = realVi as typeof realVi & {
+  fn<Args extends readonly unknown[], Result>(impl?: (...args: Args) => Result): ReturnType<typeof realVi.fn> & typeof globalThis.fetch;
+};
 import { existsSync, readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { send, telemetryStatus } from '../src/telemetry.js';
