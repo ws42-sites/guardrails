@@ -195,6 +195,12 @@ For static sites without adding a repo dependency, run `npx -y @ws42ca/guardrail
 
 Push a `v*` tag that matches `package.json`. The checklist, the `NPM_TOKEN` secret, and the changelog rule are in [RUNBOOK.md](RUNBOOK.md).
 
+## Author
+
+Built and maintained by [Josh Boyer](https://joshboyer.ca) ([@JoshBoyer](https://github.com/JoshBoyer)), Ottawa.
+
+— Josh Boyer
+
 ## Licence
 
 MIT. Copyright (c) 2026 Josh Boyer / WS42. See `LICENSE`.
