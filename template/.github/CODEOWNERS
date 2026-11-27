@@ -1,6 +1,8 @@
-# Guardrails: changes to the rules, baseline, specs or CI need a human code owner.
+# Guardrails: changes to the rules, baseline, specs, CI or secret-scan settings need a human code owner.
 /guardrails.config.json        {{OWNER}}
 /.guardrails/                  {{OWNER}}
 /.github/workflows/            {{OWNER}}
 /.github/CODEOWNERS            {{OWNER}}
 /AGENTS.md                     {{OWNER}}
+/.gitleaks.toml                {{OWNER}}
+/.gitleaksignore               {{OWNER}}

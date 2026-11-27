@@ -4,3 +4,5 @@
 /.github/                 @JoshBoyer
 /src/rules.ts             @JoshBoyer
 /template/                @JoshBoyer
+/.gitleaks.toml           @JoshBoyer
+/.gitleaksignore          @JoshBoyer
