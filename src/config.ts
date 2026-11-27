@@ -182,7 +182,7 @@ const configSchema = z
     lock: z
       .object({
         specTests: z.boolean().default(true),
-        paths: globs.default(['guardrails.config.json', 'guardrails.md', '.guardrails/**', '.github/CODEOWNERS', '.github/workflows/**', '.claude/settings.json', '.gemini/settings.json', '.agents/hooks.json', '.codex/hooks.json', '.codex/config.toml']),
+        paths: globs.default(['guardrails.config.json', 'guardrails.md', '.guardrails/**', '.github/CODEOWNERS', '.github/workflows/**', '.claude/settings.json', '.gemini/settings.json', '.agents/hooks.json', '.codex/hooks.json', '.codex/config.toml', '.gitleaks.toml', '.gitleaksignore']),
       })
       .strict()
       .default({}),

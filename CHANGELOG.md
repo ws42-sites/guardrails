@@ -9,6 +9,7 @@ Version: 0.7.0 · Date: 2026-11-21
 - File listing skips generated directories (`node_modules`, `dist`, and the rest of the skip list) even when `git ls-files` would show them. `guardrails init` creates `.gitignore`, or appends the missing lines. A fresh install no longer baselines dependency files or fails TEST-9 because of them.
 
 ### Changed
+- The default `lock.paths` include `.gitleaks.toml` and `.gitleaksignore`. Gitleaks reads both from the repo, so an agent could otherwise add its own exception and get past SEC-1.
 - README states that 0.7.0 has shipped, shows a check that blocks a loosened matcher, and lists what Guardrails does not do.
 - Development dependencies: Vitest `^4.1.12` (Node 20) and Stryker 9.6.1. CI checks the README rule count and host list, rejects "planned" wording for released versions, treats DOC-1 as a failure, smoke-tests the quickstart from `npm pack`, and fails `npm audit` on high or critical advisories other than the documented Zod 3 exception.
 - Tag publishes fail when `NPM_TOKEN` is missing instead of skipping, and the GitHub release notes are the changelog section for that version.
