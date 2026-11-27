@@ -1,0 +1,12 @@
+# Read by gitleaks in the SEC-1 secrets job. Every default rule stays on; this adds one narrow exception.
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Rust engine test answers: summaryKey is a sha256 cache label computed from public test inputs, not a credential."
+targetRules = ["generic-api-key"]
+condition = "AND"
+paths = ['''^(?:crates/[^/]+/)?tests/(?:parity|golden)/expected/.+\.json$''']
+regexTarget = "match"
+regexes = ['''^summaryKey"\s*:\s*"[0-9a-f]{64}"$''']
