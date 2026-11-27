@@ -1,0 +1,565 @@
+{
+ "cases": [
+  {
+   "id": "reads-unsupported-cases",
+   "steps": [
+    {
+     "op": "write",
+     "fixture": "unsupported-cases"
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "write",
+     "files": {
+      "py/dynamic.py": "def dynamic():\n    return __import__('os')\n",
+      "py/new.py": "def new():\n    return 1\n"
+     }
+    },
+    {
+     "op": "remove",
+     "paths": [
+      "web/missing.ts"
+     ]
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "owner/repo",
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "owner/repo",
+      99
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "nobody/nothing"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "nobody/nothing"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "dynamic"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "dynamic"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "dynamic",
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "DYNAMIC"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "%"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "_"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "\\"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "",
+      2
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "dynamic",
+      0
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "dynamic",
+      -5
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "dynamic",
+      5000
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "no-such-name-anywhere"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "dynamic"
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "nobody/nothing",
+      "dynamic"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "architecture_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "architecture_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "architecture_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=1"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=2"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      "unknown-revision"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "nobody/nothing",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=1"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/dynamic.py'"
+      },
+      "outbound",
+      3,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/dynamic.py'"
+      },
+      "inbound",
+      3,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/big.py'"
+      },
+      "outbound",
+      3,
+      50
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/big.py'"
+      },
+      "inbound",
+      3,
+      50
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/dynamic.py'"
+      },
+      "outbound",
+      0,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/dynamic.py'"
+      },
+      "outbound",
+      1,
+      1
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/dynamic.py'"
+      },
+      "outbound",
+      9,
+      5000
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/dynamic.py'"
+      },
+      "outbound",
+      -3,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/dynamic.py'"
+      },
+      "outbound",
+      2,
+      0
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/dynamic.py'"
+      },
+      "outbound",
+      2,
+      -1
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/dynamic.py'"
+      },
+      "sideways",
+      2,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      "no-such-node",
+      "outbound"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=1 AND kind='file' AND path='py/dynamic.py'"
+      },
+      "outbound"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/dynamic.py'"
+      }
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='py/dynamic.py'"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=1 AND kind='file' AND path='py/dynamic.py'"
+      },
+      "inbound",
+      5,
+      200
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 1
+     }
+    }
+   ],
+   "finalState": "full"
+  }
+ ]
+}

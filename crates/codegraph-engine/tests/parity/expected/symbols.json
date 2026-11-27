@@ -1,0 +1,9392 @@
+{
+ "python/bom.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "test_crlf_function",
+    4,
+    null
+   ],
+   [
+    "function_definition",
+    "helper",
+    8,
+    null
+   ],
+   [
+    "function_definition",
+    "caller",
+    12,
+    null
+   ]
+  ]
+ },
+ "python/calls.py:python": {
+  "value": [
+   [
+    "import",
+    "import functools",
+    2,
+    null
+   ],
+   [
+    "function_definition",
+    "helper",
+    5,
+    null
+   ],
+   [
+    "function_definition",
+    "other",
+    9,
+    null
+   ],
+   [
+    "function_definition",
+    "fetch",
+    13,
+    null
+   ],
+   [
+    "function_definition",
+    "decorated",
+    18,
+    null
+   ],
+   [
+    "function_definition",
+    "uses_decorator",
+    23,
+    null
+   ],
+   [
+    "function_definition",
+    "uses_parenthesised_decorator",
+    28,
+    null
+   ],
+   [
+    "class_definition",
+    "Service",
+    32,
+    null
+   ],
+   [
+    "function_definition",
+    "method",
+    35,
+    "Service"
+   ],
+   [
+    "function_definition",
+    "static",
+    40,
+    "Service"
+   ],
+   [
+    "function_definition",
+    "uses_all",
+    43,
+    "Service"
+   ],
+   [
+    "function_definition",
+    "outer",
+    65,
+    null
+   ],
+   [
+    "function_definition",
+    "inner",
+    66,
+    "outer"
+   ],
+   [
+    "class_definition",
+    "Local",
+    69,
+    "outer"
+   ],
+   [
+    "function_definition",
+    "method",
+    70,
+    "Local"
+   ],
+   [
+    "function_definition",
+    "control",
+    76,
+    null
+   ],
+   [
+    "function_definition",
+    "matching",
+    109,
+    null
+   ],
+   [
+    "function_definition",
+    "keyword_and_default",
+    125,
+    null
+   ],
+   [
+    "function_definition",
+    "star_chains",
+    129,
+    null
+   ],
+   [
+    "function_definition",
+    "precedence",
+    133,
+    null
+   ]
+  ]
+ },
+ "python/crlf.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "test_crlf_function",
+    4,
+    null
+   ],
+   [
+    "function_definition",
+    "helper",
+    8,
+    null
+   ],
+   [
+    "function_definition",
+    "caller",
+    12,
+    null
+   ]
+  ]
+ },
+ "python/docstring_bad_escape.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "helper",
+    4,
+    null
+   ]
+  ]
+ },
+ "python/docstring_named_escape.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "helper",
+    4,
+    null
+   ]
+  ]
+ },
+ "python/docstring_tabs.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "tabbed",
+    1,
+    null
+   ],
+   [
+    "class_definition",
+    "Tabs",
+    9,
+    null
+   ],
+   [
+    "function_definition",
+    "method",
+    10,
+    "Tabs"
+   ]
+  ]
+ },
+ "python/docstrings.py:python": {
+  "value": [
+   [
+    "class_definition",
+    "Renders",
+    7,
+    null
+   ],
+   [
+    "function_definition",
+    "method",
+    13,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "raw",
+    16,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "escapes",
+    19,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "concatenated",
+    22,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "formatted",
+    26,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "bytes_literal",
+    29,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "number_first",
+    32,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "empty",
+    36,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "blank",
+    39,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "leading_blank_lines",
+    44,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "unicode_text",
+    51,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "long_line",
+    54,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "secret",
+    57,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "credential",
+    60,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "async_documented",
+    63,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "form_feed",
+    66,
+    "Renders"
+   ],
+   [
+    "function_definition",
+    "test_rejects_unsafe_paths",
+    70,
+    null
+   ],
+   [
+    "function_definition",
+    "test_clears_stale_selections_when_input_changes",
+    74,
+    null
+   ],
+   [
+    "function_definition",
+    "test_async_case_runs",
+    78,
+    null
+   ],
+   [
+    "class_definition",
+    "TestGroup",
+    82,
+    null
+   ],
+   [
+    "function_definition",
+    "test_nested_method",
+    83,
+    "TestGroup"
+   ],
+   [
+    "function_definition",
+    "test_inner_function",
+    84,
+    "test_nested_method"
+   ],
+   [
+    "function_definition",
+    "helper_not_a_test",
+    87,
+    "TestGroup"
+   ],
+   [
+    "function_definition",
+    "not_test_prefix",
+    91,
+    null
+   ],
+   [
+    "function_definition",
+    "test_CamelCaseAndNumbers42",
+    95,
+    null
+   ]
+  ]
+ },
+ "python/empty.py:python": {
+  "value": []
+ },
+ "python/imports.py:python": {
+  "value": [
+   [
+    "import",
+    "import os, sys",
+    3,
+    null
+   ],
+   [
+    "import",
+    "import pkg.a",
+    4,
+    null
+   ],
+   [
+    "import",
+    "import pkg.sub.b as sub_b",
+    5,
+    null
+   ],
+   [
+    "import",
+    "import pkg.missing.deep",
+    6,
+    null
+   ],
+   [
+    "import",
+    "from pkg import a, sub",
+    7,
+    null
+   ],
+   [
+    "import",
+    "from pkg.sub import b as bee, c",
+    8,
+    null
+   ],
+   [
+    "import",
+    "from pkg.sub import (\n    c as see,\n    d,\n)",
+    9,
+    null
+   ],
+   [
+    "import",
+    "from . import sibling",
+    13,
+    null
+   ],
+   [
+    "import",
+    "from .sibling import thing",
+    14,
+    null
+   ],
+   [
+    "import",
+    "from .. import up",
+    15,
+    null
+   ],
+   [
+    "import",
+    "from ..up import more",
+    16,
+    null
+   ],
+   [
+    "import",
+    "from ... import too_far",
+    17,
+    null
+   ],
+   [
+    "import",
+    "from .... import way_too_far",
+    18,
+    null
+   ],
+   [
+    "import",
+    "from . import (\n    one,\n    two as deux,\n)",
+    19,
+    null
+   ],
+   [
+    "import",
+    "from .pkg.deep import *",
+    23,
+    null
+   ],
+   [
+    "import",
+    "from pkg . sub import b",
+    24,
+    null
+   ],
+   [
+    "import",
+    "import pkg . a as spaced",
+    25,
+    null
+   ],
+   [
+    "import",
+    "import conditional",
+    27,
+    null
+   ],
+   [
+    "import",
+    "from pkg import a as again",
+    28,
+    null
+   ],
+   [
+    "import",
+    "from pkg import a as other",
+    30,
+    null
+   ],
+   [
+    "import",
+    "import maybe",
+    32,
+    null
+   ],
+   [
+    "import",
+    "import cleanup",
+    36,
+    null
+   ],
+   [
+    "function_definition",
+    "function",
+    39,
+    null
+   ],
+   [
+    "import",
+    "from pkg.a import inner",
+    40,
+    "function"
+   ],
+   [
+    "import",
+    "import pkg.sub.c",
+    41,
+    "function"
+   ],
+   [
+    "function_definition",
+    "nested",
+    43,
+    "function"
+   ],
+   [
+    "import",
+    "import pkg.sub.b",
+    44,
+    "nested"
+   ],
+   [
+    "class_definition",
+    "Holder",
+    47,
+    null
+   ],
+   [
+    "import",
+    "import in_class",
+    48,
+    "Holder"
+   ],
+   [
+    "import",
+    "from pkg import a as member",
+    49,
+    "Holder"
+   ]
+  ]
+ },
+ "python/invalid_utf8.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "helper",
+    4,
+    null
+   ]
+  ]
+ },
+ "python/lone_cr.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "test_crlf_function",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "helper",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "caller",
+    1,
+    null
+   ]
+  ]
+ },
+ "python/nul.py:python": {
+  "value": [
+   [
+    "import",
+    "import os",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "helper",
+    4,
+    null
+   ]
+  ]
+ },
+ "python/only_comments.py:python": {
+  "value": []
+ },
+ "python/positional_after_keyword.py:python": {
+  "value": [
+   [
+    "import",
+    "import pkg.a",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "helper",
+    4,
+    null
+   ]
+  ]
+ },
+ "python/python2_chevron.py:python": {
+  "value": [
+   [
+    "import",
+    "import sys",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "helper",
+    4,
+    null
+   ]
+  ]
+ },
+ "python/python2_print.py:python": {
+  "value": [
+   [
+    "import",
+    "import pkg.a",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "helper",
+    4,
+    null
+   ]
+  ]
+ },
+ "python/syntax_error.py:python": {
+  "value": [
+   [
+    "import",
+    "import pkg.a",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "broken",
+    4,
+    null
+   ]
+  ]
+ },
+ "python/tab_error.py:python": {
+  "value": [
+   [
+    "import",
+    "import pkg.a",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "helper",
+    4,
+    null
+   ]
+  ]
+ },
+ "python/zoo_docstrings.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "first",
+    4,
+    null
+   ],
+   [
+    "function_definition",
+    "second",
+    8,
+    null
+   ],
+   [
+    "class_definition",
+    "Third",
+    12,
+    null
+   ],
+   [
+    "function_definition",
+    "test_user_login_when_locked",
+    15,
+    "Third"
+   ],
+   [
+    "function_definition",
+    "test_async_runs",
+    18,
+    "Third"
+   ],
+   [
+    "function_definition",
+    "method",
+    21,
+    "Third"
+   ],
+   [
+    "function_definition",
+    "test_nested_function",
+    22,
+    "method"
+   ],
+   [
+    "function_definition",
+    "test_top_level_after_docstring",
+    26,
+    null
+   ],
+   [
+    "function_definition",
+    "test_ThingCamelCase_and_more",
+    30,
+    null
+   ]
+  ]
+ },
+ "python/zoo_expressions.py:python": {
+  "value": []
+ },
+ "python/zoo_fstrings.py:python": {
+  "value": []
+ },
+ "python/zoo_statements.py:python": {
+  "value": [
+   [
+    "import",
+    "import os, sys as system",
+    2,
+    null
+   ],
+   [
+    "import",
+    "from pkg import (a, b as bee)",
+    3,
+    null
+   ],
+   [
+    "import",
+    "from . import sibling",
+    4,
+    null
+   ],
+   [
+    "import",
+    "from .. import up",
+    5,
+    null
+   ],
+   [
+    "function_definition",
+    "decorated",
+    11,
+    null
+   ],
+   [
+    "function_definition",
+    "coroutine",
+    17,
+    null
+   ],
+   [
+    "function_definition",
+    "generic",
+    27,
+    null
+   ],
+   [
+    "function_definition",
+    "inner",
+    30,
+    "generic"
+   ],
+   [
+    "class_definition",
+    "Base",
+    36,
+    null
+   ],
+   [
+    "function_definition",
+    "method",
+    40,
+    "Base"
+   ],
+   [
+    "class_definition",
+    "Generic",
+    44,
+    null
+   ]
+  ]
+ },
+ "rust/attributes_items.rs:rust": {
+  "value": [
+   [
+    "struct_item",
+    "Derived",
+    3,
+    null
+   ],
+   [
+    "function_item",
+    "gated",
+    8,
+    null
+   ],
+   [
+    "function_item",
+    "attributed",
+    12,
+    null
+   ],
+   [
+    "union_item",
+    "Packed",
+    15,
+    null
+   ],
+   [
+    "enum_item",
+    "Tagged",
+    18,
+    null
+   ]
+  ]
+ },
+ "rust/bom.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use crate::a::B;",
+    1,
+    null
+   ],
+   [
+    "struct_item",
+    "S",
+    3,
+    null
+   ],
+   [
+    "function_item",
+    "t",
+    6,
+    null
+   ]
+  ]
+ },
+ "rust/comments_cr.rs:rust": {
+  "value": []
+ },
+ "rust/comments_first_blank.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "f",
+    6,
+    null
+   ]
+  ]
+ },
+ "rust/comments_late.rs:rust": {
+  "value": []
+ },
+ "rust/comments_many.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "after",
+    25,
+    null
+   ]
+  ]
+ },
+ "rust/comments_star_only.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "f",
+    8,
+    null
+   ]
+  ]
+ },
+ "rust/crate_main.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use crate::config::Settings;",
+    1,
+    null
+   ],
+   [
+    "import",
+    "use crate::util::run;",
+    2,
+    null
+   ],
+   [
+    "mod_item",
+    "config",
+    4,
+    null
+   ],
+   [
+    "mod_item",
+    "util",
+    5,
+    null
+   ],
+   [
+    "function_item",
+    "main",
+    7,
+    null
+   ]
+  ]
+ },
+ "rust/crates_use.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use foo_bar::a::B;",
+    1,
+    null
+   ],
+   [
+    "import",
+    "use foo_bar::missing;",
+    2,
+    null
+   ],
+   [
+    "import",
+    "use foo_bar;",
+    3,
+    null
+   ],
+   [
+    "import",
+    "use root_crate::x;",
+    4,
+    null
+   ],
+   [
+    "import",
+    "use dup::z;",
+    5,
+    null
+   ],
+   [
+    "import",
+    "use std::io;",
+    6,
+    null
+   ],
+   [
+    "import",
+    "use core::fmt;",
+    7,
+    null
+   ],
+   [
+    "import",
+    "use test::t;",
+    8,
+    null
+   ],
+   [
+    "import",
+    "use std::x::y;",
+    9,
+    null
+   ],
+   [
+    "import",
+    "use nolib::thing;",
+    10,
+    null
+   ],
+   [
+    "import",
+    "use ::foo_bar::via_root;",
+    11,
+    null
+   ],
+   [
+    "import",
+    "extern crate foo_bar;",
+    12,
+    null
+   ],
+   [
+    "import",
+    "use sibling::x;",
+    13,
+    null
+   ],
+   [
+    "import",
+    "use foo_bar::{a::B, c};",
+    14,
+    null
+   ],
+   [
+    "import",
+    "use bad_name::q;",
+    15,
+    null
+   ],
+   [
+    "mod_item",
+    "inline",
+    17,
+    null
+   ],
+   [
+    "import",
+    "use foo_bar::in_inline;",
+    18,
+    "inline"
+   ]
+  ]
+ },
+ "rust/crlf.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use crate::a::B;",
+    2,
+    null
+   ],
+   [
+    "struct_item",
+    "S",
+    5,
+    null
+   ],
+   [
+    "function_item",
+    "works",
+    10,
+    null
+   ],
+   [
+    "function_item",
+    "off",
+    16,
+    null
+   ]
+  ]
+ },
+ "rust/crlf_use.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use crate::a::B;",
+    1,
+    null
+   ],
+   [
+    "import",
+    "use crate::c::{\r\n    d,\r\n    e,\r\n};",
+    2,
+    null
+   ]
+  ]
+ },
+ "rust/definitions_only.rs:rust": {
+  "value": [
+   [
+    "struct_item",
+    "Order",
+    1,
+    null
+   ],
+   [
+    "enum_item",
+    "Status",
+    2,
+    null
+   ],
+   [
+    "trait_item",
+    "Settle",
+    3,
+    null
+   ],
+   [
+    "function_item",
+    "settle",
+    4,
+    null
+   ],
+   [
+    "function_item",
+    "r#match",
+    5,
+    null
+   ]
+  ]
+ },
+ "rust/doc_comments.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "documented",
+    5,
+    null
+   ],
+   [
+    "function_item",
+    "block_documented",
+    8,
+    null
+   ],
+   [
+    "function_item",
+    "plain_block",
+    16,
+    null
+   ]
+  ]
+ },
+ "rust/duplicate_targets.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use crate::a::{x, y};",
+    1,
+    null
+   ],
+   [
+    "import",
+    "use crate::a::z;",
+    2,
+    null
+   ],
+   [
+    "import",
+    "use crate::a::z;",
+    3,
+    null
+   ],
+   [
+    "import",
+    "use crate::a::{p, q};",
+    4,
+    null
+   ],
+   [
+    "import",
+    "use crate::a::r;",
+    4,
+    null
+   ]
+  ]
+ },
+ "rust/empty.rs:rust": {
+  "value": []
+ },
+ "rust/error_attribute.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "t",
+    2,
+    null
+   ],
+   [
+    "function_item",
+    "u",
+    4,
+    null
+   ]
+  ]
+ },
+ "rust/error_extern_crate.rs:rust": {
+  "value": [
+   [
+    "import",
+    "extern crate a b;",
+    2,
+    null
+   ],
+   [
+    "import",
+    "use ::;",
+    4,
+    null
+   ]
+  ]
+ },
+ "rust/error_garbage.rs:rust": {
+  "value": []
+ },
+ "rust/error_impl.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "a",
+    2,
+    null
+   ],
+   [
+    "function_item",
+    "after",
+    6,
+    null
+   ]
+  ]
+ },
+ "rust/error_missing_name.rs:rust": {
+  "value": []
+ },
+ "rust/error_param.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "f",
+    1,
+    null
+   ],
+   [
+    "function_item",
+    "g",
+    2,
+    null
+   ],
+   [
+    "function_item",
+    "h",
+    3,
+    null
+   ]
+  ]
+ },
+ "rust/error_unclosed_brace.rs:rust": {
+  "value": [
+   [
+    "struct_item",
+    "A",
+    1,
+    null
+   ]
+  ]
+ },
+ "rust/error_unclosed_comment.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "a",
+    1,
+    null
+   ]
+  ]
+ },
+ "rust/error_unterminated_string.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "f",
+    1,
+    null
+   ],
+   [
+    "function_item",
+    "g",
+    4,
+    null
+   ]
+  ]
+ },
+ "rust/error_use.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use a::{b;",
+    1,
+    null
+   ],
+   [
+    "import",
+    "use c::d;",
+    2,
+    null
+   ],
+   [
+    "function_item",
+    "ok",
+    3,
+    null
+   ]
+  ]
+ },
+ "rust/invalid_utf8.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use crate::a::B;",
+    2,
+    null
+   ],
+   [
+    "function_item",
+    "f",
+    3,
+    null
+   ]
+  ]
+ },
+ "rust/invalid_utf8_name.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "caf",
+    1,
+    null
+   ],
+   [
+    "import",
+    "use crate::a::B;",
+    2,
+    null
+   ]
+  ]
+ },
+ "rust/invalid_utf8_use.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use crate::a\ufffd::B;",
+    1,
+    null
+   ],
+   [
+    "import",
+    "use crate::b::C;",
+    2,
+    null
+   ]
+  ]
+ },
+ "rust/lone_cr.rs:rust": {
+  "value": []
+ },
+ "rust/long_names.rs:rust": {
+  "value": [
+   [
+    "struct_item",
+    "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+    1,
+    null
+   ],
+   [
+    "trait_item",
+    "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+    2,
+    null
+   ],
+   [
+    "function_item",
+    "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    3,
+    null
+   ]
+  ]
+ },
+ "rust/macros.rs:rust": {
+  "value": [
+   [
+    "macro_definition",
+    "make",
+    1,
+    null
+   ],
+   [
+    "macro_definition",
+    "with_assert",
+    8,
+    null
+   ],
+   [
+    "function_item",
+    "calls",
+    16,
+    null
+   ],
+   [
+    "macro_definition",
+    "nested",
+    24,
+    null
+   ]
+  ]
+ },
+ "rust/many_methods.rs:rust": {
+  "value": [
+   [
+    "struct_item",
+    "Big",
+    1,
+    null
+   ],
+   [
+    "trait_item",
+    "Wide",
+    3,
+    null
+   ],
+   [
+    "function_signature_item",
+    "trait_m0",
+    4,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m1",
+    5,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m2",
+    6,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m3",
+    7,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m4",
+    8,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m5",
+    9,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m6",
+    10,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m7",
+    11,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m8",
+    12,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m9",
+    13,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m10",
+    14,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m11",
+    15,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m12",
+    16,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m13",
+    17,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m14",
+    18,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m15",
+    19,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m16",
+    20,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m17",
+    21,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m18",
+    22,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m19",
+    23,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m20",
+    24,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m21",
+    25,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m22",
+    26,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m23",
+    27,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m24",
+    28,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m25",
+    29,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m26",
+    30,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m27",
+    31,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m28",
+    32,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m29",
+    33,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m30",
+    34,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m31",
+    35,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m32",
+    36,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m33",
+    37,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m34",
+    38,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m35",
+    39,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m36",
+    40,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m37",
+    41,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m38",
+    42,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m39",
+    43,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m40",
+    44,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m41",
+    45,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m42",
+    46,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m43",
+    47,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m44",
+    48,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m45",
+    49,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m46",
+    50,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m47",
+    51,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m48",
+    52,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m49",
+    53,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m50",
+    54,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m51",
+    55,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m52",
+    56,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m53",
+    57,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m54",
+    58,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m55",
+    59,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m56",
+    60,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m57",
+    61,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m58",
+    62,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m59",
+    63,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m60",
+    64,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m61",
+    65,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m62",
+    66,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m63",
+    67,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m64",
+    68,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m65",
+    69,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m66",
+    70,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m67",
+    71,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m68",
+    72,
+    "Wide"
+   ],
+   [
+    "function_signature_item",
+    "trait_m69",
+    73,
+    "Wide"
+   ],
+   [
+    "function_item",
+    "impl_m0",
+    77,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m1",
+    78,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m2",
+    79,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m3",
+    80,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m4",
+    81,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m5",
+    82,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m6",
+    83,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m7",
+    84,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m8",
+    85,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m9",
+    86,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m10",
+    87,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m11",
+    88,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m12",
+    89,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m13",
+    90,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m14",
+    91,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m15",
+    92,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m16",
+    93,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m17",
+    94,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m18",
+    95,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m19",
+    96,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m20",
+    97,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m21",
+    98,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m22",
+    99,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m23",
+    100,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m24",
+    101,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m25",
+    102,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m26",
+    103,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m27",
+    104,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m28",
+    105,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m29",
+    106,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m30",
+    107,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m31",
+    108,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m32",
+    109,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m33",
+    110,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m34",
+    111,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m35",
+    112,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m36",
+    113,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m37",
+    114,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m38",
+    115,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m39",
+    116,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m40",
+    117,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m41",
+    118,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m42",
+    119,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m43",
+    120,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m44",
+    121,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m45",
+    122,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m46",
+    123,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m47",
+    124,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m48",
+    125,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m49",
+    126,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m50",
+    127,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m51",
+    128,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m52",
+    129,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m53",
+    130,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m54",
+    131,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m55",
+    132,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m56",
+    133,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m57",
+    134,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m58",
+    135,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m59",
+    136,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m60",
+    137,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m61",
+    138,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m62",
+    139,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m63",
+    140,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m64",
+    141,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m65",
+    142,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m66",
+    143,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m67",
+    144,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m68",
+    145,
+    "Big"
+   ],
+   [
+    "function_item",
+    "impl_m69",
+    146,
+    "Big"
+   ]
+  ]
+ },
+ "rust/many_parameters.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "wide",
+    1,
+    null
+   ]
+  ]
+ },
+ "rust/modules_inline.rs:rust": {
+  "value": [
+   [
+    "mod_item",
+    "outer",
+    2,
+    null
+   ],
+   [
+    "import",
+    "use crate::alpha::One;",
+    3,
+    "outer"
+   ],
+   [
+    "mod_item",
+    "inner",
+    4,
+    "outer"
+   ],
+   [
+    "import",
+    "use super::beta::Two;",
+    5,
+    "inner"
+   ],
+   [
+    "import",
+    "use crate::gamma::Three;",
+    6,
+    "inner"
+   ],
+   [
+    "function_item",
+    "deep",
+    7,
+    "inner"
+   ],
+   [
+    "function_item",
+    "mid",
+    9,
+    "outer"
+   ],
+   [
+    "mod_item",
+    "tests",
+    13,
+    null
+   ],
+   [
+    "import",
+    "use super::*;",
+    14,
+    "tests"
+   ],
+   [
+    "function_item",
+    "t",
+    17,
+    "tests"
+   ],
+   [
+    "mod_item",
+    "declared_elsewhere",
+    22,
+    null
+   ],
+   [
+    "mod_item",
+    "empty_inline",
+    23,
+    null
+   ]
+  ]
+ },
+ "rust/no_trailing_newline.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "last",
+    1,
+    null
+   ]
+  ]
+ },
+ "rust/non_ascii.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use crate::m\u00f3dulo::\u044d\u043b\u0435\u043c\u0435\u043d\u0442;",
+    2,
+    null
+   ],
+   [
+    "import",
+    "use crate::ascii::caf\u00e9;",
+    3,
+    null
+   ],
+   [
+    "import",
+    "use crate::ok::fine;",
+    4,
+    null
+   ],
+   [
+    "struct_item",
+    "\u00dcn\u00ef",
+    7,
+    null
+   ],
+   [
+    "function_item",
+    "stra\u00dfe",
+    11,
+    null
+   ],
+   [
+    "function_item",
+    "pr\u00fcfung",
+    14,
+    null
+   ]
+  ]
+ },
+ "rust/nul.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use crate::a::B;",
+    1,
+    null
+   ],
+   [
+    "function_item",
+    "f",
+    3,
+    null
+   ]
+  ]
+ },
+ "rust/only_comments.rs:rust": {
+  "value": []
+ },
+ "rust/raw_names.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use r#type::Item;",
+    1,
+    null
+   ],
+   [
+    "import",
+    "use crate::r#match::x;",
+    2,
+    null
+   ],
+   [
+    "import",
+    "use self::r#fn::y;",
+    3,
+    null
+   ],
+   [
+    "import",
+    "use r#mod::z;",
+    4,
+    null
+   ]
+  ]
+ },
+ "rust/relative_paths.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use crate::a::b::Item;",
+    1,
+    null
+   ],
+   [
+    "import",
+    "use crate::a::Missing;",
+    2,
+    null
+   ],
+   [
+    "import",
+    "use crate::nothing::Here;",
+    3,
+    null
+   ],
+   [
+    "import",
+    "use crate::top::Thing;",
+    4,
+    null
+   ],
+   [
+    "import",
+    "use crate::*;",
+    5,
+    null
+   ],
+   [
+    "import",
+    "use self::child::Leaf;",
+    6,
+    null
+   ],
+   [
+    "import",
+    "use self::Leaf;",
+    7,
+    null
+   ],
+   [
+    "import",
+    "use self::*;",
+    8,
+    null
+   ],
+   [
+    "import",
+    "use super::sibling::Peer;",
+    9,
+    null
+   ],
+   [
+    "import",
+    "use super::super::grand::Elder;",
+    10,
+    null
+   ],
+   [
+    "import",
+    "use super::super::super::beyond::Far;",
+    11,
+    null
+   ],
+   [
+    "import",
+    "use super::*;",
+    12,
+    null
+   ],
+   [
+    "import",
+    "use child::Direct;",
+    13,
+    null
+   ],
+   [
+    "import",
+    "use sibling_dir::Entry;",
+    14,
+    null
+   ],
+   [
+    "import",
+    "use other_crate::thing;",
+    15,
+    null
+   ],
+   [
+    "import",
+    "use other_crate::deep::item;",
+    16,
+    null
+   ],
+   [
+    "import",
+    "use shared::Value;",
+    17,
+    null
+   ],
+   [
+    "import",
+    "use std::fmt::Debug;",
+    18,
+    null
+   ],
+   [
+    "import",
+    "use core::fmt;",
+    19,
+    null
+   ],
+   [
+    "import",
+    "use alloc::vec::Vec;",
+    20,
+    null
+   ],
+   [
+    "import",
+    "use proc_macro::TokenStream;",
+    21,
+    null
+   ],
+   [
+    "import",
+    "use test::Bencher;",
+    22,
+    null
+   ],
+   [
+    "import",
+    "use crate::a;",
+    23,
+    null
+   ],
+   [
+    "import",
+    "use crate;",
+    24,
+    null
+   ],
+   [
+    "import",
+    "use self;",
+    25,
+    null
+   ],
+   [
+    "import",
+    "use super;",
+    26,
+    null
+   ],
+   [
+    "import",
+    "extern crate other_crate;",
+    27,
+    null
+   ],
+   [
+    "import",
+    "extern crate shared;",
+    28,
+    null
+   ],
+   [
+    "import",
+    "extern crate std;",
+    29,
+    null
+   ],
+   [
+    "import",
+    "extern crate child;",
+    30,
+    null
+   ],
+   [
+    "import",
+    "use ::child::not_relative;",
+    33,
+    null
+   ]
+  ]
+ },
+ "rust/same_name_twice.rs:rust": {
+  "value": [
+   [
+    "struct_item",
+    "Dup",
+    1,
+    null
+   ],
+   [
+    "struct_item",
+    "Dup",
+    2,
+    null
+   ],
+   [
+    "function_item",
+    "first",
+    5,
+    "Dup"
+   ],
+   [
+    "trait_item",
+    "Dup",
+    8,
+    null
+   ],
+   [
+    "function_item",
+    "run",
+    10,
+    null
+   ],
+   [
+    "function_item",
+    "run",
+    11,
+    null
+   ]
+  ]
+ },
+ "rust/symbols.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use std::fmt;",
+    2,
+    null
+   ],
+   [
+    "struct_item",
+    "Graph",
+    4,
+    null
+   ],
+   [
+    "struct_item",
+    "Unit",
+    8,
+    null
+   ],
+   [
+    "struct_item",
+    "Pair",
+    9,
+    null
+   ],
+   [
+    "enum_item",
+    "Kind",
+    11,
+    null
+   ],
+   [
+    "union_item",
+    "Bits",
+    16,
+    null
+   ],
+   [
+    "trait_item",
+    "Store",
+    21,
+    null
+   ],
+   [
+    "function_signature_item",
+    "load",
+    22,
+    "Store"
+   ],
+   [
+    "function_item",
+    "save",
+    23,
+    "Store"
+   ],
+   [
+    "type_item",
+    "Handle",
+    28,
+    null
+   ],
+   [
+    "const_item",
+    "LIMIT",
+    29,
+    null
+   ],
+   [
+    "static_item",
+    "NAME",
+    30,
+    null
+   ],
+   [
+    "static_item",
+    "COUNTER",
+    31,
+    null
+   ],
+   [
+    "mod_item",
+    "inner",
+    33,
+    null
+   ],
+   [
+    "function_item",
+    "helper",
+    34,
+    "inner"
+   ],
+   [
+    "struct_item",
+    "Deep",
+    35,
+    "inner"
+   ],
+   [
+    "mod_item",
+    "deeper",
+    36,
+    "inner"
+   ],
+   [
+    "function_item",
+    "bottom",
+    37,
+    "deeper"
+   ],
+   [
+    "mod_item",
+    "external",
+    41,
+    null
+   ],
+   [
+    "macro_definition",
+    "shout",
+    43,
+    null
+   ],
+   [
+    "function_item",
+    "top",
+    49,
+    null
+   ],
+   [
+    "function_item",
+    "nested",
+    50,
+    "top"
+   ],
+   [
+    "function_item",
+    "later",
+    54,
+    null
+   ],
+   [
+    "function_item",
+    "fixed",
+    55,
+    null
+   ],
+   [
+    "function_item",
+    "risky",
+    56,
+    null
+   ],
+   [
+    "function_item",
+    "crate_only",
+    57,
+    null
+   ],
+   [
+    "function_item",
+    "r#type",
+    58,
+    null
+   ],
+   [
+    "function_item",
+    "caf\u00e9",
+    59,
+    null
+   ],
+   [
+    "struct_item",
+    "\u00dcn\u00ef",
+    60,
+    null
+   ],
+   [
+    "function_item",
+    "new",
+    63,
+    "Graph"
+   ],
+   [
+    "function_item",
+    "add",
+    66,
+    "Graph"
+   ],
+   [
+    "function_item",
+    "fmt",
+    72,
+    "Graph"
+   ],
+   [
+    "function_item",
+    "from",
+    78,
+    "Graph"
+   ],
+   [
+    "function_item",
+    "qualified",
+    84,
+    "Remote"
+   ],
+   [
+    "function_item",
+    "load",
+    88,
+    "u32"
+   ],
+   [
+    "function_item",
+    "load",
+    92,
+    null
+   ],
+   [
+    "function_item",
+    "load",
+    96,
+    null
+   ],
+   [
+    "function_item",
+    "on_object",
+    100,
+    null
+   ],
+   [
+    "function_item",
+    "wrapped",
+    104,
+    "Wrapper"
+   ],
+   [
+    "function_signature_item",
+    "c_function",
+    108,
+    null
+   ],
+   [
+    "static_item",
+    "C_STATIC",
+    109,
+    null
+   ],
+   [
+    "import",
+    "extern crate alloc;",
+    112,
+    null
+   ]
+  ]
+ },
+ "rust/syntax_error.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use crate::a;",
+    1,
+    null
+   ],
+   [
+    "function_item",
+    "broken",
+    3,
+    null
+   ],
+   [
+    "struct_item",
+    "Fine",
+    7,
+    null
+   ]
+  ]
+ },
+ "rust/tests_asserts.rs:rust": {
+  "value": [
+   [
+    "mod_item",
+    "tests",
+    2,
+    null
+   ],
+   [
+    "import",
+    "use super::*;",
+    3,
+    "tests"
+   ],
+   [
+    "function_item",
+    "plain",
+    6,
+    "tests"
+   ],
+   [
+    "function_item",
+    "paths",
+    16,
+    "tests"
+   ],
+   [
+    "function_item",
+    "prefixed_names",
+    24,
+    "tests"
+   ],
+   [
+    "function_item",
+    "vacuous",
+    37,
+    "tests"
+   ],
+   [
+    "function_item",
+    "skipped",
+    63,
+    "tests"
+   ],
+   [
+    "function_item",
+    "skipped_with_reason",
+    67,
+    "tests"
+   ],
+   [
+    "function_item",
+    "skipped_call",
+    71,
+    "tests"
+   ],
+   [
+    "function_item",
+    "not_ignore",
+    75,
+    "tests"
+   ],
+   [
+    "function_item",
+    "conditional",
+    79,
+    "tests"
+   ],
+   [
+    "function_item",
+    "panics",
+    83,
+    "tests"
+   ],
+   [
+    "function_item",
+    "trailing",
+    87,
+    "tests"
+   ],
+   [
+    "function_item",
+    "commented_marker",
+    91,
+    "tests"
+   ],
+   [
+    "function_item",
+    "marker_first",
+    95,
+    "tests"
+   ],
+   [
+    "function_item",
+    "wrong_case",
+    100,
+    "tests"
+   ],
+   [
+    "function_item",
+    "twice",
+    102,
+    "tests"
+   ],
+   [
+    "function_item",
+    "other_attribute",
+    105,
+    "tests"
+   ],
+   [
+    "function_item",
+    "runtime",
+    108,
+    "tests"
+   ],
+   [
+    "function_item",
+    "closure_asserts",
+    112,
+    "tests"
+   ],
+   [
+    "macro_definition",
+    "check",
+    119,
+    null
+   ]
+  ]
+ },
+ "rust/tests_many.rs:rust": {
+  "value": [
+   [
+    "function_item",
+    "case_0",
+    2,
+    null
+   ],
+   [
+    "function_item",
+    "case_1",
+    4,
+    null
+   ],
+   [
+    "function_item",
+    "case_2",
+    6,
+    null
+   ],
+   [
+    "function_item",
+    "case_3",
+    8,
+    null
+   ],
+   [
+    "function_item",
+    "case_4",
+    10,
+    null
+   ],
+   [
+    "function_item",
+    "case_5",
+    12,
+    null
+   ],
+   [
+    "function_item",
+    "case_6",
+    14,
+    null
+   ],
+   [
+    "function_item",
+    "case_7",
+    16,
+    null
+   ],
+   [
+    "function_item",
+    "case_8",
+    18,
+    null
+   ],
+   [
+    "function_item",
+    "case_9",
+    20,
+    null
+   ],
+   [
+    "function_item",
+    "case_10",
+    22,
+    null
+   ],
+   [
+    "function_item",
+    "case_11",
+    24,
+    null
+   ],
+   [
+    "function_item",
+    "case_12",
+    26,
+    null
+   ],
+   [
+    "function_item",
+    "case_13",
+    28,
+    null
+   ],
+   [
+    "function_item",
+    "case_14",
+    30,
+    null
+   ],
+   [
+    "function_item",
+    "case_15",
+    32,
+    null
+   ],
+   [
+    "function_item",
+    "case_16",
+    34,
+    null
+   ],
+   [
+    "function_item",
+    "case_17",
+    36,
+    null
+   ],
+   [
+    "function_item",
+    "case_18",
+    38,
+    null
+   ],
+   [
+    "function_item",
+    "case_19",
+    40,
+    null
+   ],
+   [
+    "function_item",
+    "case_20",
+    42,
+    null
+   ],
+   [
+    "function_item",
+    "case_21",
+    44,
+    null
+   ],
+   [
+    "function_item",
+    "case_22",
+    46,
+    null
+   ],
+   [
+    "function_item",
+    "case_23",
+    48,
+    null
+   ],
+   [
+    "function_item",
+    "case_24",
+    50,
+    null
+   ],
+   [
+    "function_item",
+    "case_25",
+    52,
+    null
+   ],
+   [
+    "function_item",
+    "case_26",
+    54,
+    null
+   ],
+   [
+    "function_item",
+    "case_27",
+    56,
+    null
+   ],
+   [
+    "function_item",
+    "case_28",
+    58,
+    null
+   ],
+   [
+    "function_item",
+    "case_29",
+    60,
+    null
+   ],
+   [
+    "function_item",
+    "case_30",
+    62,
+    null
+   ],
+   [
+    "function_item",
+    "case_31",
+    64,
+    null
+   ],
+   [
+    "function_item",
+    "case_32",
+    66,
+    null
+   ],
+   [
+    "function_item",
+    "case_33",
+    68,
+    null
+   ],
+   [
+    "function_item",
+    "case_34",
+    70,
+    null
+   ],
+   [
+    "function_item",
+    "case_35",
+    72,
+    null
+   ],
+   [
+    "function_item",
+    "case_36",
+    74,
+    null
+   ],
+   [
+    "function_item",
+    "case_37",
+    76,
+    null
+   ],
+   [
+    "function_item",
+    "case_38",
+    78,
+    null
+   ],
+   [
+    "function_item",
+    "case_39",
+    80,
+    null
+   ],
+   [
+    "function_item",
+    "case_40",
+    82,
+    null
+   ],
+   [
+    "function_item",
+    "case_41",
+    84,
+    null
+   ],
+   [
+    "function_item",
+    "case_42",
+    86,
+    null
+   ],
+   [
+    "function_item",
+    "case_43",
+    88,
+    null
+   ],
+   [
+    "function_item",
+    "case_44",
+    90,
+    null
+   ],
+   [
+    "function_item",
+    "case_45",
+    92,
+    null
+   ],
+   [
+    "function_item",
+    "case_46",
+    94,
+    null
+   ],
+   [
+    "function_item",
+    "case_47",
+    96,
+    null
+   ],
+   [
+    "function_item",
+    "case_48",
+    98,
+    null
+   ],
+   [
+    "function_item",
+    "case_49",
+    100,
+    null
+   ],
+   [
+    "function_item",
+    "case_50",
+    102,
+    null
+   ],
+   [
+    "function_item",
+    "case_51",
+    104,
+    null
+   ],
+   [
+    "function_item",
+    "case_52",
+    106,
+    null
+   ],
+   [
+    "function_item",
+    "case_53",
+    108,
+    null
+   ],
+   [
+    "function_item",
+    "case_54",
+    110,
+    null
+   ],
+   [
+    "function_item",
+    "case_55",
+    112,
+    null
+   ],
+   [
+    "function_item",
+    "case_56",
+    114,
+    null
+   ],
+   [
+    "function_item",
+    "case_57",
+    116,
+    null
+   ],
+   [
+    "function_item",
+    "case_58",
+    118,
+    null
+   ],
+   [
+    "function_item",
+    "case_59",
+    120,
+    null
+   ],
+   [
+    "function_item",
+    "case_60",
+    122,
+    null
+   ],
+   [
+    "function_item",
+    "case_61",
+    124,
+    null
+   ],
+   [
+    "function_item",
+    "case_62",
+    126,
+    null
+   ],
+   [
+    "function_item",
+    "case_63",
+    128,
+    null
+   ],
+   [
+    "function_item",
+    "case_64",
+    130,
+    null
+   ],
+   [
+    "function_item",
+    "case_65",
+    132,
+    null
+   ],
+   [
+    "function_item",
+    "case_66",
+    134,
+    null
+   ],
+   [
+    "function_item",
+    "case_67",
+    136,
+    null
+   ],
+   [
+    "function_item",
+    "case_68",
+    138,
+    null
+   ],
+   [
+    "function_item",
+    "case_69",
+    140,
+    null
+   ],
+   [
+    "function_item",
+    "case_70",
+    142,
+    null
+   ],
+   [
+    "function_item",
+    "case_71",
+    144,
+    null
+   ],
+   [
+    "function_item",
+    "case_72",
+    146,
+    null
+   ],
+   [
+    "function_item",
+    "case_73",
+    148,
+    null
+   ],
+   [
+    "function_item",
+    "case_74",
+    150,
+    null
+   ],
+   [
+    "function_item",
+    "case_75",
+    152,
+    null
+   ],
+   [
+    "function_item",
+    "case_76",
+    154,
+    null
+   ],
+   [
+    "function_item",
+    "case_77",
+    156,
+    null
+   ],
+   [
+    "function_item",
+    "case_78",
+    158,
+    null
+   ],
+   [
+    "function_item",
+    "case_79",
+    160,
+    null
+   ],
+   [
+    "function_item",
+    "case_80",
+    162,
+    null
+   ],
+   [
+    "function_item",
+    "case_81",
+    164,
+    null
+   ],
+   [
+    "function_item",
+    "case_82",
+    166,
+    null
+   ],
+   [
+    "function_item",
+    "case_83",
+    168,
+    null
+   ],
+   [
+    "function_item",
+    "case_84",
+    170,
+    null
+   ],
+   [
+    "function_item",
+    "case_85",
+    172,
+    null
+   ],
+   [
+    "function_item",
+    "case_86",
+    174,
+    null
+   ],
+   [
+    "function_item",
+    "case_87",
+    176,
+    null
+   ],
+   [
+    "function_item",
+    "case_88",
+    178,
+    null
+   ],
+   [
+    "function_item",
+    "case_89",
+    180,
+    null
+   ],
+   [
+    "function_item",
+    "case_90",
+    182,
+    null
+   ],
+   [
+    "function_item",
+    "case_91",
+    184,
+    null
+   ],
+   [
+    "function_item",
+    "case_92",
+    186,
+    null
+   ],
+   [
+    "function_item",
+    "case_93",
+    188,
+    null
+   ],
+   [
+    "function_item",
+    "case_94",
+    190,
+    null
+   ],
+   [
+    "function_item",
+    "case_95",
+    192,
+    null
+   ],
+   [
+    "function_item",
+    "case_96",
+    194,
+    null
+   ],
+   [
+    "function_item",
+    "case_97",
+    196,
+    null
+   ],
+   [
+    "function_item",
+    "case_98",
+    198,
+    null
+   ],
+   [
+    "function_item",
+    "case_99",
+    200,
+    null
+   ],
+   [
+    "function_item",
+    "case_100",
+    202,
+    null
+   ],
+   [
+    "function_item",
+    "case_101",
+    204,
+    null
+   ],
+   [
+    "function_item",
+    "case_102",
+    206,
+    null
+   ],
+   [
+    "function_item",
+    "case_103",
+    208,
+    null
+   ],
+   [
+    "function_item",
+    "case_104",
+    210,
+    null
+   ],
+   [
+    "function_item",
+    "case_105",
+    212,
+    null
+   ],
+   [
+    "function_item",
+    "case_106",
+    214,
+    null
+   ],
+   [
+    "function_item",
+    "case_107",
+    216,
+    null
+   ],
+   [
+    "function_item",
+    "case_108",
+    218,
+    null
+   ],
+   [
+    "function_item",
+    "case_109",
+    220,
+    null
+   ],
+   [
+    "function_item",
+    "case_110",
+    222,
+    null
+   ],
+   [
+    "function_item",
+    "case_111",
+    224,
+    null
+   ],
+   [
+    "function_item",
+    "case_112",
+    226,
+    null
+   ],
+   [
+    "function_item",
+    "case_113",
+    228,
+    null
+   ],
+   [
+    "function_item",
+    "case_114",
+    230,
+    null
+   ],
+   [
+    "function_item",
+    "case_115",
+    232,
+    null
+   ],
+   [
+    "function_item",
+    "case_116",
+    234,
+    null
+   ],
+   [
+    "function_item",
+    "case_117",
+    236,
+    null
+   ],
+   [
+    "function_item",
+    "case_118",
+    238,
+    null
+   ],
+   [
+    "function_item",
+    "case_119",
+    240,
+    null
+   ],
+   [
+    "function_item",
+    "case_120",
+    242,
+    null
+   ],
+   [
+    "function_item",
+    "case_121",
+    244,
+    null
+   ],
+   [
+    "function_item",
+    "case_122",
+    246,
+    null
+   ],
+   [
+    "function_item",
+    "case_123",
+    248,
+    null
+   ],
+   [
+    "function_item",
+    "case_124",
+    250,
+    null
+   ],
+   [
+    "function_item",
+    "case_125",
+    252,
+    null
+   ],
+   [
+    "function_item",
+    "case_126",
+    254,
+    null
+   ],
+   [
+    "function_item",
+    "case_127",
+    256,
+    null
+   ],
+   [
+    "function_item",
+    "case_128",
+    258,
+    null
+   ],
+   [
+    "function_item",
+    "case_129",
+    260,
+    null
+   ],
+   [
+    "function_item",
+    "case_130",
+    262,
+    null
+   ],
+   [
+    "function_item",
+    "case_131",
+    264,
+    null
+   ],
+   [
+    "function_item",
+    "case_132",
+    266,
+    null
+   ],
+   [
+    "function_item",
+    "case_133",
+    268,
+    null
+   ],
+   [
+    "function_item",
+    "case_134",
+    270,
+    null
+   ],
+   [
+    "function_item",
+    "case_135",
+    272,
+    null
+   ],
+   [
+    "function_item",
+    "case_136",
+    274,
+    null
+   ],
+   [
+    "function_item",
+    "case_137",
+    276,
+    null
+   ],
+   [
+    "function_item",
+    "case_138",
+    278,
+    null
+   ],
+   [
+    "function_item",
+    "case_139",
+    280,
+    null
+   ]
+  ]
+ },
+ "rust/tests_names.rs:rust": {
+  "value": [
+   [
+    "mod_item",
+    "tests",
+    2,
+    null
+   ],
+   [
+    "function_item",
+    "plain_name",
+    4,
+    "tests"
+   ],
+   [
+    "function_item",
+    "test_prefixed_name",
+    7,
+    "tests"
+   ],
+   [
+    "function_item",
+    "spec_prefixed_name",
+    10,
+    "tests"
+   ],
+   [
+    "function_item",
+    "public_test",
+    13,
+    "tests"
+   ],
+   [
+    "function_item",
+    "crate_test",
+    16,
+    "tests"
+   ],
+   [
+    "function_item",
+    "path_test",
+    19,
+    "tests"
+   ],
+   [
+    "function_item",
+    "async_test",
+    22,
+    "tests"
+   ],
+   [
+    "function_item",
+    "public_async_test",
+    25,
+    "tests"
+   ],
+   [
+    "function_item",
+    "tokio_test",
+    28,
+    "tests"
+   ],
+   [
+    "function_item",
+    "deep_path_test",
+    31,
+    "tests"
+   ],
+   [
+    "function_item",
+    "stacked_attributes",
+    36,
+    "tests"
+   ],
+   [
+    "function_item",
+    "with_arguments",
+    39,
+    "tests"
+   ],
+   [
+    "function_item",
+    "with_value",
+    42,
+    "tests"
+   ],
+   [
+    "function_item",
+    "not_a_test",
+    45,
+    "tests"
+   ],
+   [
+    "function_item",
+    "not_a_test_either",
+    48,
+    "tests"
+   ],
+   [
+    "function_item",
+    "cfg_only",
+    51,
+    "tests"
+   ],
+   [
+    "function_item",
+    "same_line",
+    53,
+    "tests"
+   ],
+   [
+    "function_item",
+    "indented",
+    56,
+    "tests"
+   ],
+   [
+    "function_item",
+    "unsafe_test",
+    59,
+    "tests"
+   ],
+   [
+    "function_item",
+    "const_test",
+    62,
+    "tests"
+   ],
+   [
+    "function_item",
+    "blank_between",
+    66,
+    "tests"
+   ],
+   [
+    "function_item",
+    "comment_between",
+    70,
+    "tests"
+   ],
+   [
+    "function_item",
+    "camelCaseName",
+    73,
+    "tests"
+   ],
+   [
+    "function_item",
+    "handles_http_request_when_offline",
+    76,
+    "tests"
+   ],
+   [
+    "function_item",
+    "r#raw",
+    79,
+    "tests"
+   ],
+   [
+    "function_item",
+    "caf\u00e9",
+    82,
+    "tests"
+   ]
+  ]
+ },
+ "rust/types_generics.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use std::fmt::Debug;",
+    1,
+    null
+   ],
+   [
+    "trait_item",
+    "Base",
+    3,
+    null
+   ],
+   [
+    "trait_item",
+    "Other",
+    4,
+    null
+   ],
+   [
+    "trait_item",
+    "Both",
+    5,
+    null
+   ],
+   [
+    "trait_item",
+    "Scoped",
+    6,
+    null
+   ],
+   [
+    "trait_item",
+    "Loose",
+    7,
+    null
+   ],
+   [
+    "trait_item",
+    "Higher",
+    8,
+    null
+   ],
+   [
+    "trait_item",
+    "Empty",
+    9,
+    null
+   ],
+   [
+    "trait_item",
+    "Generic",
+    10,
+    null
+   ],
+   [
+    "function_signature_item",
+    "one",
+    11,
+    "Generic"
+   ],
+   [
+    "function_signature_item",
+    "two",
+    12,
+    "Generic"
+   ],
+   [
+    "const_item",
+    "ASSOCIATED",
+    13,
+    "Generic"
+   ],
+   [
+    "struct_item",
+    "Early",
+    17,
+    null
+   ],
+   [
+    "function_item",
+    "make",
+    22,
+    "Early"
+   ],
+   [
+    "function_item",
+    "peek",
+    25,
+    "Early"
+   ],
+   [
+    "function_item",
+    "one",
+    33,
+    "Early"
+   ],
+   [
+    "function_item",
+    "two",
+    34,
+    "Early"
+   ],
+   [
+    "function_item",
+    "before_declaration",
+    38,
+    "Late"
+   ],
+   [
+    "struct_item",
+    "Late",
+    41,
+    null
+   ],
+   [
+    "function_item",
+    "after_declaration",
+    44,
+    "Late"
+   ],
+   [
+    "enum_item",
+    "Choice",
+    47,
+    null
+   ],
+   [
+    "function_item",
+    "from_enum",
+    53,
+    "Choice"
+   ],
+   [
+    "union_item",
+    "Raw",
+    56,
+    null
+   ],
+   [
+    "function_item",
+    "from_union",
+    61,
+    "Raw"
+   ],
+   [
+    "function_item",
+    "nowhere",
+    65,
+    "Missing"
+   ],
+   [
+    "function_item",
+    "far",
+    69,
+    "Remote"
+   ],
+   [
+    "function_item",
+    "plain",
+    83,
+    null
+   ],
+   [
+    "function_item",
+    "borrows",
+    84,
+    null
+   ],
+   [
+    "function_item",
+    "receivers",
+    85,
+    null
+   ],
+   [
+    "function_item",
+    "exotic",
+    86,
+    null
+   ],
+   [
+    "function_item",
+    "patterns",
+    103,
+    null
+   ],
+   [
+    "function_item",
+    "method_receivers",
+    106,
+    "Early"
+   ],
+   [
+    "function_item",
+    "by_value",
+    107,
+    "Early"
+   ],
+   [
+    "function_item",
+    "by_mut",
+    108,
+    "Early"
+   ],
+   [
+    "function_item",
+    "mut_value",
+    109,
+    "Early"
+   ],
+   [
+    "function_item",
+    "boxed",
+    110,
+    "Early"
+   ],
+   [
+    "function_item",
+    "borrowed_self",
+    111,
+    "Early"
+   ],
+   [
+    "function_item",
+    "lifetimes",
+    112,
+    "Early"
+   ],
+   [
+    "function_item",
+    "private_one",
+    115,
+    null
+   ],
+   [
+    "function_item",
+    "crate_visible",
+    116,
+    null
+   ],
+   [
+    "function_item",
+    "super_visible",
+    117,
+    null
+   ],
+   [
+    "function_item",
+    "path_visible",
+    118,
+    null
+   ],
+   [
+    "function_item",
+    "asynchronous",
+    119,
+    null
+   ],
+   [
+    "function_item",
+    "unsafely",
+    120,
+    null
+   ],
+   [
+    "function_item",
+    "constantly",
+    121,
+    null
+   ],
+   [
+    "function_item",
+    "externally",
+    122,
+    null
+   ],
+   [
+    "function_item",
+    "generic_function",
+    124,
+    null
+   ],
+   [
+    "function_item",
+    "nested_outer",
+    125,
+    null
+   ],
+   [
+    "function_item",
+    "nested_inner",
+    126,
+    "nested_outer"
+   ],
+   [
+    "struct_item",
+    "LocalStruct",
+    127,
+    "nested_outer"
+   ],
+   [
+    "function_item",
+    "local_method",
+    129,
+    "LocalStruct"
+   ]
+  ]
+ },
+ "rust/use_forms.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use std::collections::HashMap;",
+    1,
+    null
+   ],
+   [
+    "import",
+    "use std::io::{self, Read, Write};",
+    2,
+    null
+   ],
+   [
+    "import",
+    "use crate::store::index::Entry;",
+    3,
+    null
+   ],
+   [
+    "import",
+    "use crate::store::{self, index as idx, Handle};",
+    4,
+    null
+   ],
+   [
+    "import",
+    "use self::helper::util;",
+    5,
+    null
+   ],
+   [
+    "import",
+    "use super::sibling;",
+    6,
+    null
+   ],
+   [
+    "import",
+    "use super::super::grand::Item;",
+    7,
+    null
+   ],
+   [
+    "import",
+    "use super::*;",
+    8,
+    null
+   ],
+   [
+    "import",
+    "use crate::*;",
+    9,
+    null
+   ],
+   [
+    "import",
+    "use self::*;",
+    10,
+    null
+   ],
+   [
+    "import",
+    "use a::b::*;",
+    11,
+    null
+   ],
+   [
+    "import",
+    "use a::{b::{c, d::e}, f};",
+    12,
+    null
+   ],
+   [
+    "import",
+    "use a::{self};",
+    13,
+    null
+   ],
+   [
+    "import",
+    "use a::{b as c, d::*};",
+    14,
+    null
+   ],
+   [
+    "import",
+    "use {first, second::third};",
+    15,
+    null
+   ],
+   [
+    "import",
+    "use ::absolute::path;",
+    16,
+    null
+   ],
+   [
+    "import",
+    "use ::absolute::{one, two};",
+    17,
+    null
+   ],
+   [
+    "import",
+    "use r#raw::r#type::r#match;",
+    18,
+    null
+   ],
+   [
+    "import",
+    "pub use crate::reexport::Thing;",
+    19,
+    null
+   ],
+   [
+    "import",
+    "pub(crate) use crate::reexport::Other;",
+    20,
+    null
+   ],
+   [
+    "import",
+    "pub(in crate::x) use crate::scoped::Third;",
+    21,
+    null
+   ],
+   [
+    "import",
+    "use crate::deep::{a::{b::{c::{d, e}}}};",
+    22,
+    null
+   ],
+   [
+    "import",
+    "use crate::trailing::{a, b,};",
+    23,
+    null
+   ],
+   [
+    "import",
+    "use crate::empty::{};",
+    24,
+    null
+   ],
+   [
+    "import",
+    "use crate::alias as renamed;",
+    25,
+    null
+   ],
+   [
+    "import",
+    "use crate::a as _;",
+    26,
+    null
+   ],
+   [
+    "import",
+    "extern crate serde;",
+    27,
+    null
+   ],
+   [
+    "import",
+    "extern crate serde as serde_alias;",
+    28,
+    null
+   ],
+   [
+    "import",
+    "extern crate self as me;",
+    29,
+    null
+   ],
+   [
+    "import",
+    "use crate::{a as x, b as y};",
+    30,
+    null
+   ],
+   [
+    "import",
+    "use caf\u00e9::x;",
+    31,
+    null
+   ],
+   [
+    "import",
+    "use crate::m\u00f3dulo::y;",
+    32,
+    null
+   ],
+   [
+    "import",
+    "use a::_underscore::b;",
+    33,
+    null
+   ],
+   [
+    "import",
+    "use a::b1::c2;",
+    34,
+    null
+   ],
+   [
+    "import",
+    "use std as standard;",
+    35,
+    null
+   ],
+   [
+    "import",
+    "use core::fmt;",
+    36,
+    null
+   ],
+   [
+    "import",
+    "use alloc::vec::Vec;",
+    37,
+    null
+   ],
+   [
+    "import",
+    "use proc_macro::TokenStream;",
+    38,
+    null
+   ],
+   [
+    "import",
+    "use test::Bencher;",
+    39,
+    null
+   ],
+   [
+    "import",
+    "use r#crate::z;",
+    40,
+    null
+   ],
+   [
+    "import",
+    "use r#self::z;",
+    41,
+    null
+   ],
+   [
+    "import",
+    "use self::r#super::z;",
+    42,
+    null
+   ],
+   [
+    "function_item",
+    "uses_inside",
+    44,
+    null
+   ],
+   [
+    "import",
+    "use crate::in_function::A;",
+    45,
+    "uses_inside"
+   ],
+   [
+    "import",
+    "use super::in_block::B;",
+    47,
+    "uses_inside"
+   ],
+   [
+    "mod_item",
+    "inline",
+    51,
+    null
+   ],
+   [
+    "import",
+    "use crate::in_inline::A;",
+    52,
+    "inline"
+   ],
+   [
+    "import",
+    "use self::child::B;",
+    53,
+    "inline"
+   ],
+   [
+    "import",
+    "use super::in_inline_super::C;",
+    54,
+    "inline"
+   ],
+   [
+    "import",
+    "use super::super::too_far::D;",
+    55,
+    "inline"
+   ],
+   [
+    "mod_item",
+    "nested",
+    56,
+    "inline"
+   ],
+   [
+    "import",
+    "use super::sibling::E;",
+    57,
+    "nested"
+   ],
+   [
+    "import",
+    "use super::super::up::F;",
+    58,
+    "nested"
+   ],
+   [
+    "import",
+    "use crate::in_nested::G;",
+    59,
+    "nested"
+   ],
+   [
+    "mod_item",
+    "tests",
+    64,
+    null
+   ],
+   [
+    "import",
+    "use super::*;",
+    65,
+    "tests"
+   ],
+   [
+    "import",
+    "use crate::tests_helper;",
+    66,
+    "tests"
+   ],
+   [
+    "mod_item",
+    "outline",
+    69,
+    null
+   ]
+  ]
+ },
+ "rust/use_limits.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use s0::s1::s2::s3::s4::s5::s6::s7::s8::s9::s10::s11::s12::s13::s14::s15::s16::s17::s18::s19::s20::s21::s22::s23::s24::s25::s26::s27::s28::s29::s30::s31;",
+    1,
+    null
+   ],
+   [
+    "import",
+    "use s0::s1::s2::s3::s4::s5::s6::s7::s8::s9::s10::s11::s12::s13::s14::s15::s16::s17::s18::s19::s20::s21::s22::s23::s24::s25::s26::s27::s28::s29::s30::s31::s32;",
+    2,
+    null
+   ],
+   [
+    "import",
+    "use crate::aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;",
+    3,
+    null
+   ],
+   [
+    "import",
+    "use crate::aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;",
+    4,
+    null
+   ],
+   [
+    "import",
+    "use r#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa::x;",
+    5,
+    null
+   ],
+   [
+    "import",
+    "use s0::s1::s2::s3::s4::s5::s6::s7::s8::s9::s10::s11::s12::s13::s14::s15::s16::s17::s18::s19::s20::s21::s22::s23::s24::s25::s26::s27::s28::s29::s30::s31::{one, two};",
+    6,
+    null
+   ],
+   [
+    "import",
+    "use s0::s1::s2::s3::s4::s5::s6::s7::s8::s9::s10::s11::s12::s13::s14::s15::s16::s17::s18::s19::s20::s21::s22::s23::s24::s25::s26::s27::s28::s29::s30:::{x::y, z};",
+    7,
+    null
+   ]
+  ]
+ },
+ "rust/use_lists_100.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{x}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}};",
+    1,
+    null
+   ]
+  ]
+ },
+ "rust/use_nested_100.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use a::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{",
+    1,
+    null
+   ]
+  ]
+ },
+ "rust/use_nested_3000.rs:rust": {
+  "value": [
+   [
+    "import",
+    "use a::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{b::{",
+    1,
+    null
+   ]
+  ]
+ },
+ "rust/whitespace_only.rs:rust": {
+  "value": []
+ },
+ "script/bom.ts:javascript": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "b",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/bom.ts:tsx": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "b",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/bom.ts:typescript": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "b",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/comments.ts:javascript": {
+  "value": [
+   [
+    "function_declaration",
+    "inspect",
+    12,
+    null
+   ],
+   [
+    "variable_declarator",
+    "store",
+    17,
+    null
+   ],
+   [
+    "variable_declarator",
+    "sample",
+    20,
+    null
+   ],
+   [
+    "variable_declarator",
+    "gap",
+    24,
+    null
+   ],
+   [
+    "variable_declarator",
+    "triple",
+    27,
+    null
+   ],
+   [
+    "variable_declarator",
+    "empty",
+    30,
+    null
+   ],
+   [
+    "variable_declarator",
+    "indented",
+    33,
+    null
+   ],
+   [
+    "variable_declarator",
+    "url",
+    35,
+    null
+   ],
+   [
+    "variable_declarator",
+    "block",
+    40,
+    null
+   ]
+  ]
+ },
+ "script/comments.ts:tsx": {
+  "value": [
+   [
+    "function_declaration",
+    "inspect",
+    12,
+    null
+   ],
+   [
+    "variable_declarator",
+    "store",
+    17,
+    null
+   ],
+   [
+    "variable_declarator",
+    "sample",
+    20,
+    null
+   ],
+   [
+    "variable_declarator",
+    "gap",
+    24,
+    null
+   ],
+   [
+    "variable_declarator",
+    "triple",
+    27,
+    null
+   ],
+   [
+    "variable_declarator",
+    "empty",
+    30,
+    null
+   ],
+   [
+    "variable_declarator",
+    "indented",
+    33,
+    null
+   ],
+   [
+    "variable_declarator",
+    "url",
+    35,
+    null
+   ],
+   [
+    "variable_declarator",
+    "block",
+    40,
+    null
+   ]
+  ]
+ },
+ "script/comments.ts:typescript": {
+  "value": [
+   [
+    "function_declaration",
+    "inspect",
+    12,
+    null
+   ],
+   [
+    "variable_declarator",
+    "store",
+    17,
+    null
+   ],
+   [
+    "variable_declarator",
+    "sample",
+    20,
+    null
+   ],
+   [
+    "variable_declarator",
+    "gap",
+    24,
+    null
+   ],
+   [
+    "variable_declarator",
+    "triple",
+    27,
+    null
+   ],
+   [
+    "variable_declarator",
+    "empty",
+    30,
+    null
+   ],
+   [
+    "variable_declarator",
+    "indented",
+    33,
+    null
+   ],
+   [
+    "variable_declarator",
+    "url",
+    35,
+    null
+   ],
+   [
+    "variable_declarator",
+    "block",
+    40,
+    null
+   ]
+  ]
+ },
+ "script/component.tsx:javascript": {
+  "value": [
+   [
+    "import",
+    "import React, { useState } from 'react';",
+    1,
+    null
+   ],
+   [
+    "import",
+    "import { Button } from './comp/Button';",
+    2,
+    null
+   ],
+   [
+    "import",
+    "import type { Props } from './comp/props';",
+    3,
+    null
+   ],
+   [
+    "import",
+    "import styles from './styles.css';",
+    4,
+    null
+   ]
+  ]
+ },
+ "script/component.tsx:tsx": {
+  "value": [
+   [
+    "import",
+    "import React, { useState } from 'react';",
+    1,
+    null
+   ],
+   [
+    "import",
+    "import { Button } from './comp/Button';",
+    2,
+    null
+   ],
+   [
+    "import",
+    "import type { Props } from './comp/props';",
+    3,
+    null
+   ],
+   [
+    "import",
+    "import styles from './styles.css';",
+    4,
+    null
+   ],
+   [
+    "interface_declaration",
+    "PanelProps",
+    6,
+    null
+   ],
+   [
+    "function_declaration",
+    "Panel",
+    10,
+    null
+   ],
+   [
+    "arrow_function",
+    "toggle",
+    12,
+    "Panel"
+   ],
+   [
+    "arrow_function",
+    "Inner",
+    13,
+    "Panel"
+   ],
+   [
+    "arrow_function",
+    "Arrow",
+    22,
+    null
+   ],
+   [
+    "class_declaration",
+    "Legacy",
+    24,
+    null
+   ],
+   [
+    "method_definition",
+    "render",
+    25,
+    "Legacy"
+   ],
+   [
+    "variable_declarator",
+    "lazy",
+    30,
+    null
+   ]
+  ]
+ },
+ "script/component.tsx:typescript": {
+  "value": [
+   [
+    "import",
+    "import React, { useState } from 'react';",
+    1,
+    null
+   ],
+   [
+    "import",
+    "import { Button } from './comp/Button';",
+    2,
+    null
+   ],
+   [
+    "import",
+    "import type { Props } from './comp/props';",
+    3,
+    null
+   ],
+   [
+    "import",
+    "import styles from './styles.css';",
+    4,
+    null
+   ],
+   [
+    "interface_declaration",
+    "PanelProps",
+    6,
+    null
+   ],
+   [
+    "function_declaration",
+    "Panel",
+    10,
+    null
+   ],
+   [
+    "arrow_function",
+    "toggle",
+    12,
+    "Panel"
+   ],
+   [
+    "variable_declarator",
+    "Inner",
+    13,
+    "Panel"
+   ],
+   [
+    "arrow_function",
+    "Arrow",
+    22,
+    null
+   ],
+   [
+    "method_definition",
+    "render",
+    25,
+    "Arrow"
+   ],
+   [
+    "variable_declarator",
+    "lazy",
+    30,
+    null
+   ]
+  ]
+ },
+ "script/control_chars.ts:javascript": {
+  "value": [
+   [
+    "function_declaration",
+    "read",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/control_chars.ts:tsx": {
+  "value": [
+   [
+    "function_declaration",
+    "read",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/control_chars.ts:typescript": {
+  "value": [
+   [
+    "function_declaration",
+    "read",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/crlf.ts:javascript": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "b",
+    4,
+    null
+   ]
+  ]
+ },
+ "script/crlf.ts:tsx": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "b",
+    4,
+    null
+   ]
+  ]
+ },
+ "script/crlf.ts:typescript": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "b",
+    4,
+    null
+   ]
+  ]
+ },
+ "script/definitions_only.ts:javascript": {
+  "value": [
+   [
+    "function_declaration",
+    "applyPolicy",
+    1,
+    null
+   ],
+   [
+    "class_declaration",
+    "RepositoryStore",
+    2,
+    null
+   ],
+   [
+    "arrow_function",
+    "snake_case_name",
+    3,
+    null
+   ]
+  ]
+ },
+ "script/definitions_only.ts:tsx": {
+  "value": [
+   [
+    "function_declaration",
+    "applyPolicy",
+    1,
+    null
+   ],
+   [
+    "class_declaration",
+    "RepositoryStore",
+    2,
+    null
+   ],
+   [
+    "arrow_function",
+    "snake_case_name",
+    3,
+    null
+   ],
+   [
+    "interface_declaration",
+    "HTTPClient",
+    4,
+    null
+   ]
+  ]
+ },
+ "script/definitions_only.ts:typescript": {
+  "value": [
+   [
+    "function_declaration",
+    "applyPolicy",
+    1,
+    null
+   ],
+   [
+    "class_declaration",
+    "RepositoryStore",
+    2,
+    null
+   ],
+   [
+    "arrow_function",
+    "snake_case_name",
+    3,
+    null
+   ],
+   [
+    "interface_declaration",
+    "HTTPClient",
+    4,
+    null
+   ]
+  ]
+ },
+ "script/empty.ts:javascript": {
+  "value": []
+ },
+ "script/empty.ts:tsx": {
+  "value": []
+ },
+ "script/empty.ts:typescript": {
+  "value": []
+ },
+ "script/empty_lines.ts:javascript": {
+  "value": []
+ },
+ "script/empty_lines.ts:tsx": {
+  "value": []
+ },
+ "script/empty_lines.ts:typescript": {
+  "value": []
+ },
+ "script/imports.ts:javascript": {
+  "value": [
+   [
+    "import",
+    "import { route } from './services/router';",
+    1,
+    null
+   ],
+   [
+    "import",
+    "import Default from \"./services/index\";",
+    2,
+    null
+   ],
+   [
+    "import",
+    "import * as everything from './services/router.js';",
+    3,
+    null
+   ],
+   [
+    "import",
+    "import type { Only } from './types';",
+    4,
+    null
+   ],
+   [
+    "import",
+    "import type Whole from './types';",
+    5,
+    null
+   ],
+   [
+    "import",
+    "import { type A, type B } from './types';",
+    6,
+    null
+   ],
+   [
+    "import",
+    "import { type C, value } from './types';",
+    7,
+    null
+   ],
+   [
+    "import",
+    "import { type } from './types';",
+    8,
+    null
+   ],
+   [
+    "import",
+    "import type, { other } from './types';",
+    9,
+    null
+   ],
+   [
+    "import",
+    "import './side-effect';",
+    10,
+    null
+   ],
+   [
+    "import",
+    "import react from 'react';",
+    11,
+    null
+   ],
+   [
+    "import",
+    "import { helper } from '@scope/package/subpath';",
+    12,
+    null
+   ],
+   [
+    "import",
+    "import json from './data.json';",
+    13,
+    null
+   ],
+   [
+    "import",
+    "import withBackslash from './dir\\\\file';",
+    14,
+    null
+   ],
+   [
+    "import",
+    "import {\n  multi,\n  line,\n} from './multi/line';",
+    15,
+    null
+   ],
+   [
+    "variable_declarator",
+    "lazy",
+    29,
+    null
+   ],
+   [
+    "variable_declarator",
+    "required",
+    30,
+    null
+   ],
+   [
+    "variable_declarator",
+    "aliased",
+    31,
+    null
+   ],
+   [
+    "variable_declarator",
+    "withComment",
+    32,
+    null
+   ],
+   [
+    "variable_declarator",
+    "computed",
+    33,
+    null
+   ],
+   [
+    "variable_declarator",
+    "twoArgs",
+    34,
+    null
+   ],
+   [
+    "variable_declarator",
+    "template",
+    35,
+    null
+   ],
+   [
+    "variable_declarator",
+    "text",
+    36,
+    null
+   ],
+   [
+    "variable_declarator",
+    "note",
+    37,
+    null
+   ],
+   [
+    "function_declaration",
+    "load",
+    41,
+    null
+   ],
+   [
+    "variable_declarator",
+    "inner",
+    42,
+    "load"
+   ],
+   [
+    "variable_declarator",
+    "nested",
+    47,
+    null
+   ],
+   [
+    "function_declaration",
+    "local",
+    54,
+    null
+   ]
+  ]
+ },
+ "script/imports.ts:tsx": {
+  "value": [
+   [
+    "import",
+    "import { route } from './services/router';",
+    1,
+    null
+   ],
+   [
+    "import",
+    "import Default from \"./services/index\";",
+    2,
+    null
+   ],
+   [
+    "import",
+    "import * as everything from './services/router.js';",
+    3,
+    null
+   ],
+   [
+    "import",
+    "import type { Only } from './types';",
+    4,
+    null
+   ],
+   [
+    "import",
+    "import type Whole from './types';",
+    5,
+    null
+   ],
+   [
+    "import",
+    "import { type A, type B } from './types';",
+    6,
+    null
+   ],
+   [
+    "import",
+    "import { type C, value } from './types';",
+    7,
+    null
+   ],
+   [
+    "import",
+    "import { type } from './types';",
+    8,
+    null
+   ],
+   [
+    "import",
+    "import type, { other } from './types';",
+    9,
+    null
+   ],
+   [
+    "import",
+    "import './side-effect';",
+    10,
+    null
+   ],
+   [
+    "import",
+    "import react from 'react';",
+    11,
+    null
+   ],
+   [
+    "import",
+    "import { helper } from '@scope/package/subpath';",
+    12,
+    null
+   ],
+   [
+    "import",
+    "import json from './data.json';",
+    13,
+    null
+   ],
+   [
+    "import",
+    "import withBackslash from './dir\\\\file';",
+    14,
+    null
+   ],
+   [
+    "import",
+    "import {\n  multi,\n  line,\n} from './multi/line';",
+    15,
+    null
+   ],
+   [
+    "variable_declarator",
+    "lazy",
+    29,
+    null
+   ],
+   [
+    "variable_declarator",
+    "required",
+    30,
+    null
+   ],
+   [
+    "variable_declarator",
+    "aliased",
+    31,
+    null
+   ],
+   [
+    "variable_declarator",
+    "withComment",
+    32,
+    null
+   ],
+   [
+    "variable_declarator",
+    "computed",
+    33,
+    null
+   ],
+   [
+    "variable_declarator",
+    "twoArgs",
+    34,
+    null
+   ],
+   [
+    "variable_declarator",
+    "template",
+    35,
+    null
+   ],
+   [
+    "variable_declarator",
+    "text",
+    36,
+    null
+   ],
+   [
+    "variable_declarator",
+    "note",
+    37,
+    null
+   ],
+   [
+    "function_declaration",
+    "load",
+    41,
+    null
+   ],
+   [
+    "variable_declarator",
+    "inner",
+    42,
+    "load"
+   ],
+   [
+    "variable_declarator",
+    "nested",
+    47,
+    null
+   ],
+   [
+    "interface_declaration",
+    "Extra",
+    51,
+    null
+   ],
+   [
+    "function_declaration",
+    "local",
+    54,
+    null
+   ]
+  ]
+ },
+ "script/imports.ts:typescript": {
+  "value": [
+   [
+    "import",
+    "import { route } from './services/router';",
+    1,
+    null
+   ],
+   [
+    "import",
+    "import Default from \"./services/index\";",
+    2,
+    null
+   ],
+   [
+    "import",
+    "import * as everything from './services/router.js';",
+    3,
+    null
+   ],
+   [
+    "import",
+    "import type { Only } from './types';",
+    4,
+    null
+   ],
+   [
+    "import",
+    "import type Whole from './types';",
+    5,
+    null
+   ],
+   [
+    "import",
+    "import { type A, type B } from './types';",
+    6,
+    null
+   ],
+   [
+    "import",
+    "import { type C, value } from './types';",
+    7,
+    null
+   ],
+   [
+    "import",
+    "import { type } from './types';",
+    8,
+    null
+   ],
+   [
+    "import",
+    "import type, { other } from './types';",
+    9,
+    null
+   ],
+   [
+    "import",
+    "import './side-effect';",
+    10,
+    null
+   ],
+   [
+    "import",
+    "import react from 'react';",
+    11,
+    null
+   ],
+   [
+    "import",
+    "import { helper } from '@scope/package/subpath';",
+    12,
+    null
+   ],
+   [
+    "import",
+    "import json from './data.json';",
+    13,
+    null
+   ],
+   [
+    "import",
+    "import withBackslash from './dir\\\\file';",
+    14,
+    null
+   ],
+   [
+    "import",
+    "import {\n  multi,\n  line,\n} from './multi/line';",
+    15,
+    null
+   ],
+   [
+    "variable_declarator",
+    "lazy",
+    29,
+    null
+   ],
+   [
+    "variable_declarator",
+    "required",
+    30,
+    null
+   ],
+   [
+    "variable_declarator",
+    "aliased",
+    31,
+    null
+   ],
+   [
+    "variable_declarator",
+    "withComment",
+    32,
+    null
+   ],
+   [
+    "variable_declarator",
+    "computed",
+    33,
+    null
+   ],
+   [
+    "variable_declarator",
+    "twoArgs",
+    34,
+    null
+   ],
+   [
+    "variable_declarator",
+    "template",
+    35,
+    null
+   ],
+   [
+    "variable_declarator",
+    "text",
+    36,
+    null
+   ],
+   [
+    "variable_declarator",
+    "note",
+    37,
+    null
+   ],
+   [
+    "function_declaration",
+    "load",
+    41,
+    null
+   ],
+   [
+    "variable_declarator",
+    "inner",
+    42,
+    "load"
+   ],
+   [
+    "variable_declarator",
+    "nested",
+    47,
+    null
+   ],
+   [
+    "interface_declaration",
+    "Extra",
+    51,
+    null
+   ],
+   [
+    "function_declaration",
+    "local",
+    54,
+    null
+   ]
+  ]
+ },
+ "script/invalid_utf8.ts:javascript": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "b",
+    3,
+    null
+   ]
+  ]
+ },
+ "script/invalid_utf8.ts:tsx": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "b",
+    3,
+    null
+   ]
+  ]
+ },
+ "script/invalid_utf8.ts:typescript": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "b",
+    3,
+    null
+   ]
+  ]
+ },
+ "script/late_comment.ts:javascript": {
+  "value": [
+   [
+    "variable_declarator",
+    "x",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "x",
+    2,
+    null
+   ],
+   [
+    "variable_declarator",
+    "x",
+    3,
+    null
+   ]
+  ]
+ },
+ "script/late_comment.ts:tsx": {
+  "value": [
+   [
+    "variable_declarator",
+    "x",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "x",
+    2,
+    null
+   ],
+   [
+    "variable_declarator",
+    "x",
+    3,
+    null
+   ]
+  ]
+ },
+ "script/late_comment.ts:typescript": {
+  "value": [
+   [
+    "variable_declarator",
+    "x",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "x",
+    2,
+    null
+   ],
+   [
+    "variable_declarator",
+    "x",
+    3,
+    null
+   ]
+  ]
+ },
+ "script/lone_cr.ts:javascript": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "b",
+    1,
+    null
+   ]
+  ]
+ },
+ "script/lone_cr.ts:tsx": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "b",
+    1,
+    null
+   ]
+  ]
+ },
+ "script/lone_cr.ts:typescript": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "b",
+    1,
+    null
+   ]
+  ]
+ },
+ "script/long_summary.ts:javascript": {
+  "value": [
+   [
+    "variable_declarator",
+    "x",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/long_summary.ts:tsx": {
+  "value": [
+   [
+    "variable_declarator",
+    "x",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/long_summary.ts:typescript": {
+  "value": [
+   [
+    "variable_declarator",
+    "x",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/many_comments.ts:javascript": {
+  "value": [
+   [
+    "variable_declarator",
+    "v0",
+    2,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v1",
+    4,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v2",
+    6,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v3",
+    8,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v4",
+    10,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v5",
+    12,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v6",
+    14,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v7",
+    16,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v8",
+    18,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v9",
+    20,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v10",
+    22,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v11",
+    24,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v12",
+    26,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v13",
+    28,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v14",
+    30,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v15",
+    32,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v16",
+    34,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v17",
+    36,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v18",
+    38,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v19",
+    40,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v20",
+    42,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v21",
+    44,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v22",
+    46,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v23",
+    48,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v24",
+    50,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v25",
+    52,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v26",
+    54,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v27",
+    56,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v28",
+    58,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v29",
+    60,
+    null
+   ]
+  ]
+ },
+ "script/many_comments.ts:tsx": {
+  "value": [
+   [
+    "variable_declarator",
+    "v0",
+    2,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v1",
+    4,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v2",
+    6,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v3",
+    8,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v4",
+    10,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v5",
+    12,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v6",
+    14,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v7",
+    16,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v8",
+    18,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v9",
+    20,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v10",
+    22,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v11",
+    24,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v12",
+    26,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v13",
+    28,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v14",
+    30,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v15",
+    32,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v16",
+    34,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v17",
+    36,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v18",
+    38,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v19",
+    40,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v20",
+    42,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v21",
+    44,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v22",
+    46,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v23",
+    48,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v24",
+    50,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v25",
+    52,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v26",
+    54,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v27",
+    56,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v28",
+    58,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v29",
+    60,
+    null
+   ]
+  ]
+ },
+ "script/many_comments.ts:typescript": {
+  "value": [
+   [
+    "variable_declarator",
+    "v0",
+    2,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v1",
+    4,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v2",
+    6,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v3",
+    8,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v4",
+    10,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v5",
+    12,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v6",
+    14,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v7",
+    16,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v8",
+    18,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v9",
+    20,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v10",
+    22,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v11",
+    24,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v12",
+    26,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v13",
+    28,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v14",
+    30,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v15",
+    32,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v16",
+    34,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v17",
+    36,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v18",
+    38,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v19",
+    40,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v20",
+    42,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v21",
+    44,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v22",
+    46,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v23",
+    48,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v24",
+    50,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v25",
+    52,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v26",
+    54,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v27",
+    56,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v28",
+    58,
+    null
+   ],
+   [
+    "variable_declarator",
+    "v29",
+    60,
+    null
+   ]
+  ]
+ },
+ "script/many_tests.ts:javascript": {
+  "value": []
+ },
+ "script/many_tests.ts:tsx": {
+  "value": []
+ },
+ "script/many_tests.ts:typescript": {
+  "value": []
+ },
+ "script/module.js:javascript": {
+  "value": [
+   [
+    "import",
+    "import { route } from './services/router.js';",
+    4,
+    null
+   ],
+   [
+    "import",
+    "import config from './legacy';",
+    5,
+    null
+   ],
+   [
+    "variable_declarator",
+    "fs",
+    6,
+    null
+   ],
+   [
+    "variable_declarator",
+    "local",
+    7,
+    null
+   ],
+   [
+    "variable_declarator",
+    "esm",
+    8,
+    null
+   ],
+   [
+    "class_declaration",
+    "Widget",
+    11,
+    null
+   ],
+   [
+    "method_definition",
+    "constructor",
+    12,
+    "Widget"
+   ],
+   [
+    "method_definition",
+    "render",
+    15,
+    "Widget"
+   ],
+   [
+    "method_definition",
+    "build",
+    18,
+    "Widget"
+   ],
+   [
+    "method_definition",
+    "value",
+    19,
+    "Widget"
+   ],
+   [
+    "function_declaration",
+    "declared",
+    24,
+    null
+   ],
+   [
+    "function_declaration",
+    "later",
+    26,
+    null
+   ],
+   [
+    "arrow_function",
+    "arrow",
+    27,
+    null
+   ],
+   [
+    "variable_declarator",
+    "fn",
+    28,
+    null
+   ],
+   [
+    "variable_declarator",
+    "a",
+    29,
+    null
+   ],
+   [
+    "arrow_function",
+    "b",
+    29,
+    null
+   ],
+   [
+    "variable_declarator",
+    "legacy",
+    30,
+    null
+   ],
+   [
+    "variable_declarator",
+    "object",
+    31,
+    null
+   ],
+   [
+    "method_definition",
+    "method",
+    31,
+    "object"
+   ],
+   [
+    "function_declaration",
+    "exported",
+    33,
+    null
+   ],
+   [
+    "arrow_function",
+    "exportedArrow",
+    34,
+    null
+   ]
+  ]
+ },
+ "script/module.js:tsx": {
+  "value": [
+   [
+    "import",
+    "import { route } from './services/router.js';",
+    4,
+    null
+   ],
+   [
+    "import",
+    "import config from './legacy';",
+    5,
+    null
+   ],
+   [
+    "variable_declarator",
+    "fs",
+    6,
+    null
+   ],
+   [
+    "variable_declarator",
+    "local",
+    7,
+    null
+   ],
+   [
+    "variable_declarator",
+    "esm",
+    8,
+    null
+   ],
+   [
+    "class_declaration",
+    "Widget",
+    11,
+    null
+   ],
+   [
+    "method_definition",
+    "constructor",
+    12,
+    "Widget"
+   ],
+   [
+    "method_definition",
+    "render",
+    15,
+    "Widget"
+   ],
+   [
+    "method_definition",
+    "build",
+    18,
+    "Widget"
+   ],
+   [
+    "method_definition",
+    "value",
+    19,
+    "Widget"
+   ],
+   [
+    "function_declaration",
+    "declared",
+    24,
+    null
+   ],
+   [
+    "function_declaration",
+    "later",
+    26,
+    null
+   ],
+   [
+    "arrow_function",
+    "arrow",
+    27,
+    null
+   ],
+   [
+    "variable_declarator",
+    "fn",
+    28,
+    null
+   ],
+   [
+    "variable_declarator",
+    "a",
+    29,
+    null
+   ],
+   [
+    "arrow_function",
+    "b",
+    29,
+    null
+   ],
+   [
+    "variable_declarator",
+    "legacy",
+    30,
+    null
+   ],
+   [
+    "variable_declarator",
+    "object",
+    31,
+    null
+   ],
+   [
+    "method_definition",
+    "method",
+    31,
+    "object"
+   ],
+   [
+    "function_declaration",
+    "exported",
+    33,
+    null
+   ],
+   [
+    "arrow_function",
+    "exportedArrow",
+    34,
+    null
+   ]
+  ]
+ },
+ "script/module.js:typescript": {
+  "value": [
+   [
+    "import",
+    "import { route } from './services/router.js';",
+    4,
+    null
+   ],
+   [
+    "import",
+    "import config from './legacy';",
+    5,
+    null
+   ],
+   [
+    "variable_declarator",
+    "fs",
+    6,
+    null
+   ],
+   [
+    "variable_declarator",
+    "local",
+    7,
+    null
+   ],
+   [
+    "variable_declarator",
+    "esm",
+    8,
+    null
+   ],
+   [
+    "class_declaration",
+    "Widget",
+    11,
+    null
+   ],
+   [
+    "method_definition",
+    "constructor",
+    12,
+    "Widget"
+   ],
+   [
+    "method_definition",
+    "render",
+    15,
+    "Widget"
+   ],
+   [
+    "method_definition",
+    "build",
+    18,
+    "Widget"
+   ],
+   [
+    "method_definition",
+    "value",
+    19,
+    "Widget"
+   ],
+   [
+    "function_declaration",
+    "declared",
+    24,
+    null
+   ],
+   [
+    "function_declaration",
+    "later",
+    26,
+    null
+   ],
+   [
+    "arrow_function",
+    "arrow",
+    27,
+    null
+   ],
+   [
+    "variable_declarator",
+    "fn",
+    28,
+    null
+   ],
+   [
+    "variable_declarator",
+    "a",
+    29,
+    null
+   ],
+   [
+    "arrow_function",
+    "b",
+    29,
+    null
+   ],
+   [
+    "variable_declarator",
+    "legacy",
+    30,
+    null
+   ],
+   [
+    "variable_declarator",
+    "object",
+    31,
+    null
+   ],
+   [
+    "method_definition",
+    "method",
+    31,
+    "object"
+   ],
+   [
+    "function_declaration",
+    "exported",
+    33,
+    null
+   ],
+   [
+    "arrow_function",
+    "exportedArrow",
+    34,
+    null
+   ]
+  ]
+ },
+ "script/no_description.ts:javascript": {
+  "value": [
+   [
+    "variable_declarator",
+    "x",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "y",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/no_description.ts:tsx": {
+  "value": [
+   [
+    "variable_declarator",
+    "x",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "y",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/no_description.ts:typescript": {
+  "value": [
+   [
+    "variable_declarator",
+    "x",
+    1,
+    null
+   ],
+   [
+    "variable_declarator",
+    "y",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/non_ascii_cases.ts:javascript": {
+  "value": [
+   [
+    "variable_declarator",
+    "x",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/non_ascii_cases.ts:tsx": {
+  "value": [
+   [
+    "variable_declarator",
+    "x",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/non_ascii_cases.ts:typescript": {
+  "value": [
+   [
+    "variable_declarator",
+    "x",
+    2,
+    null
+   ]
+  ]
+ },
+ "script/secrets.ts:javascript": {
+  "value": []
+ },
+ "script/secrets.ts:tsx": {
+  "value": []
+ },
+ "script/secrets.ts:typescript": {
+  "value": []
+ },
+ "script/selection.test.ts:javascript": {
+  "value": [
+   [
+    "import",
+    "import { describe, it, test } from 'vitest';",
+    1,
+    null
+   ],
+   [
+    "import",
+    "import { select } from '../src/selection';",
+    2,
+    null
+   ],
+   [
+    "variable_declarator",
+    "it",
+    21,
+    null
+   ]
+  ]
+ },
+ "script/selection.test.ts:tsx": {
+  "value": [
+   [
+    "import",
+    "import { describe, it, test } from 'vitest';",
+    1,
+    null
+   ],
+   [
+    "import",
+    "import { select } from '../src/selection';",
+    2,
+    null
+   ],
+   [
+    "variable_declarator",
+    "it",
+    21,
+    null
+   ]
+  ]
+ },
+ "script/selection.test.ts:typescript": {
+  "value": [
+   [
+    "import",
+    "import { describe, it, test } from 'vitest';",
+    1,
+    null
+   ],
+   [
+    "import",
+    "import { select } from '../src/selection';",
+    2,
+    null
+   ],
+   [
+    "variable_declarator",
+    "it",
+    21,
+    null
+   ]
+  ]
+ },
+ "script/single_line_no_newline.ts:javascript": {
+  "value": []
+ },
+ "script/single_line_no_newline.ts:tsx": {
+  "value": []
+ },
+ "script/single_line_no_newline.ts:typescript": {
+  "value": []
+ },
+ "script/symbols.ts:javascript": {
+  "value": [
+   [
+    "import",
+    "import { Base } from './base';",
+    1,
+    null
+   ],
+   [
+    "import",
+    "import type { Config } from './config';",
+    2,
+    null
+   ],
+   [
+    "function_declaration",
+    "asynchronous",
+    50,
+    null
+   ],
+   [
+    "arrow_function",
+    "handler",
+    53,
+    null
+   ],
+   [
+    "arrow_function",
+    "Handler",
+    54,
+    null
+   ],
+   [
+    "variable_declarator",
+    "reassigned",
+    55,
+    null
+   ],
+   [
+    "arrow_function",
+    "second",
+    55,
+    null
+   ],
+   [
+    "variable_declarator",
+    "oldStyle",
+    58,
+    null
+   ],
+   [
+    "function_declaration",
+    "inside",
+    67,
+    null
+   ],
+   [
+    "function_declaration",
+    "ambient",
+    70,
+    null
+   ],
+   [
+    "class_declaration",
+    "Outer",
+    75,
+    null
+   ],
+   [
+    "method_definition",
+    "method",
+    76,
+    "Outer"
+   ],
+   [
+    "class_declaration",
+    "Local",
+    77,
+    "method"
+   ],
+   [
+    "method_definition",
+    "deep",
+    78,
+    "Local"
+   ],
+   [
+    "variable_declarator",
+    "object",
+    84,
+    null
+   ],
+   [
+    "method_definition",
+    "method",
+    85,
+    "object"
+   ],
+   [
+    "method_definition",
+    "asyncMethod",
+    87,
+    "object"
+   ],
+   [
+    "method_definition",
+    "accessor",
+    88,
+    "object"
+   ],
+   [
+    "function_declaration",
+    "overload",
+    95,
+    null
+   ]
+  ]
+ },
+ "script/symbols.ts:tsx": {
+  "value": [
+   [
+    "import",
+    "import { Base } from './base';",
+    1,
+    null
+   ],
+   [
+    "import",
+    "import type { Config } from './config';",
+    2,
+    null
+   ],
+   [
+    "interface_declaration",
+    "Repository",
+    4,
+    null
+   ],
+   [
+    "type_alias_declaration",
+    "Handler",
+    9,
+    null
+   ],
+   [
+    "type_alias_declaration",
+    "Pair",
+    10,
+    null
+   ],
+   [
+    "method_definition",
+    "constructor",
+    16,
+    null
+   ],
+   [
+    "method_definition",
+    "find",
+    20,
+    null
+   ],
+   [
+    "method_definition",
+    "size",
+    24,
+    null
+   ],
+   [
+    "method_definition",
+    "size",
+    28,
+    null
+   ],
+   [
+    "method_definition",
+    "fetch",
+    32,
+    null
+   ],
+   [
+    "arrow_function",
+    "inner",
+    33,
+    "fetch"
+   ],
+   [
+    "variable_declarator",
+    "named",
+    34,
+    "fetch"
+   ],
+   [
+    "function_declaration",
+    "nested",
+    35,
+    "fetch"
+   ],
+   [
+    "method_definition",
+    "create",
+    38,
+    null
+   ],
+   [
+    "function_declaration",
+    "plain",
+    48,
+    null
+   ],
+   [
+    "function_declaration",
+    "asynchronous",
+    50,
+    null
+   ],
+   [
+    "arrow_function",
+    "handler",
+    53,
+    null
+   ],
+   [
+    "arrow_function",
+    "typed",
+    54,
+    null
+   ],
+   [
+    "variable_declarator",
+    "reassigned",
+    55,
+    null
+   ],
+   [
+    "arrow_function",
+    "second",
+    55,
+    null
+   ],
+   [
+    "variable_declarator",
+    "oldStyle",
+    58,
+    null
+   ],
+   [
+    "class_declaration",
+    "Inside",
+    66,
+    null
+   ],
+   [
+    "function_declaration",
+    "inside",
+    67,
+    null
+   ],
+   [
+    "class_declaration",
+    "AmbientClass",
+    71,
+    null
+   ],
+   [
+    "class_declaration",
+    "Outer",
+    75,
+    null
+   ],
+   [
+    "method_definition",
+    "method",
+    76,
+    "Outer"
+   ],
+   [
+    "class_declaration",
+    "Local",
+    77,
+    "method"
+   ],
+   [
+    "method_definition",
+    "deep",
+    78,
+    "Local"
+   ],
+   [
+    "variable_declarator",
+    "object",
+    84,
+    null
+   ],
+   [
+    "method_definition",
+    "method",
+    85,
+    "object"
+   ],
+   [
+    "method_definition",
+    "asyncMethod",
+    87,
+    "object"
+   ],
+   [
+    "method_definition",
+    "accessor",
+    88,
+    "object"
+   ],
+   [
+    "function_declaration",
+    "overload",
+    95,
+    null
+   ]
+  ]
+ },
+ "script/symbols.ts:typescript": {
+  "value": [
+   [
+    "import",
+    "import { Base } from './base';",
+    1,
+    null
+   ],
+   [
+    "import",
+    "import type { Config } from './config';",
+    2,
+    null
+   ],
+   [
+    "interface_declaration",
+    "Repository",
+    4,
+    null
+   ],
+   [
+    "type_alias_declaration",
+    "Handler",
+    9,
+    null
+   ],
+   [
+    "type_alias_declaration",
+    "Pair",
+    10,
+    null
+   ],
+   [
+    "method_definition",
+    "constructor",
+    16,
+    null
+   ],
+   [
+    "method_definition",
+    "find",
+    20,
+    null
+   ],
+   [
+    "method_definition",
+    "size",
+    24,
+    null
+   ],
+   [
+    "method_definition",
+    "size",
+    28,
+    null
+   ],
+   [
+    "method_definition",
+    "fetch",
+    32,
+    null
+   ],
+   [
+    "arrow_function",
+    "inner",
+    33,
+    "fetch"
+   ],
+   [
+    "variable_declarator",
+    "named",
+    34,
+    "fetch"
+   ],
+   [
+    "function_declaration",
+    "nested",
+    35,
+    "fetch"
+   ],
+   [
+    "method_definition",
+    "create",
+    38,
+    null
+   ],
+   [
+    "function_declaration",
+    "plain",
+    48,
+    null
+   ],
+   [
+    "function_declaration",
+    "asynchronous",
+    50,
+    null
+   ],
+   [
+    "arrow_function",
+    "handler",
+    53,
+    null
+   ],
+   [
+    "arrow_function",
+    "typed",
+    54,
+    null
+   ],
+   [
+    "variable_declarator",
+    "reassigned",
+    55,
+    null
+   ],
+   [
+    "arrow_function",
+    "second",
+    55,
+    null
+   ],
+   [
+    "variable_declarator",
+    "oldStyle",
+    58,
+    null
+   ],
+   [
+    "class_declaration",
+    "Inside",
+    66,
+    null
+   ],
+   [
+    "function_declaration",
+    "inside",
+    67,
+    null
+   ],
+   [
+    "class_declaration",
+    "AmbientClass",
+    71,
+    null
+   ],
+   [
+    "class_declaration",
+    "Outer",
+    75,
+    null
+   ],
+   [
+    "method_definition",
+    "method",
+    76,
+    "Outer"
+   ],
+   [
+    "class_declaration",
+    "Local",
+    77,
+    "method"
+   ],
+   [
+    "method_definition",
+    "deep",
+    78,
+    "Local"
+   ],
+   [
+    "variable_declarator",
+    "object",
+    84,
+    null
+   ],
+   [
+    "method_definition",
+    "method",
+    85,
+    "object"
+   ],
+   [
+    "method_definition",
+    "asyncMethod",
+    87,
+    "object"
+   ],
+   [
+    "method_definition",
+    "accessor",
+    88,
+    "object"
+   ],
+   [
+    "function_declaration",
+    "overload",
+    95,
+    null
+   ]
+  ]
+ },
+ "script/syntax_error.ts:javascript": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ]
+  ]
+ },
+ "script/syntax_error.ts:tsx": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ]
+  ]
+ },
+ "script/syntax_error.ts:typescript": {
+  "value": [
+   [
+    "import",
+    "import { a } from './a';",
+    1,
+    null
+   ]
+  ]
+ },
+ "script/tests_and_comments.ts:javascript": {
+  "value": []
+ },
+ "script/tests_and_comments.ts:tsx": {
+  "value": []
+ },
+ "script/tests_and_comments.ts:typescript": {
+  "value": []
+ },
+ "script/unicode.ts:javascript": {
+  "value": [
+   [
+    "import",
+    "import { caf\u00e9 } from './caf\u00e9';",
+    1,
+    null
+   ],
+   [
+    "class_declaration",
+    "Na\u00efve",
+    2,
+    null
+   ],
+   [
+    "arrow_function",
+    "\u65e5\u672c\u8a9e",
+    3,
+    null
+   ],
+   [
+    "function_declaration",
+    "\u00fcn\u00ef",
+    4,
+    null
+   ],
+   [
+    "variable_declarator",
+    "emoji",
+    6,
+    null
+   ]
+  ]
+ },
+ "script/unicode.ts:tsx": {
+  "value": [
+   [
+    "import",
+    "import { caf\u00e9 } from './caf\u00e9';",
+    1,
+    null
+   ],
+   [
+    "class_declaration",
+    "Na\u00efve",
+    2,
+    null
+   ],
+   [
+    "arrow_function",
+    "\u65e5\u672c\u8a9e",
+    3,
+    null
+   ],
+   [
+    "function_declaration",
+    "\u00fcn\u00ef",
+    4,
+    null
+   ],
+   [
+    "variable_declarator",
+    "emoji",
+    6,
+    null
+   ]
+  ]
+ },
+ "script/unicode.ts:typescript": {
+  "value": [
+   [
+    "import",
+    "import { caf\u00e9 } from './caf\u00e9';",
+    1,
+    null
+   ],
+   [
+    "class_declaration",
+    "Na\u00efve",
+    2,
+    null
+   ],
+   [
+    "arrow_function",
+    "\u65e5\u672c\u8a9e",
+    3,
+    null
+   ],
+   [
+    "function_declaration",
+    "\u00fcn\u00ef",
+    4,
+    null
+   ],
+   [
+    "variable_declarator",
+    "emoji",
+    6,
+    null
+   ]
+  ]
+ },
+ "snippet/annassign_tuple.py:python": {
+  "value": []
+ },
+ "snippet/annotation_star.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/assign_binop.py:python": {
+  "value": []
+ },
+ "snippet/assign_call.py:python": {
+  "value": []
+ },
+ "snippet/assign_constant_true.py:python": {
+  "value": []
+ },
+ "snippet/assign_debug.py:python": {
+  "value": []
+ },
+ "snippet/assign_double_star.py:python": {
+  "value": []
+ },
+ "snippet/assign_in_condition.py:python": {
+  "value": []
+ },
+ "snippet/assign_keyword_target.py:python": {
+  "value": []
+ },
+ "snippet/assign_literal.py:python": {
+  "value": []
+ },
+ "snippet/assign_star_alone.py:python": {
+  "value": []
+ },
+ "snippet/assign_star_target_alone.py:python": {
+  "value": []
+ },
+ "snippet/assign_star_tuple.py:python": {
+  "value": []
+ },
+ "snippet/async_function_calls.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "g",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/async_identifier.py:python": {
+  "value": []
+ },
+ "snippet/augassign_list.py:python": {
+  "value": []
+ },
+ "snippet/augassign_tuple.py:python": {
+  "value": []
+ },
+ "snippet/await_outside.py:python": {
+  "value": []
+ },
+ "snippet/backslash_continuation.py:python": {
+  "value": []
+ },
+ "snippet/backslash_continuation_blank.py:python": {
+  "value": []
+ },
+ "snippet/backslash_space.py:python": {
+  "value": []
+ },
+ "snippet/bom_first.py:python": {
+  "value": []
+ },
+ "snippet/bom_in_code.py:python": {
+  "value": []
+ },
+ "snippet/bom_in_string.py:python": {
+  "value": []
+ },
+ "snippet/break_outside.py:python": {
+  "value": []
+ },
+ "snippet/call_dstar_then_kw.py:python": {
+  "value": []
+ },
+ "snippet/call_dstar_then_pos.py:python": {
+  "value": []
+ },
+ "snippet/call_dstar_then_star.py:python": {
+  "value": []
+ },
+ "snippet/call_in_await_yield.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "g",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/call_in_class_bases_and_keywords.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "class_definition",
+    "C",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/call_in_compare_and_boolop.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/call_in_decorator_and_default.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "g",
+    3,
+    null
+   ]
+  ]
+ },
+ "snippet/call_in_dict_and_set_and_starred.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/call_in_fstring_and_format_spec.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/call_in_global_scope_after_def.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/call_in_lambda_and_comprehension.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/call_in_match_and_patterns.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/call_in_slice_and_subscript.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/call_in_type_params.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "g",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/call_in_with_and_try.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/call_kw_then_pos.py:python": {
+  "value": []
+ },
+ "snippet/call_kw_then_star.py:python": {
+  "value": []
+ },
+ "snippet/call_star_kw_star.py:python": {
+  "value": []
+ },
+ "snippet/class_in_class.py:python": {
+  "value": [
+   [
+    "class_definition",
+    "A",
+    1,
+    null
+   ],
+   [
+    "class_definition",
+    "B",
+    2,
+    "A"
+   ],
+   [
+    "function_definition",
+    "f",
+    3,
+    "B"
+   ]
+  ]
+ },
+ "snippet/class_kw_then_pos.py:python": {
+  "value": [
+   [
+    "class_definition",
+    "A",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/class_ok.py:python": {
+  "value": [
+   [
+    "class_definition",
+    "A",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/comparison_chain_walrus.py:python": {
+  "value": []
+ },
+ "snippet/conditional_function.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    2,
+    null
+   ],
+   [
+    "function_definition",
+    "f",
+    4,
+    null
+   ]
+  ]
+ },
+ "snippet/crlf_code.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/crlf_docstring.py:python": {
+  "value": []
+ },
+ "snippet/crlf_triple_string.py:python": {
+  "value": []
+ },
+ "snippet/decorator_async.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/decorator_comment_between.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    4,
+    null
+   ]
+  ]
+ },
+ "snippet/decorator_multiple_lines.py:python": {
+  "value": [
+   [
+    "class_definition",
+    "C",
+    5,
+    null
+   ]
+  ]
+ },
+ "snippet/decorator_on_assignment.py:python": {
+  "value": []
+ },
+ "snippet/decorator_subscript.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/decorator_ternary.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/dedent_mismatch.py:python": {
+  "value": []
+ },
+ "snippet/def_annotated_star.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/def_bare_star.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/def_default_order.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/def_dstar_then_arg.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/def_slash_first.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/def_slash_twice.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/def_star_default.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/def_two_stars.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/del_call.py:python": {
+  "value": []
+ },
+ "snippet/dict_mixed_pairs.py:python": {
+  "value": []
+ },
+ "snippet/dict_star_and_double.py:python": {
+  "value": []
+ },
+ "snippet/docstring_named_escape.py:python": {
+  "value": []
+ },
+ "snippet/dots_in_expression.py:python": {
+  "value": []
+ },
+ "snippet/double_semicolon.py:python": {
+  "value": []
+ },
+ "snippet/dstar_call_alone.py:python": {
+  "value": []
+ },
+ "snippet/duplicate_arguments.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/duplicate_keyword.py:python": {
+  "value": []
+ },
+ "snippet/elif_alone.py:python": {
+  "value": []
+ },
+ "snippet/ellipsis_forms.py:python": {
+  "value": []
+ },
+ "snippet/ellipsis_slices.py:python": {
+  "value": []
+ },
+ "snippet/else_alone.py:python": {
+  "value": []
+ },
+ "snippet/else_if.py:python": {
+  "value": []
+ },
+ "snippet/empty_decorator.py:python": {
+  "value": []
+ },
+ "snippet/empty_source.py:python": {
+  "value": []
+ },
+ "snippet/escape_bytes_nonascii.py:python": {
+  "value": []
+ },
+ "snippet/escape_bytes_unicode.py:python": {
+  "value": []
+ },
+ "snippet/escape_hex_short.py:python": {
+  "value": []
+ },
+ "snippet/escape_invalid_warns_only.py:python": {
+  "value": []
+ },
+ "snippet/escape_named_alias.py:python": {
+  "value": []
+ },
+ "snippet/escape_named_lowercase.py:python": {
+  "value": []
+ },
+ "snippet/escape_named_ok.py:python": {
+  "value": []
+ },
+ "snippet/escape_named_sequence.py:python": {
+  "value": []
+ },
+ "snippet/escape_named_unicode16.py:python": {
+  "value": []
+ },
+ "snippet/escape_named_unknown.py:python": {
+  "value": []
+ },
+ "snippet/escape_octal_big.py:python": {
+  "value": []
+ },
+ "snippet/escape_unicode_big.py:python": {
+  "value": []
+ },
+ "snippet/escape_unicode_short.py:python": {
+  "value": []
+ },
+ "snippet/except_star_bare.py:python": {
+  "value": []
+ },
+ "snippet/except_star_mixed.py:python": {
+  "value": []
+ },
+ "snippet/expected_indent.py:python": {
+  "value": []
+ },
+ "snippet/for_call_target.py:python": {
+  "value": []
+ },
+ "snippet/formfeed_indent.py:python": {
+  "value": []
+ },
+ "snippet/formfeed_line.py:python": {
+  "value": []
+ },
+ "snippet/from_import_dots.py:python": {
+  "value": [
+   [
+    "import",
+    "from ... import x",
+    1,
+    null
+   ],
+   [
+    "import",
+    "from .... import y",
+    2,
+    null
+   ],
+   [
+    "import",
+    "from . import (z)",
+    3,
+    null
+   ]
+  ]
+ },
+ "snippet/from_import_ellipsis_tokens.py:python": {
+  "value": [
+   [
+    "import",
+    "from .. . import x",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/from_import_star_in_function.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "import",
+    "from x import *",
+    2,
+    "f"
+   ]
+  ]
+ },
+ "snippet/from_import_star_mixed.py:python": {
+  "value": [
+   [
+    "import",
+    "from x import *",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/from_import_trailing_comma.py:python": {
+  "value": [
+   [
+    "import",
+    "from x import (a, b,)",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/from_import_unparenthesised_trailing.py:python": {
+  "value": [
+   [
+    "import",
+    "from x import a, b,",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/fstring_backslash_expr.py:python": {
+  "value": []
+ },
+ "snippet/fstring_bad_conversion.py:python": {
+  "value": []
+ },
+ "snippet/fstring_bang_missing.py:python": {
+  "value": []
+ },
+ "snippet/fstring_bytes_mix.py:python": {
+  "value": []
+ },
+ "snippet/fstring_comment_in_expr.py:python": {
+  "value": []
+ },
+ "snippet/fstring_comment_single_line.py:python": {
+  "value": []
+ },
+ "snippet/fstring_concat_multiline.py:python": {
+  "value": []
+ },
+ "snippet/fstring_debug_conversion.py:python": {
+  "value": []
+ },
+ "snippet/fstring_empty_expr.py:python": {
+  "value": []
+ },
+ "snippet/fstring_format_spec_brace.py:python": {
+  "value": []
+ },
+ "snippet/fstring_lambda_unparenthesised.py:python": {
+  "value": []
+ },
+ "snippet/fstring_nested_depth.py:python": {
+  "value": []
+ },
+ "snippet/fstring_newline_in_expr.py:python": {
+  "value": []
+ },
+ "snippet/fstring_raw_backslash.py:python": {
+  "value": []
+ },
+ "snippet/fstring_same_quote.py:python": {
+  "value": []
+ },
+ "snippet/fstring_single_brace.py:python": {
+  "value": []
+ },
+ "snippet/fstring_triple_multiline_pieces.py:python": {
+  "value": []
+ },
+ "snippet/fstring_unclosed.py:python": {
+  "value": []
+ },
+ "snippet/fstring_walrus.py:python": {
+  "value": []
+ },
+ "snippet/future_braces.py:python": {
+  "value": []
+ },
+ "snippet/genexp_not_sole.py:python": {
+  "value": []
+ },
+ "snippet/genexp_sole_multiline.py:python": {
+  "value": []
+ },
+ "snippet/genexp_with_kw.py:python": {
+  "value": []
+ },
+ "snippet/global_after_use.py:python": {
+  "value": []
+ },
+ "snippet/ident_cjk.py:python": {
+  "value": []
+ },
+ "snippet/ident_combining_start.py:python": {
+  "value": []
+ },
+ "snippet/ident_fullwidth_test.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "\uff54est_fullwidth",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/ident_kelvin.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "\u212a",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/ident_math_alpha.py:python": {
+  "value": []
+ },
+ "snippet/ident_midot.py:python": {
+  "value": []
+ },
+ "snippet/ident_nfkc_ligature.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "\ufb01",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/ident_start_digit.py:python": {
+  "value": []
+ },
+ "snippet/ident_superscript.py:python": {
+  "value": []
+ },
+ "snippet/ident_unicode16.py:python": {
+  "value": []
+ },
+ "snippet/if_no_body.py:python": {
+  "value": []
+ },
+ "snippet/ifexp_chain_2000.py:python": {
+  "value": []
+ },
+ "snippet/import_dotted_as.py:python": {
+  "value": [
+   [
+    "import",
+    "import a.b as c.d",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/import_star.py:python": {
+  "value": []
+ },
+ "snippet/indent_100_levels.py:python": {
+  "value": []
+ },
+ "snippet/indent_101_levels.py:python": {
+  "value": []
+ },
+ "snippet/indent_99_levels.py:python": {
+  "value": []
+ },
+ "snippet/lambda_bare_star.py:python": {
+  "value": []
+ },
+ "snippet/lambda_chain_2000.py:python": {
+  "value": []
+ },
+ "snippet/lazy_import.py:python": {
+  "value": [
+   [
+    "import",
+    "import os",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/lone_cr_code.py:python": {
+  "value": []
+ },
+ "snippet/match_bad_complex.py:python": {
+  "value": []
+ },
+ "snippet/match_capture_attr.py:python": {
+  "value": []
+ },
+ "snippet/match_complex_literal.py:python": {
+  "value": []
+ },
+ "snippet/match_guard.py:python": {
+  "value": []
+ },
+ "snippet/match_irrefutable_not_last.py:python": {
+  "value": []
+ },
+ "snippet/match_keyword_pattern_dup.py:python": {
+  "value": []
+ },
+ "snippet/match_mapping_keys.py:python": {
+  "value": []
+ },
+ "snippet/match_or_bind.py:python": {
+  "value": []
+ },
+ "snippet/match_positional_after_keyword.py:python": {
+  "value": []
+ },
+ "snippet/match_rest_not_last.py:python": {
+  "value": []
+ },
+ "snippet/match_soft_keyword_call.py:python": {
+  "value": []
+ },
+ "snippet/match_star_alone.py:python": {
+  "value": []
+ },
+ "snippet/match_subject_star.py:python": {
+  "value": []
+ },
+ "snippet/match_wildcard_as.py:python": {
+  "value": []
+ },
+ "snippet/method_call_not_local.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "class_definition",
+    "C",
+    2,
+    null
+   ],
+   [
+    "function_definition",
+    "f",
+    3,
+    "C"
+   ],
+   [
+    "function_definition",
+    "g",
+    4,
+    "C"
+   ]
+  ]
+ },
+ "snippet/mismatched_brackets.py:python": {
+  "value": []
+ },
+ "snippet/mixed_newlines.py:python": {
+  "value": []
+ },
+ "snippet/nbsp_in_code.py:python": {
+  "value": []
+ },
+ "snippet/nbsp_in_string.py:python": {
+  "value": []
+ },
+ "snippet/nested_functions_calls.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "g",
+    2,
+    "f"
+   ],
+   [
+    "function_definition",
+    "h",
+    4,
+    "f"
+   ]
+  ]
+ },
+ "snippet/nesting_150_brackets.py:python": {
+  "value": []
+ },
+ "snippet/nesting_199_parens.py:python": {
+  "value": []
+ },
+ "snippet/nesting_200_parens.py:python": {
+  "value": []
+ },
+ "snippet/nesting_201_parens.py:python": {
+  "value": []
+ },
+ "snippet/nesting_300_parens.py:python": {
+  "value": []
+ },
+ "snippet/nesting_mixed_201.py:python": {
+  "value": []
+ },
+ "snippet/no_trailing_newline.py:python": {
+  "value": []
+ },
+ "snippet/nonlocal_toplevel.py:python": {
+  "value": []
+ },
+ "snippet/nul_in_comment.py:python": {
+  "value": []
+ },
+ "snippet/nul_in_string.py:python": {
+  "value": []
+ },
+ "snippet/nul_middle.py:python": {
+  "value": []
+ },
+ "snippet/number_bad_binary.py:python": {
+  "value": []
+ },
+ "snippet/number_bad_hex.py:python": {
+  "value": []
+ },
+ "snippet/number_bad_octal.py:python": {
+  "value": []
+ },
+ "snippet/number_double_underscore.py:python": {
+  "value": []
+ },
+ "snippet/number_float_forms.py:python": {
+  "value": []
+ },
+ "snippet/number_keyword_adjacent.py:python": {
+  "value": []
+ },
+ "snippet/number_leading_zero.py:python": {
+  "value": []
+ },
+ "snippet/number_letters.py:python": {
+  "value": []
+ },
+ "snippet/number_trailing_underscore.py:python": {
+  "value": []
+ },
+ "snippet/only_comments.py:python": {
+  "value": []
+ },
+ "snippet/operator_dollar.py:python": {
+  "value": []
+ },
+ "snippet/operator_null_coalesce.py:python": {
+  "value": []
+ },
+ "snippet/operator_question.py:python": {
+  "value": []
+ },
+ "snippet/operator_strict_ne.py:python": {
+  "value": []
+ },
+ "snippet/pow_chain_2000.py:python": {
+  "value": []
+ },
+ "snippet/print_two_names.py:python": {
+  "value": []
+ },
+ "snippet/py2_backticks.py:python": {
+  "value": []
+ },
+ "snippet/py2_except_comma.py:python": {
+  "value": []
+ },
+ "snippet/py2_exec.py:python": {
+  "value": []
+ },
+ "snippet/py2_not_equal.py:python": {
+  "value": []
+ },
+ "snippet/py2_octal.py:python": {
+  "value": []
+ },
+ "snippet/py2_print.py:python": {
+  "value": []
+ },
+ "snippet/py2_raise_comma.py:python": {
+  "value": []
+ },
+ "snippet/py2_ur_string.py:python": {
+  "value": []
+ },
+ "snippet/raw_newline_in_string.py:python": {
+  "value": []
+ },
+ "snippet/return_outside.py:python": {
+  "value": []
+ },
+ "snippet/return_with_star.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/same_name_twice.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "f",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/set_with_colon.py:python": {
+  "value": []
+ },
+ "snippet/soft_keywords.py:python": {
+  "value": []
+ },
+ "snippet/spaces_then_tab_deeper.py:python": {
+  "value": []
+ },
+ "snippet/star_call_alone.py:python": {
+  "value": []
+ },
+ "snippet/str_bytes_mix.py:python": {
+  "value": []
+ },
+ "snippet/stray_semicolon.py:python": {
+  "value": []
+ },
+ "snippet/string_prefix_bf.py:python": {
+  "value": []
+ },
+ "snippet/string_prefix_invalid.py:python": {
+  "value": []
+ },
+ "snippet/string_prefix_uppercase.py:python": {
+  "value": []
+ },
+ "snippet/subscript_star.py:python": {
+  "value": []
+ },
+ "snippet/subscript_walrus.py:python": {
+  "value": []
+ },
+ "snippet/tab_blank_lines_ignored.py:python": {
+  "value": []
+ },
+ "snippet/tab_comment_only_line.py:python": {
+  "value": []
+ },
+ "snippet/tab_consistent.py:python": {
+  "value": []
+ },
+ "snippet/tab_continuation_backslash.py:python": {
+  "value": []
+ },
+ "snippet/tab_in_brackets.py:python": {
+  "value": []
+ },
+ "snippet/tab_nested.py:python": {
+  "value": []
+ },
+ "snippet/tab_then_spaces_dedent.py:python": {
+  "value": []
+ },
+ "snippet/tab_vs_spaces.py:python": {
+  "value": []
+ },
+ "snippet/trailing_backslash_eof.py:python": {
+  "value": []
+ },
+ "snippet/trailing_semicolon.py:python": {
+  "value": []
+ },
+ "snippet/try_without_handlers.py:python": {
+  "value": []
+ },
+ "snippet/tstring.py:python": {
+  "value": []
+ },
+ "snippet/typeparam_bound_constraints.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/typeparam_class_ok.py:python": {
+  "value": [
+   [
+    "class_definition",
+    "C",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/typeparam_default.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/typeparam_default_alias.py:python": {
+  "value": []
+ },
+ "snippet/typeparam_default_tuple.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/unary_chain_1000.py:python": {
+  "value": []
+ },
+ "snippet/unary_chain_2500.py:python": {
+  "value": []
+ },
+ "snippet/unclosed_paren_eof.py:python": {
+  "value": []
+ },
+ "snippet/unexpected_indent.py:python": {
+  "value": []
+ },
+ "snippet/unmatched_close.py:python": {
+  "value": []
+ },
+ "snippet/unparenthesised_walrus_tuple.py:python": {
+  "value": []
+ },
+ "snippet/unterminated_string.py:python": {
+  "value": []
+ },
+ "snippet/unterminated_triple.py:python": {
+  "value": []
+ },
+ "snippet/very_long_line.py:python": {
+  "value": []
+ },
+ "snippet/walk_order_assign_targets.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_class_parts.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "class_definition",
+    "C",
+    3,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_comprehension.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_decorators_vs_body.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "g",
+    3,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_dict_keys_values.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_elif_chain.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_for_else.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_ifexp_compare.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_kwonly_defaults.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "g",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_match.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_nested_function_depth.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "g",
+    2,
+    null
+   ],
+   [
+    "function_definition",
+    "h",
+    3,
+    "g"
+   ]
+  ]
+ },
+ "snippet/walk_order_raise_assert.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_return_annotations.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ],
+   [
+    "function_definition",
+    "g",
+    2,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_slices.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_starred_and_keywords.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_try_blocks.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_while_else.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walk_order_with_items.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walrus_assign_target.py:python": {
+  "value": []
+ },
+ "snippet/walrus_in_comprehension_iter.py:python": {
+  "value": []
+ },
+ "snippet/walrus_in_return.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "snippet/walrus_toplevel.py:python": {
+  "value": []
+ },
+ "snippet/walrus_while.py:python": {
+  "value": []
+ },
+ "snippet/whitespace_only.py:python": {
+  "value": []
+ },
+ "snippet/with_call_target.py:python": {
+  "value": []
+ },
+ "snippet/yield_outside.py:python": {
+  "value": []
+ },
+ "snippet/yield_with_star.py:python": {
+  "value": [
+   [
+    "function_definition",
+    "f",
+    1,
+    null
+   ]
+  ]
+ },
+ "text": {
+  "value": []
+ }
+}

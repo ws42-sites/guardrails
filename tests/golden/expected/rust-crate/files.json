@@ -1,0 +1,158 @@
+[
+  {
+    "bytes": 139,
+    "category": {
+      "basis": "configuration-path-or-filename",
+      "category": "configuration",
+      "inferred": true
+    },
+    "language": "text",
+    "path": "Cargo.toml",
+    "sha256": "b360c898bc78eade8cde1ad80efdcd81d214f433050f336243048068d446ffb7",
+    "status": "indexed"
+  },
+  {
+    "bytes": 173,
+    "category": {
+      "basis": "documentation-filename-or-extension",
+      "category": "documentation",
+      "inferred": true
+    },
+    "language": "text",
+    "path": "README.md",
+    "sha256": "721a5743366ea487f0a31c0c5335c5931525508d682efd8acba088d88ae018fc",
+    "status": "indexed"
+  },
+  {
+    "bytes": 68,
+    "category": {
+      "basis": "configuration-path-or-filename",
+      "category": "configuration",
+      "inferred": true
+    },
+    "language": "text",
+    "path": "crates/shared/Cargo.toml",
+    "sha256": "9f5dc4162262d3727a99a38d20deee676172e4ac526fa2e49bdc1029481ac385",
+    "status": "indexed"
+  },
+  {
+    "bytes": 54,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "rust",
+    "path": "crates/shared/src/lib.rs",
+    "sha256": "e20a191d5c0c7eafd1cb7016926c677e4fd7e31d7b6edf240038f66e13abe2e4",
+    "status": "indexed"
+  },
+  {
+    "bytes": 129,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "rust",
+    "path": "crates/shared/src/types.rs",
+    "sha256": "673f06037000ad344521de2a3114e259a370191f6ca2e801f73a35b49299b0d8",
+    "status": "indexed"
+  },
+  {
+    "bytes": 191,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "rust",
+    "path": "src/bin/tool.rs",
+    "sha256": "00d5df4bbe745482987b726a8c5f2795cb2666731d9fe7b076f311ab4c788aff",
+    "status": "indexed"
+  },
+  {
+    "bytes": 373,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "rust",
+    "path": "src/graph.rs",
+    "sha256": "9082ae48de0d384251b6e8a3d5404139003d3d67c089ce96215d2bfe03318da9",
+    "status": "indexed"
+  },
+  {
+    "bytes": 262,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "rust",
+    "path": "src/graph/node.rs",
+    "sha256": "ad69d15ad00f36609101ba262e2486d9d9598f7b6df140c38c96def715e0c0ac",
+    "status": "indexed"
+  },
+  {
+    "bytes": 671,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "rust",
+    "path": "src/lib.rs",
+    "sha256": "e622e136cdf47025bbd64b750d833b43a81a1999dbfb7418edf2441d2b1d7d19",
+    "status": "indexed"
+  },
+  {
+    "bytes": 178,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "rust",
+    "path": "src/store/index.rs",
+    "sha256": "b324817916b0f0c66dff391376dd44d99288b7db28216ea4264d96fdd0987c2b",
+    "status": "indexed"
+  },
+  {
+    "bytes": 277,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "rust",
+    "path": "src/store/mod.rs",
+    "sha256": "37f0c54b454941ddb3e12383d2a31ccbc4eeb07b2d36f0283713e82d214623b6",
+    "status": "indexed"
+  },
+  {
+    "bytes": 122,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "rust",
+    "path": "src/util.rs",
+    "sha256": "1bdf00e613dd965ca4542bd8999a7511d6b6d9da0f90c10807ab73752ce3f984",
+    "status": "indexed"
+  },
+  {
+    "bytes": 325,
+    "category": {
+      "basis": "test-path-or-filename",
+      "category": "test",
+      "inferred": true
+    },
+    "language": "rust",
+    "path": "tests/roundtrip.rs",
+    "sha256": "809ecaa37db09c8c6ce1e51224ae987984fa82360bcc19abc96d1256fd4f79f5",
+    "status": "indexed"
+  }
+]

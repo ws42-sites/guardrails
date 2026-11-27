@@ -1,0 +1,601 @@
+{
+ "cases": [
+  {
+   "id": "reads-rust-crate",
+   "steps": [
+    {
+     "op": "write",
+     "fixture": "rust-crate"
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "write",
+     "files": {
+      "src/util.rs": "pub fn util() -> u8 {\n    2\n}\n",
+      "src/extra.rs": "use crate::util;\n\npub fn extra() {}\n"
+     }
+    },
+    {
+     "op": "remove",
+     "paths": [
+      "src/store/index.rs"
+     ]
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "owner/repo",
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "owner/repo",
+      99
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "nobody/nothing"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "nobody/nothing"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "normalise"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "normalise"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "normalise",
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "NORMALISE"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "%"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "_"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "\\"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "",
+      2
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "normalise",
+      0
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "normalise",
+      -5
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "normalise",
+      5000
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "no-such-name-anywhere"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "normalise"
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "nobody/nothing",
+      "normalise"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "architecture_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "architecture_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "architecture_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=1"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=2"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      "unknown-revision"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "nobody/nothing",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=1"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/lib.rs'"
+      },
+      "outbound",
+      3,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/lib.rs'"
+      },
+      "inbound",
+      3,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/graph.rs'"
+      },
+      "outbound",
+      3,
+      50
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/graph.rs'"
+      },
+      "inbound",
+      3,
+      50
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/util.rs'"
+      },
+      "outbound",
+      3,
+      50
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/util.rs'"
+      },
+      "inbound",
+      3,
+      50
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/lib.rs'"
+      },
+      "outbound",
+      0,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/lib.rs'"
+      },
+      "outbound",
+      1,
+      1
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/lib.rs'"
+      },
+      "outbound",
+      9,
+      5000
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/lib.rs'"
+      },
+      "outbound",
+      -3,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/lib.rs'"
+      },
+      "outbound",
+      2,
+      0
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/lib.rs'"
+      },
+      "outbound",
+      2,
+      -1
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/lib.rs'"
+      },
+      "sideways",
+      2,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      "no-such-node",
+      "outbound"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=1 AND kind='file' AND path='src/lib.rs'"
+      },
+      "outbound"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/lib.rs'"
+      }
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='src/lib.rs'"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=1 AND kind='file' AND path='src/lib.rs'"
+      },
+      "inbound",
+      5,
+      200
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 1
+     }
+    }
+   ],
+   "finalState": "full"
+  }
+ ]
+}

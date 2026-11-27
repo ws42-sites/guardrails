@@ -1,0 +1,209 @@
+{
+ "not-a-mapping": {
+  "aliases": {},
+  "resolved": [
+   {
+    "value": [
+     [],
+     []
+    ]
+   }
+  ],
+  "resolvedWithoutAliases": {
+   "value": [
+    [],
+    []
+   ]
+  },
+  "targets": [
+   {
+    "value": null
+   }
+  ]
+ },
+ "workspace-packages": {
+  "aliases": {
+   "@codegraph/contract": [
+    [
+     "packages/contract/package.json",
+     "./src/index.ts"
+    ]
+   ],
+   "@codegraph/contract/abs": [
+    [
+     "packages/contract/package.json",
+     "/abs.ts"
+    ]
+   ],
+   "@codegraph/contract/features/*": [
+    [
+     "packages/contract/package.json",
+     "./src/features/*.ts"
+    ]
+   ],
+   "@codegraph/contract/graph": [
+    [
+     "packages/contract/package.json",
+     "./src/graph.ts"
+    ]
+   ],
+   "@codegraph/contract/internal/*": [
+    [
+     "packages/contract/package.json",
+     "../outside/*.ts"
+    ]
+   ],
+   "@codegraph/contract/nested": [
+    [
+     "packages/contract/package.json",
+     {
+      "import": "./src/x.ts"
+     }
+    ]
+   ],
+   "@codegraph/contract/package.json": [
+    [
+     "packages/contract/package.json",
+     "./package.json"
+    ]
+   ],
+   "dup": [
+    [
+     "packages/dup-a/package.json",
+     "./a.ts"
+    ],
+    [
+     "packages/dup-b/package.json",
+     "./b.ts"
+    ]
+   ],
+   "plain-name": [
+    [
+     "packages/engine/package.json",
+     "./src/index.ts"
+    ]
+   ],
+   "plain-name/*": [
+    [
+     "packages/engine/package.json",
+     "./src/*.ts"
+    ]
+   ],
+   "plain-name/deep/*/leaf": [
+    [
+     "packages/engine/package.json",
+     "./src/deep/*/leaf.ts"
+    ]
+   ]
+  },
+  "resolved": [
+   {
+    "value": [
+     [
+      [
+       "packages/contract/src/index.ts",
+       1,
+       "resolved-package-export"
+      ],
+      [
+       "packages/contract/src/graph.ts",
+       2,
+       "resolved-package-export"
+      ],
+      [
+       "packages/contract/src/features/alpha.ts",
+       3,
+       "resolved-package-export"
+      ],
+      [
+       "packages/contract/package.json",
+       6,
+       "resolved-package-export"
+      ],
+      [
+       "packages/engine/src/index.ts",
+       11,
+       "resolved-package-export"
+      ],
+      [
+       "packages/engine/src/util.ts",
+       12,
+       "resolved-package-export"
+      ],
+      [
+       "packages/engine/src/deep/one/leaf.ts",
+       13,
+       "resolved-package-export"
+      ]
+     ],
+     []
+    ]
+   }
+  ],
+  "resolvedWithoutAliases": {
+   "value": [
+    [],
+    []
+   ]
+  },
+  "targets": [
+   {
+    "value": "packages/contract/src/index.ts"
+   },
+   {
+    "value": "packages/contract/src/graph.ts"
+   },
+   {
+    "value": "packages/contract/src/features/alpha.ts"
+   },
+   {
+    "value": null
+   },
+   {
+    "value": null
+   },
+   {
+    "value": "packages/contract/package.json"
+   },
+   {
+    "value": null
+   },
+   {
+    "value": null
+   },
+   {
+    "value": null
+   },
+   {
+    "value": null
+   },
+   {
+    "value": "packages/engine/src/index.ts"
+   },
+   {
+    "value": "packages/engine/src/util.ts"
+   },
+   {
+    "value": "packages/engine/src/deep/one/leaf.ts"
+   },
+   {
+    "value": null
+   },
+   {
+    "value": null
+   },
+   {
+    "value": null
+   },
+   {
+    "value": null
+   },
+   {
+    "value": null
+   },
+   {
+    "value": null
+   }
+  ]
+ }
+}

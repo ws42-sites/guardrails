@@ -1,0 +1,1471 @@
+{
+ "cases": [
+  {
+   "id": "wide-repository-overview-is-bounded",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "area000/mod.py",
+       "data": "\"\"\"Area 0 handles request number 0 for the service.\"\"\"\n\n\ndef run_0():\n    return 0\n"
+      },
+      {
+       "path": "area001/mod.py",
+       "data": "\"\"\"Area 1 handles request number 1 for the service.\"\"\"\n\n\ndef run_1():\n    return 1\n"
+      },
+      {
+       "path": "area002/mod.py",
+       "data": "\"\"\"Area 2 handles request number 2 for the service.\"\"\"\n\n\ndef run_2():\n    return 2\n"
+      },
+      {
+       "path": "area003/mod.py",
+       "data": "\"\"\"Area 3 handles request number 3 for the service.\"\"\"\n\n\ndef run_3():\n    return 3\n"
+      },
+      {
+       "path": "area004/mod.py",
+       "data": "\"\"\"Area 4 handles request number 4 for the service.\"\"\"\n\n\ndef run_4():\n    return 4\n"
+      },
+      {
+       "path": "area005/mod.py",
+       "data": "\"\"\"Area 5 handles request number 5 for the service.\"\"\"\n\n\ndef run_5():\n    return 5\n"
+      },
+      {
+       "path": "area006/mod.py",
+       "data": "\"\"\"Area 6 handles request number 6 for the service.\"\"\"\n\n\ndef run_6():\n    return 6\n"
+      },
+      {
+       "path": "area007/mod.py",
+       "data": "\"\"\"Area 7 handles request number 7 for the service.\"\"\"\n\n\ndef run_7():\n    return 7\n"
+      },
+      {
+       "path": "area008/mod.py",
+       "data": "\"\"\"Area 8 handles request number 8 for the service.\"\"\"\n\n\ndef run_8():\n    return 8\n"
+      },
+      {
+       "path": "area009/mod.py",
+       "data": "\"\"\"Area 9 handles request number 9 for the service.\"\"\"\n\n\ndef run_9():\n    return 9\n"
+      },
+      {
+       "path": "area010/mod.py",
+       "data": "\"\"\"Area 10 handles request number 10 for the service.\"\"\"\n\n\ndef run_10():\n    return 10\n"
+      },
+      {
+       "path": "area011/mod.py",
+       "data": "\"\"\"Area 11 handles request number 11 for the service.\"\"\"\n\n\ndef run_11():\n    return 11\n"
+      },
+      {
+       "path": "area012/mod.py",
+       "data": "\"\"\"Area 12 handles request number 12 for the service.\"\"\"\n\n\ndef run_12():\n    return 12\n"
+      },
+      {
+       "path": "area013/mod.py",
+       "data": "\"\"\"Area 13 handles request number 13 for the service.\"\"\"\n\n\ndef run_13():\n    return 13\n"
+      },
+      {
+       "path": "area014/mod.py",
+       "data": "\"\"\"Area 14 handles request number 14 for the service.\"\"\"\n\n\ndef run_14():\n    return 14\n"
+      },
+      {
+       "path": "area015/mod.py",
+       "data": "\"\"\"Area 15 handles request number 15 for the service.\"\"\"\n\n\ndef run_15():\n    return 15\n"
+      },
+      {
+       "path": "area016/mod.py",
+       "data": "\"\"\"Area 16 handles request number 16 for the service.\"\"\"\n\n\ndef run_16():\n    return 16\n"
+      },
+      {
+       "path": "area017/mod.py",
+       "data": "\"\"\"Area 17 handles request number 17 for the service.\"\"\"\n\n\ndef run_17():\n    return 17\n"
+      },
+      {
+       "path": "area018/mod.py",
+       "data": "\"\"\"Area 18 handles request number 18 for the service.\"\"\"\n\n\ndef run_18():\n    return 18\n"
+      },
+      {
+       "path": "area019/mod.py",
+       "data": "\"\"\"Area 19 handles request number 19 for the service.\"\"\"\n\n\ndef run_19():\n    return 19\n"
+      },
+      {
+       "path": "area020/mod.py",
+       "data": "\"\"\"Area 20 handles request number 20 for the service.\"\"\"\n\n\ndef run_20():\n    return 20\n"
+      },
+      {
+       "path": "area021/mod.py",
+       "data": "\"\"\"Area 21 handles request number 21 for the service.\"\"\"\n\n\ndef run_21():\n    return 21\n"
+      },
+      {
+       "path": "area022/mod.py",
+       "data": "\"\"\"Area 22 handles request number 22 for the service.\"\"\"\n\n\ndef run_22():\n    return 22\n"
+      },
+      {
+       "path": "area023/mod.py",
+       "data": "\"\"\"Area 23 handles request number 23 for the service.\"\"\"\n\n\ndef run_23():\n    return 23\n"
+      },
+      {
+       "path": "area024/mod.py",
+       "data": "\"\"\"Area 24 handles request number 24 for the service.\"\"\"\n\n\ndef run_24():\n    return 24\n"
+      },
+      {
+       "path": "area025/mod.py",
+       "data": "\"\"\"Area 25 handles request number 25 for the service.\"\"\"\n\n\ndef run_25():\n    return 25\n"
+      },
+      {
+       "path": "area026/mod.py",
+       "data": "\"\"\"Area 26 handles request number 26 for the service.\"\"\"\n\n\ndef run_26():\n    return 26\n"
+      },
+      {
+       "path": "area027/mod.py",
+       "data": "\"\"\"Area 27 handles request number 27 for the service.\"\"\"\n\n\ndef run_27():\n    return 27\n"
+      },
+      {
+       "path": "area028/mod.py",
+       "data": "\"\"\"Area 28 handles request number 28 for the service.\"\"\"\n\n\ndef run_28():\n    return 28\n"
+      },
+      {
+       "path": "area029/mod.py",
+       "data": "\"\"\"Area 29 handles request number 29 for the service.\"\"\"\n\n\ndef run_29():\n    return 29\n"
+      },
+      {
+       "path": "area030/mod.py",
+       "data": "\"\"\"Area 30 handles request number 30 for the service.\"\"\"\n\n\ndef run_30():\n    return 30\n"
+      },
+      {
+       "path": "area031/mod.py",
+       "data": "\"\"\"Area 31 handles request number 31 for the service.\"\"\"\n\n\ndef run_31():\n    return 31\n"
+      },
+      {
+       "path": "area032/mod.py",
+       "data": "\"\"\"Area 32 handles request number 32 for the service.\"\"\"\n\n\ndef run_32():\n    return 32\n"
+      },
+      {
+       "path": "area033/mod.py",
+       "data": "\"\"\"Area 33 handles request number 33 for the service.\"\"\"\n\n\ndef run_33():\n    return 33\n"
+      },
+      {
+       "path": "area034/mod.py",
+       "data": "\"\"\"Area 34 handles request number 34 for the service.\"\"\"\n\n\ndef run_34():\n    return 34\n"
+      },
+      {
+       "path": "area035/mod.py",
+       "data": "\"\"\"Area 35 handles request number 35 for the service.\"\"\"\n\n\ndef run_35():\n    return 35\n"
+      },
+      {
+       "path": "area036/mod.py",
+       "data": "\"\"\"Area 36 handles request number 36 for the service.\"\"\"\n\n\ndef run_36():\n    return 36\n"
+      },
+      {
+       "path": "area037/mod.py",
+       "data": "\"\"\"Area 37 handles request number 37 for the service.\"\"\"\n\n\ndef run_37():\n    return 37\n"
+      },
+      {
+       "path": "area038/mod.py",
+       "data": "\"\"\"Area 38 handles request number 38 for the service.\"\"\"\n\n\ndef run_38():\n    return 38\n"
+      },
+      {
+       "path": "area039/mod.py",
+       "data": "\"\"\"Area 39 handles request number 39 for the service.\"\"\"\n\n\ndef run_39():\n    return 39\n"
+      },
+      {
+       "path": "area040/mod.py",
+       "data": "\"\"\"Area 40 handles request number 40 for the service.\"\"\"\n\n\ndef run_40():\n    return 40\n"
+      },
+      {
+       "path": "area041/mod.py",
+       "data": "\"\"\"Area 41 handles request number 41 for the service.\"\"\"\n\n\ndef run_41():\n    return 41\n"
+      },
+      {
+       "path": "area042/mod.py",
+       "data": "\"\"\"Area 42 handles request number 42 for the service.\"\"\"\n\n\ndef run_42():\n    return 42\n"
+      },
+      {
+       "path": "area043/mod.py",
+       "data": "\"\"\"Area 43 handles request number 43 for the service.\"\"\"\n\n\ndef run_43():\n    return 43\n"
+      },
+      {
+       "path": "area044/mod.py",
+       "data": "\"\"\"Area 44 handles request number 44 for the service.\"\"\"\n\n\ndef run_44():\n    return 44\n"
+      },
+      {
+       "path": "area045/mod.py",
+       "data": "\"\"\"Area 45 handles request number 45 for the service.\"\"\"\n\n\ndef run_45():\n    return 45\n"
+      },
+      {
+       "path": "area046/mod.py",
+       "data": "\"\"\"Area 46 handles request number 46 for the service.\"\"\"\n\n\ndef run_46():\n    return 46\n"
+      },
+      {
+       "path": "area047/mod.py",
+       "data": "\"\"\"Area 47 handles request number 47 for the service.\"\"\"\n\n\ndef run_47():\n    return 47\n"
+      },
+      {
+       "path": "area048/mod.py",
+       "data": "\"\"\"Area 48 handles request number 48 for the service.\"\"\"\n\n\ndef run_48():\n    return 48\n"
+      },
+      {
+       "path": "area049/mod.py",
+       "data": "\"\"\"Area 49 handles request number 49 for the service.\"\"\"\n\n\ndef run_49():\n    return 49\n"
+      },
+      {
+       "path": "area050/mod.py",
+       "data": "\"\"\"Area 50 handles request number 50 for the service.\"\"\"\n\n\ndef run_50():\n    return 50\n"
+      },
+      {
+       "path": "area051/mod.py",
+       "data": "\"\"\"Area 51 handles request number 51 for the service.\"\"\"\n\n\ndef run_51():\n    return 51\n"
+      },
+      {
+       "path": "area052/mod.py",
+       "data": "\"\"\"Area 52 handles request number 52 for the service.\"\"\"\n\n\ndef run_52():\n    return 52\n"
+      },
+      {
+       "path": "area053/mod.py",
+       "data": "\"\"\"Area 53 handles request number 53 for the service.\"\"\"\n\n\ndef run_53():\n    return 53\n"
+      },
+      {
+       "path": "area054/mod.py",
+       "data": "\"\"\"Area 54 handles request number 54 for the service.\"\"\"\n\n\ndef run_54():\n    return 54\n"
+      },
+      {
+       "path": "area055/mod.py",
+       "data": "\"\"\"Area 55 handles request number 55 for the service.\"\"\"\n\n\ndef run_55():\n    return 55\n"
+      },
+      {
+       "path": "area056/mod.py",
+       "data": "\"\"\"Area 56 handles request number 56 for the service.\"\"\"\n\n\ndef run_56():\n    return 56\n"
+      },
+      {
+       "path": "area057/mod.py",
+       "data": "\"\"\"Area 57 handles request number 57 for the service.\"\"\"\n\n\ndef run_57():\n    return 57\n"
+      },
+      {
+       "path": "area058/mod.py",
+       "data": "\"\"\"Area 58 handles request number 58 for the service.\"\"\"\n\n\ndef run_58():\n    return 58\n"
+      },
+      {
+       "path": "area059/mod.py",
+       "data": "\"\"\"Area 59 handles request number 59 for the service.\"\"\"\n\n\ndef run_59():\n    return 59\n"
+      },
+      {
+       "path": "area060/mod.py",
+       "data": "\"\"\"Area 60 handles request number 60 for the service.\"\"\"\n\n\ndef run_60():\n    return 60\n"
+      },
+      {
+       "path": "area061/mod.py",
+       "data": "\"\"\"Area 61 handles request number 61 for the service.\"\"\"\n\n\ndef run_61():\n    return 61\n"
+      },
+      {
+       "path": "area062/mod.py",
+       "data": "\"\"\"Area 62 handles request number 62 for the service.\"\"\"\n\n\ndef run_62():\n    return 62\n"
+      },
+      {
+       "path": "area063/mod.py",
+       "data": "\"\"\"Area 63 handles request number 63 for the service.\"\"\"\n\n\ndef run_63():\n    return 63\n"
+      },
+      {
+       "path": "area064/mod.py",
+       "data": "\"\"\"Area 64 handles request number 64 for the service.\"\"\"\n\n\ndef run_64():\n    return 64\n"
+      },
+      {
+       "path": "area065/mod.py",
+       "data": "\"\"\"Area 65 handles request number 65 for the service.\"\"\"\n\n\ndef run_65():\n    return 65\n"
+      },
+      {
+       "path": "area066/mod.py",
+       "data": "\"\"\"Area 66 handles request number 66 for the service.\"\"\"\n\n\ndef run_66():\n    return 66\n"
+      },
+      {
+       "path": "area067/mod.py",
+       "data": "\"\"\"Area 67 handles request number 67 for the service.\"\"\"\n\n\ndef run_67():\n    return 67\n"
+      },
+      {
+       "path": "area068/mod.py",
+       "data": "\"\"\"Area 68 handles request number 68 for the service.\"\"\"\n\n\ndef run_68():\n    return 68\n"
+      },
+      {
+       "path": "area069/mod.py",
+       "data": "\"\"\"Area 69 handles request number 69 for the service.\"\"\"\n\n\ndef run_69():\n    return 69\n"
+      },
+      {
+       "path": "area070/mod.py",
+       "data": "\"\"\"Area 70 handles request number 70 for the service.\"\"\"\n\n\ndef run_70():\n    return 70\n"
+      },
+      {
+       "path": "area071/mod.py",
+       "data": "\"\"\"Area 71 handles request number 71 for the service.\"\"\"\n\n\ndef run_71():\n    return 71\n"
+      },
+      {
+       "path": "area072/mod.py",
+       "data": "\"\"\"Area 72 handles request number 72 for the service.\"\"\"\n\n\ndef run_72():\n    return 72\n"
+      },
+      {
+       "path": "area073/mod.py",
+       "data": "\"\"\"Area 73 handles request number 73 for the service.\"\"\"\n\n\ndef run_73():\n    return 73\n"
+      },
+      {
+       "path": "area074/mod.py",
+       "data": "\"\"\"Area 74 handles request number 74 for the service.\"\"\"\n\n\ndef run_74():\n    return 74\n"
+      },
+      {
+       "path": "area075/mod.py",
+       "data": "\"\"\"Area 75 handles request number 75 for the service.\"\"\"\n\n\ndef run_75():\n    return 75\n"
+      },
+      {
+       "path": "area076/mod.py",
+       "data": "\"\"\"Area 76 handles request number 76 for the service.\"\"\"\n\n\ndef run_76():\n    return 76\n"
+      },
+      {
+       "path": "area077/mod.py",
+       "data": "\"\"\"Area 77 handles request number 77 for the service.\"\"\"\n\n\ndef run_77():\n    return 77\n"
+      },
+      {
+       "path": "area078/mod.py",
+       "data": "\"\"\"Area 78 handles request number 78 for the service.\"\"\"\n\n\ndef run_78():\n    return 78\n"
+      },
+      {
+       "path": "area079/mod.py",
+       "data": "\"\"\"Area 79 handles request number 79 for the service.\"\"\"\n\n\ndef run_79():\n    return 79\n"
+      },
+      {
+       "path": "area080/mod.py",
+       "data": "\"\"\"Area 80 handles request number 80 for the service.\"\"\"\n\n\ndef run_80():\n    return 80\n"
+      },
+      {
+       "path": "area081/mod.py",
+       "data": "\"\"\"Area 81 handles request number 81 for the service.\"\"\"\n\n\ndef run_81():\n    return 81\n"
+      },
+      {
+       "path": "area082/mod.py",
+       "data": "\"\"\"Area 82 handles request number 82 for the service.\"\"\"\n\n\ndef run_82():\n    return 82\n"
+      },
+      {
+       "path": "area083/mod.py",
+       "data": "\"\"\"Area 83 handles request number 83 for the service.\"\"\"\n\n\ndef run_83():\n    return 83\n"
+      },
+      {
+       "path": "area084/mod.py",
+       "data": "\"\"\"Area 84 handles request number 84 for the service.\"\"\"\n\n\ndef run_84():\n    return 84\n"
+      },
+      {
+       "path": "area085/mod.py",
+       "data": "\"\"\"Area 85 handles request number 85 for the service.\"\"\"\n\n\ndef run_85():\n    return 85\n"
+      },
+      {
+       "path": "area086/mod.py",
+       "data": "\"\"\"Area 86 handles request number 86 for the service.\"\"\"\n\n\ndef run_86():\n    return 86\n"
+      },
+      {
+       "path": "area087/mod.py",
+       "data": "\"\"\"Area 87 handles request number 87 for the service.\"\"\"\n\n\ndef run_87():\n    return 87\n"
+      },
+      {
+       "path": "area088/mod.py",
+       "data": "\"\"\"Area 88 handles request number 88 for the service.\"\"\"\n\n\ndef run_88():\n    return 88\n"
+      },
+      {
+       "path": "area089/mod.py",
+       "data": "\"\"\"Area 89 handles request number 89 for the service.\"\"\"\n\n\ndef run_89():\n    return 89\n"
+      },
+      {
+       "path": "area090/mod.py",
+       "data": "\"\"\"Area 90 handles request number 90 for the service.\"\"\"\n\n\ndef run_90():\n    return 90\n"
+      },
+      {
+       "path": "area091/mod.py",
+       "data": "\"\"\"Area 91 handles request number 91 for the service.\"\"\"\n\n\ndef run_91():\n    return 91\n"
+      },
+      {
+       "path": "area092/mod.py",
+       "data": "\"\"\"Area 92 handles request number 92 for the service.\"\"\"\n\n\ndef run_92():\n    return 92\n"
+      },
+      {
+       "path": "area093/mod.py",
+       "data": "\"\"\"Area 93 handles request number 93 for the service.\"\"\"\n\n\ndef run_93():\n    return 93\n"
+      },
+      {
+       "path": "area094/mod.py",
+       "data": "\"\"\"Area 94 handles request number 94 for the service.\"\"\"\n\n\ndef run_94():\n    return 94\n"
+      },
+      {
+       "path": "area095/mod.py",
+       "data": "\"\"\"Area 95 handles request number 95 for the service.\"\"\"\n\n\ndef run_95():\n    return 95\n"
+      },
+      {
+       "path": "area096/mod.py",
+       "data": "\"\"\"Area 96 handles request number 96 for the service.\"\"\"\n\n\ndef run_96():\n    return 96\n"
+      },
+      {
+       "path": "area097/mod.py",
+       "data": "\"\"\"Area 97 handles request number 97 for the service.\"\"\"\n\n\ndef run_97():\n    return 97\n"
+      },
+      {
+       "path": "area098/mod.py",
+       "data": "\"\"\"Area 98 handles request number 98 for the service.\"\"\"\n\n\ndef run_98():\n    return 98\n"
+      },
+      {
+       "path": "area099/mod.py",
+       "data": "\"\"\"Area 99 handles request number 99 for the service.\"\"\"\n\n\ndef run_99():\n    return 99\n"
+      },
+      {
+       "path": "area100/mod.py",
+       "data": "\"\"\"Area 100 handles request number 100 for the service.\"\"\"\n\n\ndef run_100():\n    return 100\n"
+      },
+      {
+       "path": "area101/mod.py",
+       "data": "\"\"\"Area 101 handles request number 101 for the service.\"\"\"\n\n\ndef run_101():\n    return 101\n"
+      },
+      {
+       "path": "area102/mod.py",
+       "data": "\"\"\"Area 102 handles request number 102 for the service.\"\"\"\n\n\ndef run_102():\n    return 102\n"
+      },
+      {
+       "path": "area103/mod.py",
+       "data": "\"\"\"Area 103 handles request number 103 for the service.\"\"\"\n\n\ndef run_103():\n    return 103\n"
+      },
+      {
+       "path": "area104/mod.py",
+       "data": "\"\"\"Area 104 handles request number 104 for the service.\"\"\"\n\n\ndef run_104():\n    return 104\n"
+      },
+      {
+       "path": "area105/mod.py",
+       "data": "\"\"\"Area 105 handles request number 105 for the service.\"\"\"\n\n\ndef run_105():\n    return 105\n"
+      },
+      {
+       "path": "area106/mod.py",
+       "data": "\"\"\"Area 106 handles request number 106 for the service.\"\"\"\n\n\ndef run_106():\n    return 106\n"
+      },
+      {
+       "path": "area107/mod.py",
+       "data": "\"\"\"Area 107 handles request number 107 for the service.\"\"\"\n\n\ndef run_107():\n    return 107\n"
+      },
+      {
+       "path": "area108/mod.py",
+       "data": "\"\"\"Area 108 handles request number 108 for the service.\"\"\"\n\n\ndef run_108():\n    return 108\n"
+      },
+      {
+       "path": "area109/mod.py",
+       "data": "\"\"\"Area 109 handles request number 109 for the service.\"\"\"\n\n\ndef run_109():\n    return 109\n"
+      },
+      {
+       "path": "area110/mod.py",
+       "data": "\"\"\"Area 110 handles request number 110 for the service.\"\"\"\n\n\ndef run_110():\n    return 110\n"
+      },
+      {
+       "path": "area111/mod.py",
+       "data": "\"\"\"Area 111 handles request number 111 for the service.\"\"\"\n\n\ndef run_111():\n    return 111\n"
+      },
+      {
+       "path": "area112/mod.py",
+       "data": "\"\"\"Area 112 handles request number 112 for the service.\"\"\"\n\n\ndef run_112():\n    return 112\n"
+      },
+      {
+       "path": "area113/mod.py",
+       "data": "\"\"\"Area 113 handles request number 113 for the service.\"\"\"\n\n\ndef run_113():\n    return 113\n"
+      },
+      {
+       "path": "area114/mod.py",
+       "data": "\"\"\"Area 114 handles request number 114 for the service.\"\"\"\n\n\ndef run_114():\n    return 114\n"
+      },
+      {
+       "path": "area115/mod.py",
+       "data": "\"\"\"Area 115 handles request number 115 for the service.\"\"\"\n\n\ndef run_115():\n    return 115\n"
+      },
+      {
+       "path": "area116/mod.py",
+       "data": "\"\"\"Area 116 handles request number 116 for the service.\"\"\"\n\n\ndef run_116():\n    return 116\n"
+      },
+      {
+       "path": "area117/mod.py",
+       "data": "\"\"\"Area 117 handles request number 117 for the service.\"\"\"\n\n\ndef run_117():\n    return 117\n"
+      },
+      {
+       "path": "area118/mod.py",
+       "data": "\"\"\"Area 118 handles request number 118 for the service.\"\"\"\n\n\ndef run_118():\n    return 118\n"
+      },
+      {
+       "path": "area119/mod.py",
+       "data": "\"\"\"Area 119 handles request number 119 for the service.\"\"\"\n\n\ndef run_119():\n    return 119\n"
+      },
+      {
+       "path": "area120/mod.py",
+       "data": "\"\"\"Area 120 handles request number 120 for the service.\"\"\"\n\n\ndef run_120():\n    return 120\n"
+      },
+      {
+       "path": "area121/mod.py",
+       "data": "\"\"\"Area 121 handles request number 121 for the service.\"\"\"\n\n\ndef run_121():\n    return 121\n"
+      },
+      {
+       "path": "area122/mod.py",
+       "data": "\"\"\"Area 122 handles request number 122 for the service.\"\"\"\n\n\ndef run_122():\n    return 122\n"
+      },
+      {
+       "path": "area123/mod.py",
+       "data": "\"\"\"Area 123 handles request number 123 for the service.\"\"\"\n\n\ndef run_123():\n    return 123\n"
+      },
+      {
+       "path": "area124/mod.py",
+       "data": "\"\"\"Area 124 handles request number 124 for the service.\"\"\"\n\n\ndef run_124():\n    return 124\n"
+      },
+      {
+       "path": "area125/mod.py",
+       "data": "\"\"\"Area 125 handles request number 125 for the service.\"\"\"\n\n\ndef run_125():\n    return 125\n"
+      },
+      {
+       "path": "area126/mod.py",
+       "data": "\"\"\"Area 126 handles request number 126 for the service.\"\"\"\n\n\ndef run_126():\n    return 126\n"
+      },
+      {
+       "path": "area127/mod.py",
+       "data": "\"\"\"Area 127 handles request number 127 for the service.\"\"\"\n\n\ndef run_127():\n    return 127\n"
+      },
+      {
+       "path": "area128/mod.py",
+       "data": "\"\"\"Area 128 handles request number 128 for the service.\"\"\"\n\n\ndef run_128():\n    return 128\n"
+      },
+      {
+       "path": "area129/mod.py",
+       "data": "\"\"\"Area 129 handles request number 129 for the service.\"\"\"\n\n\ndef run_129():\n    return 129\n"
+      },
+      {
+       "path": "area130/mod.py",
+       "data": "\"\"\"Area 130 handles request number 130 for the service.\"\"\"\n\n\ndef run_130():\n    return 130\n"
+      },
+      {
+       "path": "area131/mod.py",
+       "data": "\"\"\"Area 131 handles request number 131 for the service.\"\"\"\n\n\ndef run_131():\n    return 131\n"
+      },
+      {
+       "path": "area132/mod.py",
+       "data": "\"\"\"Area 132 handles request number 132 for the service.\"\"\"\n\n\ndef run_132():\n    return 132\n"
+      },
+      {
+       "path": "area133/mod.py",
+       "data": "\"\"\"Area 133 handles request number 133 for the service.\"\"\"\n\n\ndef run_133():\n    return 133\n"
+      },
+      {
+       "path": "area134/mod.py",
+       "data": "\"\"\"Area 134 handles request number 134 for the service.\"\"\"\n\n\ndef run_134():\n    return 134\n"
+      },
+      {
+       "path": "area135/mod.py",
+       "data": "\"\"\"Area 135 handles request number 135 for the service.\"\"\"\n\n\ndef run_135():\n    return 135\n"
+      },
+      {
+       "path": "area136/mod.py",
+       "data": "\"\"\"Area 136 handles request number 136 for the service.\"\"\"\n\n\ndef run_136():\n    return 136\n"
+      },
+      {
+       "path": "area137/mod.py",
+       "data": "\"\"\"Area 137 handles request number 137 for the service.\"\"\"\n\n\ndef run_137():\n    return 137\n"
+      },
+      {
+       "path": "area138/mod.py",
+       "data": "\"\"\"Area 138 handles request number 138 for the service.\"\"\"\n\n\ndef run_138():\n    return 138\n"
+      },
+      {
+       "path": "area139/mod.py",
+       "data": "\"\"\"Area 139 handles request number 139 for the service.\"\"\"\n\n\ndef run_139():\n    return 139\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     },
+     "state": "digest"
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "run_139"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "area07",
+      100
+     ],
+     "digest": true
+    }
+   ],
+   "finalState": "digest"
+  },
+  {
+   "id": "many-matches-are-capped-and-ranked",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "m000.py",
+       "data": "def common_0():\n    pass\n"
+      },
+      {
+       "path": "m001.py",
+       "data": "def common_1():\n    pass\n"
+      },
+      {
+       "path": "m002.py",
+       "data": "def common_2():\n    pass\n"
+      },
+      {
+       "path": "m003.py",
+       "data": "def common_3():\n    pass\n"
+      },
+      {
+       "path": "m004.py",
+       "data": "def common_4():\n    pass\n"
+      },
+      {
+       "path": "m005.py",
+       "data": "def common_5():\n    pass\n"
+      },
+      {
+       "path": "m006.py",
+       "data": "def common_6():\n    pass\n"
+      },
+      {
+       "path": "m007.py",
+       "data": "def common_7():\n    pass\n"
+      },
+      {
+       "path": "m008.py",
+       "data": "def common_8():\n    pass\n"
+      },
+      {
+       "path": "m009.py",
+       "data": "def common_9():\n    pass\n"
+      },
+      {
+       "path": "m010.py",
+       "data": "def common_10():\n    pass\n"
+      },
+      {
+       "path": "m011.py",
+       "data": "def common_11():\n    pass\n"
+      },
+      {
+       "path": "m012.py",
+       "data": "def common_12():\n    pass\n"
+      },
+      {
+       "path": "m013.py",
+       "data": "def common_13():\n    pass\n"
+      },
+      {
+       "path": "m014.py",
+       "data": "def common_14():\n    pass\n"
+      },
+      {
+       "path": "m015.py",
+       "data": "def common_15():\n    pass\n"
+      },
+      {
+       "path": "m016.py",
+       "data": "def common_16():\n    pass\n"
+      },
+      {
+       "path": "m017.py",
+       "data": "def common_17():\n    pass\n"
+      },
+      {
+       "path": "m018.py",
+       "data": "def common_18():\n    pass\n"
+      },
+      {
+       "path": "m019.py",
+       "data": "def common_19():\n    pass\n"
+      },
+      {
+       "path": "m020.py",
+       "data": "def common_20():\n    pass\n"
+      },
+      {
+       "path": "m021.py",
+       "data": "def common_21():\n    pass\n"
+      },
+      {
+       "path": "m022.py",
+       "data": "def common_22():\n    pass\n"
+      },
+      {
+       "path": "m023.py",
+       "data": "def common_23():\n    pass\n"
+      },
+      {
+       "path": "m024.py",
+       "data": "def common_24():\n    pass\n"
+      },
+      {
+       "path": "m025.py",
+       "data": "def common_25():\n    pass\n"
+      },
+      {
+       "path": "m026.py",
+       "data": "def common_26():\n    pass\n"
+      },
+      {
+       "path": "m027.py",
+       "data": "def common_27():\n    pass\n"
+      },
+      {
+       "path": "m028.py",
+       "data": "def common_28():\n    pass\n"
+      },
+      {
+       "path": "m029.py",
+       "data": "def common_29():\n    pass\n"
+      },
+      {
+       "path": "m030.py",
+       "data": "def common_30():\n    pass\n"
+      },
+      {
+       "path": "m031.py",
+       "data": "def common_31():\n    pass\n"
+      },
+      {
+       "path": "m032.py",
+       "data": "def common_32():\n    pass\n"
+      },
+      {
+       "path": "m033.py",
+       "data": "def common_33():\n    pass\n"
+      },
+      {
+       "path": "m034.py",
+       "data": "def common_34():\n    pass\n"
+      },
+      {
+       "path": "m035.py",
+       "data": "def common_35():\n    pass\n"
+      },
+      {
+       "path": "m036.py",
+       "data": "def common_36():\n    pass\n"
+      },
+      {
+       "path": "m037.py",
+       "data": "def common_37():\n    pass\n"
+      },
+      {
+       "path": "m038.py",
+       "data": "def common_38():\n    pass\n"
+      },
+      {
+       "path": "m039.py",
+       "data": "def common_39():\n    pass\n"
+      },
+      {
+       "path": "m040.py",
+       "data": "def common_40():\n    pass\n"
+      },
+      {
+       "path": "m041.py",
+       "data": "def common_41():\n    pass\n"
+      },
+      {
+       "path": "m042.py",
+       "data": "def common_42():\n    pass\n"
+      },
+      {
+       "path": "m043.py",
+       "data": "def common_43():\n    pass\n"
+      },
+      {
+       "path": "m044.py",
+       "data": "def common_44():\n    pass\n"
+      },
+      {
+       "path": "m045.py",
+       "data": "def common_45():\n    pass\n"
+      },
+      {
+       "path": "m046.py",
+       "data": "def common_46():\n    pass\n"
+      },
+      {
+       "path": "m047.py",
+       "data": "def common_47():\n    pass\n"
+      },
+      {
+       "path": "m048.py",
+       "data": "def common_48():\n    pass\n"
+      },
+      {
+       "path": "m049.py",
+       "data": "def common_49():\n    pass\n"
+      },
+      {
+       "path": "m050.py",
+       "data": "def common_50():\n    pass\n"
+      },
+      {
+       "path": "m051.py",
+       "data": "def common_51():\n    pass\n"
+      },
+      {
+       "path": "m052.py",
+       "data": "def common_52():\n    pass\n"
+      },
+      {
+       "path": "m053.py",
+       "data": "def common_53():\n    pass\n"
+      },
+      {
+       "path": "m054.py",
+       "data": "def common_54():\n    pass\n"
+      },
+      {
+       "path": "m055.py",
+       "data": "def common_55():\n    pass\n"
+      },
+      {
+       "path": "m056.py",
+       "data": "def common_56():\n    pass\n"
+      },
+      {
+       "path": "m057.py",
+       "data": "def common_57():\n    pass\n"
+      },
+      {
+       "path": "m058.py",
+       "data": "def common_58():\n    pass\n"
+      },
+      {
+       "path": "m059.py",
+       "data": "def common_59():\n    pass\n"
+      },
+      {
+       "path": "m060.py",
+       "data": "def common_60():\n    pass\n"
+      },
+      {
+       "path": "m061.py",
+       "data": "def common_61():\n    pass\n"
+      },
+      {
+       "path": "m062.py",
+       "data": "def common_62():\n    pass\n"
+      },
+      {
+       "path": "m063.py",
+       "data": "def common_63():\n    pass\n"
+      },
+      {
+       "path": "m064.py",
+       "data": "def common_64():\n    pass\n"
+      },
+      {
+       "path": "m065.py",
+       "data": "def common_65():\n    pass\n"
+      },
+      {
+       "path": "m066.py",
+       "data": "def common_66():\n    pass\n"
+      },
+      {
+       "path": "m067.py",
+       "data": "def common_67():\n    pass\n"
+      },
+      {
+       "path": "m068.py",
+       "data": "def common_68():\n    pass\n"
+      },
+      {
+       "path": "m069.py",
+       "data": "def common_69():\n    pass\n"
+      },
+      {
+       "path": "m070.py",
+       "data": "def common_70():\n    pass\n"
+      },
+      {
+       "path": "m071.py",
+       "data": "def common_71():\n    pass\n"
+      },
+      {
+       "path": "m072.py",
+       "data": "def common_72():\n    pass\n"
+      },
+      {
+       "path": "m073.py",
+       "data": "def common_73():\n    pass\n"
+      },
+      {
+       "path": "m074.py",
+       "data": "def common_74():\n    pass\n"
+      },
+      {
+       "path": "m075.py",
+       "data": "def common_75():\n    pass\n"
+      },
+      {
+       "path": "m076.py",
+       "data": "def common_76():\n    pass\n"
+      },
+      {
+       "path": "m077.py",
+       "data": "def common_77():\n    pass\n"
+      },
+      {
+       "path": "m078.py",
+       "data": "def common_78():\n    pass\n"
+      },
+      {
+       "path": "m079.py",
+       "data": "def common_79():\n    pass\n"
+      },
+      {
+       "path": "m080.py",
+       "data": "def common_80():\n    pass\n"
+      },
+      {
+       "path": "m081.py",
+       "data": "def common_81():\n    pass\n"
+      },
+      {
+       "path": "m082.py",
+       "data": "def common_82():\n    pass\n"
+      },
+      {
+       "path": "m083.py",
+       "data": "def common_83():\n    pass\n"
+      },
+      {
+       "path": "m084.py",
+       "data": "def common_84():\n    pass\n"
+      },
+      {
+       "path": "m085.py",
+       "data": "def common_85():\n    pass\n"
+      },
+      {
+       "path": "m086.py",
+       "data": "def common_86():\n    pass\n"
+      },
+      {
+       "path": "m087.py",
+       "data": "def common_87():\n    pass\n"
+      },
+      {
+       "path": "m088.py",
+       "data": "def common_88():\n    pass\n"
+      },
+      {
+       "path": "m089.py",
+       "data": "def common_89():\n    pass\n"
+      },
+      {
+       "path": "m090.py",
+       "data": "def common_90():\n    pass\n"
+      },
+      {
+       "path": "m091.py",
+       "data": "def common_91():\n    pass\n"
+      },
+      {
+       "path": "m092.py",
+       "data": "def common_92():\n    pass\n"
+      },
+      {
+       "path": "m093.py",
+       "data": "def common_93():\n    pass\n"
+      },
+      {
+       "path": "m094.py",
+       "data": "def common_94():\n    pass\n"
+      },
+      {
+       "path": "m095.py",
+       "data": "def common_95():\n    pass\n"
+      },
+      {
+       "path": "m096.py",
+       "data": "def common_96():\n    pass\n"
+      },
+      {
+       "path": "m097.py",
+       "data": "def common_97():\n    pass\n"
+      },
+      {
+       "path": "m098.py",
+       "data": "def common_98():\n    pass\n"
+      },
+      {
+       "path": "m099.py",
+       "data": "def common_99():\n    pass\n"
+      },
+      {
+       "path": "m100.py",
+       "data": "def common_100():\n    pass\n"
+      },
+      {
+       "path": "m101.py",
+       "data": "def common_101():\n    pass\n"
+      },
+      {
+       "path": "m102.py",
+       "data": "def common_102():\n    pass\n"
+      },
+      {
+       "path": "m103.py",
+       "data": "def common_103():\n    pass\n"
+      },
+      {
+       "path": "m104.py",
+       "data": "def common_104():\n    pass\n"
+      },
+      {
+       "path": "m105.py",
+       "data": "def common_105():\n    pass\n"
+      },
+      {
+       "path": "m106.py",
+       "data": "def common_106():\n    pass\n"
+      },
+      {
+       "path": "m107.py",
+       "data": "def common_107():\n    pass\n"
+      },
+      {
+       "path": "m108.py",
+       "data": "def common_108():\n    pass\n"
+      },
+      {
+       "path": "m109.py",
+       "data": "def common_109():\n    pass\n"
+      },
+      {
+       "path": "m110.py",
+       "data": "def common_110():\n    pass\n"
+      },
+      {
+       "path": "m111.py",
+       "data": "def common_111():\n    pass\n"
+      },
+      {
+       "path": "m112.py",
+       "data": "def common_112():\n    pass\n"
+      },
+      {
+       "path": "m113.py",
+       "data": "def common_113():\n    pass\n"
+      },
+      {
+       "path": "m114.py",
+       "data": "def common_114():\n    pass\n"
+      },
+      {
+       "path": "m115.py",
+       "data": "def common_115():\n    pass\n"
+      },
+      {
+       "path": "m116.py",
+       "data": "def common_116():\n    pass\n"
+      },
+      {
+       "path": "m117.py",
+       "data": "def common_117():\n    pass\n"
+      },
+      {
+       "path": "m118.py",
+       "data": "def common_118():\n    pass\n"
+      },
+      {
+       "path": "m119.py",
+       "data": "def common_119():\n    pass\n"
+      },
+      {
+       "path": "m120.py",
+       "data": "def common_120():\n    pass\n"
+      },
+      {
+       "path": "m121.py",
+       "data": "def common_121():\n    pass\n"
+      },
+      {
+       "path": "m122.py",
+       "data": "def common_122():\n    pass\n"
+      },
+      {
+       "path": "m123.py",
+       "data": "def common_123():\n    pass\n"
+      },
+      {
+       "path": "m124.py",
+       "data": "def common_124():\n    pass\n"
+      },
+      {
+       "path": "m125.py",
+       "data": "def common_125():\n    pass\n"
+      },
+      {
+       "path": "m126.py",
+       "data": "def common_126():\n    pass\n"
+      },
+      {
+       "path": "m127.py",
+       "data": "def common_127():\n    pass\n"
+      },
+      {
+       "path": "m128.py",
+       "data": "def common_128():\n    pass\n"
+      },
+      {
+       "path": "m129.py",
+       "data": "def common_129():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "common",
+      1000
+     ],
+     "digest": true
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "common",
+      100
+     ],
+     "digest": true
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "common",
+      7
+     ],
+     "digest": true
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "COMMON_1"
+     ],
+     "digest": true
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "common_1",
+      3
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "m01",
+      3
+     ]
+    }
+   ],
+   "finalState": "digest"
+  },
+  {
+   "id": "empty-snapshot-reads",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "x"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "architecture_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      "none"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "no-snapshot-at-all",
+   "steps": [
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "x"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      "x"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "same-revision-twice-answers-with-the-latest-snapshot",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=1"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=2"
+      }
+     ]
+    },
+    {
+     "op": "prune",
+     "kwargs": {
+      "keep": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=2"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "partial-flags",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def a(): pass\n",
+      "b.go": "package b\n",
+      "big.js": {
+       "repeat": {
+        "text": "x",
+        "times": 300
+       }
+      }
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_file_bytes": 200
+     }
+    },
+    {
+     "op": "read",
+     "fn": "architecture_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "read",
+     "fn": "architecture_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "UPDATE snapshot_files SET analysis_id=analysis_id"
+     ]
+    }
+   ]
+  }
+ ]
+}

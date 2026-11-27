@@ -1,0 +1,1568 @@
+{
+ "cases": [
+  {
+   "id": "index-files-max-files-zero",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "max_files": 0
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "index-files-max-files-negative",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "max_files": -1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "index-files-max-bytes-zero",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "max_bytes": 0
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "index-files-max-symbols-zero",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "max_symbols": 0
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "index-files-timeout-zero",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "timeout_seconds": 0
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "index-files-timeout-negative",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "timeout_seconds": -1.5
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "rollback-max-files-exceeded",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "base.py",
+       "data": "def read():\n    return 1\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "max_files": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM waypoint_cache"
+    }
+   ]
+  },
+  {
+   "id": "rollback-max-bytes-exceeded",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "base.py",
+       "data": "def read():\n    return 1\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "max_bytes": 5
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM waypoint_cache"
+    }
+   ]
+  },
+  {
+   "id": "rollback-max-symbols-exceeded",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "base.py",
+       "data": "def read():\n    return 1\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "max_symbols": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM waypoint_cache"
+    }
+   ]
+  },
+  {
+   "id": "limits-at-the-boundary-pass",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "max_files": 2,
+      "max_bytes": 40,
+      "max_symbols": 2
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "max_files": 2,
+      "max_bytes": 39,
+      "max_symbols": 2
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "max_files": 2,
+      "max_bytes": 40,
+      "max_symbols": 1
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "max_files": 1,
+      "max_bytes": 40,
+      "max_symbols": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "same-content-counts-towards-byte-and-symbol-limits",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def read():\n    return 1\n"
+      },
+      {
+       "path": "b.py",
+       "data": "def read():\n    return 1\n"
+      },
+      {
+       "path": "c.py",
+       "data": "def read():\n    return 1\n"
+      }
+     ],
+     "options": {
+      "max_bytes": 50
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def read():\n    return 1\n"
+      },
+      {
+       "path": "b.py",
+       "data": "def read():\n    return 1\n"
+      },
+      {
+       "path": "c.py",
+       "data": "def read():\n    return 1\n"
+      }
+     ],
+     "options": {
+      "max_symbols": 2
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def read():\n    return 1\n"
+      },
+      {
+       "path": "b.py",
+       "data": "def read():\n    return 1\n"
+      },
+      {
+       "path": "c.py",
+       "data": "def read():\n    return 1\n"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "empty-file-list",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": []
+    },
+    {
+     "op": "indexFiles",
+     "files": [],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "invalid-source-revision-short",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "abc"
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-source-revision-39-characters",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-source-revision-41-characters",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-source-revision-uppercase",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-source-revision-trailing-newline",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n"
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-source-revision-not-hex",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "gggggggggggggggggggggggggggggggggggggggg"
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-source-revision-empty",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": ""
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "valid-source-revision-is-kept",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "0123456789abcdef0123456789abcdef01234567"
+     }
+    }
+   ]
+  },
+  {
+   "id": "invalid-workspace-context-missing-fingerprint",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-workspace-context-missing-branch",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-workspace-context-extra-key",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch",
+       "extra": "x"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-workspace-context-short-fingerprint",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-workspace-context-uppercase-workspace-id",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-workspace-context-unknown-view",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "tag"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-workspace-context-empty-branch",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-workspace-context-nul-in-branch",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "ma\u0000in",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-workspace-context-branch-too-long",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-workspace-context-empty-context",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {}
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "workspace-context-needs-a-source-revision",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "valid-workspace-contexts",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "working_tree"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "49abd65bbf7f7e40c7055093ed2e3fd75f2f602f2c5fcf955c213e3135eb03f7",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": null,
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "view": "branch",
+       "fingerprint": "8254c329a92850f6d539dd376f4816ee2764517da5e0235514af433164480d7a",
+       "workspace_id": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+       "branch": "keys-in-another-order"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "invalid-waypoint-configuration-traversal",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "waypoint_configuration": {
+       "../package.json": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-waypoint-configuration-not-a-hash",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "waypoint_configuration": {
+       "package.json": "not-a-hash"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-waypoint-configuration-uppercase-hash",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "waypoint_configuration": {
+       "package.json": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-waypoint-configuration-secret-name",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "waypoint_configuration": {
+       ".env": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-waypoint-configuration-absolute",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "waypoint_configuration": {
+       "/package.json": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-waypoint-configuration-backslash",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "waypoint_configuration": {
+       "config\\package.json": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-waypoint-configuration-not-a-configuration-file",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "waypoint_configuration": {
+       "module.py": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-waypoint-policy-digest-short",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "waypoint_policy_digest": "abc"
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "invalid-waypoint-policy-digest-uppercase",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "waypoint_policy_digest": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "valid-waypoint-configuration-and-policy",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      },
+      {
+       "path": "web/tsconfig.json",
+       "data": "{}"
+      }
+     ],
+     "options": {
+      "waypoint_configuration": {
+       "web/tsconfig.json": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+       "package.json": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "waypoint_policy_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      },
+      {
+       "path": "web/tsconfig.json",
+       "data": "{}"
+      }
+     ],
+     "options": {
+      "waypoint_policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+     }
+    }
+   ]
+  },
+  {
+   "id": "before-commit-failure-rolls-everything-back",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ],
+     "beforeCommit": "fail"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM waypoint_cache"
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "one.py",
+       "data": "def one():\n    pass\n"
+      },
+      {
+       "path": "two.py",
+       "data": "def two():\n    pass\n"
+      }
+     ]
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "index-repo-max-file-bytes-zero",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def read():\n    return 1\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_file_bytes": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "index-repo-max-file-bytes-negative",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def read():\n    return 1\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_file_bytes": -5
+     }
+    }
+   ]
+  },
+  {
+   "id": "index-repo-max-files-zero",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def read():\n    return 1\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_files": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "index-repo-max-bytes-negative",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def read():\n    return 1\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_bytes": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "index-repo-max-symbols-zero",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def read():\n    return 1\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_symbols": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "index-repo-timeout-zero",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def read():\n    return 1\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "timeout_seconds": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "index-repo-limits-roll-back",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def read():\n    return 1\n"
+     }
+    },
+    {
+     "op": "write",
+     "files": {
+      "b.py": "def b():\n    pass\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_files": 1
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_bytes": 5
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_symbols": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    }
+   ]
+  },
+  {
+   "id": "index-repo-root-must-exist-and-be-a-folder",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def read():\n    return 1\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "root": "missing"
+    },
+    {
+     "op": "indexRepo",
+     "root": "a.py"
+    },
+    {
+     "op": "indexRepo",
+     "root": "."
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "index-repo-before-commit-failure",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def read():\n    return 1\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "beforeCommit": "fail"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  }
+ ]
+}

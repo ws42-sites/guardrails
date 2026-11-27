@@ -1,0 +1,93 @@
+{
+  ".codegraph/architecture.json": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "apps/entry.ts": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 1,
+        "target": "core/store.ts"
+      }
+    ],
+    "possible_calls": []
+  },
+  "core/README.md": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "core/leak.ts": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 1,
+        "target": "apps/entry.ts"
+      }
+    ],
+    "possible_calls": []
+  },
+  "core/store.ts": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 1,
+        "target": "core/types.ts"
+      }
+    ],
+    "possible_calls": []
+  },
+  "core/types.ts": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "docs/overview.md": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "lib/a.ts": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 1,
+        "target": "lib/b.ts"
+      }
+    ],
+    "possible_calls": []
+  },
+  "lib/b.ts": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 1,
+        "target": "lib/a.ts"
+      }
+    ],
+    "possible_calls": []
+  },
+  "lib/big.ts": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "tests/store.test.ts": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 1,
+        "target": "core/store.ts"
+      }
+    ],
+    "possible_calls": []
+  }
+}

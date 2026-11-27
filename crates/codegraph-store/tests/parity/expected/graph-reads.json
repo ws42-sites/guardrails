@@ -1,0 +1,2265 @@
+{
+ "cases": {
+  "empty-database": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": []
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": []
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": []
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": []
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": []
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": []
+     }
+    },
+    "user_version": 3
+   },
+   "sqlDump": [
+    "BEGIN TRANSACTION;",
+    "CREATE TABLE analyses(\n        id TEXT PRIMARY KEY,content_hash TEXT NOT NULL,git_oid TEXT NOT NULL,\n        language TEXT NOT NULL,version TEXT NOT NULL,size_bytes INTEGER NOT NULL,\n        symbols TEXT NOT NULL CHECK(json_valid(symbols)),facts TEXT NOT NULL CHECK(json_valid(facts)));",
+    "CREATE TABLE legacy_edges(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind));",
+    "CREATE TABLE legacy_nodes(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}');",
+    "CREATE TABLE resolved_edges(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,\n        PRIMARY KEY(snapshot_id,source,target,kind));",
+    "CREATE TABLE snapshot_files(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,file_id TEXT NOT NULL,name TEXT NOT NULL,\n        analysis_id TEXT NOT NULL REFERENCES analyses(id),PRIMARY KEY(snapshot_id,path));",
+    "CREATE TABLE snapshot_waypoints(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,kind TEXT NOT NULL CHECK(kind IN ('file','area')),\n        summary_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        validation_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        PRIMARY KEY(snapshot_id,path));",
+    "CREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP, metadata TEXT NOT NULL DEFAULT '{}', node_prefix TEXT, view_key TEXT NOT NULL DEFAULT 'default');",
+    "CREATE TABLE waypoint_cache(\n        id TEXT PRIMARY KEY,kind TEXT NOT NULL CHECK(kind IN ('file','area','validation')),\n        version TEXT NOT NULL,payload TEXT NOT NULL CHECK(json_valid(payload)),\n        payload_hash TEXT NOT NULL);",
+    "CREATE INDEX idx_nodes_lookup ON legacy_nodes(snapshot_id,name,kind);",
+    "CREATE INDEX idx_edges_source ON legacy_edges(snapshot_id,source);",
+    "CREATE INDEX idx_edges_target ON legacy_edges(snapshot_id,target);",
+    "CREATE INDEX analysis_object ON analyses(git_oid,language,version);",
+    "CREATE INDEX manifest_analysis ON snapshot_files(analysis_id);",
+    "CREATE INDEX resolved_inbound ON resolved_edges(snapshot_id,target);",
+    "CREATE INDEX waypoint_summary_bindings ON snapshot_waypoints(summary_key);",
+    "CREATE INDEX waypoint_validation_bindings ON snapshot_waypoints(validation_key);",
+    "CREATE INDEX snapshot_view ON snapshots(repo,view_key,id DESC);",
+    "CREATE VIEW nodes AS\n SELECT id,snapshot_id,kind,name,path,line,metadata FROM legacy_nodes\n UNION ALL\n SELECT 'r:'||node_prefix,id,'repository',repo,'.',NULL,\n json_set(metadata,'$.areaWaypoints',json((\n   SELECT json_group_array(json(waypoint)) FROM (\n     SELECT json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))) AS waypoint\n     FROM snapshot_waypoints sw JOIN waypoint_cache wc ON wc.id=sw.summary_key\n     JOIN waypoint_cache vc ON vc.id=sw.validation_key\n     WHERE sw.snapshot_id=s.id AND sw.kind='area' ORDER BY sw.path\n   ))))\n FROM snapshots s WHERE node_prefix IS NOT NULL\n UNION ALL\n SELECT 'f:'||s.node_prefix||':'||f.file_id,f.snapshot_id,'file',f.name,f.path,NULL,\n CASE WHEN sw.path IS NULL THEN json_object('language',a.language,'sha256',a.content_hash)\n ELSE json_object('language',a.language,'sha256',a.content_hash,'waypoint',json(json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))))) END\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id JOIN analyses a ON a.id=f.analysis_id\n LEFT JOIN snapshot_waypoints sw ON sw.snapshot_id=f.snapshot_id AND sw.path=f.path AND sw.kind='file'\n LEFT JOIN waypoint_cache wc ON wc.id=sw.summary_key\n LEFT JOIN waypoint_cache vc ON vc.id=sw.validation_key\n UNION ALL\n SELECT 's:'||s.node_prefix||':'||f.file_id||':'||j.key,f.snapshot_id,\n json_extract(j.value,'$[0]'),json_extract(j.value,'$[1]'),f.path,json_extract(j.value,'$[2]'),\n json_object('parent',json_extract(j.value,'$[3]'))\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j;",
+    "CREATE VIEW edges AS\n SELECT snapshot_id,source,target,kind,evidence FROM legacy_edges\n UNION ALL SELECT snapshot_id,source,target,kind,evidence FROM resolved_edges\n UNION ALL\n SELECT f.snapshot_id,'r:'||s.node_prefix,'f:'||s.node_prefix||':'||f.file_id,'CONTAINS',f.path\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n UNION ALL\n SELECT f.snapshot_id,'f:'||s.node_prefix||':'||f.file_id,\n 's:'||s.node_prefix||':'||f.file_id||':'||j.key,'DEFINES',\n f.path||':'||json_extract(j.value,'$[2]')\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j;",
+    "CREATE TRIGGER staging_edge_insert INSTEAD OF INSERT ON edges\n        BEGIN INSERT INTO resolved_edges(snapshot_id,source,target,kind,evidence)\n        VALUES (new.snapshot_id,new.source,new.target,new.kind,new.evidence); END;",
+    "COMMIT;"
+   ],
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "manifest_entries": 0,
+      "stored_symbols": 0,
+      "unique_analyses": 0,
+      "unique_source_bytes": 0
+     }
+    },
+    {
+     "value": []
+    },
+    {
+     "value": []
+    },
+    {
+     "value": []
+    }
+   ]
+  },
+  "hand-built-database": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": [
+       [
+        "an-alpha",
+        "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8",
+        "1111111111111111111111111111111111111111",
+        "python",
+        "analyser-1",
+        120,
+        "[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]",
+        "{\"imports\":[],\"calls\":[]}"
+       ],
+       [
+        "an-beta",
+        "f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753",
+        "2222222222222222222222222222222222222222",
+        "python",
+        "analyser-1",
+        80,
+        "[[\"function_definition\",\"beta\",1,null]]",
+        "{\"imports\":[],\"calls\":[]}"
+       ],
+       [
+        "an-unused",
+        "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "3333333333333333333333333333333333333333",
+        "python",
+        "analyser-1",
+        10,
+        "[]",
+        "{}"
+       ]
+      ]
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": []
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": [
+       [
+        1,
+        "f:p1:f2",
+        "f:p1:f1",
+        "IMPORTS",
+        "src/b.py:1"
+       ],
+       [
+        2,
+        "f:p2:f1",
+        "f:p2:f1",
+        "CALLS",
+        "src/a.py:6"
+       ]
+      ]
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": [
+       [
+        1,
+        "src/a.py",
+        "f1",
+        "a.py",
+        "an-alpha"
+       ],
+       [
+        1,
+        "src/b.py",
+        "f2",
+        "b.py",
+        "an-beta"
+       ],
+       [
+        2,
+        "src/a.py",
+        "f1",
+        "a.py",
+        "an-alpha"
+       ],
+       [
+        3,
+        "x.py",
+        "f1",
+        "x.py",
+        "an-alpha"
+       ]
+      ]
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": [
+       [
+        1,
+        "src/a.py",
+        "file",
+        "wp-s",
+        "wp-v"
+       ]
+      ]
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": [
+       [
+        1,
+        "owner/repo",
+        "rev-1",
+        "<timestamp>",
+        "{\"k\":1}",
+        "p1",
+        "branch"
+       ],
+       [
+        2,
+        "owner/repo",
+        "rev-2",
+        "<timestamp>",
+        "{}",
+        "p2",
+        "branch"
+       ],
+       [
+        3,
+        "other/repo",
+        "rev-3",
+        "<timestamp>",
+        "{}",
+        "p3",
+        "branch"
+       ]
+      ]
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": [
+       [
+        "wp-s",
+        "file",
+        "waypoint-v2",
+        "{\"kind\":\"file\",\"path\":\"src/a.py\"}",
+        "6ad0905d1d5f66168e5de64094f53a1c648a776ef2e8af5e6d172020ec154f6d"
+       ],
+       [
+        "wp-v",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[]}",
+        "eb974a7f5ec1b337afeb736d5f5f55eb466edf8c0efbe67fec328b9db844faf1"
+       ],
+       [
+        "wp-orphan",
+        "area",
+        "waypoint-v2",
+        "{}",
+        "0"
+       ]
+      ]
+     }
+    },
+    "user_version": 3
+   },
+   "sqlDump": [
+    "BEGIN TRANSACTION;",
+    "CREATE TABLE analyses(\n        id TEXT PRIMARY KEY,content_hash TEXT NOT NULL,git_oid TEXT NOT NULL,\n        language TEXT NOT NULL,version TEXT NOT NULL,size_bytes INTEGER NOT NULL,\n        symbols TEXT NOT NULL CHECK(json_valid(symbols)),facts TEXT NOT NULL CHECK(json_valid(facts)));",
+    "INSERT INTO \"analyses\" VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}');",
+    "INSERT INTO \"analyses\" VALUES('an-beta','f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753','2222222222222222222222222222222222222222','python','analyser-1',80,'[[\"function_definition\",\"beta\",1,null]]','{\"imports\":[],\"calls\":[]}');",
+    "INSERT INTO \"analyses\" VALUES('an-unused','febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e','3333333333333333333333333333333333333333','python','analyser-1',10,'[]','{}');",
+    "CREATE TABLE legacy_edges(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind));",
+    "CREATE TABLE legacy_nodes(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}');",
+    "CREATE TABLE resolved_edges(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,\n        PRIMARY KEY(snapshot_id,source,target,kind));",
+    "INSERT INTO \"resolved_edges\" VALUES(1,'f:p1:f2','f:p1:f1','IMPORTS','src/b.py:1');",
+    "INSERT INTO \"resolved_edges\" VALUES(2,'f:p2:f1','f:p2:f1','CALLS','src/a.py:6');",
+    "CREATE TABLE snapshot_files(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,file_id TEXT NOT NULL,name TEXT NOT NULL,\n        analysis_id TEXT NOT NULL REFERENCES analyses(id),PRIMARY KEY(snapshot_id,path));",
+    "INSERT INTO \"snapshot_files\" VALUES(1,'src/a.py','f1','a.py','an-alpha');",
+    "INSERT INTO \"snapshot_files\" VALUES(1,'src/b.py','f2','b.py','an-beta');",
+    "INSERT INTO \"snapshot_files\" VALUES(2,'src/a.py','f1','a.py','an-alpha');",
+    "INSERT INTO \"snapshot_files\" VALUES(3,'x.py','f1','x.py','an-alpha');",
+    "CREATE TABLE snapshot_waypoints(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,kind TEXT NOT NULL CHECK(kind IN ('file','area')),\n        summary_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        validation_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        PRIMARY KEY(snapshot_id,path));",
+    "INSERT INTO \"snapshot_waypoints\" VALUES(1,'src/a.py','file','wp-s','wp-v');",
+    "CREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP, metadata TEXT NOT NULL DEFAULT '{}', node_prefix TEXT, view_key TEXT NOT NULL DEFAULT 'default');",
+    "INSERT INTO \"snapshots\" VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch');",
+    "INSERT INTO \"snapshots\" VALUES(2,'owner/repo','rev-2','2026-01-02 00:00:00','{}','p2','branch');",
+    "INSERT INTO \"snapshots\" VALUES(3,'other/repo','rev-3','2026-01-03 00:00:00','{}','p3','branch');",
+    "CREATE TABLE waypoint_cache(\n        id TEXT PRIMARY KEY,kind TEXT NOT NULL CHECK(kind IN ('file','area','validation')),\n        version TEXT NOT NULL,payload TEXT NOT NULL CHECK(json_valid(payload)),\n        payload_hash TEXT NOT NULL);",
+    "INSERT INTO \"waypoint_cache\" VALUES('wp-s','file','waypoint-v2','{\"kind\":\"file\",\"path\":\"src/a.py\"}','6ad0905d1d5f66168e5de64094f53a1c648a776ef2e8af5e6d172020ec154f6d');",
+    "INSERT INTO \"waypoint_cache\" VALUES('wp-v','validation','waypoint-checks-v1','{\"checks\":[]}','eb974a7f5ec1b337afeb736d5f5f55eb466edf8c0efbe67fec328b9db844faf1');",
+    "INSERT INTO \"waypoint_cache\" VALUES('wp-orphan','area','waypoint-v2','{}','0');",
+    "CREATE INDEX idx_nodes_lookup ON legacy_nodes(snapshot_id,name,kind);",
+    "CREATE INDEX idx_edges_source ON legacy_edges(snapshot_id,source);",
+    "CREATE INDEX idx_edges_target ON legacy_edges(snapshot_id,target);",
+    "CREATE INDEX analysis_object ON analyses(git_oid,language,version);",
+    "CREATE INDEX manifest_analysis ON snapshot_files(analysis_id);",
+    "CREATE INDEX resolved_inbound ON resolved_edges(snapshot_id,target);",
+    "CREATE INDEX waypoint_summary_bindings ON snapshot_waypoints(summary_key);",
+    "CREATE INDEX waypoint_validation_bindings ON snapshot_waypoints(validation_key);",
+    "CREATE INDEX snapshot_view ON snapshots(repo,view_key,id DESC);",
+    "CREATE VIEW nodes AS\n SELECT id,snapshot_id,kind,name,path,line,metadata FROM legacy_nodes\n UNION ALL\n SELECT 'r:'||node_prefix,id,'repository',repo,'.',NULL,\n json_set(metadata,'$.areaWaypoints',json((\n   SELECT json_group_array(json(waypoint)) FROM (\n     SELECT json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))) AS waypoint\n     FROM snapshot_waypoints sw JOIN waypoint_cache wc ON wc.id=sw.summary_key\n     JOIN waypoint_cache vc ON vc.id=sw.validation_key\n     WHERE sw.snapshot_id=s.id AND sw.kind='area' ORDER BY sw.path\n   ))))\n FROM snapshots s WHERE node_prefix IS NOT NULL\n UNION ALL\n SELECT 'f:'||s.node_prefix||':'||f.file_id,f.snapshot_id,'file',f.name,f.path,NULL,\n CASE WHEN sw.path IS NULL THEN json_object('language',a.language,'sha256',a.content_hash)\n ELSE json_object('language',a.language,'sha256',a.content_hash,'waypoint',json(json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))))) END\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id JOIN analyses a ON a.id=f.analysis_id\n LEFT JOIN snapshot_waypoints sw ON sw.snapshot_id=f.snapshot_id AND sw.path=f.path AND sw.kind='file'\n LEFT JOIN waypoint_cache wc ON wc.id=sw.summary_key\n LEFT JOIN waypoint_cache vc ON vc.id=sw.validation_key\n UNION ALL\n SELECT 's:'||s.node_prefix||':'||f.file_id||':'||j.key,f.snapshot_id,\n json_extract(j.value,'$[0]'),json_extract(j.value,'$[1]'),f.path,json_extract(j.value,'$[2]'),\n json_object('parent',json_extract(j.value,'$[3]'))\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j;",
+    "CREATE VIEW edges AS\n SELECT snapshot_id,source,target,kind,evidence FROM legacy_edges\n UNION ALL SELECT snapshot_id,source,target,kind,evidence FROM resolved_edges\n UNION ALL\n SELECT f.snapshot_id,'r:'||s.node_prefix,'f:'||s.node_prefix||':'||f.file_id,'CONTAINS',f.path\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n UNION ALL\n SELECT f.snapshot_id,'f:'||s.node_prefix||':'||f.file_id,\n 's:'||s.node_prefix||':'||f.file_id||':'||j.key,'DEFINES',\n f.path||':'||json_extract(j.value,'$[2]')\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j;",
+    "CREATE TRIGGER staging_edge_insert INSTEAD OF INSERT ON edges\n        BEGIN INSERT INTO resolved_edges(snapshot_id,source,target,kind,evidence)\n        VALUES (new.snapshot_id,new.source,new.target,new.kind,new.evidence); END;",
+    "COMMIT;"
+   ],
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "content_hash": "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8",
+      "encoded_bytes": 139,
+      "facts": {
+       "calls": [],
+       "imports": []
+      },
+      "git_oid": "1111111111111111111111111111111111111111",
+      "id": "an-alpha",
+      "language": "python",
+      "size_bytes": 120,
+      "symbols": [
+       [
+        "function_definition",
+        "alpha",
+        1,
+        null
+       ],
+       [
+        "class_definition",
+        "Beta",
+        5,
+        null
+       ],
+       [
+        "function_definition",
+        "run",
+        6,
+        "Beta"
+       ]
+      ],
+      "version": "analyser-1"
+     }
+    },
+    {
+     "value": {
+      "content_hash": "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+      "encoded_bytes": 4,
+      "facts": {},
+      "git_oid": "3333333333333333333333333333333333333333",
+      "id": "an-unused",
+      "language": "python",
+      "size_bytes": 10,
+      "symbols": [],
+      "version": "analyser-1"
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "manifest_entries": 3,
+      "stored_symbols": 4,
+      "unique_analyses": 2,
+      "unique_source_bytes": 200
+     }
+    },
+    {
+     "value": {
+      "manifest_entries": 1,
+      "stored_symbols": 3,
+      "unique_analyses": 1,
+      "unique_source_bytes": 120
+     }
+    },
+    {
+     "value": {
+      "manifest_entries": 0,
+      "stored_symbols": 0,
+      "unique_analyses": 0,
+      "unique_source_bytes": 0
+     }
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint record"
+    },
+    {
+     "value": []
+    },
+    {
+     "value": [
+      [
+       "f:p1:f1",
+       1,
+       "file",
+       "a.py",
+       "src/a.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\",\"waypoint\":{\"kind\":\"file\",\"path\":\"src/a.py\",\"validation\":{\"checks\":[]},\"evidence\":[]}}"
+      ],
+      [
+       "f:p1:f2",
+       1,
+       "file",
+       "b.py",
+       "src/b.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753\"}"
+      ],
+      [
+       "f:p2:f1",
+       2,
+       "file",
+       "a.py",
+       "src/a.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+      ],
+      [
+       "f:p3:f1",
+       3,
+       "file",
+       "x.py",
+       "x.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+      ],
+      [
+       "r:p1",
+       1,
+       "repository",
+       "owner/repo",
+       ".",
+       null,
+       "{\"k\":1,\"areaWaypoints\":[]}"
+      ],
+      [
+       "r:p2",
+       2,
+       "repository",
+       "owner/repo",
+       ".",
+       null,
+       "{\"areaWaypoints\":[]}"
+      ],
+      [
+       "r:p3",
+       3,
+       "repository",
+       "other/repo",
+       ".",
+       null,
+       "{\"areaWaypoints\":[]}"
+      ],
+      [
+       "s:p1:f1:0",
+       1,
+       "function_definition",
+       "alpha",
+       "src/a.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p1:f1:1",
+       1,
+       "class_definition",
+       "Beta",
+       "src/a.py",
+       5,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p1:f1:2",
+       1,
+       "function_definition",
+       "run",
+       "src/a.py",
+       6,
+       "{\"parent\":\"Beta\"}"
+      ],
+      [
+       "s:p1:f2:0",
+       1,
+       "function_definition",
+       "beta",
+       "src/b.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p2:f1:0",
+       2,
+       "function_definition",
+       "alpha",
+       "src/a.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p2:f1:1",
+       2,
+       "class_definition",
+       "Beta",
+       "src/a.py",
+       5,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p2:f1:2",
+       2,
+       "function_definition",
+       "run",
+       "src/a.py",
+       6,
+       "{\"parent\":\"Beta\"}"
+      ],
+      [
+       "s:p3:f1:0",
+       3,
+       "function_definition",
+       "alpha",
+       "x.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p3:f1:1",
+       3,
+       "class_definition",
+       "Beta",
+       "x.py",
+       5,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p3:f1:2",
+       3,
+       "function_definition",
+       "run",
+       "x.py",
+       6,
+       "{\"parent\":\"Beta\"}"
+      ]
+     ]
+    },
+    {
+     "value": [
+      [
+       1,
+       "f:p1:f1",
+       "s:p1:f1:0",
+       "DEFINES",
+       "src/a.py:1"
+      ],
+      [
+       1,
+       "f:p1:f1",
+       "s:p1:f1:1",
+       "DEFINES",
+       "src/a.py:5"
+      ],
+      [
+       1,
+       "f:p1:f1",
+       "s:p1:f1:2",
+       "DEFINES",
+       "src/a.py:6"
+      ],
+      [
+       1,
+       "f:p1:f2",
+       "f:p1:f1",
+       "IMPORTS",
+       "src/b.py:1"
+      ],
+      [
+       1,
+       "f:p1:f2",
+       "s:p1:f2:0",
+       "DEFINES",
+       "src/b.py:1"
+      ],
+      [
+       1,
+       "r:p1",
+       "f:p1:f1",
+       "CONTAINS",
+       "src/a.py"
+      ],
+      [
+       1,
+       "r:p1",
+       "f:p1:f2",
+       "CONTAINS",
+       "src/b.py"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "f:p2:f1",
+       "CALLS",
+       "src/a.py:6"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "s:p2:f1:0",
+       "DEFINES",
+       "src/a.py:1"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "s:p2:f1:1",
+       "DEFINES",
+       "src/a.py:5"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "s:p2:f1:2",
+       "DEFINES",
+       "src/a.py:6"
+      ],
+      [
+       2,
+       "r:p2",
+       "f:p2:f1",
+       "CONTAINS",
+       "src/a.py"
+      ],
+      [
+       3,
+       "f:p3:f1",
+       "s:p3:f1:0",
+       "DEFINES",
+       "x.py:1"
+      ],
+      [
+       3,
+       "f:p3:f1",
+       "s:p3:f1:1",
+       "DEFINES",
+       "x.py:5"
+      ],
+      [
+       3,
+       "f:p3:f1",
+       "s:p3:f1:2",
+       "DEFINES",
+       "x.py:6"
+      ],
+      [
+       3,
+       "r:p3",
+       "f:p3:f1",
+       "CONTAINS",
+       "x.py"
+      ]
+     ]
+    }
+   ]
+  },
+  "indexed-by-python": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": {
+      "content_hash": "0a56b66ee5b6b7be18d8d516af558475b3748c3ae13efdada987297f8e3dde7d",
+      "encoded_bytes": 734,
+      "facts": {
+       "architecture": {
+        "ci": {},
+        "configured_grants": [],
+        "deployment": {
+         "links": [],
+         "partial": false,
+         "resources": [],
+         "version": "deployment-1"
+        },
+        "imports": [],
+        "lines": 3,
+        "nonblank_lines": 2,
+        "sha256": "0a56b66ee5b6b7be18d8d516af558475b3748c3ae13efdada987297f8e3dde7d",
+        "test_assertions": 0,
+        "test_focused": 0,
+        "test_skips": 0,
+        "vacuous_assertions": [],
+        "version": 2
+       },
+       "calls": [],
+       "imports": [],
+       "waypoint": {
+        "evidenceLines": [],
+        "lineCount": 3,
+        "parseErrors": 0,
+        "parserEvidence": false,
+        "purposeHint": "code",
+        "summary": "No readable purpose description was found in the captured source.",
+        "summaryKey": "930e0c48e607e3e05284241ed5f2f54f51532d6a4231565ded01bf2c565de912",
+        "title": "Source definitions",
+        "version": "waypoint-v2"
+       }
+      },
+      "git_oid": "7499d6d1290e13b0fee2b413dbcf863d6816d6a0",
+      "id": "06ea19254ca82d2d7546b7e77bf7662a83bb21615205d0399623af5e7ecd62d1",
+      "language": "text",
+      "size_bytes": 59,
+      "symbols": [],
+      "version": "{\"format\": 15, \"language-pack\": \"1.23.1\", \"tree-sitter\": \"0.25.2\", \"waypoints\": \"waypoint-v2\"}"
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "manifest_entries": 5,
+      "stored_symbols": 9,
+      "unique_analyses": 4,
+      "unique_source_bytes": 322
+     }
+    },
+    {
+     "value": {
+      "manifest_entries": 0,
+      "stored_symbols": 0,
+      "unique_analyses": 0,
+      "unique_source_bytes": 0
+     }
+    },
+    {
+     "value": {
+      "manifest_entries": 0,
+      "stored_symbols": 0,
+      "unique_analyses": 0,
+      "unique_source_bytes": 0
+     }
+    },
+    {
+     "value": {
+      "manifest_entries": 0,
+      "stored_symbols": 0,
+      "unique_analyses": 0,
+      "unique_source_bytes": 0
+     }
+    },
+    {
+     "value": [
+      {
+       "contentHash": "8752ff2fe5e00141638a36ae45a42194873814c954b9a0029c8ce004ad992c42",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": ".",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions.",
+       "summaryKey": "a34a2ada34cac6721a4db4f3a8e27cdda07f6ac072d9f51d0d31afa7141f11e0",
+       "title": "Repository map",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "1c6bebc6893587adf596679a6038b8649b3c5308f55b6cc564a5d7d79bf34918",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "cbcce2112f13d26c6a6718e312319e1a317c4b085a6877ca58d086105e936c57",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": "src",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions.",
+       "summaryKey": "05648f5353a38d71a5c1313833e22cd6e7604ffdef5d95a0bf49f71e25b12699",
+       "title": "Src",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "f9ee97a64d6535a11dfec12b3400bfafdcdec58b5b5b5b006d00104a44cfa5f1",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/a.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Alpha helpers.",
+       "summaryKey": "8c5e5bb8a3e706088ed3bcd076ffdb079252e744410140114a5bd4e118ff01cc",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "fe9e69be3495440f12da8772d13f2cf2c057ad47db0421bfc3820a2ae3288624",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "2e81e77a0af4cca87cf06631a30c77f706bb69973ad2e5af3a637a48988186af",
+       "evidence": [
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/b.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Defines Beta, run.",
+       "summaryKey": "7365b6adf212c69999a92d7c4c8a7c319e546f47c5fe14f2c7efa9021034ea66",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "def424f5a11905bd8dbe5aec40fbb46c61be194ba1e362f83d3c247e38aada2c",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "contentHash": "d6ce6239cbfcaaabfdabd565cb9074b20fef270427a24e90eb40436158cb38f9",
+       "evidence": [
+        {
+         "method": "content-hash",
+         "path": "README.md",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 8,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": ".",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions, documentation.",
+       "summaryKey": "f502635196b57c8f7ac667846e8eb951ce79788ef4a41576dc783409517ec9e2",
+       "title": "Repository map",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "83f608243653a42cc627589da24c1a2b82b4d45d03d7497fafe79cc633798e0c",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "0a56b66ee5b6b7be18d8d516af558475b3748c3ae13efdada987297f8e3dde7d",
+       "evidence": [
+        {
+         "method": "content-hash",
+         "path": "README.md",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "README.md",
+       "purpose": "documentation",
+       "schemaVersion": "1",
+       "summary": "No readable purpose description was found in the captured source.",
+       "summaryKey": "930e0c48e607e3e05284241ed5f2f54f51532d6a4231565ded01bf2c565de912",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "9f68244efb3f6b9bf6c9544968eb21182c662d836bf3953e32d35643b1131a55",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "b81784ce3d0ad51ceb617d4c62dbb31af7a4fa15ac76dbbd49a8a82fedae7b5a",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 8,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": "src",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions.",
+       "summaryKey": "162396dd28e44e5c4b1d4a43300b838084f4589c7bfdc9ecb9214e0cff1a9125",
+       "title": "Src",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "cacaa1cd89aae308f7c16134d2c4c8cef8f03a0ea28d42ce0ff827569ff38461",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/a.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Alpha helpers.",
+       "summaryKey": "8c5e5bb8a3e706088ed3bcd076ffdb079252e744410140114a5bd4e118ff01cc",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "fe9e69be3495440f12da8772d13f2cf2c057ad47db0421bfc3820a2ae3288624",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "490146fa9469a8a8bd697dc95addd0d3fb24e63f71595b99b1ddcf52e94a45ca",
+       "evidence": [
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 8,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/b.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Defines Beta, run, stop.",
+       "summaryKey": "0090b36f8f69ad8621f9887b68aa2d138e551363f93ab104f961ca631453d0d9",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "def00384486b141a772258e75d5e3101bee5665129eef3fb6e347e51ba158977",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      }
+     ]
+    },
+    {
+     "value": []
+    },
+    {
+     "value": []
+    },
+    {
+     "value": [
+      {
+       "contentHash": "8752ff2fe5e00141638a36ae45a42194873814c954b9a0029c8ce004ad992c42",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": ".",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions.",
+       "summaryKey": "a34a2ada34cac6721a4db4f3a8e27cdda07f6ac072d9f51d0d31afa7141f11e0",
+       "title": "Repository map",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "1c6bebc6893587adf596679a6038b8649b3c5308f55b6cc564a5d7d79bf34918",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "cbcce2112f13d26c6a6718e312319e1a317c4b085a6877ca58d086105e936c57",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": "src",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions.",
+       "summaryKey": "05648f5353a38d71a5c1313833e22cd6e7604ffdef5d95a0bf49f71e25b12699",
+       "title": "Src",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "f9ee97a64d6535a11dfec12b3400bfafdcdec58b5b5b5b006d00104a44cfa5f1",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/a.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Alpha helpers.",
+       "summaryKey": "8c5e5bb8a3e706088ed3bcd076ffdb079252e744410140114a5bd4e118ff01cc",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "fe9e69be3495440f12da8772d13f2cf2c057ad47db0421bfc3820a2ae3288624",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "2e81e77a0af4cca87cf06631a30c77f706bb69973ad2e5af3a637a48988186af",
+       "evidence": [
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/b.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Defines Beta, run.",
+       "summaryKey": "7365b6adf212c69999a92d7c4c8a7c319e546f47c5fe14f2c7efa9021034ea66",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "def424f5a11905bd8dbe5aec40fbb46c61be194ba1e362f83d3c247e38aada2c",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "contentHash": "cbcce2112f13d26c6a6718e312319e1a317c4b085a6877ca58d086105e936c57",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": "src",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions.",
+       "summaryKey": "05648f5353a38d71a5c1313833e22cd6e7604ffdef5d95a0bf49f71e25b12699",
+       "title": "Src",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "f9ee97a64d6535a11dfec12b3400bfafdcdec58b5b5b5b006d00104a44cfa5f1",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/a.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Alpha helpers.",
+       "summaryKey": "8c5e5bb8a3e706088ed3bcd076ffdb079252e744410140114a5bd4e118ff01cc",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "fe9e69be3495440f12da8772d13f2cf2c057ad47db0421bfc3820a2ae3288624",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "2e81e77a0af4cca87cf06631a30c77f706bb69973ad2e5af3a637a48988186af",
+       "evidence": [
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/b.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Defines Beta, run.",
+       "summaryKey": "7365b6adf212c69999a92d7c4c8a7c319e546f47c5fe14f2c7efa9021034ea66",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "def424f5a11905bd8dbe5aec40fbb46c61be194ba1e362f83d3c247e38aada2c",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "contentHash": "3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/a.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Alpha helpers.",
+       "summaryKey": "8c5e5bb8a3e706088ed3bcd076ffdb079252e744410140114a5bd4e118ff01cc",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "fe9e69be3495440f12da8772d13f2cf2c057ad47db0421bfc3820a2ae3288624",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      }
+     ]
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint path"
+    },
+    {
+     "value": []
+    },
+    {
+     "value": []
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint snapshot"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint snapshot"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint path"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint path"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint path"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint path"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint path"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint path"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint path"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint path"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint path"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint path"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint path"
+    },
+    {
+     "value": [
+      [
+       "f:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2",
+       2,
+       "file",
+       "b.py",
+       "src/b.py",
+       null
+      ],
+      [
+       "f:1564ebeebddab15cc1a87d1f:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4",
+       2,
+       "file",
+       "a.py",
+       "src/a.py",
+       null
+      ],
+      [
+       "f:1564ebeebddab15cc1a87d1f:c78ce06f54b5699dd05f21aa165fcc765b0e9f0c110b01f0f0add1f584e83b27",
+       2,
+       "file",
+       "README.md",
+       "README.md",
+       null
+      ],
+      [
+       "f:d4bb28a987dc4d6309b826e2:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4",
+       1,
+       "file",
+       "a.py",
+       "src/a.py",
+       null
+      ],
+      [
+       "f:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933",
+       1,
+       "file",
+       "b.py",
+       "src/b.py",
+       null
+      ],
+      [
+       "r:1564ebeebddab15cc1a87d1f",
+       2,
+       "repository",
+       "owner/repo",
+       ".",
+       null
+      ],
+      [
+       "r:d4bb28a987dc4d6309b826e2",
+       1,
+       "repository",
+       "owner/repo",
+       ".",
+       null
+      ],
+      [
+       "s:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2:0",
+       2,
+       "import",
+       "from a import alpha",
+       "src/b.py",
+       1
+      ],
+      [
+       "s:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2:1",
+       2,
+       "class_definition",
+       "Beta",
+       "src/b.py",
+       4
+      ],
+      [
+       "s:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2:2",
+       2,
+       "function_definition",
+       "run",
+       "src/b.py",
+       5
+      ],
+      [
+       "s:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2:3",
+       2,
+       "function_definition",
+       "stop",
+       "src/b.py",
+       8
+      ],
+      [
+       "s:1564ebeebddab15cc1a87d1f:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4:0",
+       2,
+       "import",
+       "import os",
+       "src/a.py",
+       3
+      ],
+      [
+       "s:1564ebeebddab15cc1a87d1f:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4:1",
+       2,
+       "function_definition",
+       "alpha",
+       "src/a.py",
+       6
+      ],
+      [
+       "s:d4bb28a987dc4d6309b826e2:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4:0",
+       1,
+       "import",
+       "import os",
+       "src/a.py",
+       3
+      ],
+      [
+       "s:d4bb28a987dc4d6309b826e2:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4:1",
+       1,
+       "function_definition",
+       "alpha",
+       "src/a.py",
+       6
+      ],
+      [
+       "s:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933:0",
+       1,
+       "import",
+       "from a import alpha",
+       "src/b.py",
+       1
+      ],
+      [
+       "s:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933:1",
+       1,
+       "class_definition",
+       "Beta",
+       "src/b.py",
+       4
+      ],
+      [
+       "s:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933:2",
+       1,
+       "function_definition",
+       "run",
+       "src/b.py",
+       5
+      ]
+     ]
+    },
+    {
+     "value": [
+      [
+       "f:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2",
+       "python",
+       "490146fa9469a8a8bd697dc95addd0d3fb24e63f71595b99b1ddcf52e94a45ca",
+       "object"
+      ],
+      [
+       "f:1564ebeebddab15cc1a87d1f:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4",
+       "python",
+       "3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56",
+       "object"
+      ],
+      [
+       "f:1564ebeebddab15cc1a87d1f:c78ce06f54b5699dd05f21aa165fcc765b0e9f0c110b01f0f0add1f584e83b27",
+       "text",
+       "0a56b66ee5b6b7be18d8d516af558475b3748c3ae13efdada987297f8e3dde7d",
+       "object"
+      ],
+      [
+       "f:d4bb28a987dc4d6309b826e2:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4",
+       "python",
+       "3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56",
+       "object"
+      ],
+      [
+       "f:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933",
+       "python",
+       "2e81e77a0af4cca87cf06631a30c77f706bb69973ad2e5af3a637a48988186af",
+       "object"
+      ]
+     ]
+    },
+    {
+     "value": [
+      [
+       "r:1564ebeebddab15cc1a87d1f",
+       "{\"workspace\":{\"branch\":\"feature\",\"workspace_id\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"fingerprint\":\"2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5\",\"view\":\"branch\",\"head\":\"cccccccccccccccccccccccccccccccccccccccc\"},\"analysis_stats\":{\"parsed_files\":2,\"reused_files\":1},\"analyzer\":{\"version\":\"{\\\"format\\\": 15, \\\"language-pack\\\": \\\"1.23.1\\\", \\\"tree-sitter\\\": \\\"0.25.2\\\", \\\"waypoints\\\": \\\"waypoint-v2\\\"}\"},\"waypoint_stats\":{\"summariesComputed\":2,\"summariesReused\":1,\"validationsComputed\":2,\"validationsReused\":1,\"areasComputed\":2,\"areasReused\":0,\"areaValidationsComputed\":2,\"areaValidationsReused\":0,\"unavailableFiles\":0,\"partial\":false},\"areaWaypoints\":[{\"contentHash\":\"d6ce6239cbfcaaabfdabd565cb9074b20fef270427a24e90eb40436158cb38f9\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"README.md\",\"revision\":\"cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5\"},{\"line\":1,\"method\":\"source-docstring\",\"path\":\"src/a.py\",\"revision\":\"cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5\"},{\"line\":4,\"method\":\"indexed-definition\",\"path\":\"src/b.py\",\"revision\":\"cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5\"},{\"line\":5,\"method\":\"indexed-definition\",\"path\":\"src/b.py\",\"revision\":\"cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5\"},{\"line\":8,\"method\":\"indexed-definition\",\"path\":\"src/b.py\",\"revision\":\"cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\".\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Brings together source definitions, documentation.\",\"summaryKey\":\"f502635196b57c8f7ac667846e8eb951ce79788ef4a41576dc783409517ec9e2\",\"title\":\"Repository map\",\"validation\":{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"83f608243653a42cc627589da24c1a2b82b4d45d03d7497fafe79cc633798e0c\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}},{\"contentHash\":\"b81784ce3d0ad51ceb617d4c62dbb31af7a4fa15ac76dbbd49a8a82fedae7b5a\",\"evidence\":[{\"line\":1,\"method\":\"source-docstring\",\"path\":\"src/a.py\",\"revision\":\"cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5\"},{\"line\":4,\"method\":\"indexed-definition\",\"path\":\"src/b.py\",\"revision\":\"cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5\"},{\"line\":5,\"method\":\"indexed-definition\",\"path\":\"src/b.py\",\"revision\":\"cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5\"},{\"line\":8,\"method\":\"indexed-definition\",\"path\":\"src/b.py\",\"revision\":\"cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\"src\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Brings together source definitions.\",\"summaryKey\":\"162396dd28e44e5c4b1d4a43300b838084f4589c7bfdc9ecb9214e0cff1a9125\",\"title\":\"Src\",\"validation\":{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"cacaa1cd89aae308f7c16134d2c4c8cef8f03a0ea28d42ce0ff827569ff38461\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}]}"
+      ],
+      [
+       "r:d4bb28a987dc4d6309b826e2",
+       "{\"workspace\":{\"branch\":\"main\",\"workspace_id\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"fingerprint\":\"0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605\",\"view\":\"branch\",\"head\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"analysis_stats\":{\"parsed_files\":2,\"reused_files\":0},\"analyzer\":{\"version\":\"{\\\"format\\\": 15, \\\"language-pack\\\": \\\"1.23.1\\\", \\\"tree-sitter\\\": \\\"0.25.2\\\", \\\"waypoints\\\": \\\"waypoint-v2\\\"}\"},\"waypoint_stats\":{\"summariesComputed\":2,\"summariesReused\":0,\"validationsComputed\":2,\"validationsReused\":0,\"areasComputed\":2,\"areasReused\":0,\"areaValidationsComputed\":2,\"areaValidationsReused\":0,\"unavailableFiles\":0,\"partial\":false},\"areaWaypoints\":[{\"contentHash\":\"8752ff2fe5e00141638a36ae45a42194873814c954b9a0029c8ce004ad992c42\",\"evidence\":[{\"line\":1,\"method\":\"source-docstring\",\"path\":\"src/a.py\",\"revision\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605\"},{\"line\":4,\"method\":\"indexed-definition\",\"path\":\"src/b.py\",\"revision\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605\"},{\"line\":5,\"method\":\"indexed-definition\",\"path\":\"src/b.py\",\"revision\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\".\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Brings together source definitions.\",\"summaryKey\":\"a34a2ada34cac6721a4db4f3a8e27cdda07f6ac072d9f51d0d31afa7141f11e0\",\"title\":\"Repository map\",\"validation\":{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"1c6bebc6893587adf596679a6038b8649b3c5308f55b6cc564a5d7d79bf34918\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}},{\"contentHash\":\"cbcce2112f13d26c6a6718e312319e1a317c4b085a6877ca58d086105e936c57\",\"evidence\":[{\"line\":1,\"method\":\"source-docstring\",\"path\":\"src/a.py\",\"revision\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605\"},{\"line\":4,\"method\":\"indexed-definition\",\"path\":\"src/b.py\",\"revision\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605\"},{\"line\":5,\"method\":\"indexed-definition\",\"path\":\"src/b.py\",\"revision\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\"src\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Brings together source definitions.\",\"summaryKey\":\"05648f5353a38d71a5c1313833e22cd6e7604ffdef5d95a0bf49f71e25b12699\",\"title\":\"Src\",\"validation\":{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"f9ee97a64d6535a11dfec12b3400bfafdcdec58b5b5b5b006d00104a44cfa5f1\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}]}"
+      ]
+     ]
+    },
+    {
+     "value": [
+      [
+       "f:d4bb28a987dc4d6309b826e2:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4",
+       "{\"language\":\"python\",\"sha256\":\"3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56\",\"waypoint\":{\"contentHash\":\"3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56\",\"evidence\":[{\"line\":1,\"method\":\"source-docstring\",\"path\":\"src/a.py\",\"revision\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"src/a.py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Alpha helpers.\",\"summaryKey\":\"8c5e5bb8a3e706088ed3bcd076ffdb079252e744410140114a5bd4e118ff01cc\",\"title\":\"Source definitions\",\"validation\":{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"fe9e69be3495440f12da8772d13f2cf2c057ad47db0421bfc3820a2ae3288624\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}}"
+      ],
+      [
+       "f:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933",
+       "{\"language\":\"python\",\"sha256\":\"2e81e77a0af4cca87cf06631a30c77f706bb69973ad2e5af3a637a48988186af\",\"waypoint\":{\"contentHash\":\"2e81e77a0af4cca87cf06631a30c77f706bb69973ad2e5af3a637a48988186af\",\"evidence\":[{\"line\":4,\"method\":\"indexed-definition\",\"path\":\"src/b.py\",\"revision\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605\"},{\"line\":5,\"method\":\"indexed-definition\",\"path\":\"src/b.py\",\"revision\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"src/b.py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Defines Beta, run.\",\"summaryKey\":\"7365b6adf212c69999a92d7c4c8a7c319e546f47c5fe14f2c7efa9021034ea66\",\"title\":\"Source definitions\",\"validation\":{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"def424f5a11905bd8dbe5aec40fbb46c61be194ba1e362f83d3c247e38aada2c\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}}"
+      ]
+     ]
+    },
+    {
+     "value": [
+      [
+       1,
+       "f:d4bb28a987dc4d6309b826e2:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4",
+       "s:d4bb28a987dc4d6309b826e2:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4:0",
+       "DEFINES",
+       "src/a.py:3"
+      ],
+      [
+       1,
+       "f:d4bb28a987dc4d6309b826e2:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4",
+       "s:d4bb28a987dc4d6309b826e2:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4:1",
+       "DEFINES",
+       "src/a.py:6"
+      ],
+      [
+       1,
+       "f:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933",
+       "s:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933:0",
+       "DEFINES",
+       "src/b.py:1"
+      ],
+      [
+       1,
+       "f:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933",
+       "s:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933:1",
+       "DEFINES",
+       "src/b.py:4"
+      ],
+      [
+       1,
+       "f:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933",
+       "s:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933:2",
+       "DEFINES",
+       "src/b.py:5"
+      ],
+      [
+       1,
+       "r:d4bb28a987dc4d6309b826e2",
+       "f:d4bb28a987dc4d6309b826e2:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4",
+       "CONTAINS",
+       "src/a.py"
+      ],
+      [
+       1,
+       "r:d4bb28a987dc4d6309b826e2",
+       "f:d4bb28a987dc4d6309b826e2:e8546d3570026857d1a482fc469c85fdb8dc4d10c6a388887c1dbb9985bc4933",
+       "CONTAINS",
+       "src/b.py"
+      ],
+      [
+       2,
+       "f:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2",
+       "s:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2:0",
+       "DEFINES",
+       "src/b.py:1"
+      ],
+      [
+       2,
+       "f:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2",
+       "s:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2:1",
+       "DEFINES",
+       "src/b.py:4"
+      ],
+      [
+       2,
+       "f:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2",
+       "s:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2:2",
+       "DEFINES",
+       "src/b.py:5"
+      ],
+      [
+       2,
+       "f:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2",
+       "s:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2:3",
+       "DEFINES",
+       "src/b.py:8"
+      ],
+      [
+       2,
+       "f:1564ebeebddab15cc1a87d1f:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4",
+       "s:1564ebeebddab15cc1a87d1f:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4:0",
+       "DEFINES",
+       "src/a.py:3"
+      ],
+      [
+       2,
+       "f:1564ebeebddab15cc1a87d1f:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4",
+       "s:1564ebeebddab15cc1a87d1f:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4:1",
+       "DEFINES",
+       "src/a.py:6"
+      ],
+      [
+       2,
+       "r:1564ebeebddab15cc1a87d1f",
+       "f:1564ebeebddab15cc1a87d1f:2d2e117bf50b99bd76aace2f54a25e14dc9c75f9ea28114d0e507a4efbb662c2",
+       "CONTAINS",
+       "src/b.py"
+      ],
+      [
+       2,
+       "r:1564ebeebddab15cc1a87d1f",
+       "f:1564ebeebddab15cc1a87d1f:5f97e0f934e649fcd5ed03a7cf025c1e6612facb77d96eb79d96ed3be0e5a8e4",
+       "CONTAINS",
+       "src/a.py"
+      ],
+      [
+       2,
+       "r:1564ebeebddab15cc1a87d1f",
+       "f:1564ebeebddab15cc1a87d1f:c78ce06f54b5699dd05f21aa165fcc765b0e9f0c110b01f0f0add1f584e83b27",
+       "CONTAINS",
+       "README.md"
+      ]
+     ]
+    },
+    {
+     "value": [
+      [
+       10
+      ]
+     ]
+    },
+    {
+     "value": [
+      [
+       9
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "schemas": {
+  "3c8ab78ffefcf6d9": [
+   [
+    "index",
+    "analysis_object",
+    "analyses",
+    "CREATE INDEX analysis_object ON analyses(git_oid,language,version)"
+   ],
+   [
+    "index",
+    "idx_edges_source",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_source ON legacy_edges(snapshot_id,source)"
+   ],
+   [
+    "index",
+    "idx_edges_target",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_target ON legacy_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "idx_nodes_lookup",
+    "legacy_nodes",
+    "CREATE INDEX idx_nodes_lookup ON legacy_nodes(snapshot_id,name,kind)"
+   ],
+   [
+    "index",
+    "manifest_analysis",
+    "snapshot_files",
+    "CREATE INDEX manifest_analysis ON snapshot_files(analysis_id)"
+   ],
+   [
+    "index",
+    "resolved_inbound",
+    "resolved_edges",
+    "CREATE INDEX resolved_inbound ON resolved_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "snapshot_view",
+    "snapshots",
+    "CREATE INDEX snapshot_view ON snapshots(repo,view_key,id DESC)"
+   ],
+   [
+    "index",
+    "waypoint_summary_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_summary_bindings ON snapshot_waypoints(summary_key)"
+   ],
+   [
+    "index",
+    "waypoint_validation_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_validation_bindings ON snapshot_waypoints(validation_key)"
+   ],
+   [
+    "table",
+    "analyses",
+    "analyses",
+    "CREATE TABLE analyses(\n        id TEXT PRIMARY KEY,content_hash TEXT NOT NULL,git_oid TEXT NOT NULL,\n        language TEXT NOT NULL,version TEXT NOT NULL,size_bytes INTEGER NOT NULL,\n        symbols TEXT NOT NULL CHECK(json_valid(symbols)),facts TEXT NOT NULL CHECK(json_valid(facts)))"
+   ],
+   [
+    "table",
+    "legacy_edges",
+    "legacy_edges",
+    "CREATE TABLE legacy_edges(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "legacy_nodes",
+    "legacy_nodes",
+    "CREATE TABLE legacy_nodes(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}')"
+   ],
+   [
+    "table",
+    "resolved_edges",
+    "resolved_edges",
+    "CREATE TABLE resolved_edges(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,\n        PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "snapshot_files",
+    "snapshot_files",
+    "CREATE TABLE snapshot_files(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,file_id TEXT NOT NULL,name TEXT NOT NULL,\n        analysis_id TEXT NOT NULL REFERENCES analyses(id),PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshot_waypoints",
+    "snapshot_waypoints",
+    "CREATE TABLE snapshot_waypoints(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,kind TEXT NOT NULL CHECK(kind IN ('file','area')),\n        summary_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        validation_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshots",
+    "snapshots",
+    "CREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP, metadata TEXT NOT NULL DEFAULT '{}', node_prefix TEXT, view_key TEXT NOT NULL DEFAULT 'default')"
+   ],
+   [
+    "table",
+    "waypoint_cache",
+    "waypoint_cache",
+    "CREATE TABLE waypoint_cache(\n        id TEXT PRIMARY KEY,kind TEXT NOT NULL CHECK(kind IN ('file','area','validation')),\n        version TEXT NOT NULL,payload TEXT NOT NULL CHECK(json_valid(payload)),\n        payload_hash TEXT NOT NULL)"
+   ],
+   [
+    "trigger",
+    "staging_edge_insert",
+    "edges",
+    "CREATE TRIGGER staging_edge_insert INSTEAD OF INSERT ON edges\n        BEGIN INSERT INTO resolved_edges(snapshot_id,source,target,kind,evidence)\n        VALUES (new.snapshot_id,new.source,new.target,new.kind,new.evidence); END"
+   ],
+   [
+    "view",
+    "edges",
+    "edges",
+    "CREATE VIEW edges AS\n SELECT snapshot_id,source,target,kind,evidence FROM legacy_edges\n UNION ALL SELECT snapshot_id,source,target,kind,evidence FROM resolved_edges\n UNION ALL\n SELECT f.snapshot_id,'r:'||s.node_prefix,'f:'||s.node_prefix||':'||f.file_id,'CONTAINS',f.path\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n UNION ALL\n SELECT f.snapshot_id,'f:'||s.node_prefix||':'||f.file_id,\n 's:'||s.node_prefix||':'||f.file_id||':'||j.key,'DEFINES',\n f.path||':'||json_extract(j.value,'$[2]')\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ],
+   [
+    "view",
+    "nodes",
+    "nodes",
+    "CREATE VIEW nodes AS\n SELECT id,snapshot_id,kind,name,path,line,metadata FROM legacy_nodes\n UNION ALL\n SELECT 'r:'||node_prefix,id,'repository',repo,'.',NULL,\n json_set(metadata,'$.areaWaypoints',json((\n   SELECT json_group_array(json(waypoint)) FROM (\n     SELECT json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))) AS waypoint\n     FROM snapshot_waypoints sw JOIN waypoint_cache wc ON wc.id=sw.summary_key\n     JOIN waypoint_cache vc ON vc.id=sw.validation_key\n     WHERE sw.snapshot_id=s.id AND sw.kind='area' ORDER BY sw.path\n   ))))\n FROM snapshots s WHERE node_prefix IS NOT NULL\n UNION ALL\n SELECT 'f:'||s.node_prefix||':'||f.file_id,f.snapshot_id,'file',f.name,f.path,NULL,\n CASE WHEN sw.path IS NULL THEN json_object('language',a.language,'sha256',a.content_hash)\n ELSE json_object('language',a.language,'sha256',a.content_hash,'waypoint',json(json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))))) END\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id JOIN analyses a ON a.id=f.analysis_id\n LEFT JOIN snapshot_waypoints sw ON sw.snapshot_id=f.snapshot_id AND sw.path=f.path AND sw.kind='file'\n LEFT JOIN waypoint_cache wc ON wc.id=sw.summary_key\n LEFT JOIN waypoint_cache vc ON vc.id=sw.validation_key\n UNION ALL\n SELECT 's:'||s.node_prefix||':'||f.file_id||':'||j.key,f.snapshot_id,\n json_extract(j.value,'$[0]'),json_extract(j.value,'$[1]'),f.path,json_extract(j.value,'$[2]'),\n json_object('parent',json_extract(j.value,'$[3]'))\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ]
+  ]
+ }
+}

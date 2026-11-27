@@ -1,0 +1,3522 @@
+{
+ "cases": {
+  "before-commit-failure-rolls-everything-back": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 2,
+      "sha256": "12955e1af853b248406835dda458aa831212a7ad0d6bc232ee0d9dc072f72985"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 2,
+      "sha256": "6040e4efa1958978992f218cae684e506288bba0f7a8dbef2d983ad7a7c7991f"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 3,
+      "sha256": "bf0c3d8306730b21d05409ebb00c8bdff62ae82237f63cdad1b0478e8df0fa7c"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "47de05bdf4ae6439f4eb9e9069cd71c885085858fe4dca3520a91a643c8ccbcb"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 6,
+      "sha256": "ed706ed38f0f1fee407fe00b623251f51987116d014683eb2d432543cb5c119f"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "RuntimeError",
+     "message": "before commit refused"
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": {
+      "files": 2,
+      "imports": 0,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-e767a5e1be9b0d88dad2992abb44fcdba8e53ed7609294780dff5f9bb300551b",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 2,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 2,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": 1
+    }
+   ]
+  },
+  "empty-file-list": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 2,
+      "sha256": "111d5e677a5fd7acb53848ba497c770f811fd0dfea108d9b7bfc76937ad0413b"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 0,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-11e637250c0675f5ca99144bc896b9fc0288c8a9c5ddece081637f4fc0964615",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 0,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 0,
+       "areasComputed": 0,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 0,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 0,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 0,
+       "areasComputed": 0,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 0
+      }
+     }
+    }
+   ]
+  },
+  "index-files-max-bytes-zero": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Indexing limits must be positive"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "index-files-max-files-negative": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Indexing limits must be positive"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "index-files-max-files-zero": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Indexing limits must be positive"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "index-files-max-symbols-zero": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Indexing limits must be positive"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "index-files-timeout-negative": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Indexing limits must be positive"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "index-files-timeout-zero": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Indexing limits must be positive"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "index-repo-before-commit-failure": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "error": "RuntimeError",
+     "message": "before commit refused"
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  "index-repo-limits-roll-back": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Repository exceeds indexing file/byte limits"
+    },
+    {
+     "error": "ValueError",
+     "message": "Repository exceeds indexing file/byte limits"
+    },
+    {
+     "error": "ValueError",
+     "message": "Repository exceeds indexing byte/symbol limits"
+    },
+    {
+     "value": 0
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  "index-repo-max-bytes-negative": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Indexing limits must be positive"
+    }
+   ]
+  },
+  "index-repo-max-file-bytes-negative": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid source limits"
+    }
+   ]
+  },
+  "index-repo-max-file-bytes-zero": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid source limits"
+    }
+   ]
+  },
+  "index-repo-max-files-zero": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Indexing limits must be positive"
+    }
+   ]
+  },
+  "index-repo-max-symbols-zero": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Indexing limits must be positive"
+    }
+   ]
+  },
+  "index-repo-root-must-exist-and-be-a-folder": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 1,
+      "sha256": "a8c27f1b41ef87c802d751eefed1b4855ad549f819ac4049dd6c4e43f0f2423a"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 1,
+      "sha256": "a0738ed021a15255efbeffc412b2b2611b94d8d30311a4f18bf30534934ef47c"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 2,
+      "sha256": "a348fbd7709d1885f6b7943c8dc78b8af7448d86063ab6a9fabd4ea47b4d2e8c"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "0e43c58e672e969b5060b2a147a7f95005bcd0c228e24351c74d360bb7190056"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 4,
+      "sha256": "79cda1b6f8ae346057e40dceb62c61bc3ea4efca8d86b4072ff7e17293c039d6"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "error": "FileNotFoundError",
+     "message": "<operating system message>"
+    },
+    {
+     "error": "ValueError",
+     "message": "Repository must be a directory"
+    },
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 1,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-da1eabfc45990cf92860a2c854667b0f20a3afb10a11e1bfe5b6b95b18e2103e",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 1,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 1,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": 1
+    }
+   ]
+  },
+  "index-repo-timeout-zero": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Indexing limits must be positive"
+    }
+   ]
+  },
+  "invalid-source-revision-39-characters": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Source revision must be a full commit SHA"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-source-revision-41-characters": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Source revision must be a full commit SHA"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-source-revision-empty": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Source revision must be a full commit SHA"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-source-revision-not-hex": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Source revision must be a full commit SHA"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-source-revision-short": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Source revision must be a full commit SHA"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-source-revision-trailing-newline": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Source revision must be a full commit SHA"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-source-revision-uppercase": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Source revision must be a full commit SHA"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-waypoint-configuration-absolute": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint configuration fingerprints"
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  "invalid-waypoint-configuration-backslash": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint configuration fingerprints"
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  "invalid-waypoint-configuration-not-a-configuration-file": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint configuration fingerprints"
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  "invalid-waypoint-configuration-not-a-hash": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint configuration fingerprints"
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  "invalid-waypoint-configuration-secret-name": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint configuration fingerprints"
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  "invalid-waypoint-configuration-traversal": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint configuration fingerprints"
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  "invalid-waypoint-configuration-uppercase-hash": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint configuration fingerprints"
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  "invalid-waypoint-policy-digest-short": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint policy fingerprint"
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  "invalid-waypoint-policy-digest-uppercase": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint policy fingerprint"
+    },
+    {
+     "value": 0
+    }
+   ]
+  },
+  "invalid-workspace-context-branch-too-long": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid workspace snapshot context"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-workspace-context-empty-branch": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid workspace snapshot context"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-workspace-context-empty-context": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid workspace snapshot context"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-workspace-context-extra-key": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid workspace snapshot context"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-workspace-context-missing-branch": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid workspace snapshot context"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-workspace-context-missing-fingerprint": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid workspace snapshot context"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-workspace-context-nul-in-branch": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid workspace snapshot context"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-workspace-context-short-fingerprint": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid workspace snapshot context"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-workspace-context-unknown-view": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid workspace snapshot context"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "invalid-workspace-context-uppercase-workspace-id": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid workspace snapshot context"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "limits-at-the-boundary-pass": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 2,
+      "sha256": "12955e1af853b248406835dda458aa831212a7ad0d6bc232ee0d9dc072f72985"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 2,
+      "sha256": "6040e4efa1958978992f218cae684e506288bba0f7a8dbef2d983ad7a7c7991f"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 3,
+      "sha256": "bf0c3d8306730b21d05409ebb00c8bdff62ae82237f63cdad1b0478e8df0fa7c"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "47de05bdf4ae6439f4eb9e9069cd71c885085858fe4dca3520a91a643c8ccbcb"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 6,
+      "sha256": "ed706ed38f0f1fee407fe00b623251f51987116d014683eb2d432543cb5c119f"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 2,
+      "imports": 0,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-e767a5e1be9b0d88dad2992abb44fcdba8e53ed7609294780dff5f9bb300551b",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 2,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 2,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "error": "ValueError",
+     "message": "Repository exceeds indexing file/byte limits"
+    },
+    {
+     "error": "ValueError",
+     "message": "Repository exceeds indexing byte/symbol limits"
+    },
+    {
+     "error": "ValueError",
+     "message": "Repository exceeds indexing file/byte limits"
+    }
+   ]
+  },
+  "rollback-max-bytes-exceeded": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 1,
+      "sha256": "a8c27f1b41ef87c802d751eefed1b4855ad549f819ac4049dd6c4e43f0f2423a"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 1,
+      "sha256": "757af4e3d4f0ccc760eed262d3e0ea072ad8ceb89b67e5f5272ec90cdb057057"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 2,
+      "sha256": "8a526682883ba1bed85f47a37828040a1388a311fdf6931acfb2023dc8211686"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "971a13439d66afd22ff2eeaa76450229fe01b350f1f1bfae2000041516c1daf3"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 4,
+      "sha256": "07547c9899a4af38d9ac5f76930993b4ca5f7ff6c2e0aa4e1f2808dc6827599d"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 1,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-c277a7ebfc06181a5eff4a55e4bb70d9305c6c2dfe440041105578deab412696",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 1,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 1,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "error": "ValueError",
+     "message": "Repository exceeds indexing file/byte limits"
+    },
+    {
+     "value": 1
+    },
+    {
+     "value": 1
+    },
+    {
+     "value": 4
+    }
+   ]
+  },
+  "rollback-max-files-exceeded": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 1,
+      "sha256": "a8c27f1b41ef87c802d751eefed1b4855ad549f819ac4049dd6c4e43f0f2423a"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 1,
+      "sha256": "757af4e3d4f0ccc760eed262d3e0ea072ad8ceb89b67e5f5272ec90cdb057057"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 2,
+      "sha256": "8a526682883ba1bed85f47a37828040a1388a311fdf6931acfb2023dc8211686"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "971a13439d66afd22ff2eeaa76450229fe01b350f1f1bfae2000041516c1daf3"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 4,
+      "sha256": "07547c9899a4af38d9ac5f76930993b4ca5f7ff6c2e0aa4e1f2808dc6827599d"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 1,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-c277a7ebfc06181a5eff4a55e4bb70d9305c6c2dfe440041105578deab412696",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 1,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 1,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "error": "ValueError",
+     "message": "Repository exceeds indexing file/byte limits"
+    },
+    {
+     "value": 1
+    },
+    {
+     "value": 1
+    },
+    {
+     "value": 4
+    }
+   ]
+  },
+  "rollback-max-symbols-exceeded": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 1,
+      "sha256": "a8c27f1b41ef87c802d751eefed1b4855ad549f819ac4049dd6c4e43f0f2423a"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 1,
+      "sha256": "757af4e3d4f0ccc760eed262d3e0ea072ad8ceb89b67e5f5272ec90cdb057057"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 2,
+      "sha256": "8a526682883ba1bed85f47a37828040a1388a311fdf6931acfb2023dc8211686"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "971a13439d66afd22ff2eeaa76450229fe01b350f1f1bfae2000041516c1daf3"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 4,
+      "sha256": "07547c9899a4af38d9ac5f76930993b4ca5f7ff6c2e0aa4e1f2808dc6827599d"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 1,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-c277a7ebfc06181a5eff4a55e4bb70d9305c6c2dfe440041105578deab412696",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 1,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 1,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "error": "ValueError",
+     "message": "Repository exceeds indexing byte/symbol limits"
+    },
+    {
+     "value": 1
+    },
+    {
+     "value": 1
+    },
+    {
+     "value": 4
+    }
+   ]
+  },
+  "same-content-counts-towards-byte-and-symbol-limits": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 1,
+      "sha256": "a8c27f1b41ef87c802d751eefed1b4855ad549f819ac4049dd6c4e43f0f2423a"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 3,
+      "sha256": "178b57e778b70a0d701770e9f679a4b4d73c5105ee8a02b42d19a282dffeca81"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 4,
+      "sha256": "635022bbb23d303bf6168a64e7b17d108b2d37047597b22f2e1c28ce4f031133"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "80efe3f3c641a9f3c9e84ac3797fb1b1388b04bdc0ee1c8be29e0b22a6ce02dd"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 8,
+      "sha256": "b2a0464225239088c08f13bba1495e20e19672cae32faf1a82e9de659639a50f"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Repository exceeds indexing file/byte limits"
+    },
+    {
+     "error": "ValueError",
+     "message": "Repository exceeds indexing byte/symbol limits"
+    },
+    {
+     "value": {
+      "files": 3,
+      "imports": 0,
+      "parsed_files": 1,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 2,
+      "revision": "working-tree-tree-675d2cf6a59cff7213a61d13c8c7ffa11ce49118bdf1e25f09b492e236493740",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 3,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 1,
+       "summariesReused": 2,
+       "unavailableFiles": 0,
+       "validationsComputed": 3,
+       "validationsReused": 0
+      }
+     }
+    }
+   ]
+  },
+  "valid-source-revision-is-kept": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 2,
+      "sha256": "12955e1af853b248406835dda458aa831212a7ad0d6bc232ee0d9dc072f72985"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 2,
+      "sha256": "6040e4efa1958978992f218cae684e506288bba0f7a8dbef2d983ad7a7c7991f"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 3,
+      "sha256": "bf0c3d8306730b21d05409ebb00c8bdff62ae82237f63cdad1b0478e8df0fa7c"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "b73e8b148db43fe1c0b52912c9c0d9a4988d350eacf9a79503ccea84c34f0816"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 6,
+      "sha256": "ed706ed38f0f1fee407fe00b623251f51987116d014683eb2d432543cb5c119f"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 2,
+      "imports": 0,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "0123456789abcdef0123456789abcdef01234567",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 2,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 2,
+       "validationsReused": 0
+      }
+     }
+    }
+   ]
+  },
+  "valid-waypoint-configuration-and-policy": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 2,
+      "sha256": "5d6e96fbd617a82bc8f3724585e2b3f396df8ce18b6c1f38e6e42a79c20db898"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 4,
+      "sha256": "8d136ddfd8d0f748f5cd173a2c3cbf043f0c50cd4b9262854d8215fd46ea7c42"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 8,
+      "sha256": "a9ada3c49cf4cc488ea882b4234817c6d9ba48bcdbe2b3b30b715a0371f618b2"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 2,
+      "sha256": "3109372f6421919153d0faf8663b4a430d7b942858afe8e9ec434bfd9e975066"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 12,
+      "sha256": "be58fcd8d53bfd285c9dc83f0f33665626b36218d6846837f2999aac1921d759"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 2,
+      "imports": 0,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-7d0fa9b3933cd64382ae3a8e7ed1f994beee0a65aa3f7d90bcaa08c8af8d1c0b",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 2,
+       "areaValidationsReused": 0,
+       "areasComputed": 2,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 2,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 2,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 2,
+      "revision": "working-tree-tree-3cc262c1eff11956f8060e9a0c9d4bb391a9e52dfe44b26a5fcbbf1a5a107eb9",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 2,
+       "areaValidationsReused": 0,
+       "areasComputed": 0,
+       "areasReused": 2,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 2,
+       "unavailableFiles": 0,
+       "validationsComputed": 2,
+       "validationsReused": 0
+      }
+     }
+    }
+   ]
+  },
+  "valid-workspace-contexts": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 2,
+      "sha256": "12955e1af853b248406835dda458aa831212a7ad0d6bc232ee0d9dc072f72985"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 10,
+      "sha256": "627da3a22d14c4a8e0a0fc4c399f320701e38cd78b8eb68aa5f5c0c5b43ef8bb"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 15,
+      "sha256": "03246b2bb472a478796125d58e3789e97d0851e968337febacbad82a1c7124d4"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 5,
+      "sha256": "b52ce5f52049e3531476eb8539c808aac340e7bf879ed04c6d0f7b54da658944"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 6,
+      "sha256": "ed706ed38f0f1fee407fe00b623251f51987116d014683eb2d432543cb5c119f"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 2,
+      "imports": 0,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-worktree-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 2,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 2,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 2,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 2,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-worktree-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 2,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 1,
+       "areasComputed": 0,
+       "areasReused": 1,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 2,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 2
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 2,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 2,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-49abd65bbf7f7e40c7055093ed2e3fd75f2f602f2c5fcf955c213e3135eb03f7",
+      "skipped_files": 0,
+      "snapshot": 3,
+      "symbols": 2,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 1,
+       "areasComputed": 0,
+       "areasReused": 1,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 2,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 2
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 2,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 2,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 4,
+      "symbols": 2,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 1,
+       "areasComputed": 0,
+       "areasReused": 1,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 2,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 2
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 2,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 2,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-8254c329a92850f6d539dd376f4816ee2764517da5e0235514af433164480d7a",
+      "skipped_files": 0,
+      "snapshot": 5,
+      "symbols": 2,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 1,
+       "areasComputed": 0,
+       "areasReused": 1,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 2,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 2
+      }
+     }
+    }
+   ]
+  },
+  "workspace-context-needs-a-source-revision": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid workspace snapshot context"
+    },
+    {
+     "value": null
+    }
+   ]
+  }
+ },
+ "schemas": {
+  "3c8ab78ffefcf6d9": [
+   [
+    "index",
+    "analysis_object",
+    "analyses",
+    "CREATE INDEX analysis_object ON analyses(git_oid,language,version)"
+   ],
+   [
+    "index",
+    "idx_edges_source",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_source ON legacy_edges(snapshot_id,source)"
+   ],
+   [
+    "index",
+    "idx_edges_target",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_target ON legacy_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "idx_nodes_lookup",
+    "legacy_nodes",
+    "CREATE INDEX idx_nodes_lookup ON legacy_nodes(snapshot_id,name,kind)"
+   ],
+   [
+    "index",
+    "manifest_analysis",
+    "snapshot_files",
+    "CREATE INDEX manifest_analysis ON snapshot_files(analysis_id)"
+   ],
+   [
+    "index",
+    "resolved_inbound",
+    "resolved_edges",
+    "CREATE INDEX resolved_inbound ON resolved_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "snapshot_view",
+    "snapshots",
+    "CREATE INDEX snapshot_view ON snapshots(repo,view_key,id DESC)"
+   ],
+   [
+    "index",
+    "waypoint_summary_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_summary_bindings ON snapshot_waypoints(summary_key)"
+   ],
+   [
+    "index",
+    "waypoint_validation_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_validation_bindings ON snapshot_waypoints(validation_key)"
+   ],
+   [
+    "table",
+    "analyses",
+    "analyses",
+    "CREATE TABLE analyses(\n        id TEXT PRIMARY KEY,content_hash TEXT NOT NULL,git_oid TEXT NOT NULL,\n        language TEXT NOT NULL,version TEXT NOT NULL,size_bytes INTEGER NOT NULL,\n        symbols TEXT NOT NULL CHECK(json_valid(symbols)),facts TEXT NOT NULL CHECK(json_valid(facts)))"
+   ],
+   [
+    "table",
+    "legacy_edges",
+    "legacy_edges",
+    "CREATE TABLE legacy_edges(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "legacy_nodes",
+    "legacy_nodes",
+    "CREATE TABLE legacy_nodes(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}')"
+   ],
+   [
+    "table",
+    "resolved_edges",
+    "resolved_edges",
+    "CREATE TABLE resolved_edges(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,\n        PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "snapshot_files",
+    "snapshot_files",
+    "CREATE TABLE snapshot_files(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,file_id TEXT NOT NULL,name TEXT NOT NULL,\n        analysis_id TEXT NOT NULL REFERENCES analyses(id),PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshot_waypoints",
+    "snapshot_waypoints",
+    "CREATE TABLE snapshot_waypoints(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,kind TEXT NOT NULL CHECK(kind IN ('file','area')),\n        summary_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        validation_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshots",
+    "snapshots",
+    "CREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP, metadata TEXT NOT NULL DEFAULT '{}', node_prefix TEXT, view_key TEXT NOT NULL DEFAULT 'default')"
+   ],
+   [
+    "table",
+    "waypoint_cache",
+    "waypoint_cache",
+    "CREATE TABLE waypoint_cache(\n        id TEXT PRIMARY KEY,kind TEXT NOT NULL CHECK(kind IN ('file','area','validation')),\n        version TEXT NOT NULL,payload TEXT NOT NULL CHECK(json_valid(payload)),\n        payload_hash TEXT NOT NULL)"
+   ],
+   [
+    "trigger",
+    "staging_edge_insert",
+    "edges",
+    "CREATE TRIGGER staging_edge_insert INSTEAD OF INSERT ON edges\n        BEGIN INSERT INTO resolved_edges(snapshot_id,source,target,kind,evidence)\n        VALUES (new.snapshot_id,new.source,new.target,new.kind,new.evidence); END"
+   ],
+   [
+    "view",
+    "edges",
+    "edges",
+    "CREATE VIEW edges AS\n SELECT snapshot_id,source,target,kind,evidence FROM legacy_edges\n UNION ALL SELECT snapshot_id,source,target,kind,evidence FROM resolved_edges\n UNION ALL\n SELECT f.snapshot_id,'r:'||s.node_prefix,'f:'||s.node_prefix||':'||f.file_id,'CONTAINS',f.path\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n UNION ALL\n SELECT f.snapshot_id,'f:'||s.node_prefix||':'||f.file_id,\n 's:'||s.node_prefix||':'||f.file_id||':'||j.key,'DEFINES',\n f.path||':'||json_extract(j.value,'$[2]')\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ],
+   [
+    "view",
+    "nodes",
+    "nodes",
+    "CREATE VIEW nodes AS\n SELECT id,snapshot_id,kind,name,path,line,metadata FROM legacy_nodes\n UNION ALL\n SELECT 'r:'||node_prefix,id,'repository',repo,'.',NULL,\n json_set(metadata,'$.areaWaypoints',json((\n   SELECT json_group_array(json(waypoint)) FROM (\n     SELECT json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))) AS waypoint\n     FROM snapshot_waypoints sw JOIN waypoint_cache wc ON wc.id=sw.summary_key\n     JOIN waypoint_cache vc ON vc.id=sw.validation_key\n     WHERE sw.snapshot_id=s.id AND sw.kind='area' ORDER BY sw.path\n   ))))\n FROM snapshots s WHERE node_prefix IS NOT NULL\n UNION ALL\n SELECT 'f:'||s.node_prefix||':'||f.file_id,f.snapshot_id,'file',f.name,f.path,NULL,\n CASE WHEN sw.path IS NULL THEN json_object('language',a.language,'sha256',a.content_hash)\n ELSE json_object('language',a.language,'sha256',a.content_hash,'waypoint',json(json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))))) END\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id JOIN analyses a ON a.id=f.analysis_id\n LEFT JOIN snapshot_waypoints sw ON sw.snapshot_id=f.snapshot_id AND sw.path=f.path AND sw.kind='file'\n LEFT JOIN waypoint_cache wc ON wc.id=sw.summary_key\n LEFT JOIN waypoint_cache vc ON vc.id=sw.validation_key\n UNION ALL\n SELECT 's:'||s.node_prefix||':'||f.file_id||':'||j.key,f.snapshot_id,\n json_extract(j.value,'$[0]'),json_extract(j.value,'$[1]'),f.path,json_extract(j.value,'$[2]'),\n json_object('parent',json_extract(j.value,'$[3]'))\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ]
+  ]
+ }
+}

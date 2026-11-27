@@ -1,0 +1,3900 @@
+{
+ "cases": {
+  "downgrade-keeps-every-visible-node-and-edge": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "4c4af06bd5c4e002",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": []
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": [
+       [
+        1,
+        "f:p1:f2",
+        "f:p1:f1",
+        "IMPORTS",
+        "src/b.py:1"
+       ],
+       [
+        2,
+        "f:p2:f1",
+        "f:p2:f1",
+        "CALLS",
+        "src/a.py:6"
+       ],
+       [
+        1,
+        "r:p1",
+        "f:p1:f1",
+        "CONTAINS",
+        "src/a.py"
+       ],
+       [
+        1,
+        "r:p1",
+        "f:p1:f2",
+        "CONTAINS",
+        "src/b.py"
+       ],
+       [
+        2,
+        "r:p2",
+        "f:p2:f1",
+        "CONTAINS",
+        "src/a.py"
+       ],
+       [
+        3,
+        "r:p3",
+        "f:p3:f1",
+        "CONTAINS",
+        "x.py"
+       ],
+       [
+        1,
+        "f:p1:f1",
+        "s:p1:f1:0",
+        "DEFINES",
+        "src/a.py:1"
+       ],
+       [
+        1,
+        "f:p1:f1",
+        "s:p1:f1:1",
+        "DEFINES",
+        "src/a.py:5"
+       ],
+       [
+        1,
+        "f:p1:f1",
+        "s:p1:f1:2",
+        "DEFINES",
+        "src/a.py:6"
+       ],
+       [
+        1,
+        "f:p1:f2",
+        "s:p1:f2:0",
+        "DEFINES",
+        "src/b.py:1"
+       ],
+       [
+        2,
+        "f:p2:f1",
+        "s:p2:f1:0",
+        "DEFINES",
+        "src/a.py:1"
+       ],
+       [
+        2,
+        "f:p2:f1",
+        "s:p2:f1:1",
+        "DEFINES",
+        "src/a.py:5"
+       ],
+       [
+        2,
+        "f:p2:f1",
+        "s:p2:f1:2",
+        "DEFINES",
+        "src/a.py:6"
+       ],
+       [
+        3,
+        "f:p3:f1",
+        "s:p3:f1:0",
+        "DEFINES",
+        "x.py:1"
+       ],
+       [
+        3,
+        "f:p3:f1",
+        "s:p3:f1:1",
+        "DEFINES",
+        "x.py:5"
+       ],
+       [
+        3,
+        "f:p3:f1",
+        "s:p3:f1:2",
+        "DEFINES",
+        "x.py:6"
+       ]
+      ]
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": [
+       [
+        "r:p1",
+        1,
+        "repository",
+        "owner/repo",
+        ".",
+        null,
+        "{\"k\":1,\"areaWaypoints\":[]}"
+       ],
+       [
+        "r:p2",
+        2,
+        "repository",
+        "owner/repo",
+        ".",
+        null,
+        "{\"areaWaypoints\":[]}"
+       ],
+       [
+        "r:p3",
+        3,
+        "repository",
+        "other/repo",
+        ".",
+        null,
+        "{\"areaWaypoints\":[]}"
+       ],
+       [
+        "f:p1:f1",
+        1,
+        "file",
+        "a.py",
+        "src/a.py",
+        null,
+        "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+       ],
+       [
+        "f:p1:f2",
+        1,
+        "file",
+        "b.py",
+        "src/b.py",
+        null,
+        "{\"language\":\"python\",\"sha256\":\"f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753\"}"
+       ],
+       [
+        "f:p2:f1",
+        2,
+        "file",
+        "a.py",
+        "src/a.py",
+        null,
+        "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+       ],
+       [
+        "f:p3:f1",
+        3,
+        "file",
+        "x.py",
+        "x.py",
+        null,
+        "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+       ],
+       [
+        "s:p1:f1:0",
+        1,
+        "function_definition",
+        "alpha",
+        "src/a.py",
+        1,
+        "{\"parent\":null}"
+       ],
+       [
+        "s:p1:f1:1",
+        1,
+        "class_definition",
+        "Beta",
+        "src/a.py",
+        5,
+        "{\"parent\":null}"
+       ],
+       [
+        "s:p1:f1:2",
+        1,
+        "function_definition",
+        "run",
+        "src/a.py",
+        6,
+        "{\"parent\":\"Beta\"}"
+       ],
+       [
+        "s:p1:f2:0",
+        1,
+        "function_definition",
+        "beta",
+        "src/b.py",
+        1,
+        "{\"parent\":null}"
+       ],
+       [
+        "s:p2:f1:0",
+        2,
+        "function_definition",
+        "alpha",
+        "src/a.py",
+        1,
+        "{\"parent\":null}"
+       ],
+       [
+        "s:p2:f1:1",
+        2,
+        "class_definition",
+        "Beta",
+        "src/a.py",
+        5,
+        "{\"parent\":null}"
+       ],
+       [
+        "s:p2:f1:2",
+        2,
+        "function_definition",
+        "run",
+        "src/a.py",
+        6,
+        "{\"parent\":\"Beta\"}"
+       ],
+       [
+        "s:p3:f1:0",
+        3,
+        "function_definition",
+        "alpha",
+        "x.py",
+        1,
+        "{\"parent\":null}"
+       ],
+       [
+        "s:p3:f1:1",
+        3,
+        "class_definition",
+        "Beta",
+        "x.py",
+        5,
+        "{\"parent\":null}"
+       ],
+       [
+        "s:p3:f1:2",
+        3,
+        "function_definition",
+        "run",
+        "x.py",
+        6,
+        "{\"parent\":\"Beta\"}"
+       ]
+      ]
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": []
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": []
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": [
+       [
+        1,
+        "owner/repo",
+        "rev-1",
+        "<timestamp>",
+        "{}",
+        null,
+        "default"
+       ],
+       [
+        2,
+        "owner/repo",
+        "rev-2",
+        "<timestamp>",
+        "{}",
+        null,
+        "default"
+       ],
+       [
+        3,
+        "other/repo",
+        "rev-3",
+        "<timestamp>",
+        "{}",
+        null,
+        "default"
+       ]
+      ]
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": []
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "4": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "685b72873fe58d03",
+     "tables": {
+      "edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": [
+        [
+         1,
+         "f:p1:f2",
+         "f:p1:f1",
+         "IMPORTS",
+         "src/b.py:1"
+        ],
+        [
+         2,
+         "f:p2:f1",
+         "f:p2:f1",
+         "CALLS",
+         "src/a.py:6"
+        ],
+        [
+         1,
+         "r:p1",
+         "f:p1:f1",
+         "CONTAINS",
+         "src/a.py"
+        ],
+        [
+         1,
+         "r:p1",
+         "f:p1:f2",
+         "CONTAINS",
+         "src/b.py"
+        ],
+        [
+         2,
+         "r:p2",
+         "f:p2:f1",
+         "CONTAINS",
+         "src/a.py"
+        ],
+        [
+         3,
+         "r:p3",
+         "f:p3:f1",
+         "CONTAINS",
+         "x.py"
+        ],
+        [
+         1,
+         "f:p1:f1",
+         "s:p1:f1:0",
+         "DEFINES",
+         "src/a.py:1"
+        ],
+        [
+         1,
+         "f:p1:f1",
+         "s:p1:f1:1",
+         "DEFINES",
+         "src/a.py:5"
+        ],
+        [
+         1,
+         "f:p1:f1",
+         "s:p1:f1:2",
+         "DEFINES",
+         "src/a.py:6"
+        ],
+        [
+         1,
+         "f:p1:f2",
+         "s:p1:f2:0",
+         "DEFINES",
+         "src/b.py:1"
+        ],
+        [
+         2,
+         "f:p2:f1",
+         "s:p2:f1:0",
+         "DEFINES",
+         "src/a.py:1"
+        ],
+        [
+         2,
+         "f:p2:f1",
+         "s:p2:f1:1",
+         "DEFINES",
+         "src/a.py:5"
+        ],
+        [
+         2,
+         "f:p2:f1",
+         "s:p2:f1:2",
+         "DEFINES",
+         "src/a.py:6"
+        ],
+        [
+         3,
+         "f:p3:f1",
+         "s:p3:f1:0",
+         "DEFINES",
+         "x.py:1"
+        ],
+        [
+         3,
+         "f:p3:f1",
+         "s:p3:f1:1",
+         "DEFINES",
+         "x.py:5"
+        ],
+        [
+         3,
+         "f:p3:f1",
+         "s:p3:f1:2",
+         "DEFINES",
+         "x.py:6"
+        ]
+       ]
+      },
+      "nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": [
+        [
+         "r:p1",
+         1,
+         "repository",
+         "owner/repo",
+         ".",
+         null,
+         "{\"k\":1,\"areaWaypoints\":[]}"
+        ],
+        [
+         "r:p2",
+         2,
+         "repository",
+         "owner/repo",
+         ".",
+         null,
+         "{\"areaWaypoints\":[]}"
+        ],
+        [
+         "r:p3",
+         3,
+         "repository",
+         "other/repo",
+         ".",
+         null,
+         "{\"areaWaypoints\":[]}"
+        ],
+        [
+         "f:p1:f1",
+         1,
+         "file",
+         "a.py",
+         "src/a.py",
+         null,
+         "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+        ],
+        [
+         "f:p1:f2",
+         1,
+         "file",
+         "b.py",
+         "src/b.py",
+         null,
+         "{\"language\":\"python\",\"sha256\":\"f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753\"}"
+        ],
+        [
+         "f:p2:f1",
+         2,
+         "file",
+         "a.py",
+         "src/a.py",
+         null,
+         "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+        ],
+        [
+         "f:p3:f1",
+         3,
+         "file",
+         "x.py",
+         "x.py",
+         null,
+         "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+        ],
+        [
+         "s:p1:f1:0",
+         1,
+         "function_definition",
+         "alpha",
+         "src/a.py",
+         1,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p1:f1:1",
+         1,
+         "class_definition",
+         "Beta",
+         "src/a.py",
+         5,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p1:f1:2",
+         1,
+         "function_definition",
+         "run",
+         "src/a.py",
+         6,
+         "{\"parent\":\"Beta\"}"
+        ],
+        [
+         "s:p1:f2:0",
+         1,
+         "function_definition",
+         "beta",
+         "src/b.py",
+         1,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p2:f1:0",
+         2,
+         "function_definition",
+         "alpha",
+         "src/a.py",
+         1,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p2:f1:1",
+         2,
+         "class_definition",
+         "Beta",
+         "src/a.py",
+         5,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p2:f1:2",
+         2,
+         "function_definition",
+         "run",
+         "src/a.py",
+         6,
+         "{\"parent\":\"Beta\"}"
+        ],
+        [
+         "s:p3:f1:0",
+         3,
+         "function_definition",
+         "alpha",
+         "x.py",
+         1,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p3:f1:1",
+         3,
+         "class_definition",
+         "Beta",
+         "x.py",
+         5,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p3:f1:2",
+         3,
+         "function_definition",
+         "run",
+         "x.py",
+         6,
+         "{\"parent\":\"Beta\"}"
+        ]
+       ]
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at"
+       ],
+       "rows": [
+        [
+         1,
+         "owner/repo",
+         "rev-1",
+         "<timestamp>"
+        ],
+        [
+         2,
+         "owner/repo",
+         "rev-2",
+         "<timestamp>"
+        ],
+        [
+         3,
+         "other/repo",
+         "rev-3",
+         "<timestamp>"
+        ]
+       ]
+      }
+     },
+     "user_version": 0
+    },
+    "8": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "4c4af06bd5c4e002",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": []
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": [
+        [
+         1,
+         "f:p1:f2",
+         "f:p1:f1",
+         "IMPORTS",
+         "src/b.py:1"
+        ],
+        [
+         2,
+         "f:p2:f1",
+         "f:p2:f1",
+         "CALLS",
+         "src/a.py:6"
+        ],
+        [
+         1,
+         "r:p1",
+         "f:p1:f1",
+         "CONTAINS",
+         "src/a.py"
+        ],
+        [
+         1,
+         "r:p1",
+         "f:p1:f2",
+         "CONTAINS",
+         "src/b.py"
+        ],
+        [
+         2,
+         "r:p2",
+         "f:p2:f1",
+         "CONTAINS",
+         "src/a.py"
+        ],
+        [
+         3,
+         "r:p3",
+         "f:p3:f1",
+         "CONTAINS",
+         "x.py"
+        ],
+        [
+         1,
+         "f:p1:f1",
+         "s:p1:f1:0",
+         "DEFINES",
+         "src/a.py:1"
+        ],
+        [
+         1,
+         "f:p1:f1",
+         "s:p1:f1:1",
+         "DEFINES",
+         "src/a.py:5"
+        ],
+        [
+         1,
+         "f:p1:f1",
+         "s:p1:f1:2",
+         "DEFINES",
+         "src/a.py:6"
+        ],
+        [
+         1,
+         "f:p1:f2",
+         "s:p1:f2:0",
+         "DEFINES",
+         "src/b.py:1"
+        ],
+        [
+         2,
+         "f:p2:f1",
+         "s:p2:f1:0",
+         "DEFINES",
+         "src/a.py:1"
+        ],
+        [
+         2,
+         "f:p2:f1",
+         "s:p2:f1:1",
+         "DEFINES",
+         "src/a.py:5"
+        ],
+        [
+         2,
+         "f:p2:f1",
+         "s:p2:f1:2",
+         "DEFINES",
+         "src/a.py:6"
+        ],
+        [
+         3,
+         "f:p3:f1",
+         "s:p3:f1:0",
+         "DEFINES",
+         "x.py:1"
+        ],
+        [
+         3,
+         "f:p3:f1",
+         "s:p3:f1:1",
+         "DEFINES",
+         "x.py:5"
+        ],
+        [
+         3,
+         "f:p3:f1",
+         "s:p3:f1:2",
+         "DEFINES",
+         "x.py:6"
+        ]
+       ]
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": [
+        [
+         "r:p1",
+         1,
+         "repository",
+         "owner/repo",
+         ".",
+         null,
+         "{\"k\":1,\"areaWaypoints\":[]}"
+        ],
+        [
+         "r:p2",
+         2,
+         "repository",
+         "owner/repo",
+         ".",
+         null,
+         "{\"areaWaypoints\":[]}"
+        ],
+        [
+         "r:p3",
+         3,
+         "repository",
+         "other/repo",
+         ".",
+         null,
+         "{\"areaWaypoints\":[]}"
+        ],
+        [
+         "f:p1:f1",
+         1,
+         "file",
+         "a.py",
+         "src/a.py",
+         null,
+         "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+        ],
+        [
+         "f:p1:f2",
+         1,
+         "file",
+         "b.py",
+         "src/b.py",
+         null,
+         "{\"language\":\"python\",\"sha256\":\"f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753\"}"
+        ],
+        [
+         "f:p2:f1",
+         2,
+         "file",
+         "a.py",
+         "src/a.py",
+         null,
+         "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+        ],
+        [
+         "f:p3:f1",
+         3,
+         "file",
+         "x.py",
+         "x.py",
+         null,
+         "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+        ],
+        [
+         "s:p1:f1:0",
+         1,
+         "function_definition",
+         "alpha",
+         "src/a.py",
+         1,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p1:f1:1",
+         1,
+         "class_definition",
+         "Beta",
+         "src/a.py",
+         5,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p1:f1:2",
+         1,
+         "function_definition",
+         "run",
+         "src/a.py",
+         6,
+         "{\"parent\":\"Beta\"}"
+        ],
+        [
+         "s:p1:f2:0",
+         1,
+         "function_definition",
+         "beta",
+         "src/b.py",
+         1,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p2:f1:0",
+         2,
+         "function_definition",
+         "alpha",
+         "src/a.py",
+         1,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p2:f1:1",
+         2,
+         "class_definition",
+         "Beta",
+         "src/a.py",
+         5,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p2:f1:2",
+         2,
+         "function_definition",
+         "run",
+         "src/a.py",
+         6,
+         "{\"parent\":\"Beta\"}"
+        ],
+        [
+         "s:p3:f1:0",
+         3,
+         "function_definition",
+         "alpha",
+         "x.py",
+         1,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p3:f1:1",
+         3,
+         "class_definition",
+         "Beta",
+         "x.py",
+         5,
+         "{\"parent\":null}"
+        ],
+        [
+         "s:p3:f1:2",
+         3,
+         "function_definition",
+         "run",
+         "x.py",
+         6,
+         "{\"parent\":\"Beta\"}"
+        ]
+       ]
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": []
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": []
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": []
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": [
+        [
+         1,
+         "owner/repo",
+         "rev-1",
+         "<timestamp>",
+         "{}",
+         null,
+         "default"
+        ],
+        [
+         2,
+         "owner/repo",
+         "rev-2",
+         "<timestamp>",
+         "{}",
+         null,
+         "default"
+        ],
+        [
+         3,
+         "other/repo",
+         "rev-3",
+         "<timestamp>",
+         "{}",
+         null,
+         "default"
+        ]
+       ]
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": []
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": [
+      [
+       "f:p1:f1",
+       1,
+       "file",
+       "a.py",
+       "src/a.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+      ],
+      [
+       "f:p1:f2",
+       1,
+       "file",
+       "b.py",
+       "src/b.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753\"}"
+      ],
+      [
+       "f:p2:f1",
+       2,
+       "file",
+       "a.py",
+       "src/a.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+      ],
+      [
+       "f:p3:f1",
+       3,
+       "file",
+       "x.py",
+       "x.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+      ],
+      [
+       "r:p1",
+       1,
+       "repository",
+       "owner/repo",
+       ".",
+       null,
+       "{\"k\":1,\"areaWaypoints\":[]}"
+      ],
+      [
+       "r:p2",
+       2,
+       "repository",
+       "owner/repo",
+       ".",
+       null,
+       "{\"areaWaypoints\":[]}"
+      ],
+      [
+       "r:p3",
+       3,
+       "repository",
+       "other/repo",
+       ".",
+       null,
+       "{\"areaWaypoints\":[]}"
+      ],
+      [
+       "s:p1:f1:0",
+       1,
+       "function_definition",
+       "alpha",
+       "src/a.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p1:f1:1",
+       1,
+       "class_definition",
+       "Beta",
+       "src/a.py",
+       5,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p1:f1:2",
+       1,
+       "function_definition",
+       "run",
+       "src/a.py",
+       6,
+       "{\"parent\":\"Beta\"}"
+      ],
+      [
+       "s:p1:f2:0",
+       1,
+       "function_definition",
+       "beta",
+       "src/b.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p2:f1:0",
+       2,
+       "function_definition",
+       "alpha",
+       "src/a.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p2:f1:1",
+       2,
+       "class_definition",
+       "Beta",
+       "src/a.py",
+       5,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p2:f1:2",
+       2,
+       "function_definition",
+       "run",
+       "src/a.py",
+       6,
+       "{\"parent\":\"Beta\"}"
+      ],
+      [
+       "s:p3:f1:0",
+       3,
+       "function_definition",
+       "alpha",
+       "x.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p3:f1:1",
+       3,
+       "class_definition",
+       "Beta",
+       "x.py",
+       5,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p3:f1:2",
+       3,
+       "function_definition",
+       "run",
+       "x.py",
+       6,
+       "{\"parent\":\"Beta\"}"
+      ]
+     ]
+    },
+    {
+     "value": [
+      [
+       1,
+       "f:p1:f1",
+       "s:p1:f1:0",
+       "DEFINES",
+       "src/a.py:1"
+      ],
+      [
+       1,
+       "f:p1:f1",
+       "s:p1:f1:1",
+       "DEFINES",
+       "src/a.py:5"
+      ],
+      [
+       1,
+       "f:p1:f1",
+       "s:p1:f1:2",
+       "DEFINES",
+       "src/a.py:6"
+      ],
+      [
+       1,
+       "f:p1:f2",
+       "f:p1:f1",
+       "IMPORTS",
+       "src/b.py:1"
+      ],
+      [
+       1,
+       "f:p1:f2",
+       "s:p1:f2:0",
+       "DEFINES",
+       "src/b.py:1"
+      ],
+      [
+       1,
+       "r:p1",
+       "f:p1:f1",
+       "CONTAINS",
+       "src/a.py"
+      ],
+      [
+       1,
+       "r:p1",
+       "f:p1:f2",
+       "CONTAINS",
+       "src/b.py"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "f:p2:f1",
+       "CALLS",
+       "src/a.py:6"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "s:p2:f1:0",
+       "DEFINES",
+       "src/a.py:1"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "s:p2:f1:1",
+       "DEFINES",
+       "src/a.py:5"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "s:p2:f1:2",
+       "DEFINES",
+       "src/a.py:6"
+      ],
+      [
+       2,
+       "r:p2",
+       "f:p2:f1",
+       "CONTAINS",
+       "src/a.py"
+      ],
+      [
+       3,
+       "f:p3:f1",
+       "s:p3:f1:0",
+       "DEFINES",
+       "x.py:1"
+      ],
+      [
+       3,
+       "f:p3:f1",
+       "s:p3:f1:1",
+       "DEFINES",
+       "x.py:5"
+      ],
+      [
+       3,
+       "f:p3:f1",
+       "s:p3:f1:2",
+       "DEFINES",
+       "x.py:6"
+      ],
+      [
+       3,
+       "r:p3",
+       "f:p3:f1",
+       "CONTAINS",
+       "x.py"
+      ]
+     ]
+    },
+    {
+     "value": null
+    },
+    {
+     "value": [
+      [
+       "f:p1:f1",
+       1,
+       "file",
+       "a.py",
+       "src/a.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+      ],
+      [
+       "f:p1:f2",
+       1,
+       "file",
+       "b.py",
+       "src/b.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753\"}"
+      ],
+      [
+       "f:p2:f1",
+       2,
+       "file",
+       "a.py",
+       "src/a.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+      ],
+      [
+       "f:p3:f1",
+       3,
+       "file",
+       "x.py",
+       "x.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+      ],
+      [
+       "r:p1",
+       1,
+       "repository",
+       "owner/repo",
+       ".",
+       null,
+       "{\"k\":1,\"areaWaypoints\":[]}"
+      ],
+      [
+       "r:p2",
+       2,
+       "repository",
+       "owner/repo",
+       ".",
+       null,
+       "{\"areaWaypoints\":[]}"
+      ],
+      [
+       "r:p3",
+       3,
+       "repository",
+       "other/repo",
+       ".",
+       null,
+       "{\"areaWaypoints\":[]}"
+      ],
+      [
+       "s:p1:f1:0",
+       1,
+       "function_definition",
+       "alpha",
+       "src/a.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p1:f1:1",
+       1,
+       "class_definition",
+       "Beta",
+       "src/a.py",
+       5,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p1:f1:2",
+       1,
+       "function_definition",
+       "run",
+       "src/a.py",
+       6,
+       "{\"parent\":\"Beta\"}"
+      ],
+      [
+       "s:p1:f2:0",
+       1,
+       "function_definition",
+       "beta",
+       "src/b.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p2:f1:0",
+       2,
+       "function_definition",
+       "alpha",
+       "src/a.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p2:f1:1",
+       2,
+       "class_definition",
+       "Beta",
+       "src/a.py",
+       5,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p2:f1:2",
+       2,
+       "function_definition",
+       "run",
+       "src/a.py",
+       6,
+       "{\"parent\":\"Beta\"}"
+      ],
+      [
+       "s:p3:f1:0",
+       3,
+       "function_definition",
+       "alpha",
+       "x.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p3:f1:1",
+       3,
+       "class_definition",
+       "Beta",
+       "x.py",
+       5,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p3:f1:2",
+       3,
+       "function_definition",
+       "run",
+       "x.py",
+       6,
+       "{\"parent\":\"Beta\"}"
+      ]
+     ]
+    },
+    {
+     "value": [
+      [
+       1,
+       "f:p1:f1",
+       "s:p1:f1:0",
+       "DEFINES",
+       "src/a.py:1"
+      ],
+      [
+       1,
+       "f:p1:f1",
+       "s:p1:f1:1",
+       "DEFINES",
+       "src/a.py:5"
+      ],
+      [
+       1,
+       "f:p1:f1",
+       "s:p1:f1:2",
+       "DEFINES",
+       "src/a.py:6"
+      ],
+      [
+       1,
+       "f:p1:f2",
+       "f:p1:f1",
+       "IMPORTS",
+       "src/b.py:1"
+      ],
+      [
+       1,
+       "f:p1:f2",
+       "s:p1:f2:0",
+       "DEFINES",
+       "src/b.py:1"
+      ],
+      [
+       1,
+       "r:p1",
+       "f:p1:f1",
+       "CONTAINS",
+       "src/a.py"
+      ],
+      [
+       1,
+       "r:p1",
+       "f:p1:f2",
+       "CONTAINS",
+       "src/b.py"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "f:p2:f1",
+       "CALLS",
+       "src/a.py:6"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "s:p2:f1:0",
+       "DEFINES",
+       "src/a.py:1"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "s:p2:f1:1",
+       "DEFINES",
+       "src/a.py:5"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "s:p2:f1:2",
+       "DEFINES",
+       "src/a.py:6"
+      ],
+      [
+       2,
+       "r:p2",
+       "f:p2:f1",
+       "CONTAINS",
+       "src/a.py"
+      ],
+      [
+       3,
+       "f:p3:f1",
+       "s:p3:f1:0",
+       "DEFINES",
+       "x.py:1"
+      ],
+      [
+       3,
+       "f:p3:f1",
+       "s:p3:f1:1",
+       "DEFINES",
+       "x.py:5"
+      ],
+      [
+       3,
+       "f:p3:f1",
+       "s:p3:f1:2",
+       "DEFINES",
+       "x.py:6"
+      ],
+      [
+       3,
+       "r:p3",
+       "f:p3:f1",
+       "CONTAINS",
+       "x.py"
+      ]
+     ]
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": [
+      [
+       "f:p1:f1",
+       1,
+       "file",
+       "a.py",
+       "src/a.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+      ],
+      [
+       "f:p1:f2",
+       1,
+       "file",
+       "b.py",
+       "src/b.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753\"}"
+      ],
+      [
+       "f:p2:f1",
+       2,
+       "file",
+       "a.py",
+       "src/a.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+      ],
+      [
+       "f:p3:f1",
+       3,
+       "file",
+       "x.py",
+       "x.py",
+       null,
+       "{\"language\":\"python\",\"sha256\":\"8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8\"}"
+      ],
+      [
+       "r:p1",
+       1,
+       "repository",
+       "owner/repo",
+       ".",
+       null,
+       "{\"k\":1,\"areaWaypoints\":[]}"
+      ],
+      [
+       "r:p2",
+       2,
+       "repository",
+       "owner/repo",
+       ".",
+       null,
+       "{\"areaWaypoints\":[]}"
+      ],
+      [
+       "r:p3",
+       3,
+       "repository",
+       "other/repo",
+       ".",
+       null,
+       "{\"areaWaypoints\":[]}"
+      ],
+      [
+       "s:p1:f1:0",
+       1,
+       "function_definition",
+       "alpha",
+       "src/a.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p1:f1:1",
+       1,
+       "class_definition",
+       "Beta",
+       "src/a.py",
+       5,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p1:f1:2",
+       1,
+       "function_definition",
+       "run",
+       "src/a.py",
+       6,
+       "{\"parent\":\"Beta\"}"
+      ],
+      [
+       "s:p1:f2:0",
+       1,
+       "function_definition",
+       "beta",
+       "src/b.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p2:f1:0",
+       2,
+       "function_definition",
+       "alpha",
+       "src/a.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p2:f1:1",
+       2,
+       "class_definition",
+       "Beta",
+       "src/a.py",
+       5,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p2:f1:2",
+       2,
+       "function_definition",
+       "run",
+       "src/a.py",
+       6,
+       "{\"parent\":\"Beta\"}"
+      ],
+      [
+       "s:p3:f1:0",
+       3,
+       "function_definition",
+       "alpha",
+       "x.py",
+       1,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p3:f1:1",
+       3,
+       "class_definition",
+       "Beta",
+       "x.py",
+       5,
+       "{\"parent\":null}"
+      ],
+      [
+       "s:p3:f1:2",
+       3,
+       "function_definition",
+       "run",
+       "x.py",
+       6,
+       "{\"parent\":\"Beta\"}"
+      ]
+     ]
+    },
+    {
+     "value": [
+      [
+       1,
+       "f:p1:f1",
+       "s:p1:f1:0",
+       "DEFINES",
+       "src/a.py:1"
+      ],
+      [
+       1,
+       "f:p1:f1",
+       "s:p1:f1:1",
+       "DEFINES",
+       "src/a.py:5"
+      ],
+      [
+       1,
+       "f:p1:f1",
+       "s:p1:f1:2",
+       "DEFINES",
+       "src/a.py:6"
+      ],
+      [
+       1,
+       "f:p1:f2",
+       "f:p1:f1",
+       "IMPORTS",
+       "src/b.py:1"
+      ],
+      [
+       1,
+       "f:p1:f2",
+       "s:p1:f2:0",
+       "DEFINES",
+       "src/b.py:1"
+      ],
+      [
+       1,
+       "r:p1",
+       "f:p1:f1",
+       "CONTAINS",
+       "src/a.py"
+      ],
+      [
+       1,
+       "r:p1",
+       "f:p1:f2",
+       "CONTAINS",
+       "src/b.py"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "f:p2:f1",
+       "CALLS",
+       "src/a.py:6"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "s:p2:f1:0",
+       "DEFINES",
+       "src/a.py:1"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "s:p2:f1:1",
+       "DEFINES",
+       "src/a.py:5"
+      ],
+      [
+       2,
+       "f:p2:f1",
+       "s:p2:f1:2",
+       "DEFINES",
+       "src/a.py:6"
+      ],
+      [
+       2,
+       "r:p2",
+       "f:p2:f1",
+       "CONTAINS",
+       "src/a.py"
+      ],
+      [
+       3,
+       "f:p3:f1",
+       "s:p3:f1:0",
+       "DEFINES",
+       "x.py:1"
+      ],
+      [
+       3,
+       "f:p3:f1",
+       "s:p3:f1:1",
+       "DEFINES",
+       "x.py:5"
+      ],
+      [
+       3,
+       "f:p3:f1",
+       "s:p3:f1:2",
+       "DEFINES",
+       "x.py:6"
+      ],
+      [
+       3,
+       "r:p3",
+       "f:p3:f1",
+       "CONTAINS",
+       "x.py"
+      ]
+     ]
+    }
+   ]
+  },
+  "migrate-is-idempotent": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": [
+       [
+        "an-alpha",
+        "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8",
+        "1111111111111111111111111111111111111111",
+        "python",
+        "analyser-1",
+        120,
+        "[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]",
+        "{\"imports\":[],\"calls\":[]}"
+       ],
+       [
+        "an-beta",
+        "f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753",
+        "2222222222222222222222222222222222222222",
+        "python",
+        "analyser-1",
+        80,
+        "[[\"function_definition\",\"beta\",1,null]]",
+        "{\"imports\":[],\"calls\":[]}"
+       ],
+       [
+        "an-unused",
+        "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "3333333333333333333333333333333333333333",
+        "python",
+        "analyser-1",
+        10,
+        "[]",
+        "{}"
+       ]
+      ]
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": []
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": []
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": []
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": [
+       [
+        1,
+        "owner/repo",
+        "rev-1",
+        "<timestamp>",
+        "{\"k\":1}",
+        "p1",
+        "branch"
+       ],
+       [
+        2,
+        "owner/repo",
+        "rev-2",
+        "<timestamp>",
+        "{}",
+        "p2",
+        "branch"
+       ]
+      ]
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": []
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "3": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": [
+        [
+         "an-alpha",
+         "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8",
+         "1111111111111111111111111111111111111111",
+         "python",
+         "analyser-1",
+         120,
+         "[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]",
+         "{\"imports\":[],\"calls\":[]}"
+        ],
+        [
+         "an-beta",
+         "f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753",
+         "2222222222222222222222222222222222222222",
+         "python",
+         "analyser-1",
+         80,
+         "[[\"function_definition\",\"beta\",1,null]]",
+         "{\"imports\":[],\"calls\":[]}"
+        ],
+        [
+         "an-unused",
+         "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+         "3333333333333333333333333333333333333333",
+         "python",
+         "analyser-1",
+         10,
+         "[]",
+         "{}"
+        ]
+       ]
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": []
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": []
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": []
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": []
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": []
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": [
+        [
+         1,
+         "owner/repo",
+         "rev-1",
+         "<timestamp>",
+         "{\"k\":1}",
+         "p1",
+         "branch"
+        ],
+        [
+         2,
+         "owner/repo",
+         "rev-2",
+         "<timestamp>",
+         "{}",
+         "p2",
+         "branch"
+        ]
+       ]
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": []
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "migrate-refuses-future-version": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": []
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": []
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": []
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": []
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": []
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": []
+     }
+    },
+    "user_version": 5
+   },
+   "states": {
+    "2": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": []
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": []
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": []
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": []
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": []
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": []
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": []
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": []
+      }
+     },
+     "user_version": 5
+    }
+   },
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "RuntimeError",
+     "message": "Unsupported graph storage version"
+    }
+   ]
+  },
+  "rollback-collides-on-existing-legacy-ids": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": [
+       [
+        "an-alpha",
+        "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8",
+        "1111111111111111111111111111111111111111",
+        "python",
+        "analyser-1",
+        120,
+        "[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]",
+        "{\"imports\":[],\"calls\":[]}"
+       ],
+       [
+        "an-beta",
+        "f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753",
+        "2222222222222222222222222222222222222222",
+        "python",
+        "analyser-1",
+        80,
+        "[[\"function_definition\",\"beta\",1,null]]",
+        "{\"imports\":[],\"calls\":[]}"
+       ],
+       [
+        "an-unused",
+        "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "3333333333333333333333333333333333333333",
+        "python",
+        "analyser-1",
+        10,
+        "[]",
+        "{}"
+       ]
+      ]
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": [
+       [
+        "r:p1",
+        9,
+        "repository",
+        "x",
+        ".",
+        null,
+        "{}"
+       ]
+      ]
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": [
+       [
+        1,
+        "f:p1:f2",
+        "f:p1:f1",
+        "IMPORTS",
+        "src/b.py:1"
+       ],
+       [
+        2,
+        "f:p2:f1",
+        "f:p2:f1",
+        "CALLS",
+        "src/a.py:6"
+       ]
+      ]
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": [
+       [
+        1,
+        "src/a.py",
+        "f1",
+        "a.py",
+        "an-alpha"
+       ],
+       [
+        1,
+        "src/b.py",
+        "f2",
+        "b.py",
+        "an-beta"
+       ],
+       [
+        2,
+        "src/a.py",
+        "f1",
+        "a.py",
+        "an-alpha"
+       ],
+       [
+        3,
+        "x.py",
+        "f1",
+        "x.py",
+        "an-alpha"
+       ]
+      ]
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": []
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": [
+       [
+        1,
+        "owner/repo",
+        "rev-1",
+        "<timestamp>",
+        "{\"k\":1}",
+        "p1",
+        "branch"
+       ],
+       [
+        2,
+        "owner/repo",
+        "rev-2",
+        "<timestamp>",
+        "{}",
+        "p2",
+        "branch"
+       ],
+       [
+        3,
+        "other/repo",
+        "rev-3",
+        "<timestamp>",
+        "{}",
+        "p3",
+        "branch"
+       ]
+      ]
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": []
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "2": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": [
+        [
+         "an-alpha",
+         "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8",
+         "1111111111111111111111111111111111111111",
+         "python",
+         "analyser-1",
+         120,
+         "[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]",
+         "{\"imports\":[],\"calls\":[]}"
+        ],
+        [
+         "an-beta",
+         "f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753",
+         "2222222222222222222222222222222222222222",
+         "python",
+         "analyser-1",
+         80,
+         "[[\"function_definition\",\"beta\",1,null]]",
+         "{\"imports\":[],\"calls\":[]}"
+        ],
+        [
+         "an-unused",
+         "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+         "3333333333333333333333333333333333333333",
+         "python",
+         "analyser-1",
+         10,
+         "[]",
+         "{}"
+        ]
+       ]
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": []
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": [
+        [
+         "r:p1",
+         9,
+         "repository",
+         "x",
+         ".",
+         null,
+         "{}"
+        ]
+       ]
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": [
+        [
+         1,
+         "f:p1:f2",
+         "f:p1:f1",
+         "IMPORTS",
+         "src/b.py:1"
+        ],
+        [
+         2,
+         "f:p2:f1",
+         "f:p2:f1",
+         "CALLS",
+         "src/a.py:6"
+        ]
+       ]
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": [
+        [
+         1,
+         "src/a.py",
+         "f1",
+         "a.py",
+         "an-alpha"
+        ],
+        [
+         1,
+         "src/b.py",
+         "f2",
+         "b.py",
+         "an-beta"
+        ],
+        [
+         2,
+         "src/a.py",
+         "f1",
+         "a.py",
+         "an-alpha"
+        ],
+        [
+         3,
+         "x.py",
+         "f1",
+         "x.py",
+         "an-alpha"
+        ]
+       ]
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": []
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": [
+        [
+         1,
+         "owner/repo",
+         "rev-1",
+         "<timestamp>",
+         "{\"k\":1}",
+         "p1",
+         "branch"
+        ],
+        [
+         2,
+         "owner/repo",
+         "rev-2",
+         "<timestamp>",
+         "{}",
+         "p2",
+         "branch"
+        ],
+        [
+         3,
+         "other/repo",
+         "rev-3",
+         "<timestamp>",
+         "{}",
+         "p3",
+         "branch"
+        ]
+       ]
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": []
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "IntegrityError",
+     "message": "UNIQUE constraint failed: legacy_nodes.id"
+    }
+   ]
+  },
+  "rollback-twice-is-refused": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "4c4af06bd5c4e002",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": []
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": []
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": []
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": []
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": []
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": []
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "4": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "4c4af06bd5c4e002",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": []
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": []
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": []
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": []
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": []
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": []
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": []
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": []
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "RuntimeError",
+     "message": "Only the current graph storage version can be rolled back"
+    },
+    {
+     "error": "RuntimeError",
+     "message": "Only waypoint storage version 3 can be downgraded"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "rollback-waypoints-twice-is-refused": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "f35ab6781f40520d",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": [
+       [
+        "an-alpha",
+        "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8",
+        "1111111111111111111111111111111111111111",
+        "python",
+        "analyser-1",
+        120,
+        "[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]",
+        "{\"imports\":[],\"calls\":[]}"
+       ],
+       [
+        "an-beta",
+        "f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753",
+        "2222222222222222222222222222222222222222",
+        "python",
+        "analyser-1",
+        80,
+        "[[\"function_definition\",\"beta\",1,null]]",
+        "{\"imports\":[],\"calls\":[]}"
+       ],
+       [
+        "an-unused",
+        "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+        "3333333333333333333333333333333333333333",
+        "python",
+        "analyser-1",
+        10,
+        "[]",
+        "{}"
+       ]
+      ]
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": []
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": [
+       [
+        1,
+        "f:p1:f2",
+        "f:p1:f1",
+        "IMPORTS",
+        "src/b.py:1"
+       ],
+       [
+        2,
+        "f:p2:f1",
+        "f:p2:f1",
+        "CALLS",
+        "src/a.py:6"
+       ]
+      ]
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": [
+       [
+        1,
+        "src/a.py",
+        "f1",
+        "a.py",
+        "an-alpha"
+       ],
+       [
+        1,
+        "src/b.py",
+        "f2",
+        "b.py",
+        "an-beta"
+       ],
+       [
+        2,
+        "src/a.py",
+        "f1",
+        "a.py",
+        "an-alpha"
+       ],
+       [
+        3,
+        "x.py",
+        "f1",
+        "x.py",
+        "an-alpha"
+       ]
+      ]
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": [
+       [
+        1,
+        "owner/repo",
+        "rev-1",
+        "<timestamp>",
+        "{\"k\":1}",
+        "p1",
+        "branch"
+       ],
+       [
+        2,
+        "owner/repo",
+        "rev-2",
+        "<timestamp>",
+        "{}",
+        "p2",
+        "branch"
+       ],
+       [
+        3,
+        "other/repo",
+        "rev-3",
+        "<timestamp>",
+        "{}",
+        "p3",
+        "branch"
+       ]
+      ]
+     }
+    },
+    "user_version": 2
+   },
+   "states": {
+    "2": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "f35ab6781f40520d",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": [
+        [
+         "an-alpha",
+         "8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8",
+         "1111111111111111111111111111111111111111",
+         "python",
+         "analyser-1",
+         120,
+         "[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]",
+         "{\"imports\":[],\"calls\":[]}"
+        ],
+        [
+         "an-beta",
+         "f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753",
+         "2222222222222222222222222222222222222222",
+         "python",
+         "analyser-1",
+         80,
+         "[[\"function_definition\",\"beta\",1,null]]",
+         "{\"imports\":[],\"calls\":[]}"
+        ],
+        [
+         "an-unused",
+         "febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e",
+         "3333333333333333333333333333333333333333",
+         "python",
+         "analyser-1",
+         10,
+         "[]",
+         "{}"
+        ]
+       ]
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": []
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": []
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": [
+        [
+         1,
+         "f:p1:f2",
+         "f:p1:f1",
+         "IMPORTS",
+         "src/b.py:1"
+        ],
+        [
+         2,
+         "f:p2:f1",
+         "f:p2:f1",
+         "CALLS",
+         "src/a.py:6"
+        ]
+       ]
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": [
+        [
+         1,
+         "src/a.py",
+         "f1",
+         "a.py",
+         "an-alpha"
+        ],
+        [
+         1,
+         "src/b.py",
+         "f2",
+         "b.py",
+         "an-beta"
+        ],
+        [
+         2,
+         "src/a.py",
+         "f1",
+         "a.py",
+         "an-alpha"
+        ],
+        [
+         3,
+         "x.py",
+         "f1",
+         "x.py",
+         "an-alpha"
+        ]
+       ]
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": [
+        [
+         1,
+         "owner/repo",
+         "rev-1",
+         "<timestamp>",
+         "{\"k\":1}",
+         "p1",
+         "branch"
+        ],
+        [
+         2,
+         "owner/repo",
+         "rev-2",
+         "<timestamp>",
+         "{}",
+         "p2",
+         "branch"
+        ],
+        [
+         3,
+         "other/repo",
+         "rev-3",
+         "<timestamp>",
+         "{}",
+         "p3",
+         "branch"
+        ]
+       ]
+      }
+     },
+     "user_version": 2
+    }
+   },
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "RuntimeError",
+     "message": "Only waypoint storage version 3 can be downgraded"
+    }
+   ]
+  }
+ },
+ "schemas": {
+  "3c8ab78ffefcf6d9": [
+   [
+    "index",
+    "analysis_object",
+    "analyses",
+    "CREATE INDEX analysis_object ON analyses(git_oid,language,version)"
+   ],
+   [
+    "index",
+    "idx_edges_source",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_source ON legacy_edges(snapshot_id,source)"
+   ],
+   [
+    "index",
+    "idx_edges_target",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_target ON legacy_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "idx_nodes_lookup",
+    "legacy_nodes",
+    "CREATE INDEX idx_nodes_lookup ON legacy_nodes(snapshot_id,name,kind)"
+   ],
+   [
+    "index",
+    "manifest_analysis",
+    "snapshot_files",
+    "CREATE INDEX manifest_analysis ON snapshot_files(analysis_id)"
+   ],
+   [
+    "index",
+    "resolved_inbound",
+    "resolved_edges",
+    "CREATE INDEX resolved_inbound ON resolved_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "snapshot_view",
+    "snapshots",
+    "CREATE INDEX snapshot_view ON snapshots(repo,view_key,id DESC)"
+   ],
+   [
+    "index",
+    "waypoint_summary_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_summary_bindings ON snapshot_waypoints(summary_key)"
+   ],
+   [
+    "index",
+    "waypoint_validation_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_validation_bindings ON snapshot_waypoints(validation_key)"
+   ],
+   [
+    "table",
+    "analyses",
+    "analyses",
+    "CREATE TABLE analyses(\n        id TEXT PRIMARY KEY,content_hash TEXT NOT NULL,git_oid TEXT NOT NULL,\n        language TEXT NOT NULL,version TEXT NOT NULL,size_bytes INTEGER NOT NULL,\n        symbols TEXT NOT NULL CHECK(json_valid(symbols)),facts TEXT NOT NULL CHECK(json_valid(facts)))"
+   ],
+   [
+    "table",
+    "legacy_edges",
+    "legacy_edges",
+    "CREATE TABLE legacy_edges(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "legacy_nodes",
+    "legacy_nodes",
+    "CREATE TABLE legacy_nodes(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}')"
+   ],
+   [
+    "table",
+    "resolved_edges",
+    "resolved_edges",
+    "CREATE TABLE resolved_edges(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,\n        PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "snapshot_files",
+    "snapshot_files",
+    "CREATE TABLE snapshot_files(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,file_id TEXT NOT NULL,name TEXT NOT NULL,\n        analysis_id TEXT NOT NULL REFERENCES analyses(id),PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshot_waypoints",
+    "snapshot_waypoints",
+    "CREATE TABLE snapshot_waypoints(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,kind TEXT NOT NULL CHECK(kind IN ('file','area')),\n        summary_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        validation_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshots",
+    "snapshots",
+    "CREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP, metadata TEXT NOT NULL DEFAULT '{}', node_prefix TEXT, view_key TEXT NOT NULL DEFAULT 'default')"
+   ],
+   [
+    "table",
+    "waypoint_cache",
+    "waypoint_cache",
+    "CREATE TABLE waypoint_cache(\n        id TEXT PRIMARY KEY,kind TEXT NOT NULL CHECK(kind IN ('file','area','validation')),\n        version TEXT NOT NULL,payload TEXT NOT NULL CHECK(json_valid(payload)),\n        payload_hash TEXT NOT NULL)"
+   ],
+   [
+    "trigger",
+    "staging_edge_insert",
+    "edges",
+    "CREATE TRIGGER staging_edge_insert INSTEAD OF INSERT ON edges\n        BEGIN INSERT INTO resolved_edges(snapshot_id,source,target,kind,evidence)\n        VALUES (new.snapshot_id,new.source,new.target,new.kind,new.evidence); END"
+   ],
+   [
+    "view",
+    "edges",
+    "edges",
+    "CREATE VIEW edges AS\n SELECT snapshot_id,source,target,kind,evidence FROM legacy_edges\n UNION ALL SELECT snapshot_id,source,target,kind,evidence FROM resolved_edges\n UNION ALL\n SELECT f.snapshot_id,'r:'||s.node_prefix,'f:'||s.node_prefix||':'||f.file_id,'CONTAINS',f.path\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n UNION ALL\n SELECT f.snapshot_id,'f:'||s.node_prefix||':'||f.file_id,\n 's:'||s.node_prefix||':'||f.file_id||':'||j.key,'DEFINES',\n f.path||':'||json_extract(j.value,'$[2]')\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ],
+   [
+    "view",
+    "nodes",
+    "nodes",
+    "CREATE VIEW nodes AS\n SELECT id,snapshot_id,kind,name,path,line,metadata FROM legacy_nodes\n UNION ALL\n SELECT 'r:'||node_prefix,id,'repository',repo,'.',NULL,\n json_set(metadata,'$.areaWaypoints',json((\n   SELECT json_group_array(json(waypoint)) FROM (\n     SELECT json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))) AS waypoint\n     FROM snapshot_waypoints sw JOIN waypoint_cache wc ON wc.id=sw.summary_key\n     JOIN waypoint_cache vc ON vc.id=sw.validation_key\n     WHERE sw.snapshot_id=s.id AND sw.kind='area' ORDER BY sw.path\n   ))))\n FROM snapshots s WHERE node_prefix IS NOT NULL\n UNION ALL\n SELECT 'f:'||s.node_prefix||':'||f.file_id,f.snapshot_id,'file',f.name,f.path,NULL,\n CASE WHEN sw.path IS NULL THEN json_object('language',a.language,'sha256',a.content_hash)\n ELSE json_object('language',a.language,'sha256',a.content_hash,'waypoint',json(json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))))) END\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id JOIN analyses a ON a.id=f.analysis_id\n LEFT JOIN snapshot_waypoints sw ON sw.snapshot_id=f.snapshot_id AND sw.path=f.path AND sw.kind='file'\n LEFT JOIN waypoint_cache wc ON wc.id=sw.summary_key\n LEFT JOIN waypoint_cache vc ON vc.id=sw.validation_key\n UNION ALL\n SELECT 's:'||s.node_prefix||':'||f.file_id||':'||j.key,f.snapshot_id,\n json_extract(j.value,'$[0]'),json_extract(j.value,'$[1]'),f.path,json_extract(j.value,'$[2]'),\n json_object('parent',json_extract(j.value,'$[3]'))\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ]
+  ],
+  "4c4af06bd5c4e002": [
+   [
+    "index",
+    "analysis_object",
+    "analyses",
+    "CREATE INDEX analysis_object ON analyses(git_oid,language,version)"
+   ],
+   [
+    "index",
+    "idx_edges_source",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_source ON \"legacy_edges\"(snapshot_id,source)"
+   ],
+   [
+    "index",
+    "idx_edges_target",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_target ON \"legacy_edges\"(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "idx_nodes_lookup",
+    "legacy_nodes",
+    "CREATE INDEX idx_nodes_lookup ON \"legacy_nodes\"(snapshot_id,name,kind)"
+   ],
+   [
+    "index",
+    "manifest_analysis",
+    "snapshot_files",
+    "CREATE INDEX manifest_analysis ON snapshot_files(analysis_id)"
+   ],
+   [
+    "index",
+    "resolved_inbound",
+    "resolved_edges",
+    "CREATE INDEX resolved_inbound ON resolved_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "snapshot_view",
+    "snapshots",
+    "CREATE INDEX snapshot_view ON snapshots(repo,view_key,id DESC)"
+   ],
+   [
+    "index",
+    "waypoint_summary_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_summary_bindings ON snapshot_waypoints(summary_key)"
+   ],
+   [
+    "index",
+    "waypoint_validation_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_validation_bindings ON snapshot_waypoints(validation_key)"
+   ],
+   [
+    "table",
+    "analyses",
+    "analyses",
+    "CREATE TABLE analyses(\n        id TEXT PRIMARY KEY,content_hash TEXT NOT NULL,git_oid TEXT NOT NULL,\n        language TEXT NOT NULL,version TEXT NOT NULL,size_bytes INTEGER NOT NULL,\n        symbols TEXT NOT NULL CHECK(json_valid(symbols)),facts TEXT NOT NULL CHECK(json_valid(facts)))"
+   ],
+   [
+    "table",
+    "legacy_edges",
+    "legacy_edges",
+    "CREATE TABLE \"legacy_edges\"(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "legacy_nodes",
+    "legacy_nodes",
+    "CREATE TABLE \"legacy_nodes\"(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}')"
+   ],
+   [
+    "table",
+    "resolved_edges",
+    "resolved_edges",
+    "CREATE TABLE resolved_edges(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,\n        PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "snapshot_files",
+    "snapshot_files",
+    "CREATE TABLE snapshot_files(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,file_id TEXT NOT NULL,name TEXT NOT NULL,\n        analysis_id TEXT NOT NULL REFERENCES analyses(id),PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshot_waypoints",
+    "snapshot_waypoints",
+    "CREATE TABLE snapshot_waypoints(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,kind TEXT NOT NULL CHECK(kind IN ('file','area')),\n        summary_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        validation_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshots",
+    "snapshots",
+    "CREATE TABLE \"snapshots\"(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP, metadata TEXT NOT NULL DEFAULT '{}', node_prefix TEXT, view_key TEXT NOT NULL DEFAULT 'default')"
+   ],
+   [
+    "table",
+    "waypoint_cache",
+    "waypoint_cache",
+    "CREATE TABLE waypoint_cache(\n        id TEXT PRIMARY KEY,kind TEXT NOT NULL CHECK(kind IN ('file','area','validation')),\n        version TEXT NOT NULL,payload TEXT NOT NULL CHECK(json_valid(payload)),\n        payload_hash TEXT NOT NULL)"
+   ],
+   [
+    "trigger",
+    "staging_edge_insert",
+    "edges",
+    "CREATE TRIGGER staging_edge_insert INSTEAD OF INSERT ON edges\n        BEGIN INSERT INTO resolved_edges(snapshot_id,source,target,kind,evidence)\n        VALUES (new.snapshot_id,new.source,new.target,new.kind,new.evidence); END"
+   ],
+   [
+    "view",
+    "edges",
+    "edges",
+    "CREATE VIEW edges AS\n SELECT snapshot_id,source,target,kind,evidence FROM legacy_edges\n UNION ALL SELECT snapshot_id,source,target,kind,evidence FROM resolved_edges\n UNION ALL\n SELECT f.snapshot_id,'r:'||s.node_prefix,'f:'||s.node_prefix||':'||f.file_id,'CONTAINS',f.path\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n UNION ALL\n SELECT f.snapshot_id,'f:'||s.node_prefix||':'||f.file_id,\n 's:'||s.node_prefix||':'||f.file_id||':'||j.key,'DEFINES',\n f.path||':'||json_extract(j.value,'$[2]')\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ],
+   [
+    "view",
+    "nodes",
+    "nodes",
+    "CREATE VIEW nodes AS\n SELECT id,snapshot_id,kind,name,path,line,metadata FROM legacy_nodes\n UNION ALL\n SELECT 'r:'||node_prefix,id,'repository',repo,'.',NULL,\n json_set(metadata,'$.areaWaypoints',json((\n   SELECT json_group_array(json(waypoint)) FROM (\n     SELECT json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))) AS waypoint\n     FROM snapshot_waypoints sw JOIN waypoint_cache wc ON wc.id=sw.summary_key\n     JOIN waypoint_cache vc ON vc.id=sw.validation_key\n     WHERE sw.snapshot_id=s.id AND sw.kind='area' ORDER BY sw.path\n   ))))\n FROM snapshots s WHERE node_prefix IS NOT NULL\n UNION ALL\n SELECT 'f:'||s.node_prefix||':'||f.file_id,f.snapshot_id,'file',f.name,f.path,NULL,\n CASE WHEN sw.path IS NULL THEN json_object('language',a.language,'sha256',a.content_hash)\n ELSE json_object('language',a.language,'sha256',a.content_hash,'waypoint',json(json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))))) END\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id JOIN analyses a ON a.id=f.analysis_id\n LEFT JOIN snapshot_waypoints sw ON sw.snapshot_id=f.snapshot_id AND sw.path=f.path AND sw.kind='file'\n LEFT JOIN waypoint_cache wc ON wc.id=sw.summary_key\n LEFT JOIN waypoint_cache vc ON vc.id=sw.validation_key\n UNION ALL\n SELECT 's:'||s.node_prefix||':'||f.file_id||':'||j.key,f.snapshot_id,\n json_extract(j.value,'$[0]'),json_extract(j.value,'$[1]'),f.path,json_extract(j.value,'$[2]'),\n json_object('parent',json_extract(j.value,'$[3]'))\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ]
+  ],
+  "685b72873fe58d03": [
+   [
+    "index",
+    "idx_edges_source",
+    "edges",
+    "CREATE INDEX idx_edges_source ON \"edges\"(snapshot_id,source)"
+   ],
+   [
+    "index",
+    "idx_edges_target",
+    "edges",
+    "CREATE INDEX idx_edges_target ON \"edges\"(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "idx_nodes_lookup",
+    "nodes",
+    "CREATE INDEX idx_nodes_lookup ON \"nodes\"(snapshot_id,name,kind)"
+   ],
+   [
+    "table",
+    "edges",
+    "edges",
+    "CREATE TABLE \"edges\"(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "nodes",
+    "nodes",
+    "CREATE TABLE \"nodes\"(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}')"
+   ],
+   [
+    "table",
+    "snapshots",
+    "snapshots",
+    "CREATE TABLE \"snapshots\"(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP)"
+   ]
+  ],
+  "f35ab6781f40520d": [
+   [
+    "index",
+    "analysis_object",
+    "analyses",
+    "CREATE INDEX analysis_object ON analyses(git_oid,language,version)"
+   ],
+   [
+    "index",
+    "idx_edges_source",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_source ON legacy_edges(snapshot_id,source)"
+   ],
+   [
+    "index",
+    "idx_edges_target",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_target ON legacy_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "idx_nodes_lookup",
+    "legacy_nodes",
+    "CREATE INDEX idx_nodes_lookup ON legacy_nodes(snapshot_id,name,kind)"
+   ],
+   [
+    "index",
+    "manifest_analysis",
+    "snapshot_files",
+    "CREATE INDEX manifest_analysis ON snapshot_files(analysis_id)"
+   ],
+   [
+    "index",
+    "resolved_inbound",
+    "resolved_edges",
+    "CREATE INDEX resolved_inbound ON resolved_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "snapshot_view",
+    "snapshots",
+    "CREATE INDEX snapshot_view ON snapshots(repo,view_key,id DESC)"
+   ],
+   [
+    "table",
+    "analyses",
+    "analyses",
+    "CREATE TABLE analyses(\n        id TEXT PRIMARY KEY,content_hash TEXT NOT NULL,git_oid TEXT NOT NULL,\n        language TEXT NOT NULL,version TEXT NOT NULL,size_bytes INTEGER NOT NULL,\n        symbols TEXT NOT NULL CHECK(json_valid(symbols)),facts TEXT NOT NULL CHECK(json_valid(facts)))"
+   ],
+   [
+    "table",
+    "legacy_edges",
+    "legacy_edges",
+    "CREATE TABLE legacy_edges(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "legacy_nodes",
+    "legacy_nodes",
+    "CREATE TABLE legacy_nodes(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}')"
+   ],
+   [
+    "table",
+    "resolved_edges",
+    "resolved_edges",
+    "CREATE TABLE resolved_edges(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,\n        PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "snapshot_files",
+    "snapshot_files",
+    "CREATE TABLE snapshot_files(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,file_id TEXT NOT NULL,name TEXT NOT NULL,\n        analysis_id TEXT NOT NULL REFERENCES analyses(id),PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshots",
+    "snapshots",
+    "CREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP, metadata TEXT NOT NULL DEFAULT '{}', node_prefix TEXT, view_key TEXT NOT NULL DEFAULT 'default')"
+   ],
+   [
+    "trigger",
+    "staging_edge_insert",
+    "edges",
+    "CREATE TRIGGER staging_edge_insert INSTEAD OF INSERT ON edges\n            BEGIN INSERT INTO resolved_edges(snapshot_id,source,target,kind,evidence)\n            VALUES (new.snapshot_id,new.source,new.target,new.kind,new.evidence); END"
+   ],
+   [
+    "view",
+    "edges",
+    "edges",
+    "CREATE VIEW edges AS\n SELECT snapshot_id,source,target,kind,evidence FROM legacy_edges\n UNION ALL SELECT snapshot_id,source,target,kind,evidence FROM resolved_edges\n UNION ALL\n SELECT f.snapshot_id,'r:'||s.node_prefix,'f:'||s.node_prefix||':'||f.file_id,'CONTAINS',f.path\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n UNION ALL\n SELECT f.snapshot_id,'f:'||s.node_prefix||':'||f.file_id,\n 's:'||s.node_prefix||':'||f.file_id||':'||j.key,'DEFINES',\n f.path||':'||json_extract(j.value,'$[2]')\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ],
+   [
+    "view",
+    "nodes",
+    "nodes",
+    "CREATE VIEW nodes AS\n SELECT id,snapshot_id,kind,name,path,line,metadata FROM legacy_nodes\n UNION ALL\n SELECT 'r:'||node_prefix,id,'repository',repo,'.',NULL,metadata\n FROM snapshots WHERE node_prefix IS NOT NULL\n UNION ALL\n SELECT 'f:'||s.node_prefix||':'||f.file_id,f.snapshot_id,'file',f.name,f.path,NULL,\n json_object('language',a.language,'sha256',a.content_hash)\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id JOIN analyses a ON a.id=f.analysis_id\n UNION ALL\n SELECT 's:'||s.node_prefix||':'||f.file_id||':'||j.key,f.snapshot_id,\n json_extract(j.value,'$[0]'),json_extract(j.value,'$[1]'),f.path,json_extract(j.value,'$[2]'),\n json_object('parent',json_extract(j.value,'$[3]'))\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ]
+  ]
+ }
+}

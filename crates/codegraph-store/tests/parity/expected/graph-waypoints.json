@@ -1,0 +1,1917 @@
+{
+ "cases": {
+  "area-payload-tampered": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Waypoint belongs to another source path"
+    },
+    {
+     "error": "ValueError",
+     "message": "Waypoint belongs to another source path"
+    },
+    {
+     "value": [
+      {
+       "contentHash": "d6ce6239cbfcaaabfdabd565cb9074b20fef270427a24e90eb40436158cb38f9",
+       "evidence": [
+        {
+         "method": "content-hash",
+         "path": "README.md",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 8,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": ".",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions, documentation.",
+       "summaryKey": "f502635196b57c8f7ac667846e8eb951ce79788ef4a41576dc783409517ec9e2",
+       "title": "Repository map",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "83f608243653a42cc627589da24c1a2b82b4d45d03d7497fafe79cc633798e0c",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "0a56b66ee5b6b7be18d8d516af558475b3748c3ae13efdada987297f8e3dde7d",
+       "evidence": [
+        {
+         "method": "content-hash",
+         "path": "README.md",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "README.md",
+       "purpose": "documentation",
+       "schemaVersion": "1",
+       "summary": "No readable purpose description was found in the captured source.",
+       "summaryKey": "930e0c48e607e3e05284241ed5f2f54f51532d6a4231565ded01bf2c565de912",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "9f68244efb3f6b9bf6c9544968eb21182c662d836bf3953e32d35643b1131a55",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "b81784ce3d0ad51ceb617d4c62dbb31af7a4fa15ac76dbbd49a8a82fedae7b5a",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 8,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": "src",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions.",
+       "summaryKey": "162396dd28e44e5c4b1d4a43300b838084f4589c7bfdc9ecb9214e0cff1a9125",
+       "title": "Src",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "cacaa1cd89aae308f7c16134d2c4c8cef8f03a0ea28d42ce0ff827569ff38461",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/a.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Alpha helpers.",
+       "summaryKey": "8c5e5bb8a3e706088ed3bcd076ffdb079252e744410140114a5bd4e118ff01cc",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "fe9e69be3495440f12da8772d13f2cf2c057ad47db0421bfc3820a2ae3288624",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "490146fa9469a8a8bd697dc95addd0d3fb24e63f71595b99b1ddcf52e94a45ca",
+       "evidence": [
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 8,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/b.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Defines Beta, run, stop.",
+       "summaryKey": "0090b36f8f69ad8621f9887b68aa2d138e551363f93ab104f961ca631453d0d9",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "def00384486b141a772258e75d5e3101bee5665129eef3fb6e347e51ba158977",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "binding-without-cache-row": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Snapshot waypoint binding is incomplete"
+    },
+    {
+     "error": "ValueError",
+     "message": "Snapshot waypoint binding is incomplete"
+    },
+    {
+     "error": "ValueError",
+     "message": "Snapshot waypoint binding is incomplete"
+    }
+   ]
+  },
+  "binding-without-check-row": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Snapshot waypoint binding is incomplete"
+    },
+    {
+     "error": "ValueError",
+     "message": "Snapshot waypoint binding is incomplete"
+    },
+    {
+     "error": "ValueError",
+     "message": "Snapshot waypoint binding is incomplete"
+    }
+   ]
+  },
+  "check-record-swapped-for-description": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    },
+    {
+     "value": [
+      {
+       "contentHash": "d6ce6239cbfcaaabfdabd565cb9074b20fef270427a24e90eb40436158cb38f9",
+       "evidence": [
+        {
+         "method": "content-hash",
+         "path": "README.md",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 8,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": ".",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions, documentation.",
+       "summaryKey": "f502635196b57c8f7ac667846e8eb951ce79788ef4a41576dc783409517ec9e2",
+       "title": "Repository map",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "83f608243653a42cc627589da24c1a2b82b4d45d03d7497fafe79cc633798e0c",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "0a56b66ee5b6b7be18d8d516af558475b3748c3ae13efdada987297f8e3dde7d",
+       "evidence": [
+        {
+         "method": "content-hash",
+         "path": "README.md",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "README.md",
+       "purpose": "documentation",
+       "schemaVersion": "1",
+       "summary": "No readable purpose description was found in the captured source.",
+       "summaryKey": "930e0c48e607e3e05284241ed5f2f54f51532d6a4231565ded01bf2c565de912",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "9f68244efb3f6b9bf6c9544968eb21182c662d836bf3953e32d35643b1131a55",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "b81784ce3d0ad51ceb617d4c62dbb31af7a4fa15ac76dbbd49a8a82fedae7b5a",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 8,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": "src",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions.",
+       "summaryKey": "162396dd28e44e5c4b1d4a43300b838084f4589c7bfdc9ecb9214e0cff1a9125",
+       "title": "Src",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "cacaa1cd89aae308f7c16134d2c4c8cef8f03a0ea28d42ce0ff827569ff38461",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/a.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Alpha helpers.",
+       "summaryKey": "8c5e5bb8a3e706088ed3bcd076ffdb079252e744410140114a5bd4e118ff01cc",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "fe9e69be3495440f12da8772d13f2cf2c057ad47db0421bfc3820a2ae3288624",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "490146fa9469a8a8bd697dc95addd0d3fb24e63f71595b99b1ddcf52e94a45ca",
+       "evidence": [
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 8,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/b.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Defines Beta, run, stop.",
+       "summaryKey": "0090b36f8f69ad8621f9887b68aa2d138e551363f93ab104f961ca631453d0d9",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "def00384486b141a772258e75d5e3101bee5665129eef3fb6e347e51ba158977",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "checksum-mismatch": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    }
+   ]
+  },
+  "evidence-as-bool": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "TypeError",
+     "message": "'bool' object is not iterable"
+    },
+    {
+     "error": "TypeError",
+     "message": "'bool' object is not iterable"
+    },
+    {
+     "error": "TypeError",
+     "message": "'bool' object is not iterable"
+    }
+   ]
+  },
+  "evidence-as-empty-object": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint evidence"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint evidence"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint evidence"
+    }
+   ]
+  },
+  "evidence-as-empty-string": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint evidence"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint evidence"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint evidence"
+    }
+   ]
+  },
+  "evidence-as-float": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "TypeError",
+     "message": "'float' object is not iterable"
+    },
+    {
+     "error": "TypeError",
+     "message": "'float' object is not iterable"
+    },
+    {
+     "error": "TypeError",
+     "message": "'float' object is not iterable"
+    }
+   ]
+  },
+  "evidence-as-null": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "TypeError",
+     "message": "'NoneType' object is not iterable"
+    },
+    {
+     "error": "TypeError",
+     "message": "'NoneType' object is not iterable"
+    },
+    {
+     "error": "TypeError",
+     "message": "'NoneType' object is not iterable"
+    }
+   ]
+  },
+  "evidence-as-number": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "TypeError",
+     "message": "'int' object is not iterable"
+    },
+    {
+     "error": "TypeError",
+     "message": "'int' object is not iterable"
+    },
+    {
+     "error": "TypeError",
+     "message": "'int' object is not iterable"
+    }
+   ]
+  },
+  "evidence-as-object": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "TypeError",
+     "message": "'str' object is not a mapping"
+    },
+    {
+     "error": "TypeError",
+     "message": "'str' object is not a mapping"
+    },
+    {
+     "error": "TypeError",
+     "message": "'str' object is not a mapping"
+    }
+   ]
+  },
+  "evidence-as-string": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "TypeError",
+     "message": "'str' object is not a mapping"
+    },
+    {
+     "error": "TypeError",
+     "message": "'str' object is not a mapping"
+    },
+    {
+     "error": "TypeError",
+     "message": "'str' object is not a mapping"
+    }
+   ]
+  },
+  "evidence-empty-list": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint evidence"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint evidence"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint evidence"
+    }
+   ]
+  },
+  "evidence-item-is-a-list": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "TypeError",
+     "message": "'list' object is not a mapping"
+    },
+    {
+     "error": "TypeError",
+     "message": "'list' object is not a mapping"
+    },
+    {
+     "error": "TypeError",
+     "message": "'list' object is not a mapping"
+    }
+   ]
+  },
+  "evidence-item-is-null": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "TypeError",
+     "message": "'NoneType' object is not a mapping"
+    },
+    {
+     "error": "TypeError",
+     "message": "'NoneType' object is not a mapping"
+    },
+    {
+     "error": "TypeError",
+     "message": "'NoneType' object is not a mapping"
+    }
+   ]
+  },
+  "evidence-item-not-a-mapping": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "TypeError",
+     "message": "'str' object is not a mapping"
+    },
+    {
+     "error": "TypeError",
+     "message": "'str' object is not a mapping"
+    },
+    {
+     "error": "TypeError",
+     "message": "'str' object is not a mapping"
+    }
+   ]
+  },
+  "evidence-missing": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint evidence"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint evidence"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint evidence"
+    }
+   ]
+  },
+  "huge-integer-in-payload": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint record"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint record"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint record"
+    }
+   ]
+  },
+  "kind-confusion": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    }
+   ]
+  },
+  "payload-is-a-json-string": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "TypeError",
+     "message": "Cached waypoint has an invalid shape"
+    },
+    {
+     "error": "TypeError",
+     "message": "Cached waypoint has an invalid shape"
+    },
+    {
+     "error": "TypeError",
+     "message": "Cached waypoint has an invalid shape"
+    }
+   ]
+  },
+  "payload-not-an-object": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "TypeError",
+     "message": "Cached waypoint has an invalid shape"
+    },
+    {
+     "error": "TypeError",
+     "message": "Cached waypoint has an invalid shape"
+    },
+    {
+     "error": "TypeError",
+     "message": "Cached waypoint has an invalid shape"
+    }
+   ]
+  },
+  "summary-key-removed": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint record"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint record"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint record"
+    }
+   ]
+  },
+  "unknown-field": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint record"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint record"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint record"
+    }
+   ]
+  },
+  "untouched-cache-reads": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": [
+      {
+       "contentHash": "8752ff2fe5e00141638a36ae45a42194873814c954b9a0029c8ce004ad992c42",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": ".",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions.",
+       "summaryKey": "a34a2ada34cac6721a4db4f3a8e27cdda07f6ac072d9f51d0d31afa7141f11e0",
+       "title": "Repository map",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "1c6bebc6893587adf596679a6038b8649b3c5308f55b6cc564a5d7d79bf34918",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "cbcce2112f13d26c6a6718e312319e1a317c4b085a6877ca58d086105e936c57",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": "src",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions.",
+       "summaryKey": "05648f5353a38d71a5c1313833e22cd6e7604ffdef5d95a0bf49f71e25b12699",
+       "title": "Src",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "f9ee97a64d6535a11dfec12b3400bfafdcdec58b5b5b5b006d00104a44cfa5f1",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/a.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Alpha helpers.",
+       "summaryKey": "8c5e5bb8a3e706088ed3bcd076ffdb079252e744410140114a5bd4e118ff01cc",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "fe9e69be3495440f12da8772d13f2cf2c057ad47db0421bfc3820a2ae3288624",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "2e81e77a0af4cca87cf06631a30c77f706bb69973ad2e5af3a637a48988186af",
+       "evidence": [
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/b.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Defines Beta, run.",
+       "summaryKey": "7365b6adf212c69999a92d7c4c8a7c319e546f47c5fe14f2c7efa9021034ea66",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "def424f5a11905bd8dbe5aec40fbb46c61be194ba1e362f83d3c247e38aada2c",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "contentHash": "cbcce2112f13d26c6a6718e312319e1a317c4b085a6877ca58d086105e936c57",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": "src",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions.",
+       "summaryKey": "05648f5353a38d71a5c1313833e22cd6e7604ffdef5d95a0bf49f71e25b12699",
+       "title": "Src",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "f9ee97a64d6535a11dfec12b3400bfafdcdec58b5b5b5b006d00104a44cfa5f1",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/a.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Alpha helpers.",
+       "summaryKey": "8c5e5bb8a3e706088ed3bcd076ffdb079252e744410140114a5bd4e118ff01cc",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "fe9e69be3495440f12da8772d13f2cf2c057ad47db0421bfc3820a2ae3288624",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "2e81e77a0af4cca87cf06631a30c77f706bb69973ad2e5af3a637a48988186af",
+       "evidence": [
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/b.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Defines Beta, run.",
+       "summaryKey": "7365b6adf212c69999a92d7c4c8a7c319e546f47c5fe14f2c7efa9021034ea66",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "def424f5a11905bd8dbe5aec40fbb46c61be194ba1e362f83d3c247e38aada2c",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "contentHash": "d6ce6239cbfcaaabfdabd565cb9074b20fef270427a24e90eb40436158cb38f9",
+       "evidence": [
+        {
+         "method": "content-hash",
+         "path": "README.md",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 8,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": ".",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions, documentation.",
+       "summaryKey": "f502635196b57c8f7ac667846e8eb951ce79788ef4a41576dc783409517ec9e2",
+       "title": "Repository map",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "83f608243653a42cc627589da24c1a2b82b4d45d03d7497fafe79cc633798e0c",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "0a56b66ee5b6b7be18d8d516af558475b3748c3ae13efdada987297f8e3dde7d",
+       "evidence": [
+        {
+         "method": "content-hash",
+         "path": "README.md",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "README.md",
+       "purpose": "documentation",
+       "schemaVersion": "1",
+       "summary": "No readable purpose description was found in the captured source.",
+       "summaryKey": "930e0c48e607e3e05284241ed5f2f54f51532d6a4231565ded01bf2c565de912",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "9f68244efb3f6b9bf6c9544968eb21182c662d836bf3953e32d35643b1131a55",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "b81784ce3d0ad51ceb617d4c62dbb31af7a4fa15ac76dbbd49a8a82fedae7b5a",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 8,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "area",
+       "origin": "inferred",
+       "path": "src",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Brings together source definitions.",
+       "summaryKey": "162396dd28e44e5c4b1d4a43300b838084f4589c7bfdc9ecb9214e0cff1a9125",
+       "title": "Src",
+       "validation": {
+        "checks": [
+         {
+          "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+          "name": "Child index evidence",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "cacaa1cd89aae308f7c16134d2c4c8cef8f03a0ea28d42ce0ff827569ff38461",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "3c14df9e111e9ece7e911837ae547cf2a417c3aede50a2f195485d8d41da1f56",
+       "evidence": [
+        {
+         "line": 1,
+         "method": "source-docstring",
+         "path": "src/a.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/a.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Alpha helpers.",
+       "summaryKey": "8c5e5bb8a3e706088ed3bcd076ffdb079252e744410140114a5bd4e118ff01cc",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "fe9e69be3495440f12da8772d13f2cf2c057ad47db0421bfc3820a2ae3288624",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      },
+      {
+       "contentHash": "490146fa9469a8a8bd697dc95addd0d3fb24e63f71595b99b1ddcf52e94a45ca",
+       "evidence": [
+        {
+         "line": 4,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 5,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        },
+        {
+         "line": 8,
+         "method": "indexed-definition",
+         "path": "src/b.py",
+         "revision": "cccccccccccccccccccccccccccccccccccccccc-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5"
+        }
+       ],
+       "kind": "file",
+       "origin": "inferred",
+       "path": "src/b.py",
+       "purpose": "code",
+       "schemaVersion": "1",
+       "summary": "Defines Beta, run, stop.",
+       "summaryKey": "0090b36f8f69ad8621f9887b68aa2d138e551363f93ab104f961ca631453d0d9",
+       "title": "Source definitions",
+       "validation": {
+        "checks": [
+         {
+          "detail": "This description is tied to a captured source analysis.",
+          "name": "Captured source",
+          "status": "supported"
+         },
+         {
+          "detail": "Parser evidence was not recorded for this source.",
+          "name": "Parser evidence",
+          "status": "inconclusive"
+         },
+         {
+          "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+          "name": "Dependency context",
+          "status": "supported"
+         },
+         {
+          "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+          "name": "Execution coverage",
+          "status": "inconclusive"
+         }
+        ],
+        "fingerprint": "def00384486b141a772258e75d5e3101bee5665129eef3fb6e347e51ba158977",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "validation-record-tampered": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint source checks"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint source checks"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid waypoint source checks"
+    }
+   ]
+  },
+  "wrong-validator-version": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    }
+   ]
+  },
+  "wrong-version": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "busy_timeout": 30000,
+      "foreign_keys": 1,
+      "journal_mode": "wal",
+      "user_version": 3
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached waypoint identity is invalid"
+    }
+   ]
+  }
+ },
+ "schemas": {}
+}

@@ -1,0 +1,134 @@
+[
+  {
+    "bytes": 115,
+    "category": {
+      "basis": "documentation-filename-or-extension",
+      "category": "documentation",
+      "inferred": true
+    },
+    "language": "text",
+    "path": "README.md",
+    "sha256": "43ff0fdc8baf9268c74155176e1ebf8037969b77375806bf80fcec72d15805f4",
+    "status": "indexed"
+  },
+  {
+    "bytes": 24,
+    "category": {
+      "basis": "generated-or-build-path",
+      "category": "artifact",
+      "inferred": true
+    },
+    "language": "javascript",
+    "path": "dist/out.js",
+    "sha256": "f3106fe23cbc88f0c78afc8b3314a4aa290a21171540194c0a11a0e88629c903",
+    "status": "excluded-by-path-rule"
+  },
+  {
+    "bytes": 13,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": null,
+    "path": "native/App.java",
+    "sha256": "7857929bc003002041fc53ce4fc1b50753a888a667ec0fbd797bc5af02866432",
+    "status": "unsupported-language"
+  },
+  {
+    "bytes": 29,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": null,
+    "path": "native/main.go",
+    "sha256": "55a60bb97151b2b4b680462447ce60ec34511b14fa10d77440c97b9777101566",
+    "status": "unsupported-language"
+  },
+  {
+    "bytes": 25,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "javascript",
+    "path": "node_modules/pkg/index.js",
+    "sha256": "cfe01a7eeee203692963de5a1404e4c94931b8e9c6a40c85022042e17f0d8241",
+    "status": "excluded-by-path-rule"
+  },
+  {
+    "bytes": 3052,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "python",
+    "path": "py/big.py",
+    "sha256": "3b4f4b507e2032c195ccf2bee794cdf8fb1f717600259e64872085c8f358a7e8",
+    "status": "excluded-too-large"
+  },
+  {
+    "bytes": 24,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "python",
+    "path": "py/broken.py",
+    "sha256": "debb06ffd29224617d9498f7db82ad0d0adc6566d38c15c4d7cfcde9df260f66",
+    "status": "indexed"
+  },
+  {
+    "bytes": 263,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "python",
+    "path": "py/dynamic.py",
+    "sha256": "a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72",
+    "status": "indexed"
+  },
+  {
+    "bytes": 15,
+    "category": {
+      "basis": "configuration-path-or-filename",
+      "category": "configuration",
+      "inferred": true
+    },
+    "language": "text",
+    "path": "web/data.json",
+    "sha256": "1de7373fbc76a139180c90b3f93ad384eb0e303fda437620e717dc7097abf341",
+    "status": "indexed"
+  },
+  {
+    "bytes": 255,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "typescript",
+    "path": "web/missing.ts",
+    "sha256": "6b217998223410d7a588708428487360b72c9ca39ff06e7d56c802657eccff0c",
+    "status": "indexed"
+  },
+  {
+    "bytes": 61,
+    "category": {
+      "basis": "configuration-path-or-filename",
+      "category": "configuration",
+      "inferred": true
+    },
+    "language": "text",
+    "path": "web/tsconfig.json",
+    "sha256": "10c786f62010604ad5b31bf5fc591bbf56b97adb1cd820e4a99cab2700f5427a",
+    "status": "indexed"
+  }
+]

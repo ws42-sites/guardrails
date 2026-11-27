@@ -1,0 +1,132 @@
+{
+  "Cargo.toml": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "README.md": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "crates/shared/Cargo.toml": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "crates/shared/src/lib.rs": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "crates/shared/src/types.rs": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "src/bin/tool.rs": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-module",
+        "line": 1,
+        "target": "src/lib.rs"
+      },
+      {
+        "confidence": "resolved-module",
+        "line": 2,
+        "target": "src/store/mod.rs"
+      },
+      {
+        "confidence": "resolved-module",
+        "line": 3,
+        "target": "crates/shared/src/types.rs"
+      }
+    ],
+    "possible_calls": []
+  },
+  "src/graph.rs": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 2,
+        "target": "src/graph/node.rs"
+      },
+      {
+        "confidence": "resolved-module",
+        "line": 3,
+        "target": "src/util.rs"
+      }
+    ],
+    "possible_calls": []
+  },
+  "src/graph/node.rs": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "src/lib.rs": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-module",
+        "line": 6,
+        "target": "src/graph.rs"
+      },
+      {
+        "confidence": "resolved-module",
+        "line": 7,
+        "target": "src/store/mod.rs"
+      },
+      {
+        "confidence": "resolved-module",
+        "line": 8,
+        "target": "crates/shared/src/types.rs"
+      },
+      {
+        "confidence": "resolved-relative",
+        "line": 10,
+        "target": "src/util.rs"
+      }
+    ],
+    "possible_calls": []
+  },
+  "src/store/index.rs": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 1,
+        "target": "src/store/mod.rs"
+      }
+    ],
+    "possible_calls": []
+  },
+  "src/store/mod.rs": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "src/util.rs": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "tests/roundtrip.rs": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-module",
+        "line": 1,
+        "target": "src/store/index.rs"
+      },
+      {
+        "confidence": "resolved-module",
+        "line": 2,
+        "target": "crates/shared/src/types.rs"
+      }
+    ],
+    "possible_calls": []
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "README.md": {
+    "calls": [],
+    "imports": []
+  },
+  "apps/web/src/entry.ts": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "@golden/core",
+        "type_only": false
+      },
+      {
+        "kind": "relative",
+        "line": 2,
+        "specifier": "@golden/core/store",
+        "type_only": false
+      }
+    ]
+  },
+  "config/settings.yaml": {
+    "calls": [],
+    "imports": []
+  },
+  "docs/guide.md": {
+    "calls": [],
+    "imports": []
+  },
+  "generated/schema.generated.ts": {
+    "calls": [],
+    "imports": []
+  },
+  "golden_pkg/__init__.py": {
+    "calls": [],
+    "imports": []
+  },
+  "golden_pkg/main.py": {
+    "calls": [
+      {
+        "confidence": "local-name-candidate",
+        "line": 18,
+        "name": "run"
+      },
+      {
+        "confidence": "local-name-candidate",
+        "line": 14,
+        "name": "normalise"
+      }
+    ],
+    "imports": [
+      {
+        "kind": "python_import",
+        "line": 1,
+        "names": [
+          "golden_pkg.util"
+        ]
+      },
+      {
+        "kind": "python_from",
+        "level": 1,
+        "line": 2,
+        "module": null,
+        "names": [
+          "models"
+        ]
+      },
+      {
+        "kind": "python_from",
+        "level": 1,
+        "line": 3,
+        "module": "util",
+        "names": [
+          "helper"
+        ]
+      },
+      {
+        "kind": "python_from",
+        "level": 0,
+        "line": 4,
+        "module": "golden_pkg.models",
+        "names": [
+          "build_account"
+        ]
+      },
+      {
+        "kind": "python_from",
+        "level": 0,
+        "line": 5,
+        "module": "os",
+        "names": [
+          "path"
+        ]
+      }
+    ]
+  },
+  "golden_pkg/models.py": {
+    "calls": [],
+    "imports": []
+  },
+  "golden_pkg/util.py": {
+    "calls": [],
+    "imports": []
+  },
+  "js/index.js": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "./lib/format.js",
+        "type_only": false
+      },
+      {
+        "kind": "relative",
+        "line": 2,
+        "specifier": "./lib/legacy.cjs",
+        "type_only": false
+      },
+      {
+        "kind": "relative",
+        "line": 3,
+        "specifier": "./lib/format",
+        "type_only": false
+      }
+    ]
+  },
+  "js/lib/format.js": {
+    "calls": [],
+    "imports": []
+  },
+  "js/lib/legacy.cjs": {
+    "calls": [],
+    "imports": []
+  },
+  "js/vendor.min.js": {
+    "calls": [],
+    "imports": []
+  },
+  "package.json": {
+    "calls": [],
+    "imports": []
+  },
+  "packages/core/package.json": {
+    "calls": [],
+    "imports": []
+  },
+  "packages/core/src/index.ts": {
+    "calls": [],
+    "imports": []
+  },
+  "packages/core/src/store.ts": {
+    "calls": [],
+    "imports": []
+  },
+  "tests/test_main.py": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "python_from",
+        "level": 0,
+        "line": 1,
+        "module": "golden_pkg.main",
+        "names": [
+          "run"
+        ]
+      }
+    ]
+  },
+  "ts/src/__snapshots__/service.snap.ts": {
+    "calls": [],
+    "imports": []
+  },
+  "ts/src/service.test.ts": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "./service",
+        "type_only": false
+      }
+    ]
+  },
+  "ts/src/service.ts": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "./store",
+        "type_only": false
+      },
+      {
+        "kind": "relative",
+        "line": 2,
+        "specifier": "./store.js",
+        "type_only": true
+      },
+      {
+        "kind": "relative",
+        "line": 3,
+        "specifier": "./ui",
+        "type_only": false
+      }
+    ]
+  },
+  "ts/src/store.ts": {
+    "calls": [],
+    "imports": []
+  },
+  "ts/src/ui/Button.tsx": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "../service",
+        "type_only": false
+      }
+    ]
+  },
+  "ts/src/ui/index.ts": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "./Button",
+        "type_only": false
+      }
+    ]
+  },
+  "tsconfig.json": {
+    "calls": [],
+    "imports": []
+  }
+}

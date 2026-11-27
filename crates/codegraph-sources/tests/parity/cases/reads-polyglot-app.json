@@ -1,0 +1,667 @@
+{
+ "cases": [
+  {
+   "id": "reads-polyglot-app",
+   "steps": [
+    {
+     "op": "write",
+     "fixture": "polyglot-app"
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "write",
+     "files": {
+      "golden_pkg/util.py": "def helper():\n    return 2\n\n\ndef extra():\n    return 3\n",
+      "ts/src/extra.ts": "import './store';\nexport function extra() { return 1; }\n"
+     }
+    },
+    {
+     "op": "remove",
+     "paths": [
+      "js/lib/legacy.cjs"
+     ]
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "owner/repo",
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "owner/repo",
+      99
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "nobody/nothing"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "nobody/nothing"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "seed"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "seed"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "seed",
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "SEED"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "%"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "_"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "\\"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "",
+      2
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "seed",
+      0
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "seed",
+      -5
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "seed",
+      5000
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "no-such-name-anywhere"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "seed"
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "nobody/nothing",
+      "seed"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "architecture_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "architecture_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "architecture_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=1"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=2"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      "unknown-revision"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "nobody/nothing",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=1"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/service.ts'"
+      },
+      "outbound",
+      3,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/service.ts'"
+      },
+      "inbound",
+      3,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='golden_pkg/main.py'"
+      },
+      "outbound",
+      3,
+      50
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='golden_pkg/main.py'"
+      },
+      "inbound",
+      3,
+      50
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/store.ts'"
+      },
+      "outbound",
+      3,
+      50
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/store.ts'"
+      },
+      "inbound",
+      3,
+      50
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='golden_pkg/util.py'"
+      },
+      "outbound",
+      3,
+      50
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='golden_pkg/util.py'"
+      },
+      "inbound",
+      3,
+      50
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/service.ts'"
+      },
+      "outbound",
+      0,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/service.ts'"
+      },
+      "outbound",
+      1,
+      1
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/service.ts'"
+      },
+      "outbound",
+      9,
+      5000
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/service.ts'"
+      },
+      "outbound",
+      -3,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/service.ts'"
+      },
+      "outbound",
+      2,
+      0
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/service.ts'"
+      },
+      "outbound",
+      2,
+      -1
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/service.ts'"
+      },
+      "sideways",
+      2,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      "no-such-node",
+      "outbound"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=1 AND kind='file' AND path='ts/src/service.ts'"
+      },
+      "outbound"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/service.ts'"
+      }
+     ],
+     "kwargs": {
+      "snapshot": 99
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='file' AND path='ts/src/service.ts'"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=1 AND kind='file' AND path='ts/src/service.ts'"
+      },
+      "inbound",
+      5,
+      200
+     ],
+     "digest": true,
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='function_definition' AND path='golden_pkg/main.py' AND name='run'"
+      },
+      "inbound",
+      2,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=2 AND kind='function_definition' AND path='golden_pkg/main.py' AND name='run'"
+      },
+      "outbound",
+      2,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    }
+   ],
+   "finalState": "full"
+  }
+ ]
+}

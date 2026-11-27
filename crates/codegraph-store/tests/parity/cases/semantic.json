@@ -1,0 +1,1229 @@
+{
+ "cases": [
+  {
+   "id": "lru-and-ledger-survive-reopening",
+   "description": "Vectors, recency and the ledger persist; the oldest unused vector is evicted at the bound.",
+   "steps": [
+    {
+     "op": "open",
+     "maxEntries": 2
+    },
+    {
+     "op": "put",
+     "key": "one",
+     "vector": {
+      "axis": 0
+     },
+     "characters": 24
+    },
+    {
+     "op": "put",
+     "key": "two",
+     "vector": {
+      "axis": 1
+     },
+     "characters": 25
+    },
+    {
+     "op": "get",
+     "key": "one"
+    },
+    {
+     "op": "put",
+     "key": "three",
+     "vector": {
+      "axis": 2
+     },
+     "characters": 26
+    },
+    {
+     "op": "get",
+     "key": "two"
+    },
+    {
+     "op": "reserve",
+     "project": "project",
+     "characters": 99,
+     "limit": 100,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "project",
+     "characters": 2,
+     "limit": 100,
+     "month": "2026-11"
+    },
+    {
+     "op": "close"
+    },
+    {
+     "op": "open"
+    },
+    {
+     "op": "get",
+     "key": "one"
+    },
+    {
+     "op": "reserve",
+     "project": "project",
+     "characters": 0,
+     "limit": 100,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "project",
+     "characters": 80,
+     "limit": 100,
+     "month": "2026-12"
+    },
+    {
+     "op": "reserve",
+     "project": "other",
+     "characters": 80,
+     "limit": 100,
+     "month": "2026-11",
+     "state": true
+    },
+    {
+     "op": "close"
+    },
+    {
+     "op": "schemaNames",
+     "words": [
+      "descriptor",
+      "text",
+      "content",
+      "source",
+      "token",
+      "secret",
+      "password",
+      "credential",
+      "signing",
+      "private"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "independent-connections-share-one-ledger",
+   "description": "Two stores on one file cannot both reserve the last of an allowance.",
+   "steps": [
+    {
+     "op": "open"
+    },
+    {
+     "op": "open",
+     "as": "b"
+    },
+    {
+     "op": "reserve",
+     "project": "project",
+     "characters": 60,
+     "limit": 100
+    },
+    {
+     "op": "reserve",
+     "project": "project",
+     "characters": 60,
+     "limit": 100,
+     "as": "b"
+    },
+    {
+     "op": "reserve",
+     "project": "project",
+     "characters": 40,
+     "limit": 100,
+     "as": "b"
+    },
+    {
+     "op": "close"
+    },
+    {
+     "op": "close",
+     "as": "b"
+    }
+   ]
+  },
+  {
+   "id": "attempt-bound-is-separate-from-the-monthly-cap",
+   "description": "A single attempt may not exceed a million characters whatever the monthly cap.",
+   "steps": [
+    {
+     "op": "open"
+    },
+    {
+     "op": "reserve",
+     "project": "project",
+     "characters": 1000000,
+     "limit": 1000000,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "project",
+     "characters": 1,
+     "limit": 1000000,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "other-project",
+     "characters": 1000001,
+     "limit": 2000000,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "other-project",
+     "characters": 0,
+     "limit": 2000000,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "project",
+     "characters": 0,
+     "limit": 1000000,
+     "month": "2026-11",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "reservation-arguments-are-validated",
+   "description": "Negative and oversize amounts are refused; zero never raises and still records the project.",
+   "steps": [
+    {
+     "op": "open"
+    },
+    {
+     "op": "reserve",
+     "project": "p",
+     "characters": -1,
+     "limit": 100,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "p",
+     "characters": 1000001,
+     "limit": 100,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "p",
+     "characters": 1,
+     "limit": -1,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "p",
+     "characters": 1,
+     "limit": 100000001,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "p",
+     "characters": 0,
+     "limit": 0,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "p",
+     "characters": 1,
+     "limit": 0,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "p",
+     "characters": 100,
+     "limit": 100,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "p",
+     "characters": 1,
+     "limit": 100,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "",
+     "characters": 0,
+     "limit": 100000000,
+     "month": "2026-11"
+    },
+    {
+     "op": "reserve",
+     "project": "p",
+     "characters": 5,
+     "limit": 100,
+     "month": "2026-12",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "cache-bound-is-validated",
+   "description": "The entry bound must be between 1 and 100000.",
+   "steps": [
+    {
+     "op": "open",
+     "maxEntries": 0
+    },
+    {
+     "op": "open",
+     "maxEntries": -1
+    },
+    {
+     "op": "open",
+     "maxEntries": 100001
+    },
+    {
+     "op": "open",
+     "as": "big",
+     "maxEntries": 100000
+    },
+    {
+     "op": "open",
+     "db": "small",
+     "as": "one",
+     "maxEntries": 1
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "put-arguments-are-validated",
+   "description": "Descriptor sizes and vector shapes are checked before anything is written.",
+   "steps": [
+    {
+     "op": "open"
+    },
+    {
+     "op": "put",
+     "key": "k",
+     "vector": {
+      "axis": 0
+     },
+     "characters": -1
+    },
+    {
+     "op": "put",
+     "key": "k",
+     "vector": {
+      "axis": 0
+     },
+     "characters": 2001
+    },
+    {
+     "op": "put",
+     "key": "k",
+     "vector": {
+      "axis": 0
+     },
+     "characters": 0
+    },
+    {
+     "op": "put",
+     "key": "k",
+     "vector": {
+      "axis": 0
+     },
+     "characters": 2000
+    },
+    {
+     "op": "put",
+     "key": "short",
+     "vector": {
+      "values": [
+       1.0
+      ]
+     },
+     "characters": 5
+    },
+    {
+     "op": "put",
+     "key": "empty",
+     "vector": {
+      "values": []
+     },
+     "characters": 5
+    },
+    {
+     "op": "put",
+     "key": "zero",
+     "vector": {
+      "length": 768,
+      "fill": 0.0
+     },
+     "characters": 5
+    },
+    {
+     "op": "put",
+     "key": "long",
+     "vector": {
+      "length": 769,
+      "fill": 0.036
+     },
+     "characters": 5
+    },
+    {
+     "op": "put",
+     "key": "nan",
+     "vector": {
+      "axis": 0,
+      "set": {
+       "1": "nan"
+      }
+     },
+     "characters": 5
+    },
+    {
+     "op": "put",
+     "key": "inf",
+     "vector": {
+      "axis": 0,
+      "set": {
+       "1": "inf"
+      }
+     },
+     "characters": 5
+    },
+    {
+     "op": "put",
+     "key": "ninf",
+     "vector": {
+      "axis": 0,
+      "set": {
+       "1": "-inf"
+      }
+     },
+     "characters": 5
+    },
+    {
+     "op": "put",
+     "key": "range",
+     "vector": {
+      "axis": 0,
+      "scale": 1.0011
+     },
+     "characters": 5
+    },
+    {
+     "op": "put",
+     "key": "scale-high",
+     "vector": {
+      "axis": 0,
+      "scale": 1.0006
+     },
+     "characters": 5
+    },
+    {
+     "op": "put",
+     "key": "scale-low",
+     "vector": {
+      "axis": 0,
+      "scale": 0.9994
+     },
+     "characters": 5
+    },
+    {
+     "op": "put",
+     "key": "scale-edge-high",
+     "vector": {
+      "axis": 0,
+      "scale": 1.0005
+     },
+     "characters": 5
+    },
+    {
+     "op": "put",
+     "key": "scale-edge-low",
+     "vector": {
+      "axis": 0,
+      "scale": 0.9994
+     },
+     "characters": 5
+    },
+    {
+     "op": "get",
+     "key": "short"
+    },
+    {
+     "op": "get",
+     "key": "zero"
+    },
+    {
+     "op": "get",
+     "key": "nan"
+    },
+    {
+     "op": "get",
+     "key": "range"
+    },
+    {
+     "op": "get",
+     "key": "k",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "vectors-round-trip-at-the-edges",
+   "description": "Accepted boundary vectors come back unchanged, and are stored as Python writes floats.",
+   "steps": [
+    {
+     "op": "open"
+    },
+    {
+     "op": "put",
+     "key": "tight-high",
+     "vector": {
+      "axis": 0,
+      "scale": 1.0004
+     },
+     "characters": 1
+    },
+    {
+     "op": "put",
+     "key": "tight-low",
+     "vector": {
+      "axis": 0,
+      "scale": 0.9996
+     },
+     "characters": 2
+    },
+    {
+     "op": "put",
+     "key": "just-inside-high",
+     "vector": {
+      "axis": 0,
+      "scale": 1.00049
+     },
+     "characters": 2
+    },
+    {
+     "op": "put",
+     "key": "just-inside-low",
+     "vector": {
+      "axis": 0,
+      "scale": 0.9995
+     },
+     "characters": 2
+    },
+    {
+     "op": "put",
+     "key": "negative",
+     "vector": {
+      "axis": 5,
+      "scale": -1.0
+     },
+     "characters": 3
+    },
+    {
+     "op": "put",
+     "key": "uniform",
+     "vector": {
+      "uniform": 768
+     },
+     "characters": 4
+    },
+    {
+     "op": "put",
+     "key": "mixed",
+     "vector": {
+      "mixed": true
+     },
+     "characters": 5
+    },
+    {
+     "op": "put",
+     "key": "negative-zero",
+     "vector": {
+      "axis": 0,
+      "set": {
+       "1": -0.0
+      }
+     },
+     "characters": 6
+    },
+    {
+     "op": "put",
+     "key": "small-exponent",
+     "vector": {
+      "mixed": true
+     },
+     "characters": 7
+    },
+    {
+     "op": "get",
+     "key": "tight-high"
+    },
+    {
+     "op": "get",
+     "key": "tight-low"
+    },
+    {
+     "op": "get",
+     "key": "just-inside-high"
+    },
+    {
+     "op": "get",
+     "key": "just-inside-low"
+    },
+    {
+     "op": "get",
+     "key": "negative"
+    },
+    {
+     "op": "get",
+     "key": "uniform"
+    },
+    {
+     "op": "get",
+     "key": "mixed"
+    },
+    {
+     "op": "get",
+     "key": "negative-zero"
+    },
+    {
+     "op": "get",
+     "key": "small-exponent",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "replacing-a-key-keeps-one-row",
+   "description": "A second put under a key replaces the vector and size and counts as most recent.",
+   "steps": [
+    {
+     "op": "open"
+    },
+    {
+     "op": "put",
+     "key": "same",
+     "vector": {
+      "axis": 0
+     },
+     "characters": 10
+    },
+    {
+     "op": "put",
+     "key": "other",
+     "vector": {
+      "axis": 1
+     },
+     "characters": 11
+    },
+    {
+     "op": "put",
+     "key": "same",
+     "vector": {
+      "axis": 2
+     },
+     "characters": 12,
+     "state": true
+    },
+    {
+     "op": "get",
+     "key": "same"
+    },
+    {
+     "op": "get",
+     "key": "other",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "eviction-follows-use-not-insertion",
+   "description": "Reading a vector protects it; the least recently used one goes first.",
+   "steps": [
+    {
+     "op": "open",
+     "maxEntries": 3
+    },
+    {
+     "op": "put",
+     "key": "a",
+     "vector": {
+      "axis": 0
+     },
+     "characters": 1
+    },
+    {
+     "op": "put",
+     "key": "b",
+     "vector": {
+      "axis": 1
+     },
+     "characters": 2
+    },
+    {
+     "op": "put",
+     "key": "c",
+     "vector": {
+      "axis": 2
+     },
+     "characters": 3
+    },
+    {
+     "op": "put",
+     "key": "d",
+     "vector": {
+      "axis": 3
+     },
+     "characters": 4
+    },
+    {
+     "op": "get",
+     "key": "a"
+    },
+    {
+     "op": "get",
+     "key": "b"
+    },
+    {
+     "op": "put",
+     "key": "e",
+     "vector": {
+      "axis": 4
+     },
+     "characters": 5
+    },
+    {
+     "op": "get",
+     "key": "b"
+    },
+    {
+     "op": "get",
+     "key": "c"
+    },
+    {
+     "op": "get",
+     "key": "d"
+    },
+    {
+     "op": "get",
+     "key": "e",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "foreign-database-at-version-zero-is-kept",
+   "description": "A database with other tables is not ours, and is left exactly as it was.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE TABLE evidence(value);INSERT INTO evidence VALUES('retained');"
+    },
+    {
+     "op": "open",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "unknown-version-is-kept",
+   "description": "A future version is refused and left alone.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE TABLE evidence(value);INSERT INTO evidence VALUES('retained');PRAGMA user_version=99;"
+    },
+    {
+     "op": "open",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "version-one-with-the-wrong-tables-is-kept",
+   "description": "Version 1 without exactly our two tables is refused.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE TABLE semantic_vectors (cache_key TEXT PRIMARY KEY, vector TEXT NOT NULL, characters INTEGER NOT NULL, last_used INTEGER NOT NULL);PRAGMA user_version=1;"
+    },
+    {
+     "op": "open",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "version-one-with-an-extra-table-is-kept",
+   "description": "Version 1 with a third table is refused.",
+   "steps": [
+    {
+     "op": "open"
+    },
+    {
+     "op": "close"
+    },
+    {
+     "op": "raw",
+     "script": "CREATE TABLE extra(value);"
+    },
+    {
+     "op": "open",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "incompatible-columns-fail-the-read-probe",
+   "description": "Version 1 with our table names but other columns fails the read contract.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE TABLE semantic_vectors (cache_key TEXT PRIMARY KEY, vector TEXT);CREATE TABLE semantic_usage (project TEXT, month TEXT, reserved INTEGER, extra TEXT);PRAGMA user_version=1;"
+    },
+    {
+     "op": "open",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "failed-install-leaves-no-partial-tables",
+   "description": "An install that fails partway is rolled back whole.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE VIEW semantic_vectors AS SELECT 1 AS cache_key;"
+    },
+    {
+     "op": "open",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "reopening-a-current-cache-changes-nothing",
+   "description": "A second open of a version-1 cache adds nothing.",
+   "steps": [
+    {
+     "op": "open"
+    },
+    {
+     "op": "put",
+     "key": "kept",
+     "vector": {
+      "axis": 0
+     },
+     "characters": 1
+    },
+    {
+     "op": "close"
+    },
+    {
+     "op": "open",
+     "state": true
+    },
+    {
+     "op": "get",
+     "key": "kept"
+    }
+   ]
+  },
+  {
+   "id": "text-file-is-not-a-cache",
+   "description": "A text file is not a database.",
+   "steps": [
+    {
+     "op": "file",
+     "text": "not a database\n"
+    },
+    {
+     "op": "open"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "folder-is-not-a-cache",
+   "description": "A folder cannot be a cache.",
+   "steps": [
+    {
+     "op": "dir"
+    },
+    {
+     "op": "open"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "parent-that-is-a-file-is-unavailable",
+   "description": "A cache whose parent folder cannot be created is unavailable.",
+   "steps": [
+    {
+     "op": "file",
+     "db": "blocker.file",
+     "text": "in the way\n"
+    },
+    {
+     "op": "open",
+     "db": "blocker.file/cache.sqlite3"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "missing-folders-are-created",
+   "description": "Parent folders are made on demand.",
+   "steps": [
+    {
+     "op": "open",
+     "db": "nested/deeper/cache.sqlite3"
+    },
+    {
+     "op": "put",
+     "key": "k",
+     "vector": {
+      "axis": 0
+     },
+     "characters": 1
+    },
+    {
+     "op": "get",
+     "key": "k"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "corrupt-vectors-fail-closed-and-are-not-served",
+   "description": "A stored vector that fails validation is an error, never a hit, and never touches recency.",
+   "steps": [
+    {
+     "op": "open"
+    },
+    {
+     "op": "put",
+     "key": "good",
+     "vector": {
+      "axis": 0
+     },
+     "characters": 5
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO semantic_vectors VALUES('short','[0]',5,1);"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO semantic_vectors VALUES('not-json','not json',5,1);"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO semantic_vectors VALUES('zeros',(SELECT '['||group_concat(0,',')||']' FROM (WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM c WHERE x<768) SELECT x FROM c)),5,1);"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO semantic_vectors VALUES('strings',(SELECT '['||group_concat('\"a\"',',')||']' FROM (WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM c WHERE x<768) SELECT x FROM c)),5,1);"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO semantic_vectors VALUES('booleans',(SELECT '['||group_concat('true',',')||']' FROM (WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM c WHERE x<768) SELECT x FROM c)),5,1);"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO semantic_vectors VALUES('nans',(SELECT '['||group_concat('NaN',',')||']' FROM (WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM c WHERE x<768) SELECT x FROM c)),5,1);"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO semantic_vectors VALUES('long',(SELECT '['||group_concat('0.036',',')||']' FROM (WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM c WHERE x<769) SELECT x FROM c)),5,1);"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO semantic_vectors VALUES('object','{}',5,1);"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO semantic_vectors VALUES('null','null',5,1);"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO semantic_vectors VALUES('number',5,5,1);"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO semantic_vectors VALUES('empty-list','[]',5,1);"
+    },
+    {
+     "op": "get",
+     "key": "short"
+    },
+    {
+     "op": "get",
+     "key": "not-json"
+    },
+    {
+     "op": "get",
+     "key": "zeros"
+    },
+    {
+     "op": "get",
+     "key": "strings"
+    },
+    {
+     "op": "get",
+     "key": "booleans"
+    },
+    {
+     "op": "get",
+     "key": "nans"
+    },
+    {
+     "op": "get",
+     "key": "long"
+    },
+    {
+     "op": "get",
+     "key": "object"
+    },
+    {
+     "op": "get",
+     "key": "null"
+    },
+    {
+     "op": "get",
+     "key": "number"
+    },
+    {
+     "op": "get",
+     "key": "empty-list"
+    },
+    {
+     "op": "get",
+     "key": "good"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "invalid-puts-never-persist",
+   "description": "A rejected vector leaves nothing behind.",
+   "steps": [
+    {
+     "op": "open"
+    },
+    {
+     "op": "put",
+     "key": "bad",
+     "vector": {
+      "length": 768,
+      "fill": 0.0
+     },
+     "characters": 10
+    },
+    {
+     "op": "put",
+     "key": "bad",
+     "vector": {
+      "values": [
+       1.0
+      ]
+     },
+     "characters": 10
+    },
+    {
+     "op": "put",
+     "key": "bad",
+     "vector": {
+      "axis": 0,
+      "set": {
+       "1": "nan"
+      }
+     },
+     "characters": 10
+    },
+    {
+     "op": "get",
+     "key": "bad"
+    },
+    {
+     "op": "query",
+     "sql": "SELECT count(*) FROM semantic_vectors"
+    }
+   ]
+  },
+  {
+   "id": "computation-lock-serialises-misses",
+   "description": "A held lock refuses a second caller when its deadline runs out, then lets it in once released.",
+   "steps": [
+    {
+     "op": "open"
+    },
+    {
+     "op": "open",
+     "as": "b"
+    },
+    {
+     "op": "lock",
+     "name": "first",
+     "seconds": 2.0
+    },
+    {
+     "op": "lock",
+     "name": "second",
+     "seconds": 0.3,
+     "as": "b",
+     "contended": true
+    },
+    {
+     "op": "release",
+     "name": "first"
+    },
+    {
+     "op": "lock",
+     "name": "third",
+     "seconds": 2.0,
+     "as": "b"
+    },
+    {
+     "op": "release",
+     "name": "third"
+    },
+    {
+     "op": "lock",
+     "name": "past",
+     "seconds": 0.0
+    },
+    {
+     "op": "lock",
+     "name": "negative",
+     "seconds": -1.0
+    },
+    {
+     "op": "close"
+    },
+    {
+     "op": "close",
+     "as": "b"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "month-key-from-instants",
+   "description": "The ledger key for a spread of instants, including month and leap boundaries.",
+   "steps": [
+    {
+     "op": "monthOf",
+     "seconds": 0
+    },
+    {
+     "op": "monthOf",
+     "seconds": 86399
+    },
+    {
+     "op": "monthOf",
+     "seconds": 951782399
+    },
+    {
+     "op": "monthOf",
+     "seconds": 951782400
+    },
+    {
+     "op": "monthOf",
+     "seconds": 951868800
+    },
+    {
+     "op": "monthOf",
+     "seconds": 1700000000
+    },
+    {
+     "op": "monthOf",
+     "seconds": 1709251199
+    },
+    {
+     "op": "monthOf",
+     "seconds": 1709251200
+    },
+    {
+     "op": "monthOf",
+     "seconds": 1767225599
+    },
+    {
+     "op": "monthOf",
+     "seconds": 1767225600
+    },
+    {
+     "op": "monthOf",
+     "seconds": 4102444799
+    },
+    {
+     "op": "monthOf",
+     "seconds": 4102444800
+    },
+    {
+     "op": "monthOf",
+     "seconds": -86400
+    },
+    {
+     "op": "monthOf",
+     "seconds": -2208988800
+    },
+    {
+     "op": "monthOf",
+     "seconds": 32503679999
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "cache-holds-no-descriptor-or-credential",
+   "description": "The schema has no column for descriptor text, a token or a key; only vectors, sizes and counters.",
+   "steps": [
+    {
+     "op": "open"
+    },
+    {
+     "op": "put",
+     "key": "k",
+     "vector": {
+      "axis": 0
+     },
+     "characters": 5
+    },
+    {
+     "op": "close"
+    },
+    {
+     "op": "schemaNames",
+     "words": [
+      "descriptor",
+      "text",
+      "content",
+      "source",
+      "token",
+      "secret",
+      "password",
+      "credential",
+      "signing",
+      "private"
+     ]
+    },
+    {
+     "op": "query",
+     "sql": "SELECT name FROM pragma_table_info('semantic_vectors') ORDER BY cid"
+    }
+   ]
+  }
+ ]
+}

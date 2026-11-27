@@ -1,0 +1,143 @@
+{
+  "invalid_lines": [
+    {
+      "line": 10,
+      "text": "[bad                 @golden/invalid"
+    },
+    {
+      "line": 11,
+      "text": "/../escape           @golden/invalid"
+    },
+    {
+      "line": 12,
+      "text": "/secrets/            not-an-owner"
+    },
+    {
+      "line": 13,
+      "text": "!negated.ts          @golden/invalid"
+    }
+  ],
+  "owners": {
+    ".codegraph/architecture.json": {
+      "owners": [
+        "@golden/everyone"
+      ],
+      "rule_line": 2
+    },
+    ".github/CODEOWNERS": {
+      "owners": [
+        "@golden/everyone"
+      ],
+      "rule_line": 2
+    },
+    "apps/entry.ts": {
+      "owners": [
+        "@golden/apps"
+      ],
+      "rule_line": 5
+    },
+    "core/README.md": {
+      "owners": [
+        "@golden/core-team",
+        "@alice"
+      ],
+      "rule_line": 3
+    },
+    "core/leak.ts": {
+      "owners": [
+        "@golden/typescript"
+      ],
+      "rule_line": 4
+    },
+    "core/store.ts": {
+      "owners": [
+        "@golden/storage"
+      ],
+      "rule_line": 6
+    },
+    "core/types.ts": {
+      "owners": [
+        "@golden/typescript"
+      ],
+      "rule_line": 4
+    },
+    "docs/overview.md": {
+      "owners": [
+        "docs@example.com"
+      ],
+      "rule_line": 8
+    },
+    "lib/a.ts": {
+      "owners": [
+        "@golden/typescript"
+      ],
+      "rule_line": 4
+    },
+    "lib/b.ts": null,
+    "lib/big.ts": {
+      "owners": [
+        "@golden/typescript"
+      ],
+      "rule_line": 4
+    },
+    "tests/store.test.ts": {
+      "owners": [
+        "@golden/typescript"
+      ],
+      "rule_line": 4
+    }
+  },
+  "path": ".github/CODEOWNERS",
+  "present": true,
+  "rules": [
+    {
+      "line": 2,
+      "owners": [
+        "@golden/everyone"
+      ],
+      "pattern": "*"
+    },
+    {
+      "line": 3,
+      "owners": [
+        "@golden/core-team",
+        "@alice"
+      ],
+      "pattern": "/core/"
+    },
+    {
+      "line": 4,
+      "owners": [
+        "@golden/typescript"
+      ],
+      "pattern": "*.ts"
+    },
+    {
+      "line": 5,
+      "owners": [
+        "@golden/apps"
+      ],
+      "pattern": "/apps/**"
+    },
+    {
+      "line": 6,
+      "owners": [
+        "@golden/storage"
+      ],
+      "pattern": "/core/store.ts"
+    },
+    {
+      "line": 7,
+      "owners": [],
+      "pattern": "/lib/b.ts"
+    },
+    {
+      "line": 8,
+      "owners": [
+        "docs@example.com"
+      ],
+      "pattern": "docs/*.md"
+    }
+  ],
+  "sha256": "ec35ce269f00322133a846fd146020ab5590ffeaf2e96010f3321dfc7b0d9335"
+}

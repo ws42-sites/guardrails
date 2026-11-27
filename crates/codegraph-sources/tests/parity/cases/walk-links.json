@@ -1,0 +1,111 @@
+{
+ "cases": [
+  {
+   "id": "symlinked-source-files-are-skipped",
+   "files": {
+    "real.py": "def real(): pass\n"
+   },
+   "outsideFiles": {
+    "secret.py": "def secret(): pass\n"
+   },
+   "links": {
+    "link.py": "real.py",
+    "escape.py": "../outside/secret.py",
+    "dangling.py": "missing.py",
+    "link.go": "real.py",
+    "link.txt": "real.py",
+    ".hidden.py": "real.py"
+   },
+   "expect": {
+    "files": [
+     "real.py"
+    ],
+    "skipped": 4
+   }
+  },
+  {
+   "id": "symlinked-folders-are-not-walked",
+   "files": {
+    "inside/a.py": "def a(): pass\n",
+    "main.py": "def m(): pass\n"
+   },
+   "outsideFiles": {
+    "x.py": "def x(): pass\n"
+   },
+   "links": {
+    "viaLink": "inside",
+    "other": "../outside",
+    "loop": "."
+   },
+   "expect": {
+    "files": [
+     "inside/a.py",
+     "main.py"
+    ],
+    "skipped": 0
+   }
+  },
+  {
+   "id": "a-symlinked-codeowners-is-unknown",
+   "files": {
+    "a.py": "def a(): pass\n",
+    "real-owners": "* @core\n"
+   },
+   "links": {
+    "CODEOWNERS": "real-owners"
+   },
+   "expect": {
+    "files": [
+     "a.py"
+    ],
+    "skipped": 0,
+    "ownership": false
+   }
+  },
+  {
+   "id": "a-symlinked-codeowners-folder-is-unknown",
+   "files": {
+    "a.py": "def a(): pass\n",
+    "real/CODEOWNERS": "* @core\n"
+   },
+   "links": {
+    ".github": "real"
+   },
+   "expect": {
+    "files": [
+     "a.py"
+    ],
+    "skipped": 0,
+    "ownership": false
+   }
+  }
+ ],
+ "unixNames": [
+  "a:b.py",
+  "a\\b.py",
+  "c:\\d.py"
+ ],
+ "socket": {
+  "files": {
+   "ok.py": "def ok(): pass\n"
+  },
+  "name": "sock.py",
+  "expect": {
+   "files": [
+    "ok.py"
+   ],
+   "skipped": 1
+  }
+ },
+ "linkedRoot": {
+  "files": {
+   "a.py": "def a(): pass\n"
+  },
+  "expect": {
+   "files": [
+    "a.py"
+   ],
+   "skipped": 0
+  }
+ }
+}

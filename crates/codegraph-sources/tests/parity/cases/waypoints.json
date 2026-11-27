@@ -1,0 +1,1487 @@
+{
+ "cases": [
+  {
+   "id": "identical-content-is-reused-across-branches",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "src/read.py",
+       "data": "\"\"\"Read the saved graph.\"\"\"\ndef read():\n    return 1\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     },
+     "state": "full"
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "src/read.py",
+       "data": "\"\"\"Read the saved graph.\"\"\"\ndef read():\n    return 1\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "read"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "read"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "a-change-refreshes-its-summary-and-direct-dependants-only",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "src/entry.ts",
+       "data": "import './target';\nexport function entry() {}\n"
+      },
+      {
+       "path": "src/target.ts",
+       "data": "export function target() { return 1; }\n"
+      },
+      {
+       "path": "other/isolated.ts",
+       "data": "export function isolated() {}\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "src/entry.ts",
+       "data": "import './target';\nexport function entry() {}\n"
+      },
+      {
+       "path": "src/target.ts",
+       "data": "export function target() { return 2; }\n"
+      },
+      {
+       "path": "other/isolated.ts",
+       "data": "export function isolated() {}\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "scoped-configuration-rechecks-without-regenerating-summaries",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "web/view.ts",
+       "data": "export function view() {}\n"
+      },
+      {
+       "path": "worker/read.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      },
+      "waypoint_configuration": {
+       "web/tsconfig.json": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "web/view.ts",
+       "data": "export function view() {}\n"
+      },
+      {
+       "path": "worker/read.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      },
+      "waypoint_configuration": {
+       "web/tsconfig.json": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "web/view.ts",
+       "data": "export function view() {}\n"
+      },
+      {
+       "path": "worker/read.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "policy",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "823412d1eacb67956220e532959f0104603057c88704863ca38e7cd188fda812",
+       "view": "branch"
+      },
+      "waypoint_configuration": {
+       "web/tsconfig.json": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "waypoint_policy_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "web/view.ts",
+       "data": "export function view() {}\n"
+      },
+      {
+       "path": "worker/read.py",
+       "data": "def read(): pass\n"
+      },
+      {
+       "path": "web/tsconfig.json",
+       "data": "{}"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "captured",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "b737815f5ca9697f685dfe2b5fe1f7b12a180562f97da5a72e90eaedd9890876",
+       "view": "branch"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "a-moved-identical-file-keeps-its-description-and-rebinds-its-path",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "src/sample.ts",
+       "data": "export function makeExample() { return {}; }\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "tests/fixtures/sample.ts",
+       "data": "export function makeExample() { return {}; }\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "makeExample"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "agent-reads-share-pinned-waypoints",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "src/entry.ts",
+       "data": "import './reader';\nexport function entry() {}\n"
+      },
+      {
+       "path": "src/reader.ts",
+       "data": "/** Read the saved graph. */\nexport function readGraph() {}\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "readGraph"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "entry.ts"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=1 AND kind='file' AND path='src/entry.ts'"
+      },
+      "outbound",
+      2,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "index-repo-uses-captured-configuration",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "reader.py": "def read(): pass\n",
+      ".codegraph/architecture.json": "{\"version\":1}"
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "write",
+     "files": {
+      ".codegraph/architecture.json": "{\"version\":2}"
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "write",
+     "files": {
+      "sub/package.json": "{\"name\":\"sub\"}",
+      "sub/mod.py": "def m(): pass\n"
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "write",
+     "files": {
+      "sub/package.json": "{\"name\":\"sub2\"}"
+     }
+    },
+    {
+     "op": "indexRepo"
+    }
+   ]
+  },
+  {
+   "id": "a-legal-name-without-a-safe-annotation-still-indexes-with-honest-coverage",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "src/reader.py",
+       "data": "def read(): return 1\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "src/tab\tquote\"caf\u00e9.py",
+       "data": "def special(): return 1\n"
+      },
+      {
+       "path": "src/reader.py",
+       "data": "def read(): return 1\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "sql",
+     "statements": []
+    }
+   ]
+  },
+  {
+   "id": "unsafe-dependency-names-are-inconclusive-and-invalidate-by-identity",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "src/tab\tquote\"caf\u00e9.ts",
+       "data": "import './reader';\nexport function special() { return 1; }\n"
+      },
+      {
+       "path": "src/reader.ts",
+       "data": "import './tab\tquote\"caf\u00e9';\nexport function read() {}\n"
+      },
+      {
+       "path": "other/isolated.py",
+       "data": "def isolated(): return 1\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "src/tab\tquote\"caf\u00e9.ts",
+       "data": "import './reader';\nexport function special() { return 2; }\n"
+      },
+      {
+       "path": "src/reader.ts",
+       "data": "import './tab\tquote\"caf\u00e9';\nexport function read() {}\n"
+      },
+      {
+       "path": "other/isolated.py",
+       "data": "def isolated(): return 1\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "an-area-with-only-undisplayable-names-is-incomplete",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "src/hidden\u200b/file.py",
+       "data": "def hidden(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "names-that-are-unsafe-in-different-ways",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a/b c.py",
+       "data": "def ok(): pass\n"
+      },
+      {
+       "path": "a//double.py",
+       "data": "def d(): pass\n"
+      },
+      {
+       "path": "./dot.py",
+       "data": "def e(): pass\n"
+      },
+      {
+       "path": "a/./mid.py",
+       "data": "def m(): pass\n"
+      },
+      {
+       "path": "\u0085.py",
+       "data": "def n(): pass\n"
+      },
+      {
+       "path": "caf\u00e9/\u00e9.py",
+       "data": "def c(): pass\n"
+      },
+      {
+       "path": "x\u00a0y.py",
+       "data": "def nb(): pass\n"
+      },
+      {
+       "path": "dir/\ud83d\ude00.py",
+       "data": "def e(): pass\n"
+      },
+      {
+       "path": "a\u200dz.py",
+       "data": "def z(): pass\n"
+      },
+      {
+       "path": "ctl\u007f.py",
+       "data": "def del_(): pass\n"
+      },
+      {
+       "path": "x/y/y/y.py",
+       "data": "def deep(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "a-corrupt-cache-is-rejected-before-reuse",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "UPDATE waypoint_cache SET payload='{}' WHERE kind='validation'"
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshot_waypoints"
+    }
+   ]
+  },
+  {
+   "id": "a-valid-cache-record-cannot-stand-in-for-another-identity",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "editPayload",
+     "select": "SELECT id FROM waypoint_cache WHERE kind='file' LIMIT 1",
+     "set": {
+      "contentHash": "0000000000000000000000000000000000000000000000000000000000000000"
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "editPayload",
+     "select": "SELECT id FROM waypoint_cache WHERE kind='file' LIMIT 1",
+     "set": {
+      "contentHash": {
+       "sql": "SELECT content_hash FROM analyses"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature2",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "98c81d4f9d1af7d78421b92b2acf21156606a9b953c60b13aa2029656ab0e68d",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "a-substituted-check-fingerprint-is-rejected",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "editPayload",
+     "select": "SELECT id FROM waypoint_cache WHERE kind='validation' LIMIT 1",
+     "set": {
+      "fingerprint": "0000000000000000000000000000000000000000000000000000000000000000"
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "editPayload",
+     "select": "SELECT id FROM waypoint_cache WHERE kind='validation' LIMIT 1",
+     "set": {
+      "ruleVersion": "other"
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "editPayload",
+     "select": "SELECT id FROM waypoint_cache WHERE kind='area' LIMIT 1",
+     "set": {
+      "path": "elsewhere"
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "retention-collects-only-unreferenced-cache-records",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): return 1\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): return 2\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): return 3\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): return 4\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "module.py",
+       "data": "def read(): return 5\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "prune",
+     "kwargs": {
+      "keep": 2
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM waypoint_cache WHERE id NOT IN (SELECT summary_key FROM snapshot_waypoints UNION SELECT validation_key FROM snapshot_waypoints)"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "read"
+     ]
+    },
+    {
+     "op": "prune",
+     "kwargs": {
+      "keep": 1
+     }
+    },
+    {
+     "op": "prune",
+     "kwargs": {
+      "keep": 0
+     }
+    },
+    {
+     "op": "prune",
+     "kwargs": {
+      "keep": 2
+     }
+    },
+    {
+     "op": "prune",
+     "repo": "nobody/nothing",
+     "kwargs": {
+      "keep": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "pruning-keeps-each-view-separately",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): return 1\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): return 2\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): return 3\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): return 4\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): return 5\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): return 6\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): return 7\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): return 8\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def other(): return 1\n"
+      }
+     ],
+     "repo": "other/repo"
+    },
+    {
+     "op": "prune",
+     "kwargs": {
+      "keep": 2
+     }
+    },
+    {
+     "op": "sql",
+     "statements": []
+    },
+    {
+     "op": "read",
+     "fn": "latest",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots WHERE repo='other/repo'"
+    }
+   ]
+  },
+  {
+   "id": "the-working-tree-revision-digests-content-and-configuration",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): pass\n"
+      },
+      {
+       "path": "b.py",
+       "data": "def b(): pass\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "b.py",
+       "data": "def b(): pass\n"
+      },
+      {
+       "path": "a.py",
+       "data": "def a(): pass\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): pass\n"
+      },
+      {
+       "path": "b.py",
+       "data": "def b(): pass\n"
+      }
+     ],
+     "options": {
+      "waypoint_configuration": {
+       "package.json": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): pass\n"
+      },
+      {
+       "path": "b.py",
+       "data": "def b(): pass\n"
+      }
+     ],
+     "options": {
+      "waypoint_policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): pass\n"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=1"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "snapshot_for_revision",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT revision FROM snapshots WHERE id=2"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "git-style-and-working-tree-snapshots-sit-side-by-side",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     }
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a(): pass\n"
+      }
+     ],
+     "options": {
+      "source_revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 2
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "import-resolution-across-languages",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "pkg/__init__.py",
+       "data": ""
+      },
+      {
+       "path": "pkg/a.py",
+       "data": "from . import b\nfrom .b import thing\nimport pkg.c\n\n\ndef run():\n    thing()\n    local()\n\n\ndef local():\n    pass\n"
+      },
+      {
+       "path": "pkg/b.py",
+       "data": "def thing():\n    pass\n"
+      },
+      {
+       "path": "pkg/c.py",
+       "data": "def other():\n    pass\n\n\ndef other():\n    pass\n"
+      },
+      {
+       "path": "web/a.ts",
+       "data": "import './b';\nimport type { T } from './t';\nexport * from './c';\nconst d = import('./d');\nconst e = require('./e');\n"
+      },
+      {
+       "path": "web/b.ts",
+       "data": "export const b = 1;\n"
+      },
+      {
+       "path": "web/t.ts",
+       "data": "export type T = number;\n"
+      },
+      {
+       "path": "web/c/index.ts",
+       "data": "export const c = 1;\n"
+      },
+      {
+       "path": "web/d.js",
+       "data": "export const d = 1;\n"
+      },
+      {
+       "path": "web/e.cjs",
+       "data": "module.exports = 1;\n"
+      },
+      {
+       "path": "package.json",
+       "data": "{\"name\":\"@scope/app\",\"exports\":{\".\":\"./web/b.ts\",\"./c\":\"./web/c/index.ts\"}}"
+      },
+      {
+       "path": "web/uses.ts",
+       "data": "import '@scope/app';\nimport '@scope/app/c';\nimport 'react';\n"
+      },
+      {
+       "path": "Cargo.toml",
+       "data": "[package]\nname = \"demo\"\n"
+      },
+      {
+       "path": "src/lib.rs",
+       "data": "mod util;\nuse crate::util::helper;\nuse demo::util;\n"
+      },
+      {
+       "path": "src/util.rs",
+       "data": "pub fn helper() {}\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=1 AND kind='file' AND path='pkg/a.py'"
+      },
+      "outbound",
+      1,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=1 AND kind='file' AND path='web/uses.ts'"
+      },
+      "outbound",
+      1,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=1 AND kind='file' AND path='web/a.ts'"
+      },
+      "outbound",
+      1,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "traverse",
+     "args": [
+      "owner/repo",
+      {
+       "sql": "SELECT id FROM nodes WHERE snapshot_id=1 AND kind='file' AND path='src/lib.rs'"
+      },
+      "outbound",
+      1,
+      50
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "guidepost_graph",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,77 @@
+{
+  "README.md": {
+    "calls": [],
+    "imports": []
+  },
+  "py/broken.py": {
+    "calls": [],
+    "imports": []
+  },
+  "py/dynamic.py": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "python_import",
+        "line": 1,
+        "names": [
+          "importlib"
+        ]
+      },
+      {
+        "kind": "python_from",
+        "level": 1,
+        "line": 2,
+        "module": null,
+        "names": [
+          "ghost"
+        ]
+      },
+      {
+        "kind": "python_from",
+        "level": 2,
+        "line": 3,
+        "module": "outside",
+        "names": [
+          "nothing"
+        ]
+      }
+    ]
+  },
+  "web/data.json": {
+    "calls": [],
+    "imports": []
+  },
+  "web/missing.ts": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "./does-not-exist",
+        "type_only": false
+      },
+      {
+        "kind": "relative",
+        "line": 2,
+        "specifier": "lodash",
+        "type_only": false
+      },
+      {
+        "kind": "relative",
+        "line": 3,
+        "specifier": "@/utils/alias",
+        "type_only": false
+      },
+      {
+        "kind": "relative",
+        "line": 4,
+        "specifier": "./data.json",
+        "type_only": false
+      }
+    ]
+  },
+  "web/tsconfig.json": {
+    "calls": [],
+    "imports": []
+  }
+}

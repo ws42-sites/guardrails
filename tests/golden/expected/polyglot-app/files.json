@@ -1,0 +1,326 @@
+[
+  {
+    "bytes": 111,
+    "category": {
+      "basis": "documentation-filename-or-extension",
+      "category": "documentation",
+      "inferred": true
+    },
+    "language": "text",
+    "path": "README.md",
+    "sha256": "48ddaa83889976b0536df7c8d879eb90a8f0fe210fb88ed8677872dcbcb1c98e",
+    "status": "indexed"
+  },
+  {
+    "bytes": 125,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "typescript",
+    "path": "apps/web/src/entry.ts",
+    "sha256": "b41047bf4ea8fdcc6529bd9b37f94a4c83bb7b90313ebfba93d0024b6ba278d7",
+    "status": "indexed"
+  },
+  {
+    "bytes": 96,
+    "category": {
+      "basis": "asset-path-or-extension",
+      "category": "asset",
+      "inferred": true
+    },
+    "language": null,
+    "path": "assets/logo.svg",
+    "sha256": "6487549cb989d010c171511d0ab8dfad74801aaf2da0dd51aa96688b43dfe921",
+    "status": "not-indexed"
+  },
+  {
+    "bytes": 19,
+    "category": {
+      "basis": "asset-path-or-extension",
+      "category": "asset",
+      "inferred": true
+    },
+    "language": null,
+    "path": "assets/pixel.png",
+    "sha256": "30edd378563175a5c987294aaa91f81cdfd49b10b0a501cfe8fe212695f063e4",
+    "status": "not-indexed"
+  },
+  {
+    "bytes": 39,
+    "category": {
+      "basis": "configuration-path-or-filename",
+      "category": "configuration",
+      "inferred": true
+    },
+    "language": "text",
+    "path": "config/settings.yaml",
+    "sha256": "cc34d37e258e37616784abfc4dbba9d582ded770902e809d226a606e815f3c19",
+    "status": "indexed"
+  },
+  {
+    "bytes": 53,
+    "category": {
+      "basis": "documentation-filename-or-extension",
+      "category": "documentation",
+      "inferred": true
+    },
+    "language": "text",
+    "path": "docs/guide.md",
+    "sha256": "0fc28b5e8674418b86a1685a40c86ab15e44240d6555a6d398e8be078b5aec06",
+    "status": "indexed"
+  },
+  {
+    "bytes": 90,
+    "category": {
+      "basis": "generated-or-build-path",
+      "category": "artifact",
+      "inferred": true
+    },
+    "language": "typescript",
+    "path": "generated/schema.generated.ts",
+    "sha256": "bfbbc514dae053978216cbec299d5498ff278f31d0b5b32eef38ed186d977ae1",
+    "status": "indexed"
+  },
+  {
+    "bytes": 73,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "python",
+    "path": "golden_pkg/__init__.py",
+    "sha256": "ee88479e137e7c48d0643ac41a2f9b17f77c46b3657851dbdd86874fe18ed896",
+    "status": "indexed"
+  },
+  {
+    "bytes": 347,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "python",
+    "path": "golden_pkg/main.py",
+    "sha256": "f73315ebe12bed854658f177bede06b07c05cec46b7cf351bc769ec06482dbc4",
+    "status": "indexed"
+  },
+  {
+    "bytes": 177,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "python",
+    "path": "golden_pkg/models.py",
+    "sha256": "e6f3e4bdbcea8132cb436f34cdd2188f73711178d0f926dffc7e22bbedafa94b",
+    "status": "indexed"
+  },
+  {
+    "bytes": 79,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "python",
+    "path": "golden_pkg/util.py",
+    "sha256": "22a35cfe56d28f2740af8c2170afd32c1b4905cd01544ee2e46a3b535b63711a",
+    "status": "indexed"
+  },
+  {
+    "bytes": 252,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "javascript",
+    "path": "js/index.js",
+    "sha256": "0a976076157581d9cc341f2da83735782bdfe9648d3244d6d0055ad31eaa6669",
+    "status": "indexed"
+  },
+  {
+    "bytes": 58,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "javascript",
+    "path": "js/lib/format.js",
+    "sha256": "a50c46e8443f7d81553c86cd946211f914e6db2ec3c6614fb9c734b7d1e22be2",
+    "status": "indexed"
+  },
+  {
+    "bytes": 63,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "javascript",
+    "path": "js/lib/legacy.cjs",
+    "sha256": "723ba6bbd60e0a1209550e4161168a8a7c58094324bb9659e480a5b3a8e41c4a",
+    "status": "indexed"
+  },
+  {
+    "bytes": 40,
+    "category": {
+      "basis": "generated-or-build-path",
+      "category": "artifact",
+      "inferred": true
+    },
+    "language": "javascript",
+    "path": "js/vendor.min.js",
+    "sha256": "f81f91bcb3cca4aef7101cccbb969c115cedc154f5d9d64d3461f9b67a5ca3a4",
+    "status": "indexed"
+  },
+  {
+    "bytes": 74,
+    "category": {
+      "basis": "configuration-path-or-filename",
+      "category": "configuration",
+      "inferred": true
+    },
+    "language": "text",
+    "path": "package.json",
+    "sha256": "64c6f74ebb650e488240e8e024ff012f5eb6babc2196f09e6e8b69f055582b92",
+    "status": "indexed"
+  },
+  {
+    "bytes": 130,
+    "category": {
+      "basis": "configuration-path-or-filename",
+      "category": "configuration",
+      "inferred": true
+    },
+    "language": "text",
+    "path": "packages/core/package.json",
+    "sha256": "6ff7fccfbca3329056956e437c6db5023a1224d33f0680fd8508d73b344b4a60",
+    "status": "indexed"
+  },
+  {
+    "bytes": 28,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "typescript",
+    "path": "packages/core/src/index.ts",
+    "sha256": "c33f294a97ae9329b74e28bfee653b2db115820bc7fe0931f155a35d50409fbc",
+    "status": "indexed"
+  },
+  {
+    "bytes": 34,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "typescript",
+    "path": "packages/core/src/store.ts",
+    "sha256": "8b11ee229e0c96930550367aa5a69d1a982360fc3c25d181889d658265cece8b",
+    "status": "indexed"
+  },
+  {
+    "bytes": 68,
+    "category": {
+      "basis": "test-path-or-filename",
+      "category": "test",
+      "inferred": true
+    },
+    "language": "python",
+    "path": "tests/test_main.py",
+    "sha256": "787944f8619aadccc0b90aa5a2c5a81d89a09c7997d44c36d762f78c46db8b6e",
+    "status": "indexed"
+  },
+  {
+    "bytes": 36,
+    "category": {
+      "basis": "generated-or-build-path",
+      "category": "artifact",
+      "inferred": true
+    },
+    "language": "typescript",
+    "path": "ts/src/__snapshots__/service.snap.ts",
+    "sha256": "398560525c5bc4aac96971bf3f74c3035e5d107a5a23882115e2c8c01c8fe017",
+    "status": "indexed"
+  },
+  {
+    "bytes": 64,
+    "category": {
+      "basis": "test-path-or-filename",
+      "category": "test",
+      "inferred": true
+    },
+    "language": "typescript",
+    "path": "ts/src/service.test.ts",
+    "sha256": "69e98820dd6509b16be217a2a496dae2998502cbf2e27ff4948ae6d3ffc2bf78",
+    "status": "indexed"
+  },
+  {
+    "bytes": 333,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "typescript",
+    "path": "ts/src/service.ts",
+    "sha256": "4cb4f1c8e7e88f3b094970cd4059188229dce8454cf4cc3cc3abdfb7f5633990",
+    "status": "indexed"
+  },
+  {
+    "bytes": 232,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "typescript",
+    "path": "ts/src/store.ts",
+    "sha256": "da7cfd4cbe5232c4ccd6b36c0a4e4b2b78afd54321c39b316d2412d7c40d7d2c",
+    "status": "indexed"
+  },
+  {
+    "bytes": 140,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "tsx",
+    "path": "ts/src/ui/Button.tsx",
+    "sha256": "f62df1f7fb2d6a54c1f620a78854b4bc06e6685c1bd258eea516cd94b3df250e",
+    "status": "indexed"
+  },
+  {
+    "bytes": 35,
+    "category": {
+      "basis": "source-extension",
+      "category": "code",
+      "inferred": true
+    },
+    "language": "typescript",
+    "path": "ts/src/ui/index.ts",
+    "sha256": "dfac35d81edfe0f46e9f88be8c4f654ae1e334453f7edba8f8de361d876058bf",
+    "status": "indexed"
+  },
+  {
+    "bytes": 84,
+    "category": {
+      "basis": "configuration-path-or-filename",
+      "category": "configuration",
+      "inferred": true
+    },
+    "language": "text",
+    "path": "tsconfig.json",
+    "sha256": "fa60bb3143dee18f2e1c1e2dc2879262d40dc562bbff9a35436b48d038ffc488",
+    "status": "indexed"
+  }
+]

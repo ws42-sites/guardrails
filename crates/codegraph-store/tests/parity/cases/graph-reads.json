@@ -1,0 +1,455 @@
+{
+ "cases": [
+  {
+   "id": "indexed-by-python",
+   "description": "Every read over a database Python's indexer wrote, including both views.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "read",
+     "fn": "analysis",
+     "args": [
+      {
+       "sql": "SELECT id FROM analyses ORDER BY id LIMIT 1"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "analysis",
+     "args": [
+      "no-such-analysis"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "analysis",
+     "args": [
+      "x' OR '1'='1"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "summary",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "summary",
+     "args": [
+      "other/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "summary",
+     "args": [
+      "unknown/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "summary",
+     "args": [
+      "owner/repo' OR repo LIKE '%"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      3
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      99
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "."
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src/a.py"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src/"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "sr"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "missing"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      0
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      -1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "/absolute"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "back\\slash"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "has:colon"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      ""
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "../up"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "a//b"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "a/.."
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "a/../b"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "ctrl\u0001char"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "tab\there"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "dot/.."
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT id,snapshot_id,kind,name,path,line FROM nodes ORDER BY id"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT id,json_extract(metadata,'$.language'),json_extract(metadata,'$.sha256'),json_type(metadata,'$.waypoint') FROM nodes WHERE kind='file' ORDER BY id"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT id,metadata FROM nodes WHERE kind='repository' ORDER BY id"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT id,metadata FROM nodes WHERE kind='file' AND snapshot_id=1 ORDER BY id"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT snapshot_id,source,target,kind,evidence FROM edges ORDER BY snapshot_id,source,target,kind"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT count(*) FROM nodes WHERE snapshot_id=?",
+      2
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT count(*) FROM edges WHERE snapshot_id=?",
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "hand-built-database",
+   "description": "The same reads over rows inserted directly, with a hand-made waypoint binding.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-beta','f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753','2222222222222222222222222222222222222222','python','analyser-1',80,'[[\"function_definition\",\"beta\",1,null]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-unused','febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e','3333333333333333333333333333333333333333','python','analyser-1',10,'[]','{}')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(2,'owner/repo','rev-2','2026-01-02 00:00:00','{}','p2','branch')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(3,'other/repo','rev-3','2026-01-03 00:00:00','{}','p3','branch')",
+      "INSERT INTO snapshot_files VALUES(1,'src/a.py','f1','a.py','an-alpha')",
+      "INSERT INTO snapshot_files VALUES(1,'src/b.py','f2','b.py','an-beta')",
+      "INSERT INTO snapshot_files VALUES(2,'src/a.py','f1','a.py','an-alpha')",
+      "INSERT INTO snapshot_files VALUES(3,'x.py','f1','x.py','an-alpha')",
+      "INSERT INTO resolved_edges VALUES(1,'f:p1:f2','f:p1:f1','IMPORTS','src/b.py:1')",
+      "INSERT INTO resolved_edges VALUES(2,'f:p2:f1','f:p2:f1','CALLS','src/a.py:6')",
+      {
+       "text": "INSERT INTO waypoint_cache VALUES('wp-s','file','waypoint-v2',?,?)",
+       "params": [
+        "{\"kind\":\"file\",\"path\":\"src/a.py\"}",
+        {
+         "sha256": "{\"kind\":\"file\",\"path\":\"src/a.py\"}"
+        }
+       ]
+      },
+      {
+       "text": "INSERT INTO waypoint_cache VALUES('wp-v','validation','waypoint-checks-v1',?,?)",
+       "params": [
+        "{\"checks\":[]}",
+        {
+         "sha256": "{\"checks\":[]}"
+        }
+       ]
+      },
+      "INSERT INTO snapshot_waypoints VALUES(1,'src/a.py','file','wp-s','wp-v')",
+      "INSERT INTO waypoint_cache VALUES('wp-orphan','area','waypoint-v2','{}','0')"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "analysis",
+     "args": [
+      "an-alpha"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "analysis",
+     "args": [
+      "an-unused"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "analysis",
+     "args": [
+      "missing"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "summary",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "summary",
+     "args": [
+      "other/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "summary",
+     "args": [
+      "unknown/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT id,snapshot_id,kind,name,path,line,metadata FROM nodes ORDER BY id"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT snapshot_id,source,target,kind,evidence FROM edges ORDER BY snapshot_id,source,target,kind"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "empty-database",
+   "description": "Reads on a database with no snapshots.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "read",
+     "fn": "analysis",
+     "args": [
+      "x"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "summary",
+     "args": [
+      "owner/repo"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT id,snapshot_id,kind,name,path,line,metadata FROM nodes ORDER BY id"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT snapshot_id,source,target,kind,evidence FROM edges ORDER BY snapshot_id,source,target,kind"
+     ]
+    }
+   ]
+  }
+ ]
+}

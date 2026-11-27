@@ -1,0 +1,2169 @@
+{
+ "cases": {
+  "git-object-lookup": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 3,
+      "sha256": "d9f35e3fae1a895580959709154cccfab68c2ce4c15c85f29a4451d0e92b2f0c"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 3,
+      "sha256": "0d1d1bd573d9cdc038cb989e89f4c1ba27b7d2c5c1225703b9feb867a9464b7a"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 4,
+      "sha256": "ace76c7e82e3cd581b87bf821688372984e86d60f55417aa25d4806e619c64ad"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "16df7fed95ff6c98307546fea1fee9531b5b6550e6df5ae9da01d9c266e49fd2"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 8,
+      "sha256": "71218113b7dab67b7aeee4c6f3ce1f63da06c31e3ef949249def9e9541073702"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 3,
+      "imports": 0,
+      "parsed_files": 3,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 3,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 3,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 3,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": [
+      [
+       "7554fde97b53ae3cc7072ccbdc48c0851e2a4f13",
+       "typescript",
+       {
+        "content_hash": "87523bbe52a3130ea0bfde65ba6fa749d63905b3d39c71bd4825156e2f22f15d",
+        "id": "4bc47b0de3ef7bb26ea9d40e8cf6d1dab641a252819606a9d3abd3e45f9a9502",
+        "language": "typescript",
+        "size_bytes": 23
+       }
+      ],
+      [
+       "b2dde251b1b46b51d45cff79b4e1c3aff92bf91d",
+       "python",
+       {
+        "content_hash": "9f8d8a0c21dd79dff3c2b39026d7af40ee0702986b4cec128dc39da342a4fdd8",
+        "id": "ecd4645770024456a1fe0d56d4aaf381cf8b99715c62d54423f28bfbfdafe6d8",
+        "language": "python",
+        "size_bytes": 18
+       }
+      ],
+      [
+       "d937545511eff045512069455a41a8430ef7ba75",
+       "rust",
+       {
+        "content_hash": "61d84a22ca31884e02beda52e98bac0f3388ac1015d3cbd1ec7eb90e3321e433",
+        "id": "aed8d5a90a0dacc38c2ec1a808b711d135603ff2104f9310288ebb450db1ef65",
+        "language": "rust",
+        "size_bytes": 14
+       }
+      ]
+     ]
+    },
+    {
+     "value": []
+    },
+    {
+     "value": []
+    },
+    {
+     "value": []
+    },
+    {
+     "value": [
+      [
+       "7554fde97b53ae3cc7072ccbdc48c0851e2a4f13",
+       "typescript",
+       {
+        "content_hash": "87523bbe52a3130ea0bfde65ba6fa749d63905b3d39c71bd4825156e2f22f15d",
+        "id": "4bc47b0de3ef7bb26ea9d40e8cf6d1dab641a252819606a9d3abd3e45f9a9502",
+        "language": "typescript",
+        "size_bytes": 23
+       }
+      ],
+      [
+       "b2dde251b1b46b51d45cff79b4e1c3aff92bf91d",
+       "python",
+       {
+        "content_hash": "9f8d8a0c21dd79dff3c2b39026d7af40ee0702986b4cec128dc39da342a4fdd8",
+        "id": "ecd4645770024456a1fe0d56d4aaf381cf8b99715c62d54423f28bfbfdafe6d8",
+        "language": "python",
+        "size_bytes": 18
+       }
+      ],
+      [
+       "d937545511eff045512069455a41a8430ef7ba75",
+       "rust",
+       {
+        "content_hash": "61d84a22ca31884e02beda52e98bac0f3388ac1015d3cbd1ec7eb90e3321e433",
+        "id": "aed8d5a90a0dacc38c2ec1a808b711d135603ff2104f9310288ebb450db1ef65",
+        "language": "rust",
+        "size_bytes": 14
+       }
+      ]
+     ]
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid Git object lookup"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid Git object lookup"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid Git object lookup"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid Git object lookup"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid Git object lookup"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid Git object lookup"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid Git object lookup"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid Git object lookup"
+    },
+    {
+     "value": []
+    },
+    {
+     "value": []
+    }
+   ]
+  },
+  "git-object-lookup-across-chunks": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 7,
+      "sha256": "464ce46fd67a43f239691dfdf9514d4d2082a00a4c0f099afa8707eb0d3b97b7"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 7,
+      "sha256": "5f0e50c9318587bb2b2f993885ca8a72e99664ffec442a4faadb2b8fea30fe8c"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 8,
+      "sha256": "cd58d5ff37f599c11f56347782bd7d2d704e32e2106f22e180dd227c8a1dff03"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "39b35d62b297312f40e1f06c2863590f2c44fcdd7864b0ab59f77bf778be8b55"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 16,
+      "sha256": "088b7641d7c4c24b05ff46afae20e6807eadccd6a1078e48f04c0048a094a9ff"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 7,
+      "imports": 0,
+      "parsed_files": 7,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 0,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 7,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 7,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": [
+      [
+       "3aea0c58ce5d9751de8059460a90685c6ce119f5",
+       "python",
+       {
+        "content_hash": "dbe37ac31a72d7ea53b9ebee11146250c80c9f28852885229dcf56019ea1f465",
+        "id": "6710cbee9040e5b5d67136349d45f9ca2ee4c0236e13c7a0d0a6f3517bf2069a",
+        "language": "python",
+        "size_bytes": 6
+       }
+      ],
+      [
+       "407de3068e7b5950585d5abed9776d104235a85d",
+       "python",
+       {
+        "content_hash": "4205c4809ab1b080fd32b6bf9640e5feaa6d1b69bf9fa684954ab710157ec141",
+        "id": "f6b371593f5346aa064ed726da3bfa716bae306489e967c111670b82eb94423f",
+        "language": "python",
+        "size_bytes": 6
+       }
+      ],
+      [
+       "486a4f7d1e770a4703884dbd435a9f94b4ec1db2",
+       "python",
+       {
+        "content_hash": "05e64e1d434831f3b400ce1f11c682a543dac28d622b601b785e7f0844b88503",
+        "id": "0851d1a918e913925cecedd889eec238000cb2fd94b844a6cae3767785a32400",
+        "language": "python",
+        "size_bytes": 6
+       }
+      ],
+      [
+       "7d4290a117a4ddcc11daae7ea675841033830c8f",
+       "python",
+       {
+        "content_hash": "9e26bf369911c45c243c684147b23fc9e1dcfcf257d299a1c632016a6fcd33f4",
+        "id": "de19ef4b9c337fa65a2eea359748993af6d7543acbaac9eef50535616c8fa649",
+        "language": "python",
+        "size_bytes": 6
+       }
+      ],
+      [
+       "b95c23a4d31624aed5394c24e8189a128d2775d1",
+       "python",
+       {
+        "content_hash": "6dba43e01d22fc87e8c47a8c04ba49a133b14f39947fe1a87d7344e5c03f33d4",
+        "id": "ff23d10c11cad727699b705c06d65ac4b5050432d6e7ee909527366ba6c25f98",
+        "language": "python",
+        "size_bytes": 6
+       }
+      ],
+      [
+       "bc173cabcfc58d70e8264cddb67a901f61849343",
+       "python",
+       {
+        "content_hash": "fffc7ca4c2a3da30e44b1c1d64bc0e0a853548d2ee429e88facbfdb8e611bb7d",
+        "id": "c4036a42b53ad26953d0e08386491333ac7dcdc42f8c797424b0c058e380af26",
+        "language": "python",
+        "size_bytes": 6
+       }
+      ],
+      [
+       "fed79d05f4a485885162c7e73aee686c044a1f42",
+       "python",
+       {
+        "content_hash": "5a361ff4a8804de1551efd8d6e56a444d97ffe19a9e29e7ed5a524b0da464014",
+        "id": "cecb617efad2e43081df031163395e5b40a809a80bbcfeef52ee254cd05668a4",
+        "language": "python",
+        "size_bytes": 6
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  "git-object-lookup-ignores-other-analyser-versions": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 3,
+      "sha256": "ba287b98b29ee0173d78175509785b01b52c793129eb08100006329e13b70d67"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 3,
+      "sha256": "0d1d1bd573d9cdc038cb989e89f4c1ba27b7d2c5c1225703b9feb867a9464b7a"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 4,
+      "sha256": "ace76c7e82e3cd581b87bf821688372984e86d60f55417aa25d4806e619c64ad"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "16df7fed95ff6c98307546fea1fee9531b5b6550e6df5ae9da01d9c266e49fd2"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 8,
+      "sha256": "71218113b7dab67b7aeee4c6f3ce1f63da06c31e3ef949249def9e9541073702"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 3,
+      "imports": 0,
+      "parsed_files": 3,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 3,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 3,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 3,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": [
+      [
+       "7554fde97b53ae3cc7072ccbdc48c0851e2a4f13",
+       "typescript",
+       {
+        "content_hash": "87523bbe52a3130ea0bfde65ba6fa749d63905b3d39c71bd4825156e2f22f15d",
+        "id": "4bc47b0de3ef7bb26ea9d40e8cf6d1dab641a252819606a9d3abd3e45f9a9502",
+        "language": "typescript",
+        "size_bytes": 23
+       }
+      ],
+      [
+       "d937545511eff045512069455a41a8430ef7ba75",
+       "rust",
+       {
+        "content_hash": "61d84a22ca31884e02beda52e98bac0f3388ac1015d3cbd1ec7eb90e3321e433",
+        "id": "aed8d5a90a0dacc38c2ec1a808b711d135603ff2104f9310288ebb450db1ef65",
+        "language": "rust",
+        "size_bytes": 14
+       }
+      ]
+     ]
+    },
+    {
+     "value": null
+    },
+    {
+     "value": []
+    }
+   ]
+  },
+  "oversized-identifier-is-refused": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 1,
+      "sha256": "608983f122eaea52bee40b09cfa7b102777bc8330ee99f1699b1a9a08379f023"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 1,
+      "sha256": "15a19d5c1b017e2f1e23de56910d733937c5919798466425bb484f288336574e"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 2,
+      "sha256": "2d0094f1b92912400fcde280c4a92aa72470263a8c0001efb8fd3f017f075eb6"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "61ea05d9b80bcc5e0b6213d192e51a8d856d2d94c74c72f9debb8a24b657d98a"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 4,
+      "sha256": "f0e2db8a201e0e009cc75a91756a3a2c0996fd8ccda2579f174b8e0a4fcdd4a7"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Analysis identifier/reference exceeds string limit"
+    },
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 1,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-2a4d5e1a883eda064ba5ba0d03b60a954c101b53d3d80c5aef276a2cac281395",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 1,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 1,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": 1
+    }
+   ]
+  },
+  "reuse-by-analysis-identifier": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 3,
+      "sha256": "432e1987a5ae435f46c1dfda6ec5a0fe44122a1ca834ab9e8d2df5cbedfd1190"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 6,
+      "sha256": "a57a2602ebbfa7348faf5519643c97e23854ab1ddefeddeb38aa4b9f808f4394"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 12,
+      "sha256": "5cdaea36dbac76f5920ee55f5ed8af9ef9337049b730569a466da06b849e75aa"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 4,
+      "sha256": "351872db3ebc997092786ef45003479d655850b568c8c5ccca727b4c15b2d970"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 18,
+      "sha256": "ec03480883e7d1e7b6725cb563c2efa67de74ba8ef33d4c07e17e7f6cbb62740"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 3,
+      "imports": 0,
+      "parsed_files": 3,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 3,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 3,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 3,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 1,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 2,
+       "areaValidationsReused": 0,
+       "areasComputed": 2,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 1,
+       "unavailableFiles": 0,
+       "validationsComputed": 1,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 1,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+      "skipped_files": 0,
+      "snapshot": 3,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 2,
+       "areasComputed": 0,
+       "areasReused": 2,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 1,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 1
+      }
+     }
+    },
+    {
+     "error": "ValueError",
+     "message": "Git object does not match captured content"
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached analysis is missing or incompatible"
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached analysis is missing or incompatible"
+    },
+    {
+     "error": "KeyError",
+     "message": "'data'"
+    },
+    {
+     "error": "ValueError",
+     "message": "Git object does not match captured content"
+    },
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 1,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+      "skipped_files": 0,
+      "snapshot": 4,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 1,
+       "unavailableFiles": 0,
+       "validationsComputed": 1,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "error": "ValueError",
+     "message": "Git object does not match captured content"
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached analysis is missing or incompatible"
+    },
+    {
+     "value": 4
+    },
+    {
+     "value": 3
+    }
+   ]
+  },
+  "reuse-within-one-snapshot-parses-once": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 2,
+      "sha256": "240c1c8d331f81d1bbc4e234d30650fec003ee405b8aa3b598524e122d050b34"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 4,
+      "sha256": "eb6d63131956a3e44ec5e247814b852ba0438415b987722b64c0ae0e65f4f1fe"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 6,
+      "sha256": "5ff418649ce9d650c9eb92ac1a3182ff0661fee23a98268aeaa12edc8e09e196"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "9fd865efd8a018e8db9712320e37bed077a7b5ef9e088fecadbef6f4987da90d"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 12,
+      "sha256": "f80d61e301072603543a857a8adad295931b65b00d634ad8cca0976ab880ecf2"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 4,
+      "imports": 0,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 2,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 4,
+      "waypoints": {
+       "areaValidationsComputed": 2,
+       "areaValidationsReused": 0,
+       "areasComputed": 2,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 2,
+       "unavailableFiles": 0,
+       "validationsComputed": 4,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": 2
+    },
+    {
+     "value": 12
+    }
+   ]
+  },
+  "rows-from-another-analyser-are-misses-and-are-parsed-again": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 6,
+      "sha256": "09bb7e59739d043c8c2bfa6e91126f63d9198b7423db92be50955a24054d1aa9"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 15,
+      "sha256": "b2c5e4eeb75108295395ddfe89095e14cd9caa6145f63f96f67923bb6525a45a"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 20,
+      "sha256": "58da4f096785db8c4621389e4a5f8ac1f8170e7a7723a9b765bb6a0fe139f4c3"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 5,
+      "sha256": "f06264d0c58f5a19e3e12bac023fb2d6a3d6a6cd34b180c8c1512258f783d13e"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 12,
+      "sha256": "3081005dedefad190295b2323166bad5e1310a1ed0be3565510a4bbdbc3e684e"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 3,
+      "imports": 0,
+      "parsed_files": 3,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 3,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 3,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 3,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 3,
+      "imports": 0,
+      "parsed_files": 3,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 3,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 0,
+       "areasReused": 1,
+       "partial": false,
+       "summariesComputed": 3,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 3,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": 6
+    },
+    {
+     "value": [
+      [
+       "7554fde97b53ae3cc7072ccbdc48c0851e2a4f13",
+       "typescript",
+       {
+        "content_hash": "87523bbe52a3130ea0bfde65ba6fa749d63905b3d39c71bd4825156e2f22f15d",
+        "id": "4bc47b0de3ef7bb26ea9d40e8cf6d1dab641a252819606a9d3abd3e45f9a9502",
+        "language": "typescript",
+        "size_bytes": 23
+       }
+      ],
+      [
+       "b2dde251b1b46b51d45cff79b4e1c3aff92bf91d",
+       "python",
+       {
+        "content_hash": "9f8d8a0c21dd79dff3c2b39026d7af40ee0702986b4cec128dc39da342a4fdd8",
+        "id": "ecd4645770024456a1fe0d56d4aaf381cf8b99715c62d54423f28bfbfdafe6d8",
+        "language": "python",
+        "size_bytes": 18
+       }
+      ],
+      [
+       "d937545511eff045512069455a41a8430ef7ba75",
+       "rust",
+       {
+        "content_hash": "61d84a22ca31884e02beda52e98bac0f3388ac1015d3cbd1ec7eb90e3321e433",
+        "id": "aed8d5a90a0dacc38c2ec1a808b711d135603ff2104f9310288ebb450db1ef65",
+        "language": "rust",
+        "size_bytes": 14
+       }
+      ]
+     ]
+    },
+    {
+     "value": [
+      [
+       "7554fde97b53ae3cc7072ccbdc48c0851e2a4f13",
+       "typescript",
+       {
+        "content_hash": "87523bbe52a3130ea0bfde65ba6fa749d63905b3d39c71bd4825156e2f22f15d",
+        "id": "452ce5e2903c5dff39b0ed9cbd34cb2fc35a32b5a6d4b32198055dc156401a3a",
+        "language": "typescript",
+        "size_bytes": 23
+       }
+      ],
+      [
+       "b2dde251b1b46b51d45cff79b4e1c3aff92bf91d",
+       "python",
+       {
+        "content_hash": "9f8d8a0c21dd79dff3c2b39026d7af40ee0702986b4cec128dc39da342a4fdd8",
+        "id": "c732fa255d66e421990d3682022100f274d618e40de343f2f7a2e8800726a809",
+        "language": "python",
+        "size_bytes": 18
+       }
+      ],
+      [
+       "d937545511eff045512069455a41a8430ef7ba75",
+       "rust",
+       {
+        "content_hash": "61d84a22ca31884e02beda52e98bac0f3388ac1015d3cbd1ec7eb90e3321e433",
+        "id": "41bb7189f16e720f2e88e250ee0e0004498cac444d65cb54d69d48c898065a36",
+        "language": "rust",
+        "size_bytes": 14
+       }
+      ]
+     ]
+    },
+    {
+     "value": {
+      "files": 3,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 3,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-b4c9e14061c2fd453b36700e3b0da008db2189c711ac629f0f583089164e267d",
+      "skipped_files": 0,
+      "snapshot": 3,
+      "symbols": 3,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 1,
+       "areasComputed": 0,
+       "areasReused": 1,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 3,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 3
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 3,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 3,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-b4c9e14061c2fd453b36700e3b0da008db2189c711ac629f0f583089164e267d",
+      "skipped_files": 0,
+      "snapshot": 4,
+      "symbols": 3,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 1,
+       "areasComputed": 0,
+       "areasReused": 1,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 3,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 3
+      }
+     }
+    },
+    {
+     "value": 6
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 3,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 3,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-5eb92ae754bb68890975b7399afb4160b9ad066c02fdec959a8bd2c1d7fa2fb7",
+      "skipped_files": 0,
+      "snapshot": 5,
+      "symbols": 3,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 1,
+       "areasComputed": 0,
+       "areasReused": 1,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 3,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 3
+      }
+     }
+    },
+    {
+     "value": 6
+    }
+   ]
+  },
+  "same-bytes-in-two-languages-are-two-analyses": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 2,
+      "sha256": "50a9c245679f016709e01501c0f19df4e65c66deb4ce2c06931f923b8ef8b548"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 4,
+      "sha256": "221860e145897ef6d35da4d2bdf2bb06d93027dfb73ceb7df82805294726c077"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 5,
+      "sha256": "766786edf534d2536dfb33be6a6f3ab8e74aa272855481c8a5a49ebc5b432029"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "ff1ce6d1045203cc256483b1e37f9e93c35cb620b1df7dc18d8ec6988ced5712"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 10,
+      "sha256": "07b853eb67d2735be81b9408a5812dfb5d48c6a24d3fc561948d97e712d95db2"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 4,
+      "imports": 0,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 2,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 0,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 2,
+       "unavailableFiles": 0,
+       "validationsComputed": 4,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": 2
+    }
+   ]
+  },
+  "stored-analysis-over-the-output-limit-is-refused": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 1,
+      "sha256": "ef94a1a40a7f2686a59fd7c2868dff0eab1b232be78bade421b9464a9c677a2c"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 1,
+      "sha256": "83d64bea4113f06b7295bc05c12d3fa086b83bc985e25cac5da858b306796a3f"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 2,
+      "sha256": "94cd76cc082aa086e33bc9e6debc43b7865fad31840a110cda813093c22d5a61"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "369f03c47164d899c8821021baceaa7423033d429d8e5fd1f2943a2e80a0c3cb"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 4,
+      "sha256": "d25e4df9716137c04c2b2741c26dcef98bf5992be4218cd6a9f0a010f0471112"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 1,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 1,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 1,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Cached analysis exceeds output limit"
+    },
+    {
+     "value": 1
+    }
+   ]
+  },
+  "stored-analysis-with-unexpected-facts-fails-closed": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 1,
+      "sha256": "28d62c282e34fb2b03abf41e54f9f2740b225aae596b0db3579e61bd8b51ff18"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 1,
+      "sha256": "83d64bea4113f06b7295bc05c12d3fa086b83bc985e25cac5da858b306796a3f"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 2,
+      "sha256": "94cd76cc082aa086e33bc9e6debc43b7865fad31840a110cda813093c22d5a61"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "369f03c47164d899c8821021baceaa7423033d429d8e5fd1f2943a2e80a0c3cb"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 4,
+      "sha256": "d25e4df9716137c04c2b2741c26dcef98bf5992be4218cd6a9f0a010f0471112"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 1,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 1,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 1,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "KeyError",
+     "message": "'imports'"
+    },
+    {
+     "value": 1
+    }
+   ]
+  },
+  "stored-analysis-without-waypoint-facts-fails-closed": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 1,
+      "sha256": "56217af0960558c417a3512f9675a47f1401f6414f60c81e242b395bd18a361b"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 1,
+      "sha256": "83d64bea4113f06b7295bc05c12d3fa086b83bc985e25cac5da858b306796a3f"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 2,
+      "sha256": "94cd76cc082aa086e33bc9e6debc43b7865fad31840a110cda813093c22d5a61"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "369f03c47164d899c8821021baceaa7423033d429d8e5fd1f2943a2e80a0c3cb"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 4,
+      "sha256": "d25e4df9716137c04c2b2741c26dcef98bf5992be4218cd6a9f0a010f0471112"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 1,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 1,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 1,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "TypeError",
+     "message": "Waypoint facts are missing from the indexed analysis"
+    },
+    {
+     "value": 1
+    }
+   ]
+  }
+ },
+ "schemas": {
+  "3c8ab78ffefcf6d9": [
+   [
+    "index",
+    "analysis_object",
+    "analyses",
+    "CREATE INDEX analysis_object ON analyses(git_oid,language,version)"
+   ],
+   [
+    "index",
+    "idx_edges_source",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_source ON legacy_edges(snapshot_id,source)"
+   ],
+   [
+    "index",
+    "idx_edges_target",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_target ON legacy_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "idx_nodes_lookup",
+    "legacy_nodes",
+    "CREATE INDEX idx_nodes_lookup ON legacy_nodes(snapshot_id,name,kind)"
+   ],
+   [
+    "index",
+    "manifest_analysis",
+    "snapshot_files",
+    "CREATE INDEX manifest_analysis ON snapshot_files(analysis_id)"
+   ],
+   [
+    "index",
+    "resolved_inbound",
+    "resolved_edges",
+    "CREATE INDEX resolved_inbound ON resolved_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "snapshot_view",
+    "snapshots",
+    "CREATE INDEX snapshot_view ON snapshots(repo,view_key,id DESC)"
+   ],
+   [
+    "index",
+    "waypoint_summary_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_summary_bindings ON snapshot_waypoints(summary_key)"
+   ],
+   [
+    "index",
+    "waypoint_validation_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_validation_bindings ON snapshot_waypoints(validation_key)"
+   ],
+   [
+    "table",
+    "analyses",
+    "analyses",
+    "CREATE TABLE analyses(\n        id TEXT PRIMARY KEY,content_hash TEXT NOT NULL,git_oid TEXT NOT NULL,\n        language TEXT NOT NULL,version TEXT NOT NULL,size_bytes INTEGER NOT NULL,\n        symbols TEXT NOT NULL CHECK(json_valid(symbols)),facts TEXT NOT NULL CHECK(json_valid(facts)))"
+   ],
+   [
+    "table",
+    "legacy_edges",
+    "legacy_edges",
+    "CREATE TABLE legacy_edges(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "legacy_nodes",
+    "legacy_nodes",
+    "CREATE TABLE legacy_nodes(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}')"
+   ],
+   [
+    "table",
+    "resolved_edges",
+    "resolved_edges",
+    "CREATE TABLE resolved_edges(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,\n        PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "snapshot_files",
+    "snapshot_files",
+    "CREATE TABLE snapshot_files(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,file_id TEXT NOT NULL,name TEXT NOT NULL,\n        analysis_id TEXT NOT NULL REFERENCES analyses(id),PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshot_waypoints",
+    "snapshot_waypoints",
+    "CREATE TABLE snapshot_waypoints(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,kind TEXT NOT NULL CHECK(kind IN ('file','area')),\n        summary_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        validation_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshots",
+    "snapshots",
+    "CREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP, metadata TEXT NOT NULL DEFAULT '{}', node_prefix TEXT, view_key TEXT NOT NULL DEFAULT 'default')"
+   ],
+   [
+    "table",
+    "waypoint_cache",
+    "waypoint_cache",
+    "CREATE TABLE waypoint_cache(\n        id TEXT PRIMARY KEY,kind TEXT NOT NULL CHECK(kind IN ('file','area','validation')),\n        version TEXT NOT NULL,payload TEXT NOT NULL CHECK(json_valid(payload)),\n        payload_hash TEXT NOT NULL)"
+   ],
+   [
+    "trigger",
+    "staging_edge_insert",
+    "edges",
+    "CREATE TRIGGER staging_edge_insert INSTEAD OF INSERT ON edges\n        BEGIN INSERT INTO resolved_edges(snapshot_id,source,target,kind,evidence)\n        VALUES (new.snapshot_id,new.source,new.target,new.kind,new.evidence); END"
+   ],
+   [
+    "view",
+    "edges",
+    "edges",
+    "CREATE VIEW edges AS\n SELECT snapshot_id,source,target,kind,evidence FROM legacy_edges\n UNION ALL SELECT snapshot_id,source,target,kind,evidence FROM resolved_edges\n UNION ALL\n SELECT f.snapshot_id,'r:'||s.node_prefix,'f:'||s.node_prefix||':'||f.file_id,'CONTAINS',f.path\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n UNION ALL\n SELECT f.snapshot_id,'f:'||s.node_prefix||':'||f.file_id,\n 's:'||s.node_prefix||':'||f.file_id||':'||j.key,'DEFINES',\n f.path||':'||json_extract(j.value,'$[2]')\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ],
+   [
+    "view",
+    "nodes",
+    "nodes",
+    "CREATE VIEW nodes AS\n SELECT id,snapshot_id,kind,name,path,line,metadata FROM legacy_nodes\n UNION ALL\n SELECT 'r:'||node_prefix,id,'repository',repo,'.',NULL,\n json_set(metadata,'$.areaWaypoints',json((\n   SELECT json_group_array(json(waypoint)) FROM (\n     SELECT json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))) AS waypoint\n     FROM snapshot_waypoints sw JOIN waypoint_cache wc ON wc.id=sw.summary_key\n     JOIN waypoint_cache vc ON vc.id=sw.validation_key\n     WHERE sw.snapshot_id=s.id AND sw.kind='area' ORDER BY sw.path\n   ))))\n FROM snapshots s WHERE node_prefix IS NOT NULL\n UNION ALL\n SELECT 'f:'||s.node_prefix||':'||f.file_id,f.snapshot_id,'file',f.name,f.path,NULL,\n CASE WHEN sw.path IS NULL THEN json_object('language',a.language,'sha256',a.content_hash)\n ELSE json_object('language',a.language,'sha256',a.content_hash,'waypoint',json(json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))))) END\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id JOIN analyses a ON a.id=f.analysis_id\n LEFT JOIN snapshot_waypoints sw ON sw.snapshot_id=f.snapshot_id AND sw.path=f.path AND sw.kind='file'\n LEFT JOIN waypoint_cache wc ON wc.id=sw.summary_key\n LEFT JOIN waypoint_cache vc ON vc.id=sw.validation_key\n UNION ALL\n SELECT 's:'||s.node_prefix||':'||f.file_id||':'||j.key,f.snapshot_id,\n json_extract(j.value,'$[0]'),json_extract(j.value,'$[1]'),f.path,json_extract(j.value,'$[2]'),\n json_object('parent',json_extract(j.value,'$[3]'))\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ]
+  ]
+ }
+}

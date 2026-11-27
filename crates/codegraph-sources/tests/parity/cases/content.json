@@ -1,0 +1,726 @@
+{
+ "cases": [
+  {
+   "id": "invalid-utf-8-in-python",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "80"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "ff"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "c3"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "c328"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "e282"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "e228a1"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "e28228"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "f09028bc"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "f09f98"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "c080"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "e08080"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "eda080"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "f4908080"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "f888808080"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "6162ff63"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "616263e2"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "ff80"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "eda0"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "f08f8080"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.py",
+       "data": {
+        "hex": "f4908080"
+       }
+      }
+     ]
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    }
+   ],
+   "finalState": "digest"
+  },
+  {
+   "id": "invalid-utf-8-in-every-language",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.ts",
+       "data": {
+        "hex": "61ff62"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.tsx",
+       "data": {
+        "hex": "61ff62"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.js",
+       "data": {
+        "hex": "61ff62"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.rs",
+       "data": {
+        "hex": "61ff62"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.md",
+       "data": {
+        "hex": "61ff62"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.json",
+       "data": {
+        "hex": "61ff62"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.toml",
+       "data": {
+        "hex": "61ff62"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.yaml",
+       "data": {
+        "hex": "61ff62"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.sql",
+       "data": {
+        "hex": "61ff62"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bad.tf",
+       "data": {
+        "hex": "61ff62"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "ok.py",
+       "data": "def ok(): pass\n"
+      },
+      {
+       "path": "bad.md",
+       "data": {
+        "hex": "e282"
+       }
+      }
+     ]
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    }
+   ],
+   "finalState": "digest"
+  },
+  {
+   "id": "invalid-utf-8-never-echoes-content",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "secret.py",
+       "data": {
+        "hex": "524541442d544f4b454e2d4d41524b45522d30303030203d20310aff"
+       }
+      }
+     ]
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ],
+   "finalState": "digest"
+  },
+  {
+   "id": "nul-bytes-in-source",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "def a():\n    pass\n\u0000\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "x = '\u0000'\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.ts",
+       "data": "export const a = 1;\u0000\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.js",
+       "data": "var a = '\u0000';\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.rs",
+       "data": "pub fn a() {}\n\u0000"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.md",
+       "data": "# a\u0000b\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.json",
+       "data": "{\u0000}"
+      }
+     ]
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ],
+   "finalState": "digest"
+  },
+  {
+   "id": "binary-and-odd-text",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "empty.py",
+       "data": ""
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "empty.ts",
+       "data": ""
+      },
+      {
+       "path": "empty.rs",
+       "data": ""
+      },
+      {
+       "path": "empty.md",
+       "data": ""
+      },
+      {
+       "path": "empty.js",
+       "data": ""
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "blank.py",
+       "data": "\n\n   \n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bom.py",
+       "data": "\ufeffdef bom():\n    pass\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "bom.ts",
+       "data": "\ufeffexport function bom() {}\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "crlf.py",
+       "data": "def a():\r\n    pass\r\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "cr.py",
+       "data": "def a():\r    pass\r"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "emoji.py",
+       "data": "def f():\n    return '\ud83d\ude00'\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "latin.py",
+       "data": "# caf\u00e9\ndef caf\u00e9():\n    pass\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "syntax.py",
+       "data": "def (:\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "syntax.ts",
+       "data": "export function (( {\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "syntax.rs",
+       "data": "pub fn ((( {\n"
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "png.json",
+       "data": {
+        "hex": "89504e470d0a1a0a"
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "long.py",
+       "data": {
+        "repeat": {
+         "prefix": "# ",
+         "text": "x",
+         "times": 200000,
+         "suffix": "\ndef long(): pass\n"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "deep.py",
+       "data": "x = ((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((1))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))\n"
+      }
+     ]
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ],
+   "finalState": "digest"
+  },
+  {
+   "id": "marker-in-indexed-text-is-ordinary-content",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "a.py",
+       "data": "token = 'READ-TOKEN-MARKER-0000'\n"
+      },
+      {
+       "path": "b.md",
+       "data": "READ-TOKEN-MARKER-0000\n"
+      },
+      {
+       "path": "c.json",
+       "data": "{\"token\": \"READ-TOKEN-MARKER-0000\"}\n"
+      },
+      {
+       "path": "d.ts",
+       "data": "export const token = 'READ-TOKEN-MARKER-0000';\n"
+      },
+      {
+       "path": "e.yaml",
+       "data": "token: READ-TOKEN-MARKER-0000\n"
+      }
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "READ-TOKEN-MARKER-0000"
+     ]
+    },
+    {
+     "op": "absent",
+     "needle": "READ-TOKEN-MARKER-0000"
+    },
+    {
+     "op": "absent",
+     "needle": "READ-TOKEN"
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "READ-TOKEN-MARKER-0000.py",
+       "data": "x = 1\n"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "READ-TOKEN-MARKER-0000"
+     ]
+    },
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "../READ-TOKEN-MARKER-0000",
+       "data": "x = 1\n"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "READ-TOKEN-MARKER-0000%"
+     ]
+    }
+   ]
+  }
+ ]
+}

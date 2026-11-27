@@ -1,0 +1,1798 @@
+{
+ "cases": {
+  "analysis-identity-keys": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": "cf11dac7145e211f671dc8e886e9d0e28a2c80ed0b590b06521102e6b446c861"
+    },
+    {
+     "value": "cf11dac7145e211f671dc8e886e9d0e28a2c80ed0b590b06521102e6b446c861"
+    },
+    {
+     "value": "3f381461d716b426058e967053d3e3b9032c025f7bb73c443cacea429a0a2f4d"
+    },
+    {
+     "value": "ebf363e8a19683db121a0734bc31e6c1a52e1c8ca27df5c253a652b81f1cfc19"
+    },
+    {
+     "value": "64ade1884018a03b77bc33018a9bf06987f5885a5765b86f84df413f00ff078b"
+    },
+    {
+     "value": "474a605b0b75b700dd932b602d2da640d3e80d4328dac4282652cf64675b50f1"
+    },
+    {
+     "value": "474a605b0b75b700dd932b602d2da640d3e80d4328dac4282652cf64675b50f1"
+    },
+    {
+     "value": "1365af816fd74b85c853e78dc2eef4e5f8ab834cdb02e75dff09a99f34b31f8f"
+    },
+    {
+     "value": "88d998e1193a4cea401ac91a9103bffbb91d3ddbc49c4d998418e8dc411e4708"
+    }
+   ]
+  },
+  "cache-holds-no-credential": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "caf709cb47e1097d",
+    "tables": {
+     "architecture_evaluation_usage": {
+      "columns": [
+       "scope",
+       "month",
+       "calls",
+       "characters"
+      ],
+      "rows": []
+     },
+     "architecture_evaluations": {
+      "columns": [
+       "repository",
+       "revision",
+       "request_key",
+       "result"
+      ],
+      "rows": []
+     },
+     "architecture_reports": {
+      "columns": [
+       "repository",
+       "revision",
+       "base_revision",
+       "policy_digest",
+       "engine_version",
+       "analysis_key",
+       "report"
+      ],
+      "rows": []
+     }
+    },
+    "user_version": 1
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "matches": []
+     }
+    }
+   ]
+  },
+  "evaluation-budget-is-atomic-and-fails-closed": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "caf709cb47e1097d",
+    "tables": {
+     "architecture_evaluation_usage": {
+      "columns": [
+       "scope",
+       "month",
+       "calls",
+       "characters"
+      ],
+      "rows": [
+       [
+        "project",
+        "2026-11",
+        9,
+        192001
+       ],
+       [
+        "project",
+        "2026-12",
+        1,
+        24000
+       ],
+       [
+        "other",
+        "2026-11",
+        1,
+        24000
+       ],
+       [
+        "many-calls",
+        "2026-11",
+        50,
+        50
+       ]
+      ]
+     },
+     "architecture_evaluations": {
+      "columns": [
+       "repository",
+       "revision",
+       "request_key",
+       "result"
+      ],
+      "rows": []
+     },
+     "architecture_reports": {
+      "columns": [
+       "repository",
+       "revision",
+       "base_revision",
+       "policy_digest",
+       "engine_version",
+       "analysis_key",
+       "report"
+      ],
+      "rows": []
+     }
+    },
+    "user_version": 1
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Evaluation input exceeds its budget"
+    },
+    {
+     "error": "ValueError",
+     "message": "Evaluation input exceeds its budget"
+    },
+    {
+     "error": "ValueError",
+     "message": "Evaluation input exceeds its budget"
+    },
+    {
+     "value": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Pilot architecture evaluation budget is exhausted",
+      "Pilot architecture evaluation budget is exhausted"
+     ]
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Pilot architecture evaluation budget is exhausted"
+    },
+    {
+     "value": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Pilot architecture evaluation budget is exhausted",
+      "Pilot architecture evaluation budget is exhausted"
+     ]
+    },
+    {
+     "value": [
+      [
+       "many-calls",
+       "2026-11",
+       50,
+       50
+      ],
+      [
+       "other",
+       "2026-11",
+       1,
+       24000
+      ],
+      [
+       "project",
+       "2026-11",
+       9,
+       192001
+      ],
+      [
+       "project",
+       "2026-12",
+       1,
+       24000
+      ]
+     ]
+    }
+   ]
+  },
+  "evaluations-list-the-newest-eight-and-keep-fifty": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": [
+      {
+       "enforcement_authority": false,
+       "n": 51,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 50,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 49,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 48,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 47,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 46,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 45,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 44,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      }
+     ]
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "enforcement_authority": false,
+      "n": 51,
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "complete"
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": [
+      {
+       "enforcement_authority": false,
+       "n": 999,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 51,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 50,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 49,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 48,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 47,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 46,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      },
+      {
+       "enforcement_authority": false,
+       "n": 45,
+       "repository": "owner/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "enforcement_authority": false,
+       "repository": "neighbour/repo",
+       "revision": "rev-1",
+       "status": "complete"
+      }
+     ]
+    },
+    {
+     "value": []
+    },
+    {
+     "value": [
+      [
+       "neighbour/repo",
+       1
+      ],
+      [
+       "owner/repo",
+       50
+      ]
+     ]
+    }
+   ]
+  },
+  "every-part-of-the-identity-counts": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "caf709cb47e1097d",
+    "tables": {
+     "architecture_evaluation_usage": {
+      "columns": [
+       "scope",
+       "month",
+       "calls",
+       "characters"
+      ],
+      "rows": []
+     },
+     "architecture_evaluations": {
+      "columns": [
+       "repository",
+       "revision",
+       "request_key",
+       "result"
+      ],
+      "rows": []
+     },
+     "architecture_reports": {
+      "columns": [
+       "repository",
+       "revision",
+       "base_revision",
+       "policy_digest",
+       "engine_version",
+       "analysis_key",
+       "report"
+      ],
+      "rows": [
+       [
+        "owner/repo",
+        "rev-1",
+        "base-1",
+        "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "architecture-1.1.0",
+        "key-1",
+        "{\"base_revision\": \"base-1\", \"engine_version\": \"architecture-1.1.0\", \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\"}"
+       ],
+       [
+        "owner/repo",
+        "rev-1",
+        "",
+        "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "architecture-1.1.0",
+        "key-1",
+        "{\"base_revision\": null, \"engine_version\": \"architecture-1.1.0\", \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\"}"
+       ]
+      ]
+     }
+    },
+    "user_version": 1
+   },
+   "states": {
+    "12": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "caf709cb47e1097d",
+     "tables": {
+      "architecture_evaluation_usage": {
+       "columns": [
+        "scope",
+        "month",
+        "calls",
+        "characters"
+       ],
+       "rows": []
+      },
+      "architecture_evaluations": {
+       "columns": [
+        "repository",
+        "revision",
+        "request_key",
+        "result"
+       ],
+       "rows": []
+      },
+      "architecture_reports": {
+       "columns": [
+        "repository",
+        "revision",
+        "base_revision",
+        "policy_digest",
+        "engine_version",
+        "analysis_key",
+        "report"
+       ],
+       "rows": [
+        [
+         "owner/repo",
+         "rev-1",
+         "base-1",
+         "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+         "architecture-1.1.0",
+         "key-1",
+         "{\"base_revision\": \"base-1\", \"engine_version\": \"architecture-1.1.0\", \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\"}"
+        ],
+        [
+         "owner/repo",
+         "rev-1",
+         "",
+         "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+         "architecture-1.1.0",
+         "key-1",
+         "{\"base_revision\": null, \"engine_version\": \"architecture-1.1.0\", \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\"}"
+        ]
+       ]
+      }
+     },
+     "user_version": 1
+    }
+   },
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "base_revision": "base-1",
+      "engine_version": "architecture-1.1.0",
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-1"
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "base_revision": null,
+      "engine_version": "architecture-1.1.0",
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-1"
+     }
+    },
+    {
+     "value": {
+      "base_revision": null,
+      "engine_version": "architecture-1.1.0",
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-1"
+     }
+    },
+    {
+     "value": {
+      "base_revision": "base-1",
+      "engine_version": "architecture-1.1.0",
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-1"
+     }
+    }
+   ]
+  },
+  "falsy-base-revisions-mean-no-base": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "caf709cb47e1097d",
+    "tables": {
+     "architecture_evaluation_usage": {
+      "columns": [
+       "scope",
+       "month",
+       "calls",
+       "characters"
+      ],
+      "rows": []
+     },
+     "architecture_evaluations": {
+      "columns": [
+       "repository",
+       "revision",
+       "request_key",
+       "result"
+      ],
+      "rows": []
+     },
+     "architecture_reports": {
+      "columns": [
+       "repository",
+       "revision",
+       "base_revision",
+       "policy_digest",
+       "engine_version",
+       "analysis_key",
+       "report"
+      ],
+      "rows": [
+       [
+        "owner/repo",
+        "rev-1",
+        "",
+        "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "architecture-1.1.0",
+        "a",
+        "{\"base_revision\": 0, \"engine_version\": \"architecture-1.1.0\", \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\"}"
+       ],
+       [
+        "owner/repo",
+        "rev-1",
+        "",
+        "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "architecture-1.1.0",
+        "b",
+        "{\"base_revision\": false, \"engine_version\": \"architecture-1.1.0\", \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\"}"
+       ],
+       [
+        "owner/repo",
+        "rev-1",
+        "",
+        "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "architecture-1.1.0",
+        "c",
+        "{\"base_revision\": [], \"engine_version\": \"architecture-1.1.0\", \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\"}"
+       ],
+       [
+        "owner/repo",
+        "rev-1",
+        "",
+        "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "architecture-1.1.0",
+        "d",
+        "{\"base_revision\": {}, \"engine_version\": \"architecture-1.1.0\", \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\"}"
+       ],
+       [
+        "owner/repo",
+        "rev-1",
+        "",
+        "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "architecture-1.1.0",
+        "e",
+        "{\"base_revision\": \"\", \"engine_version\": \"architecture-1.1.0\", \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\"}"
+       ],
+       [
+        "owner/repo",
+        "rev-1",
+        "7",
+        "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "architecture-1.1.0",
+        "f",
+        "{\"base_revision\": 7, \"engine_version\": \"architecture-1.1.0\", \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\"}"
+       ]
+      ]
+     }
+    },
+    "user_version": 1
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "base_revision": 0,
+      "engine_version": "architecture-1.1.0",
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-1"
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": [
+      [
+       "a",
+       "",
+       "text"
+      ],
+      [
+       "b",
+       "",
+       "text"
+      ],
+      [
+       "c",
+       "",
+       "text"
+      ],
+      [
+       "d",
+       "",
+       "text"
+      ],
+      [
+       "e",
+       "",
+       "text"
+      ],
+      [
+       "f",
+       "7",
+       "text"
+      ]
+     ]
+    }
+   ]
+  },
+  "folder-is-not-a-cache": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "error": "OperationalError",
+     "message": "unable to open database file"
+    }
+   ]
+  },
+  "foreign-tables-are-left-alongside": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "b3f78f14607f3d50",
+    "tables": {
+     "architecture_evaluation_usage": {
+      "columns": [
+       "scope",
+       "month",
+       "calls",
+       "characters"
+      ],
+      "rows": []
+     },
+     "architecture_evaluations": {
+      "columns": [
+       "repository",
+       "revision",
+       "request_key",
+       "result"
+      ],
+      "rows": []
+     },
+     "architecture_reports": {
+      "columns": [
+       "repository",
+       "revision",
+       "base_revision",
+       "policy_digest",
+       "engine_version",
+       "analysis_key",
+       "report"
+      ],
+      "rows": []
+     },
+     "evidence": {
+      "columns": [
+       "value"
+      ],
+      "rows": [
+       [
+        "retained"
+       ]
+      ]
+     }
+    },
+    "user_version": 1
+   },
+   "states": {
+    "1": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "b3f78f14607f3d50",
+     "tables": {
+      "architecture_evaluation_usage": {
+       "columns": [
+        "scope",
+        "month",
+        "calls",
+        "characters"
+       ],
+       "rows": []
+      },
+      "architecture_evaluations": {
+       "columns": [
+        "repository",
+        "revision",
+        "request_key",
+        "result"
+       ],
+       "rows": []
+      },
+      "architecture_reports": {
+       "columns": [
+        "repository",
+        "revision",
+        "base_revision",
+        "policy_digest",
+        "engine_version",
+        "analysis_key",
+        "report"
+       ],
+       "rows": []
+      },
+      "evidence": {
+       "columns": [
+        "value"
+       ],
+       "rows": [
+        [
+         "retained"
+        ]
+       ]
+      }
+     },
+     "user_version": 1
+    }
+   },
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "fresh-cache-schema": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "caf709cb47e1097d",
+    "tables": {
+     "architecture_evaluation_usage": {
+      "columns": [
+       "scope",
+       "month",
+       "calls",
+       "characters"
+      ],
+      "rows": []
+     },
+     "architecture_evaluations": {
+      "columns": [
+       "repository",
+       "revision",
+       "request_key",
+       "result"
+      ],
+      "rows": []
+     },
+     "architecture_reports": {
+      "columns": [
+       "repository",
+       "revision",
+       "base_revision",
+       "policy_digest",
+       "engine_version",
+       "analysis_key",
+       "report"
+      ],
+      "rows": []
+     }
+    },
+    "user_version": 1
+   },
+   "states": {
+    "0": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "caf709cb47e1097d",
+     "tables": {
+      "architecture_evaluation_usage": {
+       "columns": [
+        "scope",
+        "month",
+        "calls",
+        "characters"
+       ],
+       "rows": []
+      },
+      "architecture_evaluations": {
+       "columns": [
+        "repository",
+        "revision",
+        "request_key",
+        "result"
+       ],
+       "rows": []
+      },
+      "architecture_reports": {
+       "columns": [
+        "repository",
+        "revision",
+        "base_revision",
+        "policy_digest",
+        "engine_version",
+        "analysis_key",
+        "report"
+       ],
+       "rows": []
+      }
+     },
+     "user_version": 1
+    }
+   },
+   "steps": [
+    {
+     "value": null
+    }
+   ]
+  },
+  "missing-folder-is-an-error": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "error": "OperationalError",
+     "message": "unable to open database file"
+    },
+    {
+     "error": "OperationalError",
+     "message": "unable to open database file"
+    }
+   ]
+  },
+  "only-advisory-evaluations-are-stored": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Only advisory evaluation results may be stored"
+    },
+    {
+     "error": "ValueError",
+     "message": "Only advisory evaluation results may be stored"
+    },
+    {
+     "error": "ValueError",
+     "message": "Only advisory evaluation results may be stored"
+    },
+    {
+     "error": "ValueError",
+     "message": "Only advisory evaluation results may be stored"
+    },
+    {
+     "error": "ValueError",
+     "message": "Only advisory evaluation results may be stored"
+    },
+    {
+     "error": "ValueError",
+     "message": "Only advisory evaluation results may be stored"
+    },
+    {
+     "error": "ValueError",
+     "message": "Only advisory evaluation results may be stored"
+    },
+    {
+     "error": "AttributeError",
+     "message": "'list' object has no attribute 'get'"
+    },
+    {
+     "error": "AttributeError",
+     "message": "'NoneType' object has no attribute 'get'"
+    },
+    {
+     "error": "ValueError",
+     "message": "Evaluation result exceeds storage budget"
+    },
+    {
+     "error": "KeyError",
+     "message": "'repository'"
+    },
+    {
+     "error": "KeyError",
+     "message": "'revision'"
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "enforcement_authority": false,
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "complete"
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": [
+      [
+       "complete"
+      ],
+      [
+       "uncertain"
+      ],
+      [
+       "inconclusive"
+      ]
+     ]
+    }
+   ]
+  },
+  "reopening-keeps-everything": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "caf709cb47e1097d",
+    "tables": {
+     "architecture_evaluation_usage": {
+      "columns": [
+       "scope",
+       "month",
+       "calls",
+       "characters"
+      ],
+      "rows": []
+     },
+     "architecture_evaluations": {
+      "columns": [
+       "repository",
+       "revision",
+       "request_key",
+       "result"
+      ],
+      "rows": []
+     },
+     "architecture_reports": {
+      "columns": [
+       "repository",
+       "revision",
+       "base_revision",
+       "policy_digest",
+       "engine_version",
+       "analysis_key",
+       "report"
+      ],
+      "rows": [
+       [
+        "owner/repo",
+        "rev-1",
+        "",
+        "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "architecture-1.1.0",
+        "key-1",
+        "{\"base_revision\": null, \"engine_version\": \"architecture-1.1.0\", \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\"}"
+       ]
+      ]
+     }
+    },
+    "user_version": 1
+   },
+   "states": {
+    "2": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "caf709cb47e1097d",
+     "tables": {
+      "architecture_evaluation_usage": {
+       "columns": [
+        "scope",
+        "month",
+        "calls",
+        "characters"
+       ],
+       "rows": []
+      },
+      "architecture_evaluations": {
+       "columns": [
+        "repository",
+        "revision",
+        "request_key",
+        "result"
+       ],
+       "rows": []
+      },
+      "architecture_reports": {
+       "columns": [
+        "repository",
+        "revision",
+        "base_revision",
+        "policy_digest",
+        "engine_version",
+        "analysis_key",
+        "report"
+       ],
+       "rows": [
+        [
+         "owner/repo",
+         "rev-1",
+         "",
+         "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+         "architecture-1.1.0",
+         "key-1",
+         "{\"base_revision\": null, \"engine_version\": \"architecture-1.1.0\", \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\"}"
+        ]
+       ]
+      }
+     },
+     "user_version": 1
+    }
+   },
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "base_revision": null,
+      "engine_version": "architecture-1.1.0",
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-1"
+     }
+    }
+   ]
+  },
+  "replacing-a-report-keeps-it-newest": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "base_revision": null,
+      "engine_version": "architecture-1.1.0",
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-0"
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "base_revision": null,
+      "engine_version": "architecture-1.1.0",
+      "i": 2,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-2"
+     }
+    },
+    {
+     "value": [
+      [
+       100
+      ]
+     ]
+    }
+   ]
+  },
+  "report-round-trip-and-key-order": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "caf709cb47e1097d",
+    "tables": {
+     "architecture_evaluation_usage": {
+      "columns": [
+       "scope",
+       "month",
+       "calls",
+       "characters"
+      ],
+      "rows": []
+     },
+     "architecture_evaluations": {
+      "columns": [
+       "repository",
+       "revision",
+       "request_key",
+       "result"
+      ],
+      "rows": []
+     },
+     "architecture_reports": {
+      "columns": [
+       "repository",
+       "revision",
+       "base_revision",
+       "policy_digest",
+       "engine_version",
+       "analysis_key",
+       "report"
+      ],
+      "rows": [
+       [
+        "owner/repo",
+        "rev-1",
+        "",
+        "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "architecture-1.1.0",
+        "key-1",
+        "{\"base_revision\": null, \"big\": 12345678901234567890, \"empty_list\": [], \"empty_object\": {}, \"engine_version\": \"architecture-1.1.0\", \"nested\": {\"a\": null, \"b\": [1, 2.5, {\"x\": \"caf\\u00e9 \\u2028 \\ud83d\\ude00\", \"y\": 1e-07}, 1e+22, 123456789.125, -0.0], \"quote\": \"say \\\"hi\\\"\\n\\ttab\\\\\", \"t\": true}, \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\", \"small\": -9007199254740993, \"z\": 1, \"zero\": 0}"
+       ]
+      ]
+     }
+    },
+    "user_version": 1
+   },
+   "states": {
+    "0": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "caf709cb47e1097d",
+     "tables": {
+      "architecture_evaluation_usage": {
+       "columns": [
+        "scope",
+        "month",
+        "calls",
+        "characters"
+       ],
+       "rows": []
+      },
+      "architecture_evaluations": {
+       "columns": [
+        "repository",
+        "revision",
+        "request_key",
+        "result"
+       ],
+       "rows": []
+      },
+      "architecture_reports": {
+       "columns": [
+        "repository",
+        "revision",
+        "base_revision",
+        "policy_digest",
+        "engine_version",
+        "analysis_key",
+        "report"
+       ],
+       "rows": [
+        [
+         "owner/repo",
+         "rev-1",
+         "",
+         "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+         "architecture-1.1.0",
+         "key-1",
+         "{\"base_revision\": null, \"big\": 12345678901234567890, \"empty_list\": [], \"empty_object\": {}, \"engine_version\": \"architecture-1.1.0\", \"nested\": {\"a\": null, \"b\": [1, 2.5, {\"x\": \"caf\\u00e9 \\u2028 \\ud83d\\ude00\", \"y\": 1e-07}, 1e+22, 123456789.125, -0.0], \"quote\": \"say \\\"hi\\\"\\n\\ttab\\\\\", \"t\": true}, \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"repository\": \"owner/repo\", \"revision\": \"rev-1\", \"small\": -9007199254740993, \"z\": 1, \"zero\": 0}"
+        ]
+       ]
+      }
+     },
+     "user_version": 1
+    }
+   },
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "base_revision": null,
+      "big": 12345678901234567890,
+      "empty_list": [],
+      "empty_object": {},
+      "engine_version": "architecture-1.1.0",
+      "nested": {
+       "a": null,
+       "b": [
+        1,
+        2.5,
+        {
+         "x": "caf\u00e9 \u2028 \ud83d\ude00",
+         "y": 1e-07
+        },
+        1e+22,
+        123456789.125,
+        -0.0
+       ],
+       "quote": "say \"hi\"\n\ttab\\",
+       "t": true
+      },
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "small": -9007199254740993,
+      "z": 1,
+      "zero": 0
+     }
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "retention-never-evicts-another-repository": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "base_revision": null,
+      "engine_version": "architecture-1.1.0",
+      "i": 1,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-1"
+     }
+    },
+    {
+     "value": {
+      "base_revision": null,
+      "engine_version": "architecture-1.1.0",
+      "i": 100,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-100"
+     }
+    },
+    {
+     "value": {
+      "base_revision": null,
+      "engine_version": "architecture-1.1.0",
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "neighbour/repo",
+      "revision": "only"
+     }
+    },
+    {
+     "value": [
+      [
+       "neighbour/repo",
+       1,
+       1,
+       1
+      ],
+      [
+       "owner/repo",
+       100,
+       3,
+       102
+      ]
+     ]
+    }
+   ]
+  },
+  "stored-report-must-match-the-identity-it-is-found-under": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "error": "ValueError",
+     "message": "Architecture cache identity mismatch"
+    },
+    {
+     "error": "ValueError",
+     "message": "Architecture cache identity mismatch"
+    },
+    {
+     "error": "ValueError",
+     "message": "Architecture cache identity mismatch"
+    },
+    {
+     "error": "JSONDecodeError",
+     "message": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+     "error": "TypeError",
+     "message": "list indices must be integers or slices, not str"
+    },
+    {
+     "error": "TypeError",
+     "message": "string indices must be integers, not 'str'"
+    },
+    {
+     "error": "TypeError",
+     "message": "'int' object is not subscriptable"
+    },
+    {
+     "error": "TypeError",
+     "message": "'NoneType' object is not subscriptable"
+    },
+    {
+     "error": "TypeError",
+     "message": "'bool' object is not subscriptable"
+    },
+    {
+     "error": "KeyError",
+     "message": "'repository'"
+    },
+    {
+     "error": "ValueError",
+     "message": "Architecture cache identity mismatch"
+    },
+    {
+     "error": "KeyError",
+     "message": "'revision'"
+    },
+    {
+     "value": {
+      "base_revision": null,
+      "engine_version": "architecture-1.1.0",
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-1"
+     }
+    }
+   ]
+  },
+  "text-file-is-not-a-cache": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "error": "DatabaseError",
+     "message": "file is not a database"
+    }
+   ]
+  },
+  "two-stores-on-one-file-agree": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "base_revision": null,
+      "engine_version": "architecture-1.1.0",
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "repository": "owner/repo",
+      "revision": "rev-1"
+     }
+    },
+    {
+     "value": [
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "value": [
+      null,
+      null,
+      null,
+      "Pilot architecture evaluation budget is exhausted",
+      "Pilot architecture evaluation budget is exhausted"
+     ]
+    }
+   ]
+  },
+  "unsafe-reports-are-refused-before-anything-is-written": {
+   "final": null,
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "Invalid or oversized architecture report"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid or oversized architecture report"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid or oversized architecture report"
+    },
+    {
+     "error": "ValueError",
+     "message": "Invalid or oversized architecture report"
+    },
+    {
+     "error": "AttributeError",
+     "message": "'list' object has no attribute 'get'"
+    },
+    {
+     "error": "AttributeError",
+     "message": "'str' object has no attribute 'get'"
+    },
+    {
+     "error": "AttributeError",
+     "message": "'int' object has no attribute 'get'"
+    },
+    {
+     "error": "AttributeError",
+     "message": "'NoneType' object has no attribute 'get'"
+    },
+    {
+     "error": "KeyError",
+     "message": "'repository'"
+    },
+    {
+     "error": "KeyError",
+     "message": "'revision'"
+    },
+    {
+     "error": "KeyError",
+     "message": "'policy_digest'"
+    },
+    {
+     "error": "IntegrityError",
+     "message": "NOT NULL constraint failed: architecture_reports.repository"
+    },
+    {
+     "value": [
+      [
+       0
+      ]
+     ]
+    }
+   ]
+  },
+  "unsupported-versions-are-refused-and-kept": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "7b2e79b2956f5c9b",
+    "tables": {
+     "evidence": {
+      "columns": [
+       "value"
+      ],
+      "rows": [
+       [
+        "retained"
+       ]
+      ]
+     }
+    },
+    "user_version": 2
+   },
+   "states": {
+    "1": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "7b2e79b2956f5c9b",
+     "tables": {
+      "evidence": {
+       "columns": [
+        "value"
+       ],
+       "rows": [
+        [
+         "retained"
+        ]
+       ]
+      }
+     },
+     "user_version": 2
+    }
+   },
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "error": "RuntimeError",
+     "message": "Unsupported architecture report schema"
+    }
+   ]
+  }
+ },
+ "schemas": {
+  "7b2e79b2956f5c9b": [
+   [
+    "table",
+    "evidence",
+    "evidence",
+    "CREATE TABLE evidence(value)"
+   ]
+  ],
+  "b3f78f14607f3d50": [
+   [
+    "table",
+    "architecture_evaluation_usage",
+    "architecture_evaluation_usage",
+    "CREATE TABLE architecture_evaluation_usage (scope TEXT NOT NULL, month TEXT NOT NULL, calls INTEGER NOT NULL, characters INTEGER NOT NULL, PRIMARY KEY(scope,month))"
+   ],
+   [
+    "table",
+    "architecture_evaluations",
+    "architecture_evaluations",
+    "CREATE TABLE architecture_evaluations (repository TEXT NOT NULL, revision TEXT NOT NULL, request_key TEXT NOT NULL, result TEXT NOT NULL CHECK(length(result)<=131072), PRIMARY KEY(repository,revision,request_key))"
+   ],
+   [
+    "table",
+    "architecture_reports",
+    "architecture_reports",
+    "CREATE TABLE architecture_reports (\n repository TEXT NOT NULL, revision TEXT NOT NULL, base_revision TEXT NOT NULL,\n policy_digest TEXT NOT NULL, engine_version TEXT NOT NULL, analysis_key TEXT NOT NULL,\n report TEXT NOT NULL CHECK(length(report)<=4000000),\n PRIMARY KEY(repository,revision,base_revision,policy_digest,engine_version,analysis_key)\n)"
+   ],
+   [
+    "table",
+    "evidence",
+    "evidence",
+    "CREATE TABLE evidence(value)"
+   ]
+  ],
+  "caf709cb47e1097d": [
+   [
+    "table",
+    "architecture_evaluation_usage",
+    "architecture_evaluation_usage",
+    "CREATE TABLE architecture_evaluation_usage (scope TEXT NOT NULL, month TEXT NOT NULL, calls INTEGER NOT NULL, characters INTEGER NOT NULL, PRIMARY KEY(scope,month))"
+   ],
+   [
+    "table",
+    "architecture_evaluations",
+    "architecture_evaluations",
+    "CREATE TABLE architecture_evaluations (repository TEXT NOT NULL, revision TEXT NOT NULL, request_key TEXT NOT NULL, result TEXT NOT NULL CHECK(length(result)<=131072), PRIMARY KEY(repository,revision,request_key))"
+   ],
+   [
+    "table",
+    "architecture_reports",
+    "architecture_reports",
+    "CREATE TABLE architecture_reports (\n repository TEXT NOT NULL, revision TEXT NOT NULL, base_revision TEXT NOT NULL,\n policy_digest TEXT NOT NULL, engine_version TEXT NOT NULL, analysis_key TEXT NOT NULL,\n report TEXT NOT NULL CHECK(length(report)<=4000000),\n PRIMARY KEY(repository,revision,base_revision,policy_digest,engine_version,analysis_key)\n)"
+   ]
+  ]
+ }
+}
