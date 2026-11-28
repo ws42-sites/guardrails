@@ -354,7 +354,9 @@
                 ".gemini/settings.json",
                 ".agents/hooks.json",
                 ".codex/hooks.json",
-                ".codex/config.toml"
+                ".codex/config.toml",
+                ".gitleaks.toml",
+                ".gitleaksignore"
               ]
             }
           },

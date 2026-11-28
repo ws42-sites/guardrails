@@ -68,7 +68,7 @@ Every finding names one of these IDs. `guardrails explain <ID>` (or the MCP tool
 - **TEST-8:** Stryker, using a generated config (pinned Stryker version, `mutation.excludedMutations`, incremental), run on changed files in `mutation.tiers`. Runs with `GUARDRAILS_MUTATION=1` so a project's Vitest config can exclude slow suites. The gate always recomputes the score; `guardrails_mutants` only lists survivors for the agent.
 - **FLAG-1:** `.guardrails/flags.json` (written by `guardrails flag` / MCP `guardrails_flag`).
 - **HOLD-1:** `guardrails holdout --dir <checkout>` in the reusable workflow's `holdout` job.
-- **SEC-1:** gitleaks (pinned CLI image) in the reusable workflow's `secrets` job, over the PR's commits. CodeQL is an optional job (`codeql: true`).
+- **SEC-1:** gitleaks (pinned CLI image) in the reusable workflow's `secrets` job, over the PR's commits. Gitleaks reads `.gitleaks.toml` and `.gitleaksignore` from the repo, so both are in the default `lock.paths`. CodeQL is an optional job (`codeql: true`).
 - **JRN-1..5:** the `journeys` block in `guardrails.config.json`. JRN-1 scans `journeys.e2eGlobs` (Playwright) for `test()`/`test.describe()` titles starting with a journey ID and reads pass/fail from `journeys.resultsFile` (Playwright JSON reporter) when set. JRN-3 diffs the journeys block against the merge-base. JRN-4 derives routes from new files under `journeys.routeGlobs` (pages, app router, Pages Functions) and from added `<Route path>`, `path:` and `app.get('/x')` lines, plus added `<form>`s. JRN-5 is a stub (VIS-1 v2).
 - **SCOPE-1:** diff line counts plus `specs.items.<ID>.paths` for the task's spec IDs (`--specs`, `$GUARDRAILS_SPECS`, or the IDs in changed tests).
 
