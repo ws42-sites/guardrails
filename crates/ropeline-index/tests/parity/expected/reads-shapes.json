@@ -1,0 +1,2207 @@
+{
+ "cases": {
+  "empty-snapshot-reads": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "0ac12154c017fcc502beed9daae65e979259e568449ec95efa926c494d3aa7b5"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 0,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 0,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 0,
+       "areasComputed": 0,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "analysis_stats": {
+       "parsed_files": 0,
+       "reused_files": 0
+      },
+      "analyzer": {
+       "version": "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}"
+      },
+      "counts": {
+       "repository": 1
+      },
+      "indexed_at": "<timestamp>",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "snapshot": 1,
+      "storage_summary": {
+       "manifest_entries": 0,
+       "stored_symbols": 0,
+       "unique_analyses": 0,
+       "unique_source_bytes": 0
+      },
+      "waypoint_stats": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 0,
+       "areasComputed": 0,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 0
+      },
+      "workspace": {
+       "branch": "main",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+       "view": "branch",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+     }
+    },
+    {
+     "value": []
+    },
+    {
+     "value": {
+      "edges": [],
+      "nodes": [
+       {
+        "id": "r:49c799d9102f54e2a423d6af",
+        "kind": "repository",
+        "line": null,
+        "metadata": "{\"workspace\":{\"branch\":\"main\",\"workspace_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"fingerprint\":\"0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605\",\"view\":\"branch\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"analysis_stats\":{\"parsed_files\":0,\"reused_files\":0},\"analyzer\":{\"version\":\"{\\\"format\\\": 15, \\\"language-pack\\\": \\\"oracle\\\", \\\"tree-sitter\\\": \\\"oracle\\\", \\\"waypoints\\\": \\\"waypoint-v2\\\"}\"},\"waypoint_stats\":{\"summariesComputed\":0,\"summariesReused\":0,\"validationsComputed\":0,\"validationsReused\":0,\"areasComputed\":0,\"areasReused\":0,\"areaValidationsComputed\":0,\"areaValidationsReused\":0,\"unavailableFiles\":0,\"partial\":false},\"areaWaypoints\":[]}",
+        "name": "owner/repo",
+        "path": "."
+       }
+      ],
+      "partial": false,
+      "repository": "owner/repo",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "snapshot": 1
+     }
+    },
+    {
+     "value": {
+      "edges": [],
+      "files": [],
+      "partial": false,
+      "repository": "owner/repo",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "snapshot": 1
+     }
+    },
+    {
+     "error": "ValueError",
+     "message": "Node not found in current snapshot"
+    }
+   ]
+  },
+  "many-matches-are-capped-and-ranked": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 130,
+      "sha256": "42b619b37b3f058b9ee3d9f7cf8c25465958e829ac8fc49244e800ddc0a80eed"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 130,
+      "sha256": "8934c7c5355c9655be822233022b87d1dbd2d86557f04a7c935f4db213a3f989"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 131,
+      "sha256": "9e75580ec679d99d2dc1ce197f18b3d215eb00c05bf31e4b6982e5c1af6ddc59"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "f4dacc8ceabe70e12909caa47a4b345601081fe991e87a14c657c5f87f6f0cfb"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 262,
+      "sha256": "9ac4330ff03aa857ed3a78930a17d476f639b3cfb306da976effa0789aa0064f"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 130,
+      "imports": 0,
+      "parsed_files": 130,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 130,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 130,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 130,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "length": 164281,
+      "sha256": "3a54a5e28d5e86d2f8c60b2872cf87ff63fa5b5c0d46fbc161d0501e04fa7e9e"
+     }
+    },
+    {
+     "value": {
+      "length": 164281,
+      "sha256": "3a54a5e28d5e86d2f8c60b2872cf87ff63fa5b5c0d46fbc161d0501e04fa7e9e"
+     }
+    },
+    {
+     "value": {
+      "length": 11488,
+      "sha256": "f94de4ea0e0bd93a73562f5dccc2a06c2320758426dab25ba3ce34e04b752dae"
+     }
+    },
+    {
+     "value": {
+      "length": 32877,
+      "sha256": "f6e483ed98cf96f7d837a81adcc66185697a07885474dfe1a7bf55fdd487c85b"
+     }
+    },
+    {
+     "value": [
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:49c799d9102f54e2a423d6af:871bc978edfb2d6c4fc172433b4db41318fcc9ade99e2343088e7258f474f997:0",
+       "kind": "function_definition",
+       "line": 1,
+       "name": "common_1",
+       "path": "m001.py",
+       "repository": "owner/repo",
+       "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "a2947b2c89bad80ac562126e24ac8ddf0a1f46f7cd0968b7a74ecb715e7f3143",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "m001.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "m001.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines common 1.",
+        "summaryKey": "baa274d514676eb702ba2092dbef23bbb01490750f687dfaa59b8845775b7f80",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "43cf4e56f564b7d541e6b0696b51580fe5b74f48eceb825ffd5a0212326676fb",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:49c799d9102f54e2a423d6af:5cddd1a1ca0070f6f0bb97bff5ecec1f980e96e34c5dd6763e44f89e0569b8fa:0",
+       "kind": "function_definition",
+       "line": 1,
+       "name": "common_10",
+       "path": "m010.py",
+       "repository": "owner/repo",
+       "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "b0ae1151ee33d6756959251d9791bff316ed72fb4ace676773f42d30559f69ae",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "m010.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "m010.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines common 10.",
+        "summaryKey": "977e4fb88ea76dd4dc51bd5a707592c52ba423997765e7d65a0244636ed53bbc",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "bfa39cba4c4e81ffabb17db7f35b70753344f84b23ad757802bf871ceeff43f2",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:49c799d9102f54e2a423d6af:697a1e8193db71edba48cf486cc718b20241e27d232739c8c6e8cb95cff3bc25:0",
+       "kind": "function_definition",
+       "line": 1,
+       "name": "common_11",
+       "path": "m011.py",
+       "repository": "owner/repo",
+       "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "f84264698ebbebcd5c1d2130d89528a5865af0f8f343e951e83a4085f13438ab",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "m011.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "m011.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines common 11.",
+        "summaryKey": "f7c4a1a4cdbffef3640069c8bf061387e6178a9a2825244b02094ef4980f8fef",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "65fc3ee268835485aab6dd442536611f04d7fea8a03262a3599146e55e8add1b",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "f:49c799d9102f54e2a423d6af:5cddd1a1ca0070f6f0bb97bff5ecec1f980e96e34c5dd6763e44f89e0569b8fa",
+       "kind": "file",
+       "line": null,
+       "name": "m010.py",
+       "path": "m010.py",
+       "repository": "owner/repo",
+       "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "b0ae1151ee33d6756959251d9791bff316ed72fb4ace676773f42d30559f69ae",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "m010.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "m010.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines common 10.",
+        "summaryKey": "977e4fb88ea76dd4dc51bd5a707592c52ba423997765e7d65a0244636ed53bbc",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "bfa39cba4c4e81ffabb17db7f35b70753344f84b23ad757802bf871ceeff43f2",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "f:49c799d9102f54e2a423d6af:697a1e8193db71edba48cf486cc718b20241e27d232739c8c6e8cb95cff3bc25",
+       "kind": "file",
+       "line": null,
+       "name": "m011.py",
+       "path": "m011.py",
+       "repository": "owner/repo",
+       "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "f84264698ebbebcd5c1d2130d89528a5865af0f8f343e951e83a4085f13438ab",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "m011.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "m011.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines common 11.",
+        "summaryKey": "f7c4a1a4cdbffef3640069c8bf061387e6178a9a2825244b02094ef4980f8fef",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "65fc3ee268835485aab6dd442536611f04d7fea8a03262a3599146e55e8add1b",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "f:49c799d9102f54e2a423d6af:684d973756c4cad73dfbf87a5ea394956737b31904b583fe7ec221a196ce6920",
+       "kind": "file",
+       "line": null,
+       "name": "m012.py",
+       "path": "m012.py",
+       "repository": "owner/repo",
+       "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "fb4f79d7751c8851a516c692b4b9f14ad90297cf0cfb3a272370bb2026af87e2",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "m012.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "m012.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines common 12.",
+        "summaryKey": "5ab20f07ac9764f0c7058678c7dc1082f55d29b85622632b44864f244c143b83",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "f52b5e7122dec7a520f1c2a0e011c99161ef503f128e890b32417a4966f4cab3",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "no-snapshot-at-all": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for owner/repo"
+    },
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for owner/repo"
+    },
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for owner/repo"
+    },
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for owner/repo"
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "partial-flags": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 1,
+      "sha256": "f05b69af152cf1b2b873d9e5969893b858c29a7f6c1e6cb972e24354c0d1b24b"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 2,
+      "sha256": "4c53d77408c96995ff94cb83ec62ddf5182e51505b983dfe700a723b2bacc922"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 4,
+      "sha256": "ad325606ea174777db96853acbd89d021f2849e5c252f23fa83497b5a453f4c1"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 2,
+      "sha256": "8860786eddf91f6ccacb663a5d5420cae0907873ec490de228bc9492a54aad12"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 4,
+      "sha256": "d25e4df9716137c04c2b2741c26dcef98bf5992be4218cd6a9f0a010f0471112"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 1,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-4fa449195f246708c5b04e7d53c17523b05b476139df5e738b6df47e6d408d74",
+      "skipped_files": 2,
+      "snapshot": 1,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 1,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 1,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "edges": [],
+      "files": [
+       {
+        "facts": {
+         "imports": [],
+         "lines": 1,
+         "nonblank_lines": 1,
+         "sha256": "d786609320d0aa20bdc625526671f31aefefc4e82bde8c882989ebcc14620524",
+         "structure": {
+          "confirmed_facts_partial": false,
+          "declarations": [
+           {
+            "exported": true,
+            "kind": "function",
+            "line": 1,
+            "name": "a",
+            "parameters": [],
+            "returns_constructed": []
+           }
+          ],
+          "effects": [],
+          "limitations": [
+           "Static lexical binding only; reflection, monkey-patching, receiver dispatch and dynamic imports are unresolved.",
+           "Typed parameters and construction are composition candidates, not proof of behavioural substitution.",
+           "Rust calls, macros and effects are not extracted."
+          ],
+          "partial": false,
+          "relation_occurrences": 0,
+          "relations": [],
+          "supported": true,
+          "unresolved_call_occurrences": 0,
+          "unresolved_samples_partial": false,
+          "version": "structure-1"
+         },
+         "test_assertions": 0,
+         "test_focused": 0,
+         "test_skips": 0,
+         "vacuous_assertions": [],
+         "version": 2
+        },
+        "id": "f:7c3b73ba37e2fe7084a80626:6acd2a81e5ec9bcf1ac1b69b46b94c3fbbcbdb17452b5f42cb103f8d4fd52702",
+        "metadata": {
+         "language": "python",
+         "sha256": "d786609320d0aa20bdc625526671f31aefefc4e82bde8c882989ebcc14620524",
+         "waypoint": {
+          "contentHash": "d786609320d0aa20bdc625526671f31aefefc4e82bde8c882989ebcc14620524",
+          "evidence": [
+           {
+            "line": 1,
+            "method": "indexed-definition",
+            "path": "a.py",
+            "revision": "working-tree-tree-4fa449195f246708c5b04e7d53c17523b05b476139df5e738b6df47e6d408d74"
+           }
+          ],
+          "kind": "file",
+          "origin": "inferred",
+          "path": "a.py",
+          "purpose": "code",
+          "schemaVersion": "1",
+          "summary": "Defines a.",
+          "summaryKey": "37f4ae490b3419657f0271b35aac3e337d858da1cd17fd57dc5ecb1ab6627ed2",
+          "title": "Source definitions",
+          "validation": {
+           "checks": [
+            {
+             "detail": "This description is tied to a captured source analysis.",
+             "name": "Captured source",
+             "status": "supported"
+            },
+            {
+             "detail": "Parser evidence was not recorded for this source.",
+             "name": "Parser evidence",
+             "status": "inconclusive"
+            },
+            {
+             "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+             "name": "Dependency context",
+             "status": "supported"
+            },
+            {
+             "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+             "name": "Execution coverage",
+             "status": "inconclusive"
+            }
+           ],
+           "fingerprint": "e4db4066b4685c82e0b45d040b8c816caf2f17b17b8e21bc5e1e8262f8fc80b6",
+           "kind": "static-index",
+           "ruleVersion": "waypoint-checks-v1",
+           "status": "inconclusive"
+          }
+         }
+        },
+        "path": "a.py"
+       }
+      ],
+      "partial": true,
+      "repository": "owner/repo",
+      "revision": "working-tree-tree-4fa449195f246708c5b04e7d53c17523b05b476139df5e738b6df47e6d408d74",
+      "snapshot": 1
+     }
+    },
+    {
+     "value": {
+      "edges": [],
+      "nodes": [
+       {
+        "id": "f:7c3b73ba37e2fe7084a80626:6acd2a81e5ec9bcf1ac1b69b46b94c3fbbcbdb17452b5f42cb103f8d4fd52702",
+        "kind": "file",
+        "line": null,
+        "metadata": "{\"language\":\"python\",\"sha256\":\"d786609320d0aa20bdc625526671f31aefefc4e82bde8c882989ebcc14620524\",\"waypoint\":{\"contentHash\":\"d786609320d0aa20bdc625526671f31aefefc4e82bde8c882989ebcc14620524\",\"evidence\":[{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"a.py\",\"revision\":\"working-tree-tree-4fa449195f246708c5b04e7d53c17523b05b476139df5e738b6df47e6d408d74\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"a.py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Defines a.\",\"summaryKey\":\"37f4ae490b3419657f0271b35aac3e337d858da1cd17fd57dc5ecb1ab6627ed2\",\"title\":\"Source definitions\",\"validation\":{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"e4db4066b4685c82e0b45d040b8c816caf2f17b17b8e21bc5e1e8262f8fc80b6\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}}",
+        "name": "a.py",
+        "path": "a.py"
+       },
+       {
+        "id": "r:7c3b73ba37e2fe7084a80626",
+        "kind": "repository",
+        "line": null,
+        "metadata": "{\"analysis_stats\":{\"parsed_files\":1,\"reused_files\":0},\"analyzer\":{\"version\":\"{\\\"format\\\": 15, \\\"language-pack\\\": \\\"oracle\\\", \\\"tree-sitter\\\": \\\"oracle\\\", \\\"waypoints\\\": \\\"waypoint-v2\\\"}\"},\"waypoint_stats\":{\"summariesComputed\":1,\"summariesReused\":0,\"validationsComputed\":1,\"validationsReused\":0,\"areasComputed\":1,\"areasReused\":0,\"areaValidationsComputed\":1,\"areaValidationsReused\":0,\"unavailableFiles\":0,\"partial\":false},\"capture\":{\"excluded_files\":2},\"areaWaypoints\":[{\"contentHash\":\"90453c79a05c41caef82319715cc40ec630471ea38958abc907bf55df59d469c\",\"evidence\":[{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"a.py\",\"revision\":\"working-tree-tree-4fa449195f246708c5b04e7d53c17523b05b476139df5e738b6df47e6d408d74\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\".\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Brings together source definitions.\",\"summaryKey\":\"fa34125b6ec436384db9fdba7a31ede9d42e8fccce335b884c0906b1ca68d6d5\",\"title\":\"Repository map\",\"validation\":{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"32b94ed3b1e9cb150d1ea15f8cdd7f9ea3e3058aa5fb20aade1f74305162fd81\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}]}",
+        "name": "owner/repo",
+        "path": "."
+       },
+       {
+        "id": "s:7c3b73ba37e2fe7084a80626:6acd2a81e5ec9bcf1ac1b69b46b94c3fbbcbdb17452b5f42cb103f8d4fd52702:0",
+        "kind": "function_definition",
+        "line": 1,
+        "metadata": "{\"parent\":null}",
+        "name": "a",
+        "path": "a.py"
+       }
+      ],
+      "partial": false,
+      "repository": "owner/repo",
+      "revision": "working-tree-tree-4fa449195f246708c5b04e7d53c17523b05b476139df5e738b6df47e6d408d74",
+      "snapshot": 1
+     }
+    },
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 1,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 1,
+       "areasComputed": 0,
+       "areasReused": 1,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 1,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 1
+      }
+     }
+    },
+    {
+     "value": {
+      "edges": [],
+      "files": [
+       {
+        "facts": {
+         "imports": [],
+         "lines": 1,
+         "nonblank_lines": 1,
+         "sha256": "d786609320d0aa20bdc625526671f31aefefc4e82bde8c882989ebcc14620524",
+         "structure": {
+          "confirmed_facts_partial": false,
+          "declarations": [
+           {
+            "exported": true,
+            "kind": "function",
+            "line": 1,
+            "name": "a",
+            "parameters": [],
+            "returns_constructed": []
+           }
+          ],
+          "effects": [],
+          "limitations": [
+           "Static lexical binding only; reflection, monkey-patching, receiver dispatch and dynamic imports are unresolved.",
+           "Typed parameters and construction are composition candidates, not proof of behavioural substitution.",
+           "Rust calls, macros and effects are not extracted."
+          ],
+          "partial": false,
+          "relation_occurrences": 0,
+          "relations": [],
+          "supported": true,
+          "unresolved_call_occurrences": 0,
+          "unresolved_samples_partial": false,
+          "version": "structure-1"
+         },
+         "test_assertions": 0,
+         "test_focused": 0,
+         "test_skips": 0,
+         "vacuous_assertions": [],
+         "version": 2
+        },
+        "id": "f:62ebc49fa9a5f13008bc3d47:6acd2a81e5ec9bcf1ac1b69b46b94c3fbbcbdb17452b5f42cb103f8d4fd52702",
+        "metadata": {
+         "language": "python",
+         "sha256": "d786609320d0aa20bdc625526671f31aefefc4e82bde8c882989ebcc14620524",
+         "waypoint": {
+          "contentHash": "d786609320d0aa20bdc625526671f31aefefc4e82bde8c882989ebcc14620524",
+          "evidence": [
+           {
+            "line": 1,
+            "method": "indexed-definition",
+            "path": "a.py",
+            "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+           }
+          ],
+          "kind": "file",
+          "origin": "inferred",
+          "path": "a.py",
+          "purpose": "code",
+          "schemaVersion": "1",
+          "summary": "Defines a.",
+          "summaryKey": "37f4ae490b3419657f0271b35aac3e337d858da1cd17fd57dc5ecb1ab6627ed2",
+          "title": "Source definitions",
+          "validation": {
+           "checks": [
+            {
+             "detail": "This description is tied to a captured source analysis.",
+             "name": "Captured source",
+             "status": "supported"
+            },
+            {
+             "detail": "Parser evidence was not recorded for this source.",
+             "name": "Parser evidence",
+             "status": "inconclusive"
+            },
+            {
+             "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+             "name": "Dependency context",
+             "status": "supported"
+            },
+            {
+             "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+             "name": "Execution coverage",
+             "status": "inconclusive"
+            }
+           ],
+           "fingerprint": "e4db4066b4685c82e0b45d040b8c816caf2f17b17b8e21bc5e1e8262f8fc80b6",
+           "kind": "static-index",
+           "ruleVersion": "waypoint-checks-v1",
+           "status": "inconclusive"
+          }
+         }
+        },
+        "path": "a.py"
+       }
+      ],
+      "partial": false,
+      "repository": "owner/repo",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "snapshot": 2
+     }
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "same-revision-twice-answers-with-the-latest-snapshot": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 1,
+      "sha256": "f05b69af152cf1b2b873d9e5969893b858c29a7f6c1e6cb972e24354c0d1b24b"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 2,
+      "sha256": "4c53d77408c96995ff94cb83ec62ddf5182e51505b983dfe700a723b2bacc922"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 4,
+      "sha256": "ad325606ea174777db96853acbd89d021f2849e5c252f23fa83497b5a453f4c1"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 2,
+      "sha256": "d4549990599305f8a1497e21960bcbb754483840831d9c0dca5067f85692c8c2"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 4,
+      "sha256": "d25e4df9716137c04c2b2741c26dcef98bf5992be4218cd6a9f0a010f0471112"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 1,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 1,
+       "areaValidationsReused": 0,
+       "areasComputed": 1,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 1,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 1,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 1,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 1,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 1,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 1,
+       "areasComputed": 0,
+       "areasReused": 1,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 1,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 1
+      }
+     }
+    },
+    {
+     "value": 2
+    },
+    {
+     "value": 2
+    },
+    {
+     "value": null
+    },
+    {
+     "value": 2
+    }
+   ]
+  },
+  "wide-repository-overview-is-bounded": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 140,
+      "sha256": "e7e44e25fa6f27ada7262e74c061ea151a62f7f8db6f5f45fda1eef2868dcb4c"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 140,
+      "sha256": "ec8aa36f634c2646207fb232cf7677502ebe261ba517b8fbd8acc7bdc8bebcdb"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 281,
+      "sha256": "559c4063a9e1207454e368d3290b3c32484d4de799439e3ee97452386ad83ab9"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 1,
+      "sha256": "8efa44f2020665eecd033ec4e0b61aef1709f27312cd83d0e7ed417efdae8f45"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 562,
+      "sha256": "6b57c5429a27218b6d18cbbe7873eb0529eca8ea0aa6d541cdd1cd43ba8dcb26"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "0": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 140,
+       "sha256": "e7e44e25fa6f27ada7262e74c061ea151a62f7f8db6f5f45fda1eef2868dcb4c"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 140,
+       "sha256": "ec8aa36f634c2646207fb232cf7677502ebe261ba517b8fbd8acc7bdc8bebcdb"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 281,
+       "sha256": "559c4063a9e1207454e368d3290b3c32484d4de799439e3ee97452386ad83ab9"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 1,
+       "sha256": "8efa44f2020665eecd033ec4e0b61aef1709f27312cd83d0e7ed417efdae8f45"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 562,
+       "sha256": "6b57c5429a27218b6d18cbbe7873eb0529eca8ea0aa6d541cdd1cd43ba8dcb26"
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": {
+      "files": 140,
+      "imports": 0,
+      "parsed_files": 140,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 140,
+      "waypoints": {
+       "areaValidationsComputed": 141,
+       "areaValidationsReused": 0,
+       "areasComputed": 141,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 140,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 140,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "analysis_stats": {
+       "parsed_files": 140,
+       "reused_files": 0
+      },
+      "analyzer": {
+       "version": "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}"
+      },
+      "counts": {
+       "file": 140,
+       "function_definition": 140,
+       "repository": 1
+      },
+      "indexed_at": "<timestamp>",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "snapshot": 1,
+      "storage_summary": {
+       "manifest_entries": 140,
+       "stored_symbols": 140,
+       "unique_analyses": 140,
+       "unique_source_bytes": 12300
+      },
+      "waypoint_stats": {
+       "areaValidationsComputed": 141,
+       "areaValidationsReused": 0,
+       "areasComputed": 141,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 140,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 140,
+       "validationsReused": 0
+      },
+      "waypoints": [
+       {
+        "contentHash": "e268902ccb58210372bd124104b69f1f0659b0e13b1bdc30969d57561b1c1d35",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area000/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         },
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area001/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         },
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area002/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         },
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area003/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         },
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area004/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         },
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area005/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         },
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area006/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         },
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area007/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": ".",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions.",
+        "summaryKey": "2304a39ef8fc52aacf754cab917a92dbd1025821a9cc54a62c1d90283690e94e",
+        "title": "Repository map",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "174d0d15afcef2a1289321e27d420395970d09ba5cdc27837ef4255f3553e410",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       },
+       {
+        "contentHash": "a6f7f4d6dcef90eb5b15920ac7a315abdb19442e9f6b591f69e1e17d39bb3c05",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area000/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "area000",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions.",
+        "summaryKey": "83b3841074e55c4ee0f890bd1d799afdd977260a30e63efe367306c68b220abb",
+        "title": "Area000",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "3e9ccbaa64fdac28cc8bfc5ffe56429d7e1ed1944be83e7d5b093d09d7c8f716",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       },
+       {
+        "contentHash": "90fadadef8aa3f8cd665b4a8a38ca0f9af38ddfa47b3add28fa70fc654b415f9",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area001/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "area001",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions.",
+        "summaryKey": "dea69fc52f0a7865f04f03c5ff0dc2d456358a4709668d2ef86b2b2ef0f490c6",
+        "title": "Area001",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "13ea0c64b3e55e2cd7f434b8d4fe9447ddf9d7e5c52a57dc964b773ea1e1df2e",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       },
+       {
+        "contentHash": "02bd62fb9ec24a99be7c95632e93bf1380ab6daf602b02f9ef84c63978884509",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area002/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "area002",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions.",
+        "summaryKey": "9a7f186dce346505da2a9058436a8868ab46d10d61c90fad71d7cac7f8b12f76",
+        "title": "Area002",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "428b991a3638dc846efeb0286ed413706f56515eb3750577969d367d8434015e",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       },
+       {
+        "contentHash": "9ed18fd8f92467544ce6dce70977b43cea639e599fa23ddceb52d82fd9b25d26",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area003/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "area003",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions.",
+        "summaryKey": "ea695df450da570c158c84a272f4d9597915c40201ff42609b7ce596b3cf8a67",
+        "title": "Area003",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d0f277c52cb7638021d512e2a3d914038e8844a86f21c9a4d5b2aafe717ffe2f",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       },
+       {
+        "contentHash": "3aed2d32e55de976188aeb4eaafa8115f8b4dafe87556984ac4313f1951ae4ba",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area004/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "area004",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions.",
+        "summaryKey": "51a18aa8fa4082c8958ae1c366afe8d8b96d5ac98483848c373bd660a725e69e",
+        "title": "Area004",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "c1ae51ff921d4da363647cee1ea0200514eacaa8e409d873c9645b7c0598d006",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       },
+       {
+        "contentHash": "5b6a6f01a7accb3988047d646bda4bcf064fe718269db401784f9c76ab65cee1",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area005/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "area005",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions.",
+        "summaryKey": "75a0d1c250a054e082b4cad9081b5f42a5c25779427f8b46f9e865105b26e9db",
+        "title": "Area005",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "75fc2da7475fbaeb69b27dca022b1f1ccae9f9395f56d490d5b6a73defbe514b",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      ],
+      "waypoints_partial": true,
+      "workspace": {
+       "branch": "main",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+       "view": "branch",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+     }
+    },
+    {
+     "value": [
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:49c799d9102f54e2a423d6af:85b9589cf994f7b4d0a3c2f5dedfb160b0e57fab582905a6af772bebfdbab197:0",
+       "kind": "function_definition",
+       "line": 4,
+       "name": "run_139",
+       "path": "area139/mod.py",
+       "repository": "owner/repo",
+       "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "6fb414715834c61c95e93474b0dba4cd4f19feb0589dd91bf68dd400effeaf58",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "area139/mod.py",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "area139/mod.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Area 139 handles request number 139 for the service.",
+        "summaryKey": "98da91555a4bb391f011277fd9aa861bdda742e3b4507c40a5f0d334e51a40cd",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "b07a9ee36b0c39e1b816fd6acd6ce56ef850dde1e1f1917354f7921a7d45ad38",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": {
+      "length": 33681,
+      "sha256": "cf9bc04249652e63216efaddf285a4d85ad5533850d4a9ea7819206986cc9769"
+     }
+    }
+   ]
+  }
+ },
+ "schemas": {
+  "3c8ab78ffefcf6d9": [
+   [
+    "index",
+    "analysis_object",
+    "analyses",
+    "CREATE INDEX analysis_object ON analyses(git_oid,language,version)"
+   ],
+   [
+    "index",
+    "idx_edges_source",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_source ON legacy_edges(snapshot_id,source)"
+   ],
+   [
+    "index",
+    "idx_edges_target",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_target ON legacy_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "idx_nodes_lookup",
+    "legacy_nodes",
+    "CREATE INDEX idx_nodes_lookup ON legacy_nodes(snapshot_id,name,kind)"
+   ],
+   [
+    "index",
+    "manifest_analysis",
+    "snapshot_files",
+    "CREATE INDEX manifest_analysis ON snapshot_files(analysis_id)"
+   ],
+   [
+    "index",
+    "resolved_inbound",
+    "resolved_edges",
+    "CREATE INDEX resolved_inbound ON resolved_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "snapshot_view",
+    "snapshots",
+    "CREATE INDEX snapshot_view ON snapshots(repo,view_key,id DESC)"
+   ],
+   [
+    "index",
+    "waypoint_summary_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_summary_bindings ON snapshot_waypoints(summary_key)"
+   ],
+   [
+    "index",
+    "waypoint_validation_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_validation_bindings ON snapshot_waypoints(validation_key)"
+   ],
+   [
+    "table",
+    "analyses",
+    "analyses",
+    "CREATE TABLE analyses(\n        id TEXT PRIMARY KEY,content_hash TEXT NOT NULL,git_oid TEXT NOT NULL,\n        language TEXT NOT NULL,version TEXT NOT NULL,size_bytes INTEGER NOT NULL,\n        symbols TEXT NOT NULL CHECK(json_valid(symbols)),facts TEXT NOT NULL CHECK(json_valid(facts)))"
+   ],
+   [
+    "table",
+    "legacy_edges",
+    "legacy_edges",
+    "CREATE TABLE legacy_edges(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "legacy_nodes",
+    "legacy_nodes",
+    "CREATE TABLE legacy_nodes(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}')"
+   ],
+   [
+    "table",
+    "resolved_edges",
+    "resolved_edges",
+    "CREATE TABLE resolved_edges(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,\n        PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "snapshot_files",
+    "snapshot_files",
+    "CREATE TABLE snapshot_files(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,file_id TEXT NOT NULL,name TEXT NOT NULL,\n        analysis_id TEXT NOT NULL REFERENCES analyses(id),PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshot_waypoints",
+    "snapshot_waypoints",
+    "CREATE TABLE snapshot_waypoints(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,kind TEXT NOT NULL CHECK(kind IN ('file','area')),\n        summary_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        validation_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshots",
+    "snapshots",
+    "CREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP, metadata TEXT NOT NULL DEFAULT '{}', node_prefix TEXT, view_key TEXT NOT NULL DEFAULT 'default')"
+   ],
+   [
+    "table",
+    "waypoint_cache",
+    "waypoint_cache",
+    "CREATE TABLE waypoint_cache(\n        id TEXT PRIMARY KEY,kind TEXT NOT NULL CHECK(kind IN ('file','area','validation')),\n        version TEXT NOT NULL,payload TEXT NOT NULL CHECK(json_valid(payload)),\n        payload_hash TEXT NOT NULL)"
+   ],
+   [
+    "trigger",
+    "staging_edge_insert",
+    "edges",
+    "CREATE TRIGGER staging_edge_insert INSTEAD OF INSERT ON edges\n        BEGIN INSERT INTO resolved_edges(snapshot_id,source,target,kind,evidence)\n        VALUES (new.snapshot_id,new.source,new.target,new.kind,new.evidence); END"
+   ],
+   [
+    "view",
+    "edges",
+    "edges",
+    "CREATE VIEW edges AS\n SELECT snapshot_id,source,target,kind,evidence FROM legacy_edges\n UNION ALL SELECT snapshot_id,source,target,kind,evidence FROM resolved_edges\n UNION ALL\n SELECT f.snapshot_id,'r:'||s.node_prefix,'f:'||s.node_prefix||':'||f.file_id,'CONTAINS',f.path\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n UNION ALL\n SELECT f.snapshot_id,'f:'||s.node_prefix||':'||f.file_id,\n 's:'||s.node_prefix||':'||f.file_id||':'||j.key,'DEFINES',\n f.path||':'||json_extract(j.value,'$[2]')\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ],
+   [
+    "view",
+    "nodes",
+    "nodes",
+    "CREATE VIEW nodes AS\n SELECT id,snapshot_id,kind,name,path,line,metadata FROM legacy_nodes\n UNION ALL\n SELECT 'r:'||node_prefix,id,'repository',repo,'.',NULL,\n json_set(metadata,'$.areaWaypoints',json((\n   SELECT json_group_array(json(waypoint)) FROM (\n     SELECT json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))) AS waypoint\n     FROM snapshot_waypoints sw JOIN waypoint_cache wc ON wc.id=sw.summary_key\n     JOIN waypoint_cache vc ON vc.id=sw.validation_key\n     WHERE sw.snapshot_id=s.id AND sw.kind='area' ORDER BY sw.path\n   ))))\n FROM snapshots s WHERE node_prefix IS NOT NULL\n UNION ALL\n SELECT 'f:'||s.node_prefix||':'||f.file_id,f.snapshot_id,'file',f.name,f.path,NULL,\n CASE WHEN sw.path IS NULL THEN json_object('language',a.language,'sha256',a.content_hash)\n ELSE json_object('language',a.language,'sha256',a.content_hash,'waypoint',json(json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))))) END\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id JOIN analyses a ON a.id=f.analysis_id\n LEFT JOIN snapshot_waypoints sw ON sw.snapshot_id=f.snapshot_id AND sw.path=f.path AND sw.kind='file'\n LEFT JOIN waypoint_cache wc ON wc.id=sw.summary_key\n LEFT JOIN waypoint_cache vc ON vc.id=sw.validation_key\n UNION ALL\n SELECT 's:'||s.node_prefix||':'||f.file_id||':'||j.key,f.snapshot_id,\n json_extract(j.value,'$[0]'),json_extract(j.value,'$[1]'),f.path,json_extract(j.value,'$[2]'),\n json_object('parent',json_extract(j.value,'$[3]'))\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ]
+  ]
+ }
+}

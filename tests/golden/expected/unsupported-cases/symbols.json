@@ -1,0 +1,107 @@
+{
+  "README.md": [],
+  "py/broken.py": [
+    {
+      "kind": "function_definition",
+      "line": 1,
+      "name": "broken",
+      "parent": null
+    }
+  ],
+  "py/dynamic.py": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import importlib",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 2,
+      "name": "from . import ghost",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 3,
+      "name": "from ..outside import nothing",
+      "parent": null
+    },
+    {
+      "kind": "function_definition",
+      "line": 6,
+      "name": "load",
+      "parent": null
+    },
+    {
+      "kind": "class_definition",
+      "line": 10,
+      "name": "Runner",
+      "parent": null
+    },
+    {
+      "kind": "function_definition",
+      "line": 11,
+      "name": "step",
+      "parent": "Runner"
+    },
+    {
+      "kind": "function_definition",
+      "line": 14,
+      "name": "go",
+      "parent": "Runner"
+    },
+    {
+      "kind": "function_definition",
+      "line": 18,
+      "name": "top",
+      "parent": null
+    }
+  ],
+  "web/data.json": [],
+  "web/missing.ts": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import { nowhere } from \"./does-not-exist\";",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 2,
+      "name": "import _ from \"lodash\";",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 3,
+      "name": "import { alias } from \"@/utils/alias\";",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 4,
+      "name": "import data from \"./data.json\";",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 6,
+      "name": "name",
+      "parent": null
+    },
+    {
+      "kind": "arrow_function",
+      "line": 7,
+      "name": "lazy",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 8,
+      "name": "used",
+      "parent": null
+    }
+  ],
+  "web/tsconfig.json": []
+}

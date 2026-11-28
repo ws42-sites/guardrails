@@ -1,0 +1,30 @@
+# The engine is pure: bytes and strings in, values out. Repository code is never
+# executed and nothing here may touch the filesystem, network, processes or the
+# environment (ADR-001, ADR-003 rules). Callers own all I/O.
+disallowed-types = [
+  { path = "std::fs::File", reason = "the engine does no I/O" },
+  { path = "std::fs::OpenOptions", reason = "the engine does no I/O" },
+  { path = "std::net::TcpStream", reason = "the engine does no I/O" },
+  { path = "std::net::TcpListener", reason = "the engine does no I/O" },
+  { path = "std::net::UdpSocket", reason = "the engine does no I/O" },
+  { path = "std::process::Command", reason = "the engine never executes anything" },
+  { path = "std::process::Child", reason = "the engine never executes anything" },
+  { path = "std::env::Args", reason = "the engine reads no environment" },
+  { path = "std::env::Vars", reason = "the engine reads no environment" },
+]
+disallowed-methods = [
+  { path = "std::fs::read", reason = "the engine does no I/O" },
+  { path = "std::fs::read_to_string", reason = "the engine does no I/O" },
+  { path = "std::fs::write", reason = "the engine does no I/O" },
+  { path = "std::fs::read_dir", reason = "the engine does no I/O" },
+  { path = "std::fs::metadata", reason = "the engine does no I/O" },
+  { path = "std::fs::create_dir_all", reason = "the engine does no I/O" },
+  { path = "std::fs::remove_file", reason = "the engine does no I/O" },
+  { path = "std::env::var", reason = "the engine reads no environment" },
+  { path = "std::env::var_os", reason = "the engine reads no environment" },
+  { path = "std::env::vars", reason = "the engine reads no environment" },
+  { path = "std::env::args", reason = "the engine reads no environment" },
+  { path = "std::env::current_dir", reason = "the engine reads no environment" },
+  { path = "std::process::exit", reason = "the engine never ends the process" },
+  { path = "std::net::TcpStream::connect", reason = "the engine does no I/O" },
+]

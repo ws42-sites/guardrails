@@ -1,0 +1,1228 @@
+{
+ "cases": [
+  {
+   "id": "untouched-cache-reads",
+   "description": "Baseline: the indexed cache is served.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "checksum-mismatch",
+   "description": "A payload whose hash no longer matches is refused.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      {
+       "text": "UPDATE waypoint_cache SET payload_hash=? WHERE id=?",
+       "params": [
+        "d121be3103007b41edf96f8262925f8c7d61894afe9a041843b631f69445bc57",
+        {
+         "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "wrong-version",
+   "description": "A cached record from another version is refused.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      {
+       "text": "UPDATE waypoint_cache SET version='waypoint-v1' WHERE id=?",
+       "params": [
+        {
+         "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "wrong-validator-version",
+   "description": "Cached checks from another rule version are refused.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      {
+       "text": "UPDATE waypoint_cache SET version='waypoint-v2' WHERE id=?",
+       "params": [
+        {
+         "sql": "SELECT validation_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "kind-confusion",
+   "description": "A file description stored as an area is refused.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      {
+       "text": "UPDATE waypoint_cache SET kind='area' WHERE id=?",
+       "params": [
+        {
+         "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "check-record-swapped-for-description",
+   "description": "A description in the checks slot is refused.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      {
+       "text": "UPDATE snapshot_waypoints SET validation_key=summary_key WHERE snapshot_id=1 AND path='src/a.py'"
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "payload-not-an-object",
+   "description": "A valid-hash payload that is not an object is a type error.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      {
+       "text": "UPDATE waypoint_cache SET payload=?,payload_hash=? WHERE id=?",
+       "params": [
+        "[1]",
+        {
+         "sha256": "[1]"
+        },
+        {
+         "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "payload-is-a-json-string",
+   "description": "A bare JSON string payload is a type error.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      {
+       "text": "UPDATE waypoint_cache SET payload=?,payload_hash=? WHERE id=?",
+       "params": [
+        "\"text\"",
+        {
+         "sha256": "\"text\""
+        },
+        {
+         "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "binding-without-cache-row",
+   "description": "A manifest entry whose description was deleted is incomplete.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "raw",
+     "script": "DELETE FROM waypoint_cache WHERE id=(SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py');"
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "binding-without-check-row",
+   "description": "A manifest entry whose checks were deleted is incomplete.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "raw",
+     "script": "DELETE FROM waypoint_cache WHERE id=(SELECT validation_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py');"
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-as-string",
+   "description": "Evidence that is a string fails unpacking.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "evidence": "abc"
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-as-empty-string",
+   "description": "An empty evidence string is no evidence.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "evidence": ""
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-as-number",
+   "description": "Evidence that is a number is not iterable.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "evidence": 5
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-as-float",
+   "description": "Evidence that is a float is not iterable.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "evidence": 1.5
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-as-null",
+   "description": "Evidence that is null is not iterable.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "evidence": null
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-as-bool",
+   "description": "Evidence that is a boolean is not iterable.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "evidence": true
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-as-object",
+   "description": "Evidence that is a non-empty object iterates its keys.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "evidence": {
+       "line": 1
+      }
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-as-empty-object",
+   "description": "An empty evidence object is no evidence.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "evidence": {}
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-item-not-a-mapping",
+   "description": "An evidence entry that is not an object fails.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "evidence": [
+       "text"
+      ]
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-item-is-a-list",
+   "description": "A list entry in evidence fails.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "evidence": [
+       [
+        1
+       ]
+      ]
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-item-is-null",
+   "description": "A null entry in evidence fails.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "evidence": [
+       null
+      ]
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-missing",
+   "description": "A description with no evidence key is rebound with none.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {},
+     "remove": [
+      "evidence"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "evidence-empty-list",
+   "description": "An empty evidence list.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "evidence": []
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "unknown-field",
+   "description": "The public contract refuses fields it does not know.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "extra": "value"
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "summary-key-removed",
+   "description": "A description with its key removed is refused by the contract.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {},
+     "remove": [
+      "summaryKey"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "area-payload-tampered",
+   "description": "An area description with a wrong path is refused.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src'"
+     },
+     "set": {
+      "path": "elsewhere"
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "validation-record-tampered",
+   "description": "A checks record with an unknown status is refused by the contract.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "editPayload",
+     "id": {
+      "sql": "SELECT validation_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+     },
+     "set": {
+      "status": "invented"
+     },
+     "remove": []
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  },
+  {
+   "id": "huge-integer-in-payload",
+   "description": "A number past 64 bits; Python keeps it, Rust refuses the record (known difference).",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      {
+       "text": "UPDATE waypoint_cache SET payload=?,payload_hash=? WHERE id=?",
+       "params": [
+        "{\"extra\":100000000000000000000000}",
+        {
+         "sha256": "{\"extra\":100000000000000000000000}"
+        },
+        {
+         "sql": "SELECT summary_key FROM snapshot_waypoints WHERE snapshot_id=1 AND path='src/a.py'"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      1,
+      "src"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "waypoint_records",
+     "args": [
+      2
+     ]
+    }
+   ],
+   "base": "indexed",
+   "noState": true
+  }
+ ]
+}

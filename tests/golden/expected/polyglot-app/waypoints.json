@@ -1,0 +1,2250 @@
+{
+  "areas": [
+    {
+      "contentHash": "8135d3097261eb63414800381e3ad8b6525333043e184bb1b08c479ea1e34cc8",
+      "evidence": [
+        {
+          "method": "content-hash",
+          "path": "README.md",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 4,
+          "method": "indexed-definition",
+          "path": "apps/web/src/entry.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "method": "content-hash",
+          "path": "config/settings.yaml",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "method": "content-hash",
+          "path": "docs/guide.md",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "source-comment",
+          "path": "generated/schema.generated.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "golden_pkg/__init__.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 8,
+          "method": "indexed-definition",
+          "path": "golden_pkg/main.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 12,
+          "method": "indexed-definition",
+          "path": "golden_pkg/main.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": ".",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Brings together source definitions, configuration, generated output.",
+      "summaryKey": "e21c99e51695d9d636c005e3e8d5943d3f9d95e84c8ce77033219c9981d16fb8",
+      "title": "Repository map",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+            "name": "Child index evidence",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    {
+      "contentHash": "3f5f79b3b10e36719bbb3b493e7868d6dbce08452b138ff53f8489d355180194",
+      "evidence": [
+        {
+          "line": 4,
+          "method": "indexed-definition",
+          "path": "apps/web/src/entry.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "apps",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Brings together source definitions.",
+      "summaryKey": "cc80821dec69fde6a44bf1ce09df9bbd26361f3e2c4dd44fe4d89f45d8c065cb",
+      "title": "Apps",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Included child source checks are current; tests were not run.",
+            "name": "Child index evidence",
+            "status": "supported"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    {
+      "contentHash": "99fa62a44bdb3aa7aad457c11e212c46314b6011ae72887ceaa02dea85b24c20",
+      "evidence": [
+        {
+          "line": 4,
+          "method": "indexed-definition",
+          "path": "apps/web/src/entry.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "apps/web",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Brings together source definitions.",
+      "summaryKey": "a2be563ccce4b9321a53489ec8e923bf1cfeb387c0ea65979fa4af17b216ea98",
+      "title": "Web",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Included child source checks are current; tests were not run.",
+            "name": "Child index evidence",
+            "status": "supported"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    {
+      "contentHash": "dd6e04e9c7656a7fc64d054885fab9e758e43d9a78729633ef0ee05c0327a685",
+      "evidence": [
+        {
+          "line": 4,
+          "method": "indexed-definition",
+          "path": "apps/web/src/entry.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "apps/web/src",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Brings together source definitions.",
+      "summaryKey": "e13e050a8326c8beb338777dd28f07ebec67bfc8a783f451d284c2921cfec6e6",
+      "title": "Src",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Included child source checks are current; tests were not run.",
+            "name": "Child index evidence",
+            "status": "supported"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    {
+      "contentHash": "1fe9d9f765bb3716e0d800f530fa17065af86b9667484cc7199b2af72f980bbf",
+      "evidence": [
+        {
+          "method": "content-hash",
+          "path": "config/settings.yaml",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "config",
+      "purpose": "configuration",
+      "schemaVersion": "1",
+      "summary": "Brings together configuration.",
+      "summaryKey": "eed8f2fc2a28423b3a928c0a49d7489ad6d70bb34c7eddb6ff987d41b2ea43b4",
+      "title": "Config",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+            "name": "Child index evidence",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    {
+      "contentHash": "26e1d66d1dcb647bbdc7eec0256a151b9b862f12c543b0019509166b0fcf3951",
+      "evidence": [
+        {
+          "method": "content-hash",
+          "path": "docs/guide.md",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "docs",
+      "purpose": "documentation",
+      "schemaVersion": "1",
+      "summary": "Brings together documentation.",
+      "summaryKey": "14d21a4e18ea369290bb2ebc30c56e3a9a3c175c07cb864159899385575684c1",
+      "title": "Docs",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+            "name": "Child index evidence",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    {
+      "contentHash": "41e15b856299e9484d90d7f57ebd72091d94f546071e18f47762de60a77b9568",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "source-comment",
+          "path": "generated/schema.generated.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "generated",
+      "purpose": "artifacts",
+      "schemaVersion": "1",
+      "summary": "Brings together generated output.",
+      "summaryKey": "b78f3e02edb4fcf5c04e482e2b8102ad44d08b47fe2d3d906c223bc80f995e23",
+      "title": "Generated",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Included child source checks are current; tests were not run.",
+            "name": "Child index evidence",
+            "status": "supported"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    {
+      "contentHash": "8fa2d3b97c0f29d8ea1fa4c2312e6254c7d5e294bd0a290f79c9cbd9e9a999dd",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "golden_pkg/__init__.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 8,
+          "method": "indexed-definition",
+          "path": "golden_pkg/main.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 12,
+          "method": "indexed-definition",
+          "path": "golden_pkg/main.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 17,
+          "method": "indexed-definition",
+          "path": "golden_pkg/main.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "golden_pkg/models.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 2,
+          "method": "indexed-definition",
+          "path": "golden_pkg/models.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 5,
+          "method": "indexed-definition",
+          "path": "golden_pkg/models.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "golden_pkg/util.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "golden_pkg",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Brings together source definitions.",
+      "summaryKey": "99940b66def723ca9d48f5debf17b5e120f0ae60104ed14bb6b7a59c7f1ab96f",
+      "title": "Golden pkg",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+            "name": "Child index evidence",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    {
+      "contentHash": "e30fe1b21c2c8b20eac39429633201cf6957fe2352101617fa25ef54df553053",
+      "evidence": [
+        {
+          "line": 2,
+          "method": "indexed-definition",
+          "path": "js/index.js",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 5,
+          "method": "indexed-definition",
+          "path": "js/index.js",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 9,
+          "method": "indexed-definition",
+          "path": "js/index.js",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "js/lib/format.js",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "js/lib/legacy.cjs",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "js/vendor.min.js",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "js",
+      "purpose": "artifacts",
+      "schemaVersion": "1",
+      "summary": "Brings together generated output, source definitions, user interface.",
+      "summaryKey": "50b3ae385ba4ad0df58f36181664cc82775fabec70a27ea2fc5217b7cf6db8be",
+      "title": "Js",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Included child source checks are current; tests were not run.",
+            "name": "Child index evidence",
+            "status": "supported"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    {
+      "contentHash": "0bfd7d219bf566a8fa8c6114f3fcdfb02b0a3bccee04fe87bef6a7b81ab7989c",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "js/lib/format.js",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "js/lib/legacy.cjs",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "js/lib",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Brings together source definitions.",
+      "summaryKey": "fe72d5ff99e381f2cf85795a1250dd5cb73fb99ea1323118b206b6e49aad8dcc",
+      "title": "Lib",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Included child source checks are current; tests were not run.",
+            "name": "Child index evidence",
+            "status": "supported"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    {
+      "contentHash": "e59c15294b4523579e1e77dab6bf67781e6ef544c5fd053c674fee01ceffdf44",
+      "evidence": [
+        {
+          "method": "content-hash",
+          "path": "packages/core/package.json",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "packages/core/src/index.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "packages/core/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "packages",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Brings together source definitions.",
+      "summaryKey": "6bd075470cc546795a9df4f59dbd6b0cbaf6537b5c3ca1bffcb53daeddbd6ed2",
+      "title": "Packages",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+            "name": "Child index evidence",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    {
+      "contentHash": "608e0d03ff653d5934772f5a91e8134099a66555ec2e1f9861aecce5b17295e2",
+      "evidence": [
+        {
+          "method": "content-hash",
+          "path": "packages/core/package.json",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "packages/core/src/index.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "packages/core/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "packages/core",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Brings together source definitions, configuration.",
+      "summaryKey": "4b64d485992b4b0e3245623eb8261f1f5f39eed57db31442c15b33fb76bb5680",
+      "title": "Core",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+            "name": "Child index evidence",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    {
+      "contentHash": "342878a240009e0534bad73045fa68342398bb4c2133d884e173ec610ab35998",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "packages/core/src/index.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "packages/core/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "packages/core/src",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Brings together source definitions.",
+      "summaryKey": "58f83a7124287c1939c250aa0093d83dd7b6d5fbaab4bb07c5d17a8d545683e3",
+      "title": "Src",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Included child source checks are current; tests were not run.",
+            "name": "Child index evidence",
+            "status": "supported"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    {
+      "contentHash": "841addea6f52c7331c82e62a1d5b77810993940bb023da03ba039394d2516fda",
+      "evidence": [
+        {
+          "line": 4,
+          "method": "test-definition",
+          "path": "tests/test_main.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "tests",
+      "purpose": "tests",
+      "schemaVersion": "1",
+      "summary": "Brings together tests.",
+      "summaryKey": "62fde7793f82be65faa098a493de7b9bedd17064a61d9c4e0907a71403d5812f",
+      "title": "Tests",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+            "name": "Child index evidence",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    {
+      "contentHash": "f0164c647a87cdd2f0e96c898451e7d4329aef44ceb97630d8ab7768482e905e",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "ts/src/__snapshots__/service.snap.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 3,
+          "method": "indexed-definition",
+          "path": "ts/src/service.test.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 5,
+          "method": "indexed-definition",
+          "path": "ts/src/service.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 9,
+          "method": "indexed-definition",
+          "path": "ts/src/service.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "ts/src/service.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "ts/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 5,
+          "method": "indexed-definition",
+          "path": "ts/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 7,
+          "method": "indexed-definition",
+          "path": "ts/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "ts",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Brings together source definitions.",
+      "summaryKey": "7ad69e77ae96d4d0d615a518256db703bab2da7c6e0370ff615d9f70cc7b5539",
+      "title": "Ts",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Included child source checks are current; tests were not run.",
+            "name": "Child index evidence",
+            "status": "supported"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    {
+      "contentHash": "92c5b83c739c27e9eed53df82dc551942d2b29b7f08e570eccd2dfef21984039",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "ts/src/__snapshots__/service.snap.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 3,
+          "method": "indexed-definition",
+          "path": "ts/src/service.test.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 5,
+          "method": "indexed-definition",
+          "path": "ts/src/service.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 9,
+          "method": "indexed-definition",
+          "path": "ts/src/service.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "ts/src/service.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "ts/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 5,
+          "method": "indexed-definition",
+          "path": "ts/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 7,
+          "method": "indexed-definition",
+          "path": "ts/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "ts/src",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Brings together source definitions, generated output, tests.",
+      "summaryKey": "4e57c21375323052897c8bd057e31f24c77262bd7948f6483a1312aa35f411f5",
+      "title": "Src",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Included child source checks are current; tests were not run.",
+            "name": "Child index evidence",
+            "status": "supported"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    {
+      "contentHash": "5ad242597269586d418c4822fba1c537438fecb7184dd9a3ff267e3373a96cb7",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "ts/src/__snapshots__/service.snap.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "ts/src/__snapshots__",
+      "purpose": "artifacts",
+      "schemaVersion": "1",
+      "summary": "Brings together generated output.",
+      "summaryKey": "bf307d812df9722273f45023fff38bf11a68bd627f7732d9de624e927ae84c40",
+      "title": "Snapshots",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Included child source checks are current; tests were not run.",
+            "name": "Child index evidence",
+            "status": "supported"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    {
+      "contentHash": "f9d2f48b6590d597ecf918afc729ffcf748de3d2feda75d0848509a490bde087",
+      "evidence": [
+        {
+          "line": 3,
+          "method": "indexed-definition",
+          "path": "ts/src/ui/Button.tsx",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "method": "content-hash",
+          "path": "ts/src/ui/index.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "area",
+      "origin": "inferred",
+      "path": "ts/src/ui",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Brings together source definitions.",
+      "summaryKey": "cfa867439cddd72ea6ea5af62286f75252be138368043d6966b3c3bed37ab485",
+      "title": "Ui",
+      "validation": {
+        "checks": [
+          {
+            "detail": "Included child source checks are current; tests were not run.",
+            "name": "Child index evidence",
+            "status": "supported"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    }
+  ],
+  "files": {
+    "README.md": {
+      "contentHash": "48ddaa83889976b0536df7c8d879eb90a8f0fe210fb88ed8677872dcbcb1c98e",
+      "evidence": [
+        {
+          "method": "content-hash",
+          "path": "README.md",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "README.md",
+      "purpose": "documentation",
+      "schemaVersion": "1",
+      "summary": "No readable purpose description was found in the captured source.",
+      "summaryKey": "053ce6b664bef433da3da82d530084d1228b7b7311666b704f521b93dc6d7c18",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "Parser evidence was not recorded for this source.",
+            "name": "Parser evidence",
+            "status": "inconclusive"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    "apps/web/src/entry.ts": {
+      "contentHash": "b41047bf4ea8fdcc6529bd9b37f94a4c83bb7b90313ebfba93d0024b6ba278d7",
+      "evidence": [
+        {
+          "line": 4,
+          "method": "indexed-definition",
+          "path": "apps/web/src/entry.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "apps/web/src/entry.ts",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Defines entry.",
+      "summaryKey": "5f0a256046593778f0de5d67ee7e478aea08e9d78cc1caea5168c9be43b4fed1",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 2 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "config/settings.yaml": {
+      "contentHash": "cc34d37e258e37616784abfc4dbba9d582ded770902e809d226a606e815f3c19",
+      "evidence": [
+        {
+          "method": "content-hash",
+          "path": "config/settings.yaml",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "config/settings.yaml",
+      "purpose": "configuration",
+      "schemaVersion": "1",
+      "summary": "No readable purpose description was found in the captured source.",
+      "summaryKey": "a30bfb566006f965da558e16325c1887f61c4554d138331a6dcb75c4c324a7ab",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "Parser evidence was not recorded for this source.",
+            "name": "Parser evidence",
+            "status": "inconclusive"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    "docs/guide.md": {
+      "contentHash": "0fc28b5e8674418b86a1685a40c86ab15e44240d6555a6d398e8be078b5aec06",
+      "evidence": [
+        {
+          "method": "content-hash",
+          "path": "docs/guide.md",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "docs/guide.md",
+      "purpose": "documentation",
+      "schemaVersion": "1",
+      "summary": "No readable purpose description was found in the captured source.",
+      "summaryKey": "123abfd2ad1f17bbceb95e0d223be8ae020d3dcf6777c4c3aae8b3f0f9089646",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "Parser evidence was not recorded for this source.",
+            "name": "Parser evidence",
+            "status": "inconclusive"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    "generated/schema.generated.ts": {
+      "contentHash": "bfbbc514dae053978216cbec299d5498ff278f31d0b5b32eef38ed186d977ae1",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "source-comment",
+          "path": "generated/schema.generated.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "generated/schema.generated.ts",
+      "purpose": "artifacts",
+      "schemaVersion": "1",
+      "summary": "Generated file: category should be artifact, not code.",
+      "summaryKey": "13718c8b48872a73ed281715cff3b85f9d05aceabe05943bd750cfbff9eb1945",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "golden_pkg/__init__.py": {
+      "contentHash": "ee88479e137e7c48d0643ac41a2f9b17f77c46b3657851dbdd86874fe18ed896",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "source-docstring",
+          "path": "golden_pkg/__init__.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "golden_pkg/__init__.py",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Package marker so absolute imports resolve to a package directory.",
+      "summaryKey": "1f9a001b2e5c507dd8d149ed8b11f044f2944ee3afbf221061d3c698880d86f8",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "Parser evidence was not recorded for this source.",
+            "name": "Parser evidence",
+            "status": "inconclusive"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    "golden_pkg/main.py": {
+      "contentHash": "f73315ebe12bed854658f177bede06b07c05cec46b7cf351bc769ec06482dbc4",
+      "evidence": [
+        {
+          "line": 8,
+          "method": "indexed-definition",
+          "path": "golden_pkg/main.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 12,
+          "method": "indexed-definition",
+          "path": "golden_pkg/main.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 17,
+          "method": "indexed-definition",
+          "path": "golden_pkg/main.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "golden_pkg/main.py",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Defines normalise, run, serve.",
+      "summaryKey": "64f36a4e07878f4f72ab2e631bea095d9ac4e6ac077048fd23c22a43cc6df5e6",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "Parser evidence was not recorded for this source.",
+            "name": "Parser evidence",
+            "status": "inconclusive"
+          },
+          {
+            "detail": "Pinned to 2 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    "golden_pkg/models.py": {
+      "contentHash": "e6f3e4bdbcea8132cb436f34cdd2188f73711178d0f926dffc7e22bbedafa94b",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "golden_pkg/models.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 2,
+          "method": "indexed-definition",
+          "path": "golden_pkg/models.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 5,
+          "method": "indexed-definition",
+          "path": "golden_pkg/models.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "golden_pkg/models.py",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Defines Account, init, label.",
+      "summaryKey": "79df65318672eae2782da954f048d23e396613d5ebf214509f54a3a954214996",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "Parser evidence was not recorded for this source.",
+            "name": "Parser evidence",
+            "status": "inconclusive"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    "golden_pkg/util.py": {
+      "contentHash": "22a35cfe56d28f2740af8c2170afd32c1b4905cd01544ee2e46a3b535b63711a",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "golden_pkg/util.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 5,
+          "method": "indexed-definition",
+          "path": "golden_pkg/util.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "golden_pkg/util.py",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Defines helper, unused helper.",
+      "summaryKey": "9f313e4b9d5a2ac688938c4dc59320c9cc339bd7075c57a5212d596a11d5ea67",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "Parser evidence was not recorded for this source.",
+            "name": "Parser evidence",
+            "status": "inconclusive"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    "js/index.js": {
+      "contentHash": "0a976076157581d9cc341f2da83735782bdfe9648d3244d6d0055ad31eaa6669",
+      "evidence": [
+        {
+          "line": 2,
+          "method": "indexed-definition",
+          "path": "js/index.js",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 5,
+          "method": "indexed-definition",
+          "path": "js/index.js",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 9,
+          "method": "indexed-definition",
+          "path": "js/index.js",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "js/index.js",
+      "purpose": "ui",
+      "schemaVersion": "1",
+      "summary": "Defines legacy, render, double.",
+      "summaryKey": "9714db8087cee28c66efa383f4d6f07bf828b81c52d6913d56cccec1dea66b9e",
+      "title": "User interface",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 2 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "js/lib/format.js": {
+      "contentHash": "a50c46e8443f7d81553c86cd946211f914e6db2ec3c6614fb9c734b7d1e22be2",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "js/lib/format.js",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "js/lib/format.js",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Defines format.",
+      "summaryKey": "896d5683561a4afcaaef5bacb20d6aafb6d5717d93fe926cfb7694b3c427616b",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "js/lib/legacy.cjs": {
+      "contentHash": "723ba6bbd60e0a1209550e4161168a8a7c58094324bb9659e480a5b3a8e41c4a",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "js/lib/legacy.cjs",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "js/lib/legacy.cjs",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Defines legacy.",
+      "summaryKey": "402b278abecb90a3a217ca359417739a9a5f0ee6de0e971cd4c7ea5494d30063",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "js/vendor.min.js": {
+      "contentHash": "f81f91bcb3cca4aef7101cccbb969c115cedc154f5d9d64d3461f9b67a5ca3a4",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "js/vendor.min.js",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "js/vendor.min.js",
+      "purpose": "artifacts",
+      "schemaVersion": "1",
+      "summary": "Defines minified.",
+      "summaryKey": "8f76e8e828124afda0782c3191f0655ca4fcbe4f2da45f15c44a7edb9c766843",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "package.json": {
+      "contentHash": "64c6f74ebb650e488240e8e024ff012f5eb6babc2196f09e6e8b69f055582b92",
+      "evidence": [
+        {
+          "method": "content-hash",
+          "path": "package.json",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "package.json",
+      "purpose": "configuration",
+      "schemaVersion": "1",
+      "summary": "No readable purpose description was found in the captured source.",
+      "summaryKey": "334f82d0af15989a47a88a973b292388f72f6f2d40234171f97ec8cea7639fa3",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "Parser evidence was not recorded for this source.",
+            "name": "Parser evidence",
+            "status": "inconclusive"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    "packages/core/package.json": {
+      "contentHash": "6ff7fccfbca3329056956e437c6db5023a1224d33f0680fd8508d73b344b4a60",
+      "evidence": [
+        {
+          "method": "content-hash",
+          "path": "packages/core/package.json",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "packages/core/package.json",
+      "purpose": "configuration",
+      "schemaVersion": "1",
+      "summary": "No readable purpose description was found in the captured source.",
+      "summaryKey": "673014432b76a62089adcf9623b90b7e71a283e955007aa43db747e99c880cc4",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "Parser evidence was not recorded for this source.",
+            "name": "Parser evidence",
+            "status": "inconclusive"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    "packages/core/src/index.ts": {
+      "contentHash": "c33f294a97ae9329b74e28bfee653b2db115820bc7fe0931f155a35d50409fbc",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "packages/core/src/index.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "packages/core/src/index.ts",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Defines core.",
+      "summaryKey": "669a51e0a7ca2f224520a2c17c5d901718138a3efa010a82ffbe358e7fa3fd2d",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "packages/core/src/store.ts": {
+      "contentHash": "8b11ee229e0c96930550367aa5a69d1a982360fc3c25d181889d658265cece8b",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "packages/core/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "packages/core/src/store.ts",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Defines core Store.",
+      "summaryKey": "cc15c211c4672703cdb0e23e191f9977913626c404af706a655bd920a93b9c12",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "tests/test_main.py": {
+      "contentHash": "787944f8619aadccc0b90aa5a2c5a81d89a09c7997d44c36d762f78c46db8b6e",
+      "evidence": [
+        {
+          "line": 4,
+          "method": "test-definition",
+          "path": "tests/test_main.py",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "tests/test_main.py",
+      "purpose": "tests",
+      "schemaVersion": "1",
+      "summary": "Tests: run.",
+      "summaryKey": "aca0cd7255733d0f8fb000d4cd2d4a4b694d715d79529c175806d37ca64057c1",
+      "title": "Run",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "Parser evidence was not recorded for this source.",
+            "name": "Parser evidence",
+            "status": "inconclusive"
+          },
+          {
+            "detail": "Pinned to 1 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    },
+    "ts/src/__snapshots__/service.snap.ts": {
+      "contentHash": "398560525c5bc4aac96971bf3f74c3035e5d107a5a23882115e2c8c01c8fe017",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "ts/src/__snapshots__/service.snap.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "ts/src/__snapshots__/service.snap.ts",
+      "purpose": "artifacts",
+      "schemaVersion": "1",
+      "summary": "Defines snapshot.",
+      "summaryKey": "2d0a913148e352bc806020d5be2ab0052b490dde3865637f4874da476d32f070",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "ts/src/service.test.ts": {
+      "contentHash": "69e98820dd6509b16be217a2a496dae2998502cbf2e27ff4948ae6d3ffc2bf78",
+      "evidence": [
+        {
+          "line": 3,
+          "method": "indexed-definition",
+          "path": "ts/src/service.test.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "ts/src/service.test.ts",
+      "purpose": "tests",
+      "schemaVersion": "1",
+      "summary": "Defines smoke.",
+      "summaryKey": "f19e43ac77abaadcf5031d05ae2b6c7db47f31f114678004c6f2553cab87e727",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 1 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "ts/src/service.ts": {
+      "contentHash": "4cb4f1c8e7e88f3b094970cd4059188229dce8454cf4cc3cc3abdfb7f5633990",
+      "evidence": [
+        {
+          "line": 5,
+          "method": "indexed-definition",
+          "path": "ts/src/service.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 9,
+          "method": "indexed-definition",
+          "path": "ts/src/service.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "ts/src/service.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "ts/src/service.ts",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Defines seed, boot, store.",
+      "summaryKey": "041a32be8cc7778ece27c4bd769ec444545ff82263808f472628531838376c13",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 2 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "ts/src/store.ts": {
+      "contentHash": "da7cfd4cbe5232c4ccd6b36c0a4e4b2b78afd54321c39b316d2412d7c40d7d2c",
+      "evidence": [
+        {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "ts/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 5,
+          "method": "indexed-definition",
+          "path": "ts/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        },
+        {
+          "line": 7,
+          "method": "indexed-definition",
+          "path": "ts/src/store.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "ts/src/store.ts",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Defines Item, Item Id, Store.",
+      "summaryKey": "9cd89fe4e1993d8bd3aa0403d47227ecf2303f52f6a16c82a2aa54808000050e",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "ts/src/ui/Button.tsx": {
+      "contentHash": "f62df1f7fb2d6a54c1f620a78854b4bc06e6685c1bd258eea516cd94b3df250e",
+      "evidence": [
+        {
+          "line": 3,
+          "method": "indexed-definition",
+          "path": "ts/src/ui/Button.tsx",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "ts/src/ui/Button.tsx",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "Defines Button.",
+      "summaryKey": "3940daae29c594f6c94bc2ab34708f790d8a57ae9b642482ffa594dc67ee2457",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 1 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "ts/src/ui/index.ts": {
+      "contentHash": "dfac35d81edfe0f46e9f88be8c4f654ae1e334453f7edba8f8de361d876058bf",
+      "evidence": [
+        {
+          "method": "content-hash",
+          "path": "ts/src/ui/index.ts",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "ts/src/ui/index.ts",
+      "purpose": "code",
+      "schemaVersion": "1",
+      "summary": "No readable purpose description was found in the captured source.",
+      "summaryKey": "fd40eff24eef6898e481d66c78ed2eef0d49b2e6e91ae7e975ff32aefb64bb62",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "No parser errors were recorded.",
+            "name": "Parser evidence",
+            "status": "supported"
+          },
+          {
+            "detail": "Pinned to 1 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "current"
+      }
+    },
+    "tsconfig.json": {
+      "contentHash": "fa60bb3143dee18f2e1c1e2dc2879262d40dc562bbff9a35436b48d038ffc488",
+      "evidence": [
+        {
+          "method": "content-hash",
+          "path": "tsconfig.json",
+          "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+        }
+      ],
+      "kind": "file",
+      "origin": "inferred",
+      "path": "tsconfig.json",
+      "purpose": "configuration",
+      "schemaVersion": "1",
+      "summary": "No readable purpose description was found in the captured source.",
+      "summaryKey": "8da7ceb3a614ea8d5ee9dac43ccd6aaf3295ae1c4cb074f3bc446f26ad021891",
+      "title": "Source definitions",
+      "validation": {
+        "checks": [
+          {
+            "detail": "This description is tied to a captured source analysis.",
+            "name": "Captured source",
+            "status": "supported"
+          },
+          {
+            "detail": "Parser evidence was not recorded for this source.",
+            "name": "Parser evidence",
+            "status": "inconclusive"
+          },
+          {
+            "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+            "name": "Dependency context",
+            "status": "supported"
+          },
+          {
+            "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+            "name": "Execution coverage",
+            "status": "inconclusive"
+          }
+        ],
+        "fingerprint": "<CAPTURE_FINGERPRINT>",
+        "kind": "static-index",
+        "ruleVersion": "waypoint-checks-v1",
+        "status": "inconclusive"
+      }
+    }
+  },
+  "overview": {
+    "waypoints": [
+      {
+        "contentHash": "8135d3097261eb63414800381e3ad8b6525333043e184bb1b08c479ea1e34cc8",
+        "evidence": [
+          {
+            "method": "content-hash",
+            "path": "README.md",
+            "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+          },
+          {
+            "line": 4,
+            "method": "indexed-definition",
+            "path": "apps/web/src/entry.ts",
+            "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+          },
+          {
+            "method": "content-hash",
+            "path": "config/settings.yaml",
+            "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+          },
+          {
+            "method": "content-hash",
+            "path": "docs/guide.md",
+            "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+          },
+          {
+            "line": 1,
+            "method": "source-comment",
+            "path": "generated/schema.generated.ts",
+            "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+          },
+          {
+            "line": 1,
+            "method": "source-docstring",
+            "path": "golden_pkg/__init__.py",
+            "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+          },
+          {
+            "line": 8,
+            "method": "indexed-definition",
+            "path": "golden_pkg/main.py",
+            "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+          },
+          {
+            "line": 12,
+            "method": "indexed-definition",
+            "path": "golden_pkg/main.py",
+            "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+          }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": ".",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions, configuration, generated output.",
+        "summaryKey": "e21c99e51695d9d636c005e3e8d5943d3f9d95e84c8ce77033219c9981d16fb8",
+        "title": "Repository map",
+        "validation": {
+          "checks": [
+            {
+              "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+              "name": "Child index evidence",
+              "status": "inconclusive"
+            }
+          ],
+          "fingerprint": "<CAPTURE_FINGERPRINT>",
+          "kind": "static-index",
+          "ruleVersion": "waypoint-checks-v1",
+          "status": "inconclusive"
+        }
+      },
+      {
+        "contentHash": "3f5f79b3b10e36719bbb3b493e7868d6dbce08452b138ff53f8489d355180194",
+        "evidence": [
+          {
+            "line": 4,
+            "method": "indexed-definition",
+            "path": "apps/web/src/entry.ts",
+            "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+          }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "apps",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions.",
+        "summaryKey": "cc80821dec69fde6a44bf1ce09df9bbd26361f3e2c4dd44fe4d89f45d8c065cb",
+        "title": "Apps",
+        "validation": {
+          "checks": [
+            {
+              "detail": "Included child source checks are current; tests were not run.",
+              "name": "Child index evidence",
+              "status": "supported"
+            }
+          ],
+          "fingerprint": "<CAPTURE_FINGERPRINT>",
+          "kind": "static-index",
+          "ruleVersion": "waypoint-checks-v1",
+          "status": "current"
+        }
+      },
+      {
+        "contentHash": "1fe9d9f765bb3716e0d800f530fa17065af86b9667484cc7199b2af72f980bbf",
+        "evidence": [
+          {
+            "method": "content-hash",
+            "path": "config/settings.yaml",
+            "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+          }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "config",
+        "purpose": "configuration",
+        "schemaVersion": "1",
+        "summary": "Brings together configuration.",
+        "summaryKey": "eed8f2fc2a28423b3a928c0a49d7489ad6d70bb34c7eddb6ff987d41b2ea43b4",
+        "title": "Config",
+        "validation": {
+          "checks": [
+            {
+              "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+              "name": "Child index evidence",
+              "status": "inconclusive"
+            }
+          ],
+          "fingerprint": "<CAPTURE_FINGERPRINT>",
+          "kind": "static-index",
+          "ruleVersion": "waypoint-checks-v1",
+          "status": "inconclusive"
+        }
+      },
+      {
+        "contentHash": "26e1d66d1dcb647bbdc7eec0256a151b9b862f12c543b0019509166b0fcf3951",
+        "evidence": [
+          {
+            "method": "content-hash",
+            "path": "docs/guide.md",
+            "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+          }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "docs",
+        "purpose": "documentation",
+        "schemaVersion": "1",
+        "summary": "Brings together documentation.",
+        "summaryKey": "14d21a4e18ea369290bb2ebc30c56e3a9a3c175c07cb864159899385575684c1",
+        "title": "Docs",
+        "validation": {
+          "checks": [
+            {
+              "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+              "name": "Child index evidence",
+              "status": "inconclusive"
+            }
+          ],
+          "fingerprint": "<CAPTURE_FINGERPRINT>",
+          "kind": "static-index",
+          "ruleVersion": "waypoint-checks-v1",
+          "status": "inconclusive"
+        }
+      },
+      {
+        "contentHash": "41e15b856299e9484d90d7f57ebd72091d94f546071e18f47762de60a77b9568",
+        "evidence": [
+          {
+            "line": 1,
+            "method": "source-comment",
+            "path": "generated/schema.generated.ts",
+            "revision": "0c8e8fe7ae5025db8112136dcf577b693718418d-branch-<VIEW_DIGEST>"
+          }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "generated",
+        "purpose": "artifacts",
+        "schemaVersion": "1",
+        "summary": "Brings together generated output.",
+        "summaryKey": "b78f3e02edb4fcf5c04e482e2b8102ad44d08b47fe2d3d906c223bc80f995e23",
+        "title": "Generated",
+        "validation": {
+          "checks": [
+            {
+              "detail": "Included child source checks are current; tests were not run.",
+              "name": "Child index evidence",
+              "status": "supported"
+            }
+          ],
+          "fingerprint": "<CAPTURE_FINGERPRINT>",
+          "kind": "static-index",
+          "ruleVersion": "waypoint-checks-v1",
+          "status": "current"
+        }
+      }
+    ],
+    "waypoints_partial": true
+  }
+}

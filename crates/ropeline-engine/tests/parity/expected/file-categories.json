@@ -1,0 +1,1848 @@
+[
+ {
+  "kind": "file",
+  "length": 14,
+  "path": "src/workers.ts",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": "src/Contest.ts",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 13,
+  "path": "src/latest.py",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 18,
+  "path": "src/server.test.ts",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 19,
+  "path": "src/server.spec.tsx",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 19,
+  "path": "src/server.tests.ts",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 18,
+  "path": "src/server-test.ts",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 18,
+  "path": "src/server_test.ts",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 16,
+  "path": "tests/helpers.py",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 24,
+  "path": "src/__tests__/helpers.ts",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 11,
+  "path": "e2e/home.ts",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": "spec/worker.rb",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 15,
+  "path": "specs/worker.rb",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 19,
+  "path": "fixtures/users.json",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 21,
+  "path": "__fixtures__/users.ts",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 15,
+  "path": "__mocks__/fs.js",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 11,
+  "path": "conftest.py",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 8,
+  "path": "tests.py",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 15,
+  "path": "service_test.go",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 12,
+  "path": "test_main.py",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 18,
+  "path": "TESTS/Test_Main.PY",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 31,
+  "path": "tests/__snapshots__/worker.snap",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": "vite.config.ts",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 17,
+  "path": "eslint.config.mjs",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": "jest.config.js",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 16,
+  "path": "config/server.py",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 12,
+  "path": "configs/a.py",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 20,
+  "path": "settings.config.json",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 24,
+  "path": ".github/workflows/ci.yml",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": ".gitlab/ci.yml",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 21,
+  "path": ".vscode/settings.json",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 24,
+  "path": ".devcontainer/Dockerfile",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 12,
+  "path": "package.json",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": "pyproject.toml",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 9,
+  "path": "setup.cfg",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 7,
+  "path": "tox.ini",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 8,
+  "path": "app.conf",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 17,
+  "path": "server.properties",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 13,
+  "path": ".editorconfig",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 4,
+  "path": ".env",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 12,
+  "path": ".env.example",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 13,
+  "path": ".eslintrc.cjs",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 11,
+  "path": ".prettierrc",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 16,
+  "path": ".prettierrc.json",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "Dockerfile",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": "Dockerfile.dev",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "dockerfile",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 12,
+  "path": "compose.yaml",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 18,
+  "path": "docker-compose.yml",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 8,
+  "path": "Makefile",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": ".gitignore",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": ".gitattributes",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 13,
+  "path": ".dockerignore",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 6,
+  "path": ".npmrc",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 6,
+  "path": ".nvmrc",
+  "result": {
+   "value": {
+    "basis": "configuration-path-or-filename",
+    "category": "configuration",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 19,
+  "path": "dist/server.test.js",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 12,
+  "path": "build/out.js",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 18,
+  "path": "coverage/lcov.info",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 21,
+  "path": "artifacts/report.json",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 21,
+  "path": "artefacts/report.json",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 19,
+  "path": "generated/models.ts",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 29,
+  "path": "__pycache__/x.cpython-312.pyc",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 20,
+  "path": "src/api.generated.ts",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 12,
+  "path": "src/api.g.ts",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 13,
+  "path": "bundle.min.js",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": "styles.min.css",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 17,
+  "path": "package-lock.json",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 19,
+  "path": "npm-shrinkwrap.json",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": "pnpm-lock.yaml",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "Cargo.lock",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 9,
+  "path": "yarn.lock",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "client.tgz",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "client.zip",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 6,
+  "path": "lib.so",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 7,
+  "path": "lib.dll",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 5,
+  "path": "x.pyc",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 7,
+  "path": "app.jar",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 17,
+  "path": "types.tsbuildinfo",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 13,
+  "path": "bundle.js.map",
+  "result": {
+   "value": {
+    "basis": "generated-or-build-path",
+    "category": "artifact",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 15,
+  "path": "assets/logo.svg",
+  "result": {
+   "value": {
+    "basis": "asset-path-or-extension",
+    "category": "asset",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 17,
+  "path": "public/font.woff2",
+  "result": {
+   "value": {
+    "basis": "asset-path-or-extension",
+    "category": "asset",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 15,
+  "path": "images/hero.psd",
+  "result": {
+   "value": {
+    "basis": "asset-path-or-extension",
+    "category": "asset",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 16,
+  "path": "fonts/custom.bin",
+  "result": {
+   "value": {
+    "basis": "asset-path-or-extension",
+    "category": "asset",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": "media/clip.bin",
+  "result": {
+   "value": {
+    "basis": "asset-path-or-extension",
+    "category": "asset",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "manual.pdf",
+  "result": {
+   "value": {
+    "basis": "asset-path-or-extension",
+    "category": "asset",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 9,
+  "path": "model.glb",
+  "result": {
+   "value": {
+    "basis": "asset-path-or-extension",
+    "category": "asset",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 9,
+  "path": "README.md",
+  "result": {
+   "value": {
+    "basis": "documentation-filename-or-extension",
+    "category": "documentation",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 6,
+  "path": "readme",
+  "result": {
+   "value": {
+    "basis": "documentation-filename-or-extension",
+    "category": "documentation",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": "docs/guide.rst",
+  "result": {
+   "value": {
+    "basis": "documentation-filename-or-extension",
+    "category": "documentation",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 9,
+  "path": "notes.txt",
+  "result": {
+   "value": {
+    "basis": "documentation-filename-or-extension",
+    "category": "documentation",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 9,
+  "path": "CHANGELOG",
+  "result": {
+   "value": {
+    "basis": "documentation-filename-or-extension",
+    "category": "documentation",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 7,
+  "path": "LICENSE",
+  "result": {
+   "value": {
+    "basis": "documentation-filename-or-extension",
+    "category": "documentation",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 7,
+  "path": "LICENCE",
+  "result": {
+   "value": {
+    "basis": "documentation-filename-or-extension",
+    "category": "documentation",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 6,
+  "path": "NOTICE",
+  "result": {
+   "value": {
+    "basis": "documentation-filename-or-extension",
+    "category": "documentation",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "guide.adoc",
+  "result": {
+   "value": {
+    "basis": "documentation-filename-or-extension",
+    "category": "documentation",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 8,
+  "path": "page.mdx",
+  "result": {
+   "value": {
+    "basis": "documentation-filename-or-extension",
+    "category": "documentation",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 11,
+  "path": "src/main.rs",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 7,
+  "path": "main.go",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 7,
+  "path": "App.vue",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 11,
+  "path": "styles.scss",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 9,
+  "path": "query.sql",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 7,
+  "path": "run.ps1",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 20,
+  "path": "data/example.unknown",
+  "result": {
+   "value": {
+    "basis": "unrecognised-path",
+    "category": "other",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 11,
+  "path": "noextension",
+  "result": {
+   "value": {
+    "basis": "unrecognised-path",
+    "category": "other",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 13,
+  "path": "trailing.dot.",
+  "result": {
+   "value": {
+    "basis": "unrecognised-path",
+    "category": "other",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 7,
+  "path": ".hidden",
+  "result": {
+   "value": {
+    "basis": "unrecognised-path",
+    "category": "other",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "a.b.c.d.ts",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 21,
+  "path": "src/\u00fcber/test_caf\u00e9.py",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "te\u017fts/a.py",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "TE\u017fTS/a.py",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "dist\u212a/a.js",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 19,
+  "path": "\u0130stanbul/tests/a.py",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 11,
+  "path": "tests\u0131/a.py",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 11,
+  "path": "src/\u03a3\u0391/a.ts",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 15,
+  "path": "src/stra\u00dfe/a.ts",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "\u65e5\u672c\u8a9e/\u30c6\u30b9\u30c8.ts",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "src/\ud83d\ude00/a.ts",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 0,
+  "path": "",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 1,
+  "path": ".",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 2,
+  "path": "..",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "../test.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 14,
+  "path": "src/../test.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 11,
+  "path": "/tests/a.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 7,
+  "path": "C:/a.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 11,
+  "path": "src\\test.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 5,
+  "path": "a\u0000.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 5,
+  "path": "a\u007f.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 5,
+  "path": "a\u0001.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "a//test.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 8,
+  "path": "a/./b.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 2,
+  "path": "a/",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 1,
+  "path": "/",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "a b/c d.ts",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 6,
+  "path": "a:b.ts",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "x.test.ts/",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 6,
+  "path": "a\u00a0b.ts",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 6,
+  "path": "a\u2028b.ts",
+  "result": {
+   "value": {
+    "basis": "source-extension",
+    "category": "code",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 5,
+  "path": "tests",
+  "result": {
+   "value": {
+    "basis": "unrecognised-path",
+    "category": "other",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "repository",
+  "length": 5,
+  "path": "tests",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "directory",
+  "length": 5,
+  "path": "tests",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "module",
+  "length": 5,
+  "path": "tests",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "cluster",
+  "length": 5,
+  "path": "tests",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "symbol",
+  "length": 5,
+  "path": "tests",
+  "result": {
+   "value": {
+    "basis": "unrecognised-path",
+    "category": "other",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "function_definition",
+  "length": 5,
+  "path": "tests",
+  "result": {
+   "value": {
+    "basis": "unrecognised-path",
+    "category": "other",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "",
+  "length": 5,
+  "path": "tests",
+  "result": {
+   "value": {
+    "basis": "unrecognised-path",
+    "category": "other",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 10,
+  "path": "tests/a.py",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "repository",
+  "length": 10,
+  "path": "tests/a.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "directory",
+  "length": 10,
+  "path": "tests/a.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "module",
+  "length": 10,
+  "path": "tests/a.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "cluster",
+  "length": 10,
+  "path": "tests/a.py",
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "symbol",
+  "length": 10,
+  "path": "tests/a.py",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "function_definition",
+  "length": 10,
+  "path": "tests/a.py",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "",
+  "length": 10,
+  "path": "tests/a.py",
+  "result": {
+   "value": {
+    "basis": "test-path-or-filename",
+    "category": "test",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 4095,
+  "path": null,
+  "result": {
+   "value": {
+    "basis": "unrecognised-path",
+    "category": "other",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 4096,
+  "path": null,
+  "result": {
+   "value": {
+    "basis": "unrecognised-path",
+    "category": "other",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 4097,
+  "path": null,
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": 4095,
+  "path": null,
+  "result": {
+   "value": {
+    "basis": "unrecognised-path",
+    "category": "other",
+    "inferred": true
+   }
+  }
+ },
+ {
+  "kind": "file",
+  "length": 4097,
+  "path": null,
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": null,
+  "path": null,
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": null,
+  "path": 123,
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": null,
+  "path": 1.5,
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": null,
+  "path": true,
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": null,
+  "path": [],
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": null,
+  "path": {},
+  "result": {
+   "value": null
+  }
+ },
+ {
+  "kind": "file",
+  "length": null,
+  "path": [
+   "a"
+  ],
+  "result": {
+   "value": null
+  }
+ }
+]

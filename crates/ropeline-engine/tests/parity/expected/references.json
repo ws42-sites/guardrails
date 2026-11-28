@@ -1,0 +1,6600 @@
+{
+ "none": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/bom.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/calls.py:python": {
+  "value": {
+   "calls": [
+    [
+     "other",
+     125,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     137,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     139,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     140,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     10,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     33,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     77,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     83,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     87,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     104,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     104,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     106,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     106,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     110,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     125,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     125,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     125,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     125,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     138,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     138,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     139,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     140,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     141,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     141,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     14,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     35,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     35,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     52,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     53,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     53,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     58,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     59,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     67,
+     "local-name-candidate"
+    ],
+    [
+     "inner",
+     73,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     79,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     84,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     86,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     88,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     90,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     94,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     96,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     97,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     97,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     98,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     100,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     101,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     105,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     105,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     111,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     137,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     139,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     140,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     141,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     141,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     37,
+     "local-name-candidate"
+    ],
+    [
+     "method",
+     41,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     44,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     45,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     45,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     46,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     46,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     47,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     48,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     48,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     48,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     49,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     54,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     54,
+     "local-name-candidate"
+    ],
+    [
+     "outer",
+     71,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     80,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     82,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     92,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     112,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     114,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     120,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     122,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     134,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     140,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     140,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     37,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     44,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     49,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     50,
+     "local-name-candidate"
+    ],
+    [
+     "method",
+     50,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     51,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     55,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     55,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     55,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     56,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     56,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     57,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     57,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     134,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     134,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     37,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     47,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     130,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     130,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     130,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     50,
+     "local-name-candidate"
+    ],
+    [
+     "helper",
+     45,
+     "local-name-candidate"
+    ],
+    [
+     "other",
+     45,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": [
+    {
+     "kind": "python_import",
+     "line": 2,
+     "names": [
+      "functools"
+     ]
+    }
+   ]
+  }
+ },
+ "python/crlf.py:python": {
+  "value": {
+   "calls": [
+    [
+     "helper",
+     13,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "python/docstring_bad_escape.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/docstring_named_escape.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/docstring_tabs.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/docstrings.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/empty.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/imports.py:python": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 2,
+     "module": "__future__",
+     "names": [
+      "annotations"
+     ]
+    },
+    {
+     "kind": "python_import",
+     "line": 3,
+     "names": [
+      "os",
+      "sys"
+     ]
+    },
+    {
+     "kind": "python_import",
+     "line": 4,
+     "names": [
+      "pkg.a"
+     ]
+    },
+    {
+     "kind": "python_import",
+     "line": 5,
+     "names": [
+      "pkg.sub.b"
+     ]
+    },
+    {
+     "kind": "python_import",
+     "line": 6,
+     "names": [
+      "pkg.missing.deep"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 7,
+     "module": "pkg",
+     "names": [
+      "a",
+      "sub"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 8,
+     "module": "pkg.sub",
+     "names": [
+      "b",
+      "c"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 9,
+     "module": "pkg.sub",
+     "names": [
+      "c",
+      "d"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 1,
+     "line": 13,
+     "module": null,
+     "names": [
+      "sibling"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 1,
+     "line": 14,
+     "module": "sibling",
+     "names": [
+      "thing"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 2,
+     "line": 15,
+     "module": null,
+     "names": [
+      "up"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 2,
+     "line": 16,
+     "module": "up",
+     "names": [
+      "more"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 3,
+     "line": 17,
+     "module": null,
+     "names": [
+      "too_far"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 4,
+     "line": 18,
+     "module": null,
+     "names": [
+      "way_too_far"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 1,
+     "line": 19,
+     "module": null,
+     "names": [
+      "one",
+      "two"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 1,
+     "line": 23,
+     "module": "pkg.deep",
+     "names": [
+      "*"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 24,
+     "module": "pkg.sub",
+     "names": [
+      "b"
+     ]
+    },
+    {
+     "kind": "python_import",
+     "line": 25,
+     "names": [
+      "pkg.a"
+     ]
+    },
+    {
+     "kind": "python_import",
+     "line": 27,
+     "names": [
+      "conditional"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 28,
+     "module": "pkg",
+     "names": [
+      "a"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 30,
+     "module": "pkg",
+     "names": [
+      "a"
+     ]
+    },
+    {
+     "kind": "python_import",
+     "line": 32,
+     "names": [
+      "maybe"
+     ]
+    },
+    {
+     "kind": "python_import",
+     "line": 36,
+     "names": [
+      "cleanup"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 40,
+     "module": "pkg.a",
+     "names": [
+      "inner"
+     ]
+    },
+    {
+     "kind": "python_import",
+     "line": 41,
+     "names": [
+      "pkg.sub.c"
+     ]
+    },
+    {
+     "kind": "python_import",
+     "line": 48,
+     "names": [
+      "in_class"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 49,
+     "module": "pkg",
+     "names": [
+      "a"
+     ]
+    },
+    {
+     "kind": "python_import",
+     "line": 44,
+     "names": [
+      "pkg.sub.b"
+     ]
+    }
+   ]
+  }
+ },
+ "python/invalid_utf8.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/lone_cr.py:python": {
+  "value": {
+   "calls": [
+    [
+     "helper",
+     13,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "python/nul.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/only_comments.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/positional_after_keyword.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/python2_chevron.py:python": {
+  "value": {
+   "calls": [
+    [
+     "helper",
+     8,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": [
+    {
+     "kind": "python_import",
+     "line": 1,
+     "names": [
+      "sys"
+     ]
+    }
+   ]
+  }
+ },
+ "python/python2_print.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/syntax_error.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/tab_error.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/zoo_docstrings.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/zoo_expressions.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/zoo_fstrings.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "python/zoo_statements.py:python": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "python_import",
+     "line": 2,
+     "names": [
+      "os",
+      "sys"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 3,
+     "module": "pkg",
+     "names": [
+      "a",
+      "b"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 1,
+     "line": 4,
+     "module": null,
+     "names": [
+      "sibling"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 2,
+     "line": 5,
+     "module": null,
+     "names": [
+      "up"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/attributes_items.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/bom.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "crate",
+      "a",
+      "B"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/comments_cr.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/comments_first_blank.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/comments_late.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/comments_many.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/comments_star_only.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/crate_main.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "crate",
+      "config",
+      "Settings"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "crate",
+      "util",
+      "run"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/crates_use.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "foo_bar",
+      "a",
+      "B"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "foo_bar",
+      "missing"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 3,
+     "path": [
+      "foo_bar"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 4,
+     "path": [
+      "root_crate",
+      "x"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 5,
+     "path": [
+      "dup",
+      "z"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 6,
+     "path": [
+      "std",
+      "io"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 7,
+     "path": [
+      "core",
+      "fmt"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 8,
+     "path": [
+      "test",
+      "t"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 9,
+     "path": [
+      "std",
+      "x",
+      "y"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 10,
+     "path": [
+      "nolib",
+      "thing"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 11,
+     "path": [
+      "foo_bar",
+      "via_root"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 12,
+     "path": [
+      "foo_bar"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 13,
+     "path": [
+      "sibling",
+      "x"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 14,
+     "path": [
+      "foo_bar",
+      "a",
+      "B"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 14,
+     "path": [
+      "foo_bar",
+      "c"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 15,
+     "path": [
+      "bad_name",
+      "q"
+     ]
+    },
+    {
+     "depth": 1,
+     "kind": "rust_use",
+     "line": 18,
+     "path": [
+      "foo_bar",
+      "in_inline"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/crlf.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "crate",
+      "a",
+      "B"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/crlf_use.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "crate",
+      "a",
+      "B"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "crate",
+      "c",
+      "d"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "crate",
+      "c",
+      "e"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/definitions_only.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/doc_comments.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/duplicate_targets.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "crate",
+      "a",
+      "x"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "crate",
+      "a",
+      "y"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "crate",
+      "a",
+      "z"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 3,
+     "path": [
+      "crate",
+      "a",
+      "z"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 4,
+     "path": [
+      "crate",
+      "a",
+      "p"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 4,
+     "path": [
+      "crate",
+      "a",
+      "q"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 4,
+     "path": [
+      "crate",
+      "a",
+      "r"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/empty.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/error_attribute.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/error_extern_crate.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "a"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/error_garbage.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/error_impl.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/error_missing_name.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/error_param.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/error_unclosed_brace.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/error_unclosed_comment.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/error_unterminated_string.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/error_use.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "a",
+      "b"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "c",
+      "d"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/invalid_utf8.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "crate",
+      "a",
+      "B"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/invalid_utf8_name.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "crate",
+      "a",
+      "B"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/invalid_utf8_use.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "crate",
+      "a",
+      "B"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "crate",
+      "b",
+      "C"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/lone_cr.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/long_names.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/macros.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/many_methods.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/many_parameters.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/modules_inline.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 1,
+     "kind": "rust_use",
+     "line": 3,
+     "path": [
+      "crate",
+      "alpha",
+      "One"
+     ]
+    },
+    {
+     "depth": 2,
+     "kind": "rust_use",
+     "line": 5,
+     "path": [
+      "super",
+      "beta",
+      "Two"
+     ]
+    },
+    {
+     "depth": 2,
+     "kind": "rust_use",
+     "line": 6,
+     "path": [
+      "crate",
+      "gamma",
+      "Three"
+     ]
+    },
+    {
+     "depth": 1,
+     "kind": "rust_use",
+     "line": 14,
+     "path": [
+      "super"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/no_trailing_newline.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/non_ascii.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 4,
+     "path": [
+      "crate",
+      "ok",
+      "fine"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/nul.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "crate",
+      "a",
+      "B"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/only_comments.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/raw_names.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "type",
+      "Item"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "crate",
+      "match",
+      "x"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 3,
+     "path": [
+      "self",
+      "fn",
+      "y"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 4,
+     "path": [
+      "mod",
+      "z"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/relative_paths.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "crate",
+      "a",
+      "b",
+      "Item"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "crate",
+      "a",
+      "Missing"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 3,
+     "path": [
+      "crate",
+      "nothing",
+      "Here"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 4,
+     "path": [
+      "crate",
+      "top",
+      "Thing"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 5,
+     "path": [
+      "crate"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 6,
+     "path": [
+      "self",
+      "child",
+      "Leaf"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 7,
+     "path": [
+      "self",
+      "Leaf"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 8,
+     "path": [
+      "self"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 9,
+     "path": [
+      "super",
+      "sibling",
+      "Peer"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 10,
+     "path": [
+      "super",
+      "super",
+      "grand",
+      "Elder"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 11,
+     "path": [
+      "super",
+      "super",
+      "super",
+      "beyond",
+      "Far"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 12,
+     "path": [
+      "super"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 13,
+     "path": [
+      "child",
+      "Direct"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 14,
+     "path": [
+      "sibling_dir",
+      "Entry"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 15,
+     "path": [
+      "other_crate",
+      "thing"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 16,
+     "path": [
+      "other_crate",
+      "deep",
+      "item"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 17,
+     "path": [
+      "shared",
+      "Value"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 18,
+     "path": [
+      "std",
+      "fmt",
+      "Debug"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 19,
+     "path": [
+      "core",
+      "fmt"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 20,
+     "path": [
+      "alloc",
+      "vec",
+      "Vec"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 21,
+     "path": [
+      "proc_macro",
+      "TokenStream"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 22,
+     "path": [
+      "test",
+      "Bencher"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 23,
+     "path": [
+      "crate",
+      "a"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 24,
+     "path": [
+      "crate"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 25,
+     "path": [
+      "self"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 26,
+     "path": [
+      "super"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 27,
+     "path": [
+      "other_crate"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 28,
+     "path": [
+      "shared"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 29,
+     "path": [
+      "std"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 30,
+     "path": [
+      "child"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 33,
+     "path": [
+      "child",
+      "not_relative"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/same_name_twice.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/symbols.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "std",
+      "fmt"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 112,
+     "path": [
+      "alloc"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/syntax_error.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "crate",
+      "a"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/tests_asserts.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 1,
+     "kind": "rust_use",
+     "line": 3,
+     "path": [
+      "super"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/tests_many.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/tests_names.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/types_generics.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "std",
+      "fmt",
+      "Debug"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/use_forms.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "std",
+      "collections",
+      "HashMap"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "std",
+      "io"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "std",
+      "io",
+      "Read"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 2,
+     "path": [
+      "std",
+      "io",
+      "Write"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 3,
+     "path": [
+      "crate",
+      "store",
+      "index",
+      "Entry"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 4,
+     "path": [
+      "crate",
+      "store"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 4,
+     "path": [
+      "crate",
+      "store",
+      "index"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 4,
+     "path": [
+      "crate",
+      "store",
+      "Handle"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 5,
+     "path": [
+      "self",
+      "helper",
+      "util"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 6,
+     "path": [
+      "super",
+      "sibling"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 7,
+     "path": [
+      "super",
+      "super",
+      "grand",
+      "Item"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 8,
+     "path": [
+      "super"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 9,
+     "path": [
+      "crate"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 10,
+     "path": [
+      "self"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 11,
+     "path": [
+      "a",
+      "b"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 12,
+     "path": [
+      "a",
+      "b",
+      "c"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 12,
+     "path": [
+      "a",
+      "b",
+      "d",
+      "e"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 12,
+     "path": [
+      "a",
+      "f"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 13,
+     "path": [
+      "a"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 14,
+     "path": [
+      "a",
+      "b"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 14,
+     "path": [
+      "a",
+      "d"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 15,
+     "path": [
+      "first"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 15,
+     "path": [
+      "second",
+      "third"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 16,
+     "path": [
+      "absolute",
+      "path"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 17,
+     "path": [
+      "absolute",
+      "one"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 17,
+     "path": [
+      "absolute",
+      "two"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 18,
+     "path": [
+      "raw",
+      "type",
+      "match"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 19,
+     "path": [
+      "crate",
+      "reexport",
+      "Thing"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 20,
+     "path": [
+      "crate",
+      "reexport",
+      "Other"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 21,
+     "path": [
+      "crate",
+      "scoped",
+      "Third"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 22,
+     "path": [
+      "crate",
+      "deep",
+      "a",
+      "b",
+      "c",
+      "d"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 22,
+     "path": [
+      "crate",
+      "deep",
+      "a",
+      "b",
+      "c",
+      "e"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 23,
+     "path": [
+      "crate",
+      "trailing",
+      "a"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 23,
+     "path": [
+      "crate",
+      "trailing",
+      "b"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 25,
+     "path": [
+      "crate",
+      "alias"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 26,
+     "path": [
+      "crate",
+      "a"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 27,
+     "path": [
+      "serde"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 28,
+     "path": [
+      "serde"
+     ]
+    },
+    {
+     "depth": 0,
+     "extern": true,
+     "kind": "rust_use",
+     "line": 29,
+     "path": [
+      "self"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 30,
+     "path": [
+      "crate",
+      "a"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 30,
+     "path": [
+      "crate",
+      "b"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 33,
+     "path": [
+      "a",
+      "_underscore",
+      "b"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 34,
+     "path": [
+      "a",
+      "b1",
+      "c2"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 35,
+     "path": [
+      "std"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 36,
+     "path": [
+      "core",
+      "fmt"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 37,
+     "path": [
+      "alloc",
+      "vec",
+      "Vec"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 38,
+     "path": [
+      "proc_macro",
+      "TokenStream"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 39,
+     "path": [
+      "test",
+      "Bencher"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 40,
+     "path": [
+      "crate",
+      "z"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 41,
+     "path": [
+      "self",
+      "z"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 42,
+     "path": [
+      "self",
+      "super",
+      "z"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 45,
+     "path": [
+      "crate",
+      "in_function",
+      "A"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 47,
+     "path": [
+      "super",
+      "in_block",
+      "B"
+     ]
+    },
+    {
+     "depth": 1,
+     "kind": "rust_use",
+     "line": 52,
+     "path": [
+      "crate",
+      "in_inline",
+      "A"
+     ]
+    },
+    {
+     "depth": 1,
+     "kind": "rust_use",
+     "line": 53,
+     "path": [
+      "self",
+      "child",
+      "B"
+     ]
+    },
+    {
+     "depth": 1,
+     "kind": "rust_use",
+     "line": 54,
+     "path": [
+      "super",
+      "in_inline_super",
+      "C"
+     ]
+    },
+    {
+     "depth": 1,
+     "kind": "rust_use",
+     "line": 55,
+     "path": [
+      "super",
+      "super",
+      "too_far",
+      "D"
+     ]
+    },
+    {
+     "depth": 2,
+     "kind": "rust_use",
+     "line": 57,
+     "path": [
+      "super",
+      "sibling",
+      "E"
+     ]
+    },
+    {
+     "depth": 2,
+     "kind": "rust_use",
+     "line": 58,
+     "path": [
+      "super",
+      "super",
+      "up",
+      "F"
+     ]
+    },
+    {
+     "depth": 2,
+     "kind": "rust_use",
+     "line": 59,
+     "path": [
+      "crate",
+      "in_nested",
+      "G"
+     ]
+    },
+    {
+     "depth": 1,
+     "kind": "rust_use",
+     "line": 65,
+     "path": [
+      "super"
+     ]
+    },
+    {
+     "depth": 1,
+     "kind": "rust_use",
+     "line": 66,
+     "path": [
+      "crate",
+      "tests_helper"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/use_limits.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "s0",
+      "s1",
+      "s2",
+      "s3",
+      "s4",
+      "s5",
+      "s6",
+      "s7",
+      "s8",
+      "s9",
+      "s10",
+      "s11",
+      "s12",
+      "s13",
+      "s14",
+      "s15",
+      "s16",
+      "s17",
+      "s18",
+      "s19",
+      "s20",
+      "s21",
+      "s22",
+      "s23",
+      "s24",
+      "s25",
+      "s26",
+      "s27",
+      "s28",
+      "s29",
+      "s30",
+      "s31"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 3,
+     "path": [
+      "crate",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 5,
+     "path": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "x"
+     ]
+    },
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 7,
+     "path": [
+      "s0",
+      "s1",
+      "s2",
+      "s3",
+      "s4",
+      "s5",
+      "s6",
+      "s7",
+      "s8",
+      "s9",
+      "s10",
+      "s11",
+      "s12",
+      "s13",
+      "s14",
+      "s15",
+      "s16",
+      "s17",
+      "s18",
+      "s19",
+      "s20",
+      "s21",
+      "s22",
+      "s23",
+      "s24",
+      "s25",
+      "s26",
+      "s27",
+      "s28",
+      "s29",
+      "s30",
+      "z"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/use_lists_100.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "depth": 0,
+     "kind": "rust_use",
+     "line": 1,
+     "path": [
+      "x"
+     ]
+    }
+   ]
+  }
+ },
+ "rust/use_nested_100.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "rust/use_nested_3000.rs:rust": {
+  "error": "RecursionError",
+  "message": "maximum recursion depth exceeded"
+ },
+ "rust/whitespace_only.rs:rust": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/bom.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/bom.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/bom.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/comments.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/comments.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/comments.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/component.tsx:javascript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "react",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 2,
+     "specifier": "./comp/Button",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 3,
+     "specifier": "./comp/props",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./styles.css",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 30,
+     "specifier": "./comp/Button",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/component.tsx:tsx": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "react",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 2,
+     "specifier": "./comp/Button",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 3,
+     "specifier": "./comp/props",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./styles.css",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 30,
+     "specifier": "./comp/Button",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/component.tsx:typescript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "react",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 2,
+     "specifier": "./comp/Button",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 3,
+     "specifier": "./comp/props",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./styles.css",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 30,
+     "specifier": "./comp/Button",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/control_chars.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/control_chars.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/control_chars.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/crlf.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./b",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/crlf.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./b",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/crlf.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./b",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/definitions_only.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/definitions_only.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/definitions_only.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/empty.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/empty.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/empty.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/empty_lines.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/empty_lines.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/empty_lines.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/imports.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./services/router",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 2,
+     "specifier": "./services/index",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 3,
+     "specifier": "./services/router.js",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 5,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 6,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 7,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 8,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 9,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 10,
+     "specifier": "./side-effect",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 11,
+     "specifier": "react",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 12,
+     "specifier": "@scope/package/subpath",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 13,
+     "specifier": "./data.json",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 15,
+     "specifier": "./multi/line",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 20,
+     "specifier": "./services/router",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 21,
+     "specifier": "./services/router",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 22,
+     "specifier": "./services/index",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 23,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 24,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 25,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 26,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 29,
+     "specifier": "./lazy",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 30,
+     "specifier": "./required",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 31,
+     "specifier": "./services/router.js",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 42,
+     "specifier": "./inner",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 43,
+     "specifier": "./services/router",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 47,
+     "specifier": "./nested",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 55,
+     "specifier": "./ ../escape",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/imports.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./services/router",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 2,
+     "specifier": "./services/index",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 3,
+     "specifier": "./services/router.js",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 5,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 6,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 7,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 8,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 9,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 10,
+     "specifier": "./side-effect",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 11,
+     "specifier": "react",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 12,
+     "specifier": "@scope/package/subpath",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 13,
+     "specifier": "./data.json",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 15,
+     "specifier": "./multi/line",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 20,
+     "specifier": "./services/router",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 21,
+     "specifier": "./services/router",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 22,
+     "specifier": "./services/index",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 23,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 24,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 25,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 26,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 29,
+     "specifier": "./lazy",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 30,
+     "specifier": "./required",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 31,
+     "specifier": "./services/router.js",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 42,
+     "specifier": "./inner",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 43,
+     "specifier": "./services/router",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 47,
+     "specifier": "./nested",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 55,
+     "specifier": "./ ../escape",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/imports.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./services/router",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 2,
+     "specifier": "./services/index",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 3,
+     "specifier": "./services/router.js",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 5,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 6,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 7,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 8,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 9,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 10,
+     "specifier": "./side-effect",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 11,
+     "specifier": "react",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 12,
+     "specifier": "@scope/package/subpath",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 13,
+     "specifier": "./data.json",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 15,
+     "specifier": "./multi/line",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 20,
+     "specifier": "./services/router",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 21,
+     "specifier": "./services/router",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 22,
+     "specifier": "./services/index",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 23,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 24,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 25,
+     "specifier": "./types",
+     "type_only": true
+    },
+    {
+     "kind": "relative",
+     "line": 26,
+     "specifier": "./types",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 29,
+     "specifier": "./lazy",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 30,
+     "specifier": "./required",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 31,
+     "specifier": "./services/router.js",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 42,
+     "specifier": "./inner",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 43,
+     "specifier": "./services/router",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 47,
+     "specifier": "./nested",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 55,
+     "specifier": "./ ../escape",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/invalid_utf8.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 3,
+     "specifier": "./b",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/invalid_utf8.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 3,
+     "specifier": "./b",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/invalid_utf8.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 3,
+     "specifier": "./b",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/late_comment.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/late_comment.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/late_comment.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/lone_cr.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./b",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/lone_cr.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./b",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/lone_cr.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./b",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/long_summary.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/long_summary.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/long_summary.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/many_comments.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/many_comments.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/many_comments.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/many_tests.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/many_tests.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/many_tests.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/module.js:javascript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./services/router.js",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 5,
+     "specifier": "./legacy",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 6,
+     "specifier": "fs",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 7,
+     "specifier": "./node.cjs",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 8,
+     "specifier": "./esm.mjs",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 37,
+     "specifier": "./conditional",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/module.js:tsx": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./services/router.js",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 5,
+     "specifier": "./legacy",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 6,
+     "specifier": "fs",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 7,
+     "specifier": "./node.cjs",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 8,
+     "specifier": "./esm.mjs",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 37,
+     "specifier": "./conditional",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/module.js:typescript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./services/router.js",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 5,
+     "specifier": "./legacy",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 6,
+     "specifier": "fs",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 7,
+     "specifier": "./node.cjs",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 8,
+     "specifier": "./esm.mjs",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 37,
+     "specifier": "./conditional",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/no_description.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/no_description.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/no_description.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/non_ascii_cases.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/non_ascii_cases.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/non_ascii_cases.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/secrets.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/secrets.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/secrets.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/selection.test.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "vitest",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 2,
+     "specifier": "../src/selection",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/selection.test.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "vitest",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 2,
+     "specifier": "../src/selection",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/selection.test.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "vitest",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 2,
+     "specifier": "../src/selection",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/single_line_no_newline.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/single_line_no_newline.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/single_line_no_newline.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/symbols.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./base",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 2,
+     "specifier": "./config",
+     "type_only": true
+    }
+   ]
+  }
+ },
+ "script/symbols.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./base",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 2,
+     "specifier": "./config",
+     "type_only": true
+    }
+   ]
+  }
+ },
+ "script/symbols.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./base",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 2,
+     "specifier": "./config",
+     "type_only": true
+    }
+   ]
+  }
+ },
+ "script/syntax_error.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./b",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/syntax_error.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./b",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/syntax_error.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./a",
+     "type_only": false
+    },
+    {
+     "kind": "relative",
+     "line": 4,
+     "specifier": "./b",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/tests_and_comments.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/tests_and_comments.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/tests_and_comments.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "script/unicode.ts:javascript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./caf\u00e9",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/unicode.ts:tsx": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./caf\u00e9",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "script/unicode.ts:typescript": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "relative",
+     "line": 1,
+     "specifier": "./caf\u00e9",
+     "type_only": false
+    }
+   ]
+  }
+ },
+ "snippet/annassign_tuple.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/annotation_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/assign_binop.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/assign_call.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/assign_constant_true.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/assign_debug.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/assign_double_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/assign_in_condition.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/assign_keyword_target.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/assign_literal.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/assign_star_alone.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/assign_star_target_alone.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/assign_star_tuple.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/async_function_calls.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/async_identifier.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/augassign_list.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/augassign_tuple.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/await_outside.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/backslash_continuation.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/backslash_continuation_blank.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/backslash_space.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/bom_first.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/bom_in_code.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/bom_in_string.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/break_outside.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/call_dstar_then_kw.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/call_dstar_then_pos.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/call_dstar_then_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/call_in_await_yield.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     4,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     5,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/call_in_class_bases_and_keywords.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/call_in_compare_and_boolop.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/call_in_decorator_and_default.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/call_in_dict_and_set_and_starred.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     4,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     4,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/call_in_fstring_and_format_spec.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/call_in_global_scope_after_def.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     1,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/call_in_lambda_and_comprehension.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/call_in_match_and_patterns.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/call_in_slice_and_subscript.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/call_in_type_params.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/call_in_with_and_try.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     4,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     5,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     8,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     6,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/call_kw_then_pos.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/call_kw_then_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/call_star_kw_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/class_in_class.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/class_kw_then_pos.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/class_ok.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/comparison_chain_walrus.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/conditional_function.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/crlf_code.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/crlf_docstring.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/crlf_triple_string.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/decorator_async.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/decorator_comment_between.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/decorator_multiple_lines.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/decorator_on_assignment.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/decorator_subscript.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/decorator_ternary.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/dedent_mismatch.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/def_annotated_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/def_bare_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/def_default_order.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/def_dstar_then_arg.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/def_slash_first.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/def_slash_twice.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/def_star_default.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/def_two_stars.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/del_call.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/dict_mixed_pairs.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/dict_star_and_double.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/docstring_named_escape.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/dots_in_expression.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/double_semicolon.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/dstar_call_alone.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/duplicate_arguments.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/duplicate_keyword.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/elif_alone.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/ellipsis_forms.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/ellipsis_slices.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/else_alone.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/else_if.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/empty_decorator.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/empty_source.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_bytes_nonascii.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_bytes_unicode.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_hex_short.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_invalid_warns_only.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_named_alias.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_named_lowercase.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_named_ok.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_named_sequence.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_named_unicode16.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_named_unknown.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_octal_big.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_unicode_big.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/escape_unicode_short.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/except_star_bare.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/except_star_mixed.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/expected_indent.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/for_call_target.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/formfeed_indent.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/formfeed_line.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/from_import_dots.py:python": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "python_from",
+     "level": 3,
+     "line": 1,
+     "module": null,
+     "names": [
+      "x"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 4,
+     "line": 2,
+     "module": null,
+     "names": [
+      "y"
+     ]
+    },
+    {
+     "kind": "python_from",
+     "level": 1,
+     "line": 3,
+     "module": null,
+     "names": [
+      "z"
+     ]
+    }
+   ]
+  }
+ },
+ "snippet/from_import_ellipsis_tokens.py:python": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "python_from",
+     "level": 3,
+     "line": 1,
+     "module": null,
+     "names": [
+      "x"
+     ]
+    }
+   ]
+  }
+ },
+ "snippet/from_import_star_in_function.py:python": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 2,
+     "module": "x",
+     "names": [
+      "*"
+     ]
+    }
+   ]
+  }
+ },
+ "snippet/from_import_star_mixed.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/from_import_trailing_comma.py:python": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 1,
+     "module": "x",
+     "names": [
+      "a",
+      "b"
+     ]
+    }
+   ]
+  }
+ },
+ "snippet/from_import_unparenthesised_trailing.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_backslash_expr.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_bad_conversion.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_bang_missing.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_bytes_mix.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_comment_in_expr.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_comment_single_line.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_concat_multiline.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_debug_conversion.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_empty_expr.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_format_spec_brace.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_lambda_unparenthesised.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_nested_depth.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_newline_in_expr.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_raw_backslash.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_same_quote.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_single_brace.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_triple_multiline_pieces.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_unclosed.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/fstring_walrus.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/future_braces.py:python": {
+  "value": {
+   "calls": [],
+   "imports": [
+    {
+     "kind": "python_from",
+     "level": 0,
+     "line": 1,
+     "module": "__future__",
+     "names": [
+      "braces"
+     ]
+    }
+   ]
+  }
+ },
+ "snippet/genexp_not_sole.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/genexp_sole_multiline.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/genexp_with_kw.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/global_after_use.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/ident_cjk.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/ident_combining_start.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/ident_fullwidth_test.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/ident_kelvin.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/ident_math_alpha.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/ident_midot.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/ident_nfkc_ligature.py:python": {
+  "value": {
+   "calls": [
+    [
+     "fi",
+     4,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/ident_start_digit.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/ident_superscript.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/ident_unicode16.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/if_no_body.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/ifexp_chain_2000.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/import_dotted_as.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/import_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/indent_100_levels.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/indent_101_levels.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/indent_99_levels.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/lambda_bare_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/lambda_chain_2000.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/lazy_import.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/lone_cr_code.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_bad_complex.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_capture_attr.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_complex_literal.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_guard.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_irrefutable_not_last.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_keyword_pattern_dup.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_mapping_keys.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_or_bind.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_positional_after_keyword.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_rest_not_last.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_soft_keyword_call.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_star_alone.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_subject_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/match_wildcard_as.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/method_call_not_local.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     6,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/mismatched_brackets.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/mixed_newlines.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/nbsp_in_code.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/nbsp_in_string.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/nested_functions_calls.py:python": {
+  "value": {
+   "calls": [
+    [
+     "g",
+     6,
+     "local-name-candidate"
+    ],
+    [
+     "h",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "g",
+     5,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/nesting_150_brackets.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/nesting_199_parens.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/nesting_200_parens.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/nesting_201_parens.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/nesting_300_parens.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/nesting_mixed_201.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/no_trailing_newline.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/nonlocal_toplevel.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/nul_in_comment.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/nul_in_string.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/nul_middle.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/number_bad_binary.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/number_bad_hex.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/number_bad_octal.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/number_double_underscore.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/number_float_forms.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/number_keyword_adjacent.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/number_leading_zero.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/number_letters.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/number_trailing_underscore.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/only_comments.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/operator_dollar.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/operator_null_coalesce.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/operator_question.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/operator_strict_ne.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/pow_chain_2000.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/print_two_names.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/py2_backticks.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/py2_except_comma.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/py2_exec.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/py2_not_equal.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/py2_octal.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/py2_print.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/py2_raise_comma.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/py2_ur_string.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/raw_newline_in_string.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/return_outside.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/return_with_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/same_name_twice.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/set_with_colon.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/soft_keywords.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/spaces_then_tab_deeper.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/star_call_alone.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/str_bytes_mix.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/stray_semicolon.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/string_prefix_bf.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/string_prefix_invalid.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/string_prefix_uppercase.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/subscript_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/subscript_walrus.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/tab_blank_lines_ignored.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/tab_comment_only_line.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/tab_consistent.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/tab_continuation_backslash.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/tab_in_brackets.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/tab_nested.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/tab_then_spaces_dedent.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/tab_vs_spaces.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/trailing_backslash_eof.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/trailing_semicolon.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/try_without_handlers.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/tstring.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/typeparam_bound_constraints.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/typeparam_class_ok.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/typeparam_default.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/typeparam_default_alias.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/typeparam_default_tuple.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/unary_chain_1000.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/unary_chain_2500.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/unclosed_paren_eof.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/unexpected_indent.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/unmatched_close.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/unparenthesised_walrus_tuple.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/unterminated_string.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/unterminated_triple.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/very_long_line.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_assign_targets.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_class_parts.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     4,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_comprehension.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_decorators_vs_body.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     4,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     5,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_dict_keys_values.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_elif_chain.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     4,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     5,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     6,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     7,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     9,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_for_else.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     5,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_ifexp_compare.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_kwonly_defaults.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_match.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_nested_function_depth.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     6,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     5,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     4,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_raise_assert.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_return_annotations.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_slices.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_starred_and_keywords.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_try_blocks.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     7,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     9,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     5,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_while_else.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     5,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walk_order_with_items.py:python": {
+  "value": {
+   "calls": [
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     2,
+     "local-name-candidate"
+    ],
+    [
+     "f",
+     3,
+     "local-name-candidate"
+    ]
+   ],
+   "imports": []
+  }
+ },
+ "snippet/walrus_assign_target.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/walrus_in_comprehension_iter.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/walrus_in_return.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/walrus_toplevel.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/walrus_while.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/whitespace_only.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/with_call_target.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/yield_outside.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "snippet/yield_with_star.py:python": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ },
+ "unknown": {
+  "value": {
+   "calls": [],
+   "imports": []
+  }
+ }
+}

@@ -1,0 +1,1315 @@
+{
+ "cases": [
+  {
+   "id": "report-round-trip-and-key-order",
+   "description": "A report is stored with sorted keys and Python's float and escape forms, and comes back equal.",
+   "steps": [
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0",
+      "z": 1,
+      "nested": {
+       "b": [
+        1,
+        2.5,
+        {
+         "y": 1e-07,
+         "x": "caf\u00e9 \u2028 \ud83d\ude00"
+        },
+        1e+22,
+        123456789.125,
+        -0.0
+       ],
+       "a": null,
+       "t": true,
+       "quote": "say \"hi\"\n\ttab\\"
+      },
+      "big": 12345678901234567890,
+      "small": -9007199254740993,
+      "zero": 0,
+      "empty_list": [],
+      "empty_object": {}
+     },
+     "key": "key-1",
+     "state": true
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "other-key"
+    }
+   ]
+  },
+  {
+   "id": "every-part-of-the-identity-counts",
+   "description": "A report is found only under its exact repository, revision, base, policy and analysis key.",
+   "steps": [
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": "base-1",
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": "base-1",
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "other/repo",
+     "revision": "rev-1",
+     "base": "base-1",
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-2",
+     "base": "base-1",
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": "",
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": "base-2",
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": "base-1",
+     "policy": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": "base-1",
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-2"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": "",
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": "base-1",
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "falsy-base-revisions-mean-no-base",
+   "description": "Any falsy base_revision is stored as the empty string.",
+   "steps": [
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": 0,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "a"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": false,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "b"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": [],
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "c"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": {},
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "d"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": "",
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "e"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": 7,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "f"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "a"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": "7",
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "e"
+    },
+    {
+     "op": "query",
+     "sql": "SELECT analysis_key,base_revision,typeof(base_revision) FROM architecture_reports ORDER BY rowid"
+    }
+   ]
+  },
+  {
+   "id": "unsafe-reports-are-refused-before-anything-is-written",
+   "description": "Wrong engine version, wrong shape, oversize and missing identity are all errors.",
+   "steps": [
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-0.9"
+     },
+     "key": "old"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+     },
+     "key": "no-engine"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": null
+     },
+     "key": "null-engine"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "padded",
+     "pad": 4000100
+    },
+    {
+     "op": "put",
+     "report": [
+      1
+     ],
+     "key": "list"
+    },
+    {
+     "op": "put",
+     "report": "text",
+     "key": "string"
+    },
+    {
+     "op": "put",
+     "report": 5,
+     "key": "int"
+    },
+    {
+     "op": "put",
+     "report": null,
+     "key": "null"
+    },
+    {
+     "op": "put",
+     "report": {
+      "revision": "rev-1",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "no-repository"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "no-revision"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": null,
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "no-policy"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": null,
+      "revision": "rev-1",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "null-repository"
+    },
+    {
+     "op": "query",
+     "sql": "SELECT count(*) FROM architecture_reports"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "retention-never-evicts-another-repository",
+   "description": "Only the newest 100 reports of a repository are kept; a neighbour's report survives.",
+   "steps": [
+    {
+     "op": "put",
+     "report": {
+      "repository": "neighbour/repo",
+      "revision": "only",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "n"
+    },
+    {
+     "op": "putMany",
+     "count": 101,
+     "repository": "owner/repo"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-0",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "k-0"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "k-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-100",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "k-100"
+    },
+    {
+     "op": "get",
+     "repository": "neighbour/repo",
+     "revision": "only",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "n"
+    },
+    {
+     "op": "query",
+     "sql": "SELECT repository,count(*),min(rowid),max(rowid) FROM architecture_reports GROUP BY repository ORDER BY repository"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "replacing-a-report-keeps-it-newest",
+   "description": "Re-putting a key refreshes its recency, so it outlives older entries.",
+   "steps": [
+    {
+     "op": "putMany",
+     "count": 100,
+     "repository": "owner/repo"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-0",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "k-0"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "extra",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "extra"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-0",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "k-0"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "k-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-2",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "k-2"
+    },
+    {
+     "op": "query",
+     "sql": "SELECT count(*) FROM architecture_reports"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "stored-report-must-match-the-identity-it-is-found-under",
+   "description": "A cached report naming another repository, revision or policy, or of the wrong shape, is an error.",
+   "steps": [
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "warm"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','other-repo','{\"repository\": \"evil/repo\", \"revision\": \"rev-1\", \"base_revision\": null, \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"engine_version\": \"architecture-1.1.0\"}');"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','other-rev','{\"repository\": \"owner/repo\", \"revision\": \"rev-9\", \"base_revision\": null, \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"engine_version\": \"architecture-1.1.0\"}');"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','other-policy','{\"repository\": \"owner/repo\", \"revision\": \"rev-1\", \"base_revision\": null, \"policy_digest\": \"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\", \"engine_version\": \"architecture-1.1.0\"}');"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','not-json','not json');"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','list','[1]');"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','text','\"x\"');"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','number','5');"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','null','null');"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','flag','true');"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','empty','{}');"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','revision-number','{\"repository\": \"owner/repo\", \"revision\": 1, \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\"}');"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','missing-revision','{\"repository\": \"owner/repo\"}');"
+    },
+    {
+     "op": "raw",
+     "script": "INSERT INTO architecture_reports VALUES('owner/repo','rev-1','','dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd','architecture-1.1.0','good','{\"repository\": \"owner/repo\", \"revision\": \"rev-1\", \"base_revision\": null, \"policy_digest\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"engine_version\": \"architecture-1.1.0\"}');"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "other-repo"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "other-rev"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "other-policy"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "not-json"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "list"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "text"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "number"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "null"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "flag"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "empty"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "revision-number"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "missing-revision"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "good"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "only-advisory-evaluations-are-stored",
+   "description": "An evaluation with authority, a wrong status or a wrong shape is refused; sound ones are found only by their exact key.",
+   "steps": [
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "complete",
+      "enforcement_authority": true
+     },
+     "key": "a"
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "complete"
+     },
+     "key": "b"
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "complete",
+      "enforcement_authority": null
+     },
+     "key": "c"
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "complete",
+      "enforcement_authority": "false"
+     },
+     "key": "d"
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "complete",
+      "enforcement_authority": 0
+     },
+     "key": "e"
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "other",
+      "enforcement_authority": false
+     },
+     "key": "f"
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "enforcement_authority": false
+     },
+     "key": "g"
+    },
+    {
+     "op": "putEvaluation",
+     "result": [
+      1
+     ],
+     "key": "h"
+    },
+    {
+     "op": "putEvaluation",
+     "result": null,
+     "key": "i"
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "complete",
+      "enforcement_authority": false
+     },
+     "key": "j",
+     "pad": 140000
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "revision": "rev-1",
+      "status": "complete",
+      "enforcement_authority": false
+     },
+     "key": "k"
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "status": "complete",
+      "enforcement_authority": false
+     },
+     "key": "l"
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "complete",
+      "enforcement_authority": false
+     },
+     "key": "complete"
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "uncertain",
+      "enforcement_authority": false
+     },
+     "key": "uncertain"
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "inconclusive",
+      "enforcement_authority": false
+     },
+     "key": "inconclusive"
+    },
+    {
+     "op": "evaluation",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "key": "complete"
+    },
+    {
+     "op": "evaluation",
+     "repository": "foreign",
+     "revision": "rev-1",
+     "key": "complete"
+    },
+    {
+     "op": "evaluation",
+     "repository": "owner/repo",
+     "revision": "new-revision",
+     "key": "complete"
+    },
+    {
+     "op": "evaluation",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "key": "different-model-or-evidence"
+    },
+    {
+     "op": "query",
+     "sql": "SELECT request_key FROM architecture_evaluations ORDER BY rowid"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "evaluations-list-the-newest-eight-and-keep-fifty",
+   "description": "Listing is newest first and capped at eight; retention is fifty per repository.",
+   "steps": [
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "neighbour/repo",
+      "revision": "rev-1",
+      "status": "complete",
+      "enforcement_authority": false
+     },
+     "key": "n"
+    },
+    {
+     "op": "putEvaluationMany",
+     "count": 52,
+     "repository": "owner/repo"
+    },
+    {
+     "op": "evaluations",
+     "repository": "owner/repo",
+     "revision": "rev-1"
+    },
+    {
+     "op": "evaluation",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "key": "eval-0"
+    },
+    {
+     "op": "evaluation",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "key": "eval-1"
+    },
+    {
+     "op": "evaluation",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "key": "eval-51"
+    },
+    {
+     "op": "putEvaluation",
+     "result": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "status": "complete",
+      "enforcement_authority": false,
+      "n": 999
+     },
+     "key": "eval-3"
+    },
+    {
+     "op": "evaluations",
+     "repository": "owner/repo",
+     "revision": "rev-1"
+    },
+    {
+     "op": "evaluations",
+     "repository": "neighbour/repo",
+     "revision": "rev-1"
+    },
+    {
+     "op": "evaluations",
+     "repository": "nobody/repo",
+     "revision": "rev-1"
+    },
+    {
+     "op": "query",
+     "sql": "SELECT repository,count(*) FROM architecture_evaluations GROUP BY repository ORDER BY repository"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "evaluation-budget-is-atomic-and-fails-closed",
+   "description": "Eight 24000-character calls fit in 200000; the ninth does not. Scope and month are separate ledgers.",
+   "steps": [
+    {
+     "op": "reserve",
+     "scope": "project",
+     "month": "2026-11",
+     "characters": 0
+    },
+    {
+     "op": "reserve",
+     "scope": "project",
+     "month": "2026-11",
+     "characters": -1
+    },
+    {
+     "op": "reserve",
+     "scope": "project",
+     "month": "2026-11",
+     "characters": 24001
+    },
+    {
+     "op": "reserveMany",
+     "scope": "project",
+     "month": "2026-11",
+     "characters": 24000,
+     "count": 10
+    },
+    {
+     "op": "reserve",
+     "scope": "project",
+     "month": "2026-12",
+     "characters": 24000
+    },
+    {
+     "op": "reserve",
+     "scope": "other",
+     "month": "2026-11",
+     "characters": 24000
+    },
+    {
+     "op": "reserve",
+     "scope": "project",
+     "month": "2026-11",
+     "characters": 1
+    },
+    {
+     "op": "reserve",
+     "scope": "project",
+     "month": "2026-11",
+     "characters": 8000
+    },
+    {
+     "op": "reserveMany",
+     "scope": "many-calls",
+     "month": "2026-11",
+     "characters": 1,
+     "count": 52
+    },
+    {
+     "op": "query",
+     "sql": "SELECT scope,month,calls,characters FROM architecture_evaluation_usage ORDER BY scope,month"
+    }
+   ]
+  },
+  {
+   "id": "two-stores-on-one-file-agree",
+   "description": "Writes through one store are visible to another and share the same budget.",
+   "steps": [
+    {
+     "op": "store",
+     "as": "b"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "key-1"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1",
+     "as": "b"
+    },
+    {
+     "op": "reserveMany",
+     "scope": "s",
+     "month": "2026-11",
+     "characters": 24000,
+     "count": 5,
+     "as": "main"
+    },
+    {
+     "op": "reserveMany",
+     "scope": "s",
+     "month": "2026-11",
+     "characters": 24000,
+     "count": 5,
+     "as": "b"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "fresh-cache-schema",
+   "description": "A first use creates three tables in WAL mode at version 1.",
+   "steps": [
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "reopening-keeps-everything",
+   "description": "A second store over the same file finds the first one's data.",
+   "steps": [
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "key-1"
+    },
+    {
+     "op": "store",
+     "as": "b"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1",
+     "as": "b",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "unsupported-versions-are-refused-and-kept",
+   "description": "A newer schema version is refused without changes.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE TABLE evidence(value);INSERT INTO evidence VALUES('retained');PRAGMA user_version=2;"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "foreign-tables-are-left-alongside",
+   "description": "A version-0 database with other tables keeps them and gains the cache tables.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE TABLE evidence(value);INSERT INTO evidence VALUES('retained');"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "text-file-is-not-a-cache",
+   "description": "A text file cannot be opened as a cache.",
+   "steps": [
+    {
+     "op": "file",
+     "text": "not a database\n"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "missing-folder-is-an-error",
+   "description": "The cache does not create its folder.",
+   "steps": [
+    {
+     "op": "store",
+     "db": "missing-folder/cache.sqlite"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    },
+    {
+     "op": "put",
+     "report": {
+      "repository": "owner/repo",
+      "revision": "rev-1",
+      "base_revision": null,
+      "policy_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_version": "architecture-1.1.0"
+     },
+     "key": "key-1"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "folder-is-not-a-cache",
+   "description": "A directory is not a cache.",
+   "steps": [
+    {
+     "op": "dir"
+    },
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "analysis-identity-keys",
+   "description": "The analysis key is a digest of the inputs, the engine version and the presentation version.",
+   "steps": [
+    {
+     "op": "identity",
+     "candidate": {
+      "files": [
+       "a.py"
+      ]
+     },
+     "baseline": null,
+     "options": {}
+    },
+    {
+     "op": "identity",
+     "candidate": {
+      "files": [
+       "a.py"
+      ]
+     },
+     "baseline": null,
+     "options": {}
+    },
+    {
+     "op": "identity",
+     "candidate": {
+      "files": [
+       "b.py"
+      ]
+     },
+     "baseline": null,
+     "options": {}
+    },
+    {
+     "op": "identity",
+     "candidate": {
+      "files": [
+       "a.py"
+      ]
+     },
+     "baseline": {
+      "files": []
+     },
+     "options": {}
+    },
+    {
+     "op": "identity",
+     "candidate": {
+      "files": [
+       "a.py"
+      ]
+     },
+     "baseline": null,
+     "options": {
+      "depth": 2
+     }
+    },
+    {
+     "op": "identity",
+     "candidate": {
+      "b": 1,
+      "a": 2
+     },
+     "baseline": null,
+     "options": {}
+    },
+    {
+     "op": "identity",
+     "candidate": {
+      "a": 2,
+      "b": 1
+     },
+     "baseline": null,
+     "options": {}
+    },
+    {
+     "op": "identity",
+     "candidate": {
+      "name": "caf\u00e9 \ud83d\ude00",
+      "ratio": 0.5,
+      "tiny": 1e-07,
+      "huge": 1e+22
+     },
+     "baseline": null,
+     "options": {}
+    },
+    {
+     "op": "identity",
+     "candidate": null,
+     "baseline": null,
+     "options": null
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "cache-holds-no-credential",
+   "description": "The report cache has no column for a token, key or secret.",
+   "steps": [
+    {
+     "op": "get",
+     "repository": "owner/repo",
+     "revision": "rev-1",
+     "base": null,
+     "policy": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+     "key": "key-1"
+    },
+    {
+     "op": "schemaNames",
+     "words": [
+      "token",
+      "secret",
+      "password",
+      "credential",
+      "apikey",
+      "api_key",
+      "signing",
+      "private"
+     ]
+    }
+   ]
+  }
+ ]
+}

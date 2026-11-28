@@ -1,0 +1,320 @@
+{
+  "README.md": [],
+  "apps/web/src/entry.ts": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import { core } from \"@golden/core\";",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 2,
+      "name": "import { coreStore } from \"@golden/core/store\";",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 4,
+      "name": "entry",
+      "parent": null
+    }
+  ],
+  "config/settings.yaml": [],
+  "docs/guide.md": [],
+  "generated/schema.generated.ts": [
+    {
+      "kind": "variable_declarator",
+      "line": 2,
+      "name": "schemaVersion",
+      "parent": null
+    }
+  ],
+  "golden_pkg/__init__.py": [],
+  "golden_pkg/main.py": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import golden_pkg.util",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 2,
+      "name": "from . import models",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 3,
+      "name": "from .util import helper",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 4,
+      "name": "from golden_pkg.models import build_account",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 5,
+      "name": "from os import path",
+      "parent": null
+    },
+    {
+      "kind": "function_definition",
+      "line": 8,
+      "name": "normalise",
+      "parent": null
+    },
+    {
+      "kind": "function_definition",
+      "line": 12,
+      "name": "run",
+      "parent": null
+    },
+    {
+      "kind": "function_definition",
+      "line": 17,
+      "name": "serve",
+      "parent": null
+    }
+  ],
+  "golden_pkg/models.py": [
+    {
+      "kind": "class_definition",
+      "line": 1,
+      "name": "Account",
+      "parent": null
+    },
+    {
+      "kind": "function_definition",
+      "line": 2,
+      "name": "__init__",
+      "parent": "Account"
+    },
+    {
+      "kind": "function_definition",
+      "line": 5,
+      "name": "label",
+      "parent": "Account"
+    },
+    {
+      "kind": "function_definition",
+      "line": 9,
+      "name": "build_account",
+      "parent": null
+    }
+  ],
+  "golden_pkg/util.py": [
+    {
+      "kind": "function_definition",
+      "line": 1,
+      "name": "helper",
+      "parent": null
+    },
+    {
+      "kind": "function_definition",
+      "line": 5,
+      "name": "unused_helper",
+      "parent": null
+    }
+  ],
+  "js/index.js": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import { format } from \"./lib/format.js\";",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 2,
+      "name": "legacy",
+      "parent": null
+    },
+    {
+      "kind": "function_declaration",
+      "line": 5,
+      "name": "render",
+      "parent": null
+    },
+    {
+      "kind": "arrow_function",
+      "line": 9,
+      "name": "double",
+      "parent": null
+    }
+  ],
+  "js/lib/format.js": [
+    {
+      "kind": "function_declaration",
+      "line": 1,
+      "name": "format",
+      "parent": null
+    }
+  ],
+  "js/lib/legacy.cjs": [
+    {
+      "kind": "function_declaration",
+      "line": 1,
+      "name": "legacy",
+      "parent": null
+    }
+  ],
+  "js/vendor.min.js": [
+    {
+      "kind": "function_declaration",
+      "line": 1,
+      "name": "minified",
+      "parent": null
+    }
+  ],
+  "package.json": [],
+  "packages/core/package.json": [],
+  "packages/core/src/index.ts": [
+    {
+      "kind": "variable_declarator",
+      "line": 1,
+      "name": "core",
+      "parent": null
+    }
+  ],
+  "packages/core/src/store.ts": [
+    {
+      "kind": "variable_declarator",
+      "line": 1,
+      "name": "coreStore",
+      "parent": null
+    }
+  ],
+  "tests/test_main.py": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "from golden_pkg.main import run",
+      "parent": null
+    },
+    {
+      "kind": "function_definition",
+      "line": 4,
+      "name": "test_run",
+      "parent": null
+    }
+  ],
+  "ts/src/__snapshots__/service.snap.ts": [
+    {
+      "kind": "variable_declarator",
+      "line": 1,
+      "name": "snapshot",
+      "parent": null
+    }
+  ],
+  "ts/src/service.test.ts": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import { boot } from \"./service\";",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 3,
+      "name": "smoke",
+      "parent": null
+    }
+  ],
+  "ts/src/service.ts": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import { Store, createStore } from \"./store\";",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 2,
+      "name": "import type { Item } from \"./store.js\";",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 3,
+      "name": "import { Button } from \"./ui\";",
+      "parent": null
+    },
+    {
+      "kind": "function_declaration",
+      "line": 5,
+      "name": "seed",
+      "parent": null
+    },
+    {
+      "kind": "function_declaration",
+      "line": 9,
+      "name": "boot",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 10,
+      "name": "store",
+      "parent": "boot"
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 15,
+      "name": "view",
+      "parent": null
+    }
+  ],
+  "ts/src/store.ts": [
+    {
+      "kind": "interface_declaration",
+      "line": 1,
+      "name": "Item",
+      "parent": null
+    },
+    {
+      "kind": "type_alias_declaration",
+      "line": 5,
+      "name": "ItemId",
+      "parent": null
+    },
+    {
+      "kind": "class_declaration",
+      "line": 7,
+      "name": "Store",
+      "parent": null
+    },
+    {
+      "kind": "method_definition",
+      "line": 10,
+      "name": "add",
+      "parent": "Store"
+    },
+    {
+      "kind": "arrow_function",
+      "line": 15,
+      "name": "createStore",
+      "parent": null
+    }
+  ],
+  "ts/src/ui/Button.tsx": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import { boot } from \"../service\";",
+      "parent": null
+    },
+    {
+      "kind": "function_declaration",
+      "line": 3,
+      "name": "Button",
+      "parent": null
+    }
+  ],
+  "ts/src/ui/index.ts": [],
+  "tsconfig.json": []
+}

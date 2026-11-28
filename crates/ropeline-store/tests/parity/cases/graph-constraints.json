@@ -1,0 +1,556 @@
+{
+ "cases": [
+  {
+   "id": "analysis-symbols-must-be-json",
+   "description": "The CHECK constraint refuses text that is not JSON.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('bad','2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881','1111111111111111111111111111111111111111','python','v',1,'not json','{}')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('bad','2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881','1111111111111111111111111111111111111111','python','v',1,'[]','{broken')"
+     ],
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "analysis-missing-required-column",
+   "description": "NOT NULL columns refuse NULL.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('bad',NULL,'1111111111111111111111111111111111111111','python','v',1,'[]','{}')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO snapshots(repo,revision) VALUES(NULL,'r')"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "duplicate-analysis-id",
+   "description": "A primary key cannot repeat.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}')"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "manifest-needs-its-analysis-and-snapshot",
+   "description": "Foreign keys are enforced on the store connection.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO snapshot_files VALUES(1,'a.py','f','a.py','missing-analysis')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO snapshot_files VALUES(77,'a.py','f','a.py','an-alpha')"
+     ],
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "waypoint-cache-kind-and-json-checks",
+   "description": "Cache rows must have a known kind and JSON payloads; bindings a known kind and real keys.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO waypoint_cache VALUES('k','other','waypoint-v2','{}','0')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO waypoint_cache VALUES('p','file','waypoint-v2','not json','0')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO waypoint_cache VALUES('ok','file','waypoint-v2','{}','0')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch')",
+      "INSERT INTO snapshot_waypoints VALUES(1,'a.py','validation','ok','ok')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch')",
+      "INSERT INTO snapshot_waypoints VALUES(1,'a.py','file','nowhere','ok')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO waypoint_cache VALUES('ok','file','waypoint-v2','{}','0')"
+     ],
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "deleting-a-snapshot-cascades",
+   "description": "Deleting a snapshot row removes its manifest, edges and waypoint bindings.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-beta','f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753','2222222222222222222222222222222222222222','python','analyser-1',80,'[[\"function_definition\",\"beta\",1,null]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-unused','febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e','3333333333333333333333333333333333333333','python','analyser-1',10,'[]','{}')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(2,'owner/repo','rev-2','2026-01-02 00:00:00','{}','p2','branch')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(3,'other/repo','rev-3','2026-01-03 00:00:00','{}','p3','branch')",
+      "INSERT INTO snapshot_files VALUES(1,'src/a.py','f1','a.py','an-alpha')",
+      "INSERT INTO snapshot_files VALUES(1,'src/b.py','f2','b.py','an-beta')",
+      "INSERT INTO snapshot_files VALUES(2,'src/a.py','f1','a.py','an-alpha')",
+      "INSERT INTO snapshot_files VALUES(3,'x.py','f1','x.py','an-alpha')",
+      "INSERT INTO resolved_edges VALUES(1,'f:p1:f2','f:p1:f1','IMPORTS','src/b.py:1')",
+      "INSERT INTO resolved_edges VALUES(2,'f:p2:f1','f:p2:f1','CALLS','src/a.py:6')",
+      {
+       "text": "INSERT INTO waypoint_cache VALUES('wp-s','file','waypoint-v2',?,?)",
+       "params": [
+        "{\"kind\":\"file\",\"path\":\"src/a.py\"}",
+        {
+         "sha256": "{\"kind\":\"file\",\"path\":\"src/a.py\"}"
+        }
+       ]
+      },
+      {
+       "text": "INSERT INTO waypoint_cache VALUES('wp-v','validation','waypoint-checks-v1',?,?)",
+       "params": [
+        "{\"checks\":[]}",
+        {
+         "sha256": "{\"checks\":[]}"
+        }
+       ]
+      },
+      "INSERT INTO snapshot_waypoints VALUES(1,'src/a.py','file','wp-s','wp-v')",
+      "INSERT INTO waypoint_cache VALUES('wp-orphan','area','waypoint-v2','{}','0')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "DELETE FROM snapshots WHERE id=1"
+     ],
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "delete-snapshot-removes-legacy-rows-too",
+   "description": "delete_snapshot clears legacy nodes and edges as well as the snapshot.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "\nCREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP);\nCREATE TABLE nodes(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}');\nCREATE TABLE edges(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind));\nINSERT INTO snapshots(id,repo,revision,indexed_at) VALUES(1,'owner/repo','legacy','2025-12-31 00:00:00');\nINSERT INTO nodes VALUES('root',1,'repository','owner/repo','.',NULL,'{}');\nINSERT INTO nodes VALUES('file',1,'file','module.py','module.py',NULL,'{}');\nINSERT INTO nodes VALUES('function',1,'function_definition','legacy_function','module.py',1,'{}');\nINSERT INTO edges VALUES(1,'root','file','CONTAINS','module.py');\nINSERT INTO edges VALUES(1,'file','function','DEFINES','module.py:1');\n"
+    },
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(2,'owner/repo','rev-2','2026-01-02 00:00:00','{}','p2','branch')",
+      "INSERT INTO snapshot_files VALUES(2,'src/a.py','f1','a.py','an-alpha')"
+     ]
+    },
+    {
+     "op": "call",
+     "fn": "delete_snapshot",
+     "args": [
+      1
+     ],
+     "state": true
+    },
+    {
+     "op": "call",
+     "fn": "delete_snapshot",
+     "args": [
+      12345
+     ]
+    },
+    {
+     "op": "call",
+     "fn": "delete_snapshot",
+     "args": [
+      2
+     ],
+     "state": true
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT id,snapshot_id,kind,name,path,line,metadata FROM nodes ORDER BY id"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "collect-unused-keeps-referenced-rows",
+   "description": "Only analyses and waypoint records no manifest refers to are collected.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-beta','f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753','2222222222222222222222222222222222222222','python','analyser-1',80,'[[\"function_definition\",\"beta\",1,null]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-unused','febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e','3333333333333333333333333333333333333333','python','analyser-1',10,'[]','{}')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(2,'owner/repo','rev-2','2026-01-02 00:00:00','{}','p2','branch')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(3,'other/repo','rev-3','2026-01-03 00:00:00','{}','p3','branch')",
+      "INSERT INTO snapshot_files VALUES(1,'src/a.py','f1','a.py','an-alpha')",
+      "INSERT INTO snapshot_files VALUES(1,'src/b.py','f2','b.py','an-beta')",
+      "INSERT INTO snapshot_files VALUES(2,'src/a.py','f1','a.py','an-alpha')",
+      "INSERT INTO snapshot_files VALUES(3,'x.py','f1','x.py','an-alpha')",
+      "INSERT INTO resolved_edges VALUES(1,'f:p1:f2','f:p1:f1','IMPORTS','src/b.py:1')",
+      "INSERT INTO resolved_edges VALUES(2,'f:p2:f1','f:p2:f1','CALLS','src/a.py:6')",
+      {
+       "text": "INSERT INTO waypoint_cache VALUES('wp-s','file','waypoint-v2',?,?)",
+       "params": [
+        "{\"kind\":\"file\",\"path\":\"src/a.py\"}",
+        {
+         "sha256": "{\"kind\":\"file\",\"path\":\"src/a.py\"}"
+        }
+       ]
+      },
+      {
+       "text": "INSERT INTO waypoint_cache VALUES('wp-v','validation','waypoint-checks-v1',?,?)",
+       "params": [
+        "{\"checks\":[]}",
+        {
+         "sha256": "{\"checks\":[]}"
+        }
+       ]
+      },
+      "INSERT INTO snapshot_waypoints VALUES(1,'src/a.py','file','wp-s','wp-v')",
+      "INSERT INTO waypoint_cache VALUES('wp-orphan','area','waypoint-v2','{}','0')"
+     ]
+    },
+    {
+     "op": "call",
+     "fn": "collect_unused",
+     "args": [],
+     "state": true
+    },
+    {
+     "op": "call",
+     "fn": "collect_unused",
+     "args": []
+    }
+   ]
+  },
+  {
+   "id": "collect-after-delete",
+   "description": "Deleting a snapshot then collecting drops what only it used.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-beta','f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753','2222222222222222222222222222222222222222','python','analyser-1',80,'[[\"function_definition\",\"beta\",1,null]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-unused','febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e','3333333333333333333333333333333333333333','python','analyser-1',10,'[]','{}')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(2,'owner/repo','rev-2','2026-01-02 00:00:00','{}','p2','branch')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(3,'other/repo','rev-3','2026-01-03 00:00:00','{}','p3','branch')",
+      "INSERT INTO snapshot_files VALUES(1,'src/a.py','f1','a.py','an-alpha')",
+      "INSERT INTO snapshot_files VALUES(1,'src/b.py','f2','b.py','an-beta')",
+      "INSERT INTO snapshot_files VALUES(2,'src/a.py','f1','a.py','an-alpha')",
+      "INSERT INTO snapshot_files VALUES(3,'x.py','f1','x.py','an-alpha')",
+      "INSERT INTO resolved_edges VALUES(1,'f:p1:f2','f:p1:f1','IMPORTS','src/b.py:1')",
+      "INSERT INTO resolved_edges VALUES(2,'f:p2:f1','f:p2:f1','CALLS','src/a.py:6')",
+      {
+       "text": "INSERT INTO waypoint_cache VALUES('wp-s','file','waypoint-v2',?,?)",
+       "params": [
+        "{\"kind\":\"file\",\"path\":\"src/a.py\"}",
+        {
+         "sha256": "{\"kind\":\"file\",\"path\":\"src/a.py\"}"
+        }
+       ]
+      },
+      {
+       "text": "INSERT INTO waypoint_cache VALUES('wp-v','validation','waypoint-checks-v1',?,?)",
+       "params": [
+        "{\"checks\":[]}",
+        {
+         "sha256": "{\"checks\":[]}"
+        }
+       ]
+      },
+      "INSERT INTO snapshot_waypoints VALUES(1,'src/a.py','file','wp-s','wp-v')",
+      "INSERT INTO waypoint_cache VALUES('wp-orphan','area','waypoint-v2','{}','0')"
+     ]
+    },
+    {
+     "op": "call",
+     "fn": "delete_snapshot",
+     "args": [
+      1
+     ]
+    },
+    {
+     "op": "call",
+     "fn": "delete_snapshot",
+     "args": [
+      2
+     ]
+    },
+    {
+     "op": "call",
+     "fn": "delete_snapshot",
+     "args": [
+      3
+     ]
+    },
+    {
+     "op": "call",
+     "fn": "collect_unused",
+     "args": [],
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "staging-edge-insert-trigger",
+   "description": "Inserting into the edges view lands in resolved_edges; the nodes view is read-only.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-beta','f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753','2222222222222222222222222222222222222222','python','analyser-1',80,'[[\"function_definition\",\"beta\",1,null]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch')",
+      "INSERT INTO snapshot_files VALUES(1,'src/a.py','f1','a.py','an-alpha')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO edges(snapshot_id,source,target,kind,evidence) VALUES(1,'a','b','CALLS','src/a.py:3')"
+     ],
+     "state": true
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO edges(snapshot_id,source,target,kind,evidence) VALUES(1,'a','b','CALLS','src/a.py:3')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO nodes VALUES('x',1,'file','a','a',NULL,'{}')"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "UPDATE edges SET kind='X'"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "DELETE FROM nodes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "duplicate-resolved-edge",
+   "description": "An edge cannot repeat inside a snapshot.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch')",
+      "INSERT INTO resolved_edges VALUES(1,'a','b','CALLS',NULL)"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO resolved_edges VALUES(1,'a','b','CALLS','other')"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "oversize-analysis-is-refused-before-decoding",
+   "description": "An analysis over 16,000,000 characters is refused; one exactly at the limit is served.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('over','5fb6a47e368e12e5d8b19280796e6a3d146fe391ed2e967d5f95c55bfb0f9c2f','1111111111111111111111111111111111111111','python','v',1,'[\"'||replace(hex(zeroblob(8000000)),'0','a')||'\"]','{}')",
+      "INSERT INTO analyses VALUES('at-limit','b1d6b91b67c2afa5e322988d9462638d354ddf8a1ef79dba987f815c22b4baee','1111111111111111111111111111111111111111','python','v',1,'[\"'||replace(hex(zeroblob(7999997)),'0','a')||'\"]','{}')"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT id,length(symbols)+length(facts) FROM analyses ORDER BY id"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "analysis",
+     "args": [
+      "over"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "analysis",
+     "args": [
+      "at-limit"
+     ],
+     "digest": true
+    }
+   ],
+   "noState": true,
+   "noSqlDump": true
+  },
+  {
+   "id": "token-never-reaches-errors-or-file",
+   "description": "A rejected write carrying a read-token marker leaves no trace in the error or the database file.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      {
+       "text": "INSERT INTO analyses VALUES(?,?,?,?,?,?,?,?)",
+       "params": [
+        "READ-TOKEN-MARKER-0000",
+        "e3b98a4da31a127d4bde6e43033f66ba274cab0eb7eb1c70ec41402bf6273dd8",
+        "1111111111111111111111111111111111111111",
+        "python",
+        "v",
+        1,
+        "not json",
+        "{}"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "analysis",
+     "args": [
+      "READ-TOKEN-MARKER-0000"
+     ]
+    },
+    {
+     "op": "sql",
+     "statements": [
+      {
+       "text": "INSERT INTO snapshots(repo,revision) VALUES(?,NULL)",
+       "params": [
+        "READ-TOKEN-MARKER-0000"
+       ]
+      }
+     ]
+    },
+    {
+     "op": "close"
+    },
+    {
+     "op": "absent",
+     "needle": "READ-TOKEN-MARKER-0000"
+    },
+    {
+     "op": "schemaNames",
+     "words": [
+      "token",
+      "secret",
+      "password",
+      "credential",
+      "apikey",
+      "api_key",
+      "signing",
+      "private"
+     ]
+    }
+   ],
+   "noSqlDump": true
+  }
+ ]
+}

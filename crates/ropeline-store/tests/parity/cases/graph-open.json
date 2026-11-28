@@ -1,0 +1,309 @@
+{
+ "cases": [
+  {
+   "id": "fresh-database",
+   "description": "A new file becomes a version-3 database in WAL mode with foreign keys on.",
+   "steps": [
+    {
+     "op": "connect",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "reopen-current",
+   "description": "Reopening a current database changes nothing.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-beta','f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753','2222222222222222222222222222222222222222','python','analyser-1',80,'[[\"function_definition\",\"beta\",1,null]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-unused','febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e','3333333333333333333333333333333333333333','python','analyser-1',10,'[]','{}')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(2,'owner/repo','rev-2','2026-01-02 00:00:00','{}','p2','branch')"
+     ]
+    },
+    {
+     "op": "close"
+    },
+    {
+     "op": "connect",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "two-connections-share-commits",
+   "description": "Two store connections to one file see each other's committed rows.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "connect",
+     "as": "b"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-beta','f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753','2222222222222222222222222222222222222222','python','analyser-1',80,'[[\"function_definition\",\"beta\",1,null]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-unused','febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e','3333333333333333333333333333333333333333','python','analyser-1',10,'[]','{}')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(2,'owner/repo','rev-2','2026-01-02 00:00:00','{}','p2','branch')"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "summary",
+     "args": [
+      "owner/repo"
+     ],
+     "as": "b"
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT count(*) FROM snapshots"
+     ],
+     "as": "b"
+    }
+   ]
+  },
+  {
+   "id": "legacy-version-zero",
+   "description": "A database from before shared analyses keeps its history and gains the staging views.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "\nCREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP);\nCREATE TABLE nodes(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}');\nCREATE TABLE edges(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind));\nINSERT INTO snapshots(id,repo,revision,indexed_at) VALUES(1,'owner/repo','legacy','2025-12-31 00:00:00');\nINSERT INTO nodes VALUES('root',1,'repository','owner/repo','.',NULL,'{}');\nINSERT INTO nodes VALUES('file',1,'file','module.py','module.py',NULL,'{}');\nINSERT INTO nodes VALUES('function',1,'function_definition','legacy_function','module.py',1,'{}');\nINSERT INTO edges VALUES(1,'root','file','CONTAINS','module.py');\nINSERT INTO edges VALUES(1,'file','function','DEFINES','module.py:1');\n"
+    },
+    {
+     "op": "connect",
+     "state": true
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT id,snapshot_id,kind,name,path,line,metadata FROM nodes ORDER BY id"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT snapshot_id,source,target,kind,evidence FROM edges ORDER BY snapshot_id,source,target,kind"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "legacy-with-some-new-columns",
+   "description": "A half-migrated snapshots table only gains the columns it lacks.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP,metadata TEXT NOT NULL DEFAULT '{}');INSERT INTO snapshots(id,repo,revision,indexed_at) VALUES(1,'owner/repo','early','2025-12-30 00:00:00');"
+    },
+    {
+     "op": "connect",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "version-two-upgrade",
+   "description": "A version-2 database gains the waypoint tables and a rebuilt node view without losing rows.",
+   "steps": [
+    {
+     "op": "connect"
+    },
+    {
+     "op": "sql",
+     "statements": [
+      "INSERT INTO analyses VALUES('an-alpha','8ed3f6ad685b959ead7022518e1af76cd816f8e8ec7ccdda1ed4018e8f2223f8','1111111111111111111111111111111111111111','python','analyser-1',120,'[[\"function_definition\",\"alpha\",1,null],[\"class_definition\",\"Beta\",5,null],[\"function_definition\",\"run\",6,\"Beta\"]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-beta','f44e64e75f3948e9f73f8dfa94721c4ce8cbb4f265c4790c702b2d41cfbf2753','2222222222222222222222222222222222222222','python','analyser-1',80,'[[\"function_definition\",\"beta\",1,null]]','{\"imports\":[],\"calls\":[]}')",
+      "INSERT INTO analyses VALUES('an-unused','febe1d741b49e5a9c31526728d8c5134a803adfc4c04c4f052673722ed85597e','3333333333333333333333333333333333333333','python','analyser-1',10,'[]','{}')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(1,'owner/repo','rev-1','2026-01-01 00:00:00','{\"k\":1}','p1','branch')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(2,'owner/repo','rev-2','2026-01-02 00:00:00','{}','p2','branch')",
+      "INSERT INTO snapshots(id,repo,revision,indexed_at,metadata,node_prefix,view_key) VALUES(3,'other/repo','rev-3','2026-01-03 00:00:00','{}','p3','branch')",
+      "INSERT INTO snapshot_files VALUES(1,'src/a.py','f1','a.py','an-alpha')",
+      "INSERT INTO snapshot_files VALUES(1,'src/b.py','f2','b.py','an-beta')",
+      "INSERT INTO snapshot_files VALUES(2,'src/a.py','f1','a.py','an-alpha')",
+      "INSERT INTO snapshot_files VALUES(3,'x.py','f1','x.py','an-alpha')",
+      "INSERT INTO resolved_edges VALUES(1,'f:p1:f2','f:p1:f1','IMPORTS','src/b.py:1')",
+      "INSERT INTO resolved_edges VALUES(2,'f:p2:f1','f:p2:f1','CALLS','src/a.py:6')"
+     ]
+    },
+    {
+     "op": "call",
+     "fn": "rollback_waypoints",
+     "args": []
+    },
+    {
+     "op": "close"
+    },
+    {
+     "op": "connect",
+     "state": true
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT id,snapshot_id,kind,name,path,line,metadata FROM nodes ORDER BY id"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "query",
+     "args": [
+      "SELECT snapshot_id,source,target,kind,evidence FROM edges ORDER BY snapshot_id,source,target,kind"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "unsupported-version-1",
+   "description": "Version 1 is refused and left alone.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE TABLE evidence(value);INSERT INTO evidence VALUES('retained');PRAGMA user_version=1;"
+    },
+    {
+     "op": "connect",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "unsupported-version-4",
+   "description": "A newer version is refused and left alone.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE TABLE evidence(value);INSERT INTO evidence VALUES('retained');PRAGMA user_version=4;"
+    },
+    {
+     "op": "connect",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "unsupported-version-99",
+   "description": "A far-future version is refused and left alone.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "PRAGMA user_version=99;"
+    },
+    {
+     "op": "connect",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "unexpected-legacy-view",
+   "description": "A view called nodes in a version-0 file is not a legacy table.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE VIEW nodes AS SELECT 1 AS id;"
+    },
+    {
+     "op": "connect",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "failed-migration-is-atomic",
+   "description": "A rename that collides rolls the whole migration back, schema and data.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE TABLE nodes(id TEXT PRIMARY KEY);INSERT INTO nodes VALUES('kept');CREATE TABLE legacy_nodes(other TEXT);"
+    },
+    {
+     "op": "connect",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "failed-version-two-upgrade-is-atomic",
+   "description": "A version-2 file missing its trigger is not half upgraded.",
+   "steps": [
+    {
+     "op": "raw",
+     "script": "CREATE TABLE snapshots(id INTEGER PRIMARY KEY);INSERT INTO snapshots VALUES(1);PRAGMA user_version=2;"
+    },
+    {
+     "op": "connect",
+     "state": true
+    }
+   ]
+  },
+  {
+   "id": "not-a-database",
+   "description": "A text file is not a database.",
+   "steps": [
+    {
+     "op": "file",
+     "text": "this is not a sqlite database, only text\n"
+    },
+    {
+     "op": "connect"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "missing-directory",
+   "description": "A path inside a missing folder cannot be created.",
+   "steps": [
+    {
+     "op": "connect",
+     "db": "missing-folder/graph.sqlite"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "directory-as-database",
+   "description": "A folder cannot be opened as a database.",
+   "steps": [
+    {
+     "op": "dir"
+    },
+    {
+     "op": "connect"
+    }
+   ],
+   "noState": true
+  },
+  {
+   "id": "empty-file-is-a-new-database",
+   "description": "A zero-byte file is a valid empty database.",
+   "steps": [
+    {
+     "op": "file",
+     "text": ""
+    },
+    {
+     "op": "connect",
+     "state": true
+    }
+   ]
+  }
+ ]
+}

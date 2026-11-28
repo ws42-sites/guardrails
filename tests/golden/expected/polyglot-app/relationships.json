@@ -1,0 +1,228 @@
+{
+  "README.md": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "apps/web/src/entry.ts": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-package-export",
+        "line": 1,
+        "target": "packages/core/src/index.ts"
+      },
+      {
+        "confidence": "resolved-package-export",
+        "line": 2,
+        "target": "packages/core/src/store.ts"
+      }
+    ],
+    "possible_calls": []
+  },
+  "config/settings.yaml": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "docs/guide.md": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "generated/schema.generated.ts": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "golden_pkg/__init__.py": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "golden_pkg/main.py": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-module",
+        "line": 1,
+        "target": "golden_pkg/util.py"
+      },
+      {
+        "confidence": "resolved-relative",
+        "line": 2,
+        "target": "golden_pkg/models.py"
+      },
+      {
+        "confidence": "resolved-relative",
+        "line": 3,
+        "target": "golden_pkg/util.py"
+      },
+      {
+        "confidence": "resolved-module",
+        "line": 4,
+        "target": "golden_pkg/models.py"
+      }
+    ],
+    "possible_calls": [
+      {
+        "confidence": "local-name-candidate",
+        "line": 18,
+        "name": "run",
+        "target_symbol_index": 6
+      },
+      {
+        "confidence": "local-name-candidate",
+        "line": 14,
+        "name": "normalise",
+        "target_symbol_index": 5
+      }
+    ]
+  },
+  "golden_pkg/models.py": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "golden_pkg/util.py": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "js/index.js": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 1,
+        "target": "js/lib/format.js"
+      },
+      {
+        "confidence": "resolved-relative",
+        "line": 2,
+        "target": "js/lib/legacy.cjs"
+      },
+      {
+        "confidence": "resolved-relative",
+        "line": 3,
+        "target": "js/lib/format.js"
+      }
+    ],
+    "possible_calls": []
+  },
+  "js/lib/format.js": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "js/lib/legacy.cjs": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "js/vendor.min.js": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "package.json": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "packages/core/package.json": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "packages/core/src/index.ts": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "packages/core/src/store.ts": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "tests/test_main.py": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-module",
+        "line": 1,
+        "target": "golden_pkg/main.py"
+      }
+    ],
+    "possible_calls": []
+  },
+  "ts/src/__snapshots__/service.snap.ts": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "ts/src/service.test.ts": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 1,
+        "target": "ts/src/service.ts"
+      }
+    ],
+    "possible_calls": []
+  },
+  "ts/src/service.ts": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 1,
+        "target": "ts/src/store.ts"
+      },
+      {
+        "confidence": "resolved-relative",
+        "line": 2,
+        "target": "ts/src/store.ts"
+      },
+      {
+        "confidence": "resolved-relative",
+        "line": 3,
+        "target": "ts/src/ui/index.ts"
+      }
+    ],
+    "possible_calls": []
+  },
+  "ts/src/store.ts": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "ts/src/ui/Button.tsx": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 1,
+        "target": "ts/src/service.ts"
+      }
+    ],
+    "possible_calls": []
+  },
+  "ts/src/ui/index.ts": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 1,
+        "target": "ts/src/ui/Button.tsx"
+      }
+    ],
+    "possible_calls": []
+  },
+  "tsconfig.json": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  }
+}

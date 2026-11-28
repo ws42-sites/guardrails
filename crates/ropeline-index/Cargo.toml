@@ -1,0 +1,21 @@
+[package]
+name = "ropeline-index"
+version = "0.1.0"
+description = "Ropeline's indexer core: reads a local folder or a list of files into the graph database"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+ropeline-engine = { path = "../ropeline-engine", version = "=0.1.0" }
+ropeline-store = { path = "../ropeline-store", version = "=0.1.0" }
+# Same pin and bundled SQLite as the store, whose connection the indexer borrows.
+rusqlite = { version = "=0.43.0", features = ["bundled"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"
+# Git blob identifiers are SHA-1; the analysis cache is looked up by them (never trusted).
+sha1 = "=0.10.6"
+
+[dev-dependencies]
+base64 = "0.22"

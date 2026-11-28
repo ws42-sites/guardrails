@@ -1,0 +1,295 @@
+{
+  "Cargo.toml": [],
+  "README.md": [],
+  "crates/shared/Cargo.toml": [],
+  "crates/shared/src/lib.rs": [
+    {
+      "kind": "mod_item",
+      "line": 2,
+      "name": "types",
+      "parent": null
+    }
+  ],
+  "crates/shared/src/types.rs": [
+    {
+      "kind": "struct_item",
+      "line": 2,
+      "name": "Handle",
+      "parent": null
+    },
+    {
+      "kind": "function_item",
+      "line": 5,
+      "name": "id",
+      "parent": "Handle"
+    }
+  ],
+  "src/bin/tool.rs": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "use golden_engine::open;",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 2,
+      "name": "use golden_engine::store::MemoryStore;",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 3,
+      "name": "use golden_shared::types::Handle;",
+      "parent": null
+    },
+    {
+      "kind": "function_item",
+      "line": 5,
+      "name": "main",
+      "parent": null
+    }
+  ],
+  "src/graph.rs": [
+    {
+      "kind": "import",
+      "line": 2,
+      "name": "use self::node::Node;",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 3,
+      "name": "use crate::util;",
+      "parent": null
+    },
+    {
+      "kind": "mod_item",
+      "line": 5,
+      "name": "node",
+      "parent": null
+    },
+    {
+      "kind": "struct_item",
+      "line": 7,
+      "name": "Graph",
+      "parent": null
+    },
+    {
+      "kind": "function_item",
+      "line": 12,
+      "name": "new",
+      "parent": "Graph"
+    },
+    {
+      "kind": "function_item",
+      "line": 16,
+      "name": "add",
+      "parent": "Graph"
+    },
+    {
+      "kind": "function_item",
+      "line": 20,
+      "name": "is_empty",
+      "parent": "Graph"
+    }
+  ],
+  "src/graph/node.rs": [
+    {
+      "kind": "struct_item",
+      "line": 3,
+      "name": "Node",
+      "parent": null
+    },
+    {
+      "kind": "enum_item",
+      "line": 7,
+      "name": "Kind",
+      "parent": null
+    },
+    {
+      "kind": "trait_item",
+      "line": 12,
+      "name": "Named",
+      "parent": null
+    },
+    {
+      "kind": "function_signature_item",
+      "line": 13,
+      "name": "name",
+      "parent": "Named"
+    },
+    {
+      "kind": "function_item",
+      "line": 17,
+      "name": "name",
+      "parent": "Node"
+    }
+  ],
+  "src/lib.rs": [
+    {
+      "kind": "mod_item",
+      "line": 2,
+      "name": "graph",
+      "parent": null
+    },
+    {
+      "kind": "mod_item",
+      "line": 3,
+      "name": "store",
+      "parent": null
+    },
+    {
+      "kind": "mod_item",
+      "line": 4,
+      "name": "util",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 6,
+      "name": "use crate::graph::Graph;",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 7,
+      "name": "use crate::store::{MemoryStore, Store};",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 8,
+      "name": "use golden_shared::types::Handle;",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 10,
+      "name": "pub use self::util::normalise;",
+      "parent": null
+    },
+    {
+      "kind": "function_item",
+      "line": 13,
+      "name": "open",
+      "parent": null
+    },
+    {
+      "kind": "mod_item",
+      "line": 19,
+      "name": "tests",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 20,
+      "name": "use super::*;",
+      "parent": "tests"
+    },
+    {
+      "kind": "function_item",
+      "line": 23,
+      "name": "opens_an_empty_graph",
+      "parent": "tests"
+    },
+    {
+      "kind": "function_item",
+      "line": 30,
+      "name": "opens_a_stored_graph",
+      "parent": "tests"
+    }
+  ],
+  "src/store/index.rs": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "use super::Store;",
+      "parent": null
+    },
+    {
+      "kind": "struct_item",
+      "line": 4,
+      "name": "Entry",
+      "parent": null
+    },
+    {
+      "kind": "function_item",
+      "line": 8,
+      "name": "build",
+      "parent": null
+    }
+  ],
+  "src/store/mod.rs": [
+    {
+      "kind": "mod_item",
+      "line": 2,
+      "name": "index",
+      "parent": null
+    },
+    {
+      "kind": "trait_item",
+      "line": 4,
+      "name": "Store",
+      "parent": null
+    },
+    {
+      "kind": "function_signature_item",
+      "line": 5,
+      "name": "load",
+      "parent": "Store"
+    },
+    {
+      "kind": "struct_item",
+      "line": 8,
+      "name": "MemoryStore",
+      "parent": null
+    },
+    {
+      "kind": "function_item",
+      "line": 11,
+      "name": "load",
+      "parent": "MemoryStore"
+    }
+  ],
+  "src/util.rs": [
+    {
+      "kind": "function_item",
+      "line": 1,
+      "name": "normalise",
+      "parent": null
+    },
+    {
+      "kind": "function_item",
+      "line": 5,
+      "name": "count",
+      "parent": null
+    }
+  ],
+  "tests/roundtrip.rs": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "use golden_engine::store::index::Entry;",
+      "parent": null
+    },
+    {
+      "kind": "import",
+      "line": 2,
+      "name": "use golden_shared::types::Handle;",
+      "parent": null
+    },
+    {
+      "kind": "function_item",
+      "line": 5,
+      "name": "keeps_entry_names",
+      "parent": null
+    },
+    {
+      "kind": "function_item",
+      "line": 14,
+      "name": "reads_a_large_store",
+      "parent": null
+    }
+  ]
+}

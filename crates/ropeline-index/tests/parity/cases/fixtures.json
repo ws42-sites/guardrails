@@ -1,0 +1,416 @@
+{
+ "cases": [
+  {
+   "id": "polyglot-app-index-repeat-change",
+   "steps": [
+    {
+     "op": "write",
+     "fixture": "polyglot-app"
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "write",
+     "files": {
+      "golden_pkg/util.py": "def helper():\n    return 2\n\n\ndef extra():\n    return 3\n",
+      "ts/src/extra.ts": "import './store';\nexport function extra() { return 1; }\n"
+     }
+    },
+    {
+     "op": "remove",
+     "paths": [
+      "js/lib/legacy.cjs"
+     ]
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "indexRepo"
+    }
+   ]
+  },
+  {
+   "id": "polyglot-app-two-branches",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "fixture": "polyglot-app",
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     },
+     "state": "digest"
+    },
+    {
+     "op": "indexFiles",
+     "fixture": "polyglot-app",
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      },
+      "max_symbols": 5000
+     },
+     "state": "digest"
+    },
+    {
+     "op": "indexFiles",
+     "fixture": "polyglot-app",
+     "set": {
+      "golden_pkg/util.py": "def helper():\n    return 2\n\n\ndef extra():\n    return 3\n",
+      "ts/src/extra.ts": "import './store';\nexport function extra() { return 1; }\n"
+     },
+     "drop": [
+      "js/lib/legacy.cjs"
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "prune",
+     "kwargs": {
+      "keep": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "owners-architecture-index-repeat-change",
+   "steps": [
+    {
+     "op": "write",
+     "fixture": "owners-architecture"
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "write",
+     "files": {
+      "core/store.ts": "export function store() { return 2; }\n",
+      "lib/c.ts": "import './a';\nexport function c() {}\n"
+     }
+    },
+    {
+     "op": "remove",
+     "paths": [
+      "lib/b.ts"
+     ]
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "indexRepo"
+    }
+   ]
+  },
+  {
+   "id": "owners-architecture-two-branches",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "fixture": "owners-architecture",
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     },
+     "state": "digest"
+    },
+    {
+     "op": "indexFiles",
+     "fixture": "owners-architecture",
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      },
+      "max_symbols": 5000
+     },
+     "state": "digest"
+    },
+    {
+     "op": "indexFiles",
+     "fixture": "owners-architecture",
+     "set": {
+      "core/store.ts": "export function store() { return 2; }\n",
+      "lib/c.ts": "import './a';\nexport function c() {}\n"
+     },
+     "drop": [
+      "lib/b.ts"
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "prune",
+     "kwargs": {
+      "keep": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "rust-crate-index-repeat-change",
+   "steps": [
+    {
+     "op": "write",
+     "fixture": "rust-crate"
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "write",
+     "files": {
+      "src/util.rs": "pub fn util() -> u8 {\n    2\n}\n",
+      "src/extra.rs": "use crate::util;\n\npub fn extra() {}\n"
+     }
+    },
+    {
+     "op": "remove",
+     "paths": [
+      "src/store/index.rs"
+     ]
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "indexRepo"
+    }
+   ]
+  },
+  {
+   "id": "rust-crate-two-branches",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "fixture": "rust-crate",
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     },
+     "state": "digest"
+    },
+    {
+     "op": "indexFiles",
+     "fixture": "rust-crate",
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      },
+      "max_symbols": 5000
+     },
+     "state": "digest"
+    },
+    {
+     "op": "indexFiles",
+     "fixture": "rust-crate",
+     "set": {
+      "src/util.rs": "pub fn util() -> u8 {\n    2\n}\n",
+      "src/extra.rs": "use crate::util;\n\npub fn extra() {}\n"
+     },
+     "drop": [
+      "src/store/index.rs"
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "prune",
+     "kwargs": {
+      "keep": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "unsupported-cases-index-repeat-change",
+   "steps": [
+    {
+     "op": "write",
+     "fixture": "unsupported-cases"
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "write",
+     "files": {
+      "py/dynamic.py": "def dynamic():\n    return __import__('os')\n",
+      "py/new.py": "def new():\n    return 1\n"
+     }
+    },
+    {
+     "op": "remove",
+     "paths": [
+      "web/missing.ts"
+     ]
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "indexRepo"
+    }
+   ]
+  },
+  {
+   "id": "unsupported-cases-two-branches",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "fixture": "unsupported-cases",
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "main",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+       "view": "branch"
+      }
+     },
+     "state": "digest"
+    },
+    {
+     "op": "indexFiles",
+     "fixture": "unsupported-cases",
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      },
+      "max_symbols": 5000
+     },
+     "state": "digest"
+    },
+    {
+     "op": "indexFiles",
+     "fixture": "unsupported-cases",
+     "set": {
+      "py/dynamic.py": "def dynamic():\n    return __import__('os')\n",
+      "py/new.py": "def new():\n    return 1\n"
+     },
+     "drop": [
+      "web/missing.ts"
+     ],
+     "options": {
+      "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "workspaceContext": {
+       "branch": "feature",
+       "workspace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+       "fingerprint": "2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+       "view": "branch"
+      }
+     }
+    },
+    {
+     "op": "prune",
+     "kwargs": {
+      "keep": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "owners-architecture-with-ownership-record",
+   "steps": [
+    {
+     "op": "write",
+     "fixture": "owners-architecture"
+    },
+    {
+     "op": "indexRepo",
+     "repo": "owner/owners",
+     "state": "digest"
+    },
+    {
+     "op": "indexFiles",
+     "fixture": "owners-architecture",
+     "repo": "owner/owners",
+     "options": {},
+     "ownership": {
+      "path": ".github/CODEOWNERS",
+      "text": "* @core\n/lib/ @libs\n"
+     }
+    }
+   ]
+  }
+ ]
+}

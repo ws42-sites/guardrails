@@ -1,0 +1,466 @@
+{
+ "cases": [
+  {
+   "id": "index-files-trips-on-the-first-file",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "f0.py",
+       "data": "def f0():\n    pass\n"
+      },
+      {
+       "path": "f1.py",
+       "data": "def f1():\n    pass\n"
+      },
+      {
+       "path": "f2.py",
+       "data": "def f2():\n    pass\n"
+      },
+      {
+       "path": "f3.py",
+       "data": "def f3():\n    pass\n"
+      },
+      {
+       "path": "f4.py",
+       "data": "def f4():\n    pass\n"
+      }
+     ],
+     "options": {
+      "timeout_seconds": 1
+     },
+     "clock": {
+      "step": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    }
+   ]
+  },
+  {
+   "id": "index-files-trips-on-the-third-file",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "f0.py",
+       "data": "def f0():\n    pass\n"
+      },
+      {
+       "path": "f1.py",
+       "data": "def f1():\n    pass\n"
+      },
+      {
+       "path": "f2.py",
+       "data": "def f2():\n    pass\n"
+      },
+      {
+       "path": "f3.py",
+       "data": "def f3():\n    pass\n"
+      },
+      {
+       "path": "f4.py",
+       "data": "def f4():\n    pass\n"
+      }
+     ],
+     "options": {
+      "timeout_seconds": 2.5
+     },
+     "clock": {
+      "step": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    }
+   ]
+  },
+  {
+   "id": "index-files-trips-when-equal",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "f0.py",
+       "data": "def f0():\n    pass\n"
+      },
+      {
+       "path": "f1.py",
+       "data": "def f1():\n    pass\n"
+      },
+      {
+       "path": "f2.py",
+       "data": "def f2():\n    pass\n"
+      },
+      {
+       "path": "f3.py",
+       "data": "def f3():\n    pass\n"
+      },
+      {
+       "path": "f4.py",
+       "data": "def f4():\n    pass\n"
+      }
+     ],
+     "options": {
+      "timeout_seconds": 3
+     },
+     "clock": {
+      "step": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    }
+   ]
+  },
+  {
+   "id": "index-files-trips-while-resolving",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "f0.py",
+       "data": "def f0():\n    pass\n"
+      },
+      {
+       "path": "f1.py",
+       "data": "def f1():\n    pass\n"
+      },
+      {
+       "path": "f2.py",
+       "data": "def f2():\n    pass\n"
+      }
+     ],
+     "options": {
+      "timeout_seconds": 4.5
+     },
+     "clock": {
+      "step": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    }
+   ]
+  },
+  {
+   "id": "index-files-trips-on-the-final-check",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "f0.py",
+       "data": "def f0():\n    pass\n"
+      },
+      {
+       "path": "f1.py",
+       "data": "def f1():\n    pass\n"
+      },
+      {
+       "path": "f2.py",
+       "data": "def f2():\n    pass\n"
+      }
+     ],
+     "options": {
+      "timeout_seconds": 6.5
+     },
+     "clock": {
+      "step": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    }
+   ]
+  },
+  {
+   "id": "index-files-does-not-trip",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "f0.py",
+       "data": "def f0():\n    pass\n"
+      },
+      {
+       "path": "f1.py",
+       "data": "def f1():\n    pass\n"
+      },
+      {
+       "path": "f2.py",
+       "data": "def f2():\n    pass\n"
+      }
+     ],
+     "options": {
+      "timeout_seconds": 7.5
+     },
+     "clock": {
+      "step": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    }
+   ]
+  },
+  {
+   "id": "index-files-does-not-trip-with-plenty",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "f0.py",
+       "data": "def f0():\n    pass\n"
+      },
+      {
+       "path": "f1.py",
+       "data": "def f1():\n    pass\n"
+      },
+      {
+       "path": "f2.py",
+       "data": "def f2():\n    pass\n"
+      },
+      {
+       "path": "f3.py",
+       "data": "def f3():\n    pass\n"
+      },
+      {
+       "path": "f4.py",
+       "data": "def f4():\n    pass\n"
+      }
+     ],
+     "options": {
+      "timeout_seconds": 1000
+     },
+     "clock": {
+      "step": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM analyses"
+    }
+   ]
+  },
+  {
+   "id": "before-commit-runs-after-the-final-check",
+   "steps": [
+    {
+     "op": "indexFiles",
+     "files": [
+      {
+       "path": "f0.py",
+       "data": "def f0():\n    pass\n"
+      },
+      {
+       "path": "f1.py",
+       "data": "def f1():\n    pass\n"
+      },
+      {
+       "path": "f2.py",
+       "data": "def f2():\n    pass\n"
+      }
+     ],
+     "options": {
+      "timeout_seconds": 100
+     },
+     "clock": {
+      "step": 1
+     },
+     "beforeCommit": "fail"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "index-repo-trips-in-the-walk-first-file",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def a():\n    pass\n",
+      "b.py": "def b():\n    pass\n",
+      "sub/c.py": "def c():\n    pass\n",
+      ".hidden.py": "x = 1\n",
+      "notes.go": "package x\n",
+      "z.py": "def z():\n    pass\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "timeout_seconds": 0.5
+     },
+     "clock": {
+      "step": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "index-repo-trips-in-the-walk",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def a():\n    pass\n",
+      "b.py": "def b():\n    pass\n",
+      "sub/c.py": "def c():\n    pass\n",
+      ".hidden.py": "x = 1\n",
+      "notes.go": "package x\n",
+      "z.py": "def z():\n    pass\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "timeout_seconds": 2.5
+     },
+     "clock": {
+      "step": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "index-repo-trips-after-two-files",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def a():\n    pass\n",
+      "b.py": "def b():\n    pass\n",
+      "sub/c.py": "def c():\n    pass\n",
+      ".hidden.py": "x = 1\n",
+      "notes.go": "package x\n",
+      "z.py": "def z():\n    pass\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "timeout_seconds": 4.5
+     },
+     "clock": {
+      "step": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "index-repo-trips-while-resolving",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def a():\n    pass\n",
+      "b.py": "def b():\n    pass\n",
+      "sub/c.py": "def c():\n    pass\n",
+      ".hidden.py": "x = 1\n",
+      "notes.go": "package x\n",
+      "z.py": "def z():\n    pass\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "timeout_seconds": 9.5
+     },
+     "clock": {
+      "step": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "index-repo-does-not-trip",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def a():\n    pass\n",
+      "b.py": "def b():\n    pass\n",
+      "sub/c.py": "def c():\n    pass\n",
+      ".hidden.py": "x = 1\n",
+      "notes.go": "package x\n",
+      "z.py": "def z():\n    pass\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "timeout_seconds": 100
+     },
+     "clock": {
+      "step": 1
+     }
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,6759 @@
+{
+ "codeowners": {
+  "files": [
+   {
+    "file": "basic.CODEOWNERS",
+    "id": "basic",
+    "path": ".github/CODEOWNERS"
+   },
+   {
+    "file": "basic.CODEOWNERS",
+    "id": "basic-root",
+    "path": "CODEOWNERS"
+   },
+   {
+    "file": "basic.CODEOWNERS",
+    "id": "basic-docs",
+    "path": "docs/CODEOWNERS"
+   },
+   {
+    "file": "basic.CODEOWNERS",
+    "id": "basic-wrong-name",
+    "path": "src/CODEOWNERS"
+   },
+   {
+    "file": "basic.CODEOWNERS",
+    "id": "basic-traversal-name",
+    "path": "../CODEOWNERS"
+   },
+   {
+    "file": "crlf.CODEOWNERS",
+    "id": "crlf",
+    "path": ".github/CODEOWNERS"
+   },
+   {
+    "file": "mixed_validity.CODEOWNERS",
+    "id": "mixed-validity",
+    "path": ".github/CODEOWNERS"
+   },
+   {
+    "file": "sixteen_owners.CODEOWNERS",
+    "id": "sixteen-owners",
+    "path": "CODEOWNERS"
+   },
+   {
+    "file": "only_comments.CODEOWNERS",
+    "id": "only-comments",
+    "path": "CODEOWNERS"
+   },
+   {
+    "file": "empty.CODEOWNERS",
+    "id": "empty",
+    "path": "CODEOWNERS"
+   },
+   {
+    "file": "invalid_utf8.CODEOWNERS",
+    "id": "invalid-utf8",
+    "path": "CODEOWNERS"
+   },
+   {
+    "file": "bom.CODEOWNERS",
+    "id": "bom",
+    "path": "CODEOWNERS"
+   },
+   {
+    "file": "unassign.CODEOWNERS",
+    "id": "unassign",
+    "path": ".github/CODEOWNERS"
+   },
+   {
+    "file": "rules_at_cap.CODEOWNERS",
+    "id": "rules-at-cap",
+    "path": ".github/CODEOWNERS"
+   },
+   {
+    "file": "rules_over_cap.CODEOWNERS",
+    "id": "rules-over-cap",
+    "path": ".github/CODEOWNERS"
+   },
+   {
+    "file": "bytes_at_cap.CODEOWNERS",
+    "id": "bytes-at-cap",
+    "path": "CODEOWNERS"
+   },
+   {
+    "file": "bytes_over_cap.CODEOWNERS",
+    "id": "bytes-over-cap",
+    "path": "CODEOWNERS"
+   },
+   {
+    "file": "escapes.CODEOWNERS",
+    "id": "escapes",
+    "path": "CODEOWNERS"
+   },
+   {
+    "file": "wildcards.CODEOWNERS",
+    "id": "wildcards",
+    "path": "CODEOWNERS"
+   }
+  ],
+  "lookups": [
+   "README.md",
+   "src/a.py",
+   "src/a/b.py",
+   "src/gen/x.py",
+   "src/gen/keep.py",
+   "src/test_x.py",
+   "src/deep/test_y.py",
+   "src/deep/er/test_z.py",
+   "docs/a.md",
+   "docs/sub/a.md",
+   "x/docs/a.md",
+   "lib/a.py",
+   "lib/x/y.py",
+   "lib/x/",
+   "a/b.py",
+   "a/x/y/b.py",
+   "a/logs/x.txt",
+   "logs",
+   "build/logs/x",
+   "app1.py",
+   "app/.py",
+   "a b.md",
+   "a*b",
+   "a?d",
+   "a\\f",
+   "g h/x",
+   "pkg/__pycache__/x.pyc",
+   "foo/bar/x",
+   "foo/x/baz",
+   "foo/x/baz/y",
+   "x.tar.gz",
+   "deep/x.tar.gz",
+   "app.js",
+   "deep/app.js",
+   "package.json",
+   "sub/package.json",
+   "a.py\n",
+   "src/a.py\n",
+   "caf\u00e9.md",
+   "unicode/\u00e9/x",
+   "emoji/\ud83d\ude00/x",
+   "emoji/\ud83d\ude00",
+   "d0/x",
+   "d1999/x",
+   "d2000/x",
+   "ok/x",
+   "ok2/y",
+   "weird/a/b",
+   "a/b",
+   "a",
+   "trailing.txt",
+   "x/trailing.txt",
+   ".github/CODEOWNERS",
+   ""
+  ],
+  "metadata": [
+   {
+    "id": "valid-object",
+    "value": {
+     "codeowners": {
+      "path": ".github/CODEOWNERS",
+      "rules": [
+       {
+        "line": 1,
+        "owners": [
+         "@me"
+        ],
+        "pattern": "src/"
+       },
+       {
+        "line": 4,
+        "owners": [],
+        "pattern": "*.py"
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "valid-string",
+    "value": "{\"codeowners\": {\"path\": \"CODEOWNERS\", \"rules\": [{\"line\": 3, \"pattern\": \"/docs/\", \"owners\": [\"@docs\", \"dev@example.com\"]}]}}"
+   },
+   {
+    "id": "hostile-rules",
+    "value": {
+     "codeowners": {
+      "path": ".github/CODEOWNERS",
+      "rules": [
+       {
+        "line": 1,
+        "owners": [
+         "@me"
+        ],
+        "pattern": "../x"
+       },
+       {
+        "line": 2,
+        "owners": [
+         "not valid"
+        ],
+        "pattern": "*"
+       },
+       {
+        "line": "3",
+        "owners": [
+         "@me"
+        ],
+        "pattern": "*"
+       },
+       {
+        "line": 4,
+        "owners": [
+         "@me"
+        ],
+        "pattern": "ok/"
+       },
+       {
+        "line": 0,
+        "owners": [
+         "@me"
+        ],
+        "pattern": "zero/"
+       },
+       {
+        "line": -1,
+        "owners": [
+         "@me"
+        ],
+        "pattern": "negative/"
+       },
+       {
+        "line": true,
+        "owners": [
+         "@me"
+        ],
+        "pattern": "bool/"
+       },
+       {
+        "line": 5,
+        "owners": [
+         "@me"
+        ],
+        "pattern": 7
+       },
+       {
+        "line": 6,
+        "owners": "@me",
+        "pattern": "list/"
+       },
+       {
+        "line": 7,
+        "owners": [
+         "@me",
+         5
+        ],
+        "pattern": "ok2/"
+       },
+       5,
+       null,
+       "x",
+       [],
+       {
+        "line": 8,
+        "owners": [
+         "@last"
+        ],
+        "pattern": "last/"
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "unknown-path",
+    "value": {
+     "codeowners": {
+      "path": "evil",
+      "rules": [
+       {
+        "line": 1,
+        "owners": [
+         "@me"
+        ],
+        "pattern": "*"
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "src-path",
+    "value": {
+     "codeowners": {
+      "path": "src/CODEOWNERS",
+      "rules": [
+       {
+        "line": 1,
+        "owners": [
+         "@me"
+        ],
+        "pattern": "*"
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "empty-rules",
+    "value": {
+     "codeowners": {
+      "path": "CODEOWNERS",
+      "rules": []
+     }
+    }
+   },
+   {
+    "id": "rules-not-list",
+    "value": {
+     "codeowners": {
+      "path": "CODEOWNERS",
+      "rules": "x"
+     }
+    }
+   },
+   {
+    "id": "rules-object",
+    "value": {
+     "codeowners": {
+      "path": "CODEOWNERS",
+      "rules": {
+       "line": 1
+      }
+     }
+    }
+   },
+   {
+    "id": "no-codeowners",
+    "value": {}
+   },
+   {
+    "id": "codeowners-list",
+    "value": {
+     "codeowners": []
+    }
+   },
+   {
+    "id": "codeowners-null",
+    "value": {
+     "codeowners": null
+    }
+   },
+   {
+    "id": "null",
+    "value": null
+   },
+   {
+    "id": "number",
+    "value": 5
+   },
+   {
+    "id": "list",
+    "value": []
+   },
+   {
+    "id": "not-json",
+    "value": "not json"
+   },
+   {
+    "id": "json-null-string",
+    "value": "null"
+   },
+   {
+    "id": "json-list-string",
+    "value": "[]"
+   },
+   {
+    "id": "extra-keys",
+    "value": {
+     "codeowners": {
+      "other": true,
+      "path": "CODEOWNERS",
+      "rules": [
+       {
+        "extra": 1,
+        "line": 2,
+        "owners": [
+         "@me"
+        ],
+        "pattern": "*"
+       }
+      ]
+     },
+     "more": 1
+    }
+   },
+   {
+    "id": "too-many-owners",
+    "value": {
+     "codeowners": {
+      "path": "CODEOWNERS",
+      "rules": [
+       {
+        "line": 1,
+        "owners": [
+         "@u0",
+         "@u1",
+         "@u2",
+         "@u3",
+         "@u4",
+         "@u5",
+         "@u6",
+         "@u7",
+         "@u8",
+         "@u9",
+         "@u10",
+         "@u11",
+         "@u12",
+         "@u13",
+         "@u14",
+         "@u15",
+         "@u16"
+        ],
+        "pattern": "*"
+       },
+       {
+        "line": 2,
+        "owners": [
+         "@me"
+        ],
+        "pattern": "ok/"
+       }
+      ]
+     }
+    }
+   }
+  ],
+  "ownerLengths": [
+   127,
+   128,
+   129
+  ],
+  "owners": [
+   "@user",
+   "@org/team-1",
+   "dev@example.com",
+   "dev+tag@example.co.uk",
+   "@a",
+   "@",
+   "@a/",
+   "@a/b/c",
+   "@-bad",
+   "@ok-name_1.x",
+   "@org/_team",
+   "@org/team.name",
+   "plain@nodot",
+   "a@b.c",
+   "user@host..com",
+   "",
+   "@caf\u00e9",
+   "@a b"
+  ]
+ },
+ "fileCategories": {
+  "kinds": [
+   "file",
+   "repository",
+   "directory",
+   "module",
+   "cluster",
+   "symbol",
+   "function_definition",
+   ""
+  ],
+  "longPaths": [
+   4095,
+   4096,
+   4097
+  ],
+  "nonStrings": [
+   null,
+   123,
+   1.5,
+   true,
+   [],
+   {},
+   [
+    "a"
+   ]
+  ],
+  "paths": [
+   "src/workers.ts",
+   "src/Contest.ts",
+   "src/latest.py",
+   "src/server.test.ts",
+   "src/server.spec.tsx",
+   "src/server.tests.ts",
+   "src/server-test.ts",
+   "src/server_test.ts",
+   "tests/helpers.py",
+   "src/__tests__/helpers.ts",
+   "e2e/home.ts",
+   "spec/worker.rb",
+   "specs/worker.rb",
+   "fixtures/users.json",
+   "__fixtures__/users.ts",
+   "__mocks__/fs.js",
+   "conftest.py",
+   "tests.py",
+   "service_test.go",
+   "test_main.py",
+   "TESTS/Test_Main.PY",
+   "tests/__snapshots__/worker.snap",
+   "vite.config.ts",
+   "eslint.config.mjs",
+   "jest.config.js",
+   "config/server.py",
+   "configs/a.py",
+   "settings.config.json",
+   ".github/workflows/ci.yml",
+   ".gitlab/ci.yml",
+   ".vscode/settings.json",
+   ".devcontainer/Dockerfile",
+   "package.json",
+   "pyproject.toml",
+   "setup.cfg",
+   "tox.ini",
+   "app.conf",
+   "server.properties",
+   ".editorconfig",
+   ".env",
+   ".env.example",
+   ".eslintrc.cjs",
+   ".prettierrc",
+   ".prettierrc.json",
+   "Dockerfile",
+   "Dockerfile.dev",
+   "dockerfile",
+   "compose.yaml",
+   "docker-compose.yml",
+   "Makefile",
+   ".gitignore",
+   ".gitattributes",
+   ".dockerignore",
+   ".npmrc",
+   ".nvmrc",
+   "dist/server.test.js",
+   "build/out.js",
+   "coverage/lcov.info",
+   "artifacts/report.json",
+   "artefacts/report.json",
+   "generated/models.ts",
+   "__pycache__/x.cpython-312.pyc",
+   "src/api.generated.ts",
+   "src/api.g.ts",
+   "bundle.min.js",
+   "styles.min.css",
+   "package-lock.json",
+   "npm-shrinkwrap.json",
+   "pnpm-lock.yaml",
+   "Cargo.lock",
+   "yarn.lock",
+   "client.tgz",
+   "client.zip",
+   "lib.so",
+   "lib.dll",
+   "x.pyc",
+   "app.jar",
+   "types.tsbuildinfo",
+   "bundle.js.map",
+   "assets/logo.svg",
+   "public/font.woff2",
+   "images/hero.psd",
+   "fonts/custom.bin",
+   "media/clip.bin",
+   "manual.pdf",
+   "model.glb",
+   "README.md",
+   "readme",
+   "docs/guide.rst",
+   "notes.txt",
+   "CHANGELOG",
+   "LICENSE",
+   "LICENCE",
+   "NOTICE",
+   "guide.adoc",
+   "page.mdx",
+   "src/main.rs",
+   "main.go",
+   "App.vue",
+   "styles.scss",
+   "query.sql",
+   "run.ps1",
+   "data/example.unknown",
+   "noextension",
+   "trailing.dot.",
+   ".hidden",
+   "a.b.c.d.ts",
+   "src/\u00fcber/test_caf\u00e9.py",
+   "te\u017fts/a.py",
+   "TE\u017fTS/a.py",
+   "dist\u212a/a.js",
+   "\u0130stanbul/tests/a.py",
+   "tests\u0131/a.py",
+   "src/\u03a3\u0391/a.ts",
+   "src/stra\u00dfe/a.ts",
+   "\u65e5\u672c\u8a9e/\u30c6\u30b9\u30c8.ts",
+   "src/\ud83d\ude00/a.ts",
+   "",
+   ".",
+   "..",
+   "../test.py",
+   "src/../test.py",
+   "/tests/a.py",
+   "C:/a.py",
+   "src\\test.py",
+   "a\u0000.py",
+   "a\u007f.py",
+   "a\u0001.py",
+   "a//test.py",
+   "a/./b.py",
+   "a/",
+   "/",
+   "a b/c d.ts",
+   "a:b.ts",
+   "x.test.ts/",
+   "a\u00a0b.ts",
+   "a\u2028b.ts"
+  ]
+ },
+ "relationships": {
+  "aliasCases": [
+   {
+    "id": "workspace-packages",
+    "known": {
+     "apps/web/src/main.ts": [
+      null,
+      {
+       "facts": {}
+      }
+     ],
+     "packages/bad/package.json": [
+      null,
+      {
+       "facts": {
+        "architecture": {
+         "manifest": {
+          "exports": {
+           ".": "./index.ts"
+          },
+          "name": "../evil"
+         }
+        }
+       }
+      }
+     ],
+     "packages/contract/package.json": [
+      null,
+      {
+       "facts": {
+        "architecture": {
+         "manifest": {
+          "exports": {
+           ".": "./src/index.ts",
+           "./abs": "/abs.ts",
+           "./features/*": "./src/features/*.ts",
+           "./graph": "./src/graph.ts",
+           "./internal/*": "../outside/*.ts",
+           "./nested": {
+            "import": "./src/x.ts"
+           },
+           "./package.json": "./package.json"
+          },
+          "name": "@codegraph/contract"
+         }
+        }
+       }
+      }
+     ],
+     "packages/contract/package.json.bak": [
+      null,
+      {
+       "facts": {}
+      }
+     ],
+     "packages/contract/src/features/alpha.ts": [
+      null,
+      {
+       "facts": {}
+      }
+     ],
+     "packages/contract/src/features/beta/index.ts": [
+      null,
+      {
+       "facts": {}
+      }
+     ],
+     "packages/contract/src/graph.ts": [
+      null,
+      {
+       "facts": {}
+      }
+     ],
+     "packages/contract/src/index.ts": [
+      null,
+      {
+       "facts": {}
+      }
+     ],
+     "packages/dup-a/a.ts": [
+      null,
+      {
+       "facts": {}
+      }
+     ],
+     "packages/dup-a/package.json": [
+      null,
+      {
+       "facts": {
+        "architecture": {
+         "manifest": {
+          "exports": {
+           ".": "./a.ts"
+          },
+          "name": "dup"
+         }
+        }
+       }
+      }
+     ],
+     "packages/dup-b/b.ts": [
+      null,
+      {
+       "facts": {}
+      }
+     ],
+     "packages/dup-b/package.json": [
+      null,
+      {
+       "facts": {
+        "architecture": {
+         "manifest": {
+          "exports": {
+           ".": "./b.ts"
+          },
+          "name": "dup"
+         }
+        }
+       }
+      }
+     ],
+     "packages/engine/package.json": [
+      null,
+      {
+       "facts": {
+        "architecture": {
+         "manifest": {
+          "exports": {
+           ".": "./src/index.ts",
+           "./*": "./src/*.ts",
+           "./deep/*/leaf": "./src/deep/*/leaf.ts"
+          },
+          "name": "plain-name"
+         }
+        }
+       }
+      }
+     ],
+     "packages/engine/src/deep/one/leaf.ts": [
+      null,
+      {
+       "facts": {}
+      }
+     ],
+     "packages/engine/src/index.ts": [
+      null,
+      {
+       "facts": {}
+      }
+     ],
+     "packages/engine/src/util.ts": [
+      null,
+      {
+       "facts": {}
+      }
+     ],
+     "packages/noexports/package.json": [
+      null,
+      {
+       "facts": {
+        "architecture": {
+         "manifest": {
+          "name": "noexports"
+         }
+        }
+       }
+      }
+     ],
+     "packages/nofacts/package.json": [
+      null,
+      {
+       "facts": {}
+      }
+     ],
+     "packages/noname/package.json": [
+      null,
+      {
+       "facts": {
+        "architecture": {
+         "manifest": {
+          "exports": {
+           ".": "./index.ts"
+          }
+         }
+        }
+       }
+      }
+     ]
+    },
+    "sources": [
+     {
+      "path": "apps/web/src/main.ts"
+     }
+    ],
+    "specifiers": [
+     "@codegraph/contract",
+     "@codegraph/contract/graph",
+     "@codegraph/contract/features/alpha",
+     "@codegraph/contract/features/beta",
+     "@codegraph/contract/features/missing",
+     "@codegraph/contract/package.json",
+     "@codegraph/contract/internal/x",
+     "@codegraph/contract/abs",
+     "@codegraph/contract/nested",
+     "@codegraph/contract/unknown",
+     "plain-name",
+     "plain-name/util",
+     "plain-name/deep/one/leaf",
+     "plain-name/deep/two/leaf",
+     "../evil",
+     "noexports",
+     "dup",
+     "react",
+     "@codegraph/contract/features/"
+    ]
+   },
+   {
+    "id": "not-a-mapping",
+    "known": null,
+    "sources": [
+     {
+      "path": "a.ts"
+     }
+    ],
+    "specifiers": [
+     "x"
+    ]
+   }
+  ],
+  "cases": [
+   {
+    "id": "py-imports-pkg-sub",
+    "path": "pkg/sub/main.py",
+    "source": "python/imports.py"
+   },
+   {
+    "id": "py-imports-pkg",
+    "path": "pkg/main.py",
+    "source": "python/imports.py"
+   },
+   {
+    "id": "py-imports-root",
+    "path": "main.py",
+    "source": "python/imports.py"
+   },
+   {
+    "id": "py-imports-init",
+    "path": "pkg/sub/__init__.py",
+    "source": "python/imports.py"
+   },
+   {
+    "id": "py-imports-deep",
+    "path": "pkg/sub/deeper/still/main.py",
+    "source": "python/imports.py"
+   },
+   {
+    "id": "py-calls",
+    "path": "src/calls.py",
+    "source": "python/calls.py"
+   },
+   {
+    "id": "py-docstrings",
+    "path": "docstrings.py",
+    "source": "python/docstrings.py"
+   },
+   {
+    "id": "py-docstring-tabs",
+    "path": "tabs.py",
+    "source": "python/docstring_tabs.py"
+   },
+   {
+    "id": "py-crlf",
+    "path": "crlf.py",
+    "source": "python/crlf.py"
+   },
+   {
+    "id": "py-lone-cr",
+    "path": "lone_cr.py",
+    "source": "python/lone_cr.py"
+   },
+   {
+    "id": "py-bom",
+    "path": "bom.py",
+    "source": "python/bom.py"
+   },
+   {
+    "id": "py-nul",
+    "path": "nul.py",
+    "source": "python/nul.py"
+   },
+   {
+    "id": "py-invalid-utf8",
+    "path": "bad.py",
+    "source": "python/invalid_utf8.py"
+   },
+   {
+    "id": "py-empty",
+    "path": "empty.py",
+    "source": "python/empty.py"
+   },
+   {
+    "id": "py-comments-only",
+    "path": "comments.py",
+    "source": "python/only_comments.py"
+   },
+   {
+    "id": "py-syntax-error",
+    "path": "pkg/broken.py",
+    "source": "python/syntax_error.py"
+   },
+   {
+    "id": "py2-print",
+    "path": "pkg/legacy.py",
+    "source": "python/python2_print.py"
+   },
+   {
+    "id": "py2-chevron",
+    "path": "pkg/chevron.py",
+    "source": "python/python2_chevron.py"
+   },
+   {
+    "id": "py-tab-error",
+    "path": "pkg/tabs.py",
+    "source": "python/tab_error.py"
+   },
+   {
+    "id": "ts-imports-src",
+    "path": "src/index.ts",
+    "source": "script/imports.ts"
+   },
+   {
+    "id": "ts-imports-nested",
+    "path": "src/sub/deep/index.ts",
+    "source": "script/imports.ts"
+   },
+   {
+    "id": "ts-imports-root",
+    "path": "index.ts",
+    "source": "script/imports.ts"
+   },
+   {
+    "id": "ts-imports-as-js",
+    "path": "src/index.js",
+    "source": "script/imports.ts"
+   },
+   {
+    "id": "ts-imports-as-tsx",
+    "path": "src/index.tsx",
+    "source": "script/imports.ts"
+   },
+   {
+    "id": "ts-imports-as-mjs",
+    "path": "src/index.mjs",
+    "source": "script/imports.ts"
+   },
+   {
+    "id": "ts-symbols",
+    "path": "src/symbols.ts",
+    "source": "script/symbols.ts"
+   },
+   {
+    "id": "tsx-component",
+    "path": "src/comp/Panel.tsx",
+    "source": "script/component.tsx"
+   },
+   {
+    "id": "js-module",
+    "path": "src/module.js",
+    "source": "script/module.js"
+   },
+   {
+    "id": "ts-test",
+    "path": "src/selection.test.ts",
+    "source": "script/selection.test.ts"
+   },
+   {
+    "id": "ts-syntax-error",
+    "path": "src/broken.ts",
+    "source": "script/syntax_error.ts"
+   },
+   {
+    "id": "ts-unicode",
+    "path": "src/unicode.ts",
+    "source": "script/unicode.ts"
+   },
+   {
+    "id": "ts-crlf",
+    "path": "src/crlf.ts",
+    "source": "script/crlf.ts"
+   },
+   {
+    "id": "ts-lone-cr",
+    "path": "src/lone_cr.ts",
+    "source": "script/lone_cr.ts"
+   },
+   {
+    "id": "ts-bom",
+    "path": "src/bom.ts",
+    "source": "script/bom.ts"
+   },
+   {
+    "id": "ts-invalid-utf8",
+    "path": "src/bad.ts",
+    "source": "script/invalid_utf8.ts"
+   },
+   {
+    "id": "ts-empty",
+    "path": "src/empty.ts",
+    "source": "script/empty.ts"
+   },
+   {
+    "id": "unknown-language",
+    "path": "src/readme.md",
+    "source": "script/comments.ts"
+   },
+   {
+    "id": "no-extension",
+    "path": "Makefile",
+    "source": "script/imports.ts"
+   },
+   {
+    "id": "py-zoo-statements",
+    "path": "pkg/zoo.py",
+    "source": "python/zoo_statements.py"
+   },
+   {
+    "id": "py-zoo-expressions",
+    "path": "pkg/zoo2.py",
+    "source": "python/zoo_expressions.py"
+   },
+   {
+    "id": "py-zoo-fstrings",
+    "path": "pkg/zoo3.py",
+    "source": "python/zoo_fstrings.py"
+   },
+   {
+    "id": "py-zoo-docstrings",
+    "path": "zoo4.py",
+    "source": "python/zoo_docstrings.py"
+   },
+   {
+    "id": "rust-lib-root",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-module-file",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/a.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-module-nested",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/a/b.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-module-no-file",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/a/b/c.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-module-mod-rs",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/store/mod.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-module-self-import",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/a/child.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-main-root",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/main.rs",
+     "src/sibling.rs",
+     "src/top.rs",
+     "src/util.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/main.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-main-module",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/main.rs",
+     "src/sibling.rs",
+     "src/top.rs",
+     "src/util.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/util/mod.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-main-sibling",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/main.rs",
+     "src/sibling.rs",
+     "src/top.rs",
+     "src/util.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/config.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-lib-and-main-module",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/main.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/util/mod.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-lib-and-main-main",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/main.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/main.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-bin-single",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "src/bin/tool.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-bin-dir-main",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "src/bin/multi/main.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-bin-dir-helper",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "src/bin/multi/helper.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-bin-dir-missing-main",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "src/bin/tool/top.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-tests-single",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "tests/it.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-tests-shared-helper",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "tests/common/mod.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-tests-shared-util",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "tests/common/util.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-tests-dir-main",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "tests/suite/main.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-tests-dir-other",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "tests/suite/other.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-examples-single",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "examples/demo.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-examples-nested",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "examples/demo/top.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-benches-single",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "benches/b.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-build-script",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "build.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-outside-layout",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "top.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-src-module",
+    "known": [
+     "Cargo.toml",
+     "benches/b.rs",
+     "benches/top.rs",
+     "build.rs",
+     "examples/demo.rs",
+     "examples/demo/top.rs",
+     "examples/top.rs",
+     "src/a.rs",
+     "src/b.rs",
+     "src/bin/multi/helper.rs",
+     "src/bin/multi/main.rs",
+     "src/bin/multi/top.rs",
+     "src/bin/other.rs",
+     "src/bin/tool.rs",
+     "src/bin/tool/top.rs",
+     "src/lib.rs",
+     "src/top.rs",
+     "tests/common/mod.rs",
+     "tests/common/util.rs",
+     "tests/it.rs",
+     "tests/it/top.rs",
+     "tests/suite/main.rs",
+     "tests/suite/other.rs",
+     "tests/suite/top.rs",
+     "tests/top.rs",
+     "top.rs"
+    ],
+    "path": "src/b.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-workspace-root-lib",
+    "known": [
+     "Cargo.toml",
+     "crates/x/Cargo.toml",
+     "crates/x/src/a.rs",
+     "crates/x/src/a/b.rs",
+     "crates/x/src/lib.rs",
+     "crates/x/src/top.rs",
+     "crates/x/y/Cargo.toml",
+     "crates/x/y/src/a.rs",
+     "crates/x/y/src/lib.rs",
+     "crates/x/y/src/top.rs",
+     "crates/y/src/lib.rs",
+     "crates/y/src/top.rs",
+     "src/lib.rs",
+     "src/top.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-workspace-member-lib",
+    "known": [
+     "Cargo.toml",
+     "crates/x/Cargo.toml",
+     "crates/x/src/a.rs",
+     "crates/x/src/a/b.rs",
+     "crates/x/src/lib.rs",
+     "crates/x/src/top.rs",
+     "crates/x/y/Cargo.toml",
+     "crates/x/y/src/a.rs",
+     "crates/x/y/src/lib.rs",
+     "crates/x/y/src/top.rs",
+     "crates/y/src/lib.rs",
+     "crates/y/src/top.rs",
+     "src/lib.rs",
+     "src/top.rs"
+    ],
+    "path": "crates/x/src/lib.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-workspace-member-module",
+    "known": [
+     "Cargo.toml",
+     "crates/x/Cargo.toml",
+     "crates/x/src/a.rs",
+     "crates/x/src/a/b.rs",
+     "crates/x/src/lib.rs",
+     "crates/x/src/top.rs",
+     "crates/x/y/Cargo.toml",
+     "crates/x/y/src/a.rs",
+     "crates/x/y/src/lib.rs",
+     "crates/x/y/src/top.rs",
+     "crates/y/src/lib.rs",
+     "crates/y/src/top.rs",
+     "src/lib.rs",
+     "src/top.rs"
+    ],
+    "path": "crates/x/src/a/b.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-workspace-member-no-root-file",
+    "known": [
+     "Cargo.toml",
+     "crates/x/Cargo.toml",
+     "crates/x/src/a.rs",
+     "crates/x/src/a/b.rs",
+     "crates/x/src/lib.rs",
+     "crates/x/src/top.rs",
+     "crates/x/y/Cargo.toml",
+     "crates/x/y/src/a.rs",
+     "crates/x/y/src/lib.rs",
+     "crates/x/y/src/top.rs",
+     "crates/y/src/lib.rs",
+     "crates/y/src/top.rs",
+     "src/lib.rs",
+     "src/top.rs"
+    ],
+    "path": "crates/y/src/top.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-workspace-nested-member",
+    "known": [
+     "Cargo.toml",
+     "crates/x/Cargo.toml",
+     "crates/x/src/a.rs",
+     "crates/x/src/a/b.rs",
+     "crates/x/src/lib.rs",
+     "crates/x/src/top.rs",
+     "crates/x/y/Cargo.toml",
+     "crates/x/y/src/a.rs",
+     "crates/x/y/src/lib.rs",
+     "crates/x/y/src/top.rs",
+     "crates/y/src/lib.rs",
+     "crates/y/src/top.rs",
+     "src/lib.rs",
+     "src/top.rs"
+    ],
+    "path": "crates/x/y/src/a.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-workspace-nested-member-lib",
+    "known": [
+     "Cargo.toml",
+     "crates/x/Cargo.toml",
+     "crates/x/src/a.rs",
+     "crates/x/src/a/b.rs",
+     "crates/x/src/lib.rs",
+     "crates/x/src/top.rs",
+     "crates/x/y/Cargo.toml",
+     "crates/x/y/src/a.rs",
+     "crates/x/y/src/lib.rs",
+     "crates/x/y/src/top.rs",
+     "crates/y/src/lib.rs",
+     "crates/y/src/top.rs",
+     "src/lib.rs",
+     "src/top.rs"
+    ],
+    "path": "crates/x/y/src/lib.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-no-manifest",
+    "known": [
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/lib.rs",
+     "src/top.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-no-manifest-module",
+    "known": [
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/lib.rs",
+     "src/top.rs"
+    ],
+    "path": "src/a.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-no-root-file",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/top.rs"
+    ],
+    "path": "src/a.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-no-root-file-nested",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/top.rs"
+    ],
+    "path": "src/a/b.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-path-dot-slash",
+    "known": [
+     "./src/lib.rs",
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/lib.rs",
+     "src/top.rs"
+    ],
+    "path": "./src/lib.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-path-double-slash",
+    "known": [
+     "Cargo.toml",
+     "src//a.rs",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/lib.rs",
+     "src/top.rs"
+    ],
+    "path": "src//a.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-path-dot-segment",
+    "known": [
+     "Cargo.toml",
+     "src/./a/b.rs",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/lib.rs",
+     "src/top.rs"
+    ],
+    "path": "src/./a/b.rs",
+    "source": "rust/relative_paths.rs"
+   },
+   {
+    "id": "rust-use-forms-lib",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/use_forms.rs"
+   },
+   {
+    "id": "rust-use-forms-module",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/a.rs",
+    "source": "rust/use_forms.rs"
+   },
+   {
+    "id": "rust-use-forms-nested",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/store/index.rs",
+    "source": "rust/use_forms.rs"
+   },
+   {
+    "id": "rust-use-limits",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/use_limits.rs"
+   },
+   {
+    "id": "rust-use-nested-100",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/use_nested_100.rs"
+   },
+   {
+    "id": "rust-use-lists-100",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/use_lists_100.rs"
+   },
+   {
+    "id": "rust-use-nested-3000",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/use_nested_3000.rs"
+   },
+   {
+    "id": "rust-inline-modules-lib",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/modules_inline.rs"
+   },
+   {
+    "id": "rust-inline-modules-file",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/outer.rs",
+    "source": "rust/modules_inline.rs"
+   },
+   {
+    "id": "rust-inline-modules-use-forms",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/inline.rs",
+    "source": "rust/use_forms.rs"
+   },
+   {
+    "id": "rust-raw-names",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/raw_names.rs"
+   },
+   {
+    "id": "rust-raw-names-module",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/a.rs",
+    "source": "rust/raw_names.rs"
+   },
+   {
+    "id": "rust-duplicate-targets",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/duplicate_targets.rs"
+   },
+   {
+    "id": "rust-duplicate-targets-self",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/a.rs",
+    "source": "rust/duplicate_targets.rs"
+   },
+   {
+    "id": "rust-crate-main",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/main.rs",
+     "src/sibling.rs",
+     "src/top.rs",
+     "src/util.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/main.rs",
+    "source": "rust/crate_main.rs"
+   },
+   {
+    "id": "rust-empty",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/empty.rs"
+   },
+   {
+    "id": "rust-comments-only",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/only_comments.rs"
+   },
+   {
+    "id": "rust-syntax-error",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/syntax_error.rs"
+   },
+   {
+    "id": "rust-error-use",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/error_use.rs"
+   },
+   {
+    "id": "rust-error-extern-crate",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/error_extern_crate.rs"
+   },
+   {
+    "id": "rust-crlf",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/crlf.rs"
+   },
+   {
+    "id": "rust-crlf-use",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/c.rs",
+     "src/c/d.rs",
+     "src/c/e.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/crlf_use.rs"
+   },
+   {
+    "id": "rust-bom",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/bom.rs"
+   },
+   {
+    "id": "rust-non-ascii",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/ascii.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/m\u00f3dulo.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/non_ascii.rs"
+   },
+   {
+    "id": "rust-invalid-utf8",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/invalid_utf8.rs"
+   },
+   {
+    "id": "rust-invalid-utf8-use",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/invalid_utf8_use.rs"
+   },
+   {
+    "id": "rust-lone-cr",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/lone_cr.rs"
+   },
+   {
+    "id": "rust-nul",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/nul.rs"
+   },
+   {
+    "id": "rust-macros-file",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/macros.rs"
+   },
+   {
+    "id": "rust-symbols-file",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/external.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rs",
+    "source": "rust/symbols.rs"
+   },
+   {
+    "id": "rust-wrong-extension",
+    "known": [
+     "Cargo.toml",
+     "src/a.rs",
+     "src/a/b.rs",
+     "src/a/b/c.rs",
+     "src/a/child.rs",
+     "src/absolute.rs",
+     "src/alias.rs",
+     "src/alpha.rs",
+     "src/beta.rs",
+     "src/child.rs",
+     "src/config.rs",
+     "src/deep.rs",
+     "src/elsewhere.rs",
+     "src/empty.rs",
+     "src/first.rs",
+     "src/fn.rs",
+     "src/gamma.rs",
+     "src/grand.rs",
+     "src/helper.rs",
+     "src/helper/util.rs",
+     "src/in_block.rs",
+     "src/in_function.rs",
+     "src/in_inline.rs",
+     "src/in_nested.rs",
+     "src/inline.rs",
+     "src/inline/child.rs",
+     "src/inline/nested.rs",
+     "src/lib.rs",
+     "src/match.rs",
+     "src/mod.rs",
+     "src/other_crate.rs",
+     "src/outer.rs",
+     "src/outer/inner.rs",
+     "src/r#mod.rs",
+     "src/reexport.rs",
+     "src/scoped.rs",
+     "src/second.rs",
+     "src/second/third.rs",
+     "src/shared.rs",
+     "src/sibling.rs",
+     "src/sibling_dir.rs",
+     "src/sibling_dir/mod.rs",
+     "src/store.rs",
+     "src/store/index.rs",
+     "src/store/index/entry.rs",
+     "src/store/mod.rs",
+     "src/tests_helper.rs",
+     "src/top.rs",
+     "src/trailing.rs",
+     "src/type.rs",
+     "src/util/mod.rs"
+    ],
+    "path": "src/lib.rst",
+    "source": "rust/relative_paths.rs"
+   }
+  ],
+  "known": [
+   "pkg/__init__.py",
+   "pkg/a.py",
+   "pkg/sub/__init__.py",
+   "pkg/sub/b.py",
+   "pkg/sub/c.py",
+   "pkg/sub/d.py",
+   "pkg/sub/sibling.py",
+   "pkg/sibling.py",
+   "pkg/up.py",
+   "pkg/deep/__init__.py",
+   "pkg/missing/deep.py",
+   "sibling.py",
+   "one.py",
+   "two.py",
+   "up.py",
+   "more.py",
+   "os.py",
+   "conditional.py",
+   "cleanup.py",
+   "maybe.py",
+   "in_class.py",
+   "inner.py",
+   "spaced.py",
+   "helper.py",
+   "src/index.ts",
+   "src/services/router.ts",
+   "src/services/index.ts",
+   "src/types.ts",
+   "src/types/index.ts",
+   "src/data.json",
+   "src/multi/line.ts",
+   "src/lazy.tsx",
+   "src/required.js",
+   "src/nested.mjs",
+   "src/commented.cjs",
+   "src/legacy.js",
+   "src/legacy/index.js",
+   "src/node.cjs",
+   "src/esm.mjs",
+   "src/side-effect.ts",
+   "src/inner.ts",
+   "src/augment.ts",
+   "src/template.ts",
+   "src/dir\\file.ts",
+   "src/comp/Button.tsx",
+   "src/comp/props.ts",
+   "src/styles.css",
+   "src/selection.ts",
+   "src/base.ts",
+   "src/config.ts",
+   "src/a.ts",
+   "src/b.ts",
+   "router.ts",
+   "services/router.ts",
+   "services/index.ts",
+   "types.ts",
+   "multi/line.ts",
+   "lazy.ts",
+   "required.ts",
+   "side-effect.ts"
+  ],
+  "relativeTargets": [
+   {
+    "known": [
+     "src/services/router.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./services/router"
+   },
+   {
+    "known": [
+     "src/services/router.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./services/router.js"
+   },
+   {
+    "known": [
+     "src/services/router.js",
+     "src/services/router.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./services/router.js"
+   },
+   {
+    "known": [
+     "src/services/router.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./services/router.mjs"
+   },
+   {
+    "known": [
+     "src/services/router.tsx"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./services/router.cjs"
+   },
+   {
+    "known": [
+     "src/services/index.tsx",
+     "src/services/index.js"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./services"
+   },
+   {
+    "known": [
+     "src/services.ts",
+     "src/services/index.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./services"
+   },
+   {
+    "known": [
+     "src/index.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "."
+   },
+   {
+    "known": [
+     "src/index.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./"
+   },
+   {
+    "known": [
+     "index.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": ".."
+   },
+   {
+    "known": [
+     "src/x.ts"
+    ],
+    "path": "src/a/b/c.ts",
+    "specifier": "../../x"
+   },
+   {
+    "known": [
+     "x.ts"
+    ],
+    "path": "src/a/b/c.ts",
+    "specifier": "../../../x"
+   },
+   {
+    "known": [
+     "x.ts"
+    ],
+    "path": "src/a/b/c.ts",
+    "specifier": "../../../../x"
+   },
+   {
+    "known": [
+     "x.ts"
+    ],
+    "path": "index.ts",
+    "specifier": "../x"
+   },
+   {
+    "known": [
+     "x/y/z.ts"
+    ],
+    "path": "index.ts",
+    "specifier": "./x/./y//z"
+   },
+   {
+    "known": [
+     "src/x.json"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./x.json"
+   },
+   {
+    "known": [
+     "src/react.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "react"
+   },
+   {
+    "known": [
+     "src.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": ""
+   },
+   {
+    "known": [
+     "src/dup/x.ts"
+    ],
+    "path": "src//dup/./index.ts",
+    "specifier": "./x"
+   },
+   {
+    "known": [
+     "/abs/x.ts"
+    ],
+    "path": "/abs/index.ts",
+    "specifier": "./x"
+   },
+   {
+    "known": [
+     "x.ts",
+     "/x.ts",
+     "//x.ts"
+    ],
+    "path": "/abs/index.ts",
+    "specifier": "../../x"
+   },
+   {
+    "known": [
+     "//two/x.ts"
+    ],
+    "path": "//two/index.ts",
+    "specifier": "./x"
+   },
+   {
+    "known": [
+     "/three/x.ts"
+    ],
+    "path": "///three/index.ts",
+    "specifier": "./x"
+   },
+   {
+    "known": [
+     "src/..ts",
+     "src/..js",
+     "src/..ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./..js"
+   },
+   {
+    "known": [
+     "src/.ts",
+     "src/.js"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./.js"
+   },
+   {
+    "known": [
+     "src/a.b.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./a.b.js"
+   },
+   {
+    "known": [
+     "src/a.js.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./a.js.js"
+   },
+   {
+    "known": [
+     "src/dir.js/x.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./dir.js/x"
+   },
+   {
+    "known": [
+     "src/caf\u00e9.ts"
+    ],
+    "path": "src/index.ts",
+    "specifier": "./caf\u00e9"
+   }
+  ],
+  "rustCrateCases": [
+   {
+    "id": "workspace",
+    "known": {
+     "Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "root-crate"
+       }
+      }
+     },
+     "crates/bad/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "bad name"
+       }
+      }
+     },
+     "crates/bad/src/lib.rs": null,
+     "crates/bad_name/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "bad_name"
+       }
+      }
+     },
+     "crates/bad_name/src/lib.rs": null,
+     "crates/bad_name/src/q.rs": null,
+     "crates/core/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "core"
+       }
+      }
+     },
+     "crates/core/src/fmt.rs": null,
+     "crates/core/src/lib.rs": null,
+     "crates/dup1/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "dup"
+       }
+      }
+     },
+     "crates/dup1/src/lib.rs": null,
+     "crates/dup1/src/z.rs": null,
+     "crates/dup2/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "dup"
+       }
+      }
+     },
+     "crates/dup2/src/lib.rs": null,
+     "crates/dup2/src/z.rs": null,
+     "crates/foo/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "foo-bar"
+       }
+      }
+     },
+     "crates/foo/src/a.rs": null,
+     "crates/foo/src/a/B.rs": null,
+     "crates/foo/src/c.rs": null,
+     "crates/foo/src/in_inline.rs": null,
+     "crates/foo/src/lib.rs": null,
+     "crates/nolib/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "nolib"
+       }
+      }
+     },
+     "crates/nolib/src/main.rs": null,
+     "crates/nolib/src/thing.rs": null,
+     "crates/std/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "std"
+       }
+      }
+     },
+     "crates/std/src/io.rs": null,
+     "crates/std/src/lib.rs": null,
+     "crates/std/src/x.rs": null,
+     "crates/test/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "test"
+       }
+      }
+     },
+     "crates/test/src/lib.rs": null,
+     "crates/test/src/t.rs": null,
+     "src/a.rs": null,
+     "src/lib.rs": null,
+     "src/main.rs": null,
+     "src/sibling.rs": null,
+     "src/x.rs": null
+    },
+    "sources": [
+     {
+      "path": "src/lib.rs",
+      "source": "rust/crates_use.rs"
+     },
+     {
+      "path": "src/a.rs",
+      "source": "rust/crates_use.rs"
+     },
+     {
+      "path": "crates/foo/src/lib.rs",
+      "source": "rust/crates_use.rs"
+     },
+     {
+      "path": "crates/foo/src/a.rs",
+      "source": "rust/crates_use.rs"
+     },
+     {
+      "path": "crates/nolib/src/main.rs",
+      "source": "rust/crates_use.rs"
+     },
+     {
+      "path": "elsewhere/lib.rs",
+      "source": "rust/crates_use.rs"
+     },
+     {
+      "path": "src/main.rs",
+      "source": "rust/crates_use.rs"
+     }
+    ]
+   },
+   {
+    "id": "names",
+    "known": {
+     "Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+       }
+      }
+     },
+     "eight/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "caf\u00e9"
+       }
+      }
+     },
+     "eight/src/lib.rs": null,
+     "eleven/Other.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "other"
+       }
+      }
+     },
+     "eleven/src/lib.rs": null,
+     "five/Cargo.toml": {
+      "architecture": {
+       "manifest": {}
+      }
+     },
+     "five/src/lib.rs": null,
+     "four/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": 5
+       }
+      }
+     },
+     "four/src/lib.rs": null,
+     "fourteen/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "fourteen"
+       }
+      }
+     },
+     "fourteen/src/main.rs": null,
+     "lower/cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "lower"
+       }
+      }
+     },
+     "lower/src/lib.rs": null,
+     "nine/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "with.dot"
+       }
+      }
+     },
+     "nine/src/lib.rs": null,
+     "one/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+       }
+      }
+     },
+     "one/src/lib.rs": null,
+     "seven/Cargo.toml": {},
+     "seven/src/lib.rs": null,
+     "six/Cargo.toml": {
+      "architecture": {}
+     },
+     "six/src/lib.rs": null,
+     "src/lib.rs": null,
+     "ten/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "new\nline"
+       }
+      }
+     },
+     "ten/src/lib.rs": null,
+     "thirteen/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "thirteen"
+       }
+      }
+     },
+     "three/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "Under_Score-Dash9"
+       }
+      }
+     },
+     "three/src/lib.rs": null,
+     "three/src/x.rs": null,
+     "twelve/MyCargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "twelve"
+       }
+      }
+     },
+     "twelve/src/lib.rs": null,
+     "two/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": ""
+       }
+      }
+     },
+     "two/src/lib.rs": null
+    },
+    "sources": [
+     {
+      "path": "src/lib.rs",
+      "source": "rust/crates_use.rs"
+     }
+    ]
+   },
+   {
+    "id": "hyphen-and-underscore",
+    "known": {
+     "Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "my-crate"
+       }
+      }
+     },
+     "other/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "other_crate"
+       }
+      }
+     },
+     "other/src/deep/mod.rs": null,
+     "other/src/lib.rs": null,
+     "other/src/thing.rs": null,
+     "src/a.rs": null,
+     "src/lib.rs": null
+    },
+    "sources": [
+     {
+      "path": "src/a.rs",
+      "source": "rust/relative_paths.rs"
+     },
+     {
+      "path": "elsewhere.rs",
+      "source": "rust/relative_paths.rs"
+     }
+    ]
+   },
+   {
+    "id": "self-reference",
+    "known": {
+     "Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "me"
+       }
+      }
+     },
+     "src/a.rs": null,
+     "src/b.rs": null,
+     "src/lib.rs": null
+    },
+    "sources": [
+     {
+      "path": "src/a.rs",
+      "source": "rust/crates_use.rs"
+     }
+    ]
+   },
+   {
+    "id": "empty",
+    "known": {},
+    "sources": [
+     {
+      "path": "src/lib.rs",
+      "source": "rust/crates_use.rs"
+     }
+    ]
+   },
+   {
+    "id": "nested-manifest-wins",
+    "known": {
+     "Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "outer"
+       }
+      }
+     },
+     "inner/Cargo.toml": {
+      "architecture": {
+       "manifest": {
+        "name": "inner"
+       }
+      }
+     },
+     "inner/src/lib.rs": null,
+     "inner/src/thing.rs": null,
+     "inner/src/x.rs": null,
+     "src/lib.rs": null
+    },
+    "sources": [
+     {
+      "path": "inner/src/x.rs",
+      "source": "rust/relative_paths.rs"
+     },
+     {
+      "path": "src/lib.rs",
+      "source": "rust/relative_paths.rs"
+     }
+    ]
+   }
+  ]
+ },
+ "waypoints": {
+  "analysisSeed": "analysis",
+  "areas": [
+   "src",
+   "src/py",
+   "src/ts",
+   "tests",
+   ".",
+   "src/zoo",
+   "src/snip",
+   "src/rs"
+  ],
+  "cases": [
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/bom.py",
+    "language": "python",
+    "path": "src/py/bom.py",
+    "revision": "rev-main",
+    "source": "python/bom.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/calls.py",
+    "language": "python",
+    "path": "src/py/calls.py",
+    "revision": "rev-main",
+    "source": "python/calls.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/crlf.py",
+    "language": "python",
+    "path": "src/py/crlf.py",
+    "revision": "rev-main",
+    "source": "python/crlf.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/docstring_bad_escape.py",
+    "language": "python",
+    "path": "src/py/docstring_bad_escape.py",
+    "revision": "rev-main",
+    "source": "python/docstring_bad_escape.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/docstring_named_escape.py",
+    "language": "python",
+    "path": "src/py/docstring_named_escape.py",
+    "revision": "rev-main",
+    "source": "python/docstring_named_escape.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/docstring_tabs.py",
+    "language": "python",
+    "path": "src/py/docstring_tabs.py",
+    "revision": "rev-main",
+    "source": "python/docstring_tabs.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/docstrings.py",
+    "language": "python",
+    "path": "src/py/docstrings.py",
+    "revision": "rev-main",
+    "source": "python/docstrings.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/empty.py",
+    "language": "python",
+    "path": "src/py/empty.py",
+    "revision": "rev-main",
+    "source": "python/empty.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/imports.py",
+    "language": "python",
+    "path": "src/py/imports.py",
+    "revision": "rev-main",
+    "source": "python/imports.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/invalid_utf8.py",
+    "language": "python",
+    "path": "src/py/invalid_utf8.py",
+    "revision": "rev-main",
+    "source": "python/invalid_utf8.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/lone_cr.py",
+    "language": "python",
+    "path": "src/py/lone_cr.py",
+    "revision": "rev-main",
+    "source": "python/lone_cr.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/nul.py",
+    "language": "python",
+    "path": "src/py/nul.py",
+    "revision": "rev-main",
+    "source": "python/nul.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/only_comments.py",
+    "language": "python",
+    "path": "src/py/only_comments.py",
+    "revision": "rev-main",
+    "source": "python/only_comments.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/positional_after_keyword.py",
+    "language": "python",
+    "path": "src/py/positional_after_keyword.py",
+    "revision": "rev-main",
+    "source": "python/positional_after_keyword.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/python2_chevron.py",
+    "language": "python",
+    "path": "src/py/python2_chevron.py",
+    "revision": "rev-main",
+    "source": "python/python2_chevron.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/python2_print.py",
+    "language": "python",
+    "path": "src/py/python2_print.py",
+    "revision": "rev-main",
+    "source": "python/python2_print.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/syntax_error.py",
+    "language": "python",
+    "path": "src/py/syntax_error.py",
+    "revision": "rev-main",
+    "source": "python/syntax_error.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/tab_error.py",
+    "language": "python",
+    "path": "src/py/tab_error.py",
+    "revision": "rev-main",
+    "source": "python/tab_error.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/bom.ts",
+    "language": "typescript",
+    "path": "src/ts/bom.ts",
+    "revision": "rev-main",
+    "source": "script/bom.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/comments.ts",
+    "language": "typescript",
+    "path": "src/ts/comments.ts",
+    "revision": "rev-main",
+    "source": "script/comments.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/component.tsx",
+    "language": "tsx",
+    "path": "src/ts/component.tsx",
+    "revision": "rev-main",
+    "source": "script/component.tsx",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/control_chars.ts",
+    "language": "typescript",
+    "path": "src/ts/control_chars.ts",
+    "revision": "rev-main",
+    "source": "script/control_chars.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/crlf.ts",
+    "language": "typescript",
+    "path": "src/ts/crlf.ts",
+    "revision": "rev-main",
+    "source": "script/crlf.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/definitions_only.ts",
+    "language": "typescript",
+    "path": "src/ts/definitions_only.ts",
+    "revision": "rev-main",
+    "source": "script/definitions_only.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/empty.ts",
+    "language": "typescript",
+    "path": "src/ts/empty.ts",
+    "revision": "rev-main",
+    "source": "script/empty.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/empty_lines.ts",
+    "language": "typescript",
+    "path": "src/ts/empty_lines.ts",
+    "revision": "rev-main",
+    "source": "script/empty_lines.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/imports.ts",
+    "language": "typescript",
+    "path": "src/ts/imports.ts",
+    "revision": "rev-main",
+    "source": "script/imports.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/invalid_utf8.ts",
+    "language": "typescript",
+    "path": "src/ts/invalid_utf8.ts",
+    "revision": "rev-main",
+    "source": "script/invalid_utf8.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/late_comment.ts",
+    "language": "typescript",
+    "path": "src/ts/late_comment.ts",
+    "revision": "rev-main",
+    "source": "script/late_comment.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/lone_cr.ts",
+    "language": "typescript",
+    "path": "src/ts/lone_cr.ts",
+    "revision": "rev-main",
+    "source": "script/lone_cr.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/long_summary.ts",
+    "language": "typescript",
+    "path": "src/ts/long_summary.ts",
+    "revision": "rev-main",
+    "source": "script/long_summary.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/many_comments.ts",
+    "language": "typescript",
+    "path": "src/ts/many_comments.ts",
+    "revision": "rev-main",
+    "source": "script/many_comments.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/many_tests.ts",
+    "language": "typescript",
+    "path": "src/ts/many_tests.ts",
+    "revision": "rev-main",
+    "source": "script/many_tests.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/module.js",
+    "language": "javascript",
+    "path": "src/ts/module.js",
+    "revision": "rev-main",
+    "source": "script/module.js",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/no_description.ts",
+    "language": "typescript",
+    "path": "src/ts/no_description.ts",
+    "revision": "rev-main",
+    "source": "script/no_description.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/non_ascii_cases.ts",
+    "language": "typescript",
+    "path": "src/ts/non_ascii_cases.ts",
+    "revision": "rev-main",
+    "source": "script/non_ascii_cases.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/secrets.ts",
+    "language": "typescript",
+    "path": "src/ts/secrets.ts",
+    "revision": "rev-main",
+    "source": "script/secrets.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/selection.test.ts",
+    "language": "typescript",
+    "path": "src/ts/selection.test.ts",
+    "revision": "rev-main",
+    "source": "script/selection.test.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/single_line_no_newline.ts",
+    "language": "typescript",
+    "path": "src/ts/single_line_no_newline.ts",
+    "revision": "rev-main",
+    "source": "script/single_line_no_newline.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/symbols.ts",
+    "language": "typescript",
+    "path": "src/ts/symbols.ts",
+    "revision": "rev-main",
+    "source": "script/symbols.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/syntax_error.ts",
+    "language": "typescript",
+    "path": "src/ts/syntax_error.ts",
+    "revision": "rev-main",
+    "source": "script/syntax_error.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/tests_and_comments.ts",
+    "language": "typescript",
+    "path": "src/ts/tests_and_comments.ts",
+    "revision": "rev-main",
+    "source": "script/tests_and_comments.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "script/unicode.ts",
+    "language": "typescript",
+    "path": "src/ts/unicode.ts",
+    "revision": "rev-main",
+    "source": "script/unicode.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "tests-dir-ts",
+    "language": "typescript",
+    "path": "tests/selection.test.ts",
+    "revision": "rev-main",
+    "source": "script/selection.test.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "tests-fixtures-dir",
+    "language": "typescript",
+    "path": "tests/fixtures/selection.test.ts",
+    "revision": "rev-main",
+    "source": "script/selection.test.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "tests-setup-file",
+    "language": "typescript",
+    "path": "tests/setup.ts",
+    "revision": "rev-main",
+    "source": "script/selection.test.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "tests-benchmark-file",
+    "language": "typescript",
+    "path": "tests/layout.benchmark.test.ts",
+    "revision": "rev-main",
+    "source": "script/selection.test.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "tests-conftest",
+    "language": "python",
+    "path": "tests/conftest.py",
+    "revision": "rev-main",
+    "source": "python/docstrings.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "config-path",
+    "language": "typescript",
+    "path": "config/settings.ts",
+    "revision": "rev-main",
+    "source": "script/comments.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "doc-path",
+    "language": "typescript",
+    "path": "docs/guide.md",
+    "revision": "rev-main",
+    "source": "script/comments.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "asset-path",
+    "language": "typescript",
+    "path": "assets/data.svg",
+    "revision": "rev-main",
+    "source": "script/comments.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "artifact-path",
+    "language": "typescript",
+    "path": "dist/bundle.js",
+    "revision": "rev-main",
+    "source": "script/comments.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "other-path",
+    "language": "typescript",
+    "path": "data/blob.unknown",
+    "revision": "rev-main",
+    "source": "script/comments.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "text-language",
+    "language": "text",
+    "path": "notes/readme.txt",
+    "revision": "rev-main",
+    "source": "script/comments.ts",
+    "symbols": []
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "parse-error-evidence",
+    "language": "typescript",
+    "path": "src/broken.ts",
+    "revision": "rev-main",
+    "source": "script/syntax_error.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {},
+    "id": "missing-parser-evidence",
+    "language": "typescript",
+    "path": "src/noevidence.ts",
+    "revision": "rev-main",
+    "source": "script/comments.ts",
+    "symbols": []
+   },
+   {
+    "facts": {
+     "architecture": "nope"
+    },
+    "id": "architecture-not-object",
+    "language": "typescript",
+    "path": "src/odd.ts",
+    "revision": "rev-main",
+    "source": "script/comments.ts",
+    "symbols": []
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": 1
+     }
+    },
+    "id": "parse-error-int",
+    "language": "typescript",
+    "path": "src/int.ts",
+    "revision": "rev-main",
+    "source": "script/comments.ts",
+    "symbols": []
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "explicit-symbols",
+    "language": "typescript",
+    "path": "src/explicit.ts",
+    "revision": "rev-main",
+    "source": "script/no_description.ts",
+    "symbols": [
+     [
+      "function_declaration",
+      "applyPolicy",
+      1,
+      null
+     ],
+     [
+      "class_declaration",
+      "RepositoryStore",
+      2,
+      null
+     ],
+     [
+      "import",
+      "import x from 'y'",
+      1,
+      null
+     ],
+     [
+      "arrow_function",
+      "snake_case_name",
+      3,
+      "RepositoryStore"
+     ],
+     [
+      "function_declaration",
+      "bad line",
+      0,
+      null
+     ],
+     [
+      "function_declaration",
+      "too far",
+      99,
+      null
+     ],
+     [
+      "function_declaration",
+      5,
+      1,
+      null
+     ],
+     [
+      5,
+      "num kind",
+      1,
+      null
+     ],
+     [
+      "function_declaration",
+      "short"
+     ],
+     "notasymbol",
+     [
+      "function_declaration",
+      "camelCaseName",
+      true,
+      null
+     ],
+     [
+      "method_definition",
+      "TestMethodName",
+      2,
+      "x"
+     ],
+     [
+      "function_declaration",
+      "spec_helper_name",
+      2,
+      null
+     ],
+     [
+      "function_declaration",
+      "test-hyphen-name",
+      2,
+      null
+     ],
+     [
+      "function_declaration",
+      "api_key=sk-or-v1-xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      1,
+      null
+     ]
+    ]
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "many-symbols",
+    "language": "typescript",
+    "path": "src/many.ts",
+    "revision": "rev-main",
+    "source": "script/many_comments.ts",
+    "symbols": [
+     [
+      "function_declaration",
+      "name0",
+      1,
+      null
+     ],
+     [
+      "function_declaration",
+      "name1",
+      2,
+      null
+     ],
+     [
+      "function_declaration",
+      "name2",
+      3,
+      null
+     ],
+     [
+      "function_declaration",
+      "name3",
+      4,
+      null
+     ],
+     [
+      "function_declaration",
+      "name4",
+      5,
+      null
+     ],
+     [
+      "function_declaration",
+      "name5",
+      6,
+      null
+     ],
+     [
+      "function_declaration",
+      "name6",
+      7,
+      null
+     ],
+     [
+      "function_declaration",
+      "name7",
+      8,
+      null
+     ],
+     [
+      "function_declaration",
+      "name8",
+      9,
+      null
+     ],
+     [
+      "function_declaration",
+      "name9",
+      10,
+      null
+     ],
+     [
+      "function_declaration",
+      "name10",
+      11,
+      null
+     ],
+     [
+      "function_declaration",
+      "name11",
+      12,
+      null
+     ],
+     [
+      "function_declaration",
+      "name12",
+      13,
+      null
+     ],
+     [
+      "function_declaration",
+      "name13",
+      14,
+      null
+     ],
+     [
+      "function_declaration",
+      "name14",
+      15,
+      null
+     ],
+     [
+      "function_declaration",
+      "name15",
+      16,
+      null
+     ],
+     [
+      "function_declaration",
+      "name16",
+      17,
+      null
+     ],
+     [
+      "function_declaration",
+      "name17",
+      18,
+      null
+     ],
+     [
+      "function_declaration",
+      "name18",
+      19,
+      null
+     ],
+     [
+      "function_declaration",
+      "name19",
+      20,
+      null
+     ],
+     [
+      "function_declaration",
+      "name20",
+      21,
+      null
+     ],
+     [
+      "function_declaration",
+      "name21",
+      22,
+      null
+     ],
+     [
+      "function_declaration",
+      "name22",
+      23,
+      null
+     ],
+     [
+      "function_declaration",
+      "name23",
+      24,
+      null
+     ],
+     [
+      "function_declaration",
+      "name24",
+      25,
+      null
+     ],
+     [
+      "function_declaration",
+      "name25",
+      26,
+      null
+     ],
+     [
+      "function_declaration",
+      "name26",
+      27,
+      null
+     ],
+     [
+      "function_declaration",
+      "name27",
+      28,
+      null
+     ],
+     [
+      "function_declaration",
+      "name28",
+      29,
+      null
+     ],
+     [
+      "function_declaration",
+      "name29",
+      30,
+      null
+     ]
+    ]
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "revision-two",
+    "language": "typescript",
+    "path": "tests/selection.test.ts",
+    "revision": "rev-second",
+    "source": "script/selection.test.ts",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/zoo_docstrings.py",
+    "language": "python",
+    "path": "src/zoo/zoo_docstrings.py",
+    "revision": "rev-main",
+    "source": "python/zoo_docstrings.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/zoo_statements.py",
+    "language": "python",
+    "path": "src/zoo/zoo_statements.py",
+    "revision": "rev-main",
+    "source": "python/zoo_statements.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "python/zoo_fstrings.py",
+    "language": "python",
+    "path": "src/zoo/zoo_fstrings.py",
+    "revision": "rev-main",
+    "source": "python/zoo_fstrings.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "snippet/crlf_docstring.py",
+    "language": "python",
+    "path": "src/snip/crlf_docstring.py",
+    "revision": "rev-main",
+    "source": "snippet/crlf_docstring.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "snippet/docstring_named_escape.py",
+    "language": "python",
+    "path": "src/snip/docstring_named_escape.py",
+    "revision": "rev-main",
+    "source": "snippet/docstring_named_escape.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "snippet/ident_fullwidth_test.py",
+    "language": "python",
+    "path": "src/snip/ident_fullwidth_test.py",
+    "revision": "rev-main",
+    "source": "snippet/ident_fullwidth_test.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "snippet/ident_nfkc_ligature.py",
+    "language": "python",
+    "path": "src/snip/ident_nfkc_ligature.py",
+    "revision": "rev-main",
+    "source": "snippet/ident_nfkc_ligature.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "snippet/escape_named_unicode16.py",
+    "language": "python",
+    "path": "src/snip/escape_named_unicode16.py",
+    "revision": "rev-main",
+    "source": "snippet/escape_named_unicode16.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "snippet/nul_in_string.py",
+    "language": "python",
+    "path": "src/snip/nul_in_string.py",
+    "revision": "rev-main",
+    "source": "snippet/nul_in_string.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "snippet/bom_first.py",
+    "language": "python",
+    "path": "src/snip/bom_first.py",
+    "revision": "rev-main",
+    "source": "snippet/bom_first.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "snippet/genexp_sole_multiline.py",
+    "language": "python",
+    "path": "src/snip/genexp_sole_multiline.py",
+    "revision": "rev-main",
+    "source": "snippet/genexp_sole_multiline.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "snippet/walk_order_elif_chain.py",
+    "language": "python",
+    "path": "src/snip/walk_order_elif_chain.py",
+    "revision": "rev-main",
+    "source": "snippet/walk_order_elif_chain.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "snippet/decorator_comment_between.py",
+    "language": "python",
+    "path": "src/snip/decorator_comment_between.py",
+    "revision": "rev-main",
+    "source": "snippet/decorator_comment_between.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "snippet/tab_vs_spaces.py",
+    "language": "python",
+    "path": "src/snip/tab_vs_spaces.py",
+    "revision": "rev-main",
+    "source": "snippet/tab_vs_spaces.py",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/attributes_items.rs",
+    "language": "rust",
+    "path": "src/rs/attributes_items.rs",
+    "revision": "rev-main",
+    "source": "rust/attributes_items.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/bom.rs",
+    "language": "rust",
+    "path": "src/rs/bom.rs",
+    "revision": "rev-main",
+    "source": "rust/bom.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/comments_cr.rs",
+    "language": "rust",
+    "path": "src/rs/comments_cr.rs",
+    "revision": "rev-main",
+    "source": "rust/comments_cr.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/comments_first_blank.rs",
+    "language": "rust",
+    "path": "src/rs/comments_first_blank.rs",
+    "revision": "rev-main",
+    "source": "rust/comments_first_blank.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/comments_late.rs",
+    "language": "rust",
+    "path": "src/rs/comments_late.rs",
+    "revision": "rev-main",
+    "source": "rust/comments_late.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/comments_many.rs",
+    "language": "rust",
+    "path": "src/rs/comments_many.rs",
+    "revision": "rev-main",
+    "source": "rust/comments_many.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/comments_star_only.rs",
+    "language": "rust",
+    "path": "src/rs/comments_star_only.rs",
+    "revision": "rev-main",
+    "source": "rust/comments_star_only.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/crate_main.rs",
+    "language": "rust",
+    "path": "src/rs/crate_main.rs",
+    "revision": "rev-main",
+    "source": "rust/crate_main.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/crates_use.rs",
+    "language": "rust",
+    "path": "src/rs/crates_use.rs",
+    "revision": "rev-main",
+    "source": "rust/crates_use.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/crlf.rs",
+    "language": "rust",
+    "path": "src/rs/crlf.rs",
+    "revision": "rev-main",
+    "source": "rust/crlf.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/crlf_use.rs",
+    "language": "rust",
+    "path": "src/rs/crlf_use.rs",
+    "revision": "rev-main",
+    "source": "rust/crlf_use.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/definitions_only.rs",
+    "language": "rust",
+    "path": "src/rs/definitions_only.rs",
+    "revision": "rev-main",
+    "source": "rust/definitions_only.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/doc_comments.rs",
+    "language": "rust",
+    "path": "src/rs/doc_comments.rs",
+    "revision": "rev-main",
+    "source": "rust/doc_comments.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/duplicate_targets.rs",
+    "language": "rust",
+    "path": "src/rs/duplicate_targets.rs",
+    "revision": "rev-main",
+    "source": "rust/duplicate_targets.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/empty.rs",
+    "language": "rust",
+    "path": "src/rs/empty.rs",
+    "revision": "rev-main",
+    "source": "rust/empty.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "rust/error_attribute.rs",
+    "language": "rust",
+    "path": "src/rs/error_attribute.rs",
+    "revision": "rev-main",
+    "source": "rust/error_attribute.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "rust/error_extern_crate.rs",
+    "language": "rust",
+    "path": "src/rs/error_extern_crate.rs",
+    "revision": "rev-main",
+    "source": "rust/error_extern_crate.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "rust/error_garbage.rs",
+    "language": "rust",
+    "path": "src/rs/error_garbage.rs",
+    "revision": "rev-main",
+    "source": "rust/error_garbage.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "rust/error_impl.rs",
+    "language": "rust",
+    "path": "src/rs/error_impl.rs",
+    "revision": "rev-main",
+    "source": "rust/error_impl.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "rust/error_missing_name.rs",
+    "language": "rust",
+    "path": "src/rs/error_missing_name.rs",
+    "revision": "rev-main",
+    "source": "rust/error_missing_name.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "rust/error_param.rs",
+    "language": "rust",
+    "path": "src/rs/error_param.rs",
+    "revision": "rev-main",
+    "source": "rust/error_param.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "rust/error_unclosed_brace.rs",
+    "language": "rust",
+    "path": "src/rs/error_unclosed_brace.rs",
+    "revision": "rev-main",
+    "source": "rust/error_unclosed_brace.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "rust/error_unclosed_comment.rs",
+    "language": "rust",
+    "path": "src/rs/error_unclosed_comment.rs",
+    "revision": "rev-main",
+    "source": "rust/error_unclosed_comment.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "rust/error_unterminated_string.rs",
+    "language": "rust",
+    "path": "src/rs/error_unterminated_string.rs",
+    "revision": "rev-main",
+    "source": "rust/error_unterminated_string.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "rust/error_use.rs",
+    "language": "rust",
+    "path": "src/rs/error_use.rs",
+    "revision": "rev-main",
+    "source": "rust/error_use.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/invalid_utf8.rs",
+    "language": "rust",
+    "path": "src/rs/invalid_utf8.rs",
+    "revision": "rev-main",
+    "source": "rust/invalid_utf8.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/invalid_utf8_name.rs",
+    "language": "rust",
+    "path": "src/rs/invalid_utf8_name.rs",
+    "revision": "rev-main",
+    "source": "rust/invalid_utf8_name.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/invalid_utf8_use.rs",
+    "language": "rust",
+    "path": "src/rs/invalid_utf8_use.rs",
+    "revision": "rev-main",
+    "source": "rust/invalid_utf8_use.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/lone_cr.rs",
+    "language": "rust",
+    "path": "src/rs/lone_cr.rs",
+    "revision": "rev-main",
+    "source": "rust/lone_cr.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/long_names.rs",
+    "language": "rust",
+    "path": "src/rs/long_names.rs",
+    "revision": "rev-main",
+    "source": "rust/long_names.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/macros.rs",
+    "language": "rust",
+    "path": "src/rs/macros.rs",
+    "revision": "rev-main",
+    "source": "rust/macros.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/many_methods.rs",
+    "language": "rust",
+    "path": "src/rs/many_methods.rs",
+    "revision": "rev-main",
+    "source": "rust/many_methods.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/many_parameters.rs",
+    "language": "rust",
+    "path": "src/rs/many_parameters.rs",
+    "revision": "rev-main",
+    "source": "rust/many_parameters.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/modules_inline.rs",
+    "language": "rust",
+    "path": "src/rs/modules_inline.rs",
+    "revision": "rev-main",
+    "source": "rust/modules_inline.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/no_trailing_newline.rs",
+    "language": "rust",
+    "path": "src/rs/no_trailing_newline.rs",
+    "revision": "rev-main",
+    "source": "rust/no_trailing_newline.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/non_ascii.rs",
+    "language": "rust",
+    "path": "src/rs/non_ascii.rs",
+    "revision": "rev-main",
+    "source": "rust/non_ascii.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/nul.rs",
+    "language": "rust",
+    "path": "src/rs/nul.rs",
+    "revision": "rev-main",
+    "source": "rust/nul.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/only_comments.rs",
+    "language": "rust",
+    "path": "src/rs/only_comments.rs",
+    "revision": "rev-main",
+    "source": "rust/only_comments.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/raw_names.rs",
+    "language": "rust",
+    "path": "src/rs/raw_names.rs",
+    "revision": "rev-main",
+    "source": "rust/raw_names.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/relative_paths.rs",
+    "language": "rust",
+    "path": "src/rs/relative_paths.rs",
+    "revision": "rev-main",
+    "source": "rust/relative_paths.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/same_name_twice.rs",
+    "language": "rust",
+    "path": "src/rs/same_name_twice.rs",
+    "revision": "rev-main",
+    "source": "rust/same_name_twice.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/symbols.rs",
+    "language": "rust",
+    "path": "src/rs/symbols.rs",
+    "revision": "rev-main",
+    "source": "rust/symbols.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": true
+     }
+    },
+    "id": "rust/syntax_error.rs",
+    "language": "rust",
+    "path": "src/rs/syntax_error.rs",
+    "revision": "rev-main",
+    "source": "rust/syntax_error.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/tests_asserts.rs",
+    "language": "rust",
+    "path": "src/rs/tests_asserts.rs",
+    "revision": "rev-main",
+    "source": "rust/tests_asserts.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/tests_many.rs",
+    "language": "rust",
+    "path": "src/rs/tests_many.rs",
+    "revision": "rev-main",
+    "source": "rust/tests_many.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/tests_names.rs",
+    "language": "rust",
+    "path": "src/rs/tests_names.rs",
+    "revision": "rev-main",
+    "source": "rust/tests_names.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/types_generics.rs",
+    "language": "rust",
+    "path": "src/rs/types_generics.rs",
+    "revision": "rev-main",
+    "source": "rust/types_generics.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/use_forms.rs",
+    "language": "rust",
+    "path": "src/rs/use_forms.rs",
+    "revision": "rev-main",
+    "source": "rust/use_forms.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/use_limits.rs",
+    "language": "rust",
+    "path": "src/rs/use_limits.rs",
+    "revision": "rev-main",
+    "source": "rust/use_limits.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/use_lists_100.rs",
+    "language": "rust",
+    "path": "src/rs/use_lists_100.rs",
+    "revision": "rev-main",
+    "source": "rust/use_lists_100.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/use_nested_100.rs",
+    "language": "rust",
+    "path": "src/rs/use_nested_100.rs",
+    "revision": "rev-main",
+    "source": "rust/use_nested_100.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/use_nested_3000.rs",
+    "language": "rust",
+    "path": "src/rs/use_nested_3000.rs",
+    "revision": "rev-main",
+    "source": "rust/use_nested_3000.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust/whitespace_only.rs",
+    "language": "rust",
+    "path": "src/rs/whitespace_only.rs",
+    "revision": "rev-main",
+    "source": "rust/whitespace_only.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust-tests-path",
+    "language": "rust",
+    "path": "tests/rust_waypoint.rs",
+    "revision": "rev-main",
+    "source": "rust/tests_names.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust-tests-path-asserts",
+    "language": "rust",
+    "path": "tests/asserts.rs",
+    "revision": "rev-main",
+    "source": "rust/tests_asserts.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {},
+    "id": "rust-missing-parser-evidence",
+    "language": "rust",
+    "path": "src/rs/noevidence.rs",
+    "revision": "rev-main",
+    "source": "rust/doc_comments.rs",
+    "symbols": []
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": 1
+     }
+    },
+    "id": "rust-evidence-wrong-type",
+    "language": "rust",
+    "path": "src/rs/wrongtype.rs",
+    "revision": "rev-main",
+    "source": "rust/doc_comments.rs",
+    "symbols": []
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust-revision-two",
+    "language": "rust",
+    "path": "src/rs/doc_comments.rs",
+    "revision": "rev-second",
+    "source": "rust/doc_comments.rs",
+    "symbols": "indexed"
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust-no-symbols",
+    "language": "rust",
+    "path": "src/rs/nosymbols.rs",
+    "revision": "rev-main",
+    "source": "rust/symbols.rs",
+    "symbols": []
+   },
+   {
+    "facts": {
+     "architecture": {
+      "parse_error": false
+     }
+    },
+    "id": "rust-given-symbols",
+    "language": "rust",
+    "path": "src/rs/given.rs",
+    "revision": "rev-main",
+    "source": "rust/definitions_only.rs",
+    "symbols": [
+     [
+      "function_item",
+      "fetch_order",
+      4,
+      null
+     ],
+     [
+      "struct_item",
+      "Order",
+      1,
+      null
+     ]
+    ]
+   }
+  ],
+  "dependencies": [
+   [
+    "src/store.ts",
+    "seed:store-v1",
+    "IMPORTS"
+   ],
+   [
+    "src/store.ts",
+    "seed:store-v1",
+    "IMPORTS"
+   ],
+   [
+    "src/a.ts",
+    "seed:a",
+    "CALLS"
+   ]
+  ],
+  "invalidPaths": [
+   "../private.ts",
+   "/a.ts",
+   "a\b.ts",
+   "a//b.ts",
+   "a/./b.ts",
+   "C:/a.ts",
+   "a\u0000.ts",
+   "a\u202e.ts",
+   "",
+   "a/",
+   "."
+  ],
+  "policySeed": "rules"
+ }
+}

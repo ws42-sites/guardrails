@@ -1,0 +1,16 @@
+[package]
+name = "ropeline-store"
+version = "0.1.0"
+description = "Ropeline's SQLite stores, reading and writing the schemas CodeGraph's Python backend defines"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+ropeline-engine = { path = "../ropeline-engine", version = "=0.1.0" }
+# bundled compiles SQLite into the binary, so no system library is needed. The tests
+# compare against Python's sqlite3 module, which links its own SQLite.
+rusqlite = { version = "=0.43.0", features = ["bundled"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"

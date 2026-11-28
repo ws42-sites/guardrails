@@ -1,0 +1,38 @@
+{
+  "README.md": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "py/broken.py": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "py/dynamic.py": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "web/data.json": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  },
+  "web/missing.ts": {
+    "dropped_calls": [],
+    "imports": [
+      {
+        "confidence": "resolved-relative",
+        "line": 4,
+        "target": "web/data.json"
+      }
+    ],
+    "possible_calls": []
+  },
+  "web/tsconfig.json": {
+    "dropped_calls": [],
+    "imports": [],
+    "possible_calls": []
+  }
+}

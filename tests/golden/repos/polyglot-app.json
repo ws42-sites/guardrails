@@ -1,0 +1,33 @@
+{
+  "files": {
+    "README.md": "# Polyglot app\n\nFixture covering Python, JavaScript, TypeScript and TSX. It is data; nothing here is ever run.\n",
+    "apps/web/src/entry.ts": "import { core } from \"@golden/core\";\nimport { coreStore } from \"@golden/core/store\";\n\nexport const entry = core + coreStore;\n",
+    "assets/logo.svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\"><rect width=\"8\" height=\"8\"/></svg>\n",
+    "assets/pixel.png": {
+      "base64": "iVBORw0KGgoAAAAAZml4dHVyZQ=="
+    },
+    "config/settings.yaml": "service:\n  name: polyglot\n  retries: 3\n",
+    "docs/guide.md": "# Guide\n\nImports resolve inside the repository only.\n",
+    "generated/schema.generated.ts": "// Generated file: category should be artifact, not code.\nexport const schemaVersion = 1;\n",
+    "golden_pkg/__init__.py": "\"\"\"Package marker so absolute imports resolve to a package directory.\"\"\"\n",
+    "golden_pkg/main.py": "import golden_pkg.util\nfrom . import models\nfrom .util import helper\nfrom golden_pkg.models import build_account\nfrom os import path\n\n\ndef normalise(value):\n    return helper(value)\n\n\ndef run(value):\n    account = build_account(\"demo\")\n    return normalise(value), account.label(), path.sep, golden_pkg.util\n\n\nasync def serve():\n    return run(1)\n",
+    "golden_pkg/models.py": "class Account:\n    def __init__(self, name):\n        self.name = name\n\n    def label(self):\n        return self.name.title()\n\n\ndef build_account(name):\n    return Account(name)\n",
+    "golden_pkg/util.py": "def helper(value):\n    return value * 2\n\n\ndef unused_helper():\n    return None\n",
+    "js/index.js": "import { format } from \"./lib/format.js\";\nconst legacy = require(\"./lib/legacy.cjs\");\nimport(\"./lib/format\");\n\nexport function render(value) {\n  return format(value) + legacy.legacy();\n}\n\nexport const double = (value) => render(value) + render(value);\n",
+    "js/lib/format.js": "export function format(value) {\n  return String(value);\n}\n",
+    "js/lib/legacy.cjs": "function legacy() {\n  return 1;\n}\nmodule.exports = { legacy };\n",
+    "js/vendor.min.js": "export function minified(a){return a+1}\n",
+    "package.json": "{\n  \"name\": \"@golden/polyglot\",\n  \"private\": true,\n  \"version\": \"0.0.0\"\n}\n",
+    "packages/core/package.json": "{\n  \"name\": \"@golden/core\",\n  \"version\": \"0.0.0\",\n  \"exports\": {\n    \".\": \"./src/index.ts\",\n    \"./store\": \"./src/store.ts\"\n  }\n}\n",
+    "packages/core/src/index.ts": "export const core = \"core\";\n",
+    "packages/core/src/store.ts": "export const coreStore = \"store\";\n",
+    "tests/test_main.py": "from golden_pkg.main import run\n\n\ndef test_run():\n    assert run(1)\n",
+    "ts/src/__snapshots__/service.snap.ts": "export const snapshot = \"recorded\";\n",
+    "ts/src/service.test.ts": "import { boot } from \"./service\";\n\nexport const smoke = boot();\n",
+    "ts/src/service.ts": "import { Store, createStore } from \"./store\";\nimport type { Item } from \"./store.js\";\nimport { Button } from \"./ui\";\n\nexport function seed(store: Store, item: Item): void {\n  store.add(item);\n}\n\nexport function boot(): Store {\n  const store = createStore();\n  seed(store, { id: \"a\" });\n  return store;\n}\n\nexport const view = Button;\n",
+    "ts/src/store.ts": "export interface Item {\n  id: string;\n}\n\nexport type ItemId = Item[\"id\"];\n\nexport class Store {\n  items: Item[] = [];\n\n  add(item: Item): void {\n    this.items.push(item);\n  }\n}\n\nexport const createStore = (): Store => new Store();\n",
+    "ts/src/ui/Button.tsx": "import { boot } from \"../service\";\n\nexport function Button(props: { label: string }) {\n  boot();\n  return <button>{props.label}</button>;\n}\n",
+    "ts/src/ui/index.ts": "export { Button } from \"./Button\";\n",
+    "tsconfig.json": "{\n  \"compilerOptions\": { \"strict\": true, \"jsx\": \"react-jsx\", \"module\": \"esnext\" }\n}\n"
+  }
+}

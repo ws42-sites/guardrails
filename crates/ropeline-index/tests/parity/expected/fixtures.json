@@ -1,0 +1,4103 @@
+{
+ "cases": {
+  "owners-architecture-index-repeat-change": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 13,
+      "sha256": "a8006f5c7b991dfb5dc4c963ba7feee9297b2e05c2c253c9b9cb44ddc325c9ca"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 20,
+      "sha256": "6f9ca248974c3a2c89cb418348b15c4cb59ab4920262a99727c27d77f5c223d0"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 44,
+      "sha256": "e48a4773f9992a950d71ff57545b9123fd6edeffe919b7c1995bcd7b6719a151"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 72,
+      "sha256": "af52d22deeb2bd219706a7a756391a2dc12772f1785fd63338229a30b6c5f105"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 4,
+      "sha256": "b67dc1e50f76c4ea1cd42953fbc658a626fc2ca8ac79363dc4ee599e07f9c3a4"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 51,
+      "sha256": "6a72716c78b77c3e134bf30caca2cb4a6fef8e2766088299151d4d830df1ac4d"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "1": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 11,
+       "sha256": "c077cc54ae15c91b59fdd34f89e7ab41a0e5494798115b93b9ec1b3f2d1cb25c"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 6,
+       "sha256": "29570d7e379a898750361aaac203d7d35ace833738049558a9cfa3ec68b5d2d4"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 11,
+       "sha256": "c25e5eaec3fee46699d6134c9907a996c9ab563dd5b52c00e91ed872afc26e3d"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 18,
+       "sha256": "1317db0702cab36440e3af308aa6722c187c500b6349fcb09e332f22b220121e"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 1,
+       "sha256": "1f560e8bdc7e395f33919e33c69ec10cea16a1448899f7db632f45e73cb86879"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 36,
+       "sha256": "94561f4c70bdd321ef638479ec64f8a98768e811d41f3ed16fafc0f37b16ae30"
+      }
+     },
+     "user_version": 3
+    },
+    "2": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 11,
+       "sha256": "c077cc54ae15c91b59fdd34f89e7ab41a0e5494798115b93b9ec1b3f2d1cb25c"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 12,
+       "sha256": "ece4ed44f975f16a486cc74591c4b0cc2e81d4efd826f9a0561e82e599954897"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 22,
+       "sha256": "15107b7455f2e88842da67ae3c2761a88a19a72e9d005288a0fd87684373d317"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 36,
+       "sha256": "664f0f586c9bca3a6c11e838f384c471abaab89c699337038eaf4366a45f512a"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 2,
+       "sha256": "9e25b4f7dab26386332469a7f1281bc06f76b81c66b40f236030176f909e93bd"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 36,
+       "sha256": "94561f4c70bdd321ef638479ec64f8a98768e811d41f3ed16fafc0f37b16ae30"
+      }
+     },
+     "user_version": 3
+    },
+    "5": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 13,
+       "sha256": "a8006f5c7b991dfb5dc4c963ba7feee9297b2e05c2c253c9b9cb44ddc325c9ca"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 16,
+       "sha256": "b2137e4f6c0cda81f848edd22d0a42ef94111f67ca3aba6407c180f754f18f77"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 33,
+       "sha256": "e312519623ea174280da6e3212db1540fac8ec6ef55f3a4cb02a3214bd0346cd"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 54,
+       "sha256": "cc3f9cd9e26b62764702ca48731a2c4c7d61834965efb48b9f49ab87e29b4677"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 3,
+       "sha256": "28366a9e61cca2681129cd3c101fd2801c4643f37d5cd2ae4a12fb2e251c04e6"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 51,
+       "sha256": "6a72716c78b77c3e134bf30caca2cb4a6fef8e2766088299151d4d830df1ac4d"
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 11,
+      "imports": 6,
+      "parsed_files": 11,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-faf30adacff4f30ef5751925475908827208d95ad904776d7e3342a1ea067af2",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 20,
+      "waypoints": {
+       "areaValidationsComputed": 7,
+       "areaValidationsReused": 0,
+       "areasComputed": 7,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 11,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 11,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 11,
+      "imports": 6,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 11,
+      "revision": "working-tree-tree-faf30adacff4f30ef5751925475908827208d95ad904776d7e3342a1ea067af2",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 20,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 7,
+       "areasComputed": 0,
+       "areasReused": 7,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 11,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 11
+      }
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 11,
+      "imports": 4,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 9,
+      "revision": "working-tree-tree-a045419985ab7237fe45575a75e44f1e11d108b618d1fd766dec1b69f349e91d",
+      "skipped_files": 0,
+      "snapshot": 3,
+      "symbols": 19,
+      "waypoints": {
+       "areaValidationsComputed": 5,
+       "areaValidationsReused": 2,
+       "areasComputed": 3,
+       "areasReused": 4,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 9,
+       "unavailableFiles": 0,
+       "validationsComputed": 5,
+       "validationsReused": 6
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 11,
+      "imports": 4,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 11,
+      "revision": "working-tree-tree-a045419985ab7237fe45575a75e44f1e11d108b618d1fd766dec1b69f349e91d",
+      "skipped_files": 0,
+      "snapshot": 4,
+      "symbols": 19,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 7,
+       "areasComputed": 0,
+       "areasReused": 7,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 11,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 11
+      }
+     }
+    }
+   ]
+  },
+  "owners-architecture-two-branches": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 13,
+      "sha256": "a8006f5c7b991dfb5dc4c963ba7feee9297b2e05c2c253c9b9cb44ddc325c9ca"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 16,
+      "sha256": "f92a3fd44e99fa9ef814ed0cafebbeb70705a92e7de87fa8b0ebd711b1444487"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 33,
+      "sha256": "17311de26d4a44e270aeeaf3cd7a71bbdae30a0948cf5fec12bef67d6aa34eae"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 54,
+      "sha256": "cc3f9cd9e26b62764702ca48731a2c4c7d61834965efb48b9f49ab87e29b4677"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 3,
+      "sha256": "1f5431533859f8ca163f08efbbe3f0a7cb145eb9a1a2458e97cd1a3520bc750d"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 51,
+      "sha256": "6a72716c78b77c3e134bf30caca2cb4a6fef8e2766088299151d4d830df1ac4d"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "0": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 11,
+       "sha256": "c077cc54ae15c91b59fdd34f89e7ab41a0e5494798115b93b9ec1b3f2d1cb25c"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 6,
+       "sha256": "d379cfdf7c89f4269d7cfe3504595e9ebc0a5aca931f6f2fd7fbcdd85c8bbeee"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 11,
+       "sha256": "c25e5eaec3fee46699d6134c9907a996c9ab563dd5b52c00e91ed872afc26e3d"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 18,
+       "sha256": "1317db0702cab36440e3af308aa6722c187c500b6349fcb09e332f22b220121e"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 1,
+       "sha256": "1246b359e3664085f54c4240c7c3813360c902ff4c6bec037c3e4835581b9f48"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 36,
+       "sha256": "94561f4c70bdd321ef638479ec64f8a98768e811d41f3ed16fafc0f37b16ae30"
+      }
+     },
+     "user_version": 3
+    },
+    "1": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 11,
+       "sha256": "c077cc54ae15c91b59fdd34f89e7ab41a0e5494798115b93b9ec1b3f2d1cb25c"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 12,
+       "sha256": "19ac2ef13a89f397efc153a62b758f0bcfca319582ad849444c87de4174749e3"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 22,
+       "sha256": "15107b7455f2e88842da67ae3c2761a88a19a72e9d005288a0fd87684373d317"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 36,
+       "sha256": "664f0f586c9bca3a6c11e838f384c471abaab89c699337038eaf4366a45f512a"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 2,
+       "sha256": "c6be3c1a2bb250813dd6858e7c498d9de1604a893c6384cbb2d7052996e4af4f"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 36,
+       "sha256": "94561f4c70bdd321ef638479ec64f8a98768e811d41f3ed16fafc0f37b16ae30"
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": {
+      "files": 11,
+      "imports": 6,
+      "parsed_files": 11,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 20,
+      "waypoints": {
+       "areaValidationsComputed": 7,
+       "areaValidationsReused": 0,
+       "areasComputed": 7,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 11,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 11,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 11,
+      "imports": 6,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 11,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 20,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 7,
+       "areasComputed": 0,
+       "areasReused": 7,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 11,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 11
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 11,
+      "imports": 4,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 9,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+      "skipped_files": 0,
+      "snapshot": 3,
+      "symbols": 19,
+      "waypoints": {
+       "areaValidationsComputed": 5,
+       "areaValidationsReused": 2,
+       "areasComputed": 3,
+       "areasReused": 4,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 9,
+       "unavailableFiles": 0,
+       "validationsComputed": 5,
+       "validationsReused": 6
+      }
+     }
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "owners-architecture-with-ownership-record": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 11,
+      "sha256": "c077cc54ae15c91b59fdd34f89e7ab41a0e5494798115b93b9ec1b3f2d1cb25c"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 12,
+      "sha256": "aeb89270feb4011be0b509e55e50e3f18dcc3b4cffae1372ee273dc1cf25686d"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 22,
+      "sha256": "15107b7455f2e88842da67ae3c2761a88a19a72e9d005288a0fd87684373d317"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 36,
+      "sha256": "a6935cbcccac0580e815692a3dbdc7276a0257cb93006c941bacd32708e05207"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 2,
+      "sha256": "06b4e2589c09310944cb21f22d2c32d9e429f63a7242a8a1e27c71443678dfb8"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 36,
+      "sha256": "03f67f642ea6504066a60d48ce1c79c615fe27a163ca2514c4e283deb1a75e8c"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "1": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 11,
+       "sha256": "c077cc54ae15c91b59fdd34f89e7ab41a0e5494798115b93b9ec1b3f2d1cb25c"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 6,
+       "sha256": "a4c0bb0b04a4528af6aaac095d0f1f5854504cb645e9d14f0246aa2fdfc3050f"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 11,
+       "sha256": "c25e5eaec3fee46699d6134c9907a996c9ab563dd5b52c00e91ed872afc26e3d"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 18,
+       "sha256": "ce8ed5e8f048779c491d34f400d825ab3d6837e657edeff691310f113bf46754"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 1,
+       "sha256": "a0f6e6fbe019561ede6f5f62babdd78a018edc2cb08fc3527aa2d04caffaf072"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 36,
+       "sha256": "03f67f642ea6504066a60d48ce1c79c615fe27a163ca2514c4e283deb1a75e8c"
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 11,
+      "imports": 6,
+      "parsed_files": 11,
+      "possible_calls": 0,
+      "repository": "owner/owners",
+      "reused_files": 0,
+      "revision": "working-tree-tree-faf30adacff4f30ef5751925475908827208d95ad904776d7e3342a1ea067af2",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 20,
+      "waypoints": {
+       "areaValidationsComputed": 7,
+       "areaValidationsReused": 0,
+       "areasComputed": 7,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 11,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 11,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 11,
+      "imports": 6,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/owners",
+      "reused_files": 11,
+      "revision": "working-tree-tree-faf30adacff4f30ef5751925475908827208d95ad904776d7e3342a1ea067af2",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 20,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 7,
+       "areasComputed": 0,
+       "areasReused": 7,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 11,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 11
+      }
+     }
+    }
+   ]
+  },
+  "polyglot-app-index-repeat-change": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 27,
+      "sha256": "8fb89fb62f1cc8899cfd55d3a85eb9a6b017d48841af7a7ec915a399eddeb32a"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 56,
+      "sha256": "2b5ac85316731e7ac34f0c74cf46725b7456b8892739784729c59d254a7d40bb"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 100,
+      "sha256": "d48d9a11d1e56d5beda9cf4a75aa925e6c1bef4f7329c9782edc07d79ff32c64"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 172,
+      "sha256": "33b7f317915b35301121a411312990dea5d2cc56ccdd839bd6e6d447b1e3bf20"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 4,
+      "sha256": "40b0bc10089f116e27b2ad4b1be78df14211f35fda08b548ee27416f0b033544"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 104,
+      "sha256": "a93d61cb0bdbe66290b7a448655bad9e6ca4ccaaef35ac9ad19bd907d3f5ffba"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "1": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 25,
+       "sha256": "bfc7e88575b1fd2e4704bb7523d9e2bb2dc995e1c5fc70210baa5654bdff2b7a"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 14,
+       "sha256": "3d15c68e98df04678ebbb5d75c6d83d6a2c30d4db0ebab53d94a3ee69848f8a2"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 25,
+       "sha256": "3c60eb932a1d4df632fe70f4adc35a41347e002f0617b954d0e11445bd11d333"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 43,
+       "sha256": "2faf6443a95712118318f26805461ad41d2825b777a9e831a72c37c873c30819"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 1,
+       "sha256": "8b47e5c1e4aac781b043e8d2e734b67b4ebd2502a3fa2df90e669dae8cae0141"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 86,
+       "sha256": "aab6b511dd012ae6d5c7c6dd04092c3e23bc40b05c929f62ac4da446ef932ff8"
+      }
+     },
+     "user_version": 3
+    },
+    "2": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 25,
+       "sha256": "bfc7e88575b1fd2e4704bb7523d9e2bb2dc995e1c5fc70210baa5654bdff2b7a"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 28,
+       "sha256": "b3f45f2e9ea0a441567d532528b1b4c918fea4f5dde7623d2cb04a2619316ca8"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 50,
+       "sha256": "e2a09e9cb671018b9649df4208a6f420f2f9f88b2775d91b65679305a4deda85"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 86,
+       "sha256": "d047874c2461dd814b09a63ed9bfa1281e954cf9d0169667a87cc7e9138707df"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 2,
+       "sha256": "2dad5598192fe8a97edbff8eec62b45401cfaec8a6e8ea1d530ec96472762c45"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 86,
+       "sha256": "aab6b511dd012ae6d5c7c6dd04092c3e23bc40b05c929f62ac4da446ef932ff8"
+      }
+     },
+     "user_version": 3
+    },
+    "5": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 27,
+       "sha256": "8fb89fb62f1cc8899cfd55d3a85eb9a6b017d48841af7a7ec915a399eddeb32a"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 42,
+       "sha256": "c6603170413eaf960269efbaeb8c02c7e117b3c35c44c6c7aa45bad2882e9fdf"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 75,
+       "sha256": "345f2dd885d7348ffd5cc6b8f5bdc16357c71dc5406311342fc5bcbbf0e07f01"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 129,
+       "sha256": "0a913feacc58eabdfe79a042270430de47cbda09285e775e49f7e816f7bf1809"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 3,
+       "sha256": "06295c3bd14d3903c430d9698c20625ec39dbd47989b47e497b803a7ca409c15"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 104,
+       "sha256": "a93d61cb0bdbe66290b7a448655bad9e6ca4ccaaef35ac9ad19bd907d3f5ffba"
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 25,
+      "imports": 16,
+      "parsed_files": 25,
+      "possible_calls": 2,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-b798478b684aa31d17b4b54b5a29236aad2a5a647b1b8ddaeba7a047f173fb93",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 46,
+      "waypoints": {
+       "areaValidationsComputed": 18,
+       "areaValidationsReused": 0,
+       "areasComputed": 18,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 25,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 25,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 25,
+      "imports": 16,
+      "parsed_files": 0,
+      "possible_calls": 2,
+      "repository": "owner/repo",
+      "reused_files": 25,
+      "revision": "working-tree-tree-b798478b684aa31d17b4b54b5a29236aad2a5a647b1b8ddaeba7a047f173fb93",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 46,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 18,
+       "areasComputed": 0,
+       "areasReused": 18,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 25,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 25
+      }
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 25,
+      "imports": 16,
+      "parsed_files": 2,
+      "possible_calls": 2,
+      "repository": "owner/repo",
+      "reused_files": 23,
+      "revision": "working-tree-tree-2fa7e869c1ea6cf91963ce22f8dcb680cd257326967488626b8ee1dc247c20d7",
+      "skipped_files": 0,
+      "snapshot": 3,
+      "symbols": 47,
+      "waypoints": {
+       "areaValidationsComputed": 6,
+       "areaValidationsReused": 12,
+       "areasComputed": 6,
+       "areasReused": 12,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 23,
+       "unavailableFiles": 0,
+       "validationsComputed": 4,
+       "validationsReused": 21
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 25,
+      "imports": 16,
+      "parsed_files": 0,
+      "possible_calls": 2,
+      "repository": "owner/repo",
+      "reused_files": 25,
+      "revision": "working-tree-tree-2fa7e869c1ea6cf91963ce22f8dcb680cd257326967488626b8ee1dc247c20d7",
+      "skipped_files": 0,
+      "snapshot": 4,
+      "symbols": 47,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 18,
+       "areasComputed": 0,
+       "areasReused": 18,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 25,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 25
+      }
+     }
+    }
+   ]
+  },
+  "polyglot-app-two-branches": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 27,
+      "sha256": "20b37ed61cbf829124886284dd77cb5f74fc57c990b179a320c9a8c623423c8a"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 42,
+      "sha256": "fa0ce2e2704a2d0bbb436de1701f882777629912aadb60475c2b9417af814bc2"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 75,
+      "sha256": "fe6e9fcfb0fe5a84ea4e6a22a059b08e07a726329be57a713e0817d273618808"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 129,
+      "sha256": "0a913feacc58eabdfe79a042270430de47cbda09285e775e49f7e816f7bf1809"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 3,
+      "sha256": "d182027311430c2fa966d4d72fce1dc37087a722885487cf2c579d5aeb5b7ae9"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 104,
+      "sha256": "a93d61cb0bdbe66290b7a448655bad9e6ca4ccaaef35ac9ad19bd907d3f5ffba"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "0": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 25,
+       "sha256": "2c36436f14ac54a9fe3ce81194304633267155a6f10d49593a8a755c3f701ac6"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 14,
+       "sha256": "83c7fae75cf67db58a3ce38c5326740e45fd85b95f94fa1d86868276bef4ca76"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 25,
+       "sha256": "569315b932336c616c9d43c8756c14d12f78c2f68c0a4a53aed787b661042f51"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 43,
+       "sha256": "2faf6443a95712118318f26805461ad41d2825b777a9e831a72c37c873c30819"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 1,
+       "sha256": "56b62e20fd27c3f56f03f0ada3636ced07831ebfcc6148117fe21f23f08bf614"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 86,
+       "sha256": "aab6b511dd012ae6d5c7c6dd04092c3e23bc40b05c929f62ac4da446ef932ff8"
+      }
+     },
+     "user_version": 3
+    },
+    "1": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 25,
+       "sha256": "2c36436f14ac54a9fe3ce81194304633267155a6f10d49593a8a755c3f701ac6"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 28,
+       "sha256": "1396a87b38794e2738705ca8f451745934241b22f7ede853ee2211a4d7653ccb"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 50,
+       "sha256": "2e18a06a5e7f99ef89286d43c1032b0ff2522ff009840118f447e044c93d1dfd"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 86,
+       "sha256": "d047874c2461dd814b09a63ed9bfa1281e954cf9d0169667a87cc7e9138707df"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 2,
+       "sha256": "5ef2438829550020a3618de5499f729b144e4acbf42ed2b1cdccbbd224376a7d"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 86,
+       "sha256": "aab6b511dd012ae6d5c7c6dd04092c3e23bc40b05c929f62ac4da446ef932ff8"
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": {
+      "files": 25,
+      "imports": 16,
+      "parsed_files": 25,
+      "possible_calls": 2,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 46,
+      "waypoints": {
+       "areaValidationsComputed": 18,
+       "areaValidationsReused": 0,
+       "areasComputed": 18,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 25,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 25,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 25,
+      "imports": 16,
+      "parsed_files": 0,
+      "possible_calls": 2,
+      "repository": "owner/repo",
+      "reused_files": 25,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 46,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 18,
+       "areasComputed": 0,
+       "areasReused": 18,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 25,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 25
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 25,
+      "imports": 16,
+      "parsed_files": 2,
+      "possible_calls": 2,
+      "repository": "owner/repo",
+      "reused_files": 23,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+      "skipped_files": 0,
+      "snapshot": 3,
+      "symbols": 47,
+      "waypoints": {
+       "areaValidationsComputed": 6,
+       "areaValidationsReused": 12,
+       "areasComputed": 6,
+       "areasReused": 12,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 23,
+       "unavailableFiles": 0,
+       "validationsComputed": 4,
+       "validationsReused": 21
+      }
+     }
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "rust-crate-index-repeat-change": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 15,
+      "sha256": "7f6970cd90a8753d90b5d86cd9e80600b5036f56c5c5f3047f6ee798731c630a"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 48,
+      "sha256": "bc003c2467b1e1ff3a8b4e7a77fa7ab95afc510fb55031a45f79f79e0939a6e9"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 52,
+      "sha256": "5fbcc57271fc079c0d1fcc7f5cd5a24487f1b7a9d739a2f4e908bbcb8cff9eaf"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 88,
+      "sha256": "e70e332e83c0a8b9323a13cc960a916648f79853181a5bc898b89375e481aba6"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 4,
+      "sha256": "f77754052e448107a3bd478b37fb940c326927874182a439dafc85cce40112d9"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 58,
+      "sha256": "a442f3b7103c515bc6c115bec2c190be48cb1e3eb12360868e2c94ae5e1da495"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "1": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 13,
+       "sha256": "0d528d8673174aab7f7d949afaab968d4a53146d9b6a560da19ee48ed210cf41"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 12,
+       "sha256": "50d1246720a5258bc339d738b80b9d0854268f9fb0b9be749249cc8a6114cb59"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 13,
+       "sha256": "5b80198752bd27e43edf7bceb85a922f4836827608840bd39e0990562e1a7595"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 22,
+       "sha256": "ab4dffed0fdb385c1de4b1dc8c49bc7258653ba45690ff8457c6684990af990f"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 1,
+       "sha256": "bff3b5b580066199f18fec21026d5b788aefec461cdccc9907fb92e307d36810"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 44,
+       "sha256": "52a53459164c37c1db7c2d1a1a306ad4ad63bbe85a01e9bbfbf5202322b622fb"
+      }
+     },
+     "user_version": 3
+    },
+    "2": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 13,
+       "sha256": "0d528d8673174aab7f7d949afaab968d4a53146d9b6a560da19ee48ed210cf41"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 24,
+       "sha256": "ef75289619e133eea0641da73a08a34460f496977fd4a42a24b3b4ce57598233"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 26,
+       "sha256": "7775d5875814719b38998eed8d27ba69d0b1df3f104de5132d1a06a8dc8011a2"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 44,
+       "sha256": "4edc5f959cf85361a98789b43420528c48a670f6821de65b304c3d48ec19eb8f"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 2,
+       "sha256": "9720557ba7313c549299362d0c890c0f3959f41e4f5a1070e5efffda98035f78"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 44,
+       "sha256": "52a53459164c37c1db7c2d1a1a306ad4ad63bbe85a01e9bbfbf5202322b622fb"
+      }
+     },
+     "user_version": 3
+    },
+    "5": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 15,
+       "sha256": "7f6970cd90a8753d90b5d86cd9e80600b5036f56c5c5f3047f6ee798731c630a"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 36,
+       "sha256": "826817f0aafa9644ded697859c16c19ec153145b3cbf1702e8b354df703cf89e"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 39,
+       "sha256": "1563486bf72a963d0ff5d8028a0edfc8a5cfb62f9c720b42d8a8f8933c1731f4"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 66,
+       "sha256": "05b7141bc8f76d6d422f0620a5a49b9a76a86708fba3fbb1ca6538f8072d112c"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 3,
+       "sha256": "fcc578c29a03b69b48d67c65fe183c36068e929725ab0e610e91fe431a6d83f4"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 58,
+       "sha256": "a442f3b7103c515bc6c115bec2c190be48cb1e3eb12360868e2c94ae5e1da495"
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 13,
+      "imports": 12,
+      "parsed_files": 13,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-4bffb06349a8df922d59d1d85982927ca22199c87e29940436bfec669e1c706e",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 45,
+      "waypoints": {
+       "areaValidationsComputed": 9,
+       "areaValidationsReused": 0,
+       "areasComputed": 9,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 13,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 13,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 13,
+      "imports": 12,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 13,
+      "revision": "working-tree-tree-4bffb06349a8df922d59d1d85982927ca22199c87e29940436bfec669e1c706e",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 45,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 9,
+       "areasComputed": 0,
+       "areasReused": 9,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 13,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 13
+      }
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 13,
+      "imports": 12,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 11,
+      "revision": "working-tree-tree-1fa5a60598cd948ef397c1095b5d7d8a0d576c2b301fb5a4d4248303cc75efdd",
+      "skipped_files": 0,
+      "snapshot": 3,
+      "symbols": 43,
+      "waypoints": {
+       "areaValidationsComputed": 4,
+       "areaValidationsReused": 5,
+       "areasComputed": 3,
+       "areasReused": 6,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 11,
+       "unavailableFiles": 0,
+       "validationsComputed": 5,
+       "validationsReused": 8
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 13,
+      "imports": 12,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 13,
+      "revision": "working-tree-tree-1fa5a60598cd948ef397c1095b5d7d8a0d576c2b301fb5a4d4248303cc75efdd",
+      "skipped_files": 0,
+      "snapshot": 4,
+      "symbols": 43,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 9,
+       "areasComputed": 0,
+       "areasReused": 9,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 13,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 13
+      }
+     }
+    }
+   ]
+  },
+  "rust-crate-two-branches": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 15,
+      "sha256": "e6e6318c9f2d3893b00acb4c2d2f402d2761e038e55e744799718b7286ae2295"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 36,
+      "sha256": "3001b7bc0e44c91dc47a67ca3d515dbc7c2352f5b91542cbbd2a9b09d89dc00a"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 39,
+      "sha256": "d4adf283056ce9b0547dc4861ef29cb6495d05028fdd0ca0dd3c67f6c65d5239"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 66,
+      "sha256": "05b7141bc8f76d6d422f0620a5a49b9a76a86708fba3fbb1ca6538f8072d112c"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 3,
+      "sha256": "69990bdf1bc7285cf4f5b62eac6249dda289f58e2b87d9bda48ffc2a9b98f465"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 58,
+      "sha256": "a442f3b7103c515bc6c115bec2c190be48cb1e3eb12360868e2c94ae5e1da495"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "0": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 13,
+       "sha256": "dcada6b692df2c4c8284b92d2fa2343508aac94b450c3199293d0d433cc07546"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 12,
+       "sha256": "ceeda8cef1051cecba6e78d1f595c2ac581136c4d61a5dc926402672d61792f2"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 13,
+       "sha256": "2d20fe9e027df9f2081311bccf6fa518fccf8c917bc416be6be54f2b89d89716"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 22,
+       "sha256": "ab4dffed0fdb385c1de4b1dc8c49bc7258653ba45690ff8457c6684990af990f"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 1,
+       "sha256": "a4da65dd356dfa25c129e43c6649d47c8bcd788781090991df78fbe246755367"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 44,
+       "sha256": "52a53459164c37c1db7c2d1a1a306ad4ad63bbe85a01e9bbfbf5202322b622fb"
+      }
+     },
+     "user_version": 3
+    },
+    "1": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 13,
+       "sha256": "dcada6b692df2c4c8284b92d2fa2343508aac94b450c3199293d0d433cc07546"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 24,
+       "sha256": "df7c8f6efe663dd1cdd48b383d67e9f00fb21ceee77d29ceed4fc9bcc443c5d3"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 26,
+       "sha256": "abf24ac204811b8a0fbe88426f5161a26e0fd73e135b045ad8bfac938d7a324f"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 44,
+       "sha256": "4edc5f959cf85361a98789b43420528c48a670f6821de65b304c3d48ec19eb8f"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 2,
+       "sha256": "c9a9d50a4e7cf4add7ecfd9c174bfd54e6d03c8387064220026ded9c292d624e"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 44,
+       "sha256": "52a53459164c37c1db7c2d1a1a306ad4ad63bbe85a01e9bbfbf5202322b622fb"
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": {
+      "files": 13,
+      "imports": 12,
+      "parsed_files": 13,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 45,
+      "waypoints": {
+       "areaValidationsComputed": 9,
+       "areaValidationsReused": 0,
+       "areasComputed": 9,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 13,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 13,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 13,
+      "imports": 12,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 13,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 45,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 9,
+       "areasComputed": 0,
+       "areasReused": 9,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 13,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 13
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 13,
+      "imports": 12,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 11,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+      "skipped_files": 0,
+      "snapshot": 3,
+      "symbols": 43,
+      "waypoints": {
+       "areaValidationsComputed": 4,
+       "areaValidationsReused": 5,
+       "areasComputed": 3,
+       "areasReused": 6,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 11,
+       "unavailableFiles": 0,
+       "validationsComputed": 5,
+       "validationsReused": 8
+      }
+     }
+    },
+    {
+     "value": null
+    }
+   ]
+  },
+  "unsupported-cases-index-repeat-change": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 9,
+      "sha256": "e36b80aa39738dd6ba049fc097cca9b3a169f45b837d08796dacf3a62b7cdadc"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 2,
+      "sha256": "6e83062ab11aa9d0c803103c92d99c0d5d6466b35e428a4cedad3cb5683914a1"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 28,
+      "sha256": "52e88a174076a84949b1c47209965fa3433f9bd1e580d1bf73b6ae9ce4cf049e"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 40,
+      "sha256": "cac08cbdc6297dfe555fc2372f52427ce22a24acdc5be0f628d4f8ffa0c31b36"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 4,
+      "sha256": "47ea4dfac9b82bdca90e0601a200e8a8b3419c1dd4b492574a698a8d3bb1daae"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 30,
+      "sha256": "4c36c55b7e877f75b211581eeeed1322c24c2ce0b14a5e8b0e02706b7b37906b"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "1": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 7,
+       "sha256": "f5352096c4e2ff9e46d0224a3539e0284772dbfa53439608de03e8cf2aacb688"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 1,
+       "sha256": "0d8b05e7928cf8c5bf65d629882b124e110bb63bcc368908a77c99a72a0a792b"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 7,
+       "sha256": "9b51bdbb4ef83cf6f19c8beda524d4979a0d134d70da47fa5e3815845f9e5cfe"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 10,
+       "sha256": "1409195a17b080efa366276fb6aa2281e24660bd0ab23447e834449471049d4f"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 1,
+       "sha256": "0a162aaa61a0a3ecbd0ee4d123955cf568b56cbbb785e17219763473a53fd018"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 20,
+       "sha256": "fa0787425c44cf575317cd0da8c0ddcb5204b93a4f6117390265992542f881d1"
+      }
+     },
+     "user_version": 3
+    },
+    "2": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 7,
+       "sha256": "f5352096c4e2ff9e46d0224a3539e0284772dbfa53439608de03e8cf2aacb688"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 2,
+       "sha256": "6e83062ab11aa9d0c803103c92d99c0d5d6466b35e428a4cedad3cb5683914a1"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 14,
+       "sha256": "c5fe19fd04f2e60ae82f90eebd1a76413d14edd827cd01718b8f312693588603"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 20,
+       "sha256": "423371483cea800c2f762e2fecbc4c9d06236f244a132b29c2f38c3846fbdff2"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 2,
+       "sha256": "61a9731a7141a9f3b98194855bd016076f74efaa1b4774c4716cc60b81c69e62"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 20,
+       "sha256": "fa0787425c44cf575317cd0da8c0ddcb5204b93a4f6117390265992542f881d1"
+      }
+     },
+     "user_version": 3
+    },
+    "5": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 9,
+       "sha256": "e36b80aa39738dd6ba049fc097cca9b3a169f45b837d08796dacf3a62b7cdadc"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 2,
+       "sha256": "6e83062ab11aa9d0c803103c92d99c0d5d6466b35e428a4cedad3cb5683914a1"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 21,
+       "sha256": "82510750944e23646894a2d852e8d598f1e32c3d9ea0ae79185f97213576d84f"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 30,
+       "sha256": "6553f14b8a756210ccd5b935e77c85635ca540245ffa8bc77bb2d392dcafdb21"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 3,
+       "sha256": "89dd7d00480f87fc076791e04af780a60935ac54e42844c7e99a623a3b45433d"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 30,
+       "sha256": "4c36c55b7e877f75b211581eeeed1322c24c2ce0b14a5e8b0e02706b7b37906b"
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 7,
+      "imports": 1,
+      "parsed_files": 7,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+      "skipped_files": 2,
+      "snapshot": 1,
+      "symbols": 16,
+      "waypoints": {
+       "areaValidationsComputed": 3,
+       "areaValidationsReused": 0,
+       "areasComputed": 3,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 7,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 7,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 7,
+      "imports": 1,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 7,
+      "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+      "skipped_files": 2,
+      "snapshot": 2,
+      "symbols": 16,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 3,
+       "areasComputed": 0,
+       "areasReused": 3,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 7,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 7
+      }
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 7,
+      "imports": 0,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 5,
+      "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+      "skipped_files": 2,
+      "snapshot": 3,
+      "symbols": 3,
+      "waypoints": {
+       "areaValidationsComputed": 3,
+       "areaValidationsReused": 0,
+       "areasComputed": 3,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 5,
+       "unavailableFiles": 0,
+       "validationsComputed": 2,
+       "validationsReused": 5
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 7,
+      "imports": 0,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 7,
+      "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+      "skipped_files": 2,
+      "snapshot": 4,
+      "symbols": 3,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 3,
+       "areasComputed": 0,
+       "areasReused": 3,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 7,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 7
+      }
+     }
+    }
+   ]
+  },
+  "unsupported-cases-two-branches": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": 11,
+      "sha256": "53273a1454e8b9a6cae797b59d7d3c43370ecf3c9d651e1016a4d0fb7b652cb1"
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": 2,
+      "sha256": "f56c5644fddb686da721de6ee77cf08d080914de22640d6ed622bbf8508bc7b3"
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": 27,
+      "sha256": "802400e7a9b4ce6db359e0ac7b84322670e67a62aa61664515c5d8460a3a447d"
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": 45,
+      "sha256": "d8d56ffceffef3fe6c30429b364ea5f5afe7d01b97db840171e6e72925b111e9"
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": 3,
+      "sha256": "e45f9475324912f04bc2990a50a60c7444481b16a1115b65c3190adbafce2da0"
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": 40,
+      "sha256": "1f7655b47a57c426789b634428231eb240359b4f2378637e5029da4a0f925733"
+     }
+    },
+    "user_version": 3
+   },
+   "states": {
+    "0": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 9,
+       "sha256": "536ca7c3172f4eedaa65a197ba8dcabd289e3b0505c2b9882df505af0dd8bce8"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 1,
+       "sha256": "4d623db387056fad46f4344aadb608d8189864f7fa585fc53372dce4c59cc2f8"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 9,
+       "sha256": "fdbeab5ed5973059ee34e07f68a119cd5db8be4f6635acb69abb95d9a0599a90"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 15,
+       "sha256": "fa00ee4bcb20322de41bea15a7bf0e92c7be2b3ebb4bbdfb2e147e2322adb403"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 1,
+       "sha256": "d00303d78c673cc42f406def0a0aaf52def2dcfcff04a33dc4a970b629c6f6c9"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 30,
+       "sha256": "d94dc5bea7c47ab20da7d5fe4fdf84fb3ff74519e4efbc8749f011870d1b47d4"
+      }
+     },
+     "user_version": 3
+    },
+    "1": {
+     "integrity": "ok",
+     "journal_mode": "wal",
+     "schemaId": "3c8ab78ffefcf6d9",
+     "tables": {
+      "analyses": {
+       "columns": [
+        "id",
+        "content_hash",
+        "git_oid",
+        "language",
+        "version",
+        "size_bytes",
+        "symbols",
+        "facts"
+       ],
+       "rows": 9,
+       "sha256": "536ca7c3172f4eedaa65a197ba8dcabd289e3b0505c2b9882df505af0dd8bce8"
+      },
+      "legacy_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "legacy_nodes": {
+       "columns": [
+        "id",
+        "snapshot_id",
+        "kind",
+        "name",
+        "path",
+        "line",
+        "metadata"
+       ],
+       "rows": 0,
+       "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "resolved_edges": {
+       "columns": [
+        "snapshot_id",
+        "source",
+        "target",
+        "kind",
+        "evidence"
+       ],
+       "rows": 2,
+       "sha256": "f56c5644fddb686da721de6ee77cf08d080914de22640d6ed622bbf8508bc7b3"
+      },
+      "snapshot_files": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "file_id",
+        "name",
+        "analysis_id"
+       ],
+       "rows": 18,
+       "sha256": "05fcc2d7ed4d8b97da12c09f0ad365d151478bbf1bcb024060a51a3c87d44468"
+      },
+      "snapshot_waypoints": {
+       "columns": [
+        "snapshot_id",
+        "path",
+        "kind",
+        "summary_key",
+        "validation_key"
+       ],
+       "rows": 30,
+       "sha256": "9c15177f69f0eb840674b390c0ec33ffaba5a928750896a95e98e03a9f425a37"
+      },
+      "snapshots": {
+       "columns": [
+        "id",
+        "repo",
+        "revision",
+        "indexed_at",
+        "metadata",
+        "node_prefix",
+        "view_key"
+       ],
+       "rows": 2,
+       "sha256": "10c785d54ac882b4515b3fe381a853474f2412f37ab247a92d866117f35e1d68"
+      },
+      "waypoint_cache": {
+       "columns": [
+        "id",
+        "kind",
+        "version",
+        "payload",
+        "payload_hash"
+       ],
+       "rows": 30,
+       "sha256": "d94dc5bea7c47ab20da7d5fe4fdf84fb3ff74519e4efbc8749f011870d1b47d4"
+      }
+     },
+     "user_version": 3
+    }
+   },
+   "steps": [
+    {
+     "value": {
+      "files": 9,
+      "imports": 1,
+      "parsed_files": 9,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-0d6e4079e36703ebd37c00722f5891d28b0e2811dc114b129215123adcce3605",
+      "skipped_files": 0,
+      "snapshot": 1,
+      "symbols": 17,
+      "waypoints": {
+       "areaValidationsComputed": 6,
+       "areaValidationsReused": 0,
+       "areasComputed": 6,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 9,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 9,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 9,
+      "imports": 1,
+      "parsed_files": 0,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 9,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+      "skipped_files": 0,
+      "snapshot": 2,
+      "symbols": 17,
+      "waypoints": {
+       "areaValidationsComputed": 0,
+       "areaValidationsReused": 6,
+       "areasComputed": 0,
+       "areasReused": 6,
+       "partial": false,
+       "summariesComputed": 0,
+       "summariesReused": 9,
+       "unavailableFiles": 0,
+       "validationsComputed": 0,
+       "validationsReused": 9
+      }
+     }
+    },
+    {
+     "value": {
+      "files": 9,
+      "imports": 0,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 7,
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-branch-2ad562319767157087dda0dec6391f4479f8a04869ab0cc8d3a9c3637dae73b5",
+      "skipped_files": 0,
+      "snapshot": 3,
+      "symbols": 4,
+      "waypoints": {
+       "areaValidationsComputed": 3,
+       "areaValidationsReused": 3,
+       "areasComputed": 3,
+       "areasReused": 3,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 7,
+       "unavailableFiles": 0,
+       "validationsComputed": 2,
+       "validationsReused": 7
+      }
+     }
+    },
+    {
+     "value": null
+    }
+   ]
+  }
+ },
+ "schemas": {
+  "3c8ab78ffefcf6d9": [
+   [
+    "index",
+    "analysis_object",
+    "analyses",
+    "CREATE INDEX analysis_object ON analyses(git_oid,language,version)"
+   ],
+   [
+    "index",
+    "idx_edges_source",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_source ON legacy_edges(snapshot_id,source)"
+   ],
+   [
+    "index",
+    "idx_edges_target",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_target ON legacy_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "idx_nodes_lookup",
+    "legacy_nodes",
+    "CREATE INDEX idx_nodes_lookup ON legacy_nodes(snapshot_id,name,kind)"
+   ],
+   [
+    "index",
+    "manifest_analysis",
+    "snapshot_files",
+    "CREATE INDEX manifest_analysis ON snapshot_files(analysis_id)"
+   ],
+   [
+    "index",
+    "resolved_inbound",
+    "resolved_edges",
+    "CREATE INDEX resolved_inbound ON resolved_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "snapshot_view",
+    "snapshots",
+    "CREATE INDEX snapshot_view ON snapshots(repo,view_key,id DESC)"
+   ],
+   [
+    "index",
+    "waypoint_summary_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_summary_bindings ON snapshot_waypoints(summary_key)"
+   ],
+   [
+    "index",
+    "waypoint_validation_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_validation_bindings ON snapshot_waypoints(validation_key)"
+   ],
+   [
+    "table",
+    "analyses",
+    "analyses",
+    "CREATE TABLE analyses(\n        id TEXT PRIMARY KEY,content_hash TEXT NOT NULL,git_oid TEXT NOT NULL,\n        language TEXT NOT NULL,version TEXT NOT NULL,size_bytes INTEGER NOT NULL,\n        symbols TEXT NOT NULL CHECK(json_valid(symbols)),facts TEXT NOT NULL CHECK(json_valid(facts)))"
+   ],
+   [
+    "table",
+    "legacy_edges",
+    "legacy_edges",
+    "CREATE TABLE legacy_edges(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "legacy_nodes",
+    "legacy_nodes",
+    "CREATE TABLE legacy_nodes(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}')"
+   ],
+   [
+    "table",
+    "resolved_edges",
+    "resolved_edges",
+    "CREATE TABLE resolved_edges(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,\n        PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "snapshot_files",
+    "snapshot_files",
+    "CREATE TABLE snapshot_files(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,file_id TEXT NOT NULL,name TEXT NOT NULL,\n        analysis_id TEXT NOT NULL REFERENCES analyses(id),PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshot_waypoints",
+    "snapshot_waypoints",
+    "CREATE TABLE snapshot_waypoints(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,kind TEXT NOT NULL CHECK(kind IN ('file','area')),\n        summary_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        validation_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshots",
+    "snapshots",
+    "CREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP, metadata TEXT NOT NULL DEFAULT '{}', node_prefix TEXT, view_key TEXT NOT NULL DEFAULT 'default')"
+   ],
+   [
+    "table",
+    "waypoint_cache",
+    "waypoint_cache",
+    "CREATE TABLE waypoint_cache(\n        id TEXT PRIMARY KEY,kind TEXT NOT NULL CHECK(kind IN ('file','area','validation')),\n        version TEXT NOT NULL,payload TEXT NOT NULL CHECK(json_valid(payload)),\n        payload_hash TEXT NOT NULL)"
+   ],
+   [
+    "trigger",
+    "staging_edge_insert",
+    "edges",
+    "CREATE TRIGGER staging_edge_insert INSTEAD OF INSERT ON edges\n        BEGIN INSERT INTO resolved_edges(snapshot_id,source,target,kind,evidence)\n        VALUES (new.snapshot_id,new.source,new.target,new.kind,new.evidence); END"
+   ],
+   [
+    "view",
+    "edges",
+    "edges",
+    "CREATE VIEW edges AS\n SELECT snapshot_id,source,target,kind,evidence FROM legacy_edges\n UNION ALL SELECT snapshot_id,source,target,kind,evidence FROM resolved_edges\n UNION ALL\n SELECT f.snapshot_id,'r:'||s.node_prefix,'f:'||s.node_prefix||':'||f.file_id,'CONTAINS',f.path\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n UNION ALL\n SELECT f.snapshot_id,'f:'||s.node_prefix||':'||f.file_id,\n 's:'||s.node_prefix||':'||f.file_id||':'||j.key,'DEFINES',\n f.path||':'||json_extract(j.value,'$[2]')\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ],
+   [
+    "view",
+    "nodes",
+    "nodes",
+    "CREATE VIEW nodes AS\n SELECT id,snapshot_id,kind,name,path,line,metadata FROM legacy_nodes\n UNION ALL\n SELECT 'r:'||node_prefix,id,'repository',repo,'.',NULL,\n json_set(metadata,'$.areaWaypoints',json((\n   SELECT json_group_array(json(waypoint)) FROM (\n     SELECT json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))) AS waypoint\n     FROM snapshot_waypoints sw JOIN waypoint_cache wc ON wc.id=sw.summary_key\n     JOIN waypoint_cache vc ON vc.id=sw.validation_key\n     WHERE sw.snapshot_id=s.id AND sw.kind='area' ORDER BY sw.path\n   ))))\n FROM snapshots s WHERE node_prefix IS NOT NULL\n UNION ALL\n SELECT 'f:'||s.node_prefix||':'||f.file_id,f.snapshot_id,'file',f.name,f.path,NULL,\n CASE WHEN sw.path IS NULL THEN json_object('language',a.language,'sha256',a.content_hash)\n ELSE json_object('language',a.language,'sha256',a.content_hash,'waypoint',json(json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))))) END\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id JOIN analyses a ON a.id=f.analysis_id\n LEFT JOIN snapshot_waypoints sw ON sw.snapshot_id=f.snapshot_id AND sw.path=f.path AND sw.kind='file'\n LEFT JOIN waypoint_cache wc ON wc.id=sw.summary_key\n LEFT JOIN waypoint_cache vc ON vc.id=sw.validation_key\n UNION ALL\n SELECT 's:'||s.node_prefix||':'||f.file_id||':'||j.key,f.snapshot_id,\n json_extract(j.value,'$[0]'),json_extract(j.value,'$[1]'),f.path,json_extract(j.value,'$[2]'),\n json_object('parent',json_extract(j.value,'$[3]'))\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ]
+  ]
+ }
+}

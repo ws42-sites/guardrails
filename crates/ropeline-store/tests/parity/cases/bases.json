@@ -1,0 +1,25 @@
+{
+ "bases": {
+  "indexed": {
+   "index": [
+    {
+     "branch": "main",
+     "revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+     "files": {
+      "src/a.py": "\"\"\"Alpha helpers.\"\"\"\n\nimport os\n\n\ndef alpha():\n    return os.getcwd()\n",
+      "src/b.py": "from a import alpha\n\n\nclass Beta:\n    def run(self):\n        return alpha()\n"
+     }
+    },
+    {
+     "branch": "feature",
+     "revision": "cccccccccccccccccccccccccccccccccccccccc",
+     "files": {
+      "src/a.py": "\"\"\"Alpha helpers.\"\"\"\n\nimport os\n\n\ndef alpha():\n    return os.getcwd()\n",
+      "src/b.py": "from a import alpha\n\n\nclass Beta:\n    def run(self):\n        return alpha()\n\n    def stop(self):\n        return None\n",
+      "README.md": "# Sample\n\nA tiny repository used to record storage parity.\n"
+     }
+    }
+   ]
+  }
+ }
+}

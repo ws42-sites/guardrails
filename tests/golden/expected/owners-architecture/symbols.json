@@ -1,0 +1,141 @@
+{
+  ".codegraph/architecture.json": [],
+  "apps/entry.ts": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import { stored } from \"../core/store\";",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 3,
+      "name": "entry",
+      "parent": null
+    }
+  ],
+  "core/README.md": [],
+  "core/leak.ts": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import { entry } from \"../apps/entry.js\";",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 3,
+      "name": "leaked",
+      "parent": null
+    }
+  ],
+  "core/store.ts": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import type { Id } from \"./types\";",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 3,
+      "name": "stored",
+      "parent": null
+    }
+  ],
+  "core/types.ts": [
+    {
+      "kind": "type_alias_declaration",
+      "line": 1,
+      "name": "Id",
+      "parent": null
+    }
+  ],
+  "docs/overview.md": [],
+  "lib/a.ts": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import { b } from \"./b\";",
+      "parent": null
+    },
+    {
+      "kind": "arrow_function",
+      "line": 3,
+      "name": "a",
+      "parent": null
+    }
+  ],
+  "lib/b.ts": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import { a } from \"./a\";",
+      "parent": null
+    },
+    {
+      "kind": "arrow_function",
+      "line": 3,
+      "name": "b",
+      "parent": null
+    }
+  ],
+  "lib/big.ts": [
+    {
+      "kind": "variable_declarator",
+      "line": 1,
+      "name": "one",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 2,
+      "name": "two",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 3,
+      "name": "three",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 4,
+      "name": "four",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 5,
+      "name": "five",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 6,
+      "name": "six",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 7,
+      "name": "seven",
+      "parent": null
+    }
+  ],
+  "tests/store.test.ts": [
+    {
+      "kind": "import",
+      "line": 1,
+      "name": "import { stored } from \"../core/store\";",
+      "parent": null
+    },
+    {
+      "kind": "variable_declarator",
+      "line": 3,
+      "name": "check",
+      "parent": null
+    }
+  ]
+}

@@ -1,0 +1,547 @@
+{
+ "cases": [
+  {
+   "id": "skipped-directories-and-hidden-files",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "keep/a.py": "def a():\n    pass\n",
+      "node_modules/pkg/index.js": "function n() {}\n",
+      "src/node_modules/x.js": "function x() {}\n",
+      ".venv/lib/a.py": "def v(): pass\n",
+      "venv/a.py": "def v(): pass\n",
+      "dist/out.js": "function o() {}\n",
+      "build/b.py": "def b(): pass\n",
+      "src/build/c.py": "def c(): pass\n",
+      ".next/page.js": "function p() {}\n",
+      "coverage/c.js": "function c() {}\n",
+      "vendor/v.go": "package v\n",
+      "vendor/v.py": "def v(): pass\n",
+      ".git/config": "x\n",
+      ".hidden/h.py": "def h(): pass\n",
+      ".github/workflows/ci.yml": "name: ci\n",
+      ".codegraph/architecture.json": "{}\n",
+      ".gitlab-ci.yml": "stages: []\n",
+      ".eslintrc.json": "{}\n",
+      ".env": "A=1\n",
+      "src/.private/p.py": "def p(): pass\n",
+      "src/Dockerfile": "FROM scratch\n",
+      "Jenkinsfile": "pipeline {}\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "state": "digest"
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      ".py"
+     ],
+     "kwargs": {
+      "limit": 100
+     }
+    }
+   ]
+  },
+  {
+   "id": "dist-is-opt-in-and-keeps-protected-exclusions",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "dist/app.js": "function entry() {}\n",
+      "dist/vendor/a.js": "function a() {}\n",
+      "dist/node_modules/a.js": "function a() {}\n",
+      "dist/.git/a.js": "function a() {}\n",
+      "dist/.hidden/a.js": "function a() {}\n",
+      "dist/sub/b.js": "function b() {}\n",
+      "src/dist/c.js": "function c() {}\n"
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "include_dist": true
+     }
+    },
+    {
+     "op": "read",
+     "fn": "search",
+     "args": [
+      "owner/repo",
+      "entry"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "unsupported-source-is-counted-not-indexed",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.go": "package a\n",
+      "b.java": "class B {}\n",
+      "c.kt": "x\n",
+      "d.kts": "x\n",
+      "e.c": "x\n",
+      "f.h": "x\n",
+      "g.cpp": "x\n",
+      "h.hpp": "x\n",
+      "i.cc": "x\n",
+      "j.cs": "x\n",
+      "k.rb": "x\n",
+      "l.php": "x\n",
+      "m.swift": "x\n",
+      "n.scala": "x\n",
+      "o.vue": "x\n",
+      "p.svelte": "x\n",
+      "UPPER.GO": "package a\n",
+      "q.py": "def q(): pass\n",
+      "sub/r.go": "package r\n",
+      ".hid/s.go": "package s\n",
+      "node_modules/t.go": "package t\n",
+      "dist/u.go": "package u\n",
+      "x.txt": "text\n",
+      "y.png": {
+       "hex": "89504e47"
+      },
+      "Makefile": "all:\n",
+      "A.PY": "x = 1\n",
+      "B.Ts": "export const b = 1;\n"
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "include_dist": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "per-file-byte-cap",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "exact.js": {
+       "repeat": {
+        "text": "a",
+        "times": 100
+       }
+      },
+      "over.js": {
+       "repeat": {
+        "text": "a",
+        "times": 101
+       }
+      },
+      "multi.py": {
+       "repeat": {
+        "text": "\u00e9",
+        "times": 60
+       }
+      },
+      "small.js": "function small() {}\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_file_bytes": 100
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_file_bytes": 101
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_file_bytes": 1
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_file_bytes": 119
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "max_file_bytes": 120
+     }
+    }
+   ]
+  },
+  {
+   "id": "default-byte-cap-is-one-million",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "app.ts": {
+       "repeat": {
+        "text": "x",
+        "times": 1000001
+       }
+      },
+      "ok.js": "function entry() {}\n"
+     }
+    },
+    {
+     "op": "write",
+     "files": {
+      "app.js": {
+       "repeat": {
+        "prefix": "/*",
+        "text": "x",
+        "times": 999996,
+        "suffix": "*/"
+       }
+      }
+     }
+    },
+    {
+     "op": "indexRepo",
+     "options": {
+      "timeout_seconds": 600
+     }
+    }
+   ],
+   "finalState": "digest"
+  },
+  {
+   "id": "non-utf-8-files-are-skipped",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "bad.py": {
+       "hex": "6465662061ff"
+      },
+      "bad.md": {
+       "hex": "e282"
+      },
+      "good.py": "def good(): pass\n",
+      "bom.py": "\ufeffdef bom(): pass\n",
+      "nul.py": "def nul(): pass\n\u0000\n",
+      "latin1.py": {
+       "hex": "2320636166e9"
+      }
+     }
+    },
+    {
+     "op": "indexRepo"
+    }
+   ]
+  },
+  {
+   "id": "folders-named-like-files-are-walked",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "weird.py/inner.py": "def inner(): pass\n",
+      "plain.ts": "export const a = 1;\n"
+     }
+    },
+    {
+     "op": "mkdir",
+     "paths": [
+      "empty",
+      "also/empty"
+     ]
+    },
+    {
+     "op": "indexRepo"
+    }
+   ]
+  },
+  {
+   "id": "empty-repository",
+   "steps": [
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "mkdir",
+     "paths": [
+      "d"
+     ]
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "count",
+     "sql": "SELECT count(*) FROM snapshots"
+    }
+   ]
+  },
+  {
+   "id": "order-does-not-depend-on-creation-order",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "z.py": "def z(): pass\n"
+     }
+    },
+    {
+     "op": "write",
+     "files": {
+      "b/y.py": "def y(): pass\n",
+      "B.py": "def B(): pass\n",
+      "a.py": "def a(): pass\n",
+      "_u.py": "def u(): pass\n",
+      "caf\u00e9.py": "def c(): pass\n",
+      "\ud83d\ude00.py": "def e(): pass\n",
+      "\uff21.py": "def f(): pass\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "state": "full"
+    }
+   ]
+  },
+  {
+   "id": "codeowners-first-candidate-wins",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def read():\n    return 1\n"
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "write",
+     "files": {
+      "docs/CODEOWNERS": "* @docs\n"
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "write",
+     "files": {
+      "CODEOWNERS": "* @root\n"
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "write",
+     "files": {
+      ".github/CODEOWNERS": "* @core\n/lib/ @libs\n"
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "codeowners-unusable-means-unknown",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def read():\n    return 1\n",
+      "docs/CODEOWNERS": "* @docs\n",
+      "CODEOWNERS": {
+       "repeat": {
+        "text": "# xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n",
+        "times": 1000
+       }
+      }
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "remove",
+     "paths": [
+      "CODEOWNERS"
+     ]
+    },
+    {
+     "op": "write",
+     "files": {
+      "CODEOWNERS": {
+       "hex": "2a2040ff0a"
+      }
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "remove",
+     "paths": [
+      "CODEOWNERS"
+     ]
+    },
+    {
+     "op": "mkdir",
+     "paths": [
+      "CODEOWNERS"
+     ]
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "remove",
+     "paths": [
+      "CODEOWNERS"
+     ]
+    },
+    {
+     "op": "write",
+     "files": {
+      ".github/CODEOWNERS": {
+       "repeat": {
+        "text": "x",
+        "times": 65537
+       }
+      }
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "remove",
+     "paths": [
+      ".github/CODEOWNERS"
+     ]
+    },
+    {
+     "op": "write",
+     "files": {
+      ".github/CODEOWNERS": {
+       "repeat": {
+        "text": "x",
+        "times": 65536
+       }
+      }
+     }
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "remove",
+     "paths": [
+      ".github/CODEOWNERS"
+     ]
+    },
+    {
+     "op": "mkdir",
+     "paths": [
+      ".github/CODEOWNERS"
+     ]
+    },
+    {
+     "op": "indexRepo"
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 1
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 5
+     }
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "owner/repo"
+     ],
+     "kwargs": {
+      "snapshot": 6
+     }
+    }
+   ]
+  },
+  {
+   "id": "repository-name-is-taken-as-given",
+   "steps": [
+    {
+     "op": "write",
+     "files": {
+      "a.py": "def read():\n    return 1\n"
+     }
+    },
+    {
+     "op": "indexRepo",
+     "repo": "x"
+    },
+    {
+     "op": "indexRepo",
+     "repo": "Owner/Repo.with-dots_and spaces"
+    },
+    {
+     "op": "indexRepo",
+     "repo": "caf\u00e9/\ud83d\ude00"
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "x"
+     ]
+    },
+    {
+     "op": "read",
+     "fn": "overview",
+     "args": [
+      "X"
+     ]
+    }
+   ]
+  }
+ ]
+}

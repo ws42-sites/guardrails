@@ -1,0 +1,88 @@
+{
+  ".codegraph/architecture.json": {
+    "calls": [],
+    "imports": []
+  },
+  "apps/entry.ts": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "../core/store",
+        "type_only": false
+      }
+    ]
+  },
+  "core/README.md": {
+    "calls": [],
+    "imports": []
+  },
+  "core/leak.ts": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "../apps/entry.js",
+        "type_only": false
+      }
+    ]
+  },
+  "core/store.ts": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "./types",
+        "type_only": true
+      }
+    ]
+  },
+  "core/types.ts": {
+    "calls": [],
+    "imports": []
+  },
+  "docs/overview.md": {
+    "calls": [],
+    "imports": []
+  },
+  "lib/a.ts": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "./b",
+        "type_only": false
+      }
+    ]
+  },
+  "lib/b.ts": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "./a",
+        "type_only": false
+      }
+    ]
+  },
+  "lib/big.ts": {
+    "calls": [],
+    "imports": []
+  },
+  "tests/store.test.ts": {
+    "calls": [],
+    "imports": [
+      {
+        "kind": "relative",
+        "line": 1,
+        "specifier": "../core/store",
+        "type_only": false
+      }
+    ]
+  }
+}

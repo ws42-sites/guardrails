@@ -1,0 +1,195 @@
+{
+  "Cargo.toml": {
+    "calls": [],
+    "imports": []
+  },
+  "README.md": {
+    "calls": [],
+    "imports": []
+  },
+  "crates/shared/Cargo.toml": {
+    "calls": [],
+    "imports": []
+  },
+  "crates/shared/src/lib.rs": {
+    "calls": [],
+    "imports": []
+  },
+  "crates/shared/src/types.rs": {
+    "calls": [],
+    "imports": []
+  },
+  "src/bin/tool.rs": {
+    "calls": [],
+    "imports": [
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 1,
+        "path": [
+          "golden_engine",
+          "open"
+        ]
+      },
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 2,
+        "path": [
+          "golden_engine",
+          "store",
+          "MemoryStore"
+        ]
+      },
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 3,
+        "path": [
+          "golden_shared",
+          "types",
+          "Handle"
+        ]
+      }
+    ]
+  },
+  "src/graph.rs": {
+    "calls": [],
+    "imports": [
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 2,
+        "path": [
+          "self",
+          "node",
+          "Node"
+        ]
+      },
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 3,
+        "path": [
+          "crate",
+          "util"
+        ]
+      }
+    ]
+  },
+  "src/graph/node.rs": {
+    "calls": [],
+    "imports": []
+  },
+  "src/lib.rs": {
+    "calls": [],
+    "imports": [
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 6,
+        "path": [
+          "crate",
+          "graph",
+          "Graph"
+        ]
+      },
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 7,
+        "path": [
+          "crate",
+          "store",
+          "MemoryStore"
+        ]
+      },
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 7,
+        "path": [
+          "crate",
+          "store",
+          "Store"
+        ]
+      },
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 8,
+        "path": [
+          "golden_shared",
+          "types",
+          "Handle"
+        ]
+      },
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 10,
+        "path": [
+          "self",
+          "util",
+          "normalise"
+        ]
+      },
+      {
+        "depth": 1,
+        "kind": "rust_use",
+        "line": 20,
+        "path": [
+          "super"
+        ]
+      }
+    ]
+  },
+  "src/store/index.rs": {
+    "calls": [],
+    "imports": [
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 1,
+        "path": [
+          "super",
+          "Store"
+        ]
+      }
+    ]
+  },
+  "src/store/mod.rs": {
+    "calls": [],
+    "imports": []
+  },
+  "src/util.rs": {
+    "calls": [],
+    "imports": []
+  },
+  "tests/roundtrip.rs": {
+    "calls": [],
+    "imports": [
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 1,
+        "path": [
+          "golden_engine",
+          "store",
+          "index",
+          "Entry"
+        ]
+      },
+      {
+        "depth": 0,
+        "kind": "rust_use",
+        "line": 2,
+        "path": [
+          "golden_shared",
+          "types",
+          "Handle"
+        ]
+      }
+    ]
+  }
+}

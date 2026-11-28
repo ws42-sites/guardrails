@@ -1,0 +1,17 @@
+{
+  "files": {
+    "Cargo.toml": "[package]\nname = \"golden-engine\"\nversion = \"0.0.0\"\nedition = \"2021\"\n\n[dependencies]\ngolden-shared = { path = \"crates/shared\" }\nserde = \"1\"\n",
+    "README.md": "# Rust crate\n\nFixture covering Rust: a library crate, a second crate it depends on, `use` links, traits and impls, and tests. It is data; nothing here is ever built or run.\n",
+    "crates/shared/Cargo.toml": "[package]\nname = \"golden-shared\"\nversion = \"0.0.0\"\nedition = \"2021\"\n",
+    "crates/shared/src/lib.rs": "//! Types shared by the golden crates.\npub mod types;\n",
+    "crates/shared/src/types.rs": "/// A handle to an opened store.\npub struct Handle(pub u32);\n\nimpl Handle {\n    pub fn id(&self) -> u32 {\n        self.0\n    }\n}\n",
+    "src/bin/tool.rs": "use golden_engine::open;\nuse golden_engine::store::MemoryStore;\nuse golden_shared::types::Handle;\n\nfn main() {\n    let graph = open(&MemoryStore, Handle(0));\n    assert!(graph.is_empty());\n}\n",
+    "src/graph.rs": "//! The in-memory graph.\nuse self::node::Node;\nuse crate::util;\n\npub mod node;\n\npub struct Graph {\n    nodes: Vec<Node>,\n}\n\nimpl Graph {\n    pub fn new() -> Self {\n        Graph { nodes: Vec::new() }\n    }\n\n    pub fn add(&mut self, node: Node) {\n        self.nodes.push(node);\n    }\n\n    pub fn is_empty(&self) -> bool {\n        util::count(self.nodes.len()) == 0\n    }\n}\n",
+    "src/graph/node.rs": "/// One node of the graph.\n#[derive(Clone, Debug)]\npub struct Node {\n    pub name: String,\n}\n\npub enum Kind {\n    File,\n    Symbol,\n}\n\npub trait Named {\n    fn name(&self) -> &str;\n}\n\nimpl Named for Node {\n    fn name(&self) -> &str {\n        &self.name\n    }\n}\n",
+    "src/lib.rs": "//! Golden engine: reads graphs from a store.\npub mod graph;\npub mod store;\nmod util;\n\nuse crate::graph::Graph;\nuse crate::store::{MemoryStore, Store};\nuse golden_shared::types::Handle;\n\npub use self::util::normalise;\n\n/// Open an empty graph over a store.\npub fn open(store: &dyn Store, handle: Handle) -> Graph {\n    let _ = (store, handle);\n    Graph::new()\n}\n\n#[cfg(test)]\nmod tests {\n    use super::*;\n\n    #[test]\n    fn opens_an_empty_graph() {\n        assert!(open(&MemoryStore, Handle(1)).is_empty());\n        assert_eq!(normalise(\"A\"), \"a\");\n    }\n\n    #[test]\n    #[ignore = \"needs a real store\"]\n    fn opens_a_stored_graph() {\n        assert!(true);\n    }\n}\n",
+    "src/store/index.rs": "use super::Store;\n\n#[derive(Clone)]\npub struct Entry {\n    pub name: String,\n}\n\npub fn build(store: &dyn Store, names: &[String]) -> usize {\n    let _ = store;\n    names.len()\n}\n",
+    "src/store/mod.rs": "//! Where graphs are read from.\npub mod index;\n\npub trait Store: Send + Sync {\n    fn load(&self, key: &str) -> Option<String>;\n}\n\npub struct MemoryStore;\n\nimpl Store for MemoryStore {\n    fn load(&self, key: &str) -> Option<String> {\n        let _ = key;\n        None\n    }\n}\n",
+    "src/util.rs": "pub fn normalise(value: &str) -> String {\n    value.to_lowercase()\n}\n\npub fn count(length: usize) -> usize {\n    length\n}\n",
+    "tests/roundtrip.rs": "use golden_engine::store::index::Entry;\nuse golden_shared::types::Handle;\n\n#[test]\nfn keeps_entry_names() {\n    let entry = Entry { name: \"Name\".to_string() };\n    assert_eq!(entry.name, \"Name\");\n    assert_ne!(Handle(1).id(), 2);\n    debug_assert!(true);\n}\n\n#[test]\n#[ignore]\nfn reads_a_large_store() {\n    assert!(true);\n}\n"
+  }
+}

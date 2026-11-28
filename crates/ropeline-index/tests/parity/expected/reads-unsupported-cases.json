@@ -1,0 +1,3706 @@
+{
+ "cases": {
+  "reads-unsupported-cases": {
+   "final": {
+    "integrity": "ok",
+    "journal_mode": "wal",
+    "schemaId": "3c8ab78ffefcf6d9",
+    "tables": {
+     "analyses": {
+      "columns": [
+       "id",
+       "content_hash",
+       "git_oid",
+       "language",
+       "version",
+       "size_bytes",
+       "symbols",
+       "facts"
+      ],
+      "rows": [
+       [
+        "d05e719f95f011ca383c74c12fbe9da4b2717dff682af4657251a91d49542103",
+        "43ff0fdc8baf9268c74155176e1ebf8037969b77375806bf80fcec72d15805f4",
+        "52112b97cce713f9dc36e2e3414fdc906f4a66d2",
+        "text",
+        "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}",
+        115,
+        "[]",
+        "{\"imports\": [], \"calls\": [], \"architecture\": {\"version\": 2, \"lines\": 3, \"nonblank_lines\": 2, \"sha256\": \"43ff0fdc8baf9268c74155176e1ebf8037969b77375806bf80fcec72d15805f4\", \"imports\": [], \"test_assertions\": 0, \"test_skips\": 0, \"test_focused\": 0, \"vacuous_assertions\": [], \"ci\": {}, \"deployment\": {\"version\": \"deployment-1\", \"resources\": [], \"links\": [], \"partial\": false}, \"configured_grants\": []}, \"waypoint\": {\"version\": \"waypoint-v2\", \"title\": \"Source definitions\", \"summary\": \"No readable purpose description was found in the captured source.\", \"purposeHint\": \"code\", \"evidenceLines\": [], \"lineCount\": 3, \"parseErrors\": 0, \"parserEvidence\": false, \"summaryKey\": \"dfc2d24c551ff25c4ff43f9b80ad870df8318c74db2b4bd91ff8cfed24569797\"}}"
+       ],
+       [
+        "591d80a902543baeca4a9361a4676379a4cf0eb25c03394428155c02483881b1",
+        "3b4f4b507e2032c195ccf2bee794cdf8fb1f717600259e64872085c8f358a7e8",
+        "a04e977da99332dee7f9e08521f406a87d6e85cd",
+        "python",
+        "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}",
+        3052,
+        "[]",
+        "{\"imports\": [], \"calls\": [], \"architecture\": {\"version\": 2, \"lines\": 201, \"nonblank_lines\": 201, \"sha256\": \"3b4f4b507e2032c195ccf2bee794cdf8fb1f717600259e64872085c8f358a7e8\", \"imports\": [], \"test_assertions\": 0, \"test_skips\": 0, \"test_focused\": 0, \"vacuous_assertions\": [], \"structure\": {\"declarations\": [], \"relations\": [], \"effects\": [], \"relation_occurrences\": 0, \"unresolved_call_occurrences\": 0, \"confirmed_facts_partial\": false, \"unresolved_samples_partial\": false, \"version\": \"structure-1\", \"supported\": true, \"partial\": false, \"limitations\": [\"Static lexical binding only; reflection, monkey-patching, receiver dispatch and dynamic imports are unresolved.\", \"Typed parameters and construction are composition candidates, not proof of behavioural substitution.\", \"Rust calls, macros and effects are not extracted.\"]}}, \"waypoint\": {\"version\": \"waypoint-v2\", \"title\": \"Source definitions\", \"summary\": \"No readable purpose description was found in the captured source.\", \"purposeHint\": \"code\", \"evidenceLines\": [], \"lineCount\": 201, \"parseErrors\": 0, \"parserEvidence\": false, \"summaryKey\": \"3f5b57fbc0a01b26ec45bba4cd35bc3982c023f7af088d7bf5398243bd6f9bdc\"}}"
+       ],
+       [
+        "cf280fb3f0048266b5bb43b99a0390f12ba51473cda024f751b086cc53872d76",
+        "debb06ffd29224617d9498f7db82ad0d0adc6566d38c15c4d7cfcde9df260f66",
+        "25828cc2abf2746cc7e5d8241c057fddb1d8b9ca",
+        "python",
+        "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}",
+        24,
+        "[[\"function_definition\", \"broken\", 1, null]]",
+        "{\"imports\": [], \"calls\": [], \"architecture\": {\"version\": 2, \"lines\": 2, \"nonblank_lines\": 2, \"sha256\": \"debb06ffd29224617d9498f7db82ad0d0adc6566d38c15c4d7cfcde9df260f66\", \"imports\": [], \"test_assertions\": 0, \"test_skips\": 0, \"test_focused\": 0, \"vacuous_assertions\": [], \"structure\": {\"version\": \"structure-1\", \"supported\": true, \"partial\": true, \"declarations\": [], \"relations\": [], \"effects\": [], \"parse_error\": true}, \"parse_error\": true}, \"waypoint\": {\"version\": \"waypoint-v2\", \"title\": \"Source definitions\", \"summary\": \"Defines broken.\", \"purposeHint\": \"code\", \"evidenceLines\": [{\"line\": 1, \"basis\": \"indexed-definition\"}], \"lineCount\": 2, \"parseErrors\": 1, \"parserEvidence\": true, \"summaryKey\": \"2fad351ed66ee540ed50f32a3f6cf961266c8d0bc7eb8c8638b29df8441f8dfb\"}}"
+       ],
+       [
+        "1fb41123bf38b7d4837d0195e59f1396a49c930a5abee8a8409284073368a926",
+        "a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72",
+        "3f601522d1c20bdd12a7e3011eb163433f8d3e5e",
+        "python",
+        "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}",
+        263,
+        "[[\"import\", \"import importlib\", 1, null], [\"import\", \"from . import ghost\", 2, null], [\"import\", \"from ..outside import nothing\", 3, null], [\"function_definition\", \"load\", 6, null], [\"class_definition\", \"Runner\", 10, null], [\"function_definition\", \"step\", 11, \"Runner\"], [\"function_definition\", \"go\", 14, \"Runner\"], [\"function_definition\", \"top\", 18, null]]",
+        "{\"imports\": [{\"kind\": \"python_import\", \"names\": [\"importlib\"], \"line\": 1}, {\"kind\": \"python_from\", \"level\": 1, \"module\": null, \"names\": [\"ghost\"], \"line\": 2}, {\"kind\": \"python_from\", \"level\": 2, \"module\": \"outside\", \"names\": [\"nothing\"], \"line\": 3}], \"calls\": [], \"architecture\": {\"version\": 2, \"lines\": 19, \"nonblank_lines\": 12, \"sha256\": \"a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72\", \"imports\": [{\"kind\": \"python_import\", \"names\": [\"importlib\"], \"line\": 1}, {\"kind\": \"python_from\", \"level\": 1, \"module\": null, \"names\": [\"ghost\"], \"line\": 2}, {\"kind\": \"python_from\", \"level\": 2, \"module\": \"outside\", \"names\": [\"nothing\"], \"line\": 3}], \"test_assertions\": 0, \"test_skips\": 0, \"test_focused\": 0, \"vacuous_assertions\": [], \"structure\": {\"declarations\": [{\"name\": \"load\", \"kind\": \"function\", \"line\": 6, \"parameters\": [], \"returns_constructed\": [], \"exported\": true}, {\"name\": \"Runner\", \"kind\": \"class\", \"line\": 10, \"bases\": [], \"methods\": [\"step\", \"go\"], \"exported\": true}, {\"name\": \"top\", \"kind\": \"function\", \"line\": 18, \"parameters\": [], \"returns_constructed\": [], \"exported\": true}, {\"name\": \"step\", \"kind\": \"function\", \"line\": 11, \"parameters\": [], \"returns_constructed\": [], \"exported\": true}, {\"name\": \"go\", \"kind\": \"function\", \"line\": 14, \"parameters\": [], \"returns_constructed\": [], \"exported\": true}], \"relations\": [{\"kind\": \"CONSTRUCTS\", \"source\": \"module\", \"target\": \"Runner\", \"line\": 19, \"resolution\": \"syntactic-construction\", \"origin\": \"observed\"}, {\"kind\": \"UNRESOLVED_CALL\", \"source\": \"module\", \"target\": \"importlib.import_module\", \"line\": 7, \"resolution\": \"dispatch-not-resolved\", \"origin\": \"inferred\"}, {\"kind\": \"UNRESOLVED_CALL\", \"source\": \"module\", \"target\": \"(dynamic)\", \"line\": 19, \"resolution\": \"dispatch-not-resolved\", \"origin\": \"inferred\"}, {\"kind\": \"UNRESOLVED_CALL\", \"source\": \"module\", \"target\": \"self.step\", \"line\": 15, \"resolution\": \"dispatch-not-resolved\", \"origin\": \"inferred\"}], \"effects\": [], \"relation_occurrences\": 4, \"unresolved_call_occurrences\": 3, \"confirmed_facts_partial\": false, \"unresolved_samples_partial\": false, \"version\": \"structure-1\", \"supported\": true, \"partial\": false, \"limitations\": [\"Static lexical binding only; reflection, monkey-patching, receiver dispatch and dynamic imports are unresolved.\", \"Typed parameters and construction are composition candidates, not proof of behavioural substitution.\", \"Rust calls, macros and effects are not extracted.\"]}}, \"waypoint\": {\"version\": \"waypoint-v2\", \"title\": \"Source definitions\", \"summary\": \"Defines load, Runner, step.\", \"purposeHint\": \"code\", \"evidenceLines\": [{\"line\": 6, \"basis\": \"indexed-definition\"}, {\"line\": 10, \"basis\": \"indexed-definition\"}, {\"line\": 11, \"basis\": \"indexed-definition\"}], \"lineCount\": 19, \"parseErrors\": 0, \"parserEvidence\": false, \"summaryKey\": \"b9ce131d25adfd95f59592ea1bbeffbe34c51cbf64f61956077dfce3819144fb\"}}"
+       ],
+       [
+        "cabadba8c85a3b86bce30d9bc849f48010aa94410fa9a8d63f0718ce8526071f",
+        "1de7373fbc76a139180c90b3f93ad384eb0e303fda437620e717dc7097abf341",
+        "e1cbe3c1546a0931b857ff19f8d987818eeb2f8c",
+        "text",
+        "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}",
+        15,
+        "[]",
+        "{\"imports\": [], \"calls\": [], \"architecture\": {\"version\": 2, \"lines\": 1, \"nonblank_lines\": 1, \"sha256\": \"1de7373fbc76a139180c90b3f93ad384eb0e303fda437620e717dc7097abf341\", \"imports\": [], \"test_assertions\": 0, \"test_skips\": 0, \"test_focused\": 0, \"vacuous_assertions\": [], \"ci\": {}, \"deployment\": {\"version\": \"deployment-1\", \"resources\": [], \"links\": [], \"partial\": false}, \"configured_grants\": [], \"manifest\": {\"name\": null, \"dependencies\": [], \"exports\": {}, \"scripts\": {}}}, \"waypoint\": {\"version\": \"waypoint-v2\", \"title\": \"Source definitions\", \"summary\": \"No readable purpose description was found in the captured source.\", \"purposeHint\": \"code\", \"evidenceLines\": [], \"lineCount\": 1, \"parseErrors\": 0, \"parserEvidence\": false, \"summaryKey\": \"f317d253af6f8d84c27d477b3abf1bb823c7bb040cb1a03c7782137962438d65\"}}"
+       ],
+       [
+        "f6e943a63f7fb79cd86fb5ae83cf586d17419e450afbf0a777bd5bf3793f4dd9",
+        "6b217998223410d7a588708428487360b72c9ca39ff06e7d56c802657eccff0c",
+        "430ab056bc755c8bf849d5587ab79e8e51757ade",
+        "typescript",
+        "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}",
+        255,
+        "[[\"import\", \"import { nowhere } from \\\"./does-not-exist\\\";\", 1, null], [\"import\", \"import _ from \\\"lodash\\\";\", 2, null], [\"import\", \"import { alias } from \\\"@/utils/alias\\\";\", 3, null], [\"import\", \"import data from \\\"./data.json\\\";\", 4, null], [\"variable_declarator\", \"name\", 6, null], [\"arrow_function\", \"lazy\", 7, null], [\"variable_declarator\", \"used\", 8, null]]",
+        "{\"imports\": [{\"kind\": \"relative\", \"specifier\": \"./does-not-exist\", \"line\": 1, \"type_only\": false}, {\"kind\": \"relative\", \"specifier\": \"lodash\", \"line\": 2, \"type_only\": false}, {\"kind\": \"relative\", \"specifier\": \"@/utils/alias\", \"line\": 3, \"type_only\": false}, {\"kind\": \"relative\", \"specifier\": \"./data.json\", \"line\": 4, \"type_only\": false}], \"calls\": [], \"architecture\": {\"version\": 2, \"lines\": 8, \"nonblank_lines\": 7, \"sha256\": \"6b217998223410d7a588708428487360b72c9ca39ff06e7d56c802657eccff0c\", \"imports\": [{\"kind\": \"relative\", \"specifier\": \"./does-not-exist\", \"line\": 1, \"type_only\": false}, {\"kind\": \"relative\", \"specifier\": \"lodash\", \"line\": 2, \"type_only\": false}, {\"kind\": \"relative\", \"specifier\": \"@/utils/alias\", \"line\": 3, \"type_only\": false}, {\"kind\": \"relative\", \"specifier\": \"./data.json\", \"line\": 4, \"type_only\": false}], \"test_assertions\": 0, \"test_skips\": 0, \"test_focused\": 0, \"vacuous_assertions\": [], \"structure\": {\"declarations\": [{\"name\": \"lazy\", \"kind\": \"function\", \"line\": 7, \"parameters\": [], \"exported\": false}], \"relations\": [{\"kind\": \"UNRESOLVED_CALL\", \"source\": \"module\", \"target\": \"import\", \"line\": 7, \"resolution\": \"dispatch-not-resolved\", \"origin\": \"inferred\"}], \"effects\": [], \"parse_error\": false, \"relation_occurrences\": 1, \"unresolved_call_occurrences\": 1, \"confirmed_facts_partial\": false, \"unresolved_samples_partial\": false, \"version\": \"structure-1\", \"supported\": true, \"partial\": false, \"limitations\": [\"Static lexical binding only; reflection, monkey-patching, receiver dispatch and dynamic imports are unresolved.\", \"Typed parameters and construction are composition candidates, not proof of behavioural substitution.\", \"Rust calls, macros and effects are not extracted.\"]}, \"parse_error\": false}, \"waypoint\": {\"version\": \"waypoint-v2\", \"title\": \"Source definitions\", \"summary\": \"Defines name, lazy, used.\", \"purposeHint\": \"code\", \"evidenceLines\": [{\"line\": 6, \"basis\": \"indexed-definition\"}, {\"line\": 7, \"basis\": \"indexed-definition\"}, {\"line\": 8, \"basis\": \"indexed-definition\"}], \"lineCount\": 8, \"parseErrors\": 0, \"parserEvidence\": true, \"summaryKey\": \"34da432af0b750f2e3651fb143779499ddeab5edcc849b16f3e04bb1a49084be\"}}"
+       ],
+       [
+        "6f290f6c138aaeca64914453c5c2d43760f3217b1e13b6a3fb3847ac633c958b",
+        "10c786f62010604ad5b31bf5fc591bbf56b97adb1cd820e4a99cab2700f5427a",
+        "70611448386b16739b6ffa6c3bdb59a19d974a92",
+        "text",
+        "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}",
+        61,
+        "[]",
+        "{\"imports\": [], \"calls\": [], \"architecture\": {\"version\": 2, \"lines\": 3, \"nonblank_lines\": 3, \"sha256\": \"10c786f62010604ad5b31bf5fc591bbf56b97adb1cd820e4a99cab2700f5427a\", \"imports\": [], \"test_assertions\": 0, \"test_skips\": 0, \"test_focused\": 0, \"vacuous_assertions\": [], \"ci\": {}, \"deployment\": {\"version\": \"deployment-1\", \"resources\": [], \"links\": [], \"partial\": false}, \"configured_grants\": [], \"manifest\": {\"name\": null, \"dependencies\": [], \"exports\": {}, \"scripts\": {}}}, \"waypoint\": {\"version\": \"waypoint-v2\", \"title\": \"Source definitions\", \"summary\": \"No readable purpose description was found in the captured source.\", \"purposeHint\": \"code\", \"evidenceLines\": [], \"lineCount\": 3, \"parseErrors\": 0, \"parserEvidence\": false, \"summaryKey\": \"131f6cdeac195c93eb8524c5cd9d73066f0846cd29db78c2e76d017ac2910632\"}}"
+       ],
+       [
+        "94d50a9666fcfd65ab0c340fd3f2b1250b1e835dbeb5195e1685042080d3000c",
+        "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "b587a4bf30603a0ada70fff605add0f3fe874b70",
+        "python",
+        "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}",
+        43,
+        "[[\"function_definition\", \"dynamic\", 1, null]]",
+        "{\"imports\": [], \"calls\": [], \"architecture\": {\"version\": 2, \"lines\": 2, \"nonblank_lines\": 2, \"sha256\": \"452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875\", \"imports\": [], \"test_assertions\": 0, \"test_skips\": 0, \"test_focused\": 0, \"vacuous_assertions\": [], \"structure\": {\"declarations\": [{\"name\": \"dynamic\", \"kind\": \"function\", \"line\": 1, \"parameters\": [], \"returns_constructed\": [], \"exported\": true}], \"relations\": [{\"kind\": \"UNRESOLVED_CALL\", \"source\": \"module\", \"target\": \"__import__\", \"line\": 2, \"resolution\": \"dispatch-not-resolved\", \"origin\": \"inferred\"}], \"effects\": [], \"relation_occurrences\": 1, \"unresolved_call_occurrences\": 1, \"confirmed_facts_partial\": false, \"unresolved_samples_partial\": false, \"version\": \"structure-1\", \"supported\": true, \"partial\": false, \"limitations\": [\"Static lexical binding only; reflection, monkey-patching, receiver dispatch and dynamic imports are unresolved.\", \"Typed parameters and construction are composition candidates, not proof of behavioural substitution.\", \"Rust calls, macros and effects are not extracted.\"]}}, \"waypoint\": {\"version\": \"waypoint-v2\", \"title\": \"Source definitions\", \"summary\": \"Defines dynamic.\", \"purposeHint\": \"code\", \"evidenceLines\": [{\"line\": 1, \"basis\": \"indexed-definition\"}], \"lineCount\": 2, \"parseErrors\": 0, \"parserEvidence\": false, \"summaryKey\": \"e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664\"}}"
+       ],
+       [
+        "470c5269f45f51e5ead31c3858fa2a8be55678d832dbc9f54de9b9afa57948f0",
+        "b8db842af59af3514fb2ef9428112ec013848c98cc57bfb2a7e9e278c8e1d347",
+        "34a6204ee64b15cb3d8a1b8f3f583ab04673ce7d",
+        "python",
+        "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}",
+        24,
+        "[[\"function_definition\", \"new\", 1, null]]",
+        "{\"imports\": [], \"calls\": [], \"architecture\": {\"version\": 2, \"lines\": 2, \"nonblank_lines\": 2, \"sha256\": \"b8db842af59af3514fb2ef9428112ec013848c98cc57bfb2a7e9e278c8e1d347\", \"imports\": [], \"test_assertions\": 0, \"test_skips\": 0, \"test_focused\": 0, \"vacuous_assertions\": [], \"structure\": {\"declarations\": [{\"name\": \"new\", \"kind\": \"function\", \"line\": 1, \"parameters\": [], \"returns_constructed\": [], \"exported\": true}], \"relations\": [], \"effects\": [], \"relation_occurrences\": 0, \"unresolved_call_occurrences\": 0, \"confirmed_facts_partial\": false, \"unresolved_samples_partial\": false, \"version\": \"structure-1\", \"supported\": true, \"partial\": false, \"limitations\": [\"Static lexical binding only; reflection, monkey-patching, receiver dispatch and dynamic imports are unresolved.\", \"Typed parameters and construction are composition candidates, not proof of behavioural substitution.\", \"Rust calls, macros and effects are not extracted.\"]}}, \"waypoint\": {\"version\": \"waypoint-v2\", \"title\": \"Source definitions\", \"summary\": \"Defines new.\", \"purposeHint\": \"code\", \"evidenceLines\": [{\"line\": 1, \"basis\": \"indexed-definition\"}], \"lineCount\": 2, \"parseErrors\": 0, \"parserEvidence\": false, \"summaryKey\": \"b06753ed908f8f5c6467cefd4871eb7e4ad01f15feea73b38b83d647296a0c9f\"}}"
+       ]
+      ]
+     },
+     "legacy_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": []
+     },
+     "legacy_nodes": {
+      "columns": [
+       "id",
+       "snapshot_id",
+       "kind",
+       "name",
+       "path",
+       "line",
+       "metadata"
+      ],
+      "rows": []
+     },
+     "resolved_edges": {
+      "columns": [
+       "snapshot_id",
+       "source",
+       "target",
+       "kind",
+       "evidence"
+      ],
+      "rows": [
+       [
+        1,
+        "f:7c3b73ba37e2fe7084a80626:1cdbd1e97a1a93fb524f1e9d9795232304a643aa5a8ffc0ad4958254c940019c",
+        "f:7c3b73ba37e2fe7084a80626:0f5b6d51cee5098bbf8811e1a6115ba358915158033d79c91fe3141d44117a97",
+        "IMPORTS",
+        "{\"path\": \"web/missing.ts\", \"line\": 4, \"confidence\": \"resolved-relative\", \"type_only\": false}"
+       ]
+      ]
+     },
+     "snapshot_files": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "file_id",
+       "name",
+       "analysis_id"
+      ],
+      "rows": [
+       [
+        1,
+        "README.md",
+        "dbedd0dee62c4651df494ae2ef2a22d3c11e4a796bcb89cb93e6de07bfeb074e",
+        "README.md",
+        "d05e719f95f011ca383c74c12fbe9da4b2717dff682af4657251a91d49542103"
+       ],
+       [
+        1,
+        "py/big.py",
+        "5590a3b14f08a1c1e09432b5f63656ceb709e819b63ffdc150301c4bd0e7eb1f",
+        "big.py",
+        "591d80a902543baeca4a9361a4676379a4cf0eb25c03394428155c02483881b1"
+       ],
+       [
+        1,
+        "py/broken.py",
+        "dfc0547bc183bb2bfc462bef1801df0be0aacaa0d0a97772e9129bfe3bb99028",
+        "broken.py",
+        "cf280fb3f0048266b5bb43b99a0390f12ba51473cda024f751b086cc53872d76"
+       ],
+       [
+        1,
+        "py/dynamic.py",
+        "052f514e7a7320dfe6d7f605662ef2cfa54fb803e6e75e20b34dbd6b155541c7",
+        "dynamic.py",
+        "1fb41123bf38b7d4837d0195e59f1396a49c930a5abee8a8409284073368a926"
+       ],
+       [
+        1,
+        "web/data.json",
+        "0f5b6d51cee5098bbf8811e1a6115ba358915158033d79c91fe3141d44117a97",
+        "data.json",
+        "cabadba8c85a3b86bce30d9bc849f48010aa94410fa9a8d63f0718ce8526071f"
+       ],
+       [
+        1,
+        "web/missing.ts",
+        "1cdbd1e97a1a93fb524f1e9d9795232304a643aa5a8ffc0ad4958254c940019c",
+        "missing.ts",
+        "f6e943a63f7fb79cd86fb5ae83cf586d17419e450afbf0a777bd5bf3793f4dd9"
+       ],
+       [
+        1,
+        "web/tsconfig.json",
+        "7ddadddb5b3699f449353f6e36fb6ba0ee3b7b6de61fbcb4ef57fb85d618b087",
+        "tsconfig.json",
+        "6f290f6c138aaeca64914453c5c2d43760f3217b1e13b6a3fb3847ac633c958b"
+       ],
+       [
+        2,
+        "README.md",
+        "dbedd0dee62c4651df494ae2ef2a22d3c11e4a796bcb89cb93e6de07bfeb074e",
+        "README.md",
+        "d05e719f95f011ca383c74c12fbe9da4b2717dff682af4657251a91d49542103"
+       ],
+       [
+        2,
+        "py/big.py",
+        "5590a3b14f08a1c1e09432b5f63656ceb709e819b63ffdc150301c4bd0e7eb1f",
+        "big.py",
+        "591d80a902543baeca4a9361a4676379a4cf0eb25c03394428155c02483881b1"
+       ],
+       [
+        2,
+        "py/broken.py",
+        "dfc0547bc183bb2bfc462bef1801df0be0aacaa0d0a97772e9129bfe3bb99028",
+        "broken.py",
+        "cf280fb3f0048266b5bb43b99a0390f12ba51473cda024f751b086cc53872d76"
+       ],
+       [
+        2,
+        "py/dynamic.py",
+        "52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411",
+        "dynamic.py",
+        "94d50a9666fcfd65ab0c340fd3f2b1250b1e835dbeb5195e1685042080d3000c"
+       ],
+       [
+        2,
+        "py/new.py",
+        "4ce7d98367c0658dd183830ad46ded2d07ed884ea3fa105d2ad5e5791cc07566",
+        "new.py",
+        "470c5269f45f51e5ead31c3858fa2a8be55678d832dbc9f54de9b9afa57948f0"
+       ],
+       [
+        2,
+        "web/data.json",
+        "0f5b6d51cee5098bbf8811e1a6115ba358915158033d79c91fe3141d44117a97",
+        "data.json",
+        "cabadba8c85a3b86bce30d9bc849f48010aa94410fa9a8d63f0718ce8526071f"
+       ],
+       [
+        2,
+        "web/tsconfig.json",
+        "7ddadddb5b3699f449353f6e36fb6ba0ee3b7b6de61fbcb4ef57fb85d618b087",
+        "tsconfig.json",
+        "6f290f6c138aaeca64914453c5c2d43760f3217b1e13b6a3fb3847ac633c958b"
+       ]
+      ]
+     },
+     "snapshot_waypoints": {
+      "columns": [
+       "snapshot_id",
+       "path",
+       "kind",
+       "summary_key",
+       "validation_key"
+      ],
+      "rows": [
+       [
+        1,
+        "README.md",
+        "file",
+        "6d96256f7cf21273f85331d15f2ec8be8614bdb6b4d06915606665448e305a4b",
+        "d859ca0fe4d5d182f41a6f370f6aae4fbe80c51130a5232e56c9c572c22766e8"
+       ],
+       [
+        1,
+        "py/big.py",
+        "file",
+        "a84e8892e611b4d8cd27b19b7f7670cbda255ab463613f7c745fa98d6e5070ef",
+        "4916c2bbf6c75c97650f7cb8e712fb255b20d084e6aa334e52af5dff6bfc828e"
+       ],
+       [
+        1,
+        "py/broken.py",
+        "file",
+        "d6c30595c86c1bbbef70eac51f9deee4e5c2df76b1adf936c768470b4442eb54",
+        "73c97dfd2c2f8ac55d8e001d002f1798be12aad05e25bb3ac8683fe11e7032db"
+       ],
+       [
+        1,
+        "py/dynamic.py",
+        "file",
+        "8863643efe198256ed5e3b25ec808b8ff5ec91de85b4a74cf58309e851ea5c8d",
+        "d87876045ca39cc6ce900f96af5ae4d5ee454955936cf174ac2deeb6ad8f86aa"
+       ],
+       [
+        1,
+        "web/data.json",
+        "file",
+        "3c1d4a378a49e91171a674ddb61fa65d6c92620ec7d8f387f731f4ad8f2f66a4",
+        "cac68229cce7765d664b0ce228df92a08302a7bc9d477fb1ba8ae60cf9c89bb6"
+       ],
+       [
+        1,
+        "web/missing.ts",
+        "file",
+        "db9883b2a42fd1a61408671a74cb01ec48a9c5d7177c661ab63d2e259ee2ad11",
+        "259eaeb9decb7fe550927850cca99f51b3e1d1a540748901a4855ad2d57f2d65"
+       ],
+       [
+        1,
+        "web/tsconfig.json",
+        "file",
+        "62f8670629d86be5b102022956c1967b6bdc6963b392c2b633e6d9b8b6bcff97",
+        "76e40c0782024da6699fd3322d050edfd8fba0f86c984829301d6fdb574cda3b"
+       ],
+       [
+        1,
+        "py",
+        "area",
+        "a2ab521faa6a8dbfc784a20d5f94830dcd1e063c3d85ca2576d0dc02b20b530b",
+        "8288fa554fe6a82822487ab542abead2dc76d8d2311642cef7d708bc424905ae"
+       ],
+       [
+        1,
+        "web",
+        "area",
+        "749d542aa911e77ab412fae16e4fb65e30590b1a5e59803cac4c8cd8ff8d2df5",
+        "ffbdba5d905b4653d1adec19bf8ecffb62e10535ff812a565a88cea66d3bcacb"
+       ],
+       [
+        1,
+        ".",
+        "area",
+        "47c543d2dfca65f0b46c295fda7b90291ad130779c205ba31b9b61eaef88e68e",
+        "10310a6434c027abc141a2831b79e7aa673dd84e827515552fc2410bafb95713"
+       ],
+       [
+        2,
+        "README.md",
+        "file",
+        "6d96256f7cf21273f85331d15f2ec8be8614bdb6b4d06915606665448e305a4b",
+        "d859ca0fe4d5d182f41a6f370f6aae4fbe80c51130a5232e56c9c572c22766e8"
+       ],
+       [
+        2,
+        "py/big.py",
+        "file",
+        "a84e8892e611b4d8cd27b19b7f7670cbda255ab463613f7c745fa98d6e5070ef",
+        "4916c2bbf6c75c97650f7cb8e712fb255b20d084e6aa334e52af5dff6bfc828e"
+       ],
+       [
+        2,
+        "py/broken.py",
+        "file",
+        "d6c30595c86c1bbbef70eac51f9deee4e5c2df76b1adf936c768470b4442eb54",
+        "73c97dfd2c2f8ac55d8e001d002f1798be12aad05e25bb3ac8683fe11e7032db"
+       ],
+       [
+        2,
+        "py/dynamic.py",
+        "file",
+        "2df553d9a1749dd167137fe2eb3b0de12f292de92b0351e59082ac1469690b4e",
+        "f003fbe6a464b5d835345b78a0b72c0a9a7836fd50a9a99cf9d25e386792f403"
+       ],
+       [
+        2,
+        "py/new.py",
+        "file",
+        "c10bb2cf8a87b93e5b798829106ac5300974298a72340caa1fb1646d39ec0e8e",
+        "30f87f3eae085d012d5bccf8b3725eeecdddd4b3da6b48e72def8f3f8005d286"
+       ],
+       [
+        2,
+        "web/data.json",
+        "file",
+        "3c1d4a378a49e91171a674ddb61fa65d6c92620ec7d8f387f731f4ad8f2f66a4",
+        "cac68229cce7765d664b0ce228df92a08302a7bc9d477fb1ba8ae60cf9c89bb6"
+       ],
+       [
+        2,
+        "web/tsconfig.json",
+        "file",
+        "62f8670629d86be5b102022956c1967b6bdc6963b392c2b633e6d9b8b6bcff97",
+        "76e40c0782024da6699fd3322d050edfd8fba0f86c984829301d6fdb574cda3b"
+       ],
+       [
+        2,
+        "py",
+        "area",
+        "c2cf8e844917e13b342999a6a4f92b87dee71cdfb2df5fd7c86f1bde98138237",
+        "8b2cefd31ae603f1f126aa35442f7a22b63838e41da9049e19beb4b3ba1665bb"
+       ],
+       [
+        2,
+        "web",
+        "area",
+        "2a013529657fd52f2b57e7714cfb4490a13b15e053135f4fc566c45f54149968",
+        "6257a21b5bc882a8d537e44213d214f34c2af808f7e256500abd0fdce97ed875"
+       ],
+       [
+        2,
+        ".",
+        "area",
+        "129b474d01793256fca1d34cc3257c37200c8e633c0a295656d33a23030fb968",
+        "b699818e83a53c8edee93559de5f8cd482be419f7e17fa7dbf544b0121deaae3"
+       ]
+      ]
+     },
+     "snapshots": {
+      "columns": [
+       "id",
+       "repo",
+       "revision",
+       "indexed_at",
+       "metadata",
+       "node_prefix",
+       "view_key"
+      ],
+      "rows": [
+       [
+        1,
+        "owner/repo",
+        "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+        "<timestamp>",
+        "{\"analysis_stats\": {\"parsed_files\": 7, \"reused_files\": 0}, \"analyzer\": {\"version\": \"{\\\"format\\\": 15, \\\"language-pack\\\": \\\"oracle\\\", \\\"tree-sitter\\\": \\\"oracle\\\", \\\"waypoints\\\": \\\"waypoint-v2\\\"}\"}, \"waypoint_stats\": {\"summariesComputed\": 7, \"summariesReused\": 0, \"validationsComputed\": 7, \"validationsReused\": 0, \"areasComputed\": 3, \"areasReused\": 0, \"areaValidationsComputed\": 3, \"areaValidationsReused\": 0, \"unavailableFiles\": 0, \"partial\": false}, \"capture\": {\"excluded_files\": 2}}",
+        "7c3b73ba37e2fe7084a80626",
+        "default"
+       ],
+       [
+        2,
+        "owner/repo",
+        "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+        "<timestamp>",
+        "{\"analysis_stats\": {\"parsed_files\": 2, \"reused_files\": 5}, \"analyzer\": {\"version\": \"{\\\"format\\\": 15, \\\"language-pack\\\": \\\"oracle\\\", \\\"tree-sitter\\\": \\\"oracle\\\", \\\"waypoints\\\": \\\"waypoint-v2\\\"}\"}, \"waypoint_stats\": {\"summariesComputed\": 2, \"summariesReused\": 5, \"validationsComputed\": 2, \"validationsReused\": 5, \"areasComputed\": 3, \"areasReused\": 0, \"areaValidationsComputed\": 3, \"areaValidationsReused\": 0, \"unavailableFiles\": 0, \"partial\": false}, \"capture\": {\"excluded_files\": 2}}",
+        "e2b4649c3aed778fcc543aba",
+        "default"
+       ]
+      ]
+     },
+     "waypoint_cache": {
+      "columns": [
+       "id",
+       "kind",
+       "version",
+       "payload",
+       "payload_hash"
+      ],
+      "rows": [
+       [
+        "d859ca0fe4d5d182f41a6f370f6aae4fbe80c51130a5232e56c9c572c22766e8",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"ef35f1dc8f836999449da61a06a158f15fe4a2c54b43212ec6782120d16dae4b\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "aec7454eaf6ff6529f98fdf77305f54b4de208f6d09c1cf961ab0caa5f500db8"
+       ],
+       [
+        "6d96256f7cf21273f85331d15f2ec8be8614bdb6b4d06915606665448e305a4b",
+        "file",
+        "waypoint-v2",
+        "{\"contentHash\":\"43ff0fdc8baf9268c74155176e1ebf8037969b77375806bf80fcec72d15805f4\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"README.md\",\"revision\":\"cache\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"README.md\",\"purpose\":\"documentation\",\"schemaVersion\":\"1\",\"summary\":\"No readable purpose description was found in the captured source.\",\"summaryKey\":\"dfc2d24c551ff25c4ff43f9b80ad870df8318c74db2b4bd91ff8cfed24569797\",\"title\":\"Source definitions\"}",
+        "74a309dce8e3409fcb1eb847f57d4a61775e937323cac2cf8b7a8e3c6434a4dd"
+       ],
+       [
+        "4916c2bbf6c75c97650f7cb8e712fb255b20d084e6aa334e52af5dff6bfc828e",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"d1beef1a6d544aec2054a65915c2af55d95d3b6d04681d0b7ff8ba7794640c94\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "d28119844a698949b1d880de6f215d9b26172eca2196022596749299bdcbcad2"
+       ],
+       [
+        "a84e8892e611b4d8cd27b19b7f7670cbda255ab463613f7c745fa98d6e5070ef",
+        "file",
+        "waypoint-v2",
+        "{\"contentHash\":\"3b4f4b507e2032c195ccf2bee794cdf8fb1f717600259e64872085c8f358a7e8\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"py/big.py\",\"revision\":\"cache\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"py/big.py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"No readable purpose description was found in the captured source.\",\"summaryKey\":\"3f5b57fbc0a01b26ec45bba4cd35bc3982c023f7af088d7bf5398243bd6f9bdc\",\"title\":\"Source definitions\"}",
+        "7bdc2b871a3dea3507c14866fc2ff0c1512eb585c9f1f0aa6c2456caff530edc"
+       ],
+       [
+        "73c97dfd2c2f8ac55d8e001d002f1798be12aad05e25bb3ac8683fe11e7032db",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser errors limit this description.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"ca7de4cad9d7873cad08958cc5d16623f5b457dbd9ef00bce609fd7b28c00c40\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "fec6e67a8d62765e9bdff7f504a2d91365210afbb585d94fc16d7ff7df8f9bd6"
+       ],
+       [
+        "d6c30595c86c1bbbef70eac51f9deee4e5c2df76b1adf936c768470b4442eb54",
+        "file",
+        "waypoint-v2",
+        "{\"contentHash\":\"debb06ffd29224617d9498f7db82ad0d0adc6566d38c15c4d7cfcde9df260f66\",\"evidence\":[{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/broken.py\",\"revision\":\"cache\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"py/broken.py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Defines broken.\",\"summaryKey\":\"2fad351ed66ee540ed50f32a3f6cf961266c8d0bc7eb8c8638b29df8441f8dfb\",\"title\":\"Source definitions\"}",
+        "e781f7e458cfcb74c1d80e710f489a300b66b4cdf8b3b841bf459abf19d550ff"
+       ],
+       [
+        "d87876045ca39cc6ce900f96af5ae4d5ee454955936cf174ac2deeb6ad8f86aa",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"ce8a2cb56531ae4d025cfae3c74cd4975583757eb87679de32c0982a6cb7e806\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "b8439ab8c8729c068bf61fa89bb58f9b56be392be970e8866cf7b1c9108dada3"
+       ],
+       [
+        "8863643efe198256ed5e3b25ec808b8ff5ec91de85b4a74cf58309e851ea5c8d",
+        "file",
+        "waypoint-v2",
+        "{\"contentHash\":\"a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72\",\"evidence\":[{\"line\":6,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"cache\"},{\"line\":10,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"cache\"},{\"line\":11,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"cache\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"py/dynamic.py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Defines load, Runner, step.\",\"summaryKey\":\"b9ce131d25adfd95f59592ea1bbeffbe34c51cbf64f61956077dfce3819144fb\",\"title\":\"Source definitions\"}",
+        "bfae2d595bf4162fc1a5b7b88ac9dba3b9d07aa5221c8d2660aab26423d72797"
+       ],
+       [
+        "cac68229cce7765d664b0ce228df92a08302a7bc9d477fb1ba8ae60cf9c89bb6",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"a6b5380e5badbf3f0ee66a0cf5a6fa75bb2ff4c6131e97b68f742e8d72bd4bb0\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "8df4e72062888a0460d74bff9e4099335276fe6db6e83742ca7f8cdf0a022908"
+       ],
+       [
+        "3c1d4a378a49e91171a674ddb61fa65d6c92620ec7d8f387f731f4ad8f2f66a4",
+        "file",
+        "waypoint-v2",
+        "{\"contentHash\":\"1de7373fbc76a139180c90b3f93ad384eb0e303fda437620e717dc7097abf341\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"web/data.json\",\"revision\":\"cache\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"web/data.json\",\"purpose\":\"configuration\",\"schemaVersion\":\"1\",\"summary\":\"No readable purpose description was found in the captured source.\",\"summaryKey\":\"f317d253af6f8d84c27d477b3abf1bb823c7bb040cb1a03c7782137962438d65\",\"title\":\"Source definitions\"}",
+        "4a398743f13e36f95e2002d7bd15ed01e40ecc9fb680e73ecc320baaea8f676d"
+       ],
+       [
+        "259eaeb9decb7fe550927850cca99f51b3e1d1a540748901a4855ad2d57f2d65",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"No parser errors were recorded.\",\"name\":\"Parser evidence\",\"status\":\"supported\"},{\"detail\":\"Pinned to 1 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"62322e65d1ef54d9256e1d7f099cf5a152b500e47ff1fdf06412c58ba0e3cbb8\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"current\"}",
+        "a8f60275532233fb9f0a84b7edfd0f8a41885faa2e2b9cfee81e1827c9dcd614"
+       ],
+       [
+        "db9883b2a42fd1a61408671a74cb01ec48a9c5d7177c661ab63d2e259ee2ad11",
+        "file",
+        "waypoint-v2",
+        "{\"contentHash\":\"6b217998223410d7a588708428487360b72c9ca39ff06e7d56c802657eccff0c\",\"evidence\":[{\"line\":6,\"method\":\"indexed-definition\",\"path\":\"web/missing.ts\",\"revision\":\"cache\"},{\"line\":7,\"method\":\"indexed-definition\",\"path\":\"web/missing.ts\",\"revision\":\"cache\"},{\"line\":8,\"method\":\"indexed-definition\",\"path\":\"web/missing.ts\",\"revision\":\"cache\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"web/missing.ts\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Defines name, lazy, used.\",\"summaryKey\":\"34da432af0b750f2e3651fb143779499ddeab5edcc849b16f3e04bb1a49084be\",\"title\":\"Source definitions\"}",
+        "7b26e222825557e9320174929d50ec872f9db486e58d182e9f7d40836273b187"
+       ],
+       [
+        "76e40c0782024da6699fd3322d050edfd8fba0f86c984829301d6fdb574cda3b",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"d737b727ad379982b846563e525d6febd618206ddeb032ec6c84445f000b3697\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "503786b6a6eda793228f493fd1ca88ada88eb349f8ec142b442504d3e165718c"
+       ],
+       [
+        "62f8670629d86be5b102022956c1967b6bdc6963b392c2b633e6d9b8b6bcff97",
+        "file",
+        "waypoint-v2",
+        "{\"contentHash\":\"10c786f62010604ad5b31bf5fc591bbf56b97adb1cd820e4a99cab2700f5427a\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"web/tsconfig.json\",\"revision\":\"cache\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"web/tsconfig.json\",\"purpose\":\"configuration\",\"schemaVersion\":\"1\",\"summary\":\"No readable purpose description was found in the captured source.\",\"summaryKey\":\"131f6cdeac195c93eb8524c5cd9d73066f0846cd29db78c2e76d017ac2910632\",\"title\":\"Source definitions\"}",
+        "e1e20ca2062c6664286713133a04f29ae5fd8d1aa81e6d1d5ffc01b03ff84055"
+       ],
+       [
+        "a2ab521faa6a8dbfc784a20d5f94830dcd1e063c3d85ca2576d0dc02b20b530b",
+        "area",
+        "waypoint-v2",
+        "{\"contentHash\":\"3dac8fdc81b2ec114121da3fa822275bf680ad86d210a7ac76fb122d1d5616cf\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"py/big.py\",\"revision\":\"cache\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/broken.py\",\"revision\":\"cache\"},{\"line\":6,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"cache\"},{\"line\":10,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"cache\"},{\"line\":11,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"cache\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\"py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Brings together source definitions.\",\"summaryKey\":\"a2ab521faa6a8dbfc784a20d5f94830dcd1e063c3d85ca2576d0dc02b20b530b\",\"title\":\"Py\"}",
+        "a33693d8dc9d87a10af69de802e33b878767ece2f15c3fb68150d03f2649c69a"
+       ],
+       [
+        "8288fa554fe6a82822487ab542abead2dc76d8d2311642cef7d708bc424905ae",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"3ec4561340103ebeb7de8f97f081382e2f4fc56fe42d2f968c59353a5cd76171\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "2ba2c29b4d15e78f50dac7620f01507df6794fc1f6f91ef0145af49a4d2dfb95"
+       ],
+       [
+        "749d542aa911e77ab412fae16e4fb65e30590b1a5e59803cac4c8cd8ff8d2df5",
+        "area",
+        "waypoint-v2",
+        "{\"contentHash\":\"7f6233e7fdbd87c8e0b661da76ab6b0e441e290f3787d4ac6ef73d1673020019\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"web/data.json\",\"revision\":\"cache\"},{\"line\":6,\"method\":\"indexed-definition\",\"path\":\"web/missing.ts\",\"revision\":\"cache\"},{\"line\":7,\"method\":\"indexed-definition\",\"path\":\"web/missing.ts\",\"revision\":\"cache\"},{\"line\":8,\"method\":\"indexed-definition\",\"path\":\"web/missing.ts\",\"revision\":\"cache\"},{\"method\":\"content-hash\",\"path\":\"web/tsconfig.json\",\"revision\":\"cache\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\"web\",\"purpose\":\"configuration\",\"schemaVersion\":\"1\",\"summary\":\"Brings together configuration, source definitions.\",\"summaryKey\":\"749d542aa911e77ab412fae16e4fb65e30590b1a5e59803cac4c8cd8ff8d2df5\",\"title\":\"Web\"}",
+        "0791d5d7620a35119f8d98b7eb947285c9923dd5b3b6caa296172ac0f5719c81"
+       ],
+       [
+        "ffbdba5d905b4653d1adec19bf8ecffb62e10535ff812a565a88cea66d3bcacb",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"506172707d09404afe373454e6fbc45cea6675090ab2ead32431da5ac48807e7\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "e5426e6db30734e216d421d179605219d3b3a3341049f2877541efb70ffe9d76"
+       ],
+       [
+        "47c543d2dfca65f0b46c295fda7b90291ad130779c205ba31b9b61eaef88e68e",
+        "area",
+        "waypoint-v2",
+        "{\"contentHash\":\"edcfdc91dca5e9906214fd27031510d5370f78af40c49a0249146c1172689110\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"README.md\",\"revision\":\"cache\"},{\"method\":\"content-hash\",\"path\":\"py/big.py\",\"revision\":\"cache\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/broken.py\",\"revision\":\"cache\"},{\"line\":6,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"cache\"},{\"line\":10,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"cache\"},{\"line\":11,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"cache\"},{\"method\":\"content-hash\",\"path\":\"web/data.json\",\"revision\":\"cache\"},{\"line\":6,\"method\":\"indexed-definition\",\"path\":\"web/missing.ts\",\"revision\":\"cache\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\".\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Brings together source definitions, configuration, documentation.\",\"summaryKey\":\"47c543d2dfca65f0b46c295fda7b90291ad130779c205ba31b9b61eaef88e68e\",\"title\":\"Repository map\"}",
+        "ab94c1be4ee6728bc04b03dc58836e72f81dad5999ef586fbf451e9028495c79"
+       ],
+       [
+        "10310a6434c027abc141a2831b79e7aa673dd84e827515552fc2410bafb95713",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"877f5c4486543cc672071d6b930faad464b0325d55871d7ded2139d707bbe5c7\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "dfbec206a7f6f062d8bf5fd5ac47eb96be723ce61219aab5f707f294700d41dc"
+       ],
+       [
+        "f003fbe6a464b5d835345b78a0b72c0a9a7836fd50a9a99cf9d25e386792f403",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "7d6e51fbd2eb2cb7c02862d5c43164872c2b20840a1eb818dd75731ddc807ef5"
+       ],
+       [
+        "2df553d9a1749dd167137fe2eb3b0de12f292de92b0351e59082ac1469690b4e",
+        "file",
+        "waypoint-v2",
+        "{\"contentHash\":\"452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875\",\"evidence\":[{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"cache\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"py/dynamic.py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Defines dynamic.\",\"summaryKey\":\"e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664\",\"title\":\"Source definitions\"}",
+        "c8d2bc630df2d59fef31eebc5674bf5a41ac62778202566c61e806e7b2b9ce31"
+       ],
+       [
+        "30f87f3eae085d012d5bccf8b3725eeecdddd4b3da6b48e72def8f3f8005d286",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"262b95d847a03ceda5fa7121bb5c2a10783f12f5dd8aed20bd387892fe2d7b8f\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "bb6d6ca41185bfcfedd5dfa7a6aacdb65a9d9e1972e4197cd98eadb5627e5fc9"
+       ],
+       [
+        "c10bb2cf8a87b93e5b798829106ac5300974298a72340caa1fb1646d39ec0e8e",
+        "file",
+        "waypoint-v2",
+        "{\"contentHash\":\"b8db842af59af3514fb2ef9428112ec013848c98cc57bfb2a7e9e278c8e1d347\",\"evidence\":[{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/new.py\",\"revision\":\"cache\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"py/new.py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Defines new.\",\"summaryKey\":\"b06753ed908f8f5c6467cefd4871eb7e4ad01f15feea73b38b83d647296a0c9f\",\"title\":\"Source definitions\"}",
+        "4dcdcde87714d3ef779d207442b141ca445b4b8f21ba0ce165f14cb1c9ee5fc7"
+       ],
+       [
+        "c2cf8e844917e13b342999a6a4f92b87dee71cdfb2df5fd7c86f1bde98138237",
+        "area",
+        "waypoint-v2",
+        "{\"contentHash\":\"f86aa98c59baa11433cefd06be16a0bbf5769f8b808902f85b18c8a36394c3e0\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"py/big.py\",\"revision\":\"cache\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/broken.py\",\"revision\":\"cache\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"cache\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/new.py\",\"revision\":\"cache\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\"py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Brings together source definitions.\",\"summaryKey\":\"c2cf8e844917e13b342999a6a4f92b87dee71cdfb2df5fd7c86f1bde98138237\",\"title\":\"Py\"}",
+        "e1c6685ec04601a78a6eee5ec87c115113238cfad36d2c2237043959b26488cd"
+       ],
+       [
+        "8b2cefd31ae603f1f126aa35442f7a22b63838e41da9049e19beb4b3ba1665bb",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"db1ab5ba391e0dac1c2f9d9205d925fa5eb3ae9b2b1b61d170f3f2c78176d101\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "1b2bdd2e0f1cf1246d6149c969ecb03ea4f5f257f988e441df46a2614e335c66"
+       ],
+       [
+        "2a013529657fd52f2b57e7714cfb4490a13b15e053135f4fc566c45f54149968",
+        "area",
+        "waypoint-v2",
+        "{\"contentHash\":\"387c577bc05b8fafdc107830c52d2efd9805ffa93c4521cdaf164f45b14ccf63\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"web/data.json\",\"revision\":\"cache\"},{\"method\":\"content-hash\",\"path\":\"web/tsconfig.json\",\"revision\":\"cache\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\"web\",\"purpose\":\"configuration\",\"schemaVersion\":\"1\",\"summary\":\"Brings together configuration.\",\"summaryKey\":\"2a013529657fd52f2b57e7714cfb4490a13b15e053135f4fc566c45f54149968\",\"title\":\"Web\"}",
+        "452d951af83dfff4b973500fe5355f8d4a62d0ce891ba13541195b3ad8c24d15"
+       ],
+       [
+        "6257a21b5bc882a8d537e44213d214f34c2af808f7e256500abd0fdce97ed875",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"7fab4afbe57a7503ca350f9948011590fd642c8cbb16b315634fe910402f076c\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "9d62d79e50a23cdbe95e142b05d958452494b4f958b2c4225eb7b90b70719751"
+       ],
+       [
+        "129b474d01793256fca1d34cc3257c37200c8e633c0a295656d33a23030fb968",
+        "area",
+        "waypoint-v2",
+        "{\"contentHash\":\"8852e88622a9ff31317e16f36e404f0dc2ed799b205e340f2cb3a9800d1be50b\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"README.md\",\"revision\":\"cache\"},{\"method\":\"content-hash\",\"path\":\"py/big.py\",\"revision\":\"cache\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/broken.py\",\"revision\":\"cache\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"cache\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/new.py\",\"revision\":\"cache\"},{\"method\":\"content-hash\",\"path\":\"web/data.json\",\"revision\":\"cache\"},{\"method\":\"content-hash\",\"path\":\"web/tsconfig.json\",\"revision\":\"cache\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\".\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Brings together source definitions, configuration, documentation.\",\"summaryKey\":\"129b474d01793256fca1d34cc3257c37200c8e633c0a295656d33a23030fb968\",\"title\":\"Repository map\"}",
+        "58eedf640a6fe4178456d1defc9537e2cfdf7634f8e25e31f75811b40ceb33e8"
+       ],
+       [
+        "b699818e83a53c8edee93559de5f8cd482be419f7e17fa7dbf544b0121deaae3",
+        "validation",
+        "waypoint-checks-v1",
+        "{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"03579c33865852bb82a284701d691b141a4955f3b6bf20c8501f436fee52a3ca\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}",
+        "8c1b72f50d1f3e8124c57de5dff191ef86ceffc982afded57b5ab01150b6406b"
+       ]
+      ]
+     }
+    },
+    "user_version": 3
+   },
+   "states": {},
+   "steps": [
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 7,
+      "imports": 1,
+      "parsed_files": 7,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 0,
+      "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+      "skipped_files": 2,
+      "snapshot": 1,
+      "symbols": 16,
+      "waypoints": {
+       "areaValidationsComputed": 3,
+       "areaValidationsReused": 0,
+       "areasComputed": 3,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 7,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 7,
+       "validationsReused": 0
+      }
+     }
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": {
+      "files": 7,
+      "imports": 0,
+      "parsed_files": 2,
+      "possible_calls": 0,
+      "repository": "owner/repo",
+      "reused_files": 5,
+      "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+      "skipped_files": 2,
+      "snapshot": 2,
+      "symbols": 3,
+      "waypoints": {
+       "areaValidationsComputed": 3,
+       "areaValidationsReused": 0,
+       "areasComputed": 3,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 5,
+       "unavailableFiles": 0,
+       "validationsComputed": 2,
+       "validationsReused": 5
+      }
+     }
+    },
+    {
+     "value": {
+      "id": 2,
+      "indexed_at": "<timestamp>",
+      "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+     }
+    },
+    {
+     "value": {
+      "id": 1,
+      "indexed_at": "<timestamp>",
+      "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+     }
+    },
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for owner/repo"
+    },
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for nobody/nothing"
+    },
+    {
+     "value": {
+      "analysis_stats": {
+       "parsed_files": 2,
+       "reused_files": 5
+      },
+      "analyzer": {
+       "version": "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}"
+      },
+      "capture": {
+       "excluded_files": 2
+      },
+      "counts": {
+       "file": 7,
+       "function_definition": 3,
+       "repository": 1
+      },
+      "indexed_at": "<timestamp>",
+      "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+      "snapshot": 2,
+      "storage_summary": {
+       "manifest_entries": 14,
+       "stored_symbols": 18,
+       "unique_analyses": 9,
+       "unique_source_bytes": 3852
+      },
+      "waypoint_stats": {
+       "areaValidationsComputed": 3,
+       "areaValidationsReused": 0,
+       "areasComputed": 3,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 2,
+       "summariesReused": 5,
+       "unavailableFiles": 0,
+       "validationsComputed": 2,
+       "validationsReused": 5
+      },
+      "waypoints": [
+       {
+        "contentHash": "8852e88622a9ff31317e16f36e404f0dc2ed799b205e340f2cb3a9800d1be50b",
+        "evidence": [
+         {
+          "method": "content-hash",
+          "path": "README.md",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         },
+         {
+          "method": "content-hash",
+          "path": "py/big.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         },
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/broken.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         },
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         },
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/new.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         },
+         {
+          "method": "content-hash",
+          "path": "web/data.json",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         },
+         {
+          "method": "content-hash",
+          "path": "web/tsconfig.json",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": ".",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions, configuration, documentation.",
+        "summaryKey": "129b474d01793256fca1d34cc3257c37200c8e633c0a295656d33a23030fb968",
+        "title": "Repository map",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "03579c33865852bb82a284701d691b141a4955f3b6bf20c8501f436fee52a3ca",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       },
+       {
+        "contentHash": "f86aa98c59baa11433cefd06be16a0bbf5769f8b808902f85b18c8a36394c3e0",
+        "evidence": [
+         {
+          "method": "content-hash",
+          "path": "py/big.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         },
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/broken.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         },
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         },
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/new.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions.",
+        "summaryKey": "c2cf8e844917e13b342999a6a4f92b87dee71cdfb2df5fd7c86f1bde98138237",
+        "title": "Py",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "db1ab5ba391e0dac1c2f9d9205d925fa5eb3ae9b2b1b61d170f3f2c78176d101",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       },
+       {
+        "contentHash": "387c577bc05b8fafdc107830c52d2efd9805ffa93c4521cdaf164f45b14ccf63",
+        "evidence": [
+         {
+          "method": "content-hash",
+          "path": "web/data.json",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         },
+         {
+          "method": "content-hash",
+          "path": "web/tsconfig.json",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "web",
+        "purpose": "configuration",
+        "schemaVersion": "1",
+        "summary": "Brings together configuration.",
+        "summaryKey": "2a013529657fd52f2b57e7714cfb4490a13b15e053135f4fc566c45f54149968",
+        "title": "Web",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "7fab4afbe57a7503ca350f9948011590fd642c8cbb16b315634fe910402f076c",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      ],
+      "waypoints_partial": false
+     }
+    },
+    {
+     "value": {
+      "analysis_stats": {
+       "parsed_files": 7,
+       "reused_files": 0
+      },
+      "analyzer": {
+       "version": "{\"format\": 15, \"language-pack\": \"oracle\", \"tree-sitter\": \"oracle\", \"waypoints\": \"waypoint-v2\"}"
+      },
+      "capture": {
+       "excluded_files": 2
+      },
+      "counts": {
+       "arrow_function": 1,
+       "class_definition": 1,
+       "file": 7,
+       "function_definition": 5,
+       "import": 7,
+       "repository": 1,
+       "variable_declarator": 2
+      },
+      "indexed_at": "<timestamp>",
+      "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+      "snapshot": 1,
+      "storage_summary": {
+       "manifest_entries": 14,
+       "stored_symbols": 18,
+       "unique_analyses": 9,
+       "unique_source_bytes": 3852
+      },
+      "waypoint_stats": {
+       "areaValidationsComputed": 3,
+       "areaValidationsReused": 0,
+       "areasComputed": 3,
+       "areasReused": 0,
+       "partial": false,
+       "summariesComputed": 7,
+       "summariesReused": 0,
+       "unavailableFiles": 0,
+       "validationsComputed": 7,
+       "validationsReused": 0
+      },
+      "waypoints": [
+       {
+        "contentHash": "edcfdc91dca5e9906214fd27031510d5370f78af40c49a0249146c1172689110",
+        "evidence": [
+         {
+          "method": "content-hash",
+          "path": "README.md",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "method": "content-hash",
+          "path": "py/big.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/broken.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 11,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "method": "content-hash",
+          "path": "web/data.json",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "web/missing.ts",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": ".",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions, configuration, documentation.",
+        "summaryKey": "47c543d2dfca65f0b46c295fda7b90291ad130779c205ba31b9b61eaef88e68e",
+        "title": "Repository map",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "877f5c4486543cc672071d6b930faad464b0325d55871d7ded2139d707bbe5c7",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       },
+       {
+        "contentHash": "3dac8fdc81b2ec114121da3fa822275bf680ad86d210a7ac76fb122d1d5616cf",
+        "evidence": [
+         {
+          "method": "content-hash",
+          "path": "py/big.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/broken.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 11,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Brings together source definitions.",
+        "summaryKey": "a2ab521faa6a8dbfc784a20d5f94830dcd1e063c3d85ca2576d0dc02b20b530b",
+        "title": "Py",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "3ec4561340103ebeb7de8f97f081382e2f4fc56fe42d2f968c59353a5cd76171",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       },
+       {
+        "contentHash": "7f6233e7fdbd87c8e0b661da76ab6b0e441e290f3787d4ac6ef73d1673020019",
+        "evidence": [
+         {
+          "method": "content-hash",
+          "path": "web/data.json",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "web/missing.ts",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 7,
+          "method": "indexed-definition",
+          "path": "web/missing.ts",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 8,
+          "method": "indexed-definition",
+          "path": "web/missing.ts",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "method": "content-hash",
+          "path": "web/tsconfig.json",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         }
+        ],
+        "kind": "area",
+        "origin": "inferred",
+        "path": "web",
+        "purpose": "configuration",
+        "schemaVersion": "1",
+        "summary": "Brings together configuration, source definitions.",
+        "summaryKey": "749d542aa911e77ab412fae16e4fb65e30590b1a5e59803cac4c8cd8ff8d2df5",
+        "title": "Web",
+        "validation": {
+         "checks": [
+          {
+           "detail": "Some child source checks are unavailable or incomplete; tests were not run.",
+           "name": "Child index evidence",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "506172707d09404afe373454e6fbc45cea6675090ab2ead32431da5ac48807e7",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      ],
+      "waypoints_partial": false
+     }
+    },
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for owner/repo"
+    },
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for nobody/nothing"
+    },
+    {
+     "value": [
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411:0",
+       "kind": "function_definition",
+       "line": 1,
+       "name": "dynamic",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "waypoint": {
+        "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines dynamic.",
+        "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "f:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411",
+       "kind": "file",
+       "line": null,
+       "name": "dynamic.py",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "waypoint": {
+        "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines dynamic.",
+        "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:7c3b73ba37e2fe7084a80626:052f514e7a7320dfe6d7f605662ef2cfa54fb803e6e75e20b34dbd6b155541c7:4",
+       "kind": "class_definition",
+       "line": 10,
+       "name": "Runner",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72",
+        "evidence": [
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 11,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines load, Runner, step.",
+        "summaryKey": "b9ce131d25adfd95f59592ea1bbeffbe34c51cbf64f61956077dfce3819144fb",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "ce8a2cb56531ae4d025cfae3c74cd4975583757eb87679de32c0982a6cb7e806",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "f:7c3b73ba37e2fe7084a80626:052f514e7a7320dfe6d7f605662ef2cfa54fb803e6e75e20b34dbd6b155541c7",
+       "kind": "file",
+       "line": null,
+       "name": "dynamic.py",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72",
+        "evidence": [
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 11,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines load, Runner, step.",
+        "summaryKey": "b9ce131d25adfd95f59592ea1bbeffbe34c51cbf64f61956077dfce3819144fb",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "ce8a2cb56531ae4d025cfae3c74cd4975583757eb87679de32c0982a6cb7e806",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:7c3b73ba37e2fe7084a80626:052f514e7a7320dfe6d7f605662ef2cfa54fb803e6e75e20b34dbd6b155541c7:3",
+       "kind": "function_definition",
+       "line": 6,
+       "name": "load",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72",
+        "evidence": [
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 11,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines load, Runner, step.",
+        "summaryKey": "b9ce131d25adfd95f59592ea1bbeffbe34c51cbf64f61956077dfce3819144fb",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "ce8a2cb56531ae4d025cfae3c74cd4975583757eb87679de32c0982a6cb7e806",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:7c3b73ba37e2fe7084a80626:052f514e7a7320dfe6d7f605662ef2cfa54fb803e6e75e20b34dbd6b155541c7:5",
+       "kind": "function_definition",
+       "line": 11,
+       "name": "step",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72",
+        "evidence": [
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 11,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines load, Runner, step.",
+        "summaryKey": "b9ce131d25adfd95f59592ea1bbeffbe34c51cbf64f61956077dfce3819144fb",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "ce8a2cb56531ae4d025cfae3c74cd4975583757eb87679de32c0982a6cb7e806",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:7c3b73ba37e2fe7084a80626:052f514e7a7320dfe6d7f605662ef2cfa54fb803e6e75e20b34dbd6b155541c7:6",
+       "kind": "function_definition",
+       "line": 14,
+       "name": "go",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72",
+        "evidence": [
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 11,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines load, Runner, step.",
+        "summaryKey": "b9ce131d25adfd95f59592ea1bbeffbe34c51cbf64f61956077dfce3819144fb",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "ce8a2cb56531ae4d025cfae3c74cd4975583757eb87679de32c0982a6cb7e806",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:7c3b73ba37e2fe7084a80626:052f514e7a7320dfe6d7f605662ef2cfa54fb803e6e75e20b34dbd6b155541c7:7",
+       "kind": "function_definition",
+       "line": 18,
+       "name": "top",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72",
+        "evidence": [
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 11,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines load, Runner, step.",
+        "summaryKey": "b9ce131d25adfd95f59592ea1bbeffbe34c51cbf64f61956077dfce3819144fb",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "ce8a2cb56531ae4d025cfae3c74cd4975583757eb87679de32c0982a6cb7e806",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:7c3b73ba37e2fe7084a80626:052f514e7a7320dfe6d7f605662ef2cfa54fb803e6e75e20b34dbd6b155541c7:0",
+       "kind": "import",
+       "line": 1,
+       "name": "import importlib",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72",
+        "evidence": [
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 11,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines load, Runner, step.",
+        "summaryKey": "b9ce131d25adfd95f59592ea1bbeffbe34c51cbf64f61956077dfce3819144fb",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "ce8a2cb56531ae4d025cfae3c74cd4975583757eb87679de32c0982a6cb7e806",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:7c3b73ba37e2fe7084a80626:052f514e7a7320dfe6d7f605662ef2cfa54fb803e6e75e20b34dbd6b155541c7:1",
+       "kind": "import",
+       "line": 2,
+       "name": "from . import ghost",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72",
+        "evidence": [
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 11,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines load, Runner, step.",
+        "summaryKey": "b9ce131d25adfd95f59592ea1bbeffbe34c51cbf64f61956077dfce3819144fb",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "ce8a2cb56531ae4d025cfae3c74cd4975583757eb87679de32c0982a6cb7e806",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:7c3b73ba37e2fe7084a80626:052f514e7a7320dfe6d7f605662ef2cfa54fb803e6e75e20b34dbd6b155541c7:2",
+       "kind": "import",
+       "line": 3,
+       "name": "from ..outside import nothing",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2",
+       "snapshot": 1,
+       "waypoint": {
+        "contentHash": "a62625589ccf7df6dc108cc5c8cabb86d63364aef419b7b4c2b8cc0f01f42c72",
+        "evidence": [
+         {
+          "line": 6,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 10,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         },
+         {
+          "line": 11,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-c55610ca6df1a68e061183a5557c76ffddd21523851645e0950153d1863f44a2"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines load, Runner, step.",
+        "summaryKey": "b9ce131d25adfd95f59592ea1bbeffbe34c51cbf64f61956077dfce3819144fb",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "ce8a2cb56531ae4d025cfae3c74cd4975583757eb87679de32c0982a6cb7e806",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411:0",
+       "kind": "function_definition",
+       "line": 1,
+       "name": "dynamic",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "waypoint": {
+        "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines dynamic.",
+        "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411:0",
+       "kind": "function_definition",
+       "line": 1,
+       "name": "dynamic",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "waypoint": {
+        "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines dynamic.",
+        "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "f:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411",
+       "kind": "file",
+       "line": null,
+       "name": "dynamic.py",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "waypoint": {
+        "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines dynamic.",
+        "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": []
+    },
+    {
+     "value": []
+    },
+    {
+     "value": []
+    },
+    {
+     "value": [
+      {
+       "file_category": {
+        "basis": "documentation-filename-or-extension",
+        "category": "documentation",
+        "inferred": true
+       },
+       "id": "f:e2b4649c3aed778fcc543aba:dbedd0dee62c4651df494ae2ef2a22d3c11e4a796bcb89cb93e6de07bfeb074e",
+       "kind": "file",
+       "line": null,
+       "name": "README.md",
+       "path": "README.md",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "waypoint": {
+        "contentHash": "43ff0fdc8baf9268c74155176e1ebf8037969b77375806bf80fcec72d15805f4",
+        "evidence": [
+         {
+          "method": "content-hash",
+          "path": "README.md",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "README.md",
+        "purpose": "documentation",
+        "schemaVersion": "1",
+        "summary": "No readable purpose description was found in the captured source.",
+        "summaryKey": "dfc2d24c551ff25c4ff43f9b80ad870df8318c74db2b4bd91ff8cfed24569797",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "ef35f1dc8f836999449da61a06a158f15fe4a2c54b43212ec6782120d16dae4b",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "f:e2b4649c3aed778fcc543aba:5590a3b14f08a1c1e09432b5f63656ceb709e819b63ffdc150301c4bd0e7eb1f",
+       "kind": "file",
+       "line": null,
+       "name": "big.py",
+       "path": "py/big.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "waypoint": {
+        "contentHash": "3b4f4b507e2032c195ccf2bee794cdf8fb1f717600259e64872085c8f358a7e8",
+        "evidence": [
+         {
+          "method": "content-hash",
+          "path": "py/big.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/big.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "No readable purpose description was found in the captured source.",
+        "summaryKey": "3f5b57fbc0a01b26ec45bba4cd35bc3982c023f7af088d7bf5398243bd6f9bdc",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d1beef1a6d544aec2054a65915c2af55d95d3b6d04681d0b7ff8ba7794640c94",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411:0",
+       "kind": "function_definition",
+       "line": 1,
+       "name": "dynamic",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "waypoint": {
+        "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines dynamic.",
+        "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411:0",
+       "kind": "function_definition",
+       "line": 1,
+       "name": "dynamic",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "waypoint": {
+        "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines dynamic.",
+        "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "s:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411:0",
+       "kind": "function_definition",
+       "line": 1,
+       "name": "dynamic",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "waypoint": {
+        "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines dynamic.",
+        "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      },
+      {
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "id": "f:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411",
+       "kind": "file",
+       "line": null,
+       "name": "dynamic.py",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "waypoint": {
+        "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines dynamic.",
+        "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": []
+    },
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for owner/repo"
+    },
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for nobody/nothing"
+    },
+    {
+     "value": {
+      "length": 21979,
+      "sha256": "a2f2486a2bd75dc4ba52f9dbab0a96a77f0e8c738704f77275e88770a97b04e5"
+     }
+    },
+    {
+     "value": {
+      "edges": [],
+      "nodes": [
+       {
+        "id": "f:e2b4649c3aed778fcc543aba:dbedd0dee62c4651df494ae2ef2a22d3c11e4a796bcb89cb93e6de07bfeb074e",
+        "kind": "file",
+        "line": null,
+        "metadata": "{\"language\":\"text\",\"sha256\":\"43ff0fdc8baf9268c74155176e1ebf8037969b77375806bf80fcec72d15805f4\",\"waypoint\":{\"contentHash\":\"43ff0fdc8baf9268c74155176e1ebf8037969b77375806bf80fcec72d15805f4\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"README.md\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"README.md\",\"purpose\":\"documentation\",\"schemaVersion\":\"1\",\"summary\":\"No readable purpose description was found in the captured source.\",\"summaryKey\":\"dfc2d24c551ff25c4ff43f9b80ad870df8318c74db2b4bd91ff8cfed24569797\",\"title\":\"Source definitions\",\"validation\":{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"ef35f1dc8f836999449da61a06a158f15fe4a2c54b43212ec6782120d16dae4b\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}}",
+        "name": "README.md",
+        "path": "README.md"
+       },
+       {
+        "id": "f:e2b4649c3aed778fcc543aba:5590a3b14f08a1c1e09432b5f63656ceb709e819b63ffdc150301c4bd0e7eb1f",
+        "kind": "file",
+        "line": null,
+        "metadata": "{\"language\":\"python\",\"sha256\":\"3b4f4b507e2032c195ccf2bee794cdf8fb1f717600259e64872085c8f358a7e8\",\"waypoint\":{\"contentHash\":\"3b4f4b507e2032c195ccf2bee794cdf8fb1f717600259e64872085c8f358a7e8\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"py/big.py\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"py/big.py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"No readable purpose description was found in the captured source.\",\"summaryKey\":\"3f5b57fbc0a01b26ec45bba4cd35bc3982c023f7af088d7bf5398243bd6f9bdc\",\"title\":\"Source definitions\",\"validation\":{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"d1beef1a6d544aec2054a65915c2af55d95d3b6d04681d0b7ff8ba7794640c94\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}}",
+        "name": "big.py",
+        "path": "py/big.py"
+       },
+       {
+        "id": "f:e2b4649c3aed778fcc543aba:dfc0547bc183bb2bfc462bef1801df0be0aacaa0d0a97772e9129bfe3bb99028",
+        "kind": "file",
+        "line": null,
+        "metadata": "{\"language\":\"python\",\"sha256\":\"debb06ffd29224617d9498f7db82ad0d0adc6566d38c15c4d7cfcde9df260f66\",\"waypoint\":{\"contentHash\":\"debb06ffd29224617d9498f7db82ad0d0adc6566d38c15c4d7cfcde9df260f66\",\"evidence\":[{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/broken.py\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"py/broken.py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Defines broken.\",\"summaryKey\":\"2fad351ed66ee540ed50f32a3f6cf961266c8d0bc7eb8c8638b29df8441f8dfb\",\"title\":\"Source definitions\",\"validation\":{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser errors limit this description.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"ca7de4cad9d7873cad08958cc5d16623f5b457dbd9ef00bce609fd7b28c00c40\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}}",
+        "name": "broken.py",
+        "path": "py/broken.py"
+       },
+       {
+        "id": "f:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411",
+        "kind": "file",
+        "line": null,
+        "metadata": "{\"language\":\"python\",\"sha256\":\"452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875\",\"waypoint\":{\"contentHash\":\"452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875\",\"evidence\":[{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"py/dynamic.py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Defines dynamic.\",\"summaryKey\":\"e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664\",\"title\":\"Source definitions\",\"validation\":{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}}",
+        "name": "dynamic.py",
+        "path": "py/dynamic.py"
+       },
+       {
+        "id": "f:e2b4649c3aed778fcc543aba:4ce7d98367c0658dd183830ad46ded2d07ed884ea3fa105d2ad5e5791cc07566",
+        "kind": "file",
+        "line": null,
+        "metadata": "{\"language\":\"python\",\"sha256\":\"b8db842af59af3514fb2ef9428112ec013848c98cc57bfb2a7e9e278c8e1d347\",\"waypoint\":{\"contentHash\":\"b8db842af59af3514fb2ef9428112ec013848c98cc57bfb2a7e9e278c8e1d347\",\"evidence\":[{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/new.py\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"py/new.py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Defines new.\",\"summaryKey\":\"b06753ed908f8f5c6467cefd4871eb7e4ad01f15feea73b38b83d647296a0c9f\",\"title\":\"Source definitions\",\"validation\":{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"262b95d847a03ceda5fa7121bb5c2a10783f12f5dd8aed20bd387892fe2d7b8f\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}}",
+        "name": "new.py",
+        "path": "py/new.py"
+       },
+       {
+        "id": "f:e2b4649c3aed778fcc543aba:0f5b6d51cee5098bbf8811e1a6115ba358915158033d79c91fe3141d44117a97",
+        "kind": "file",
+        "line": null,
+        "metadata": "{\"language\":\"text\",\"sha256\":\"1de7373fbc76a139180c90b3f93ad384eb0e303fda437620e717dc7097abf341\",\"waypoint\":{\"contentHash\":\"1de7373fbc76a139180c90b3f93ad384eb0e303fda437620e717dc7097abf341\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"web/data.json\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"web/data.json\",\"purpose\":\"configuration\",\"schemaVersion\":\"1\",\"summary\":\"No readable purpose description was found in the captured source.\",\"summaryKey\":\"f317d253af6f8d84c27d477b3abf1bb823c7bb040cb1a03c7782137962438d65\",\"title\":\"Source definitions\",\"validation\":{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"a6b5380e5badbf3f0ee66a0cf5a6fa75bb2ff4c6131e97b68f742e8d72bd4bb0\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}}",
+        "name": "data.json",
+        "path": "web/data.json"
+       },
+       {
+        "id": "f:e2b4649c3aed778fcc543aba:7ddadddb5b3699f449353f6e36fb6ba0ee3b7b6de61fbcb4ef57fb85d618b087",
+        "kind": "file",
+        "line": null,
+        "metadata": "{\"language\":\"text\",\"sha256\":\"10c786f62010604ad5b31bf5fc591bbf56b97adb1cd820e4a99cab2700f5427a\",\"waypoint\":{\"contentHash\":\"10c786f62010604ad5b31bf5fc591bbf56b97adb1cd820e4a99cab2700f5427a\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"web/tsconfig.json\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"}],\"kind\":\"file\",\"origin\":\"inferred\",\"path\":\"web/tsconfig.json\",\"purpose\":\"configuration\",\"schemaVersion\":\"1\",\"summary\":\"No readable purpose description was found in the captured source.\",\"summaryKey\":\"131f6cdeac195c93eb8524c5cd9d73066f0846cd29db78c2e76d017ac2910632\",\"title\":\"Source definitions\",\"validation\":{\"checks\":[{\"detail\":\"This description is tied to a captured source analysis.\",\"name\":\"Captured source\",\"status\":\"supported\"},{\"detail\":\"Parser evidence was not recorded for this source.\",\"name\":\"Parser evidence\",\"status\":\"inconclusive\"},{\"detail\":\"Pinned to 0 loaded dependency identities and the applicable index rules.\",\"name\":\"Dependency context\",\"status\":\"supported\"},{\"detail\":\"Static index evidence only; tests and runtime behaviour were not executed or validated.\",\"name\":\"Execution coverage\",\"status\":\"inconclusive\"}],\"fingerprint\":\"d737b727ad379982b846563e525d6febd618206ddeb032ec6c84445f000b3697\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}}",
+        "name": "tsconfig.json",
+        "path": "web/tsconfig.json"
+       },
+       {
+        "id": "r:e2b4649c3aed778fcc543aba",
+        "kind": "repository",
+        "line": null,
+        "metadata": "{\"analysis_stats\":{\"parsed_files\":2,\"reused_files\":5},\"analyzer\":{\"version\":\"{\\\"format\\\": 15, \\\"language-pack\\\": \\\"oracle\\\", \\\"tree-sitter\\\": \\\"oracle\\\", \\\"waypoints\\\": \\\"waypoint-v2\\\"}\"},\"waypoint_stats\":{\"summariesComputed\":2,\"summariesReused\":5,\"validationsComputed\":2,\"validationsReused\":5,\"areasComputed\":3,\"areasReused\":0,\"areaValidationsComputed\":3,\"areaValidationsReused\":0,\"unavailableFiles\":0,\"partial\":false},\"capture\":{\"excluded_files\":2},\"areaWaypoints\":[{\"contentHash\":\"8852e88622a9ff31317e16f36e404f0dc2ed799b205e340f2cb3a9800d1be50b\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"README.md\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"},{\"method\":\"content-hash\",\"path\":\"py/big.py\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/broken.py\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/new.py\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"},{\"method\":\"content-hash\",\"path\":\"web/data.json\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"},{\"method\":\"content-hash\",\"path\":\"web/tsconfig.json\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\".\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Brings together source definitions, configuration, documentation.\",\"summaryKey\":\"129b474d01793256fca1d34cc3257c37200c8e633c0a295656d33a23030fb968\",\"title\":\"Repository map\",\"validation\":{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"03579c33865852bb82a284701d691b141a4955f3b6bf20c8501f436fee52a3ca\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}},{\"contentHash\":\"f86aa98c59baa11433cefd06be16a0bbf5769f8b808902f85b18c8a36394c3e0\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"py/big.py\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/broken.py\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/dynamic.py\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"},{\"line\":1,\"method\":\"indexed-definition\",\"path\":\"py/new.py\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\"py\",\"purpose\":\"code\",\"schemaVersion\":\"1\",\"summary\":\"Brings together source definitions.\",\"summaryKey\":\"c2cf8e844917e13b342999a6a4f92b87dee71cdfb2df5fd7c86f1bde98138237\",\"title\":\"Py\",\"validation\":{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"db1ab5ba391e0dac1c2f9d9205d925fa5eb3ae9b2b1b61d170f3f2c78176d101\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}},{\"contentHash\":\"387c577bc05b8fafdc107830c52d2efd9805ffa93c4521cdaf164f45b14ccf63\",\"evidence\":[{\"method\":\"content-hash\",\"path\":\"web/data.json\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"},{\"method\":\"content-hash\",\"path\":\"web/tsconfig.json\",\"revision\":\"working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0\"}],\"kind\":\"area\",\"origin\":\"inferred\",\"path\":\"web\",\"purpose\":\"configuration\",\"schemaVersion\":\"1\",\"summary\":\"Brings together configuration.\",\"summaryKey\":\"2a013529657fd52f2b57e7714cfb4490a13b15e053135f4fc566c45f54149968\",\"title\":\"Web\",\"validation\":{\"checks\":[{\"detail\":\"Some child source checks are unavailable or incomplete; tests were not run.\",\"name\":\"Child index evidence\",\"status\":\"inconclusive\"}],\"fingerprint\":\"7fab4afbe57a7503ca350f9948011590fd642c8cbb16b315634fe910402f076c\",\"kind\":\"static-index\",\"ruleVersion\":\"waypoint-checks-v1\",\"status\":\"inconclusive\"}}]}",
+        "name": "owner/repo",
+        "path": "."
+       },
+       {
+        "id": "s:e2b4649c3aed778fcc543aba:dfc0547bc183bb2bfc462bef1801df0be0aacaa0d0a97772e9129bfe3bb99028:0",
+        "kind": "function_definition",
+        "line": 1,
+        "metadata": "{\"parent\":null}",
+        "name": "broken",
+        "path": "py/broken.py"
+       },
+       {
+        "id": "s:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411:0",
+        "kind": "function_definition",
+        "line": 1,
+        "metadata": "{\"parent\":null}",
+        "name": "dynamic",
+        "path": "py/dynamic.py"
+       },
+       {
+        "id": "s:e2b4649c3aed778fcc543aba:4ce7d98367c0658dd183830ad46ded2d07ed884ea3fa105d2ad5e5791cc07566:0",
+        "kind": "function_definition",
+        "line": 1,
+        "metadata": "{\"parent\":null}",
+        "name": "new",
+        "path": "py/new.py"
+       }
+      ],
+      "partial": false,
+      "repository": "owner/repo",
+      "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+      "snapshot": 2
+     }
+    },
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for owner/repo"
+    },
+    {
+     "value": {
+      "length": 16836,
+      "sha256": "9a76579acad28fea775c10bf60b1a114838e104e7552096efafd2d95311898dd"
+     }
+    },
+    {
+     "value": {
+      "edges": [],
+      "files": [
+       {
+        "facts": {
+         "ci": {},
+         "configured_grants": [],
+         "deployment": {
+          "links": [],
+          "partial": false,
+          "resources": [],
+          "version": "deployment-1"
+         },
+         "imports": [],
+         "lines": 3,
+         "nonblank_lines": 2,
+         "sha256": "43ff0fdc8baf9268c74155176e1ebf8037969b77375806bf80fcec72d15805f4",
+         "test_assertions": 0,
+         "test_focused": 0,
+         "test_skips": 0,
+         "vacuous_assertions": [],
+         "version": 2
+        },
+        "id": "f:e2b4649c3aed778fcc543aba:dbedd0dee62c4651df494ae2ef2a22d3c11e4a796bcb89cb93e6de07bfeb074e",
+        "metadata": {
+         "language": "text",
+         "sha256": "43ff0fdc8baf9268c74155176e1ebf8037969b77375806bf80fcec72d15805f4",
+         "waypoint": {
+          "contentHash": "43ff0fdc8baf9268c74155176e1ebf8037969b77375806bf80fcec72d15805f4",
+          "evidence": [
+           {
+            "method": "content-hash",
+            "path": "README.md",
+            "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+           }
+          ],
+          "kind": "file",
+          "origin": "inferred",
+          "path": "README.md",
+          "purpose": "documentation",
+          "schemaVersion": "1",
+          "summary": "No readable purpose description was found in the captured source.",
+          "summaryKey": "dfc2d24c551ff25c4ff43f9b80ad870df8318c74db2b4bd91ff8cfed24569797",
+          "title": "Source definitions",
+          "validation": {
+           "checks": [
+            {
+             "detail": "This description is tied to a captured source analysis.",
+             "name": "Captured source",
+             "status": "supported"
+            },
+            {
+             "detail": "Parser evidence was not recorded for this source.",
+             "name": "Parser evidence",
+             "status": "inconclusive"
+            },
+            {
+             "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+             "name": "Dependency context",
+             "status": "supported"
+            },
+            {
+             "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+             "name": "Execution coverage",
+             "status": "inconclusive"
+            }
+           ],
+           "fingerprint": "ef35f1dc8f836999449da61a06a158f15fe4a2c54b43212ec6782120d16dae4b",
+           "kind": "static-index",
+           "ruleVersion": "waypoint-checks-v1",
+           "status": "inconclusive"
+          }
+         }
+        },
+        "path": "README.md"
+       },
+       {
+        "facts": {
+         "imports": [],
+         "lines": 201,
+         "nonblank_lines": 201,
+         "sha256": "3b4f4b507e2032c195ccf2bee794cdf8fb1f717600259e64872085c8f358a7e8",
+         "structure": {
+          "confirmed_facts_partial": false,
+          "declarations": [],
+          "effects": [],
+          "limitations": [
+           "Static lexical binding only; reflection, monkey-patching, receiver dispatch and dynamic imports are unresolved.",
+           "Typed parameters and construction are composition candidates, not proof of behavioural substitution.",
+           "Rust calls, macros and effects are not extracted."
+          ],
+          "partial": false,
+          "relation_occurrences": 0,
+          "relations": [],
+          "supported": true,
+          "unresolved_call_occurrences": 0,
+          "unresolved_samples_partial": false,
+          "version": "structure-1"
+         },
+         "test_assertions": 0,
+         "test_focused": 0,
+         "test_skips": 0,
+         "vacuous_assertions": [],
+         "version": 2
+        },
+        "id": "f:e2b4649c3aed778fcc543aba:5590a3b14f08a1c1e09432b5f63656ceb709e819b63ffdc150301c4bd0e7eb1f",
+        "metadata": {
+         "language": "python",
+         "sha256": "3b4f4b507e2032c195ccf2bee794cdf8fb1f717600259e64872085c8f358a7e8",
+         "waypoint": {
+          "contentHash": "3b4f4b507e2032c195ccf2bee794cdf8fb1f717600259e64872085c8f358a7e8",
+          "evidence": [
+           {
+            "method": "content-hash",
+            "path": "py/big.py",
+            "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+           }
+          ],
+          "kind": "file",
+          "origin": "inferred",
+          "path": "py/big.py",
+          "purpose": "code",
+          "schemaVersion": "1",
+          "summary": "No readable purpose description was found in the captured source.",
+          "summaryKey": "3f5b57fbc0a01b26ec45bba4cd35bc3982c023f7af088d7bf5398243bd6f9bdc",
+          "title": "Source definitions",
+          "validation": {
+           "checks": [
+            {
+             "detail": "This description is tied to a captured source analysis.",
+             "name": "Captured source",
+             "status": "supported"
+            },
+            {
+             "detail": "Parser evidence was not recorded for this source.",
+             "name": "Parser evidence",
+             "status": "inconclusive"
+            },
+            {
+             "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+             "name": "Dependency context",
+             "status": "supported"
+            },
+            {
+             "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+             "name": "Execution coverage",
+             "status": "inconclusive"
+            }
+           ],
+           "fingerprint": "d1beef1a6d544aec2054a65915c2af55d95d3b6d04681d0b7ff8ba7794640c94",
+           "kind": "static-index",
+           "ruleVersion": "waypoint-checks-v1",
+           "status": "inconclusive"
+          }
+         }
+        },
+        "path": "py/big.py"
+       },
+       {
+        "facts": {
+         "imports": [],
+         "lines": 2,
+         "nonblank_lines": 2,
+         "parse_error": true,
+         "sha256": "debb06ffd29224617d9498f7db82ad0d0adc6566d38c15c4d7cfcde9df260f66",
+         "structure": {
+          "declarations": [],
+          "effects": [],
+          "parse_error": true,
+          "partial": true,
+          "relations": [],
+          "supported": true,
+          "version": "structure-1"
+         },
+         "test_assertions": 0,
+         "test_focused": 0,
+         "test_skips": 0,
+         "vacuous_assertions": [],
+         "version": 2
+        },
+        "id": "f:e2b4649c3aed778fcc543aba:dfc0547bc183bb2bfc462bef1801df0be0aacaa0d0a97772e9129bfe3bb99028",
+        "metadata": {
+         "language": "python",
+         "sha256": "debb06ffd29224617d9498f7db82ad0d0adc6566d38c15c4d7cfcde9df260f66",
+         "waypoint": {
+          "contentHash": "debb06ffd29224617d9498f7db82ad0d0adc6566d38c15c4d7cfcde9df260f66",
+          "evidence": [
+           {
+            "line": 1,
+            "method": "indexed-definition",
+            "path": "py/broken.py",
+            "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+           }
+          ],
+          "kind": "file",
+          "origin": "inferred",
+          "path": "py/broken.py",
+          "purpose": "code",
+          "schemaVersion": "1",
+          "summary": "Defines broken.",
+          "summaryKey": "2fad351ed66ee540ed50f32a3f6cf961266c8d0bc7eb8c8638b29df8441f8dfb",
+          "title": "Source definitions",
+          "validation": {
+           "checks": [
+            {
+             "detail": "This description is tied to a captured source analysis.",
+             "name": "Captured source",
+             "status": "supported"
+            },
+            {
+             "detail": "Parser errors limit this description.",
+             "name": "Parser evidence",
+             "status": "inconclusive"
+            },
+            {
+             "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+             "name": "Dependency context",
+             "status": "supported"
+            },
+            {
+             "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+             "name": "Execution coverage",
+             "status": "inconclusive"
+            }
+           ],
+           "fingerprint": "ca7de4cad9d7873cad08958cc5d16623f5b457dbd9ef00bce609fd7b28c00c40",
+           "kind": "static-index",
+           "ruleVersion": "waypoint-checks-v1",
+           "status": "inconclusive"
+          }
+         }
+        },
+        "path": "py/broken.py"
+       },
+       {
+        "facts": {
+         "imports": [],
+         "lines": 2,
+         "nonblank_lines": 2,
+         "sha256": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+         "structure": {
+          "confirmed_facts_partial": false,
+          "declarations": [
+           {
+            "exported": true,
+            "kind": "function",
+            "line": 1,
+            "name": "dynamic",
+            "parameters": [],
+            "returns_constructed": []
+           }
+          ],
+          "effects": [],
+          "limitations": [
+           "Static lexical binding only; reflection, monkey-patching, receiver dispatch and dynamic imports are unresolved.",
+           "Typed parameters and construction are composition candidates, not proof of behavioural substitution.",
+           "Rust calls, macros and effects are not extracted."
+          ],
+          "partial": false,
+          "relation_occurrences": 1,
+          "relations": [
+           {
+            "kind": "UNRESOLVED_CALL",
+            "line": 2,
+            "origin": "inferred",
+            "resolution": "dispatch-not-resolved",
+            "source": "module",
+            "target": "__import__"
+           }
+          ],
+          "supported": true,
+          "unresolved_call_occurrences": 1,
+          "unresolved_samples_partial": false,
+          "version": "structure-1"
+         },
+         "test_assertions": 0,
+         "test_focused": 0,
+         "test_skips": 0,
+         "vacuous_assertions": [],
+         "version": 2
+        },
+        "id": "f:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411",
+        "metadata": {
+         "language": "python",
+         "sha256": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+         "waypoint": {
+          "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+          "evidence": [
+           {
+            "line": 1,
+            "method": "indexed-definition",
+            "path": "py/dynamic.py",
+            "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+           }
+          ],
+          "kind": "file",
+          "origin": "inferred",
+          "path": "py/dynamic.py",
+          "purpose": "code",
+          "schemaVersion": "1",
+          "summary": "Defines dynamic.",
+          "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+          "title": "Source definitions",
+          "validation": {
+           "checks": [
+            {
+             "detail": "This description is tied to a captured source analysis.",
+             "name": "Captured source",
+             "status": "supported"
+            },
+            {
+             "detail": "Parser evidence was not recorded for this source.",
+             "name": "Parser evidence",
+             "status": "inconclusive"
+            },
+            {
+             "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+             "name": "Dependency context",
+             "status": "supported"
+            },
+            {
+             "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+             "name": "Execution coverage",
+             "status": "inconclusive"
+            }
+           ],
+           "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+           "kind": "static-index",
+           "ruleVersion": "waypoint-checks-v1",
+           "status": "inconclusive"
+          }
+         }
+        },
+        "path": "py/dynamic.py"
+       },
+       {
+        "facts": {
+         "imports": [],
+         "lines": 2,
+         "nonblank_lines": 2,
+         "sha256": "b8db842af59af3514fb2ef9428112ec013848c98cc57bfb2a7e9e278c8e1d347",
+         "structure": {
+          "confirmed_facts_partial": false,
+          "declarations": [
+           {
+            "exported": true,
+            "kind": "function",
+            "line": 1,
+            "name": "new",
+            "parameters": [],
+            "returns_constructed": []
+           }
+          ],
+          "effects": [],
+          "limitations": [
+           "Static lexical binding only; reflection, monkey-patching, receiver dispatch and dynamic imports are unresolved.",
+           "Typed parameters and construction are composition candidates, not proof of behavioural substitution.",
+           "Rust calls, macros and effects are not extracted."
+          ],
+          "partial": false,
+          "relation_occurrences": 0,
+          "relations": [],
+          "supported": true,
+          "unresolved_call_occurrences": 0,
+          "unresolved_samples_partial": false,
+          "version": "structure-1"
+         },
+         "test_assertions": 0,
+         "test_focused": 0,
+         "test_skips": 0,
+         "vacuous_assertions": [],
+         "version": 2
+        },
+        "id": "f:e2b4649c3aed778fcc543aba:4ce7d98367c0658dd183830ad46ded2d07ed884ea3fa105d2ad5e5791cc07566",
+        "metadata": {
+         "language": "python",
+         "sha256": "b8db842af59af3514fb2ef9428112ec013848c98cc57bfb2a7e9e278c8e1d347",
+         "waypoint": {
+          "contentHash": "b8db842af59af3514fb2ef9428112ec013848c98cc57bfb2a7e9e278c8e1d347",
+          "evidence": [
+           {
+            "line": 1,
+            "method": "indexed-definition",
+            "path": "py/new.py",
+            "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+           }
+          ],
+          "kind": "file",
+          "origin": "inferred",
+          "path": "py/new.py",
+          "purpose": "code",
+          "schemaVersion": "1",
+          "summary": "Defines new.",
+          "summaryKey": "b06753ed908f8f5c6467cefd4871eb7e4ad01f15feea73b38b83d647296a0c9f",
+          "title": "Source definitions",
+          "validation": {
+           "checks": [
+            {
+             "detail": "This description is tied to a captured source analysis.",
+             "name": "Captured source",
+             "status": "supported"
+            },
+            {
+             "detail": "Parser evidence was not recorded for this source.",
+             "name": "Parser evidence",
+             "status": "inconclusive"
+            },
+            {
+             "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+             "name": "Dependency context",
+             "status": "supported"
+            },
+            {
+             "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+             "name": "Execution coverage",
+             "status": "inconclusive"
+            }
+           ],
+           "fingerprint": "262b95d847a03ceda5fa7121bb5c2a10783f12f5dd8aed20bd387892fe2d7b8f",
+           "kind": "static-index",
+           "ruleVersion": "waypoint-checks-v1",
+           "status": "inconclusive"
+          }
+         }
+        },
+        "path": "py/new.py"
+       },
+       {
+        "facts": {
+         "ci": {},
+         "configured_grants": [],
+         "deployment": {
+          "links": [],
+          "partial": false,
+          "resources": [],
+          "version": "deployment-1"
+         },
+         "imports": [],
+         "lines": 1,
+         "manifest": {
+          "dependencies": [],
+          "exports": {},
+          "name": null,
+          "scripts": {}
+         },
+         "nonblank_lines": 1,
+         "sha256": "1de7373fbc76a139180c90b3f93ad384eb0e303fda437620e717dc7097abf341",
+         "test_assertions": 0,
+         "test_focused": 0,
+         "test_skips": 0,
+         "vacuous_assertions": [],
+         "version": 2
+        },
+        "id": "f:e2b4649c3aed778fcc543aba:0f5b6d51cee5098bbf8811e1a6115ba358915158033d79c91fe3141d44117a97",
+        "metadata": {
+         "language": "text",
+         "sha256": "1de7373fbc76a139180c90b3f93ad384eb0e303fda437620e717dc7097abf341",
+         "waypoint": {
+          "contentHash": "1de7373fbc76a139180c90b3f93ad384eb0e303fda437620e717dc7097abf341",
+          "evidence": [
+           {
+            "method": "content-hash",
+            "path": "web/data.json",
+            "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+           }
+          ],
+          "kind": "file",
+          "origin": "inferred",
+          "path": "web/data.json",
+          "purpose": "configuration",
+          "schemaVersion": "1",
+          "summary": "No readable purpose description was found in the captured source.",
+          "summaryKey": "f317d253af6f8d84c27d477b3abf1bb823c7bb040cb1a03c7782137962438d65",
+          "title": "Source definitions",
+          "validation": {
+           "checks": [
+            {
+             "detail": "This description is tied to a captured source analysis.",
+             "name": "Captured source",
+             "status": "supported"
+            },
+            {
+             "detail": "Parser evidence was not recorded for this source.",
+             "name": "Parser evidence",
+             "status": "inconclusive"
+            },
+            {
+             "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+             "name": "Dependency context",
+             "status": "supported"
+            },
+            {
+             "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+             "name": "Execution coverage",
+             "status": "inconclusive"
+            }
+           ],
+           "fingerprint": "a6b5380e5badbf3f0ee66a0cf5a6fa75bb2ff4c6131e97b68f742e8d72bd4bb0",
+           "kind": "static-index",
+           "ruleVersion": "waypoint-checks-v1",
+           "status": "inconclusive"
+          }
+         }
+        },
+        "path": "web/data.json"
+       },
+       {
+        "facts": {
+         "ci": {},
+         "configured_grants": [],
+         "deployment": {
+          "links": [],
+          "partial": false,
+          "resources": [],
+          "version": "deployment-1"
+         },
+         "imports": [],
+         "lines": 3,
+         "manifest": {
+          "dependencies": [],
+          "exports": {},
+          "name": null,
+          "scripts": {}
+         },
+         "nonblank_lines": 3,
+         "sha256": "10c786f62010604ad5b31bf5fc591bbf56b97adb1cd820e4a99cab2700f5427a",
+         "test_assertions": 0,
+         "test_focused": 0,
+         "test_skips": 0,
+         "vacuous_assertions": [],
+         "version": 2
+        },
+        "id": "f:e2b4649c3aed778fcc543aba:7ddadddb5b3699f449353f6e36fb6ba0ee3b7b6de61fbcb4ef57fb85d618b087",
+        "metadata": {
+         "language": "text",
+         "sha256": "10c786f62010604ad5b31bf5fc591bbf56b97adb1cd820e4a99cab2700f5427a",
+         "waypoint": {
+          "contentHash": "10c786f62010604ad5b31bf5fc591bbf56b97adb1cd820e4a99cab2700f5427a",
+          "evidence": [
+           {
+            "method": "content-hash",
+            "path": "web/tsconfig.json",
+            "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+           }
+          ],
+          "kind": "file",
+          "origin": "inferred",
+          "path": "web/tsconfig.json",
+          "purpose": "configuration",
+          "schemaVersion": "1",
+          "summary": "No readable purpose description was found in the captured source.",
+          "summaryKey": "131f6cdeac195c93eb8524c5cd9d73066f0846cd29db78c2e76d017ac2910632",
+          "title": "Source definitions",
+          "validation": {
+           "checks": [
+            {
+             "detail": "This description is tied to a captured source analysis.",
+             "name": "Captured source",
+             "status": "supported"
+            },
+            {
+             "detail": "Parser evidence was not recorded for this source.",
+             "name": "Parser evidence",
+             "status": "inconclusive"
+            },
+            {
+             "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+             "name": "Dependency context",
+             "status": "supported"
+            },
+            {
+             "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+             "name": "Execution coverage",
+             "status": "inconclusive"
+            }
+           ],
+           "fingerprint": "d737b727ad379982b846563e525d6febd618206ddeb032ec6c84445f000b3697",
+           "kind": "static-index",
+           "ruleVersion": "waypoint-checks-v1",
+           "status": "inconclusive"
+          }
+         }
+        },
+        "path": "web/tsconfig.json"
+       }
+      ],
+      "partial": true,
+      "repository": "owner/repo",
+      "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+      "snapshot": 2
+     }
+    },
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for owner/repo"
+    },
+    {
+     "value": 1
+    },
+    {
+     "value": 2
+    },
+    {
+     "value": null
+    },
+    {
+     "value": null
+    },
+    {
+     "value": [
+      {
+       "evidence": "py/dynamic.py:1",
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "kind": "DEFINES",
+       "line": 1,
+       "name": "dynamic",
+       "node_kind": "function_definition",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "source": "f:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411",
+       "target": "s:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411:0",
+       "waypoint": {
+        "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines dynamic.",
+        "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": [
+      {
+       "evidence": "py/dynamic.py",
+       "file_category": null,
+       "kind": "CONTAINS",
+       "line": null,
+       "name": "owner/repo",
+       "node_kind": "repository",
+       "path": ".",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "source": "r:e2b4649c3aed778fcc543aba",
+       "target": "f:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411"
+      }
+     ]
+    },
+    {
+     "value": {
+      "length": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+     }
+    },
+    {
+     "value": {
+      "length": 409,
+      "sha256": "10064eba3de6d18d763112af0ef959adbdb398f32f8339af98b6d2c20a090b6d"
+     }
+    },
+    {
+     "value": []
+    },
+    {
+     "value": [
+      {
+       "evidence": "py/dynamic.py:1",
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "kind": "DEFINES",
+       "line": 1,
+       "name": "dynamic",
+       "node_kind": "function_definition",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "source": "f:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411",
+       "target": "s:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411:0",
+       "waypoint": {
+        "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines dynamic.",
+        "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": {
+      "length": 1756,
+      "sha256": "8dd1b189a7ad5e36ffd19d1cd3a4d7d8b4967e99542b32b6e72bee823f697d3b"
+     }
+    },
+    {
+     "value": []
+    },
+    {
+     "value": []
+    },
+    {
+     "value": []
+    },
+    {
+     "error": "ValueError",
+     "message": "direction must be inbound or outbound"
+    },
+    {
+     "error": "ValueError",
+     "message": "Node not found in current snapshot"
+    },
+    {
+     "error": "ValueError",
+     "message": "Node not found in current snapshot"
+    },
+    {
+     "error": "ValueError",
+     "message": "No indexed snapshot for owner/repo"
+    },
+    {
+     "value": [
+      {
+       "evidence": "py/dynamic.py:1",
+       "file_category": {
+        "basis": "source-extension",
+        "category": "code",
+        "inferred": true
+       },
+       "kind": "DEFINES",
+       "line": 1,
+       "name": "dynamic",
+       "node_kind": "function_definition",
+       "path": "py/dynamic.py",
+       "repository": "owner/repo",
+       "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0",
+       "snapshot": 2,
+       "source": "f:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411",
+       "target": "s:e2b4649c3aed778fcc543aba:52904b0fa9ff3ff404d5448a592d8099b131333fddadf2987cdfb4f53a1ed411:0",
+       "waypoint": {
+        "contentHash": "452d1f5599d53ba33b26030d5b72935c1941a6036396218f18e63701c2797875",
+        "evidence": [
+         {
+          "line": 1,
+          "method": "indexed-definition",
+          "path": "py/dynamic.py",
+          "revision": "working-tree-tree-70f008dd412493f16b74c938ef879b5e820b8f4f71d606ad61a365b1255a28f0"
+         }
+        ],
+        "kind": "file",
+        "origin": "inferred",
+        "path": "py/dynamic.py",
+        "purpose": "code",
+        "schemaVersion": "1",
+        "summary": "Defines dynamic.",
+        "summaryKey": "e8e9e270fb17c48e7ba8b0794e61d7d795c7988fd7f25bdcb569cb30b0b68664",
+        "title": "Source definitions",
+        "validation": {
+         "checks": [
+          {
+           "detail": "This description is tied to a captured source analysis.",
+           "name": "Captured source",
+           "status": "supported"
+          },
+          {
+           "detail": "Parser evidence was not recorded for this source.",
+           "name": "Parser evidence",
+           "status": "inconclusive"
+          },
+          {
+           "detail": "Pinned to 0 loaded dependency identities and the applicable index rules.",
+           "name": "Dependency context",
+           "status": "supported"
+          },
+          {
+           "detail": "Static index evidence only; tests and runtime behaviour were not executed or validated.",
+           "name": "Execution coverage",
+           "status": "inconclusive"
+          }
+         ],
+         "fingerprint": "d9041996ee190df5719ca9cbfb6fe9050438552213eb347cceae477df98291dd",
+         "kind": "static-index",
+         "ruleVersion": "waypoint-checks-v1",
+         "status": "inconclusive"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "value": {
+      "length": 413,
+      "sha256": "ce05f7f28a89fd065bae28f9c8275a79dcac5145cc62da1e258507ac9f37977d"
+     }
+    }
+   ]
+  }
+ },
+ "schemas": {
+  "3c8ab78ffefcf6d9": [
+   [
+    "index",
+    "analysis_object",
+    "analyses",
+    "CREATE INDEX analysis_object ON analyses(git_oid,language,version)"
+   ],
+   [
+    "index",
+    "idx_edges_source",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_source ON legacy_edges(snapshot_id,source)"
+   ],
+   [
+    "index",
+    "idx_edges_target",
+    "legacy_edges",
+    "CREATE INDEX idx_edges_target ON legacy_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "idx_nodes_lookup",
+    "legacy_nodes",
+    "CREATE INDEX idx_nodes_lookup ON legacy_nodes(snapshot_id,name,kind)"
+   ],
+   [
+    "index",
+    "manifest_analysis",
+    "snapshot_files",
+    "CREATE INDEX manifest_analysis ON snapshot_files(analysis_id)"
+   ],
+   [
+    "index",
+    "resolved_inbound",
+    "resolved_edges",
+    "CREATE INDEX resolved_inbound ON resolved_edges(snapshot_id,target)"
+   ],
+   [
+    "index",
+    "snapshot_view",
+    "snapshots",
+    "CREATE INDEX snapshot_view ON snapshots(repo,view_key,id DESC)"
+   ],
+   [
+    "index",
+    "waypoint_summary_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_summary_bindings ON snapshot_waypoints(summary_key)"
+   ],
+   [
+    "index",
+    "waypoint_validation_bindings",
+    "snapshot_waypoints",
+    "CREATE INDEX waypoint_validation_bindings ON snapshot_waypoints(validation_key)"
+   ],
+   [
+    "table",
+    "analyses",
+    "analyses",
+    "CREATE TABLE analyses(\n        id TEXT PRIMARY KEY,content_hash TEXT NOT NULL,git_oid TEXT NOT NULL,\n        language TEXT NOT NULL,version TEXT NOT NULL,size_bytes INTEGER NOT NULL,\n        symbols TEXT NOT NULL CHECK(json_valid(symbols)),facts TEXT NOT NULL CHECK(json_valid(facts)))"
+   ],
+   [
+    "table",
+    "legacy_edges",
+    "legacy_edges",
+    "CREATE TABLE legacy_edges(snapshot_id INTEGER NOT NULL,source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "legacy_nodes",
+    "legacy_nodes",
+    "CREATE TABLE legacy_nodes(id TEXT PRIMARY KEY,snapshot_id INTEGER NOT NULL,kind TEXT NOT NULL,name TEXT NOT NULL,path TEXT NOT NULL,line INTEGER,metadata TEXT DEFAULT '{}')"
+   ],
+   [
+    "table",
+    "resolved_edges",
+    "resolved_edges",
+    "CREATE TABLE resolved_edges(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        source TEXT NOT NULL,target TEXT NOT NULL,kind TEXT NOT NULL,evidence TEXT,\n        PRIMARY KEY(snapshot_id,source,target,kind))"
+   ],
+   [
+    "table",
+    "snapshot_files",
+    "snapshot_files",
+    "CREATE TABLE snapshot_files(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,file_id TEXT NOT NULL,name TEXT NOT NULL,\n        analysis_id TEXT NOT NULL REFERENCES analyses(id),PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshot_waypoints",
+    "snapshot_waypoints",
+    "CREATE TABLE snapshot_waypoints(\n        snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,\n        path TEXT NOT NULL,kind TEXT NOT NULL CHECK(kind IN ('file','area')),\n        summary_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        validation_key TEXT NOT NULL REFERENCES waypoint_cache(id),\n        PRIMARY KEY(snapshot_id,path))"
+   ],
+   [
+    "table",
+    "snapshots",
+    "snapshots",
+    "CREATE TABLE snapshots(id INTEGER PRIMARY KEY,repo TEXT NOT NULL,revision TEXT NOT NULL,indexed_at TEXT DEFAULT CURRENT_TIMESTAMP, metadata TEXT NOT NULL DEFAULT '{}', node_prefix TEXT, view_key TEXT NOT NULL DEFAULT 'default')"
+   ],
+   [
+    "table",
+    "waypoint_cache",
+    "waypoint_cache",
+    "CREATE TABLE waypoint_cache(\n        id TEXT PRIMARY KEY,kind TEXT NOT NULL CHECK(kind IN ('file','area','validation')),\n        version TEXT NOT NULL,payload TEXT NOT NULL CHECK(json_valid(payload)),\n        payload_hash TEXT NOT NULL)"
+   ],
+   [
+    "trigger",
+    "staging_edge_insert",
+    "edges",
+    "CREATE TRIGGER staging_edge_insert INSTEAD OF INSERT ON edges\n        BEGIN INSERT INTO resolved_edges(snapshot_id,source,target,kind,evidence)\n        VALUES (new.snapshot_id,new.source,new.target,new.kind,new.evidence); END"
+   ],
+   [
+    "view",
+    "edges",
+    "edges",
+    "CREATE VIEW edges AS\n SELECT snapshot_id,source,target,kind,evidence FROM legacy_edges\n UNION ALL SELECT snapshot_id,source,target,kind,evidence FROM resolved_edges\n UNION ALL\n SELECT f.snapshot_id,'r:'||s.node_prefix,'f:'||s.node_prefix||':'||f.file_id,'CONTAINS',f.path\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n UNION ALL\n SELECT f.snapshot_id,'f:'||s.node_prefix||':'||f.file_id,\n 's:'||s.node_prefix||':'||f.file_id||':'||j.key,'DEFINES',\n f.path||':'||json_extract(j.value,'$[2]')\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ],
+   [
+    "view",
+    "nodes",
+    "nodes",
+    "CREATE VIEW nodes AS\n SELECT id,snapshot_id,kind,name,path,line,metadata FROM legacy_nodes\n UNION ALL\n SELECT 'r:'||node_prefix,id,'repository',repo,'.',NULL,\n json_set(metadata,'$.areaWaypoints',json((\n   SELECT json_group_array(json(waypoint)) FROM (\n     SELECT json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))) AS waypoint\n     FROM snapshot_waypoints sw JOIN waypoint_cache wc ON wc.id=sw.summary_key\n     JOIN waypoint_cache vc ON vc.id=sw.validation_key\n     WHERE sw.snapshot_id=s.id AND sw.kind='area' ORDER BY sw.path\n   ))))\n FROM snapshots s WHERE node_prefix IS NOT NULL\n UNION ALL\n SELECT 'f:'||s.node_prefix||':'||f.file_id,f.snapshot_id,'file',f.name,f.path,NULL,\n CASE WHEN sw.path IS NULL THEN json_object('language',a.language,'sha256',a.content_hash)\n ELSE json_object('language',a.language,'sha256',a.content_hash,'waypoint',json(json_set(wc.payload,'$.validation',json(vc.payload),'$.evidence',\n    json((SELECT json_group_array(json_set(we.value,'$.revision',s.revision))\n          FROM json_each(wc.payload,'$.evidence') we))))) END\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id JOIN analyses a ON a.id=f.analysis_id\n LEFT JOIN snapshot_waypoints sw ON sw.snapshot_id=f.snapshot_id AND sw.path=f.path AND sw.kind='file'\n LEFT JOIN waypoint_cache wc ON wc.id=sw.summary_key\n LEFT JOIN waypoint_cache vc ON vc.id=sw.validation_key\n UNION ALL\n SELECT 's:'||s.node_prefix||':'||f.file_id||':'||j.key,f.snapshot_id,\n json_extract(j.value,'$[0]'),json_extract(j.value,'$[1]'),f.path,json_extract(j.value,'$[2]'),\n json_object('parent',json_extract(j.value,'$[3]'))\n FROM snapshot_files f JOIN snapshots s ON s.id=f.snapshot_id\n JOIN analyses a ON a.id=f.analysis_id JOIN json_each(a.symbols) j"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+  "files": {
+    ".codegraph/architecture.json": "{\n  \"version\": 1,\n  \"kind\": \"ArchitectureContract\",\n  \"domains\": {\n    \"core\": {\n      \"owner\": \"core-team\",\n      \"paths\": [\"core/**\"],\n      \"public_interfaces\": [\"core/store.ts\"]\n    },\n    \"apps\": {\n      \"owner\": \"apps-team\",\n      \"paths\": [\"apps/**\"]\n    }\n  },\n  \"rules\": [\n    {\n      \"id\": \"CORE-NOT-APPS\",\n      \"kind\": \"forbidden-dependency\",\n      \"source\": [\"core/**\"],\n      \"target\": [\"apps/**\"],\n      \"severity\": \"block\",\n      \"reason\": \"Core must not import application code.\",\n      \"remediation\": \"Invert the dependency through a core-owned interface.\"\n    },\n    {\n      \"id\": \"NO-CYCLES\",\n      \"kind\": \"cycles\",\n      \"severity\": \"review\",\n      \"reason\": \"Import cycles hide ownership.\",\n      \"remediation\": \"Extract the shared piece into a third module.\"\n    },\n    {\n      \"id\": \"SMALL-MODULES\",\n      \"kind\": \"max-module-lines\",\n      \"source\": [\"lib/**\"],\n      \"limit\": 5,\n      \"severity\": \"inform\",\n      \"reason\": \"Large modules are hard to review.\",\n      \"remediation\": \"Split the module by responsibility.\"\n    }\n  ]\n}\n",
+    ".github/CODEOWNERS": "# Last matching rule wins.\n*                    @golden/everyone\n/core/               @golden/core-team @alice\n*.ts                 @golden/typescript\n/apps/**             @golden/apps\n/core/store.ts       @golden/storage   # trailing comment\n/lib/b.ts\ndocs/*.md            docs@example.com\n# Invalid lines are dropped, never guessed at.\n[bad                 @golden/invalid\n/../escape           @golden/invalid\n/secrets/            not-an-owner\n!negated.ts          @golden/invalid\n",
+    "apps/entry.ts": "import { stored } from \"../core/store\";\n\nexport const entry = stored;\n",
+    "core/README.md": "# Core\n\nOwned by the core team through the directory rule alone.\n",
+    "core/leak.ts": "import { entry } from \"../apps/entry.js\";\n\nexport const leaked = entry;\n",
+    "core/store.ts": "import type { Id } from \"./types\";\n\nexport const stored: Id = \"1\";\n",
+    "core/types.ts": "export type Id = string;\n",
+    "docs/overview.md": "# Overview\n\nOwnership is resolved from CODEOWNERS.\n",
+    "lib/a.ts": "import { b } from \"./b\";\n\nexport const a = () => b;\n",
+    "lib/b.ts": "import { a } from \"./a\";\n\nexport const b = () => a;\n",
+    "lib/big.ts": "export const one = 1;\nexport const two = 2;\nexport const three = 3;\nexport const four = 4;\nexport const five = 5;\nexport const six = 6;\nexport const seven = 7;\n",
+    "tests/store.test.ts": "import { stored } from \"../core/store\";\n\nexport const check = stored;\n"
+  }
+}
