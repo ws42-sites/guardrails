@@ -147,53 +147,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "codegraph-engine"
-version = "0.1.0"
-dependencies = [
- "base64",
- "fancy-regex",
- "regex",
- "ruff_python_ast",
- "ruff_python_parser",
- "ruff_source_file",
- "ruff_text_size",
- "ruff_unicode_names2",
- "serde",
- "serde_json",
- "sha2",
- "toml",
- "tree-sitter",
- "tree-sitter-javascript",
- "tree-sitter-python",
- "tree-sitter-rust",
- "tree-sitter-typescript",
- "yaml-rust2",
-]
-
-[[package]]
-name = "codegraph-sources"
-version = "0.1.0"
-dependencies = [
- "base64",
- "codegraph-engine",
- "codegraph-store",
- "rusqlite",
- "serde_json",
- "sha1",
- "sha2",
-]
-
-[[package]]
-name = "codegraph-store"
-version = "0.1.0"
-dependencies = [
- "codegraph-engine",
- "rusqlite",
- "serde_json",
- "sha2",
-]
-
-[[package]]
 name = "collection_literals"
 version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -631,6 +584,53 @@ name = "regex-syntax"
 version = "0.8.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d902046e6a28a1e4c3cab97258a0ce11e994903f01c2d97a9447a0b3df85f4f6"
+
+[[package]]
+name = "ropeline-engine"
+version = "0.1.0"
+dependencies = [
+ "base64",
+ "fancy-regex",
+ "regex",
+ "ruff_python_ast",
+ "ruff_python_parser",
+ "ruff_source_file",
+ "ruff_text_size",
+ "ruff_unicode_names2",
+ "serde",
+ "serde_json",
+ "sha2",
+ "toml",
+ "tree-sitter",
+ "tree-sitter-javascript",
+ "tree-sitter-python",
+ "tree-sitter-rust",
+ "tree-sitter-typescript",
+ "yaml-rust2",
+]
+
+[[package]]
+name = "ropeline-index"
+version = "0.1.0"
+dependencies = [
+ "base64",
+ "ropeline-engine",
+ "ropeline-store",
+ "rusqlite",
+ "serde_json",
+ "sha1",
+ "sha2",
+]
+
+[[package]]
+name = "ropeline-store"
+version = "0.1.0"
+dependencies = [
+ "ropeline-engine",
+ "rusqlite",
+ "serde_json",
+ "sha2",
+]
 
 [[package]]
 name = "rsqlite-vfs"
